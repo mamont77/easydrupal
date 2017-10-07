@@ -1,0 +1,16 @@
+uuid: 30a7a682-e2b7-4bf0-99d1-8f510f241886
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: 5rOnjIF_aDyGBmfXNhJnkPXxQMlem0CmVmggV-TF3Fg
+id: global
+label: Global
+tags:
+  title: '[current-page:title] | [site:name]'
+  article_author: 'https://www.facebook.com/ruslan.piskarev'
+  pinterest: d6e072f3bd77097d62789e16fab0cccc
+  bing: 3D3003A221DDAAA0BF0723DB08CA5591
+  google: 7BPEL8oFrMwJfCTcAqpzLtfQ3qxteBMgrOhUIawQMPM
+  norton_safe_web: 3c3oskyqbhbyc2y7cveiqcsq7l5s872zmvv0tpd0gfiinjmis5-t9k39n9-0t93b78geisno7i4bzgup1ldr8gpiyp86gjp071yyy63ytnawbjwnx0-sxjgmk2hc7cu8
+  yandex: 623eec36f51c0bdd

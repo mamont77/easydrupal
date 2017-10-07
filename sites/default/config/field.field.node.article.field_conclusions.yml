@@ -1,0 +1,21 @@
+uuid: 4233a0fc-f334-453f-8f42-e16f1dd4749b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_conclusions
+    - node.type.article
+  module:
+    - text
+id: node.article.field_conclusions
+field_name: field_conclusions
+entity_type: node
+bundle: article
+label: Conclusion
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

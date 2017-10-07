@@ -1,0 +1,15 @@
+uuid: d92c4240-a6a8-4723-a90b-d2a7ae0a3ed8
+langcode: en
+status: true
+dependencies: {  }
+name: max_360x360
+label: 'Max 360x360'
+effects:
+  ddacbba8-7830-4ce8-b06f-a1ed91bfc938:
+    uuid: ddacbba8-7830-4ce8-b06f-a1ed91bfc938
+    id: image_scale
+    weight: 1
+    data:
+      width: 360
+      height: 360
+      upscale: false

@@ -1,0 +1,15 @@
+uuid: a73aa758-4ad8-437f-bb6a-aae40fb2ea5b
+langcode: en
+status: true
+dependencies: {  }
+name: max_345x345
+label: 'Max 345x345'
+effects:
+  f250fc45-1600-4bba-a411-50b2072f4d27:
+    uuid: f250fc45-1600-4bba-a411-50b2072f4d27
+    id: image_scale
+    weight: 1
+    data:
+      width: 345
+      height: 345
+      upscale: false

@@ -1,0 +1,136 @@
+uuid: 7e891f3c-fdfa-4875-bf02-2f3bc0ac5bbb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.feedback.body
+    - field.field.node.feedback.field_country_v2
+    - field.field.node.feedback.field_date
+    - field.field.node.feedback.field_image
+    - field.field.node.feedback.field_name
+    - field.field.node.feedback.field_position
+    - field.field.node.feedback.field_project_title
+    - image.style.feedback_portrait
+    - node.type.feedback
+  module:
+    - country
+    - datetime
+    - ds
+    - image
+    - text
+    - user
+third_party_settings:
+  ds:
+    layout:
+      id: ds_reset
+      path: modules/ds
+      library: ''
+      disable_css: false
+      entity_classes: no_classes
+      settings:
+        wrappers:
+          ds_content: div
+        outer_wrapper: div
+        attributes: ''
+        link_attribute: ''
+        link_custom: ''
+        classes:
+          layout_class: {  }
+          ds_content: {  }
+    regions:
+      ds_content:
+        - field_image
+        - field_name
+        - links
+        - field_position
+        - field_country_v2
+        - field_date
+        - field_project_title
+        - body
+id: node.feedback.default
+targetEntityType: node
+bundle: feedback
+mode: default
+content:
+  body:
+    weight: 8
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: ds_content
+  field_country_v2:
+    weight: 4
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: country_default
+    region: ds_content
+  field_date:
+    weight: 5
+    label: hidden
+    settings:
+      timezone_override: ''
+      format_type: month_year
+    third_party_settings: {  }
+    type: datetime_default
+    region: ds_content
+  field_image:
+    type: image
+    weight: 0
+    label: hidden
+    settings:
+      image_style: feedback_portrait
+      image_link: ''
+    third_party_settings:
+      ds:
+        ft:
+          id: minimal
+          settings:
+            lb: ''
+            lb-col: false
+            classes: {  }
+    region: ds_content
+  field_name:
+    weight: 0
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings:
+      ds:
+        ft:
+          id: minimal
+          settings:
+            lb: ''
+            lb-col: false
+            classes: {  }
+    type: string
+    region: ds_content
+  field_position:
+    weight: 2
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: ds_content
+  field_project_title:
+    weight: 6
+    label: hidden
+    settings:
+      link: false
+    third_party_settings:
+      ds:
+        ds_limit: ''
+        ft:
+          id: reset
+          settings:
+            lb: ''
+    type: entity_reference_label
+    region: ds_content
+  links:
+    weight: 1
+    settings: {  }
+    third_party_settings: {  }
+    region: ds_content
+hidden: {  }

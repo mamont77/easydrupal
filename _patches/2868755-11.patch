@@ -1,0 +1,44 @@
+diff --git a/src/Ds.php b/src/Ds.php
+index fb04ac5..6a80fad 100644
+--- a/src/Ds.php
++++ b/src/Ds.php
+@@ -90,6 +90,11 @@ class Ds {
+     static $layouts = FALSE;
+ 
+     if (!$layouts) {
++      // This can be called before ds_update_8003() has run. If that is the case
++      // return an empty array and don't static cache anything.
++      if (!\Drupal::hasService('plugin.manager.core.layout')) {
++        return [];
++      }
+       $layouts = \Drupal::service('plugin.manager.core.layout')->getDefinitions();
+     }
+ 
+diff --git a/tests/src/Unit/DsServiceTest.php b/tests/src/Unit/DsServiceTest.php
+new file mode 100644
+index 0000000..1b94914
+--- /dev/null
++++ b/tests/src/Unit/DsServiceTest.php
+@@ -0,0 +1,22 @@
++<?php
++
++namespace Drupal\Tests\ds\Unit;
++
++use Drupal\ds\Ds;
++use Drupal\Tests\UnitTestCase;
++
++/**
++ * @coversDefaultClass \Drupal\ds\Ds
++ * @group ds
++ */
++class DsServiceTest extends UnitTestCase {
++
++  /**
++   * @covers ::getLayouts
++   */
++  public function testMissingLayoutService() {
++    $this->assertFalse(\Drupal::hasService('plugin.manager.core.layout'));
++    $this->assertSame([], Ds::getLayouts());
++  }
++
++}

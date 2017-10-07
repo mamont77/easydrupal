@@ -1,0 +1,12 @@
+uuid: 134ef9cc-9f0f-40b8-bbda-e42157e3238f
+langcode: en
+status: true
+dependencies: {  }
+label: 'FeedBack Portrait'
+id: feedback_portrait
+description: ''
+aspect_ratio: '1:1'
+soft_limit_width: 150
+soft_limit_height: 150
+hard_limit_width: null
+hard_limit_height: null

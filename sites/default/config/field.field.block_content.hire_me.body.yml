@@ -1,0 +1,22 @@
+uuid: b045ef44-b12a-4f87-98d9-870aff0d9646
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.hire_me
+    - field.storage.block_content.body
+  module:
+    - text
+id: block_content.hire_me.body
+field_name: body
+entity_type: block_content
+bundle: hire_me
+label: Body
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: false
+field_type: text_with_summary

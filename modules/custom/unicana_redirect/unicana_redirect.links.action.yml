@@ -1,0 +1,14 @@
+# Add some local task links to facilitate navigation.
+
+unicana_redirect.add_action:
+  route_name: entity.redirect.add_form
+  title: 'Add Redirect'
+  appears_on:
+    - entity.redirect.list
+
+unicana_redirect.list_action:
+  route_name: entity.redirect.list
+  title: 'List Redirects'
+  appears_on:
+    - entity.redirect.add_form
+    - entity.redirect.edit_form

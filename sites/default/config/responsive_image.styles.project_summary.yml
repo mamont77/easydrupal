@@ -1,0 +1,31 @@
+uuid: 71ee3473-4b4b-42f1-80b9-98be8e6b5747
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.max_720x720
+    - image.style.project_summary_default
+    - image.style.project_summary_max_width_1199px
+    - image.style.project_summary_max_width_991px_
+  theme:
+    - easydrupal
+id: project_summary
+label: 'Project Summary'
+image_style_mappings:
+  -
+    breakpoint_id: easydrupal.screen-xs-max
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: max_720x720
+  -
+    breakpoint_id: easydrupal.screen-sm-max
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: project_summary_max_width_991px_
+  -
+    breakpoint_id: easydrupal.screen-md-max
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: project_summary_max_width_1199px
+breakpoint_group: easydrupal
+fallback_image_style: project_summary_default

@@ -1,0 +1,31 @@
+uuid: de2cf1ce-a6c2-4bd3-8c80-3ec4d6b63c17
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:9e9ec6c0-7a8a-46d1-bdfe-febaa30677a8'
+  module:
+    - block_content
+    - system
+  theme:
+    - easydrupal
+id: googleadsenseeasydrupalresponsive_2
+theme: easydrupal
+region: sidebar_second
+weight: -6
+provider: null
+plugin: 'block_content:9e9ec6c0-7a8a-46d1-bdfe-febaa30677a8'
+settings:
+  id: 'block_content:9e9ec6c0-7a8a-46d1-bdfe-febaa30677a8'
+  label: 'Google Adsense - EasyDrupal Responsive'
+  provider: block_content
+  label_display: '0'
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    pages: "/articles\r\n/articles/*\r\n/taxonomy/term/*"
+    negate: false
+    context_mapping: {  }

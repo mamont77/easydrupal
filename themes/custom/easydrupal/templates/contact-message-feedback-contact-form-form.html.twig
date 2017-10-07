@@ -1,0 +1,18 @@
+<div class="row">
+    <div class="col-sm-6">
+        {{ form.name }}
+        {{ form.mail }}
+        {{ form.subject }}
+    </div>
+    <div class="col-sm-6">
+        {{ form.message }}
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        {{ form.captcha }}
+        {{ form.actions }}
+        {# Renders the rest of the form #}
+        {{ form|without('name','mail','subject', 'message', 'actions', 'captcha') }}
+    </div>
+</div>

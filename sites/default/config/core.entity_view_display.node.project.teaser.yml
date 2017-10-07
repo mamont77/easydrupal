@@ -1,0 +1,58 @@
+uuid: e86a52a5-88d6-460b-9057-875aa143ae1a
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.project.body
+    - field.field.node.project.field_date
+    - field.field.node.project.field_image
+    - field.field.node.project.field_landing_page_background
+    - field.field.node.project.field_logo
+    - field.field.node.project.field_project_images
+    - field.field.node.project.field_project_url
+    - field.field.node.project.field_skills
+    - node.type.project
+    - responsive_image.styles.project_summary
+  module:
+    - ds
+    - responsive_image
+    - text
+    - user
+id: node.project.teaser
+targetEntityType: node
+bundle: project
+mode: teaser
+content:
+  body:
+    label: visually_hidden
+    type: text_summary_or_trimmed
+    weight: 2
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    region: content
+  field_image:
+    type: responsive_image
+    weight: 1
+    label: hidden
+    settings:
+      responsive_image_style: project_summary
+      image_link: ''
+    third_party_settings:
+      ds:
+        ft:
+          id: minimal
+          settings:
+            lb: ''
+            lb-col: false
+            classes: {  }
+    region: content
+hidden:
+  field_date: true
+  field_landing_page_background: true
+  field_logo: true
+  field_project_images: true
+  field_project_url: true
+  field_skills: true
+  links: true

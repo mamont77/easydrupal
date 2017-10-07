@@ -1,0 +1,19 @@
+disqus_domain: easy-drupal
+behavior:
+  disqus_localization: false
+  disqus_inherit_login: false
+  disqus_disable_mobile: false
+  disqus_track_newcomment_ga: true
+advanced:
+  disqus_useraccesstoken: 53a804fb22f14356947208f4e35e59b8
+  disqus_publickey: uf0Mbq1NoMdzMIbqsgDqoAV9pe910S93ngpPZV6MyQVyT51d8d6vFgDe8mE2muI8
+  disqus_secretkey: zi6OOx2TsZr3zdK1WuyhqAhVwjA9aMu9rHCemo5qgMTEImtZCz4Ab6dSgs4h8jnE
+  api:
+    disqus_api_update: false
+    disqus_api_delete: DISQUS_API_NO_ACTION
+  sso:
+    disqus_sso: true
+    disqus_use_site_logo: false
+    disqus_logo: ''
+_core:
+  default_config_hash: cLPUKXMlBdHBqZyzVRCLdj0IK7Z5zD6ro3GLAuIpiNU

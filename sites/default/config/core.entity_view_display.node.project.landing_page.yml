@@ -1,0 +1,116 @@
+uuid: ebb2cef4-a432-4ab2-abef-8a409015ab5f
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.landing_page
+    - field.field.node.project.body
+    - field.field.node.project.field_date
+    - field.field.node.project.field_image
+    - field.field.node.project.field_landing_page_background
+    - field.field.node.project.field_logo
+    - field.field.node.project.field_project_images
+    - field.field.node.project.field_project_url
+    - field.field.node.project.field_skills
+    - node.type.project
+    - responsive_image.styles.project_landing_page
+  module:
+    - ds
+    - responsive_image
+    - text
+    - user
+third_party_settings:
+  ds:
+    layout:
+      id: bs_2col
+      path: modules/bootstrap_layouts
+      library: ''
+      disable_css: false
+      entity_classes: no_classes
+      settings:
+        layout:
+          wrapper: div
+          classes:
+            clearfix: clearfix
+            row: row
+          attributes: ''
+          add_layout_class: 1
+        regions:
+          left:
+            wrapper: div
+            classes:
+              col-sm-6: col-sm-6
+            add_region_classes: 1
+            attributes: ''
+          right:
+            wrapper: div
+            classes:
+              col-sm-6: col-sm-6
+            add_region_classes: 1
+            attributes: ''
+    regions:
+      right:
+        - field_landing_page_background
+      left:
+        - node_title
+        - body
+    fields:
+      node_title:
+        plugin_id: node_title
+        weight: 1
+        label: hidden
+        formatter: default
+        settings:
+          link: true
+          wrapper: h3
+          class: ''
+        ft:
+          id: minimal
+          settings:
+            lb: ''
+            lb-col: false
+            classes: {  }
+id: node.project.landing_page
+targetEntityType: node
+bundle: project
+mode: landing_page
+content:
+  body:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 2
+    settings:
+      trim_length: 600
+    third_party_settings:
+      ds:
+        ft:
+          id: minimal
+          settings:
+            lb: ''
+            lb-col: false
+            classes: {  }
+    region: left
+  field_landing_page_background:
+    type: responsive_image
+    weight: 0
+    label: hidden
+    settings:
+      responsive_image_style: project_landing_page
+      image_link: ''
+    third_party_settings:
+      ds:
+        ft:
+          id: minimal
+          settings:
+            lb: ''
+            lb-col: false
+            classes: {  }
+    region: right
+hidden:
+  field_date: true
+  field_image: true
+  field_logo: true
+  field_project_images: true
+  field_project_url: true
+  field_skills: true
+  links: true

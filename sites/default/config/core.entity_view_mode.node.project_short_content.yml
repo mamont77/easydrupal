@@ -1,0 +1,10 @@
+uuid: b6732b3c-b75c-4921-a1e4-d565b4c5c17a
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.project_short_content
+label: 'Project Short content'
+targetEntityType: node
+cache: true

@@ -1,0 +1,57 @@
+uuid: d91b9589-1de3-4296-af33-b50cd95dc7b8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_image
+    - node.type.feedback
+  module:
+    - filefield_paths
+    - image
+third_party_settings:
+  filefield_paths:
+    enabled: true
+    file_path:
+      value: 'feedback-portraits/[date:custom:Y]-[date:custom:m]'
+      options:
+        slashes: false
+        pathauto: false
+        transliterate: false
+    redirect: false
+    retroactive_update: false
+    active_updating: false
+    file_name:
+      value: '[file:ffp-name-only-original].[file:ffp-extension-original]'
+      options:
+        slashes: false
+        pathauto: true
+        transliterate: true
+id: node.feedback.field_image
+field_name: field_image
+entity_type: node
+bundle: feedback
+label: Portrait
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  file_directory: '[date:custom:Y]-[date:custom:m]'
+  file_extensions: 'png gif jpg jpeg'
+  max_filesize: ''
+  max_resolution: ''
+  min_resolution: ''
+  alt_field: false
+  alt_field_required: false
+  title_field: false
+  title_field_required: false
+  default_image:
+    uuid: 073af5f5-7719-404c-86be-8fb1909d0f9d
+    alt: ''
+    title: ''
+    width: 440
+    height: 440
+  handler: 'default:file'
+  handler_settings: {  }
+field_type: image

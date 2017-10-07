@@ -1,0 +1,18 @@
+name: Real-time SEO for Drupal
+description: Adds Real-time SEO page analysis and configuration
+package: SEO
+
+type: module
+# core: 8.x
+configure: yoast_seo.settings
+
+dependencies:
+  - metatag
+  - node
+  - path
+
+# Information added by Drupal.org packaging script on 2016-12-05
+version: '8.x-1.1'
+core: '8.x'
+project: 'yoast_seo'
+datestamp: 1480952318

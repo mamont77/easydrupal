@@ -1,0 +1,139 @@
+uuid: 0eeab432-ed90-4e64-9200-c41468355fb5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.feedback.body
+    - field.field.node.feedback.field_country_v2
+    - field.field.node.feedback.field_date
+    - field.field.node.feedback.field_image
+    - field.field.node.feedback.field_name
+    - field.field.node.feedback.field_position
+    - field.field.node.feedback.field_project_title
+    - image.style.feedback_portrait
+    - node.type.feedback
+  module:
+    - country
+    - datetime
+    - image_widget_crop
+    - path
+    - text
+id: node.feedback.default
+targetEntityType: node
+bundle: feedback
+mode: default
+content:
+  body:
+    weight: 8
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea_with_summary
+    region: content
+  created:
+    type: datetime_timestamp
+    weight: 11
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_country_v2:
+    weight: 5
+    settings:
+      size: '60'
+      autocomplete_route_name: country.autocomplete
+      placeholder: 'Start typing a country name ...'
+    third_party_settings: {  }
+    type: country_autocomplete
+    region: content
+  field_date:
+    weight: 1
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  field_image:
+    weight: 6
+    settings:
+      show_default_crop: true
+      warn_multiple_usages: true
+      preview_image_style: feedback_portrait
+      crop_preview_image_style: crop_thumbnail
+      crop_list:
+        - feedback_portrait
+      progress_indicator: throbber
+      show_crop_area: false
+    third_party_settings: {  }
+    type: image_widget_crop
+    region: content
+  field_name:
+    weight: 2
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_position:
+    weight: 3
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_project_title:
+    weight: 7
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  path:
+    type: path
+    weight: 14
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  promote:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 12
+    third_party_settings: {  }
+    region: content
+  status:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 121
+    third_party_settings: {  }
+    region: content
+  sticky:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 13
+    third_party_settings: {  }
+    region: content
+  title:
+    type: string_textfield
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    region: content
+  uid:
+    type: entity_reference_autocomplete
+    weight: 10
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    region: content
+hidden: {  }

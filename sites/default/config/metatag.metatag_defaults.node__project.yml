@@ -1,0 +1,8 @@
+uuid: 3e2ae831-de29-41a5-aa3e-91cceb9be51b
+langcode: en
+status: true
+dependencies: {  }
+id: node__project
+label: 'Content: Project'
+tags:
+  robots: 'noindex, nofollow, noarchive, nosnippet, noodp, noydir, noimageindex, notranslate'

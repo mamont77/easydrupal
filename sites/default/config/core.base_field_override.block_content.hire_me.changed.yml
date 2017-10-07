@@ -1,0 +1,18 @@
+uuid: 0e564651-7546-4636-8cbf-68d4cff866d2
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.hire_me
+id: block_content.hire_me.changed
+field_name: changed
+entity_type: block_content
+bundle: hire_me
+label: Changed
+description: 'The time that the custom block was last edited.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: changed

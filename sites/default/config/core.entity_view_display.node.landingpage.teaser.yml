@@ -1,0 +1,28 @@
+uuid: a70731d2-875d-4f23-816b-f68b0519f19f
+langcode: en
+status: false
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.landingpage.field_about
+    - field.field.node.landingpage.field_articles
+    - field.field.node.landingpage.field_contact_me
+    - field.field.node.landingpage.field_feedback
+    - field.field.node.landingpage.field_projects
+    - node.type.landingpage
+  module:
+    - user
+id: node.landingpage.teaser
+targetEntityType: node
+bundle: landingpage
+mode: teaser
+content:
+  links:
+    weight: 100
+    region: content
+hidden:
+  field_about: true
+  field_articles: true
+  field_contact_me: true
+  field_feedback: true
+  field_projects: true

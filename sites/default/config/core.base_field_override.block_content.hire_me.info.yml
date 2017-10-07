@@ -1,0 +1,18 @@
+uuid: b5b1cb4e-aff6-4aa4-acd8-6d9c7ff8e80b
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.hire_me
+id: block_content.hire_me.info
+field_name: info
+entity_type: block_content
+bundle: hire_me
+label: 'Block description'
+description: 'A brief description of your block.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

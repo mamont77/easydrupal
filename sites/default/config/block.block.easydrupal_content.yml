@@ -1,0 +1,22 @@
+uuid: 81aa0039-1da1-471e-87b6-ea903a329a96
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - easydrupal
+_core:
+  default_config_hash: fNNLN48MSGSLiqwIFywCuxH2Dk_IxDbaP0kYhg_IPrg
+id: easydrupal_content
+theme: easydrupal
+region: content
+weight: -9
+provider: null
+plugin: system_main_block
+settings:
+  id: system_main_block
+  label: 'Main page content'
+  provider: system
+  label_display: '0'
+visibility: {  }

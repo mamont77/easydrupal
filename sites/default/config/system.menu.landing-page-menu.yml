@@ -1,0 +1,8 @@
+uuid: c9880544-05ca-481c-b6ae-4676f45e13d3
+langcode: en
+status: true
+dependencies: {  }
+id: landing-page-menu
+label: 'Landing Page Menu'
+description: ''
+locked: false

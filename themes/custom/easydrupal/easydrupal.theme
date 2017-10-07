@@ -1,0 +1,125 @@
+<?php
+/**
+ * @file
+ * Bootstrap sub-theme.
+ *
+ * Place your custom PHP code in this file.
+ */
+
+
+/**
+ * Attach a few libraries for lending page only.
+ *
+ * @param $variables
+ */
+//function easydrupal_preprocess_node__landingpage(&$variables) {
+//  $variables['#attached']['library'][] = 'easydrupal/full-page';
+//  $variables['#attached']['library'][] = 'easydrupal/perfect-scrollbar';
+//}
+
+/**
+ * Implements template_preprocess_ds_field_expert().
+ */
+//function easydrupal_preprocess_field__ds_field_expert(&$variables) {
+//  echo '<pre>';
+//  print_r($variables);
+//  echo '</pre>';
+//
+//
+//  kint($variables);
+//  exit;
+//  return;
+//
+//  $variables['settings'] = isset($variables['ds-config']['settings']) ? $variables['ds-config']['settings'] : [];
+//
+//  $vars = array(
+//    'lbw' => 'label_attributes',
+//    'ow' => 'wrapper_attributes',
+//    'fis' => 'field_wrapper_attributes',
+//    'fi' => 'field_item_wrapper_attributes',
+//  );
+//
+//  foreach ($vars as $key => $variable_name) {
+//    $var_attributes = array();
+//
+//    // Add classes.
+//    if (!empty($variables['settings'][$key . '-cl'])) {
+//      $var_attributes['class'] = explode(' ', $variables['settings'][$key . '-cl']);
+//    }
+//    // Add attributes.
+//    if (!empty($variables['settings'][$key . '-at'])) {
+//      $attributes = explode(' ', $variables['settings'][$key . '-at']);
+//      foreach ($attributes as $attribute) {
+//        if (strpos($attribute, '=') !== FALSE) {
+//          $attribute_parts = explode('=', $attribute);
+//          $var_attributes[$attribute_parts[0]] = trim($attribute_parts[1], '\"');
+//        }
+//      }
+//    }
+//    $variables[$variable_name] = new \Drupal\ds\DsAttribute($var_attributes);
+//  }
+//
+//  // In order to allow HTML we need to filter XSS the output of the
+//  // prefix/suffix.
+//  $variables['settings']['prefix'] = XSS::filterAdmin($variables['settings']['prefix']);
+//  $variables['settings']['suffix'] = XSS::filterAdmin($variables['settings']['suffix']);
+//}
+
+/**
+ * Implements hook_theme().
+ */
+function easydrupal_theme($existing, $type, $theme, $path) {
+  return [
+    'contact_message_feedback_contact_form_form' => [
+      'render element' => 'form',
+    ],
+  ];
+}
+
+/**
+ * Implements hook_form_alter().
+ *
+ * @param $form
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ * @param $form_id
+ */
+function easydrupal_form_contact_message_feedback_contact_form_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+
+  // Checking field type because it is markup for logged user and we wan't any placeholder.
+  if (isset($form['name']) && $form['name']['#type'] == 'textfield') {
+    $form['name']['#attributes']['placeholder'][] = $form['name']['#title'] . ' *';
+    unset($form['name']['#title']);
+  }
+
+  if (isset($form['mail']) && $form['mail']['#type'] == 'email') {
+    $form['mail']['#attributes']['placeholder'][] = t('Your email') . ' *';
+    unset($form['mail']['#title']);
+  }
+
+  if (isset($form['subject']['widget'])) {
+    $form['subject']['widget'][0]['value']['#attributes']['placeholder'][] = $form['subject']['widget'][0]['#title'] . ' *';
+    unset($form['subject']['widget'][0]['value']['#title']);
+  }
+
+  if (isset($form['message']['widget'])) {
+    $form['message']['widget'][0]['value']['#attributes']['placeholder'][] = t('Message') . ' *';
+    unset($form['message']['widget'][0]['value']['#title']);
+  }
+
+}
+
+
+/**
+ * Implements hook_form_alter().
+ *
+ * @param $form
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ * @param $form_id
+ */
+function easydrupal_form_user_login_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  $form['name']['#attributes']['placeholder'][] = $form['name']['#title'] . ' *';
+  unset($form['name']['#title'], $form['name']['#description']);
+
+  $form['pass']['#attributes']['placeholder'][] = $form['pass']['#title'] . ' *';
+  unset($form['pass']['#title'], $form['pass']['#description']);
+}

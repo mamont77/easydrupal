@@ -1,0 +1,15 @@
+uuid: e70b3b48-4539-46f7-8046-f765870f7f44
+langcode: en
+status: true
+dependencies: {  }
+name: max_750x750
+label: 'Max 750x750'
+effects:
+  7af014a1-46e0-4abb-9146-265d46dff382:
+    uuid: 7af014a1-46e0-4abb-9146-265d46dff382
+    id: image_scale
+    weight: 1
+    data:
+      width: 750
+      height: 750
+      upscale: false

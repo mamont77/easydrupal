@@ -1,0 +1,21 @@
+uuid: 55c5ebd7-a0b5-4b54-aecb-afbfeba7e47f
+langcode: en
+status: true
+dependencies:
+  module:
+    - contact_storage
+third_party_settings:
+  contact_storage:
+    redirect_uri: ''
+    submit_text: 'Send message'
+    show_preview: false
+    disabled_form_message: 'This contact form has been disabled.'
+    maximum_submissions_user: 0
+id: feedback_contact_form
+label: 'GET IN TOUCH'
+recipients:
+  - ruslan.piskarev@gmail.com
+reply: ''
+weight: 0
+message: 'Your message has been sent.'
+redirect: ''

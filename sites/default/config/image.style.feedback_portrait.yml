@@ -1,0 +1,22 @@
+uuid: 0e03ec94-c83e-4991-b67c-fc54c4037fe3
+langcode: en
+status: true
+dependencies:
+  module:
+    - crop
+name: feedback_portrait
+label: 'FeedBack Portrait'
+effects:
+  fcd6d909-01e9-4b00-984a-49eccd95d468:
+    uuid: fcd6d909-01e9-4b00-984a-49eccd95d468
+    id: crop_crop
+    weight: -10
+    data:
+      crop_type: feedback_portrait
+  f57afba8-284d-41cb-8108-41b66e1fb3e4:
+    uuid: f57afba8-284d-41cb-8108-41b66e1fb3e4
+    id: image_scale_and_crop
+    weight: 3
+    data:
+      width: 150
+      height: 150

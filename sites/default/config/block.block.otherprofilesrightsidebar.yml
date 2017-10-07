@@ -1,0 +1,31 @@
+uuid: fadb5baa-9dc2-4b80-943f-2222c7a0a153
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:4c49790f-8a91-4272-b295-fb4cda3deb4d'
+  module:
+    - block_content
+    - system
+  theme:
+    - easydrupal
+id: otherprofilesrightsidebar
+theme: easydrupal
+region: sidebar_second
+weight: -10
+provider: null
+plugin: 'block_content:4c49790f-8a91-4272-b295-fb4cda3deb4d'
+settings:
+  id: 'block_content:4c49790f-8a91-4272-b295-fb4cda3deb4d'
+  label: 'Me in other places'
+  provider: block_content
+  label_display: visible
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    pages: /contact
+    negate: false
+    context_mapping: {  }

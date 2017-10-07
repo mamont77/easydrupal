@@ -1,0 +1,20 @@
+uuid: 93644d2b-addb-46af-8673-3f3205129bad
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.feedback
+id: node.feedback.menu_link
+field_name: menu_link
+entity_type: node
+bundle: feedback
+label: 'Menu link'
+description: 'Computed menu link for the node (only available during node saving).'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: default
+  handler_settings: {  }
+field_type: entity_reference

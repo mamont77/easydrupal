@@ -1,0 +1,20 @@
+uuid: 10138188-c0c4-4398-a2a2-dd2592bea9c3
+langcode: en
+status: true
+dependencies:
+  theme:
+    - easydrupal
+_core:
+  default_config_hash: ffxthelqQF8xcr4GTG4HlaNNsluiHftN0pujmQpW0bQ
+id: easydrupal_local_actions
+theme: easydrupal
+region: header
+weight: -6
+provider: null
+plugin: local_actions_block
+settings:
+  id: local_actions_block
+  label: 'Primary admin actions'
+  provider: core
+  label_display: '0'
+visibility: {  }

@@ -1,0 +1,32 @@
+uuid: b2a5053f-b71c-47f4-bdbd-5f99ac0ad265
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.tags
+  module:
+    - node
+    - views
+  theme:
+    - bootstrap
+id: views_block__tags_tags
+theme: bootstrap
+region: sidebar_second
+weight: -7
+provider: null
+plugin: 'views_block:tags-tags'
+settings:
+  id: 'views_block:tags-tags'
+  label: ''
+  provider: views
+  label_display: visible
+  views_label: ''
+  items_per_page: none
+visibility:
+  node_type:
+    id: node_type
+    bundles:
+      article: article
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'

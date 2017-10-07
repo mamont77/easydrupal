@@ -1,0 +1,47 @@
+uuid: 1a715aa0-9013-4557-a74c-76b8dce39dcd
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.user.compact
+    - field.field.user.user.field_about
+    - field.field.user.user.field_country
+    - field.field.user.user.field_date_birth
+    - field.field.user.user.field_first_name
+    - field.field.user.user.field_last_name
+    - field.field.user.user.user_picture
+    - image.style.max_150x150
+  module:
+    - ds
+    - image
+    - user
+_core:
+  default_config_hash: C3k_McOy8bL8rTnIjspy5OfFdgqV1z6OdGZaI-tO5eM
+id: user.user.compact
+targetEntityType: user
+bundle: user
+mode: compact
+content:
+  user_picture:
+    type: image
+    weight: 0
+    settings:
+      image_style: max_150x150
+      image_link: content
+    third_party_settings:
+      ds:
+        ft:
+          id: minimal
+          settings:
+            lb: ''
+            lb-col: false
+            classes: {  }
+    label: hidden
+    region: content
+hidden:
+  field_about: true
+  field_country: true
+  field_date_birth: true
+  field_first_name: true
+  field_last_name: true
+  member_for: true

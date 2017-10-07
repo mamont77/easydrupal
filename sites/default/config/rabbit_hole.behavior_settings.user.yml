@@ -1,0 +1,9 @@
+uuid: deab1293-b492-4534-9a7b-8508d9d56922
+langcode: en
+status: true
+dependencies: {  }
+id: user
+action: access_denied
+allow_override: 0
+redirect: ''
+redirect_code: 301

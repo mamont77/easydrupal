@@ -1,0 +1,15 @@
+uuid: b63fb950-f594-4388-af8f-8f2d77093b5f
+langcode: en
+status: true
+dependencies: {  }
+name: max_293x293
+label: 'Max 293x293'
+effects:
+  705d27e7-777e-4bee-a977-2af67c89c766:
+    uuid: 705d27e7-777e-4bee-a977-2af67c89c766
+    id: image_scale
+    weight: 1
+    data:
+      width: 293
+      height: 293
+      upscale: false

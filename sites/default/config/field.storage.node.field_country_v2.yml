@@ -1,0 +1,20 @@
+uuid: 4a10e1d1-fd8f-46b5-b93a-ea7a6ad04ef6
+langcode: en
+status: true
+dependencies:
+  module:
+    - country
+    - node
+id: node.field_country_v2
+field_name: field_country_v2
+entity_type: node
+type: country
+settings:
+  selectable_countries: {  }
+module: country
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,15 @@
+uuid: cbec73d6-d3c8-4259-bcdf-11bd81f20bc3
+langcode: en
+status: true
+dependencies: {  }
+name: max_455x455
+label: 'Max 455x455'
+effects:
+  18d423e3-d925-4c29-88f2-b6ae8e01c27b:
+    uuid: 18d423e3-d925-4c29-88f2-b6ae8e01c27b
+    id: image_scale
+    weight: 1
+    data:
+      width: 455
+      height: 455
+      upscale: false

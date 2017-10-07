@@ -1,0 +1,8 @@
+uuid: 9f78a929-2e0f-40cf-9916-1cf3e40d28ab
+langcode: en
+status: true
+dependencies: {  }
+id: timestamp
+label: Timestamp
+locked: false
+pattern: U

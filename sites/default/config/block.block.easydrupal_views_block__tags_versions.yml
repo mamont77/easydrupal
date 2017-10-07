@@ -1,0 +1,32 @@
+uuid: 029abf7a-e9f9-4984-b9e0-130075310924
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.tags
+  module:
+    - node
+    - views
+  theme:
+    - easydrupal
+id: easydrupal_views_block__tags_versions
+theme: easydrupal
+region: sidebar_second
+weight: -7
+provider: null
+plugin: 'views_block:tags-versions'
+settings:
+  id: 'views_block:tags-versions'
+  label: ''
+  provider: views
+  label_display: visible
+  views_label: ''
+  items_per_page: none
+visibility:
+  node_type:
+    id: node_type
+    bundles:
+      article: article
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'

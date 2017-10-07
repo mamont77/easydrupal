@@ -1,0 +1,15 @@
+uuid: df922da6-398a-4088-97fd-250064233b04
+langcode: en
+status: true
+dependencies: {  }
+name: max_450x450
+label: 'Max 450x450'
+effects:
+  fa2a8046-1927-4ed9-a733-a9c92147a3ef:
+    uuid: fa2a8046-1927-4ed9-a733-a9c92147a3ef
+    id: image_scale
+    weight: 1
+    data:
+      width: 450
+      height: 450
+      upscale: false

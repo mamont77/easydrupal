@@ -1,0 +1,21 @@
+uuid: 891d17de-e9f1-4a5f-922a-d3d91c20ae74
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.field_collection_item.field_description
+    - field_collection.field_collection.field_sourse_code
+  module:
+    - text
+id: field_collection_item.field_sourse_code.field_description
+field_name: field_description
+entity_type: field_collection_item
+bundle: field_sourse_code
+label: Description
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

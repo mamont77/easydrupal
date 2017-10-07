@@ -1,0 +1,18 @@
+uuid: a719eeb7-7f69-4a04-9792-0d0db7e6c956
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: ShncZd3oX-UZDBGDUrgbRiZ2BmIJYSLHvIIPjq6tRAQ
+id: taxonomy_term
+label: 'Taxonomy term'
+tags:
+  title: '[term:name] with Drupal | [site:name]'
+  description: '[term:description]'
+  robots: 'index, follow'
+  og_site_name: '[site:name]'
+  og_type: atricle
+  og_title: '[term:name] with Drupal'
+  og_see_also: '[site:url]/articles'
+  twitter_cards_title: '[term:name] with Drupal'
+  twitter_cards_site: '@mamont77'

@@ -1,0 +1,10 @@
+uuid: eed7082a-68d2-4084-80f8-7d1d5fc62376
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.project_full_content
+label: 'Project Full content'
+targetEntityType: node
+cache: true

@@ -1,0 +1,44 @@
+uuid: 205e75d0-bc29-4408-a250-5bcac9ac1c38
+langcode: en
+status: true
+dependencies:
+  config:
+    - contact.form.feedback_contact_form
+id: contact_message.feedback_contact_form.default
+targetEntityType: contact_message
+bundle: feedback_contact_form
+mode: default
+content:
+  mail:
+    weight: 1
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  message:
+    type: string_textarea
+    weight: 3
+    settings:
+      rows: 6
+      placeholder: 'Your message'
+    third_party_settings: {  }
+    region: content
+  name:
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  preview:
+    weight: 4
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  subject:
+    type: string_textfield
+    weight: 2
+    settings:
+      size: 30
+      placeholder: 'Your subject'
+    third_party_settings: {  }
+    region: content
+hidden:
+  copy: true

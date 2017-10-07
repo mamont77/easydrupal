@@ -1,0 +1,15 @@
+uuid: 4e9627eb-93f8-4eb4-a389-f35689a91677
+langcode: en
+status: true
+dependencies: {  }
+name: max_100x150
+label: 'Max 100x100'
+effects:
+  8feff371-5acc-4d5c-8191-f8377b2471ba:
+    uuid: 8feff371-5acc-4d5c-8191-f8377b2471ba
+    id: image_scale
+    weight: 1
+    data:
+      width: 100
+      height: 100
+      upscale: false

@@ -1,0 +1,13 @@
+diff --git a/includes/field_ui.inc b/includes/field_ui.inc
+index d20cb107..05fc803e 100644
+--- a/includes/field_ui.inc
++++ b/includes/field_ui.inc
+@@ -242,7 +242,7 @@ function ds_field_ui_regions(array $form, FormStateInterface $form_state) {
+       else {
+         $region_default_value = $row['region']['#default_value'];
+         $default = (isset($field_regions[$name]) && isset($region_options[$field_regions[$name]])) ? $field_regions[$name] : 'hidden';
+-        if ($region_default_value == 'content') {
++        if ($region_default_value == 'content' && !isset($region_options['content'])) {
+           $default = key($region_options);
+         }
+         $row['region']['#options'] = $region_options;

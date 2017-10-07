@@ -1,0 +1,11 @@
+uuid: 62a658d2-6b3b-471c-aad7-c764d0b575ab
+langcode: en
+status: true
+dependencies: {  }
+id: NXhscRe0440PFpI5dSznEVgmauL25KojD7u4e9aZwOM
+label: DrupalEasy
+chunks: 1
+links: 33
+max_filesize: 5891
+context: {  }
+updated: 1505894402

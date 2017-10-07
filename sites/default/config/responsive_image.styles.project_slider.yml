@@ -1,0 +1,25 @@
+uuid: 4e27f550-8755-401d-a8aa-1bf838ae4993
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.project_slider_default
+    - image.style.project_slider_max_width_767px
+    - image.style.project_slider_max_width_991px
+  theme:
+    - easydrupal
+id: project_slider
+label: 'Project Slider'
+image_style_mappings:
+  -
+    breakpoint_id: easydrupal.screen-xs-max
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: project_slider_max_width_767px
+  -
+    breakpoint_id: easydrupal.screen-sm-max
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: project_slider_max_width_991px
+breakpoint_group: easydrupal
+fallback_image_style: project_slider_default

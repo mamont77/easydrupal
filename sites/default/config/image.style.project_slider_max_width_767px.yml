@@ -1,0 +1,23 @@
+uuid: 59f768fb-62a3-4532-b84b-de43918a8d9e
+langcode: en
+status: true
+dependencies: {  }
+name: project_slider_max_width_767px
+label: 'Project Slider MAX-WIDTH: 767PX'
+effects:
+  f31225c8-ef02-4594-b0b8-07ac6b64c354:
+    uuid: f31225c8-ef02-4594-b0b8-07ac6b64c354
+    id: image_scale
+    weight: 1
+    data:
+      width: 720
+      height: null
+      upscale: true
+  f748bad4-a29f-4a5a-b20e-bb14ea36015c:
+    uuid: f748bad4-a29f-4a5a-b20e-bb14ea36015c
+    id: image_scale
+    weight: 2
+    data:
+      width: 720
+      height: 450
+      upscale: false

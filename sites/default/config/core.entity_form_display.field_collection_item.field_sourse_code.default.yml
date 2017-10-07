@@ -1,0 +1,40 @@
+uuid: 7805c772-756f-4537-9b91-62f1691824c3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.field_collection_item.field_sourse_code.field_code
+    - field.field.field_collection_item.field_sourse_code.field_description
+    - field.field.field_collection_item.field_sourse_code.field_file_name
+    - field_collection.field_collection.field_sourse_code
+  module:
+    - geshifield
+    - text
+id: field_collection_item.field_sourse_code.default
+targetEntityType: field_collection_item
+bundle: field_sourse_code
+mode: default
+content:
+  field_code:
+    weight: 1
+    settings: {  }
+    third_party_settings: {  }
+    type: geshifield_default
+    region: content
+  field_description:
+    weight: 2
+    settings:
+      rows: 6
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+  field_file_name:
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+hidden: {  }

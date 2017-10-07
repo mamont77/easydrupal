@@ -1,0 +1,102 @@
+uuid: 9c4a28f5-ae93-494a-ba00-c02b0cca2474
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.user.user.field_about
+    - field.field.user.user.field_country
+    - field.field.user.user.field_date_birth
+    - field.field.user.user.field_first_name
+    - field.field.user.user.field_last_name
+    - field.field.user.user.user_picture
+    - image.style.max_150x150
+  module:
+    - datetime
+    - image
+    - path
+    - text
+    - user
+_core:
+  default_config_hash: LLAieeozVsoZDb-2PbFxRJpQqnKmpR7-4OoRJnduz-U
+id: user.user.default
+targetEntityType: user
+bundle: user
+mode: default
+content:
+  account:
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  contact:
+    weight: 8
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_about:
+    weight: 6
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea_with_summary
+    region: content
+  field_country:
+    weight: 4
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_date_birth:
+    weight: 5
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  field_first_name:
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_last_name:
+    weight: 1
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  google_analytics:
+    weight: 3
+    region: content
+  language:
+    weight: 7
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  path:
+    type: path
+    weight: 10
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  timezone:
+    weight: 9
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  user_picture:
+    type: image_image
+    settings:
+      preview_image_style: max_150x150
+      progress_indicator: throbber
+    third_party_settings: {  }
+    weight: 3
+    region: content
+hidden: {  }

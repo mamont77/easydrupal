@@ -1,0 +1,234 @@
+uuid: 0f40e287-3939-40f7-a513-22c588735119
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.full
+    - field.field.node.landingpage.field_about
+    - field.field.node.landingpage.field_articles
+    - field.field.node.landingpage.field_contact_me
+    - field.field.node.landingpage.field_feedback
+    - field.field.node.landingpage.field_projects
+    - node.type.landingpage
+  module:
+    - ds
+    - user
+third_party_settings:
+  ds:
+    layout:
+      id: ds_reset
+      path: modules/ds
+      library: ''
+      disable_css: false
+      entity_classes: all_classes
+      settings:
+        wrappers:
+          ds_content: div
+        outer_wrapper: div
+        attributes: ''
+        link_attribute: ''
+        link_custom: ''
+        classes:
+          layout_class: {  }
+          ds_content: {  }
+    regions:
+      ds_content:
+        - field_about
+        - field_projects
+        - field_articles
+        - field_feedback
+        - field_contact_me
+id: node.landingpage.full
+targetEntityType: node
+bundle: landingpage
+mode: full
+content:
+  field_about:
+    weight: 0
+    label: above
+    settings:
+      view_mode: landing_page
+      link: false
+    third_party_settings:
+      ds:
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            prefix: ''
+            lbw: true
+            lbw-el: h2
+            lbw-cl: 'section-title animated'
+            lbw-at: ''
+            ow: true
+            ow-el: div
+            ow-cl: 'section about'
+            ow-at: 'id="about"'
+            fis-el: div
+            fis-cl: row
+            fis-at: ''
+            fi-el: ''
+            fi-cl: ''
+            fi-at: ''
+            suffix: ''
+            lb-col: false
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
+            fis-def-at: false
+            fi: false
+            fi-def-at: false
+    type: entity_reference_entity_view
+    region: ds_content
+  field_articles:
+    weight: 2
+    label: above
+    settings:
+      view_mode: landing_page
+      link: false
+    third_party_settings:
+      ds:
+        ds_limit: ''
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            prefix: ''
+            lbw: true
+            lbw-el: h2
+            lbw-cl: section-title
+            lbw-at: ''
+            ow: true
+            ow-el: div
+            ow-cl: 'section articles'
+            ow-at: 'id="articles"'
+            fis: true
+            fis-el: div
+            fis-cl: row
+            fis-at: ''
+            fi: true
+            fi-el: div
+            fi-cl: 'item col-sm-6'
+            fi-at: ''
+            suffix: ''
+            lb-col: false
+            ow-def-at: false
+            ow-def-cl: false
+            fis-def-at: false
+            fi-def-at: false
+    type: entity_reference_entity_view
+    region: ds_content
+  field_contact_me:
+    weight: 4
+    label: above
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings:
+      ds:
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            prefix: ''
+            lbw: true
+            lbw-el: h2
+            lbw-cl: section-title
+            lbw-at: ''
+            ow: true
+            ow-el: div
+            ow-cl: 'section contact'
+            ow-at: 'id="contact"'
+            fis-el: div
+            fis-cl: row
+            fis-at: ''
+            fi-el: div
+            fi-cl: '.col-sm-12 col-md-4 col-lg-4'
+            fi-at: ''
+            suffix: ''
+            lb-col: false
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
+            fis-def-at: false
+            fi: false
+            fi-def-at: false
+    type: entity_reference_entity_view
+    region: ds_content
+  field_feedback:
+    weight: 3
+    label: above
+    settings:
+      view_mode: landing_page
+      link: false
+    third_party_settings:
+      ds:
+        ds_limit: ''
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            prefix: ''
+            lbw: true
+            lbw-el: h2
+            lbw-cl: section-title
+            lbw-at: ''
+            ow: true
+            ow-el: div
+            ow-cl: 'section feedback'
+            ow-at: 'id="feedback"'
+            fis: true
+            fis-el: div
+            fis-cl: row
+            fis-at: ''
+            fi: true
+            fi-el: div
+            fi-cl: 'item col-sm-4'
+            fi-at: ''
+            suffix: ''
+            lb-col: false
+            ow-def-at: false
+            ow-def-cl: false
+            fis-def-at: false
+            fi-def-at: false
+    type: entity_reference_entity_view
+    region: ds_content
+  field_projects:
+    weight: 1
+    label: above
+    settings:
+      view_mode: landing_page
+      link: false
+    third_party_settings:
+      ds:
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            prefix: ''
+            lbw: true
+            lbw-el: h2
+            lbw-cl: section-title
+            lbw-at: ''
+            ow: true
+            ow-el: div
+            ow-cl: 'section projects'
+            ow-at: 'id="projects"'
+            fis-el: div
+            fis-cl: row
+            fis-at: ''
+            fi-el: div
+            fi-cl: 'slide project'
+            fi-at: ''
+            suffix: ''
+            lb-col: false
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
+            fis-def-at: false
+            fi: false
+            fi-def-at: false
+    type: entity_reference_entity_view
+    region: ds_content
+hidden:
+  links: true

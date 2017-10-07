@@ -1,0 +1,106 @@
+uuid: 02aa0c94-9e37-4110-b36a-6234f9deb009
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.landing_page
+    - field.field.node.article.body
+    - field.field.node.article.field_attachment
+    - field.field.node.article.field_comments
+    - field.field.node.article.field_conclusions
+    - field.field.node.article.field_image
+    - field.field.node.article.field_sourse_code
+    - field.field.node.article.field_tags
+    - field.field.node.article.field_version
+    - node.type.article
+    - responsive_image.styles.landing_page_article
+  module:
+    - ds
+    - responsive_image
+    - text
+    - user
+third_party_settings:
+  ds:
+    layout:
+      id: ds_reset
+      path: modules/ds
+      library: ''
+      disable_css: false
+      entity_classes: all_classes
+      settings:
+        wrappers:
+          ds_content: div
+        outer_wrapper: div
+        attributes: ''
+        link_attribute: ''
+        link_custom: ''
+        classes:
+          layout_class: {  }
+          ds_content: {  }
+    regions:
+      ds_content:
+        - node_title
+        - field_image
+        - body
+    fields:
+      node_title:
+        plugin_id: node_title
+        weight: 0
+        label: hidden
+        formatter: default
+        settings:
+          link: true
+          wrapper: h3
+          class: ''
+        ft:
+          id: minimal
+          settings:
+            lb: ''
+            lb-col: false
+            classes: {  }
+_core:
+  default_config_hash: JtAg_-waIt1quMtdDtHIaXJMxvTuSmxW7bWyO6Zd68E
+id: node.article.landing_page
+targetEntityType: node
+bundle: article
+mode: landing_page
+content:
+  body:
+    type: text_summary_or_trimmed
+    weight: 2
+    settings:
+      trim_length: 600
+    third_party_settings:
+      ds:
+        ft:
+          id: minimal
+          settings:
+            lb: ''
+            lb-col: false
+            classes: {  }
+    label: hidden
+    region: ds_content
+  field_image:
+    type: responsive_image
+    weight: 1
+    settings:
+      responsive_image_style: landing_page_article
+      image_link: ''
+    third_party_settings:
+      ds:
+        ft:
+          id: minimal
+          settings:
+            lb: ''
+            lb-col: false
+            classes: {  }
+    label: hidden
+    region: ds_content
+hidden:
+  field_attachment: true
+  field_comments: true
+  field_conclusions: true
+  field_sourse_code: true
+  field_tags: true
+  field_version: true
+  links: true

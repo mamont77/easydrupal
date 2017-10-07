@@ -1,0 +1,21 @@
+uuid: 778b0f44-f00c-4a91-850a-dda8206b71d2
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: articles_links_collention
+label: 'Articles Links Collention'
+description: ''
+matchers:
+  8460b787-eb85-4a9e-9be1-9c8765a2c26d:
+    uuid: 8460b787-eb85-4a9e-9be1-9c8765a2c26d
+    id: 'entity:node'
+    weight: 0
+    settings:
+      bundles:
+        article: article
+      group_by_bundle: false
+      include_unpublished: false
+      substitution_type: canonical
+      metadata: ''

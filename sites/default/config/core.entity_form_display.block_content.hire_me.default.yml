@@ -1,0 +1,42 @@
+uuid: 93090955-1d9c-44dd-8b3a-d563f7f198a3
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.hire_me
+    - field.field.block_content.hire_me.body
+    - field.field.block_content.hire_me.field_link
+  module:
+    - link
+    - text
+id: block_content.hire_me.default
+targetEntityType: block_content
+bundle: hire_me
+mode: default
+content:
+  body:
+    type: text_textarea_with_summary
+    weight: 2
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+    third_party_settings: {  }
+    region: content
+  field_link:
+    weight: 3
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+  info:
+    type: string_textfield
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    region: content
+hidden: {  }

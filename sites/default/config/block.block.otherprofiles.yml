@@ -1,0 +1,31 @@
+uuid: d9e8645b-61bb-4d50-bd63-6e37d44ebaef
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:a4bd2375-c885-4ab7-ba12-cd7893a0ead9'
+  module:
+    - block_content
+    - system
+  theme:
+    - easydrupal
+id: otherprofiles
+theme: easydrupal
+region: footer
+weight: -9
+provider: null
+plugin: 'block_content:a4bd2375-c885-4ab7-ba12-cd7893a0ead9'
+settings:
+  id: 'block_content:a4bd2375-c885-4ab7-ba12-cd7893a0ead9'
+  label: 'Other profiles'
+  provider: block_content
+  label_display: '0'
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    pages: "<front>\r\n/user/login\r\n/user/password\r\n/contact"
+    negate: true
+    context_mapping: {  }

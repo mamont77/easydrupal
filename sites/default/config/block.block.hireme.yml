@@ -1,0 +1,31 @@
+uuid: b81f953c-bd60-44b8-aea0-1f2bfaaee75c
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:hire_me:1f1ad292-4551-4e34-a068-ee4f88f4ebb3'
+  module:
+    - block_content
+    - system
+  theme:
+    - easydrupal
+id: hireme
+theme: easydrupal
+region: content
+weight: -8
+provider: null
+plugin: 'block_content:1f1ad292-4551-4e34-a068-ee4f88f4ebb3'
+settings:
+  id: 'block_content:1f1ad292-4551-4e34-a068-ee4f88f4ebb3'
+  label: 'Hire Me!'
+  provider: block_content
+  label_display: '0'
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    pages: "/about-me\r\n/projects"
+    negate: false
+    context_mapping: {  }

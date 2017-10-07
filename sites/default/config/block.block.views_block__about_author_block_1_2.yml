@@ -1,0 +1,32 @@
+uuid: 581d9982-f4b8-45d5-ab09-fb0f74d5f849
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.about_author
+  module:
+    - ctools
+    - views
+  theme:
+    - bootstrap
+id: views_block__about_author_block_1_2
+theme: bootstrap
+region: sidebar_second
+weight: -8
+provider: null
+plugin: 'views_block:about_author-block_1'
+settings:
+  id: 'views_block:about_author-block_1'
+  label: ''
+  provider: views
+  label_display: visible
+  views_label: ''
+  items_per_page: none
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    bundles:
+      article: article
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'

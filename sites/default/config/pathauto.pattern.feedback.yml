@@ -1,0 +1,22 @@
+uuid: 2804b47b-db28-4c3a-a7a5-e193208df26a
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: feedback
+label: Feedback
+type: 'canonical_entities:node'
+pattern: 'feedback/[node:title]'
+selection_criteria:
+  2d3c1fc2-3a1e-4822-b1bb-ea8fe62dc5a6:
+    id: node_type
+    bundles:
+      feedback: feedback
+    negate: false
+    context_mapping:
+      node: node
+    uuid: 2d3c1fc2-3a1e-4822-b1bb-ea8fe62dc5a6
+selection_logic: and
+weight: -5
+relationships: {  }

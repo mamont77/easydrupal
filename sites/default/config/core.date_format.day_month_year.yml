@@ -1,0 +1,8 @@
+uuid: bacc8545-452b-46b5-90dd-e28fcb916437
+langcode: en
+status: true
+dependencies: {  }
+id: day_month_year
+label: 'Day Month Year'
+locked: false
+pattern: 'd F Y'

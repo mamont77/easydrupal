@@ -1,0 +1,23 @@
+uuid: c1e7fc07-e6e3-4a29-b4a1-8491bfb4f03e
+langcode: en
+status: true
+dependencies: {  }
+name: project_slider_default
+label: 'Project Slider Default'
+effects:
+  238ba254-ca75-4dae-a179-c5fc75be84f1:
+    uuid: 238ba254-ca75-4dae-a179-c5fc75be84f1
+    id: image_scale
+    weight: 1
+    data:
+      width: 681
+      height: null
+      upscale: true
+  13a64bb3-12fb-4d84-b758-9d0340705a95:
+    uuid: 13a64bb3-12fb-4d84-b758-9d0340705a95
+    id: image_crop
+    weight: 2
+    data:
+      width: 681
+      height: 385
+      anchor: left-top

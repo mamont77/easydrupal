@@ -1,0 +1,22 @@
+uuid: 8a9d5241-6f62-4e1c-923a-92b06aa600bc
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.landingpage
+id: node.landingpage.status
+field_name: status
+entity_type: node
+bundle: landingpage
+label: 'Publishing status'
+description: 'A boolean indicating whether the node is published.'
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

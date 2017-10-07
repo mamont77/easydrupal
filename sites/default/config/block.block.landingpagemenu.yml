@@ -1,0 +1,29 @@
+uuid: cd9bed4a-f37f-4435-9deb-8142eae3b538
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.landing-page-menu
+  module:
+    - system
+  theme:
+    - easydrupal
+id: landingpagemenu
+theme: easydrupal
+region: navigation_collapsible
+weight: -8
+provider: null
+plugin: 'system_menu_block:landing-page-menu'
+settings:
+  id: 'system_menu_block:landing-page-menu'
+  label: 'Landing Page Menu'
+  provider: system
+  label_display: '0'
+  level: 1
+  depth: 2
+visibility:
+  request_path:
+    id: request_path
+    pages: '<front>'
+    negate: false
+    context_mapping: {  }

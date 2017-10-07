@@ -1,0 +1,13 @@
+uuid: db138101-d904-4f88-a853-a319effad520
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: ydpmSCtxLjO9xqkBxObkeYx0Bf2dkW-d8bB_6Q1Ggjs
+id: node
+label: Content
+tags:
+  description: '[node:summary]'
+  title: '[node:title] | [site:name]'
+  article_tag: '[node:field_tags]'
+  og_image: '[node:field_image:max_750x750]'

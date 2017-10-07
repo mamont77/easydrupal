@@ -1,0 +1,48 @@
+use_format_specific_options: false
+default_highlighting: GESHIFILTER_DEFAULT_DONOTHING
+default_line_numbering: 0
+use_highlight_string_for_php: false
+enable_keyword_urls: true
+decode_entities: false
+css_mode: 3
+code_container: '2'
+tags: 'code blockcode'
+tag_styles:
+  1: 1
+  2: 0
+  4: 0
+  8: 0
+language:
+  php:
+    enabled: true
+    tags: php
+  cpp:
+    tags: cpp
+  java:
+    tags: java
+  css:
+    enabled: true
+    tags: css
+  diff:
+    enabled: true
+    tags: diff
+  html4strict:
+    enabled: true
+    tags: html
+  html5:
+    enabled: true
+    tags: html5
+  javascript:
+    enabled: true
+    tags: javascript
+  jquery:
+    enabled: true
+    tags: jquery
+  yaml:
+    enabled: true
+    tags: yaml
+  text:
+    enabled: true
+    tags: text
+_core:
+  default_config_hash: rFxYA6H7ZH3mYsXr2lgP8oCdXvPXiCTr0Hjaxgu5Mts

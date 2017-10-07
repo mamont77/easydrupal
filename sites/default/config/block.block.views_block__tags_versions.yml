@@ -1,0 +1,32 @@
+uuid: de43b7ec-cae5-450a-9c8d-2ae5d830a51d
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.tags
+  module:
+    - node
+    - views
+  theme:
+    - bootstrap
+id: views_block__tags_versions
+theme: bootstrap
+region: sidebar_second
+weight: -6
+provider: null
+plugin: 'views_block:tags-versions'
+settings:
+  id: 'views_block:tags-versions'
+  label: ''
+  provider: views
+  label_display: visible
+  views_label: ''
+  items_per_page: none
+visibility:
+  node_type:
+    id: node_type
+    bundles:
+      article: article
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'

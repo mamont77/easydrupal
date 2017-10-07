@@ -1,0 +1,23 @@
+uuid: 73f53f72-d8fc-46c6-83a9-ed8dd9c1b610
+langcode: en
+status: true
+dependencies: {  }
+name: project_landing_page_max_width_991px
+label: 'Project Landing Page MAX-WIDTH: 991PX'
+effects:
+  5557ad39-2bb4-4207-81eb-4380a172b651:
+    uuid: 5557ad39-2bb4-4207-81eb-4380a172b651
+    id: image_scale
+    weight: 1
+    data:
+      width: 343
+      height: null
+      upscale: true
+  52bf5261-2b51-4519-9146-e47b643a5da9:
+    uuid: 52bf5261-2b51-4519-9146-e47b643a5da9
+    id: image_crop
+    weight: 2
+    data:
+      width: 343
+      height: 214
+      anchor: left-top

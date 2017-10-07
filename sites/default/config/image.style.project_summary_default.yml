@@ -1,0 +1,23 @@
+uuid: 326d7b19-22b7-490a-8fa8-07434d6bd28b
+langcode: en
+status: true
+dependencies: {  }
+name: project_summary_default
+label: 'Project Summary Default'
+effects:
+  9b4c4e71-22a3-4671-a8d4-148e4013b15c:
+    uuid: 9b4c4e71-22a3-4671-a8d4-148e4013b15c
+    id: image_scale
+    weight: 1
+    data:
+      width: 360
+      height: null
+      upscale: true
+  f057a531-2bdd-4708-b23a-7d0c9a38e967:
+    uuid: f057a531-2bdd-4708-b23a-7d0c9a38e967
+    id: image_crop
+    weight: 2
+    data:
+      width: 360
+      height: 204
+      anchor: left-top
