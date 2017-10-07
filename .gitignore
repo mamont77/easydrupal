@@ -65,3 +65,11 @@ Thumbs.db
 # Pantheon files directory symlink #
 ####################################
 sites/default/files
+
+# Custom Paches #
+####################################
+
+/.idea
+node_modules
+/_my_data
+/themes/easydrupal/css/*.map
