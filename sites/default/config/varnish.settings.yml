@@ -1,7 +1,7 @@
 varnish_flush_cron: null
 varnish_version: '3'
 varnish_control_terminal: '127.0.0.1:6082'
-varnish_control_key: 9a4a9039-c4ba-4318-9000-1b93c874faa4
+varnish_control_key: b759bb89-4721-4d5d-8ac4-6734a7e352e4
 varnish_socket_timeout: '100'
 varnish_cache_clear: '1'
 varnish_bantype: '0'
