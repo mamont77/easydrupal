@@ -17,7 +17,7 @@ class DrupalBrowserUploadDestination extends PluginBase implements ReadableDesti
    * {@inheritdoc}
    */
   public function getFile($id) {
-    $file_upload = \Drupal::request()->files->get("files[$id]", NULL, TRUE);
+    $file_upload = \Drupal::request()->files->get("files", NULL, TRUE)[$id];
     // Make sure there's an upload to process.
     if (!empty($file_upload)) {
       $out = new ReadableStreamBackupFile($file_upload->getRealPath());
