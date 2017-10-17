@@ -210,4 +210,12 @@ if (defined('PANTHEON_ENVIRONMENT')) {
 //    $settings['trusted_host_patterns'][] = '^responsinator.com$';
 //    $settings['trusted_host_patterns'][] = '^www.responsinator.com';
   }
+  if ($_ENV['PANTHEON_ENVIRONMENT'] == 'dev') {
+    // Disable Core CSS and JS aggregation.
+    $config['system.performance']['css']['preprocess'] = FALSE;
+    $config['system.performance']['js']['preprocess'] = FALSE;
+
+    // Disable AdvAgg.
+    $config['advagg.settings']['enabled'] = FALSE;
+  }
 }

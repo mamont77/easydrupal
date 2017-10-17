@@ -305,15 +305,17 @@
   color: #81a5bf;
   font-size: 3em;
   line-height: 0.1em;
-  margin-left: 0.2em;
 }
 .page-node-type-landingpage .feedback blockquote:before {
   content: "\201c";
   vertical-align: -.4em;
+  margin-left: 0;
+  margin-right: 0.2em;
 }
 .page-node-type-landingpage .feedback blockquote:after {
   content: "\201d";
   vertical-align: -.45em;
+  margin-left: 0.2em;
 }
 .page-node-type-landingpage .feedback blockquote > p:first-child {
   display: inline;

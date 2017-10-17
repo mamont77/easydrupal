@@ -858,15 +858,17 @@ body.path-contact .contact-form .btn-primary {
   color: #81a5bf;
   font-size: 3em;
   line-height: 0.1em;
-  margin-left: 0.2em;
 }
 .view-feedback blockquote:before {
   content: "\201c";
   vertical-align: -.4em;
+  margin-left: 0;
+  margin-right: 0.2em;
 }
 .view-feedback blockquote:after {
   content: "\201d";
   vertical-align: -.45em;
+  margin-left: 0.2em;
 }
 .view-feedback blockquote > p:first-child {
   display: inline;
