@@ -6,7 +6,8 @@
     "require": {
         "composer/installers": "^1.0.24",
         "wikimedia/composer-merge-plugin": "^1.4",
-        "drush/drush": "~9.0"
+        "drush/drush": "~9.0",
+        "drupal/sticky_sharrre_bar": "1.x-dev"
     },
     "replace": {
         "drupal/core": "^8.4"
@@ -40,7 +41,8 @@
             "themes/contrib/{$name}": ["type:drupal-theme"],
             "drush/contrib/{$name}": ["type:drupal-drush"],
             "modules/custom/{$name}": ["type:drupal-custom-module"],
-            "themes/custom/{$name}": ["type:drupal-custom-theme"]
+            "themes/custom/{$name}": ["type:drupal-custom-theme"],
+            "libraries/{$name}": ["type:drupal-library"]
         }
     },
     "autoload": {
