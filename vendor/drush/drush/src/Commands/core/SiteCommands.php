@@ -154,7 +154,7 @@ class SiteCommands extends DrushCommands implements SiteAliasManagerAwareInterfa
      * @aliases sa-convert,sac
      * @return array
      */
-    public function siteAliasConvert($destination, $options = ['format' => 'yaml', 'sources' => null])
+    public function siteAliasConvert($destination, $options = ['format' => 'yaml', 'sources' => self::REQ])
     {
         /**
          * @todo
@@ -205,7 +205,7 @@ class SiteCommands extends DrushCommands implements SiteAliasManagerAwareInterfa
             if ($composerRoot = Drush::bootstrapManager()->getComposerRoot()) {
                 $default = Path::join($composerRoot, 'drush/site-aliases');
             }
-            $destination = $this->io()->ask('Absolute path for writing new alias files', $default);
+            $destination = $this->io()->ask('Absolute path to a directory for writing new alias files', $default);
             $input->setArgument('destination', $destination);
         }
     }

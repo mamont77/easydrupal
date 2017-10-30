@@ -3,12 +3,13 @@ namespace Drush\SiteAlias;
 
 use Consolidation\Config\Config;
 use Consolidation\Config\ConfigInterface;
+use Consolidation\Config\Util\ArrayUtil;
 
 /**
  * An alias record is a configuration record containing well-known items.
  *
  * NOTE: AliasRecord is implemented as a Config subclass; however, it
- * should not be used as a config. (A better implementaton would be
+ * should not be used as a config. (A better implementation would be
  * "hasa" config, but that is less convenient, as we want all of the
  * same capabilities as a config object).
  *
@@ -229,9 +230,17 @@ class AliasRecord extends Config
      */
     public function exportConfig()
     {
-        $data = $this->export();
+        return $this->remap($this->export());
+    }
 
-        foreach ($this->remapOptions() as $from => $to) {
+    /**
+     * Reconfigure data exported from the form it is expected to be in
+     * inside an alias record to the form it is expected to be in when
+     * inside a configuration file.
+     */
+    protected function remap($data)
+    {
+        foreach ($this->remapOptionTable() as $from => $to) {
             if (isset($data[$from])) {
                 unset($data[$from]);
             }
@@ -245,19 +254,41 @@ class AliasRecord extends Config
     }
 
     /**
+     * Fetch the parameter-specific options from the 'alias-parameters' section of the alias.
+     * @param string $parameterName
+     * @return array
+     */
+    protected function getParameterSpecificOptions($aliasData, $parameterName)
+    {
+        if (!empty($parameterName) && $this->has("alias-parameters.{$parameterName}")) {
+            return $this->get("alias-parameters.{$parameterName}");
+        }
+        return [];
+    }
+
+    /**
      * Convert the data in this record to the layout that was used
      * in the legacy code, for backwards compatiblity.
      */
     public function legacyRecord()
     {
-        return $this->exportConfig()->get('options', []);
+        $result = $this->exportConfig()->get('options', []);
+
+        // Backend invoke needs a couple of critical items in specific locations.
+        if ($this->has('paths.drush-script')) {
+            $result['path-aliases']['%drush-script'] = $this->get('paths.drush-script');
+        }
+        if ($this->has('ssh.options')) {
+            $result['ssh-options'] = $this->get('ssh.options');
+        }
+        return $result;
     }
 
     /**
      * Conversion table from old to new option names. These all implicitly
      * go in `options`, although they can come from different locations.
      */
-    protected function remapOptions()
+    protected function remapOptionTable()
     {
         return [
             'user' => 'remote-user',

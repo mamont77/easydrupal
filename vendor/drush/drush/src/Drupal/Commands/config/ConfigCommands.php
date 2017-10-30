@@ -84,7 +84,7 @@ class ConfigCommands extends DrushCommands
      *   Sets system.site:page.front to "node".
      * @aliases cset,config-set
      */
-    public function set($config_name, $key, $value = null, $options = ['format' => 'string', 'value' => null])
+    public function set($config_name, $key, $value = null, $options = ['format' => 'string', 'value' => self::REQ])
     {
         // This hidden option is a convenient way to pass a value without passing a key.
         $data = $options['value'] ?: $value;
@@ -219,7 +219,7 @@ class ConfigCommands extends DrushCommands
      * @aliases cst,config-status
      * @return \Consolidation\OutputFormatters\StructuredData\RowsOfFields
      */
-    public function status($options = ['state' => 'Only in DB,Only in sync dir,Different', 'prefix' => '', 'label' => ''])
+    public function status($options = ['state' => 'Only in DB,Only in sync dir,Different', 'prefix' => self::REQ, 'label' => self::REQ])
     {
         $config_list = array_fill_keys(
             $this->configFactory->listAll($options['prefix']),
@@ -230,8 +230,8 @@ class ConfigCommands extends DrushCommands
         $storage = $this->getStorage($directory);
         $state_map = [
             'create' => 'Only in DB',
-            'update' => 'Only in sync dir',
-            'delete' => 'Different',
+            'update' => 'Different',
+            'delete' => 'Only in sync dir',
         ];
         foreach ($this->getChanges($storage) as $collection) {
             foreach ($collection as $operation => $configs) {
@@ -257,8 +257,8 @@ class ConfigCommands extends DrushCommands
         $rows = [];
         $color_map = [
             'Only in DB' => 'green',
-            'Only in sync dir' => 'yellow',
-            'Different' => 'red',
+            'Only in sync dir' => 'red',
+            'Different' => 'yellow',
             'Identical' => 'white',
         ];
 

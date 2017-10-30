@@ -4,15 +4,19 @@ namespace Drush\Commands;
 /*
  * Common options providers. Use them by adding an annotation to your method.
  */
+use Symfony\Component\Console\Input\InputOption;
+
 class OptionsCommands
 {
+
+    const REQ=InputOption::VALUE_REQUIRED;
 
     /**
      * @hook option @optionset_proc_build
      * @option ssh-options A string of extra options that will be passed to the ssh command (e.g. "-p 100")
      * @option tty Create a tty (e.g. to run an interactive program).
      */
-    public function optionsetProcBuild($options = ['ssh-options' => '', 'tty' => false])
+    public function optionsetProcBuild($options = ['ssh-options' => self::REQ, 'tty' => false])
     {
     }
 
@@ -29,7 +33,7 @@ class OptionsCommands
      * @hook option @optionset_ssh
      * @option ssh-options A string appended to ssh command during rsync, sql-sync, etc.
      */
-    public function optionsetSsh()
+    public function optionsetSsh($options = ['ssh-options' => self::REQ])
     {
     }
 
@@ -39,7 +43,7 @@ class OptionsCommands
      * @option db-url A Drupal 6 style database URL.
      * @option target The name of a target within the specified database connection. Defaults to default
      */
-    public function optionsetSql($options = ['database' => 'default', 'target' => 'default', 'db-url' => ''])
+    public function optionsetSql($options = ['database' => 'default', 'target' => 'default', 'db-url' => self::REQ])
     {
     }
 
@@ -52,7 +56,13 @@ class OptionsCommands
      * @option structure-tables-list A comma-separated list of tables to include for structure, but not data.
      * @option tables-list A comma-separated list of tables to transfer.
      */
-    public function optionsetTableSelection()
+    public function optionsetTableSelection($options = [
+        'skip-tables-key' => self::REQ,
+        'structure-tables-key' => self::REQ,
+        'tables-key' => self::REQ,
+        'skip-tables-list' => self::REQ,
+        'structure-tables-list' => self::REQ,
+        'tables-list' => self::REQ])
     {
     }
 }
