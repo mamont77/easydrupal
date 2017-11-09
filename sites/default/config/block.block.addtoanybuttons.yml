@@ -1,0 +1,26 @@
+uuid: 700db239-3df8-40ea-a010-8cf8c5ae503a
+langcode: en
+status: true
+dependencies:
+  module:
+    - addtoany
+    - system
+  theme:
+    - easydrupal
+id: addtoanybuttons
+theme: easydrupal
+region: content
+weight: -10
+provider: null
+plugin: addtoany_block
+settings:
+  id: addtoany_block
+  label: 'AddToAny buttons'
+  provider: addtoany
+  label_display: '0'
+visibility:
+  request_path:
+    id: request_path
+    pages: "/articles\r\n/articles/*"
+    negate: false
+    context_mapping: {  }
