@@ -125,6 +125,50 @@ a:hover, a:active, a:focus {
   border-left-color: #666;
 }
 
+.addtoany_list {
+  background-color: #fff;
+  border-radius: 6px;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: center;
+      justify-content: center;
+  margin-bottom: 15px;
+}
+@media (min-width: 1200px) {
+  .addtoany_list {
+    display: block;
+    position: fixed;
+    z-index: 9999995;
+    right: 3px;
+    top: 30%;
+    bottom: auto;
+  }
+  .addtoany_list .a2a_counter .a2a_svg {
+    display: block;
+    margin: 0 auto 2px auto;
+  }
+  .addtoany_list .a2a_count {
+    display: block;
+    margin: 0 auto;
+  }
+  .addtoany_list > a {
+    text-align: center;
+    display: block;
+  }
+}
+.addtoany_list > a {
+  overflow: hidden;
+  padding: 4px;
+  text-decoration: none;
+}
+
+.a2a_svg,
+.a2a_count,
+.a2a_menu,
+.a2a_menu_find_container {
+  border-radius: 0 !important;
+}
+
 .logo {
   margin-right: 8px;
 }
@@ -776,7 +820,7 @@ body.path-contact .contact-form .btn-primary {
   font-size: 22px;
   font-weight: bold;
   text-align: center;
-  color: #414A51;
+  color: #414a51;
 }
 .view-about-author .views-field-user-picture img {
   margin: 0 auto;

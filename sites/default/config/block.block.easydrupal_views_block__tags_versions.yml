@@ -12,7 +12,7 @@ dependencies:
 id: easydrupal_views_block__tags_versions
 theme: easydrupal
 region: sidebar_second
-weight: -7
+weight: -8
 provider: null
 plugin: 'views_block:tags-versions'
 settings:

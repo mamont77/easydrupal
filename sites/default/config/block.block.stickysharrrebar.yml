@@ -3,8 +3,8 @@ langcode: en
 status: true
 dependencies:
   module:
-    - ctools
     - sticky_sharrre_bar
+    - system
   theme:
     - easydrupal
 id: stickysharrrebar
@@ -31,10 +31,8 @@ settings:
   use_custom_css_selector: '#navbar'
   use_google_analytics_tracking: 1
 visibility:
-  'entity_bundle:node':
-    id: 'entity_bundle:node'
-    bundles:
-      article: article
+  request_path:
+    id: request_path
+    pages: /node/63
     negate: false
-    context_mapping:
-      node: '@node.node_route_context:node'
+    context_mapping: {  }

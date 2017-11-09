@@ -6,35 +6,35 @@
 
 // http://adobe.ly/1BOf1GL
 // sandy stone beach ocean diver
-$c1: #E6E2AF;
-$c2: #A7A37E;
-$c3: #EFECCA;
+$c1: #e6e2af;
+$c2: #a7a37e;
+$c3: #efecca;
 $c4: #046380;
-$c5: #002F2F;
+$c5: #002f2f;
 
 // https://color.adobe.com/ru/Firenze-color-theme-24198/?showPublished=true
 // Firenze
 $c1: #468966;
-$c2: #FFF0A5;
-$c3: #FFB03B;
-$c4: #B64926;
-$c5: #8E2800;
+$c2: #fff0a5;
+$c3: #ffb03b;
+$c4: #b64926;
+$c5: #8e2800;
 
 // https://color.adobe.com/ru/Flat-UI-color-theme-2469224/
 // Flat UI
-$c1: #2C3E50; //texts
-$c2: #E74C3C; // links
-$c3: #ECF0F1; //bg
-$c4: #3498DB; //bg for header and footer
-$c5: #2980B9; //bg for header and footer active
+$c1: #2c3e50; //texts
+$c2: #e74c3c; // links
+$c3: #ecf0f1; //bg
+$c4: #3498db; //bg for header and footer
+$c5: #2980b9; //bg for header and footer active
 
 // https://color.adobe.com/ru/Tech-Office-color-theme-23615/
 // Tech Office
 $c1: #595241;
-$c2: #B8AE9C;
-$c3: #FFFFFF;
-$c4: #ACCFCC;
-$c5: #8A0917;
+$c2: #b8ae9c;
+$c3: #fff;
+$c4: #accfcc;
+$c5: #8a0917;
 
 $globalBgColor: #fff;
 $globalTextColor: #575756;
@@ -146,16 +146,14 @@ $blockHireMeButtonText: #fff;
 $blockHireMeButtonBg: $attachmentsTextColor;
 $blockHireMeButtonBgHover: darken($attachmentsTextColor, 10%);
 
-$aboutAuthorNameColor: #414A51;
+$aboutAuthorNameColor: #414a51;
 
 $upperBgHoverColor: #81a5bf;
-
 
 html {
   position: relative;
   min-height: 100%;
 }
-
 body {
   font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 18px;
@@ -165,14 +163,12 @@ body {
   position: static;
   margin-bottom: 87px;
 }
-
 h1 {
   font-family: "Roboto Condensed", Verdana, Arial, Helvetica, sans-serif;
   font-size: 32px;
   color: $h1Color;
   font-weight: bold;
 }
-
 h2 {
   font-family: "Roboto Condensed", Verdana, Arial, Helvetica, sans-serif;
   font-weight: bold;
@@ -186,7 +182,6 @@ h2 {
     }
   }
 }
-
 h3 {
   font-family: "Roboto", Verdana, Arial, Helvetica, sans-serif;
   font-size: 22px;
@@ -199,7 +194,6 @@ h3 {
     }
   }
 }
-
 h4 {
   font-family: "Roboto", Verdana, Arial, Helvetica, sans-serif;
   font-size: 20px;
@@ -212,7 +206,6 @@ h4 {
     }
   }
 }
-
 a {
   color: $globalLinkColor;
   &:hover,
@@ -221,11 +214,9 @@ a {
     color: $globalLinkHoverColor;
   }
 }
-
 .field--label {
   color: $labelColor;
 }
-
 .field--type-fivestar {
   float: right;
   margin-left: 15px;
@@ -236,7 +227,6 @@ a {
     }
   }
 }
-
 %tags {
   top: -3px;
   display: inline-block;
@@ -278,7 +268,6 @@ a {
     }
   }
 }
-
 // Placeholder text
 $input-color-placeholder: #ccc;
 $input-font-style-placeholder: italic;
@@ -305,7 +294,46 @@ $input-font-style-placeholder: italic;
   }
   // Safari and Chrome
 }
-
+.addtoany_list {
+  background-color: #fff;
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+  @media (min-width: 1200px) {
+    display: block;
+    position: fixed;
+    z-index: 9999995;
+    right: 3px;
+    top: 30%;
+    bottom: auto;
+    .a2a_counter {
+      .a2a_svg {
+        display: block;
+        margin: 0 auto 2px auto;
+      }
+    }
+    .a2a_count {
+      display: block;
+      margin: 0 auto;
+    }
+    > a {
+      text-align: center;
+      display: block;
+    }
+  }
+  > a {
+    overflow: hidden;
+    padding: 4px;
+    text-decoration: none;
+  }
+}
+.a2a_svg,
+.a2a_count,
+.a2a_menu,
+.a2a_menu_find_container {
+  border-radius: 0 !important;
+}
 @import "site";
 @import "sprite";
 @import "nodes_types";

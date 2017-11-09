@@ -48,7 +48,7 @@ module.exports = function (grunt) {
         options: {
           style: 'expanded',
           unixNewlines: true,
-          sourcemap: true
+          sourcemap: 'file'
         },
         files: [{
           expand: true,

@@ -12,7 +12,7 @@ dependencies:
 id: otherprofiles
 theme: easydrupal
 region: footer
-weight: -9
+weight: -10
 provider: null
 plugin: 'block_content:a4bd2375-c885-4ab7-ba12-cd7893a0ead9'
 settings:
