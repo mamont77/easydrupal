@@ -6,7 +6,6 @@
     margin-bottom: 15px;
   }
 }
-
 .page-node-type-article {
   .date {
     display: none;
@@ -57,7 +56,6 @@
     }
   }
 }
-
 .page-node-type-page {
   article[about="/about-me"] {
     .field--name-body {
@@ -77,7 +75,6 @@
     }
   }
 }
-
 .file > span {
   background: #fff;
   color: $attachmentsLinkColor;
@@ -90,11 +87,9 @@
     border-right: 1px solid $attachmentsBorderColor;
   }
 }
-
 .text-primary {
   color: $globalTextColor;
 }
-
 .page-node-type-project {
   .field-name-field-image {
     img {
@@ -145,7 +140,6 @@
     }
   }
 }
-
 .field--name-field-comments {
   margin-top: 15px;
   clear: both;
@@ -159,7 +153,6 @@
     padding: 15px 0;
   }
 }
-
 body.path-contact {
   //background: transparent url(../images/bg-contacts.png);
   //background-size: cover;
@@ -172,7 +165,6 @@ body.path-contact {
     }
   }
 }
-
 .field--type-text-with-summary {
   figure {
     border: 1px solid $globalBorderColor;
@@ -201,7 +193,6 @@ body.path-contact {
     }
   }
 }
-
 .conclusion {
   border: 1px solid $globalBorderColor;
   background-color: #eee;

@@ -21,7 +21,7 @@ $lupe-desktop-height: 55px;
 $lupe-desktop-total-width: 79px;
 $lupe-desktop-total-height: 55px;
 $lupe-desktop-image: '../images/sprite.png';
-$lupe-desktop: (0px, 0px, 0px, 0px, 55px, 55px, 79px, 55px, '../images/sprite.png', 'lupe-desktop', );
+$lupe-desktop: (0px, 0px, 0px, 0px, 55px, 55px, 79px, 55px, '../images/sprite.png', 'lupe-desktop',);
 $lupe-mobile-name: 'lupe-mobile';
 $lupe-mobile-x: 57px;
 $lupe-mobile-y: 0px;
@@ -32,12 +32,12 @@ $lupe-mobile-height: 23px;
 $lupe-mobile-total-width: 79px;
 $lupe-mobile-total-height: 55px;
 $lupe-mobile-image: '../images/sprite.png';
-$lupe-mobile: (57px, 0px, -57px, 0px, 22px, 23px, 79px, 55px, '../images/sprite.png', 'lupe-mobile', );
+$lupe-mobile: (57px, 0px, -57px, 0px, 22px, 23px, 79px, 55px, '../images/sprite.png', 'lupe-mobile',);
 $spritesheet-width: 79px;
 $spritesheet-height: 55px;
 $spritesheet-image: '../images/sprite.png';
-$spritesheet-sprites: ($lupe-desktop, $lupe-mobile, );
-$spritesheet: (79px, 55px, '../images/sprite.png', $spritesheet-sprites, );
+$spritesheet-sprites: ($lupe-desktop, $lupe-mobile,);
+$spritesheet: (79px, 55px, '../images/sprite.png', $spritesheet-sprites,);
 
 /*
 The provided mixins are intended to be used with the array-like variables
@@ -68,29 +68,24 @@ To change `display` (e.g. `display: inline-block;`), we suggest using a common C
 @mixin sprite-width($sprite) {
   width: nth($sprite, 5);
 }
-
 @mixin sprite-height($sprite) {
   height: nth($sprite, 6);
 }
-
 @mixin sprite-position($sprite) {
   $sprite-offset-x: nth($sprite, 3);
   $sprite-offset-y: nth($sprite, 4);
-  background-position: $sprite-offset-x  $sprite-offset-y;
+  background-position: $sprite-offset-x $sprite-offset-y;
 }
-
 @mixin sprite-image($sprite) {
   $sprite-image: nth($sprite, 9);
   background-image: url(#{$sprite-image});
 }
-
 @mixin sprite($sprite) {
   @include sprite-image($sprite);
   @include sprite-position($sprite);
   @include sprite-width($sprite);
   @include sprite-height($sprite);
 }
-
 /*
 The `sprites` mixin generates identical output to the CSS template
   but can be overridden inside of SCSS

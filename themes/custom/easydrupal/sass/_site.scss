@@ -7,11 +7,9 @@
     height: 62px;
   }
 }
-
 @media (min-width: 768px) {
   .navbar {
     &.navbar-static-top {
-
     }
   }
   .navbar-nav > li > a {
@@ -28,7 +26,6 @@
     }
   }
 }
-
 // Default navbar
 .navbar-default {
   background: $headerBgColor;
@@ -140,7 +137,6 @@
     }
   }
 }
-
 @media (min-width: 768px) and (max-width: 991px) {
   .logo {
     margin-right: 30px;
@@ -151,13 +147,11 @@
     }
   }
 }
-
 @media (max-width: 768px) {
   .logo {
     margin-left: 15px;
   }
 }
-
 .dropdown-menu {
   padding: 0;
   background-color: $menuItemBgColor;
@@ -195,7 +189,6 @@
     }
   }
 }
-
 @media (max-width: 767px) {
   .navbar-default .navbar-nav .open .dropdown-menu > .active > a,
   .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
@@ -204,7 +197,6 @@
     background-color: inherit;
   }
 }
-
 .field--type-text-with-summary,
 .field-name-body,
 .cke_editable {
@@ -227,7 +219,6 @@
     }
   }
 }
-
 .region-sidebar-second {
   h2 {
     color: $secondSidebarH2Color;
@@ -238,12 +229,10 @@
     margin-bottom: 15px;
   }
 }
-
 .main-container {
   //margin-bottom: 30px;
   padding-bottom: 15px;
 }
-
 .footer {
   position: absolute;
   bottom: 0;
@@ -288,7 +277,6 @@
   //  }
   //}
 }
-
 .upper {
   position: fixed;
   text-align: center;
@@ -315,7 +303,6 @@
     font-family: 'Glyphicons Halflings';
   }
 }
-
 .breadcrumb {
   border-radius: 0;
   background: none transparent;
@@ -324,7 +311,6 @@
     color: $breadcrumbColor;
   }
 }
-
 // Commented - the stiles from bootstrap less!
 .pagination {
   //display: inline-block;
@@ -399,7 +385,6 @@
     }
   }
 }
-
 .pager {
   //padding-left: 0;
   //margin: @line-height-computed 0;
@@ -452,27 +437,22 @@
     }
   }
 }
-
 .page-header {
   border-bottom: 1px solid $globalBorderColor;
 }
-
 //Todo: Make beautiful.
 .feed-icons {
   display: none;
 }
-
 pre {
   border-color: $preBorderColor;
   background-color: $preBgColor;
   color: $preTextColor;
 }
-
 blockquote {
   border-left-color: $blockquoteBorderColor;
   color: $blockquoteTextColor;
 }
-
 .btn-primary {
   color: $formButtonTextColor;
   border-color: $formButtonBorderColor;
@@ -490,7 +470,6 @@ blockquote {
     border-color: $formButtonBorderActiveColor !important;
   }
 }
-
 .date {
   position: relative;
   background-color: $dateArticleBgColor;
@@ -526,7 +505,6 @@ blockquote {
     margin-top: -8px;
   }
 }
-
 .contact-message-form {
   .form-control {
     border: solid 1px $formFieldBorderColor;
@@ -550,7 +528,6 @@ blockquote {
     text-align: center;
   }
 }
-
 .g-recaptcha {
   margin-bottom: 15px;
   opacity: .8;
@@ -558,11 +535,9 @@ blockquote {
     margin: 0 auto;
   }
 }
-
 .wow {
   visibility: hidden;
 }
-
 .user-login-page {
   h1 {
     display: none;
@@ -572,7 +547,6 @@ blockquote {
     margin: 0 auto;
   }
 }
-
 .user-login-form {
   max-width: 330px;
   padding: 15px;

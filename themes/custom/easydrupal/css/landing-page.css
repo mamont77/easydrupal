@@ -377,8 +377,6 @@
   font-size: 24px;
   padding: 20px 30px;
   text-transform: uppercase;
-  -webkit-transition: all 0.2s ease-out;
-  -o-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
   opacity: .7;
 }
@@ -477,4 +475,5 @@
     width: 100%;
   }
 }
+
 /*# sourceMappingURL=landing-page.css.map */
