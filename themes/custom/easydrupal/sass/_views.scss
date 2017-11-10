@@ -5,7 +5,6 @@
     margin-bottom: 15px;
   }
 }
-
 .view-about-author {
   border: 1px solid $globalBorderColor;
   padding: 20px 15px;
@@ -52,7 +51,6 @@
     line-height: 18px;
   }
 }
-
 .view-feedback {
   .row {
     text-align: center;
@@ -76,13 +74,10 @@
     }
   }
   .name {
-
   }
   .position {
-
   }
   .country {
-
   }
   .field-name-field-image {
     img {
@@ -143,7 +138,6 @@
     }
   }
 }
-
 .view-articles,
 .view-taxonomy-term {
   .views-row {
@@ -155,7 +149,6 @@
       margin-top: 0;
     }
     a {
-
     }
   }
   .field-name-field-image {
@@ -173,7 +166,6 @@
     }
   }
 }
-
 @media (min-width: 768px) {
   .view-articles,
   .view-taxonomy-term {
@@ -184,7 +176,6 @@
     }
   }
 }
-
 $white: #fff;
 
 .view-portfolio {
@@ -235,7 +226,7 @@ $white: #fff;
   a:hover {
     text-decoration: none;
     img {
-       //transform: scale(1.05);
+      //transform: scale(1.05);
       transform: rotate(-2deg) scale(1.05);
     }
     .field-flex-wrap {
@@ -246,7 +237,6 @@ $white: #fff;
     }
   }
 }
-
 .view-tags {
   .views-row {
     display: inline;
