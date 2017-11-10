@@ -99,7 +99,8 @@ a:hover, a:active, a:focus {
 .page-node-type-project .field--name-field-skills .skills .skill::before, .view-tags .views-field a::before {
   background: #fff;
   border-radius: 4px;
-  box-shadow: inset 0 1px rgba(0, 0, 0, 0.25);
+  -webkit-box-shadow: inset 0 1px rgba(0, 0, 0, 0.25);
+          box-shadow: inset 0 1px rgba(0, 0, 0, 0.25);
   content: '';
   height: 4px;
   left: 6px;
@@ -128,10 +129,12 @@ a:hover, a:active, a:focus {
 .addtoany_list {
   background-color: #fff;
   border-radius: 6px;
+  display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-pack: center;
-      justify-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   margin-bottom: 15px;
 }
 @media (min-width: 1200px) {
@@ -209,6 +212,8 @@ a:hover, a:active, a:focus {
   text-transform: uppercase;
   letter-spacing: 0;
   font-size: 15px;
+  -webkit-transition: none;
+  -o-transition: none;
   transition: none;
   font-weight: bold;
 }
@@ -381,6 +386,8 @@ a:hover, a:active, a:focus {
   right: 17px;
   cursor: pointer;
   z-index: 10;
+  -webkit-transition: all 0.2s ease-out;
+  -o-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
 }
 .upper:hover, .upper:focus, .upper:active {
@@ -963,11 +970,15 @@ body.path-contact .contact-form .btn-primary {
   left: 0;
   width: 100%;
   height: 100%;
+  display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-align: center;
-      align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   background-color: transparent;
+  -webkit-transition: 150ms ease background-color;
+  -o-transition: 150ms ease background-color;
   transition: 150ms ease background-color;
 }
 .view-portfolio .image {
@@ -975,8 +986,11 @@ body.path-contact .contact-form .btn-primary {
   overflow: hidden;
 }
 .view-portfolio img {
-  -ms-transform: scale(1);
-      transform: scale(1);
+  -webkit-transform: scale(1);
+      -ms-transform: scale(1);
+          transform: scale(1);
+  -webkit-transition: 150ms ease transform;
+  -o-transition: 150ms ease transform;
   transition: 150ms ease transform;
   width: 100%;
 }
@@ -988,6 +1002,8 @@ body.path-contact .contact-form .btn-primary {
   color: #fff;
   opacity: 0;
   text-align: center;
+  -webkit-transition: 150ms ease opacity;
+  -o-transition: 150ms ease opacity;
   transition: 150ms ease opacity;
 }
 .view-portfolio .title {
@@ -1000,8 +1016,9 @@ body.path-contact .contact-form .btn-primary {
   text-decoration: none;
 }
 .view-portfolio a:hover img {
-  -ms-transform: rotate(-2deg) scale(1.05);
-      transform: rotate(-2deg) scale(1.05);
+  -webkit-transform: rotate(-2deg) scale(1.05);
+      -ms-transform: rotate(-2deg) scale(1.05);
+          transform: rotate(-2deg) scale(1.05);
 }
 .view-portfolio a:hover .field-flex-wrap {
   background-color: rgba(24, 39, 46, 0.7);
@@ -1188,5 +1205,4 @@ body.path-contact .contact-form .btn-primary {
     opacity: .8;
   }
 }
-
 /*# sourceMappingURL=style.css.map */

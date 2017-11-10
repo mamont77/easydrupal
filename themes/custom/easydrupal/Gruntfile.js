@@ -11,6 +11,7 @@ module.exports = function (grunt) {
     sprite: 'grunt-spritesmith'
   });
 
+
   // Configurable.
   var config = {};
 
@@ -59,52 +60,38 @@ module.exports = function (grunt) {
         }]
       }
     },
-    autoprefixer: {
-      dist: {
-        options: {
-          map: true,
-          browsers: [
-            'last 3 versions'
-          ]
+    postcss: {
+      options: {
+        map: {
+          inline: false
         },
-        files: {
-          'css/style.css': 'css/style.css',
-          'css/landing-page.css': 'css/landing-page.css'
-        }
+        processors: [
+          require('autoprefixer')({browsers: 'last 3 versions'})
+        ]
+      },
+      dist: {
+        src: ['css/landing-page.css', 'css/style.css']
       }
     },
-
-    // uglify: {
-    //   options: {
-    //     mangle: false
-    //   },
-    //   my_target: {
-    //     options: {
-    //       sourceMap: true,
-    //       sourceMapName: 'js/sourcemap.map.js'
-    //     },
-    //     files: {
-    //       'js/scripts.min.js': ['js/scripts.js']
-    //     }
-    //   }
-    // },
-
     // Watches files for changes and runs tasks based on the changed files.
     watch: {
-      sass: {
-        files: ['sass/*.scss'],
-        tasks: ['sass:development', 'autoprefixer']
-      },
       sprite: {
         files: ['images/sprite-src/*.png'],
         tasks: ['sprite']
+      },
+      sass: {
+        files: ['sass/*.scss'],
+        tasks: ['sass:development']
+      },
+      postcss: {
+        files: ['css/*.css'],
+        tasks: ['postcss']
       },
       gruntfile: {
         files: ['Gruntfile.js']
       },
       js: {
         files: ['js/*.js'],
-        // tasks: ['uglify'],
         options: {
           livereload: true
         }
@@ -114,6 +101,7 @@ module.exports = function (grunt) {
 
   // Force load tasks which can not be loaded by 'jit-grunt' plugin.
   grunt.loadNpmTasks('grunt-notify');
+  grunt.loadNpmTasks('grunt-postcss');
 
   grunt.registerTask('default', ['watch']);
 };
