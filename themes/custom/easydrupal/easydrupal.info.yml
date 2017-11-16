@@ -30,4 +30,5 @@ ckeditor_stylesheets:
 #  - css/components/captions.css
 #  - css/components/table.css
 #  - css/components/text-formatted.css
+  - //cdn.jsdelivr.net/bootstrap/3.3.7/css/bootstrap.css
   - css/style.css
