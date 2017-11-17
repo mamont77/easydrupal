@@ -1,0 +1,9 @@
+uuid: 061cc291-0c68-41e8-8f60-9a43a36d4d42
+langcode: en
+status: true
+dependencies: {  }
+id: node_type_client
+action: access_denied
+allow_override: 0
+redirect: ''
+redirect_code: 301
