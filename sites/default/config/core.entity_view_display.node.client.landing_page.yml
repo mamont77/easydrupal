@@ -1,0 +1,57 @@
+uuid: f57e6ed3-2b48-4c55-b269-2e608659edea
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.landing_page
+    - field.field.node.client.field_image
+    - image.style.client
+    - node.type.client
+  module:
+    - ds
+    - image
+    - user
+third_party_settings:
+  ds:
+    layout:
+      id: ds_reset
+      library: null
+      disable_css: false
+      entity_classes: no_classes
+      settings:
+        wrappers:
+          ds_content: div
+        outer_wrapper: div
+        attributes: ''
+        link_attribute: ''
+        link_custom: ''
+        classes:
+          layout_class: {  }
+          ds_content: {  }
+    regions:
+      ds_content:
+        - field_image
+id: node.client.landing_page
+targetEntityType: node
+bundle: client
+mode: landing_page
+content:
+  field_image:
+    weight: 0
+    label: hidden
+    settings:
+      image_style: client
+      image_link: ''
+    third_party_settings:
+      ds:
+        ft:
+          id: minimal
+          settings:
+            lb: ''
+            lb-col: false
+            classes: {  }
+    type: image
+    region: ds_content
+hidden:
+  addtoany: true
+  links: true

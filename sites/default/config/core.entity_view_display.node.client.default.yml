@@ -1,0 +1,40 @@
+uuid: f2b13b93-80ad-49d3-9896-b0646ae4d9e0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.client.field_image
+    - node.type.client
+    - responsive_image.styles.project_logo
+  module:
+    - ds
+    - responsive_image
+    - user
+id: node.client.default
+targetEntityType: node
+bundle: client
+mode: default
+content:
+  field_image:
+    weight: 0
+    label: hidden
+    settings:
+      responsive_image_style: project_logo
+      image_link: ''
+    third_party_settings:
+      ds:
+        ft:
+          id: minimal
+          settings:
+            lb: ''
+            lb-col: false
+            classes: {  }
+    type: responsive_image
+    region: content
+  links:
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  addtoany: true

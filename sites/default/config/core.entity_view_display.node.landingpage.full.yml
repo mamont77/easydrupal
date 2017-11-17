@@ -6,6 +6,7 @@ dependencies:
     - core.entity_view_mode.node.full
     - field.field.node.landingpage.field_about
     - field.field.node.landingpage.field_articles
+    - field.field.node.landingpage.field_clients
     - field.field.node.landingpage.field_contact_me
     - field.field.node.landingpage.field_feedback
     - field.field.node.landingpage.field_projects
@@ -17,8 +18,7 @@ third_party_settings:
   ds:
     layout:
       id: ds_reset
-      path: modules/ds
-      library: ''
+      library: null
       disable_css: false
       entity_classes: all_classes
       settings:
@@ -35,6 +35,7 @@ third_party_settings:
       ds_content:
         - field_about
         - field_projects
+        - field_clients
         - field_articles
         - field_feedback
         - field_contact_me
@@ -81,7 +82,7 @@ content:
     type: entity_reference_entity_view
     region: ds_content
   field_articles:
-    weight: 2
+    weight: 3
     label: above
     settings:
       view_mode: landing_page
@@ -118,8 +119,46 @@ content:
             fi-def-at: false
     type: entity_reference_entity_view
     region: ds_content
+  field_clients:
+    type: entity_reference_entity_view
+    weight: 2
+    region: ds_content
+    label: above
+    settings:
+      view_mode: landing_page
+      link: false
+    third_party_settings:
+      ds:
+        ds_limit: ''
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            prefix: ''
+            lbw: true
+            lbw-el: h2
+            lbw-cl: section-title
+            lbw-at: ''
+            ow: true
+            ow-el: div
+            ow-cl: 'section clients'
+            ow-at: 'id="clients"'
+            fis: true
+            fis-el: div
+            fis-cl: row
+            fis-at: ''
+            fi: true
+            fi-el: div
+            fi-cl: 'item col-sm-6 col-md-2 col-lg-2'
+            fi-at: ''
+            suffix: ''
+            lb-col: false
+            ow-def-at: false
+            ow-def-cl: false
+            fis-def-at: false
+            fi-def-at: false
   field_contact_me:
-    weight: 4
+    weight: 5
     label: above
     settings:
       view_mode: default
@@ -156,7 +195,7 @@ content:
     type: entity_reference_entity_view
     region: ds_content
   field_feedback:
-    weight: 3
+    weight: 4
     label: above
     settings:
       view_mode: landing_page
@@ -231,4 +270,5 @@ content:
     type: entity_reference_entity_view
     region: ds_content
 hidden:
+  addtoany: true
   links: true

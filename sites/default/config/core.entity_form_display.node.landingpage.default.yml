@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.node.landingpage.field_about
     - field.field.node.landingpage.field_articles
+    - field.field.node.landingpage.field_clients
     - field.field.node.landingpage.field_contact_me
     - field.field.node.landingpage.field_feedback
     - field.field.node.landingpage.field_projects
@@ -18,7 +19,7 @@ mode: default
 content:
   created:
     type: datetime_timestamp
-    weight: 7
+    weight: 8
     settings: {  }
     third_party_settings: {  }
     region: content
@@ -32,6 +33,15 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_articles:
+    weight: 4
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_clients:
     weight: 3
     settings:
       match_operator: CONTAINS
@@ -41,7 +51,7 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_contact_me:
-    weight: 5
+    weight: 6
     settings:
       match_operator: CONTAINS
       size: 60
@@ -50,7 +60,7 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_feedback:
-    weight: 4
+    weight: 5
     settings:
       match_operator: CONTAINS
       size: 60
@@ -69,7 +79,7 @@ content:
     region: content
   path:
     type: path
-    weight: 10
+    weight: 11
     settings: {  }
     third_party_settings: {  }
     region: content
@@ -77,21 +87,21 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 8
+    weight: 9
     third_party_settings: {  }
     region: content
   status:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 121
+    weight: 12
     third_party_settings: {  }
     region: content
   sticky:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 9
+    weight: 10
     third_party_settings: {  }
     region: content
   title:
@@ -104,7 +114,7 @@ content:
     region: content
   uid:
     type: entity_reference_autocomplete
-    weight: 6
+    weight: 7
     settings:
       match_operator: CONTAINS
       size: 60

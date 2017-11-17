@@ -1,0 +1,15 @@
+uuid: b58ce7eb-1758-4911-9671-e98277583db6
+langcode: en
+status: true
+dependencies: {  }
+name: client
+label: Client
+effects:
+  b14ad393-30e7-4309-84a9-95e598166014:
+    uuid: b14ad393-30e7-4309-84a9-95e598166014
+    id: image_scale
+    weight: 2
+    data:
+      width: null
+      height: 80
+      upscale: false

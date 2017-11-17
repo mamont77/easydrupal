@@ -1,0 +1,28 @@
+uuid: cbde66be-f3fa-4488-9111-4076befdf149
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_clients
+    - node.type.client
+    - node.type.landingpage
+id: node.landingpage.field_clients
+field_name: field_clients
+entity_type: node
+bundle: landingpage
+label: 'My clients'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      client: client
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

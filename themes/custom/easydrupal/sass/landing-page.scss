@@ -298,6 +298,25 @@ $input-font-style-placeholder: italic;
     }
   }
 
+  /** Projects **/
+  .clients {
+    padding-top: 0;
+    background: url(../images/bg-page-section--light-dbffac9426e51e0fdcaaad8452d7561b.png);
+    background-color: #fff;
+    color: #575756;
+    h2 {
+      color: #81a5bf;
+    }
+    .line {
+      background-color: #81a5bf;
+    }
+    .field-name-field-image {
+      img {
+        margin: 0 auto;
+      }
+    }
+  }
+
   /** Articles **/
   .articles {
     background: #eaeaea;

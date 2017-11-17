@@ -6,6 +6,7 @@
   font-weight: 300;
   /** About **/
   /** Projects **/
+  /** Projects **/
   /** Articles **/
   /** Feedback **/
   /** Contact **/
@@ -216,6 +217,21 @@
 }
 .page-node-type-landingpage .projects .read-more a {
   color: #293749;
+}
+.page-node-type-landingpage .clients {
+  padding-top: 0;
+  background: url(../images/bg-page-section--light-dbffac9426e51e0fdcaaad8452d7561b.png);
+  background-color: #fff;
+  color: #575756;
+}
+.page-node-type-landingpage .clients h2 {
+  color: #81a5bf;
+}
+.page-node-type-landingpage .clients .line {
+  background-color: #81a5bf;
+}
+.page-node-type-landingpage .clients .field-name-field-image img {
+  margin: 0 auto;
 }
 .page-node-type-landingpage .articles {
   background: #eaeaea;
@@ -477,5 +493,4 @@
     width: 100%;
   }
 }
-
 /*# sourceMappingURL=landing-page.css.map */
