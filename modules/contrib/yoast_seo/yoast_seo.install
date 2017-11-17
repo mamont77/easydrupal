@@ -24,7 +24,6 @@ function yoast_seo_install() {
 function _yoast_seo_attach_to_all_content_types() {
   $supported_entities = [
     'node' => 'Node',
-    'taxonomy_term' => 'Taxonomy term',
   ];
   $yoast_seo_manager = \Drupal::service('yoast_seo.manager');
   foreach ($supported_entities as $entity_type_id => $entity_type_label) {
@@ -41,4 +40,24 @@ function _yoast_seo_attach_to_all_content_types() {
 function _yoast_seo_add_status_to_content_view() {
   $yoast_seo_manager = \Drupal::service('yoast_seo.manager');
   $yoast_seo_manager->attachFieldHandlerToContentView();
+}
+
+/**
+ * Detach Yoast SEO fields from all taxonomies.
+ */
+function yoast_seo_update_8001() {
+  $yoast_seo_manager = \Drupal::service('yoast_seo.manager');
+  $entity_type_id = 'taxonomy_term';
+
+  $enabled_bundles = $yoast_seo_manager->getEnabledBundles($entity_type_id);
+  if (!empty($enabled_bundles)) {
+    foreach ($enabled_bundles as $bundle_id) {
+      $yoast_seo_manager->detachYoastSeoFields($entity_type_id, $bundle_id);
+    }
+  }
+
+  // Fields have been marked as deleted. Attempt to delete them straight away.
+  // Anything that's missed now will be cleaned up by cron later.
+  $limit = \Drupal::config('field.settings')->get('purge_batch_size');
+  field_purge_batch($limit);
 }

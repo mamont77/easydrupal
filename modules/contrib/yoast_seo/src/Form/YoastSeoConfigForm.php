@@ -37,7 +37,7 @@ class YoastSeoConfigForm extends FormBase {
       // enable/disable Yoast SEO for supported bundles.
       $form[$entity_type] = array(
         '#type' => 'checkboxes',
-        '#title' => t('@label', array('@label' => $entity_label)),
+        '#title' => $this->t('@label', array('@label' => $entity_label)),
         '#options' => $options,
         '#required' => FALSE,
         '#default_value' => $enabled_bundles,
@@ -48,7 +48,7 @@ class YoastSeoConfigForm extends FormBase {
     $form['actions']           = array('#type' => 'actions');
     $form['actions']['submit'] = array(
       '#type' => 'submit',
-      '#value' => t('Save'),
+      '#value' => $this->t('Save'),
     );
 
     return $form;
@@ -151,7 +151,6 @@ class YoastSeoConfigForm extends FormBase {
     // @todo Should be the same than the ones supported by the metatag module.
     return [
       'node' => 'Node',
-      // 'taxonomy_term' => 'Taxonomy term',.
     ];
   }
 
