@@ -105,7 +105,7 @@ $settings['fast404_html'] = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//
 
     .error-number {
       font-size: 82px;
-      color: #28A9E0;
+      color: #81A5BF;
       font-weight: bold;
       margin-bottom: 15px;
     }
