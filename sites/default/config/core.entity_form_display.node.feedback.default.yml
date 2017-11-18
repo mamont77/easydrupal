@@ -7,6 +7,7 @@ dependencies:
     - field.field.node.feedback.field_country_v2
     - field.field.node.feedback.field_date
     - field.field.node.feedback.field_image
+    - field.field.node.feedback.field_meta_tags
     - field.field.node.feedback.field_name
     - field.field.node.feedback.field_position
     - field.field.node.feedback.field_project_title
@@ -16,6 +17,7 @@ dependencies:
     - country
     - datetime
     - image_widget_crop
+    - metatag
     - path
     - text
 id: node.feedback.default
@@ -66,6 +68,12 @@ content:
       show_crop_area: false
     third_party_settings: {  }
     type: image_widget_crop
+    region: content
+  field_meta_tags:
+    weight: 122
+    settings: {  }
+    third_party_settings: {  }
+    type: metatag_firehose
     region: content
   field_name:
     weight: 2

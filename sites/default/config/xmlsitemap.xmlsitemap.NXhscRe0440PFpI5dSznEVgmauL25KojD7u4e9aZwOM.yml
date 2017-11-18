@@ -3,9 +3,9 @@ langcode: en
 status: true
 dependencies: {  }
 id: NXhscRe0440PFpI5dSznEVgmauL25KojD7u4e9aZwOM
-label: DrupalEasy
+label: 'Make Drupal Easy'
 chunks: 1
-links: 33
-max_filesize: 5891
+links: 34
+max_filesize: 6000
 context: {  }
-updated: 1505894402
+updated: 1510992821

@@ -8,6 +8,7 @@ dependencies:
     - field.field.node.project.field_image
     - field.field.node.project.field_landing_page_background
     - field.field.node.project.field_logo
+    - field.field.node.project.field_meta_tags
     - field.field.node.project.field_project_images
     - field.field.node.project.field_project_url
     - field.field.node.project.field_skills
@@ -17,6 +18,7 @@ dependencies:
     - datetime
     - image
     - link
+    - metatag
     - path
     - text
 id: node.project.default
@@ -68,6 +70,12 @@ content:
       progress_indicator: throbber
     third_party_settings: {  }
     type: image_image
+    region: content
+  field_meta_tags:
+    weight: 122
+    settings: {  }
+    third_party_settings: {  }
+    type: metatag_firehose
     region: content
   field_project_images:
     weight: 8

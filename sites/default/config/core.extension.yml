@@ -59,6 +59,7 @@ module:
   metatag_open_graph: 0
   metatag_twitter_cards: 0
   metatag_verification: 0
+  metatag_views: 0
   node: 0
   options: 0
   page_cache: 0
@@ -72,6 +73,7 @@ module:
   rdf: 0
   readme: 0
   recaptcha: 0
+  redirect: 0
   responsive_image: 0
   rh_node: 0
   rh_taxonomy: 0
@@ -94,7 +96,9 @@ module:
   views_infinite_scroll: 0
   views_ui: 0
   xmlsitemap: 0
+  xmlsitemap_custom: 0
   xmlsitemap_engines: 0
+  yoast_seo: 0
   ds: 1
   extlink: 1
   menu_link_content: 1

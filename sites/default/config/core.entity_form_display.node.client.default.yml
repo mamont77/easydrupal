@@ -4,10 +4,12 @@ status: true
 dependencies:
   config:
     - field.field.node.client.field_image
+    - field.field.node.client.field_meta_tags
     - image.style.thumbnail
     - node.type.client
   module:
     - image
+    - metatag
     - path
 id: node.client.default
 targetEntityType: node
@@ -27,6 +29,12 @@ content:
       preview_image_style: thumbnail
     third_party_settings: {  }
     type: image_image
+    region: content
+  field_meta_tags:
+    weight: 26
+    settings: {  }
+    third_party_settings: {  }
+    type: metatag_firehose
     region: content
   path:
     type: path

@@ -6,7 +6,7 @@ id: node__article
 label: 'Content: Article'
 tags:
   image_src: '[node:field_image:max_750x750]'
-  title: '[Solved] [node:title]'
+  title: '[Tips & Tricks] [node:title]'
   description: '[node:summary]'
   abstract: '[node:field_conclusions]'
   robots: 'index, follow'
@@ -21,11 +21,12 @@ tags:
   article_author: 'https://www.facebook.com/ruslan.piskarev'
   og_type: atricle
   og_description: '[node:summary]'
-  og_title: '[Solved] [node:title]'
+  og_title: '[Tips & Tricks] [node:title]'
   og_see_also: '[site:url]/articles'
-  twitter_cards_title: '[Solved] [node:title]'
+  twitter_cards_title: '[Howto] [node:title]'
   twitter_cards_image: '[node:field_image:max_750x750]'
   twitter_cards_page_url: '[node:url]'
   twitter_cards_description: '[node:summary]'
+  twitter_cards_creator: '@mamont77'
   twitter_cards_site: '@mamont77'
   twitter_cards_type: summary_large_image

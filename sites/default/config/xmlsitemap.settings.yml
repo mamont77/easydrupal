@@ -7,7 +7,7 @@ path: xmlsitemap
 frontpage_priority: !!float 1
 frontpage_changefreq: 604800
 lastmod_format: 'Y-m-d\TH:i\Z'
-gz: false
+gz: true
 clean_url: 0
 cron_threshold_error: 1209600
 cron_threshold_warning: 172800

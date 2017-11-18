@@ -8,10 +8,12 @@ dependencies:
     - field.field.node.landingpage.field_clients
     - field.field.node.landingpage.field_contact_me
     - field.field.node.landingpage.field_feedback
+    - field.field.node.landingpage.field_meta_tags
     - field.field.node.landingpage.field_projects
     - node.type.landingpage
   module:
     - ds
+    - metatag
     - user
 third_party_settings:
   ds:
@@ -231,6 +233,13 @@ content:
             fi-def-at: false
     type: entity_reference_entity_view
     region: ds_content
+  field_meta_tags:
+    weight: 6
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: metatag_empty_formatter
+    region: content
   field_projects:
     weight: 1
     label: above
