@@ -26,11 +26,11 @@ $settings['container_yamls'][] = __DIR__ . '/services.yml';
 # requests hit them before defaulting to a Drupal request.
 # Default extension list, this is considered safe and is even in queue for
 # Drupal 8 (see: http://drupal.org/node/76824).
-$settings['fast404_exts'] = '/^(?!drupals).*\.(txt|png|gif|jpe?g|css|js|ico|swf|flv|cgi|bat|pl|dll|exe|asp)$/i';
+$settings['fast404_exts'] = '/^(?!robots).*\.(txt|png|gif|jpe?g|css|js|ico|swf|flv|cgi|bat|pl|dll|exe|asp)$/i';
 
 # If you use a private file system use the conf variable below and change the
 # 'sites/default/private' to your actual private files path
-# $settings['fast404_exts'] = '/^(?!drupals)^(?!sites/default/private).*\.(txt|png|gif|jpe?g|css|js|ico|swf|flv|cgi|bat|pl|dll|exe|asp)$/i';
+# $settings['fast404_exts'] = '/^(?!robots)^(?!sites/default/private).*\.(txt|png|gif|jpe?g|css|js|ico|swf|flv|cgi|bat|pl|dll|exe|asp)$/i';
 
 # If you would prefer a stronger version of NO then return a 410 instead of a
 # 404. This informs clients that not only is the resource currently not present
@@ -53,23 +53,16 @@ $settings['fast404_allow_anon_imagecache'] = TRUE;
 $conf['fast404_url_whitelisting'] = FALSE;
 
 # Array of whitelisted files/urls. Used if whitelisting is set to TRUE.
-$settings['fast404_whitelist'] = array(
-  'index.php',
-  'rss.xml',
-  'install.php',
-  'cron.php',
-  'update.php',
-  'xmlrpc.php',
-);
+$settings['fast404_whitelist'] = ['index.php', 'rss.xml', 'install.php', 'cron.php', 'update.php', 'xmlrpc.php'];
 
 # Array of whitelisted URL fragment strings that conflict with fast404.
-$settings['fast404_string_whitelisting'] = array('cdn/farfuture', '/advagg_');
+$settings['fast404_string_whitelisting'] = ['cdn/farfuture', '/advagg_'];
 
 # By default we will show a super plain 404, because usually errors like this are shown to browsers who only look at the headers.
 # However, some cases (usually when checking paths for Drupal pages) you may want to show a regular 404 error. In this case you can
 # specify a URL to another page and it will be read and displayed (it can't be redirected to because we have to give a 30x header to
 # do that. This page needs to be in your docroot.
-$conf['fast404_HTML_error_page'] = './404.html';
+#$conf['fast404_HTML_error_page'] = './my_page.html';
 
 # Path checking. USE AT YOUR OWN RISK.
 # Path checking at this phase is more dangerous, but faster. Normally
@@ -78,7 +71,7 @@ $conf['fast404_HTML_error_page'] = './404.html';
 # regular pages, so only use if you are spending too much CPU/Memory/DB on
 # 404s and the trade-off is worth it.
 # This setting will deliver 404s with less than 2MB of RAM.
-//$settings['fast404_path_check'] = TRUE;
+#$settings['fast404_path_check'] = TRUE;
 
 # Default fast 404 error message.
 $settings['fast404_html'] = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN" "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
@@ -167,13 +160,21 @@ $settings['fast404_html'] = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//
   <div class="right">
     <a class="logo" href="/">MakeDrupalEasy</a>
     <p class="error-number">404</p>
-    <p class="error-text">… Oops! Something is missing</p>
+    <p class="error-text">... Oops! Something is missing</p>
     <p class="go-home"><a href="/">Home</a></p>
   </div>
 </div>
 </body>
 </html>
 ';
+
+# Load the fast404.inc file. This is needed if you wish to do extension
+# checking in settings.php.
+// if (file_exists('./modules/fast404/fast404.inc')) {
+//   include_once './modules/fast404/fast404.inc';
+//   fast404_preboot($settings);
+// }
+
 
 /**
  * Include the Pantheon-specific settings file.
