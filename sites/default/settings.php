@@ -83,7 +83,7 @@ $conf['fast404_HTML_error_page'] = './404.html';
 # Default fast 404 error message.
 $settings['fast404_html'] = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN" "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head><title>404 Not Found | EasyDrupal</title>
+<head><title>404 Not Found | MakeDrupalEasy</title>
   <style type="text/css">
     body {
       background: #fff;
@@ -162,10 +162,10 @@ $settings['fast404_html'] = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//
 <body>
 <div class="wrapper">
   <div class="left">
-    <img class="drupal-logo" src="https://www.drupal.org/files/drupal%208%20logo%20isolated%20CMYK%2072.png"/>
+    <img class="drupal-logo" src="/themes/custom/easydrupal/logo.svg"/>
   </div>
   <div class="right">
-    <a class="logo" href="/">EasyDrupal</a>
+    <a class="logo" href="/">MakeDrupalEasy</a>
     <p class="error-number">404</p>
     <p class="error-text">… Oops! Something is missing</p>
     <p class="go-home"><a href="/">Home</a></p>
