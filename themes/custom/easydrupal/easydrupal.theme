@@ -6,64 +6,31 @@
  * Place your custom PHP code in this file.
  */
 
-
 /**
- * Attach a few libraries for lending page only.
+ * Implements hook_theme_suggestions_page_alter() to set 40x template suggestions.
  *
- * @param $variables
+ * @param array $suggestions
+ * @param array $variables
  */
-//function easydrupal_preprocess_node__landingpage(&$variables) {
-//  $variables['#attached']['library'][] = 'easydrupal/full-page';
-//  $variables['#attached']['library'][] = 'easydrupal/perfect-scrollbar';
-//}
+function easydrupal_theme_suggestions_page_alter(array &$suggestions, array $variables) {
+  // Add content type suggestions.
+  if ($node = \Drupal::request()->attributes->get('node')) {
+    array_splice($suggestions, 1, 0, 'page__node__' . $node->getType());
+  }
 
-/**
- * Implements template_preprocess_ds_field_expert().
- */
-//function easydrupal_preprocess_field__ds_field_expert(&$variables) {
-//  echo '<pre>';
-//  print_r($variables);
-//  echo '</pre>';
-//
-//
-//  kint($variables);
-//  exit;
-//  return;
-//
-//  $variables['settings'] = isset($variables['ds-config']['settings']) ? $variables['ds-config']['settings'] : [];
-//
-//  $vars = array(
-//    'lbw' => 'label_attributes',
-//    'ow' => 'wrapper_attributes',
-//    'fis' => 'field_wrapper_attributes',
-//    'fi' => 'field_item_wrapper_attributes',
-//  );
-//
-//  foreach ($vars as $key => $variable_name) {
-//    $var_attributes = array();
-//
-//    // Add classes.
-//    if (!empty($variables['settings'][$key . '-cl'])) {
-//      $var_attributes['class'] = explode(' ', $variables['settings'][$key . '-cl']);
-//    }
-//    // Add attributes.
-//    if (!empty($variables['settings'][$key . '-at'])) {
-//      $attributes = explode(' ', $variables['settings'][$key . '-at']);
-//      foreach ($attributes as $attribute) {
-//        if (strpos($attribute, '=') !== FALSE) {
-//          $attribute_parts = explode('=', $attribute);
-//          $var_attributes[$attribute_parts[0]] = trim($attribute_parts[1], '\"');
-//        }
-//      }
-//    }
-//    $variables[$variable_name] = new \Drupal\ds\DsAttribute($var_attributes);
-//  }
-//
-//  // In order to allow HTML we need to filter XSS the output of the
-//  // prefix/suffix.
-//  $variables['settings']['prefix'] = XSS::filterAdmin($variables['settings']['prefix']);
-//  $variables['settings']['suffix'] = XSS::filterAdmin($variables['settings']['suffix']);
-//}
+  $path_args = explode('/', trim(\Drupal::service('path.current')->getPath(), '/'));
+  $suggestions = theme_get_suggestions($path_args, 'page');
+  $http_error_suggestions = [
+    'system.401' => 'page__system__401',
+    'system.403' => 'page__system__403',
+    'system.404' => 'page__system__404',
+  ];
+
+  $route_name = \Drupal::routeMatch()->getRouteName();
+  if (isset($http_error_suggestions[$route_name])) {
+    $suggestions[] = $http_error_suggestions[$route_name];
+  }
+}
 
 /**
  * Implements hook_theme().

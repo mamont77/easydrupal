@@ -77,88 +77,78 @@ $settings['fast404_string_whitelisting'] = ['cdn/farfuture', '/advagg_'];
 $settings['fast404_html'] = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN" "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head><title>404 Not Found | MakeDrupalEasy</title>
-  <style type="text/css">
-    body {
-      background: #fff;
-      font: 14px Arial, Helvetica, sans-serif;
-      color: #666;
-      margin: 0;
-      padding: 0;
-      text-align: center;
+<style type="text/css">
+  body {
+    background: #fff;
+    font: 14px Arial, Helvetica, sans-serif;
+    color: #666;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+  }
+  p {
+    margin: 0;
+  }
+  .wrapper {
+    width: 50%;
+    margin: 10% auto;
+  }
+  .error-number {
+    font-size: 82px;
+    color: #81A5BF;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+  .error-text {
+    font-size: 27px;
+    margin-bottom: 15px;
+  }
+  .logo {
+    font-size: 32px;
+    color: #74B74A;
+    text-decoration: none;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+  .go-home a {
+    margin-top: 12px;
+    display: inline-block;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    font-weight: 500;
+    background-color: #74B74A;
+    padding: 15px 20px;
+    color: #fff;
+    text-decoration: none;
+  }
+  .drupal-logo {
+    max-width: 296px;
+    width: 100%;
+    height: auto;
+    margin: 0 0 15px 0;
+  }
+  @media (min-width: 992px) {
+    .left {
+      width: 49%;
+      float: left;
     }
-
-    p {
-      margin: 0;
+    .right {
+      width: 49%;
+      float: right;
     }
-
-    .wrapper {
-      width: 50%;
-      margin: 10% auto;
-    }
-
     .error-number {
-      font-size: 82px;
-      color: #81A5BF;
-      font-weight: bold;
-      margin-bottom: 15px;
+      font-size: 164px;
     }
-
-    .error-text {
-      font-size: 27px;
-      margin-bottom: 15px;
-    }
-
-    .logo {
-      font-size: 32px;
-      color: #74B74A;
-      text-decoration: none;
-      font-weight: bold;
-      margin-bottom: 15px;
-    }
-
-    .go-home a {
-      margin-top: 12px;
-      display: inline-block;
-      letter-spacing: 0.03em;
-      text-transform: uppercase;
-      font-weight: 500;
-      background-color: #74B74A;
-      padding: 15px 20px;
-      color: #fff;
-      text-decoration: none;
-    }
-
-    .drupal-logo {
-      max-width: 296px;
-      width: 100%;
-      height: auto;
-      margin-bottom: 15px;
-    }
-
-    @media (min-width: 992px) {
-      .left {
-        width: 49%;
-        float: left;
-      }
-
-      .right {
-        width: 49%;
-        float: right;
-      }
-
-      .error-number {
-        font-size: 164px;
-      }
-    }
-  </style>
+  }
+</style>
 </head>
 <body>
 <div class="wrapper">
   <div class="left">
-    <img class="drupal-logo" src="/themes/custom/easydrupal/logo.svg"/>
+    <img class="drupal-logo" src="/themes/custom/easydrupal/logo.svg" />
   </div>
   <div class="right">
-    <a class="logo" href="/">MakeDrupalEasy</a>
+    <a class="logo" href="/">Make Drupal Easy</a>
     <p class="error-number">404</p>
     <p class="error-text">... Oops! Something is missing</p>
     <p class="go-home"><a href="/">Home</a></p>
