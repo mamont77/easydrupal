@@ -2,6 +2,8 @@
 
 namespace Drupal\geshifilter;
 
+use Drupal\Core\Url;
+
 /**
  * Contains constantas and some helper functions.
  */
@@ -59,6 +61,11 @@ class GeshiFilter {
   const ATTRIBUTE_TITLE = 'title';
 
   /**
+   * Attributes valid to set special lines(lines to highlight).
+   */
+  const ATTRIBUTE_SPECIAL_LINES = 'special';
+
+  /**
    * Parse code with tags inside <>, example, <code>.
    */
   const BRACKETS_ANGLE = 1;
@@ -82,6 +89,11 @@ class GeshiFilter {
    * Parse code with tags inside <?php ?>, example, <?php echo('hi'); ?>.
    */
   const BRACKETS_PHPBLOCK = 8;
+
+  /**
+   * Parse code inside Markdown (```) blocks.
+   */
+  const BRACKETS_MARKDOWNBLOCK = 16;
 
   /**
    * No line numbers.
@@ -151,12 +163,12 @@ class GeshiFilter {
     if (!$available_languages) {
       // Not in cache: build the array of available_languages.
       $geshi_library = GeshiFilter::loadGeshi();
-      $available_languages = array();
+      $available_languages = [];
       if ($geshi_library['loaded']) {
-        $dirs = array(
+        $dirs = [
           $geshi_library['library path'] . '/geshi',
           drupal_get_path('module', 'geshifilter') . '/geshi-extra',
-        );
+        ];
         foreach ($dirs as $dir) {
           foreach (file_scan_directory($dir, '/.[pP][hH][pP]$/i') as $filename => $fileinfo) {
             // Short name.
@@ -167,7 +179,7 @@ class GeshiFilter {
             $fullname = $geshi->get_language_name();
             unset($geshi);
             // Store.
-            $available_languages[$name] = array('language_path' => $dir, 'fullname' => $fullname);
+            $available_languages[$name] = ['language_path' => $dir, 'fullname' => $fullname];
           }
         }
         ksort($available_languages);
@@ -191,7 +203,7 @@ class GeshiFilter {
     $config = \Drupal::config('geshifilter.settings');
     static $enabled_languages = NULL;
     if ($enabled_languages === NULL) {
-      $enabled_languages = array();
+      $enabled_languages = [];
       $languages = self::getAvailableLanguages();
       foreach ($languages as $language => $language_data) {
         if ($config->get('language.' . $language . ".enabled")) {
@@ -213,10 +225,9 @@ class GeshiFilter {
    *   libraries_load().
    */
   public static function loadGeshi() {
-    $library = array();
+    $library = [];
     // Try include geshi from composer.
-    if (file_exists(DRUPAL_ROOT . '/vendor/geshi/geshi/src/geshi.php')) {
-      include_once DRUPAL_ROOT . '/vendor/geshi/geshi/src/geshi.php';
+    if (class_exists('GeSHi')) {
       $library['loaded'] = TRUE;
       $library['library path'] = GESHI_ROOT;
     }
@@ -230,6 +241,10 @@ class GeshiFilter {
     else {
       $library['loaded'] = FALSE;
       $library['library path'] = '';
+      $library['error message'] = t('The GeSHi filter requires the GeSHi library (which needs to be @downloaded and installed seperately). Please review the install instruction at @readme.', [
+        '@downloaded' => \Drupal::l(t('downloaded'), Url::fromUri('http://qbnz.com/highlighter/')),
+        '@readme' => \Drupal::l(t('README.TXT'), Url::fromUri('http://cgit.drupalcode.org/geshifilter/tree/README.txt?h=8.x-1.x')),
+      ]);
     }
     return $library;
   }

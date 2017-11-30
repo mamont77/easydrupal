@@ -7,7 +7,8 @@
         "composer/installers": "^1.0.24",
         "wikimedia/composer-merge-plugin": "^1.4",
         "drush/drush": "~9.0",
-        "drupal/sticky_sharrre_bar": "1.x-dev"
+        "drupal/sticky_sharrre_bar": "1.x-dev",
+        "drupal/geshifilter": "^1.2"
     },
     "replace": {
         "drupal/core": "^8.4"

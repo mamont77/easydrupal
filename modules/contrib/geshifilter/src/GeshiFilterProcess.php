@@ -55,11 +55,13 @@ class GeshiFilterProcess {
    *   When to write all styles inline or from a css.
    * @param string $title
    *   The title to use in code.
+   * @param array $special_lines
+   *   Special lines to highlight.
    *
    * @return string
    *   The sourcecode after process by Geshi.
    */
-  public static function geshiProcess($source_code, $lang, $line_numbering = 0, $linenumbers_start = 1, $inline_mode = FALSE, $title = NULL) {
+  public static function geshiProcess($source_code, $lang, $line_numbering = 0, $linenumbers_start = 1, $inline_mode = FALSE, $title = NULL, array $special_lines = []) {
     $config = \Drupal::config('geshifilter.settings');
     // Load GeSHi library (if not already).
     $geshi_library = GeshiFilter::loadGeshi();
@@ -87,9 +89,8 @@ class GeshiFilterProcess {
       // To counter a change between GeSHi version 1.0.7.22 and 1.0.8 (svn
       // commit 1610), we use both the language and overall_class for the class,
       // to mimic the 1.0.8 behavior, which is backward compatible.
-
-      // $language and $overall_class are protected with $geshi, with no get functions,
-      // recreate them manually.
+      // $language and $overall_class are protected with $geshi, with no get
+      // functions, recreate them manually.
       $overall_class = 'geshifilter-' . $lang;
       $code_class = "{$lang} {$overall_class}";
       $source_code = '<span class="geshifilter"'
@@ -97,6 +98,10 @@ class GeshiFilterProcess {
         . '><code class="' . $code_class . '">' . $geshi->parse_code() . '</code></span>';
     }
     else {
+      $geshi->highlight_lines_extra($special_lines);
+      // How many spaces to use for tabs.
+      $geshi->set_tab_width($config->get('tab_width'));
+
       // Block source code mode.
       $geshi->set_header_type((int) $config->get('code_container', GESHI_HEADER_PRE));
       if ($line_numbering == 1) {
@@ -154,16 +159,16 @@ class GeshiFilterProcess {
    *   When to write all styles inline or from a css.
    * @param string $title
    *   The title to use in code.
+   * @param array $special_lines
+   *   An array with the number of lines to highlight.
+   *
+   * @paran array $special_lines
+   *   Lines to highlight.
    *
    * @return string
    *   The sourcecode after process by Geshi.
    */
-  public static function processSourceCode($source_code,
-  $lang,
-  $line_numbering = 0,
-                                          $linenumbers_start = 1,
-  $inline_mode = FALSE,
-  $title = NULL) {
+  public static function processSourceCode($source_code, $lang, $line_numbering = 0, $linenumbers_start = 1, $inline_mode = FALSE, $title = NULL, array $special_lines = []) {
     $config = \Drupal::config('geshifilter.settings');
     // Process.
     if ($lang == 'php' && $config->get('use_highlight_string_for_php', FALSE)) {
@@ -171,7 +176,7 @@ class GeshiFilterProcess {
     }
     else {
       // Process with GeSHi.
-      return self::geshiProcess($source_code, $lang, $line_numbering, $linenumbers_start, $inline_mode, $title);
+      return self::geshiProcess($source_code, $lang, $line_numbering, $linenumbers_start, $inline_mode, $title, $special_lines);
     }
   }
 

@@ -22,7 +22,7 @@ class GeshiFilterCss {
    *   Return the css to show.
    */
   public static function generateCss() {
-    $headers = array();
+    $headers = [];
     $headers['Content-type'] = 'text/css';
     $css = self::generateLanguagesCssRules();
     $response = new Response($css, 200, $headers);
@@ -67,7 +67,7 @@ class GeshiFilterCss {
     $output = '';
     $geshi_library = GeshiFilter::loadGeshi();
     if ($geshi_library['loaded']) {
-      $languages = GeshiFilter::getAvailableLanguages();
+      $languages = GeshiFilter::getEnabledLanguages();
       foreach ($languages as $langcode => $language_full_name) {
         // Create GeSHi object.
         $geshi = GeshiFilterProcess::geshiFactory('', $langcode);
@@ -79,7 +79,7 @@ class GeshiFilterCss {
       }
     }
     else {
-      drupal_set_message(t('Error while generating CSS rules: could not load GeSHi library.'), 'error');
+      drupal_set_message($this->t('Error while generating CSS rules: could not load GeSHi library.'), 'error');
     }
     return $output;
   }
@@ -104,13 +104,13 @@ class GeshiFilterCss {
 
       $ret = file_save_data($stylesheet, $stylesheet_filename, FILE_EXISTS_REPLACE);
       if ($ret) {
-        drupal_set_message(t('(Re)generated external CSS style sheet %file.', array('%file' => $ret->getFilename())));
+        drupal_set_message(t('(Re)generated external CSS style sheet %file.', ['%file' => $ret->getFilename()]));
       }
       else {
         drupal_set_message(t('Could not generate external CSS file. Check the settings of your <a href="!filesystem">file system</a>.',
-          array(
+          [
             '!filesystem' => Url::fromRoute('system.file_system_settings')->toString(),
-          )), 'error');
+          ]), 'error');
       }
       // Remember for which list of languages the CSS file was generated.
       \Drupal::state()->set('cssfile_languages', $languages_hash);
