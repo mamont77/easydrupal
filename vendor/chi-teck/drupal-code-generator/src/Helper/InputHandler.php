@@ -7,6 +7,7 @@ use Symfony\Component\Console\Exception\InvalidOptionException;
 use Symfony\Component\Console\Helper\Helper;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Question\ChoiceQuestion;
 use Symfony\Component\Console\Question\Question;
 
 /**
@@ -81,6 +82,9 @@ class InputHandler extends Helper {
         }
       }
 
+      // Default value may have tokens.
+      $default_value = Utils::tokenReplace($default_value, $vars);
+
       $this->setQuestionDefault($question, $default_value);
 
       if (isset($answers[$name])) {
@@ -109,14 +113,20 @@ class InputHandler extends Helper {
     $question_text = $question->getQuestion();
     $default_value = $question->getDefault();
 
-    $question_text = "<info>$question_text</info>";
+    $question_text = "\n <info>$question_text</info>";
     if (is_bool($default_value)) {
       $default_value = $default_value ? 'Yes' : 'No';
     }
     if ($default_value) {
       $question_text .= " [<comment>$default_value</comment>]";
     }
-    $question_text .= ': ';
+    $question_text .= ":";
+    if ($question instanceof ChoiceQuestion) {
+      $question->setPrompt('  ➤➤➤ ');
+    }
+    else {
+      $question_text .= "\n ➤ ";
+    }
 
     $this->setQuestionText($question, $question_text);
   }

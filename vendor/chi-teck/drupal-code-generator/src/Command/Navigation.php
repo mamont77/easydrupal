@@ -127,12 +127,15 @@ class Navigation extends Command {
 
     $command_name = $input->getFirstArgument();
 
+    // Before version 3.3.6 of Symfony console getFistArgument returned default
+    // command name.
+    $command_name = $command_name == 'navigation' ? NULL : $command_name;
+
     if (isset($this->defaultAliases[$command_name])) {
       $command_name = $this->defaultAliases[$command_name];
     }
 
-    $menu_trail = $command_name == $this->getName() ?
-      [] : explode(':', $command_name);
+    $menu_trail = $command_name ? explode(':', $command_name) : [];
 
     $this->generatorName = $this->selectGenerator($input, $output, $menu_trail);
   }
@@ -146,19 +149,10 @@ class Navigation extends Command {
       return 0;
     }
 
-    $command = $this->getApplication()->find($this->generatorName);
-    $aliases = $command->getAliases();
-
-    $header = sprintf(
-      '<info>Command:</info> <comment>%s</comment>',
-      // Display alias instead command name if possible.
-      isset($aliases[0]) ? $aliases[0] : $this->generatorName
-    );
-    $output->writeln($header);
-    $output->writeln(str_repeat('-', strlen(strip_tags($header))));
-
     // Run the generator.
-    return $command->run($input, $output);
+    return $this->getApplication()
+      ->find($this->generatorName)
+      ->run($input, $output);
   }
 
   /**
@@ -205,8 +199,8 @@ class Navigation extends Command {
     // - Sorted list of nested menu levels.
     // - Sorted list of commands.
     $choices = ['..' => '..'] + $sub_menu_labels + $command_labels;
-    $question = new ChoiceQuestion('<title>Select generator:</title>', array_values($choices));
-    $question->setPrompt('  >>> ');
+    $question = new ChoiceQuestion('<title> Select generator: </title>', array_values($choices));
+    $question->setPrompt(count($choices) <= 10 ? '  ➤➤➤ ' : '  ➤➤➤➤ ');
 
     $answer_label = $this->getHelper('question')->ask($input, $output, $question);
     $answer = array_search($answer_label, $choices);

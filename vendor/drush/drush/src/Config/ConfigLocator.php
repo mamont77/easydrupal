@@ -280,7 +280,7 @@ class ConfigLocator
     }
 
     /**
-     * Add any configruation file found at any of the provided paths. Both the
+     * Add any configuration file found at any of the provided paths. Both the
      * provided location, and the directory `config` inside each provided location
      * is searched for a drush.yml file.
      *
@@ -381,12 +381,14 @@ class ConfigLocator
     {
         // In addition to the paths passed in to us (from --alias-paths
         // commandline options), add some site-local locations.
-        foreach ($this->siteRoots as $siteRoot) {
-            $paths[] = $siteRoot . '/drush';
-        }
-        $paths[] = $this->composerRoot . '/drush';
-        $candidates = [ '', 'site-aliases' ];
-        $paths = $this->identifyCandidates($paths, $candidates);
+        $base_dirs = array_filter(array_merge($this->siteRoots, [$this->composerRoot]));
+        $site_local_paths = array_map(
+            function ($item) {
+                return "$item/drush/sites";
+            },
+            $base_dirs
+        );
+        $paths = array_merge($paths, $site_local_paths);
 
         return $paths;
     }

@@ -7,12 +7,17 @@
 
 namespace Drush\Cache;
 
+use Drush\Drush;
+use Webmozart\PathUtil\Path;
+
 /**
  * Default cache implementation.
  *
  * This cache implementation uses plain text files
  * containing serialized php to store cached data. Each cache bin corresponds
  * to a directory by the same name.
+ *
+ * @deprecated
  */
 class FileCache implements CacheInterface
 {
@@ -33,7 +38,7 @@ class FileCache implements CacheInterface
     public function cacheDirectory($bin = null)
     {
         $bin = $bin ? $bin : $this->bin;
-        return drush_directory_cache($bin);
+        return Path::join(Drush::config()->cache(), $bin);
     }
 
     public function get($cid)

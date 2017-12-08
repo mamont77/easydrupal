@@ -58,6 +58,7 @@ class PreflightArgs extends Config implements PreflightArgsInterface
     const SIMULATE = 'simulate';
     const BACKEND = 'backend';
     const STRICT = 'strict';
+    const DEBUG = 'preflight-debug';
 
     /**
      * PreflightArgs constructor
@@ -77,6 +78,10 @@ class PreflightArgs extends Config implements PreflightArgsInterface
         return [
             '-r=' => 'setSelectedSite',
             '--root=' => 'setSelectedSite',
+            '--debug' => 'setDebug',
+            '-d' => 'setDebug',
+            '-vv' => 'setDebug',
+            '-vvv' => 'setDebug',
             '-l=' => 'setUri',
             '--uri=' => 'setUri',
             '-c=' => 'addConfigPath',
@@ -227,6 +232,12 @@ class PreflightArgs extends Config implements PreflightArgsInterface
         return $this->get(self::ROOT, $default);
     }
 
+    public function setDebug($value)
+    {
+        $this->set(self::DEBUG, $value);
+        $this->addArg('-vvv');
+    }
+
     /**
      * Set the selected site.
      */
@@ -284,7 +295,7 @@ class PreflightArgs extends Config implements PreflightArgsInterface
     }
 
     /**
-     * Get the alias paths where drush site.alias.yml files may be found
+     * Get the alias paths where drush site.site.yml files may be found
      */
     public function aliasPaths()
     {

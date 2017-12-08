@@ -35,14 +35,15 @@ abstract class BasePlugin extends BaseGenerator {
     $questions['category'] = new Question('Category', 'Custom');
 
     $questions['context'] = new ChoiceQuestion(
-      '<comment>Required context</comment>',
+      'Required context',
       ['-', 'Node', 'User', 'Term']
     );
 
-    $vars = $this->collectVars($input, $output, $questions);
+    $this->collectVars($input, $output, $questions);
 
-    $path = $this->subDirectory . '/' . $vars['plugin_machine_name'] . '.inc';
-    $this->setFile($path, $this->template, $vars);
+    $this->addFile()
+      ->path($this->subDirectory . '/{plugin_machine_name}.inc')
+      ->template($this->template);
   }
 
 }

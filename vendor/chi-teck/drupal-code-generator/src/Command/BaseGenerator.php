@@ -2,6 +2,7 @@
 
 namespace DrupalCodeGenerator\Command;
 
+use DrupalCodeGenerator\Asset;
 use DrupalCodeGenerator\Utils;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -69,8 +70,24 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
    * the value is the generated content of it.
    *
    * @var array
+   *
+   * @deprecated Use self::$assets.
    */
   protected $files = [];
+
+  /**
+   * Assets to create.
+   *
+   * @var \DrupalCodeGenerator\Asset[]
+   */
+  protected $assets = [];
+
+  /**
+   * Twig template variables.
+   *
+   * @var array
+   */
+  protected $vars = [];
 
   /**
    * {@inheritdoc}
@@ -115,12 +132,28 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
     $is_extension = in_array($this->destination, $extension_destinations);
     $this->directory = $is_extension
       ? $directory : (Utils::getExtensionRoot($directory) ?: $directory);
+
+    // Display welcome message.
+    $header = sprintf(
+      "\n Welcome to %s generator!",
+      $this->getName()
+    );
+    $output->writeln($header);
+    $header_length = strlen(trim(strip_tags($header)));
+    $output->writeln('<fg=cyan;options=bold>–' . str_repeat('–', $header_length) . '–</>');
   }
 
   /**
    * {@inheritdoc}
    */
   protected function execute(InputInterface $input, OutputInterface $output) {
+
+    // Render all assets.
+    $renderer = $this->getHelper('dcg_renderer');
+    foreach ($this->getAssets() as $asset) {
+      $asset->render($renderer, $this->vars);
+    }
+
     $dumped_files = $this->getHelper('dcg_dumper')->dump($input, $output);
     $this->getHelper('dcg_output_handler')->printSummary($output, $dumped_files);
     return 0;
@@ -134,10 +167,52 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
   }
 
   /**
-   * {@inheritdoc}
+   * Returns list of rendered files.
+   *
+   * @return array
+   *   An associative array where each key is path to a file and value is
+   *   rendered content.
+   *
+   * @deprecated.
    */
   public function getFiles() {
     return $this->files;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getAssets() {
+    if ($this->files) {
+      // Convert files into assets for legacy commands.
+      $assets = [];
+      foreach ($this->getFiles() as $path => $file) {
+        $asset = new Asset();
+        $asset->path($path);
+        if (!is_array($file)) {
+          $file = ['content' => $file];
+        }
+        if (isset($file['content'])) {
+          $asset->content($file['content']);
+        }
+        else {
+          $asset->type('directory');
+        }
+        if (isset($file['action'])) {
+          $asset->action($file['action']);
+        }
+        if (isset($file['header_size'])) {
+          $asset->headerSize($file['header_size']);
+        }
+        if (isset($file['mode'])) {
+          $asset->mode($file['mode']);
+        }
+        $assets[] = $asset;
+      }
+      return array_merge($assets, $this->assets);
+    }
+
+    return $this->assets;
   }
 
   /**
@@ -192,35 +267,69 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
    *   Output instance.
    * @param array $questions
    *   List of questions that the user should answer.
+   * @param array $vars
+   *   Array of predefined template variables.
    *
    * @return array
    *   Template variables.
    *
    * @see \DrupalCodeGenerator\InputHandler
    */
-  protected function collectVars(InputInterface $input, OutputInterface $output, array $questions) {
-    return $this->getHelper('dcg_input_handler')->collectVars($input, $output, $questions);
+  protected function &collectVars(InputInterface $input, OutputInterface $output, array $questions, array $vars = []) {
+    $this->vars += $this->getHelper('dcg_input_handler')->collectVars($input, $output, $questions, $vars);
+    return $this->vars;
   }
 
   /**
-   * Renders content for a given file.
+   * Creates an asset.
    *
-   * @param string $path
-   *   Path to the file.
-   * @param string $template
-   *   Twig template to render.
-   * @param array $vars
-   *   Twig variables.
+   * @param string $type
+   *   Asset type.
+   *
+   * @return \DrupalCodeGenerator\Asset
+   *   The asset.
    */
-  protected function setFile($path, $template, array $vars) {
-    $this->files[$path] = [
-      'content' => $this->render($template, $vars),
-      'action' => 'replace',
-    ];
+  protected function addAsset($type) {
+    $asset = (new Asset())->type($type);
+    $this->assets[] = $asset;
+    return $asset;
   }
 
   /**
-   * Renders content for services.yml file.
+   * Creates file asset.
+   *
+   * @return \DrupalCodeGenerator\Asset
+   *   The asset.
+   */
+  protected function addFile() {
+    return $this->addAsset('file');
+  }
+
+  /**
+   * Creates directory asset.
+   *
+   * @return \DrupalCodeGenerator\Asset
+   *   The asset.
+   */
+  protected function addDirectory() {
+    return $this->addAsset('directory');
+  }
+
+  /**
+   * Creates service file asset.
+   *
+   * @return \DrupalCodeGenerator\Asset
+   *   The asset.
+   */
+  protected function addServicesFile() {
+    return $this->addFile()
+      ->path('{machine_name}.services.yml')
+      ->action('append')
+      ->headerSize(1);
+  }
+
+  /**
+   * Creates file asset.
    *
    * @param string $path
    *   Path to the file.
@@ -228,13 +337,33 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
    *   Twig template to render.
    * @param array $vars
    *   Twig variables.
+   *
+   * @deprecated Use self::createFile() or self::createDirectory().
+   */
+  protected function setFile($path = NULL, $template = NULL, array $vars = []) {
+    $this->addFile()
+      ->path($path)
+      ->template($template)
+      ->vars($vars);
+  }
+
+  /**
+   * Creates service file asset.
+   *
+   * @param string $path
+   *   Path to the file.
+   * @param string $template
+   *   Twig template to render.
+   * @param array $vars
+   *   Twig variables.
+   *
+   * @deprecated Use self::createFile().
    */
   protected function setServicesFile($path, $template, array $vars) {
-    $this->files[$path] = [
-      'content' => $this->render($template, $vars),
-      'action' => 'append',
-      'header_size' => 1,
-    ];
+    $this->addServicesFile()
+      ->path($path)
+      ->template($template)
+      ->vars($vars);
   }
 
 }

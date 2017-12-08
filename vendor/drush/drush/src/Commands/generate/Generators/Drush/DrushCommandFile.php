@@ -26,17 +26,65 @@ class DrushCommandFile extends BaseGenerator
     {
         $questions = Utils::defaultQuestions();
         $questions['source'] = new Question('Absolute path to legacy Drush command file (optional - for porting)');
+        $questions['source']->setValidator(function ($path) {
+            if ($path && !is_file($path)) {
+                throw new \UnexpectedValueException(sprintf('Could not open file "%s".', $path));
+            }
+            return $path;
+        });
 
         $vars = $this->collectVars($input, $output, $questions);
         $vars['class'] = Utils::camelize($vars['machine_name'] . 'Commands');
         if ($vars['source']) {
             require_once $vars['source'];
             $filename = str_replace(['.drush.inc', '.drush8.inc'], '', basename($vars['source']));
+            $command_hook = $filename . '_drush_command';
+            if (!function_exists($command_hook)) {
+                throw new \InvalidArgumentException('Drush command hook "' . $command_hook . '" does not exist.');
+            }
             $commands = call_user_func($filename . '_drush_command');
             $vars['commands'] = $this->adjustCommands($commands);
         }
         $this->setFile('src/Commands/' . $vars['class'] . '.php', 'drush-command-file.twig', $vars);
+        $composer_json_data = $this->getComposerJson($vars);
+        $this->_setFileJson('composer.json', $composer_json_data);
         $this->setServicesFile('drush.services.yml', 'drush.services.twig', $vars);
+    }
+
+    protected function getComposerJson($vars)
+    {
+        $composer_json_template_path = __DIR__ . '/dcf-composer.json';
+        // TODO: look up the path of the 'machine_name' module.
+        $composer_json_existing_path = DRUPAL_ROOT . '/modules/' . $vars['machine_name'] . '/composer.json';
+        $composer_json_path = file_exists($composer_json_existing_path) ? $composer_json_existing_path : $composer_json_template_path;
+        $composer_json_contents = file_get_contents($composer_json_path);
+        $composer_json_data = json_decode($composer_json_contents, true);
+
+        // If there is no name, fill something in
+        if (empty($composer_json_data['name'])) {
+            $composer_json_data['name'] = 'org/' . $vars['machine_name'];
+        }
+
+        // Add an entry for the drush services file.
+        $composer_json_data['extra']['drush']['services'] = [
+            'drush.services.yml' => '^9',
+        ];
+
+        return $composer_json_data;
+    }
+
+    protected function getOwningModulePath($vars)
+    {
+        $module_name = $vars['machine_name'];
+
+        $modules = \Drupal::moduleHandler()->getModuleList();
+        $themes = \Drupal::service('theme_handler')->listInfo();
+        $projects = array_merge($modules, $themes);
+
+        if (!isset($projects[$module_name])) {
+             throw new \Exception(dt('{module} does not exist. Run `drush generate module-standard` to create it.', ['module' => $module_name]));
+        }
+        return $projects[$module_name]->getPath();
     }
 
     protected function adjustCommands($commands)
@@ -80,5 +128,26 @@ class DrushCommandFile extends BaseGenerator
             }
         }
         return $commands;
+    }
+
+    // Maybe put in BaseGenerator?
+    protected function _setFileJson($path, $data)
+    {
+        $content = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+        $this->_setFileContent($path, $content);
+
+        // TODO: Once supported, use:
+        // $this->addFile()
+        //   ->path($path)
+        //  ->content($content);
+    }
+
+    // TODO: Remove once `addFile` is available.
+    protected function _setFileContent($path, $content)
+    {
+        $this->files[$path] = [
+            'content' => $content,
+            'action' => 'replace',
+        ];
     }
 }
