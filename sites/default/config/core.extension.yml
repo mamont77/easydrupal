@@ -78,6 +78,8 @@ module:
   rh_node: 0
   rh_taxonomy: 0
   rh_user: 0
+  schema_article: 0
+  schema_metatag: 0
   seckit: 0
   shortcut: 0
   slick: 0

@@ -1,0 +1,7 @@
+name: EasyDrupal Common Functionality
+type: module
+description: "Setting breadcrumbs for custom content types."
+core: 8.x
+package: Custom
+dependencies:
+  - schema_article
