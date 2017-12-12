@@ -1,23 +1,60 @@
 <?php
 /**
  * @file
- * Contains easydrupal_breadcrumb.module.
+ * Contains easydrupal_common.module.
  */
 
 use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\schema_metatag\SchemaMetatagManager;
 
 /**
  * Implements hook_help().
  */
-function easydrupal_breadcrumb_help($route_name, RouteMatchInterface $route_match) {
+function easydrupal_common_help($route_name, RouteMatchInterface $route_match) {
   switch ($route_name) {
-    // Main module help for the easydrupal_breadcrumb module.
-    case 'help.page.easydrupal_breadcrumb':
+    case 'help.page.easydrupal_common':
       $output = '';
       $output .= '<h3>' . t('About') . '</h3>';
-      $output .= '<p>' . t('Setting breadcrumbs for custom content types') . '</p>';
+      $output .= '<p>' . t('Setting the common functionality of the site.') . '</p>';
       return $output;
 
     default:
+  }
+}
+
+/**
+ * Implements hook_page_attachments_alter().
+ *
+ * Load all meta tags for this page, then separate out the structured data.
+ */
+function easydrupal_common_page_attachments_alter(array &$attachments) {
+
+  if (empty($attachments['#attached']['html_head'])) {
+    return;
+  }
+
+  // Collect tags added by Schema Metatag into structured data array.
+  $items = SchemaMetatagManager::parseJsonld($attachments['#attached']['html_head']);
+
+  // Turn the structured data array into JSON LD and add it to page head.
+  if (count($items) > 0) {
+    $items['@graph'][1]['reviewRating'] = [
+      "@type" => "Rating",
+      "ratingValue" => "5.0",
+      "bestRating" => "5",
+      "worstRating" => "1",
+    ];
+    $jsonld = SchemaMetatagManager::encodeJsonld($items);
+    if (!empty($jsonld)) {
+      $attachments['#attached']['html_head']['schema_metatag'] = [
+        [
+          '#type' => 'html_tag',
+          '#tag' => 'script',
+          '#value' => $jsonld,
+          '#attributes' => ['type' => 'application/ld+json'],
+        ],
+        'schema_metatag',
+      ];
+    }
   }
 }

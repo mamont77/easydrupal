@@ -1,7 +1,7 @@
 INSTALL
 ==========
 
-1. Extract module into /sites/all/modules folder.
+1. Extract module into /modules folder.
 2. Enable "EasyDrupal breadcrumbs".
 
 

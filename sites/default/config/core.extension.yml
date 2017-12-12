@@ -30,6 +30,7 @@ module:
   ds_switch_view_mode: 0
   dynamic_page_cache: 0
   easydrupal_breadcrumb: 0
+  easydrupal_common: 0
   editor: 0
   editor_advanced_link: 0
   fast404: 0
@@ -80,6 +81,7 @@ module:
   rh_user: 0
   schema_article: 0
   schema_metatag: 0
+  schema_web_site: 0
   seckit: 0
   shortcut: 0
   slick: 0
