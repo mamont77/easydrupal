@@ -38,12 +38,17 @@ function easydrupal_common_page_attachments_alter(array &$attachments) {
 
   // Turn the structured data array into JSON LD and add it to page head.
   if (count($items) > 0) {
-    $items['@graph'][1]['reviewRating'] = [
-      "@type" => "Rating",
-      "ratingValue" => "5.0",
-      "bestRating" => "5",
-      "worstRating" => "1",
-    ];
+    foreach ($items['@graph'] as $key => $graph) {
+      if ($graph['@type'] == 'TechArticle' || $graph['@type'] == 'Article') {
+        $items['@graph'][$key]['reviewRating'] = [
+          "@type" => "Rating",
+          "ratingValue" => "5.0",
+          "bestRating" => "5",
+          "worstRating" => "1",
+        ];
+      }
+    }
+
     $jsonld = SchemaMetatagManager::encodeJsonld($items);
     if (!empty($jsonld)) {
       $attachments['#attached']['html_head']['schema_metatag'] = [
