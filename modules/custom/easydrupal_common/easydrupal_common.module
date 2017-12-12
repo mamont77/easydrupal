@@ -40,11 +40,12 @@ function easydrupal_common_page_attachments_alter(array &$attachments) {
   if (count($items) > 0) {
     foreach ($items['@graph'] as $key => $graph) {
       if ($graph['@type'] == 'TechArticle' || $graph['@type'] == 'Article') {
-        $items['@graph'][$key]['reviewRating'] = [
-          "@type" => "Rating",
+        $items['@graph'][$key]['aggregateRating'] = [
+          "@type" => "AggregateRating",
           "ratingValue" => "5.0",
           "bestRating" => "5",
           "worstRating" => "1",
+          "ratingCount" => 5,
         ];
       }
     }
