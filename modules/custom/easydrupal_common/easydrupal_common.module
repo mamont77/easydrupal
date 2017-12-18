@@ -6,6 +6,7 @@
 
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\schema_metatag\SchemaMetatagManager;
+use Drupal\votingapi\VoteResultFunctionManager;
 
 /**
  * Implements hook_help().
@@ -35,38 +36,51 @@ function easydrupal_common_page_attachments_alter(array &$attachments) {
 
   // TODO: Get votes for a node.
   // Load the current node.
-//  $node = \Drupal::routeMatch()->getParameter('node');
-//    if ($node && $node->getType() == 'article') {
-//  }
+  $node = \Drupal::routeMatch()->getParameter('node');
+  if ($node && $node->getType() == 'article') {
+    $results = [];
 
-  // Collect tags added by Schema Metatag into structured data array.
-  $items = SchemaMetatagManager::parseJsonld($attachments['#attached']['html_head']);
+    $result = db_select('votingapi_result', 'v')
+      ->fields('v', ['type', 'function', 'value'])
+      ->condition('entity_type', 'node')
+      ->condition('entity_id', $node->id())
+      ->execute();
+    while ($row = $result->fetchAssoc()) {
+      $results[$row['type']][$row['function']] = $row['value'];
+    }
 
-  // Turn the structured data array into JSON LD and add it to page head.
-  if (count($items) > 0) {
-    foreach ($items['@graph'] as $key => $graph) {
-      if ($graph['@type'] == 'TechArticle' || $graph['@type'] == 'Article') {
-        $items['@graph'][$key]['aggregateRating'] = [
-          "@type" => "AggregateRating",
-          "ratingValue" => "5.0",
-          "bestRating" => "5",
-          "worstRating" => "1",
-          "ratingCount" => 5,
+    // Collect tags added by Schema Metatag into structured data array.
+    $items = SchemaMetatagManager::parseJsonld($attachments['#attached']['html_head']);
+
+    // Turn the structured data array into JSON LD and add it to page head.
+    if (count($items) > 0 && !empty($results)) {
+      foreach ($items['@graph'] as $key => $graph) {
+        if ($graph['@type'] == 'TechArticle' || $graph['@type'] == 'Article') {
+          $items['@graph'][$key]['aggregateRating'] = [
+            "@type" => "AggregateRating",
+            "ratingValue" => $results['vote']['vote_average'],
+            "bestRating" => 5,
+            "worstRating" => 1,
+            "ratingCount" => $results['vote']['vote_count'],
+          ];
+        }
+      }
+
+      $jsonld = SchemaMetatagManager::encodeJsonld($items);
+      if (!empty($jsonld)) {
+        $attachments['#attached']['html_head']['schema_metatag'] = [
+          [
+            '#type' => 'html_tag',
+            '#tag' => 'script',
+            '#value' => $jsonld,
+            '#attributes' => ['type' => 'application/ld+json'],
+          ],
+          'schema_metatag',
         ];
       }
     }
 
-    $jsonld = SchemaMetatagManager::encodeJsonld($items);
-    if (!empty($jsonld)) {
-      $attachments['#attached']['html_head']['schema_metatag'] = [
-        [
-          '#type' => 'html_tag',
-          '#tag' => 'script',
-          '#value' => $jsonld,
-          '#attributes' => ['type' => 'application/ld+json'],
-        ],
-        'schema_metatag',
-      ];
-    }
   }
+
+
 }
