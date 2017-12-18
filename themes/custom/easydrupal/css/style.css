@@ -807,6 +807,20 @@ body.path-contact .contact-form .btn-primary {
   padding: 15px;
 }
 
+.field-name-field-vote {
+  display: none;
+}
+.field-name-field-vote .select-wrapper::after {
+  content: '';
+  display: none;
+}
+.field-name-field-vote .form-group {
+  margin-bottom: 0;
+}
+.field-name-field-vote .br-widget {
+  height: 20px;
+}
+
 .view .views-row {
   margin-bottom: 15px;
 }
@@ -1205,4 +1219,5 @@ body.path-contact .contact-form .btn-primary {
     opacity: .8;
   }
 }
+
 /*# sourceMappingURL=style.css.map */

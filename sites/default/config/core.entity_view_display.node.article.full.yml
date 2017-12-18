@@ -158,17 +158,17 @@ content:
     type: voting_api_formatter
     weight: 0
     region: ds_content
-    label: inline
+    label: hidden
     settings:
-      style: default
+      style: css-stars
+      show_own_vote: '1'
       readonly: 0
       show_results: 0
-      show_own_vote: 0
       values: {  }
     third_party_settings:
       ds:
         ft:
-          id: default
+          id: minimal
           settings:
             lb: ''
             lb-col: false

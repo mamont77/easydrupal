@@ -171,6 +171,7 @@
     attach: function (context, settings) {
 
       $('.page-header', context).prepend($('.page-node-type-article .date', context));
+      $('.page-header', context).append($('.page-node-type-article .field-name-field-vote', context).css('display', 'inline-block'));
 
       var $region_sidebar_second = $('aside.col-sm-3', context),
         $region_sidebar_second_content = $('.region-sidebar-second', context),
@@ -217,8 +218,6 @@
         );
         document.querySelector('head').appendChild(msViewportStyle)
       }
-
-      // $('footer', context).after('<a class="upper" href="#main-content" title="' + Drupal.t('Back to top') + '"></a>');
 
       $('.upper').on('click', function (event) {
         event.preventDefault();

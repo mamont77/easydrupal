@@ -198,3 +198,19 @@ body.path-contact {
   background-color: #eee;
   padding: 15px;
 }
+
+.field-name-field-vote {
+  display: none;
+  .select-wrapper {
+    &::after {
+      content: '';
+      display: none;
+    }
+  }
+  .form-group {
+    margin-bottom: 0;
+  }
+  .br-widget {
+    height: 20px
+  }
+}

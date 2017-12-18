@@ -11,7 +11,7 @@ entity_type: node
 type: voting_api_field
 settings:
   vote_type: vote
-  vote_plugin: useful
+  vote_plugin: fivestar
   status: ''
 module: votingapi_widgets
 locked: false

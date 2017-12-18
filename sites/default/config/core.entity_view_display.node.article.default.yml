@@ -168,10 +168,10 @@ content:
     weight: 10
     label: inline
     settings:
-      style: default
+      style: bars-horizontal
+      show_results: '1'
       show_own_vote: '1'
       readonly: 0
-      show_results: 0
       values: {  }
     third_party_settings:
       ds:
