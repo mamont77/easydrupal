@@ -34,7 +34,9 @@ function easydrupal_common_page_attachments_alter(array &$attachments) {
     return;
   }
 
-  // TODO: Get votes for a node.
+  // Collect tags added by Schema Metatag into structured data array.
+  $items = SchemaMetatagManager::parseJsonld($attachments['#attached']['html_head']);
+
   // Load the current node.
   $node = \Drupal::routeMatch()->getParameter('node');
   if ($node && $node->getType() == 'article') {
@@ -49,9 +51,6 @@ function easydrupal_common_page_attachments_alter(array &$attachments) {
       $results[$row['type']][$row['function']] = $row['value'];
     }
 
-    // Collect tags added by Schema Metatag into structured data array.
-    $items = SchemaMetatagManager::parseJsonld($attachments['#attached']['html_head']);
-
     // Turn the structured data array into JSON LD and add it to page head.
     if (count($items) > 0 && !empty($results)) {
       foreach ($items['@graph'] as $key => $graph) {
@@ -65,22 +64,21 @@ function easydrupal_common_page_attachments_alter(array &$attachments) {
           ];
         }
       }
-
-      $jsonld = SchemaMetatagManager::encodeJsonld($items);
-      if (!empty($jsonld)) {
-        $attachments['#attached']['html_head']['schema_metatag'] = [
-          [
-            '#type' => 'html_tag',
-            '#tag' => 'script',
-            '#value' => $jsonld,
-            '#attributes' => ['type' => 'application/ld+json'],
-          ],
-          'schema_metatag',
-        ];
-      }
     }
 
   }
 
+  $jsonld = SchemaMetatagManager::encodeJsonld($items);
+  if (!empty($jsonld)) {
+    $attachments['#attached']['html_head']['schema_metatag'] = [
+      [
+        '#type' => 'html_tag',
+        '#tag' => 'script',
+        '#value' => $jsonld,
+        '#attributes' => ['type' => 'application/ld+json'],
+      ],
+      'schema_metatag',
+    ];
+  }
 
 }
