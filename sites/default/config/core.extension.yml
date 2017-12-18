@@ -99,6 +99,8 @@ module:
   views_bootstrap: 0
   views_infinite_scroll: 0
   views_ui: 0
+  votingapi: 0
+  votingapi_widgets: 0
   xmlsitemap: 0
   xmlsitemap_custom: 0
   xmlsitemap_engines: 0
