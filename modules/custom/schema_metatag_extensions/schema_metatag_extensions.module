@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * Contains easydrupal_common.module.
+ * Contains schema_metatag_extensions.module.
  */
 
 use Drupal\Core\Routing\RouteMatchInterface;
@@ -10,12 +10,12 @@ use Drupal\schema_metatag\SchemaMetatagManager;
 /**
  * Implements hook_help().
  */
-function easydrupal_common_help($route_name, RouteMatchInterface $route_match) {
+function schema_metatag_extensions_help($route_name, RouteMatchInterface $route_match) {
   switch ($route_name) {
-    case 'help.page.easydrupal_common':
+    case 'help.page.schema_metatag_extensions':
       $output = '';
       $output .= '<h3>' . t('About') . '</h3>';
-      $output .= '<p>' . t('Setting the common functionality of the site.') . '</p>';
+      $output .= '<p>' . t('Allow to add an additional data to JSON provided by "Schema.org Metatag" module.') . '</p>';
       return $output;
 
     default:
@@ -27,7 +27,7 @@ function easydrupal_common_help($route_name, RouteMatchInterface $route_match) {
  *
  * Load all meta tags for this page, then adds the structured data.
  */
-function easydrupal_common_page_attachments_alter(array &$attachments) {
+function schema_metatag_extensions_page_attachments_alter(array &$attachments) {
 
   if (empty($attachments['#attached']['html_head'])) {
     return;
