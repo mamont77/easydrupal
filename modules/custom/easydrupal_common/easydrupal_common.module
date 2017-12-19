@@ -37,25 +37,25 @@ function easydrupal_common_page_attachments_alter(array &$attachments) {
   // Collect tags added by Schema Metatag into structured data array.
   $items = SchemaMetatagManager::parseJsonld($attachments['#attached']['html_head']);
 
-  // Load the current node.
-  $node = \Drupal::routeMatch()->getParameter('node');
-  if ($node && $node->getType() == 'article') {
-    $results = [];
+  if (count($items) > 0) {
+    foreach ($items['@graph'] as $key => &$graph) {
+      if (isset($graph['aggregateRating']) &&
+        ($graph['@type'] == 'TechArticle' || $graph['@type'] == 'Article')) {
+        // Load the current node.
+        $node = \Drupal::routeMatch()->getParameter('node');
+        // Get rating from votingapi.
+        $results = [];
+        $result = db_select('votingapi_result', 'v')
+          ->fields('v', ['type', 'function', 'value'])
+          ->condition('entity_type', 'node')
+          ->condition('entity_id', $node->id())
+          ->execute();
+        while ($row = $result->fetchAssoc()) {
+          $results[$row['type']][$row['function']] = $row['value'];
+        }
 
-    $result = db_select('votingapi_result', 'v')
-      ->fields('v', ['type', 'function', 'value'])
-      ->condition('entity_type', 'node')
-      ->condition('entity_id', $node->id())
-      ->execute();
-    while ($row = $result->fetchAssoc()) {
-      $results[$row['type']][$row['function']] = $row['value'];
-    }
-
-    // Turn the structured data array into JSON LD and add it to page head.
-    if (count($items) > 0 && !empty($results)) {
-      foreach ($items['@graph'] as $key => $graph) {
-        if ($graph['@type'] == 'TechArticle' || $graph['@type'] == 'Article') {
-          $items['@graph'][$key]['aggregateRating'] = [
+        if (!empty($results)) {
+          $graph['aggregateRating'] = [
             "@type" => "AggregateRating",
             "ratingValue" => $results['vote']['vote_average'],
             "bestRating" => 5,
@@ -65,9 +65,9 @@ function easydrupal_common_page_attachments_alter(array &$attachments) {
         }
       }
     }
-
   }
 
+  // Update JSON data.
   $jsonld = SchemaMetatagManager::encodeJsonld($items);
   if (!empty($jsonld)) {
     $attachments['#attached']['html_head']['schema_metatag'] = [
