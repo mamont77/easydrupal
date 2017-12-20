@@ -1,8 +1,8 @@
 <?php
 
-namespace Drupal\schema_metatag_extensions\Plugin\metatag\Tag;
+namespace Drupal\easydrupal_common\Plugin\metatag\Tag;
 
-use \Drupal\schema_metatag\Plugin\metatag\Tag\SchemaNameBase;
+use Drupal\schema_metatag\Plugin\metatag\Tag\SchemaNameBase;
 
 /**
  * Provides a plugin for the 'schema.org AggregateRating' meta tag.
@@ -26,13 +26,31 @@ use \Drupal\schema_metatag\Plugin\metatag\Tag\SchemaNameBase;
 class SchemaArticleAggregateRating extends SchemaNameBase {
 
   /**
+   * Basic info about votingapi.
+   *
+   * @var bool
+   */
+  protected $votingapiEnabled;
+
+  /**
+   * {@inheritdoc}
+   */
+  public function __construct(array $configuration, $plugin_id, array $plugin_definition) {
+    parent::__construct($configuration, $plugin_id, $plugin_definition);
+
+    $moduleHandler = \Drupal::service('module_handler');
+    if ($moduleHandler->moduleExists('votingapi')) {
+      $this->votingapiEnabled = TRUE;
+    }
+  }
+
+  /**
    * Generate a form element for this meta tag.
    */
   public function form(array $element = []) {
     $form = [];
 
-    $moduleHandler = \Drupal::service('module_handler');
-    if ($moduleHandler->moduleExists('votingapi')) {
+    if ($this->votingapiEnabled) {
       $form = [
         '#type' => 'checkbox',
         '#title' => $this->label(),
@@ -42,6 +60,42 @@ class SchemaArticleAggregateRating extends SchemaNameBase {
     }
 
     return $form;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public function output() {
+    $element = parent::output();
+
+    if (!empty($element['#attributes']['content'])) {
+      // Load the current node.
+      $node = \Drupal::routeMatch()->getParameter('node');
+
+      // Get rating from votingapi.
+      $results = [];
+      $query = \Drupal::database()->select('votingapi_result', 'v');
+      $query->fields('v', ['type', 'function', 'value']);
+      $query->condition('entity_type', 'node');
+      $query->condition('entity_id', $node->id());
+      $result = $query->execute();
+      while ($row = $result->fetchAssoc()) {
+        $results[$row['type']][$row['function']] = $row['value'];
+      }
+
+      if (!empty($results)) {
+        $element['#attributes']['content'] = [
+          "@type" => "AggregateRating",
+          "ratingValue" => $results['vote']['vote_average'],
+          "bestRating" => 5,
+          "worstRating" => 1,
+          "ratingCount" => $results['vote']['vote_count'],
+        ];
+      }
+
+    }
+
+    return $element;
   }
 
 }

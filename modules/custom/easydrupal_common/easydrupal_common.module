@@ -5,7 +5,6 @@
  */
 
 use Drupal\Core\Routing\RouteMatchInterface;
-use Drupal\schema_metatag\SchemaMetatagManager;
 
 /**
  * Implements hook_help().
