@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\easydrupal_common\Plugin\metatag\Tag;
+namespace Drupal\schema_metatag_extensions\Plugin\metatag\Tag;
 
 use Drupal\schema_metatag\Plugin\metatag\Tag\SchemaNameBase;
 
