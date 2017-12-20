@@ -14,16 +14,31 @@ use \Drupal\schema_metatag\Plugin\metatag\Tag\SchemaNameBase;
  * @MetatagTag(
  *   id = "schema_article_aggregate_rating",
  *   label = @Translation("AggregateRating"),
- *   description = @Translation("Attach to JSON the aggregate rating of the article provided by the Voting API module."),
- *   name = "aggregateRating",
- *   group = "schema_article",
- *   weight = 11,
- *   type = "string",
- *   secure = FALSE,
+ *   description = @Translation("Attach to JSON the aggregate rating of the article provided by the Voting API
+ *   module."), name = "aggregateRating", group = "schema_article", weight = 11, type = "string", secure = FALSE,
  *   multiple = FALSE
  * )
  */
 class SchemaArticleAggregateRating extends SchemaNameBase {
+
+  /**
+   * Basic info about votingapi.
+   *
+   * @var bool
+   */
+  protected $votingapi_enabled;
+
+  /**
+   * {@inheritdoc}
+   */
+  public function __construct(array $configuration, $plugin_id, array $plugin_definition) {
+    parent::__construct($configuration, $plugin_id, $plugin_definition);
+
+    $moduleHandler = \Drupal::service('module_handler');
+    if ($moduleHandler->moduleExists('votingapi')) {
+      $this->votingapi_enabled = TRUE;
+    }
+  }
 
   /**
    * Generate a form element for this meta tag.
@@ -31,8 +46,7 @@ class SchemaArticleAggregateRating extends SchemaNameBase {
   public function form(array $element = []) {
     $form = [];
 
-    $moduleHandler = \Drupal::service('module_handler');
-    if ($moduleHandler->moduleExists('votingapi')) {
+    if ($this->votingapi_enabled) {
       $form = [
         '#type' => 'checkbox',
         '#title' => $this->label(),
@@ -42,6 +56,42 @@ class SchemaArticleAggregateRating extends SchemaNameBase {
     }
 
     return $form;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public function output() {
+    $element = parent::output();
+
+    if (!empty($element['#attributes']['content'])) {
+      // Load the current node.
+      $node = \Drupal::routeMatch()->getParameter('node');
+
+      // Get rating from votingapi.
+      $results = [];
+      $query = \Drupal::database()->select('votingapi_result', 'v');
+      $query->fields('v', ['type', 'function', 'value']);
+      $query->condition('entity_type', 'node');
+      $query->condition('entity_id', $node->id());
+      $result = $query->execute();
+      while ($row = $result->fetchAssoc()) {
+        $results[$row['type']][$row['function']] = $row['value'];
+      }
+
+      if (!empty($results)) {
+        $element['#attributes']['content'] = [
+          "@type" => "AggregateRating",
+          "ratingValue" => $results['vote']['vote_average'],
+          "bestRating" => 5,
+          "worstRating" => 1,
+          "ratingCount" => $results['vote']['vote_count'],
+        ];
+      }
+
+    }
+
+    return $element;
   }
 
 }
