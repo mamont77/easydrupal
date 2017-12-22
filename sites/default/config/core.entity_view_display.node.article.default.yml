@@ -26,7 +26,6 @@ dependencies:
     - text
     - user
     - votingapi_widgets
-    - yoast_seo
 third_party_settings:
   ds:
     layout:
@@ -54,9 +53,6 @@ third_party_settings:
         - field_attachment
         - links
         - field_comments
-        - field_meta_tags
-        - field_yoast_seo
-        - field_vote
     fields:
       node_post_date:
         plugin_id: node_post_date
@@ -154,7 +150,7 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: metatag_empty_formatter
-    region: ds_content
+    region: content
   field_sourse_code:
     weight: 3
     label: hidden
@@ -166,30 +162,24 @@ content:
     region: ds_content
   field_vote:
     weight: 10
-    label: inline
+    label: above
     settings:
-      style: bars-horizontal
-      show_results: '1'
-      show_own_vote: '1'
-      readonly: 0
+      readonly: false
+      style: default
+      show_results: false
       values: {  }
-    third_party_settings:
-      ds:
-        ft:
-          id: minimal
-          settings:
-            lb: ''
-            lb-col: false
-            classes: {  }
+      show_own_vote: false
+    third_party_settings: {  }
     type: voting_api_formatter
-    region: ds_content
+    region: content
   field_yoast_seo:
     weight: 9
     label: above
-    settings: {  }
+    settings:
+      link_to_entity: false
     third_party_settings: {  }
-    type: yoastseo_formatter
-    region: ds_content
+    type: string
+    region: content
   links:
     weight: 6
     region: ds_content
