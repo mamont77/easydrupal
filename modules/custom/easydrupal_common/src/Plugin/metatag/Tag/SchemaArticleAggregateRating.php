@@ -92,7 +92,9 @@ class SchemaArticleAggregateRating extends SchemaNameBase {
           "ratingCount" => $results['vote']['vote_count'],
         ];
       }
-
+      else {
+        return FALSE;
+      }
     }
 
     return $element;
