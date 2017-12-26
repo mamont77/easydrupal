@@ -130,7 +130,7 @@ class SchemaMetatagManager implements SchemaMetatagManagerInterface {
       $value = $exploded[0];
     }
     else {
-      $value = array_map('trim', $exploded);;
+      $value = array_map('trim', $exploded);
     }
     return $value;
   }
