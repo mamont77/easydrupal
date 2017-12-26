@@ -125,13 +125,13 @@ class SchemaMetatagManager implements SchemaMetatagManagerInterface {
    * @inherit
    */
   public static function explode($value) {
-    $exploded = array_filter(explode(',', $value));
-    if (count($exploded) == 1) {
-      $value = $exploded[0];
+    $value = explode(',', $value);
+    $value = array_map('trim', $value);
+    $value = array_unique($value);
+    if (count($value) == 1) {
+      return $value[0];
     }
-    else {
-      $value = array_map('trim', $exploded);
-    }
+
     return $value;
   }
 
