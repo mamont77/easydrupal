@@ -1,0 +1,251 @@
+@charset "UTF-8";
+
+.view {
+  .views-row {
+    margin-bottom: 15px;
+  }
+}
+.view-about-author {
+  border: 1px solid $globalBorderColor;
+  padding: 20px 15px;
+  line-height: 22px;
+  .views-row {
+    margin-bottom: 0;
+  }
+  .views-field {
+    margin-bottom: 5px;
+  }
+  .views-field-field-last-name {
+    font-family: "Roboto", Verdana, Arial, Helvetica, sans-serif;
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+    color: $aboutAuthorNameColor;
+  }
+  .views-field-user-picture {
+    img {
+      margin: 0 auto;
+      border-radius: 50%;
+      border: 8px solid $imageBorderColor;
+      opacity: .8;
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+  .views-field-field-country {
+    .field-content {
+      &::before {
+        font-family: 'Glyphicons Halflings';
+        content: "\e062";
+        padding-right: 5px;
+      }
+    }
+
+  }
+  .views-field-field-date-birth {
+    color: $dateColor;
+  }
+  .views-field-field-about {
+    font-size: 16px;
+    line-height: 18px;
+  }
+}
+.view-feedback {
+  .row {
+    text-align: center;
+    .col {
+      border-bottom: 1px dashed $globalBorderColor;
+      padding-bottom: 30px;
+      margin-bottom: 30px;
+    }
+  }
+  .field-name-node-title {
+    margin-bottom: 15px;
+    h3 {
+      margin: 0;
+    }
+  }
+  .about {
+    margin-bottom: 15px;
+    color: $testimonialsAboutTextColor;
+    span {
+      color: $testimonialsAboutTextColor;
+    }
+  }
+  .name {
+  }
+  .position {
+  }
+  .country {
+  }
+  .field-name-field-image {
+    img {
+      border-radius: 50%;
+      border: 8px solid $imageBorderColor;
+      margin: 0 auto 15px auto;
+      opacity: .8;
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+  .project-info {
+    margin-bottom: 15px;
+  }
+  .field-name-field-date {
+    font-size: 15px;
+    margin-bottom: 5px;
+    color: $dateColor;
+    //font-weight: bold;
+  }
+  .field-name-field-project-title {
+    color: $globalLinkColor; //need for "comma".
+    //font-weight: bold;
+    a {
+    }
+  }
+  blockquote {
+    color: $testimonialsBlockquoteTextColor;
+    background-color: $testimonialsBlockquoteBgColor;
+    border-left: 1px solid $testimonialsBlockquoteBorderColor;
+    font-style: italic;
+    padding: 15px;
+    text-align: justify;
+    margin: 0;
+    font-size: inherit;
+    font-family: "Roboto", "Helvetica Neue", helvetica, arial, sans-serif;
+    font-weight: 300;
+    &:before, &:after {
+      font-family: helvetica, arial, sans-serif;
+      color: $testimonialsBlockquoteAdditionalColor;
+      font-size: 3em;
+      line-height: 0.1em;
+    }
+    &:before {
+      content: "\201c";
+      vertical-align: -.4em;
+      margin-left: 0;
+      margin-right: 0.2em;
+    }
+    &:after {
+      content: "\201d";
+      vertical-align: -.45em;
+      margin-left: 0.2em;
+    }
+    > p:first-child {
+      display: inline;
+    }
+  }
+}
+.view-articles,
+.view-taxonomy-term {
+  .views-row {
+    padding-bottom: 7px;
+    border-bottom: 1px dashed $globalBorderColor;
+  }
+  .field-name-node-title {
+    h2 {
+      margin-top: 0;
+    }
+    a {
+    }
+  }
+  .field-name-field-image {
+    img {
+      width: 100%;
+      border: 1px solid $imageBorderColor;
+      margin: 0 auto;
+    }
+  }
+  .field-name-body {
+    p:first-child:first-letter {
+      font-family: "Times New Roman", Times, serif; /* Гарнитура шрифта первой буквы */
+      font-size: 200%; /* Размер шрифта первого символа */
+      color: $articleFirstLetterColor; /* Красный цвет текста */
+    }
+  }
+}
+@media (min-width: 768px) {
+  .view-articles,
+  .view-taxonomy-term {
+    .field-name-field-image {
+      max-width: 200px;
+      float: left;
+      margin: 0 15px 15px 0;
+    }
+  }
+}
+$white: #fff;
+
+.view-portfolio {
+  .row .col {
+    margin-bottom: 30px;
+  }
+  .wrapper {
+    position: relative;
+  }
+  .field-flex-wrap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    transition: 150ms ease background-color;
+    //transition: all 0.3s ease 0s;
+  }
+  .image {
+    margin-bottom: 15px;
+    overflow: hidden;
+  }
+  img {
+    transform: scale(1);
+    transition: 150ms ease transform;
+    width: 100%;
+  }
+  .description {
+    font-size: 14px;
+    line-height: 24px;
+    margin: auto;
+    padding: 0 24px;
+    color: $portfolioHoverTextColor;
+    opacity: 0;
+    text-align: center;
+    transition: 150ms ease opacity;
+  }
+  .title {
+    //font-size: 1.25rem;
+    margin-bottom: 0;
+    color: $h3LinkColor;
+    font-weight: 300;
+    text-align: center;
+  }
+  a:hover {
+    text-decoration: none;
+    img {
+      //transform: scale(1.05);
+      transform: rotate(-2deg) scale(1.05);
+    }
+    .field-flex-wrap {
+      background-color: rgba(24, 39, 46, 0.7);
+    }
+    .description {
+      opacity: 1;
+    }
+  }
+}
+.view-tags {
+  .views-row {
+    display: inline;
+  }
+  .views-field {
+    display: inline;
+    a {
+      @extend %tags;
+    }
+  }
+
+}

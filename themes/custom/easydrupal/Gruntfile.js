@@ -26,7 +26,7 @@ module.exports = function (grunt) {
       development: {
         src: 'images/sprite-src/*.png',
         dest: 'images/sprite.png',
-        destCss: 'sass/_sprite.scss',
+        destCss: 'scss/_sprite.scss',
         padding: 2
       }
     },
@@ -53,7 +53,7 @@ module.exports = function (grunt) {
         },
         files: [{
           expand: true,
-          cwd: 'sass',
+          cwd: 'scss',
           src: ['*.scss'],
           dest: 'css',
           ext: '.css'
@@ -80,8 +80,8 @@ module.exports = function (grunt) {
         tasks: ['sprite']
       },
       sass: {
-        files: ['sass/*.scss'],
-        tasks: ['sass:development']
+        files: ['scss/*.scss'],
+        tasks: ['scss:development']
       },
       postcss: {
         files: ['css/*.css'],

@@ -1,21 +1,9 @@
-#full-page:
-#  css:
-#    theme:
-#      /libraries/fullPage.js/jquery.fullPage.css: {}
-#  js:
-#    #/libraries/fullPage.js/vendors/scrolloverflow.min.js: {}
-#    /libraries/fullPage.js/jquery.fullPage.min.js: {}
-#  dependencies:
-#    - core/jquery
-
 wow:
   css:
     theme:
       /libraries/wow/css/libs/animate.css: {}
   js:
     /libraries/wow/dist/wow.min.js: {}
-#  dependencies:
-#    - core/jquery
 
 easing:
   js:
@@ -23,24 +11,20 @@ easing:
   dependencies:
     - core/jquery
 
-#jquery.sticky.js:
-#  js:
-#    /libraries/jquery.sticky.js/jquery.sticky.js: {}
-#  dependencies:
-#    - core/jquery
-
-#perfect-scrollbar:
-#  css:
-#    theme:
-#      /libraries/perfect-scrollbar/css/perfect-scrollbar.min.css: {}
-#  js:
-#    /libraries/perfect-scrollbar/js/perfect-scrollbar.jquery.min.js: {}
-#  dependencies:
-#    - core/jquery
-
-#isotope:
-#  js:
-#    /libraries/isotope/isotope.pkgd.min.js: {}
+bootstrap-scripts:
+  js:
+    bootstrap/assets/javascripts/bootstrap/affix.js: {}
+    bootstrap/assets/javascripts/bootstrap/alert.js: {}
+    bootstrap/assets/javascripts/bootstrap/button.js: {}
+    bootstrap/assets/javascripts/bootstrap/carousel.js: {}
+    bootstrap/assets/javascripts/bootstrap/collapse.js: {}
+    bootstrap/assets/javascripts/bootstrap/dropdown.js: {}
+    bootstrap/assets/javascripts/bootstrap/modal.js: {}
+    bootstrap/assets/javascripts/bootstrap/tooltip.js: {}
+    bootstrap/assets/javascripts/bootstrap/popover.js: {}
+    bootstrap/assets/javascripts/bootstrap/scrollspy.js: {}
+    bootstrap/assets/javascripts/bootstrap/tab.js: {}
+    bootstrap/assets/javascripts/bootstrap/transition.js: {}
 
 global-styling:
   css:
