@@ -27,3 +27,21 @@ libraries:
 
 ckeditor_stylesheets:
   - css/style.css
+
+libraries-override:
+  votingapi_widgets/fontawesome:
+    css:
+      theme:
+        https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css: false
+  votingapi_widgets/fivestar:
+    css:
+      theme:
+        https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css: false
+        https://cdnjs.cloudflare.com/ajax/libs/jquery-bar-rating/1.2.1/themes/bars-square.min.css: false
+        https://cdnjs.cloudflare.com/ajax/libs/jquery-bar-rating/1.2.1/themes/bars-pill.min.css: false
+        https://cdnjs.cloudflare.com/ajax/libs/jquery-bar-rating/1.2.1/themes/bars-movie.min.css: false
+        https://cdnjs.cloudflare.com/ajax/libs/jquery-bar-rating/1.2.1/themes/bars-horizontal.min.css: false
+        https://cdnjs.cloudflare.com/ajax/libs/jquery-bar-rating/1.2.1/themes/fontawesome-stars.min.css: false
+        https://cdnjs.cloudflare.com/ajax/libs/jquery-bar-rating/1.2.1/themes/fontawesome-stars-o.min.css: false
+        https://cdnjs.cloudflare.com/ajax/libs/jquery-bar-rating/1.2.1/themes/bars-reversed.min.css: false
+        https://cdnjs.cloudflare.com/ajax/libs/jquery-bar-rating/1.2.1/themes/bootstrap-stars.min.css: false
