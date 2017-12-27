@@ -88,12 +88,12 @@
   }
 
   .navbar-toggle {
-    border-color: $link-hover-color;
-    background-color: $link-color;
+    border-color: $btn-primary-border;
+    background-color: $btn-primary-bg;
     margin-top: 20px;
     &:hover,
     &:focus {
-      background-color: $link-hover-color;
+      background-color: darken($btn-primary-bg, 10%);
     }
     .icon-bar {
       background-color: $body-bg;

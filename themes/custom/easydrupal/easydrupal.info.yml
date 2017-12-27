@@ -21,7 +21,7 @@ regions:
 
 libraries:
   - 'easydrupal/global-styling'
-#  - 'easydrupal/bootstrap-scripts'
+  - 'easydrupal/bootstrap-scripts'
   - 'easydrupal/easing'
   - 'easydrupal/wow'
 
