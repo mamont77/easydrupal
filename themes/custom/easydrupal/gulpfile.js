@@ -15,7 +15,7 @@ gulp.task('sprite', function () {
     padding: 2
   }));
   spriteData.img.pipe(gulp.dest('images'));
-  spriteData.css.pipe(gulp.dest('sass'));
+  spriteData.css.pipe(gulp.dest('scss'));
 });
 
 gulp.task('imagemin', function () {
@@ -25,7 +25,7 @@ gulp.task('imagemin', function () {
 });
 
 gulp.task('sass', function () {
-  return gulp.src('./sass/*')
+  return gulp.src('./scss/*')
     .pipe(sourcemaps.init())
     .pipe(sass({
       outputStyle: 'expanded',
@@ -50,5 +50,5 @@ gulp.task('imagemin', function () {
   gulp.watch(['images/**'], ['imagemin']);
 });
 gulp.task('watch', function () {
-  gulp.watch(['images/sprite-src/*.png', './sass/**/*.scss'], ['sprite', 'sass', 'postcss']);
+  gulp.watch(['images/sprite-src/*.png', './scss/**/*.scss'], ['sprite', 'sass', 'postcss']);
 });

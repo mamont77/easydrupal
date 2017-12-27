@@ -1,6 +1,4 @@
 .page-node-type-landingpage {
-  background: #fff;
-  color: #575756;
   font-size: 16px;
   line-height: 22px;
   font-weight: 300;
@@ -33,53 +31,6 @@
   width: 100%;
   z-index: 9;
 }
-.page-node-type-landingpage .navbar-default .navbar-brand {
-  color: #575756;
-}
-.page-node-type-landingpage .navbar-default .navbar-nav > li > a {
-  color: #777;
-}
-.page-node-type-landingpage .navbar-default .navbar-nav > li > a:hover, .page-node-type-landingpage .navbar-default .navbar-nav > li > a:focus {
-  border-bottom: 8px solid #81a5bf;
-  color: #81a5bf;
-}
-.page-node-type-landingpage .navbar-default .navbar-nav > .active > a, .page-node-type-landingpage .navbar-default .navbar-nav > .active > a:hover, .page-node-type-landingpage .navbar-default .navbar-nav > .active > a:focus {
-  border-bottom: 8px solid #81a5bf;
-  color: #81a5bf;
-}
-.page-node-type-landingpage .navbar-default .navbar-nav > .open > a:focus {
-  color: #81a5bf;
-}
-@media (max-width: 768px) {
-  .page-node-type-landingpage .navbar-default .navbar-nav > li > a {
-    border-bottom: 1px solid #ddd;
-  }
-  .page-node-type-landingpage .navbar-default .navbar-nav > li > a:hover, .page-node-type-landingpage .navbar-default .navbar-nav > li > a:focus {
-    border-left: 8px solid #81a5bf;
-    border-bottom: 1px solid #ddd;
-    background: none transparent;
-  }
-}
-.page-node-type-landingpage .navbar-default .navbar-toggle {
-  border-color: #eee;
-  background-color: #81a5bf;
-}
-.page-node-type-landingpage .navbar-default .navbar-toggle:hover, .page-node-type-landingpage .navbar-default .navbar-toggle:focus {
-  background-color: rgba(74, 74, 74, 0.6);
-}
-.page-node-type-landingpage .navbar-default .navbar-toggle .icon-bar {
-  background-color: #eee;
-}
-.page-node-type-landingpage .footer p {
-  margin: 0;
-  padding: 0;
-}
-.page-node-type-landingpage .region-content a {
-  color: #293749;
-}
-.page-node-type-landingpage .region-content a:hover, .page-node-type-landingpage .region-content a:active, .page-node-type-landingpage .region-content a:focus {
-  color: #293749;
-}
 .page-node-type-landingpage .section {
   text-align: center;
   padding-top: 50px;
@@ -91,16 +42,13 @@
   margin: 0 auto 15px auto;
 }
 .page-node-type-landingpage .section h2 {
-  font-family: "Roboto Condensed", Verdana, Arial, Helvetica, sans-serif;
   font-size: 34px;
   padding: 0;
   text-transform: uppercase;
   color: #81a5bf;
 }
 .page-node-type-landingpage .section h3 {
-  font-family: "Roboto", Verdana, Arial, Helvetica, sans-serif;
   font-size: 26px;
-  font-weight: bold;
 }
 .page-node-type-landingpage .section .line {
   width: 100%;
@@ -134,7 +82,6 @@
 .page-node-type-landingpage .about {
   background: url(../images/pattern-1.png);
   background-color: #7ea2bb;
-  color: #293749;
 }
 .page-node-type-landingpage .about .container {
   margin: 0 auto 0 auto;
@@ -393,8 +340,6 @@
   font-size: 24px;
   padding: 20px 30px;
   text-transform: uppercase;
-  -webkit-transition: all 0.2s ease-out;
-  -o-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
   opacity: .7;
 }
@@ -403,15 +348,6 @@
 }
 .page-node-type-landingpage .contact-form .btn-primary:active {
   background-color: #ddd;
-}
-.page-node-type-landingpage .upper {
-  border: 1px solid #fff;
-  color: #fff;
-}
-.page-node-type-landingpage .upper:after {
-  content: "\e253";
-  color: #eee;
-  font-family: 'Glyphicons Halflings';
 }
 
 @media screen and (max-width: 1024px) {
