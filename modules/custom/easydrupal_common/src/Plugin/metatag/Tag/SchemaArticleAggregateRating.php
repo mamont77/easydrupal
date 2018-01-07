@@ -73,15 +73,9 @@ class SchemaArticleAggregateRating extends SchemaNameBase {
       $node = \Drupal::routeMatch()->getParameter('node');
 
       // Get rating from votingapi.
-      $results = [];
-      $query = \Drupal::database()->select('votingapi_result', 'v');
-      $query->fields('v', ['type', 'function', 'value']);
-      $query->condition('entity_type', 'node');
-      $query->condition('entity_id', $node->id());
-      $result = $query->execute();
-      while ($row = $result->fetchAssoc()) {
-        $results[$row['type']][$row['function']] = $row['value'];
-      }
+      // Get rating from votingapi.
+      $voting_service = \Drupal::service('plugin.manager.votingapi.resultfunction');
+      $results = $voting_service->getResults('node', $node->id());
 
       if (!empty($results)) {
         $element['#attributes']['content'] = [
