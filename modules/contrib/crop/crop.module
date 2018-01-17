@@ -12,6 +12,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\StreamWrapper\PublicStream;
 use Drupal\crop\Entity\Crop;
 use Drupal\image\Entity\ImageStyle;
+use Drupal\media\MediaSourceInterface;
 use Drupal\media\MediaTypeInterface;
 use Drupal\file\FileInterface;
 
@@ -39,16 +40,19 @@ function template_preprocess_crop_crop_summary(&$variables) {
 }
 
 /**
- * Implements hook_form_BASE_ID_alter().
+ * Implements hook_form_FORM_ID_alter().
  *
- * Adds crop configuraiton fields to media bundle form.
+ * Adds crop configuration fields to media form.
  */
-function crop_form_media_type_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-  /** @var \Drupal\media\MediaTypeInterface $bundle */
-  $bundle = $form_state->getStorage()['type'];
+function crop_form_media_type_edit_form_alter(array &$form, FormStateInterface $form_state, $form_id) {
+  /** @var \Drupal\media\Entity\MediaType $entity_type */
+  $entity_type = $form_state->getFormObject()->getEntity();
   $options = [];
   $allowed_field_types = ['file', 'image'];
-  foreach (\Drupal::service('entity_field.manager')->getFieldDefinitions('media', $bundle->id()) as $field_name => $field) {
+
+  /** @var \Drupal\Core\Field\FieldDefinitionInterface[] $fields */
+  $fields = \Drupal::service('entity_field.manager')->getFieldDefinitions('media', $entity_type->id());
+  foreach ($fields as $field_name => $field) {
     if (in_array($field->getType(), $allowed_field_types) && !$field->getFieldStorageDefinition()->isBaseField()) {
       $options[$field_name] = $field->getLabel();
     }
@@ -58,6 +62,7 @@ function crop_form_media_type_form_alter(&$form, FormStateInterface $form_state,
   $form['crop'] = [
     '#type' => 'fieldset',
     '#title' => t('Crop configuration'),
+    '#group' => 'source_dependent',
   ];
 
   if (empty($options)) {
@@ -76,21 +81,22 @@ function crop_form_media_type_form_alter(&$form, FormStateInterface $form_state,
   $form['crop']['image_field'] = [
     '#type' => 'select',
     '#title' => t('Image field'),
-    '#default_value' => $bundle->getThirdPartySetting('crop', 'image_field'),
+    '#default_value' => $entity_type->getThirdPartySetting('crop', 'image_field'),
     '#options' => $options,
+    '#empty_option' => t('- Skip field -'),
+    '#empty_value' => MediaSourceInterface::METADATA_FIELD_EMPTY,
     '#description' => t('Select field that stores image which needs to be cropped.'),
   ];
-
 }
 
 /**
- * Entity builder for Media bundle.
+ * Entity builder for Media type.
  *
- * Adds third party settings to Media bundle config entity.
+ * Adds third party settings to Media type config entity.
  *
- * @see crop_form_media_type_form_alter()
+ * @see crop_form_media_type_edit_form_alter()
  */
-function crop_media_type_form_builder($entity_type, MediaTypeInterface $bundle, &$form, FormStateInterface $form_state) {
+function crop_media_type_form_builder($entity_type, MediaTypeInterface $bundle, array &$form, FormStateInterface $form_state) {
   $bundle->setThirdPartySetting('crop', 'image_field', $form_state->getValue('image_field'));
 }
 
@@ -135,19 +141,7 @@ function crop_file_url_alter(&$uri) {
       return;
     }
 
-    $crop_type = NULL;
-    // Find whether matched image style uses "crop_type" effect.
-    /* @var  \Drupal\image\ImageEffectInterface $effect */
-    foreach ($image_style->getEffects() as $uuid => $effect) {
-      $data_effect = $image_style->getEffect($uuid)->getConfiguration()['data'];
-      if (isset($data_effect['crop_type'])) {
-        $crop_type = $data_effect['crop_type'];
-        break;
-      }
-    }
-
-    // In case the image style uses "crop_type" effect, load the crop entity.
-    if ($crop_type && $crop = Crop::findCrop($file_uri, $crop_type)) {
+    if ($crop = Crop::getCropFromImageStyle($file_uri, $image_style)) {
       // Found a crop for this image, append a hash of it to the URL,
       // so that browsers reload the image and CDNs and proxies can be bypassed.
       $shortened_hash = substr(md5(implode($crop->position()) . implode($crop->anchor())), 0, 8);
