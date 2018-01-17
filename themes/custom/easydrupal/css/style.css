@@ -5264,18 +5264,18 @@ table .checkbox.form-no-label, table .radio.form-no-label {
 /**
  * Icon styles.
  */
-a.icon-before .glyphicon {
+a.icon-before .glyphicon, a .glyphicon.icon-before {
   margin-right: .25em;
 }
-a.icon-after .glyphicon {
+a.icon-after .glyphicon, a .glyphicon.icon-after {
   margin-left: .25em;
 }
 
-.btn.icon-before .glyphicon {
+.btn.icon-before .glyphicon, .btn .glyphicon.icon-before {
   margin-left: -.25em;
   margin-right: .25em;
 }
-.btn.icon-after .glyphicon {
+.btn.icon-after .glyphicon, .btn .glyphicon.icon-after {
   margin-left: .25em;
   margin-right: -.25em;
 }
@@ -5343,6 +5343,10 @@ body.navbar-is-fixed-bottom {
 /**
  * Node styling.
  */
+.is-unpublished {
+  background-color: #fff4f4;
+}
+
 .node-preview-container {
   margin-top: -15px;
 }
