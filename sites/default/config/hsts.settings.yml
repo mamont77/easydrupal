@@ -1,0 +1,5 @@
+max_age: 63072000
+enabled: true
+subdomains: false
+_core:
+  default_config_hash: EAbMxIgI1sZqCIFBD_Yizpts5jPQVawzY4UYY8vIrbw

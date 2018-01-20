@@ -1,11 +1,7 @@
 favicon:
   mimetype: image/vnd.microsoft.icon
   path: ''
-  url: 'http://dev-easydrupal.pantheonsite.io/themes/easydrupal/favicon.ico'
-  use_default: true
-logo:
-  path: ''
-  url: ''
+  url: 'https://makedrupaleasy.com/themes/custom/easydrupal/favicon.ico'
   use_default: true
 cdn_jsdelivr_version: 3.3.7
 breadcrumb_title: 0
@@ -17,11 +13,16 @@ table: ''
 breadcrumb_home: 1
 cdn_provider_import_data: ''
 button_size: btn-lg
+modal_enabled: 0
+popover_enabled: 0
+tooltip_enabled: 0
 features:
   comment_user_picture: true
   comment_user_verification: true
   favicon: true
   node_user_picture: true
-modal_enabled: 0
-popover_enabled: 0
-tooltip_enabled: 0
+logo:
+  path: ''
+  url: ''
+  use_default: true
+cdn_provider: ''

@@ -9,7 +9,6 @@ tags:
   image_src: '[node:field_image:max_750x750]'
   title: '[Tips & Tricks] [node:title]'
   description: '[node:summary]'
-  abstract: '[node:field_conclusions]'
   robots: 'index, follow'
   content_language: en
   canonical_url: '[node:url]'

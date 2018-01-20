@@ -7,6 +7,7 @@ path:
   convert:
     absolute_to_protocol_relative: true
     force_https: false
+    absolute: false
 cache_level: 2
 cron_frequency: 86400
 enabled: true
@@ -17,6 +18,8 @@ _core:
   default_config_hash: vRsxLXJ3AVIy7bfhzF1RBK6hXSeOMLg726F-KtB1erw
 js:
   fix_type: true
-  preserve_external: false
+  preserve_external: null
   brotli: true
 immutable: true
+symlinks: false
+symlinksifownermatch: false
