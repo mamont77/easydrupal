@@ -73,7 +73,6 @@ class SchemaArticleCustomAggregateRating extends SchemaNameBase {
       $node = \Drupal::routeMatch()->getParameter('node');
 
       // Get rating from votingapi.
-      // Get rating from votingapi.
       $voting_service = \Drupal::service('plugin.manager.votingapi.resultfunction');
       $results = $voting_service->getResults('node', $node->id());
 
