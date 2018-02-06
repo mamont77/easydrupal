@@ -12,8 +12,8 @@ use Drupal\schema_metatag\Plugin\metatag\Tag\SchemaNameBase;
  * - 'group' should match the id of the group that defines the Schema.org type.
  *
  * @MetatagTag(
- *   id = "schema_article_aggregate_rating",
- *   label = @Translation("AggregateRating"),
+ *   id = "schema_article_custom_aggregate_rating",
+ *   label = @Translation("Custom AggregateRating"),
  *   description = @Translation("Attach to JSON the aggregate rating of the article provided by the Voting API module."),
  *   name = "aggregateRating",
  *   group = "schema_article",
@@ -23,7 +23,7 @@ use Drupal\schema_metatag\Plugin\metatag\Tag\SchemaNameBase;
  *   multiple = FALSE
  * )
  */
-class SchemaArticleAggregateRating extends SchemaNameBase {
+class SchemaArticleCustomAggregateRating extends SchemaNameBase {
 
   /**
    * Basic info about votingapi.
