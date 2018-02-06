@@ -82,6 +82,8 @@ class ImagemagickIdentify extends FileMetadataPluginBase {
    *   'format' - ImageMagick's image format identifier.
    *   'width' - Image width.
    *   'height' - Image height.
+   *   'colorspace' - Image colorspace.
+   *   'profiles' - Image profiles.
    *   'exif_orientation' - Image EXIF orientation (only supported formats).
    *   'source_local_path' - The local file path from where the file was
    *     parsed.
@@ -92,6 +94,8 @@ class ImagemagickIdentify extends FileMetadataPluginBase {
       'format',
       'width',
       'height',
+      'colorspace',
+      'profiles',
       'exif_orientation',
       'source_local_path',
       'frames_count',
@@ -212,11 +216,17 @@ class ImagemagickIdentify extends FileMetadataPluginBase {
     // Prepare the -format argument according to the graphics package in use.
     switch ($this->execManager->getPackage()) {
       case 'imagemagick':
-        $arguments->addArgument('-format ' . $this->execManager->escapeShellArg("format:%[magick]|width:%[width]|height:%[height]|exif_orientation:%[EXIF:Orientation]\\n"));
+        $arguments->add(
+          '-format ' . $arguments->escape("format:%[magick]|width:%[width]|height:%[height]|colorspace:%[colorspace]|profiles:%[profiles]|exif_orientation:%[EXIF:Orientation]\\n"),
+          ImagemagickExecArguments::PRE_SOURCE
+        );
         break;
 
       case 'graphicsmagick':
-        $arguments->addArgument('-format ' . $this->execManager->escapeShellArg("format:%m|width:%w|height:%h|exif_orientation:%[EXIF:Orientation]\\n"));
+        $arguments->add(
+          '-format ' . $arguments->escape("format:%m|width:%w|height:%h|exif_orientation:%[EXIF:Orientation]\\n"),
+          ImagemagickExecArguments::PRE_SOURCE
+        );
         break;
 
     }
@@ -233,6 +243,9 @@ class ImagemagickIdentify extends FileMetadataPluginBase {
     // Process results.
     $data = [];
     if ($ret) {
+      // Remove any CR character (GraphicsMagick on Windows produces such).
+      $output = str_replace("\r", '', $output);
+
       // Builds the frames info.
       $frames = [];
       $frames_tmp = explode("\n", $output);
@@ -244,7 +257,13 @@ class ImagemagickIdentify extends FileMetadataPluginBase {
         $info = explode('|', $frame);
         foreach ($info as $item) {
           list($key, $value) = explode(':', $item);
-          $frames[$i][trim($key)] = trim($value);
+          if (trim($key) === 'profiles') {
+            $profiles_tmp = empty($value) ? [] : explode(',', $value);
+            $frames[$i][trim($key)] = $profiles_tmp;
+          }
+          else {
+            $frames[$i][trim($key)] = trim($value);
+          }
         }
       }
       $data['frames'] = $frames;

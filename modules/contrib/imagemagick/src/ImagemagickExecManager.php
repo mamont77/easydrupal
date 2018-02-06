@@ -4,6 +4,7 @@ namespace Drupal\imagemagick;
 
 use Drupal\Component\Utility\Timer;
 use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Psr\Log\LoggerInterface;
@@ -59,6 +60,20 @@ class ImagemagickExecManager implements ImagemagickExecManagerInterface {
   protected $configFactory;
 
   /**
+   * The module handler service.
+   *
+   * @var \Drupal\Core\Extension\ModuleHandlerInterface
+   */
+  protected $moduleHandler;
+
+  /**
+   * The format mapper service.
+   *
+   * @var \Drupal\imagemagick\ImagemagickFormatMapperInterface
+   */
+  protected $formatMapper;
+
+  /**
    * Constructs an ImagemagickExecManager object.
    *
    * @param \Psr\Log\LoggerInterface $logger
@@ -69,13 +84,43 @@ class ImagemagickExecManager implements ImagemagickExecManagerInterface {
    *   The app root.
    * @param \Drupal\Core\Session\AccountProxyInterface $current_user
    *   The current user.
+   * @param \Drupal\imagemagick\ImagemagickFormatMapperInterface $format_mapper
+   *   The format mapper service.
+   * @param \Drupal\Core\Extension\ModuleHandlerInterface $module_handler
+   *   The module handler service.
    */
-  public function __construct(LoggerInterface $logger, ConfigFactoryInterface $config_factory, $app_root, AccountProxyInterface $current_user) {
+  public function __construct(LoggerInterface $logger, ConfigFactoryInterface $config_factory, $app_root, AccountProxyInterface $current_user, ImagemagickFormatMapperInterface $format_mapper, ModuleHandlerInterface $module_handler) {
     $this->logger = $logger;
     $this->configFactory = $config_factory;
     $this->appRoot = $app_root;
     $this->currentUser = $current_user;
+    $this->formatMapper = $format_mapper;
+    $this->moduleHandler = $module_handler;
     $this->isWindows = substr(PHP_OS, 0, 3) === 'WIN';
+  }
+
+  /**
+   * Returns the format mapper.
+   *
+   * @return \Drupal\imagemagick\ImagemagickFormatMapperInterface
+   *   The format mapper service.
+   *
+   * @todo in 8.x-3.0, add this method to the interface.
+   */
+  public function getFormatMapper() {
+    return $this->formatMapper;
+  }
+
+  /**
+   * Returns the module handler.
+   *
+   * @return \Drupal\Core\Extension\ModuleHandlerInterface
+   *   The module handler service.
+   *
+   * @todo in 8.x-3.0, add this method to the interface.
+   */
+  public function getModuleHandler() {
+    return $this->moduleHandler;
   }
 
   /**
@@ -88,7 +133,7 @@ class ImagemagickExecManager implements ImagemagickExecManagerInterface {
    *
    * @return $this
    *
-   * @todo in next major, add this method to the interface.
+   * @todo in 8.x-3.0, add this method to the interface.
    */
   public function setTimeout($timeout) {
     $this->timeout = $timeout;
@@ -211,7 +256,13 @@ class ImagemagickExecManager implements ImagemagickExecManagerInterface {
             // ImageMagick syntax:
             // identify [arguments] source
             // @codingStandardsIgnoreEnd
-            $cmdline = $arguments->getStringForBinary() . ' ' . $source_path;
+            $cmdline = $arguments->toString(ImagemagickExecArguments::PRE_SOURCE);
+            // @todo BC layer. In 8.x-3.0, remove adding post source path
+            // arguments.
+            if (($post = $arguments->toString(ImagemagickExecArguments::POST_SOURCE)) !== '') {
+              $cmdline .= ' ' . $post;
+            }
+            $cmdline .= ' ' . $source_path;
             break;
 
           case 'graphicsmagick':
@@ -219,7 +270,13 @@ class ImagemagickExecManager implements ImagemagickExecManagerInterface {
             // GraphicsMagick syntax:
             // gm identify [arguments] source
             // @codingStandardsIgnoreEnd
-            $cmdline = 'identify ' . $arguments->getStringForBinary() . ' ' . $source_path;
+            $cmdline = 'identify ' . $arguments->toString(ImagemagickExecArguments::PRE_SOURCE);
+            // @todo BC layer. In 8.x-3.0, remove adding post source path
+            // arguments.
+            if (($post = $arguments->toString(ImagemagickExecArguments::POST_SOURCE)) !== '') {
+              $cmdline .= ' ' . $post;
+            }
+            $cmdline .= ' ' . $source_path;
             break;
 
         }
@@ -233,7 +290,11 @@ class ImagemagickExecManager implements ImagemagickExecManagerInterface {
             // convert input [arguments] output
             // @see http://www.imagemagick.org/Usage/basics/#cmdline
             // @codingStandardsIgnoreEnd
-            $cmdline = $source_path . ' ' . $arguments->getStringForBinary() . ' ' . $destination_path;
+            $cmdline = '';
+            if (($pre = $arguments->toString(ImagemagickExecArguments::PRE_SOURCE)) !== '') {
+              $cmdline .= $pre . ' ';
+            }
+            $cmdline .= $source_path . ' ' . $arguments->toString(ImagemagickExecArguments::POST_SOURCE) . ' ' . $destination_path;
             break;
 
           case 'graphicsmagick':
@@ -242,7 +303,11 @@ class ImagemagickExecManager implements ImagemagickExecManagerInterface {
             // gm convert [arguments] input output
             // @see http://www.graphicsmagick.org/GraphicsMagick.html
             // @codingStandardsIgnoreEnd
-            $cmdline = 'convert ' . $arguments->getStringForBinary() . ' ' . $source_path . ' ' . $destination_path;
+            $cmdline = 'convert ';
+            if (($pre = $arguments->toString(ImagemagickExecArguments::PRE_SOURCE)) !== '') {
+              $cmdline .= $pre . ' ';
+            }
+            $cmdline .= $arguments->toString(ImagemagickExecArguments::POST_SOURCE) . ' ' . $source_path . ' ' . $destination_path;
             break;
 
         }

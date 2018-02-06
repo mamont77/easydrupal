@@ -43,3 +43,20 @@ function imagemagick_update_8201() {
     'file_mdm',
   ]);
 }
+
+/**
+ * Adds the 'prepend_pre_source' config setting.
+ */
+function imagemagick_update_8202() {
+  $config_factory = \Drupal::configFactory();
+  $setting = $config_factory->getEditable('imagemagick.settings')
+    ->set('prepend_pre_source', FALSE)
+    ->save(TRUE);
+}
+
+/**
+ * Clear caches to discover service changes.
+ */
+function imagemagick_update_8203() {
+  // Empty function.
+}

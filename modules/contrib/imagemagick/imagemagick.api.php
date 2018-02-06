@@ -19,7 +19,7 @@
  * file system to allow processing.
  *
  * @param \Drupal\imagemagick\ImagemagickExecArguments $arguments
- *   The ImageMagick execution arguments object.
+ *   The ImageMagick/GraphicsMagick execution arguments object.
  *
  * @see \Drupal\imagemagick\Plugin\ImageToolkit\ImagemagickToolkit::parseFile()
  * @see \Drupal\imagemagick\ImagemagickExecArguments::getSource()
@@ -37,11 +37,11 @@ function hook_imagemagick_pre_parse_file_alter(\Drupal\imagemagick\ImagemagickEx
  * systems.
  *
  * @param \Drupal\imagemagick\ImagemagickExecArguments $arguments
- *   The ImageMagick execution arguments object.
+ *   The ImageMagick/GraphicsMagick execution arguments object.
  *
+ * @see \Drupal\imagemagick\Plugin\ImageToolkit\ImagemagickToolkit::save()
  * @see \Drupal\imagemagick\ImagemagickExecArguments::getDestination()
  * @see \Drupal\imagemagick\ImagemagickExecArguments::getDestinationLocalPath()
- * @see \Drupal\imagemagick\Plugin\ImageToolkit\ImagemagickToolkit::save()
  */
 function hook_imagemagick_post_save_alter(\Drupal\imagemagick\ImagemagickExecArguments $arguments) {
 }
@@ -57,36 +57,29 @@ function hook_imagemagick_post_save_alter(\Drupal\imagemagick\ImagemagickExecArg
  *
  * In addition to arguments that are passed to the binaries command line for
  * execution, it is possible to push arguments to be used only by the toolkit
- * or the hooks. You can add/get/find such arguments by prepending
- * ImagemagickExecArguments::INTERNAL_ARGUMENT_IDENTIFIER to the argument.
+ * or the hooks. You can add/get/find such arguments by specifying
+ * ImagemagickExecArguments::INTERNAL as the argument $mode in the methods.
  *
  * ImageMagick automatically converts the target image to the format denoted by
  * the file extension. However, since changing the file extension is not always
  * an option, you can specify an alternative image format via
- * $toolkit->setDestinationFormat('format'), where 'format' is a string
- * denoting an Imagemagick supported format.
+ * $arguments->setDestinationFormat('format'), where 'format' is a string
+ * denoting an Imagemagick supported format, or via
+ * $arguments->setDestinationFormatFromExtension('extension'), where
+ * 'extension' is a string denoting an image file extension.
+ *
  * When the destination format is set, it is passed to ImageMagick's convert
  * binary with the syntax "[format]:[destination]".
  *
  * @param \Drupal\imagemagick\ImagemagickExecArguments $arguments
- *   The ImageMagick execution arguments object.
+ *   The ImageMagick/GraphicsMagick execution arguments object.
  * @param string $command
- *   The ImageMagick binary being called.
+ *   The ImageMagick/GraphicsMagick command being called.
  *
  * @see http://www.imagemagick.org/script/command-line-processing.php#output
  * @see http://www.imagemagick.org/Usage/files/#save
  *
- * @see \Drupal\imagemagick\ImagemagickExecArguments::getArguments()
- * @see \Drupal\imagemagick\ImagemagickExecArguments::prependArgument()
- * @see \Drupal\imagemagick\ImagemagickExecArguments::addArgument()
- * @see \Drupal\imagemagick\ImagemagickExecArguments::findArgument()
- * @see \Drupal\imagemagick\ImagemagickExecArguments::resetArguments()
- * @see \Drupal\imagemagick\ImagemagickExecArguments::getSource()
- * @see \Drupal\imagemagick\ImagemagickExecArguments::setSourceLocalPath()
- * @see \Drupal\imagemagick\ImagemagickExecArguments::getSourceLocalPath()
- * @see \Drupal\imagemagick\ImagemagickExecArguments::getDestination()
- * @see \Drupal\imagemagick\ImagemagickExecArguments::setDestinationLocalPath()
- * @see \Drupal\imagemagick\ImagemagickExecArguments::getDestinationLocalPath()
+ * @see \Drupal\imagemagick\ImagemagickExecArguments
  * @see \Drupal\imagemagick\Plugin\ImageToolkit\ImagemagickToolkit::convert()
  * @see \Drupal\imagemagick\Plugin\FileMetadata\ImagemagickIdentify::identify()
  */

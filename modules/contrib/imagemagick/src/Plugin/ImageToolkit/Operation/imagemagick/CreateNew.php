@@ -75,24 +75,27 @@ class CreateNew extends ImagemagickImageToolkitOperationBase {
    */
   protected function execute(array $arguments) {
     $this->getToolkit()
-      ->resetArguments()
-      ->setSourceLocalPath('')
-      ->setSourceFormatFromExtension($arguments['extension'])
       ->setWidth($arguments['width'])
       ->setHeight($arguments['height'])
       ->setExifOrientation(NULL)
+      ->setColorspace($this->getToolkit()->getExecManager()->getPackage() === 'imagemagick' ? 'sRGB' : NULL)
+      ->setProfiles([])
       ->setFrames(1);
+    $this->getToolkit()->arguments()
+      ->setSourceFormatFromExtension($arguments['extension'])
+      ->setSourceLocalPath('')
+      ->reset();
     $arg = '-size ' . $arguments['width'] . 'x' . $arguments['height'];
 
     // Transparent color syntax for GIF files differs by package.
     if ($arguments['extension'] === 'gif') {
-      switch ($this->getToolkit()->getPackage()) {
+      switch ($this->getToolkit()->getExecManager()->getPackage()) {
         case 'imagemagick':
-          $arg .= ' xc:transparent -transparent-color ' . $this->getToolkit()->escapeShellArg($arguments['transparent_color']);
+          $arg .= ' xc:transparent -transparent-color ' . $this->escapeArgument($arguments['transparent_color']);
           break;
 
         case 'graphicsmagick':
-          $arg .= ' xc:' . $this->getToolkit()->escapeShellArg($arguments['transparent_color']) . ' -transparent ' . $this->getToolkit()->escapeShellArg($arguments['transparent_color']);
+          $arg .= ' xc:' . $this->escapeArgument($arguments['transparent_color']) . ' -transparent ' . $this->escapeArgument($arguments['transparent_color']);
           break;
 
       }
@@ -101,7 +104,7 @@ class CreateNew extends ImagemagickImageToolkitOperationBase {
       $arg .= ' xc:transparent';
     }
 
-    $this->getToolkit()->addArgument($arg);
+    $this->addArgument($arg);
     return TRUE;
   }
 

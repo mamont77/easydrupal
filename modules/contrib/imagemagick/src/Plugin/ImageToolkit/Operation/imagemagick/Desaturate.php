@@ -27,7 +27,7 @@ class Desaturate extends ImagemagickImageToolkitOperationBase {
    * {@inheritdoc}
    */
   protected function execute(array $arguments) {
-    $this->getToolkit()->addArgument('-colorspace GRAY');
+    $this->addArgument('-colorspace GRAY');
     return TRUE;
   }
 

@@ -2,6 +2,7 @@ quality: 75
 binaries: 'imagemagick'
 path_to_binaries: ''
 prepend: ''
+prepend_pre_source: FALSE
 log_warnings: TRUE
 debug: FALSE
 use_identify: TRUE

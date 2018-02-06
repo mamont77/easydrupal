@@ -33,6 +33,11 @@ class ImagemagickToolkit extends ImageToolkitBase {
 
   /**
    * EXIF orientation not fetched.
+   *
+   * @deprecated in 8.x-2.3, will be removed in 8.x-3.0. Use
+   *   parseFileViaIdentify() to parse image files.
+   *
+   * @see https://www.drupal.org/project/imagemagick/issues/2941093
    */
   const EXIF_ORIENTATION_NOT_FETCHED = -99;
 
@@ -98,6 +103,20 @@ class ImagemagickToolkit extends ImageToolkitBase {
    * @var int
    */
   protected $exifOrientation;
+
+  /**
+   * The source image colorspace.
+   *
+   * @var string
+   */
+  protected $colorspace;
+
+  /**
+   * The source image profiles.
+   *
+   * @var string[]
+   */
+  protected $profiles = [];
 
   /**
    * Constructs an ImagemagickToolkit object.
@@ -187,13 +206,13 @@ class ImagemagickToolkit extends ImageToolkitBase {
       '#group' => 'imagemagick_settings',
     ];
     $options = [
-      'imagemagick' => $this->getPackageLabel('imagemagick'),
-      'graphicsmagick' => $this->getPackageLabel('graphicsmagick'),
+      'imagemagick' => $this->getExecManager()->getPackageLabel('imagemagick'),
+      'graphicsmagick' => $this->getExecManager()->getPackageLabel('graphicsmagick'),
     ];
     $form['suite']['binaries'] = [
       '#type' => 'radios',
       '#title' => $this->t('Suite'),
-      '#default_value' => $this->getPackage(),
+      '#default_value' => $this->getExecManager()->getPackage(),
       '#options' => $options,
       '#required' => TRUE,
       '#description' => $this->t("Select the graphics package to use."),
@@ -207,7 +226,7 @@ class ImagemagickToolkit extends ImageToolkitBase {
       '#description' => $this->t('If needed, the path to the package executables (<kbd>convert</kbd>, <kbd>identify</kbd>, <kbd>gm</kbd>, etc.), <b>including</b> the trailing slash/backslash. For example: <kbd>/usr/bin/</kbd> or <kbd>C:\Program Files\ImageMagick-6.3.4-Q16\</kbd>.'),
     ];
     // Version information.
-    $status = $this->execManager->checkPath($config->get('path_to_binaries'));
+    $status = $this->getExecManager()->checkPath($config->get('path_to_binaries'));
     if (empty($status['errors'])) {
       $version_info = explode("\n", preg_replace('/\r/', '', Html::escape($status['output'])));
     }
@@ -235,7 +254,7 @@ class ImagemagickToolkit extends ImageToolkitBase {
       '#description' => $this->t("@suite formats: %formats<br />Image file extensions: %extensions", [
         '%formats' => implode(', ', $this->formatMapper->getEnabledFormats()),
         '%extensions' => Unicode::strtolower(implode(', ', static::getSupportedExtensions())),
-        '@suite' => $this->getPackageLabel(),
+        '@suite' => $this->getExecManager()->getPackageLabel(),
       ]),
     ];
     // Image formats map.
@@ -253,17 +272,17 @@ class ImagemagickToolkit extends ImageToolkitBase {
     ];
     // Image formats supported by the package.
     if (empty($status['errors'])) {
-      $this->addArgument('-list format');
+      $this->arguments()->add('-list format', ImagemagickExecArguments::PRE_SOURCE);
       $output = NULL;
-      $this->execManager->execute('convert', $this->arguments, $output);
-      $this->resetArguments();
+      $this->getExecManager()->execute('convert', $this->arguments(), $output);
+      $this->arguments()->reset();
       $formats_info = implode('<br />', explode("\n", preg_replace('/\r/', '', Html::escape($output))));
       $form['formats']['list'] = [
         '#type' => 'details',
         '#collapsible' => TRUE,
         '#open' => FALSE,
         '#title' => $this->t('Format list'),
-        '#description' => $this->t("Supported image formats returned by executing <kbd>'convert -list format'</kbd>. <b>Note:</b> these are the formats supported by the installed @suite executable, <b>not</b> by the toolkit.<br /><br />", ['@suite' => $this->getPackageLabel()]),
+        '#description' => $this->t("Supported image formats returned by executing <kbd>'convert -list format'</kbd>. <b>Note:</b> these are the formats supported by the installed @suite executable, <b>not</b> by the toolkit.<br /><br />", ['@suite' => $this->getExecManager()->getPackageLabel()]),
       ];
       $form['formats']['list']['list'] = [
         '#markup' => "<pre>" . $formats_info . "</pre>",
@@ -282,7 +301,7 @@ class ImagemagickToolkit extends ImageToolkitBase {
       '#type' => 'checkbox',
       '#title' => $this->t('Use "identify"'),
       '#default_value' => $config->get('use_identify'),
-      '#description' => $this->t('Use the <kbd>identify</kbd> command to parse image files to determine image format and dimensions. If not selected, the PHP <kbd>getimagesize</kbd> function will be used, BUT this will limit the image formats supported by the toolkit.'),
+      '#description' => $this->t('<strong>This setting is deprecated and will be removed in the next major release of the Imagemagick module. Leave it enabled to ensure smooth transition.</strong>') . ' ' . $this->t('Use the <kbd>identify</kbd> command to parse image files to determine image format and dimensions. If not selected, the PHP <kbd>getimagesize</kbd> function will be used, BUT this will limit the image formats supported by the toolkit.'),
     ];
     // Cache metadata.
     $configure_link = Link::fromTextAndUrl(
@@ -298,12 +317,33 @@ class ImagemagickToolkit extends ImageToolkitBase {
     ];
     // Prepend arguments.
     $form['exec']['prepend'] = [
-      '#type' => 'textfield',
+      '#type' => 'details',
+      '#collapsible' => FALSE,
+      '#open' => TRUE,
       '#title' => $this->t('Prepend arguments'),
+      '#description' => $this->t("Use this to add e.g. <kbd><a href=':limit-url'>-limit</a></kbd> or <kbd><a href=':debug-url'>-debug</a></kbd> arguments in front of the others when executing the <kbd>identify</kbd> and <kbd>convert</kbd> commands. Select 'Before source' to execute the arguments before loading the source image.", [
+        ':limit-url' => 'https://www.imagemagick.org/script/command-line-options.php#limit',
+        ':debug-url' => 'https://www.imagemagick.org/script/command-line-options.php#debug',
+      ]),
+    ];
+    $form['exec']['prepend']['container'] = [
+      '#type' => 'container',
+      '#attributes' => [
+        'class' => ['container-inline'],
+      ],
+    ];
+    $form['exec']['prepend']['container']['prepend'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Arguments'),
       '#default_value' => $config->get('prepend'),
       '#required' => FALSE,
-      '#description' => $this->t('Use this to add e.g. <kbd>-limit</kbd> or <kbd>-debug</kbd> arguments in front of the others when executing the <kbd>identify</kbd> and <kbd>convert</kbd> commands.'),
     ];
+    $form['exec']['prepend']['container']['prepend_pre_source'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Before source'),
+      '#default_value' => $config->get('prepend_pre_source'),
+    ];
+
     // Locale.
     $form['exec']['locale'] = [
       '#type' => 'textfield',
@@ -313,7 +353,7 @@ class ImagemagickToolkit extends ImageToolkitBase {
       '#description' => $this->t("The locale to be used to prepare the command passed to executables. The default, <kbd>'en_US.UTF-8'</kbd>, should work in most cases. If that is not available on the server, enter another locale. 'Installed Locales' below provides a list of locales installed on the server."),
     ];
     // Installed locales.
-    $locales = $this->execManager->getInstalledLocales();
+    $locales = $this->getExecManager()->getInstalledLocales();
     $locales_info = implode('<br />', explode("\n", preg_replace('/\r/', '', Html::escape($locales))));
     $form['exec']['installed_locales'] = [
       '#type' => 'details',
@@ -391,6 +431,16 @@ class ImagemagickToolkit extends ImageToolkitBase {
   }
 
   /**
+   * Returns the ImageMagick execution manager service.
+   *
+   * @return \Drupal\imagemagick\ImagemagickExecManagerInterface
+   *   The ImageMagick execution manager service.
+   */
+  public function getExecManager() {
+    return $this->execManager;
+  }
+
+  /**
    * Gets the binaries package in use.
    *
    * @param string $package
@@ -399,9 +449,15 @@ class ImagemagickToolkit extends ImageToolkitBase {
    * @return string
    *   The default package ('imagemagick'|'graphicsmagick'), or the $package
    *   argument.
+   *
+   * @deprecated in 8.x-2.3, will be removed in 8.x-3.0. Use
+   *   ImagemagickExecManagerInterface::getPackage() instead.
+   *
+   * @see https://www.drupal.org/project/imagemagick/issues/2938375
    */
   public function getPackage($package = NULL) {
-    return $this->execManager->getPackage($package);
+    @trigger_error('getPackage() is deprecated in 8.x-2.3, will be removed in 8.x-3.0. Use ImagemagickExecManagerInterface::getPackage() instead. See https://www.drupal.org/project/imagemagick/issues/2938375.', E_USER_DEPRECATED);
+    return $this->getExecManager()->getPackage($package);
   }
 
   /**
@@ -413,9 +469,15 @@ class ImagemagickToolkit extends ImageToolkitBase {
    * @return string
    *   A translated label of the binaries package in use, or the $package
    *   argument.
+   *
+   * @deprecated in 8.x-2.3, will be removed in 8.x-3.0. Use
+   *   ImagemagickExecManagerInterface::getPackageLabel() instead.
+   *
+   * @see https://www.drupal.org/project/imagemagick/issues/2938375
    */
   public function getPackageLabel($package = NULL) {
-    return $this->execManager->getPackageLabel($package);
+    @trigger_error('getPackageLabel() is deprecated in 8.x-2.3, will be removed in 8.x-3.0. Use ImagemagickExecManagerInterface::getPackageLabel() instead. See https://www.drupal.org/project/imagemagick/issues/2938375.', E_USER_DEPRECATED);
+    return $this->getExecManager()->getPackageLabel($package);
   }
 
   /**
@@ -431,9 +493,15 @@ class ImagemagickToolkit extends ImageToolkitBase {
    *   - output: The shell output of 'convert -version', if any.
    *   - errors: A list of error messages indicating if the executable could
    *     not be found or executed.
+   *
+   * @deprecated in 8.x-2.3, will be removed in 8.x-3.0. Use
+   *   ImagemagickExecManagerInterface::checkPath() instead.
+   *
+   * @see https://www.drupal.org/project/imagemagick/issues/2938375
    */
   public function checkPath($path, $package = NULL) {
-    return $this->execManager->checkPath($path, $package);
+    @trigger_error('checkPath() is deprecated in 8.x-2.3, will be removed in 8.x-3.0. Use ImagemagickExecManagerInterface::checkPath() instead. See https://www.drupal.org/project/imagemagick/issues/2938375.', E_USER_DEPRECATED);
+    return $this->getExecManager()->checkPath($path, $package);
   }
 
   /**
@@ -459,7 +527,7 @@ class ImagemagickToolkit extends ImageToolkitBase {
     // it will prevent the entire image toolkit selection form from being
     // submitted.
     if ($form_state->getValue(['image_toolkit']) === 'imagemagick') {
-      $status = $this->execManager->checkPath($form_state->getValue([
+      $status = $this->getExecManager()->checkPath($form_state->getValue([
         'imagemagick', 'suite', 'path_to_binaries',
       ]), $form_state->getValue(['imagemagick', 'suite', 'binaries']));
       if ($status['errors']) {
@@ -490,7 +558,10 @@ class ImagemagickToolkit extends ImageToolkitBase {
         'imagemagick', 'formats', 'mapping', 'image_formats',
       ])))
       ->set('prepend', (string) $form_state->getValue([
-        'imagemagick', 'exec', 'prepend',
+        'imagemagick', 'exec', 'prepend', 'container', 'prepend',
+      ]))
+      ->set('prepend_pre_source', (bool) $form_state->getValue([
+        'imagemagick', 'exec', 'prepend', 'container', 'prepend_pre_source',
       ]))
       ->set('locale', (string) $form_state->getValue([
         'imagemagick', 'exec', 'locale',
@@ -525,7 +596,7 @@ class ImagemagickToolkit extends ImageToolkitBase {
    */
   public function setSource($source) {
     parent::setSource($source);
-    $this->arguments->setSource($source);
+    $this->arguments()->setSource($source);
     return $this;
   }
 
@@ -533,7 +604,7 @@ class ImagemagickToolkit extends ImageToolkitBase {
    * {@inheritdoc}
    */
   public function getSource() {
-    return $this->arguments->getSource();
+    return $this->arguments()->getSource();
   }
 
   /**
@@ -541,16 +612,32 @@ class ImagemagickToolkit extends ImageToolkitBase {
    *
    * @return string
    *   A filesystem path.
+   *
+   * @deprecated in 8.x-2.3, will be removed in 8.x-3.0. Use
+   *   ::ensureSourceLocalPath() instead.
+   *
+   * @see https://www.drupal.org/project/imagemagick/issues/2938375
    */
   public function getSourceLocalPath() {
+    @trigger_error('getSourceLocalPath() is deprecated in 8.x-2.3, will be removed in 8.x-3.0. Use ::ensureSourceLocalPath() instead. See https://www.drupal.org/project/imagemagick/issues/2938375.', E_USER_DEPRECATED);
+    return $this->ensureSourceLocalPath();
+  }
+
+  /**
+   * Ensures that the local filesystem path to the image file exists.
+   *
+   * @return string
+   *   A filesystem path.
+   */
+  public function ensureSourceLocalPath() {
     // If sourceLocalPath is NULL, then ensure it is prepared. This can
     // happen if image was identified via cached metadata: the cached data are
     // available, but the temp file path is not resolved, or even the temp file
     // could be missing if it was copied locally from a remote file system.
-    if (!$this->arguments->getSourceLocalPath() && $this->getSource()) {
+    if (!$this->arguments()->getSourceLocalPath() && $this->getSource()) {
       $this->moduleHandler->alter('imagemagick_pre_parse_file', $this->arguments);
     }
-    return $this->arguments->getSourceLocalPath();
+    return $this->arguments()->getSourceLocalPath();
   }
 
   /**
@@ -560,9 +647,15 @@ class ImagemagickToolkit extends ImageToolkitBase {
    *   A filesystem path.
    *
    * @return $this
+   *
+   * @deprecated in 8.x-2.3, will be removed in 8.x-3.0. Use
+   *   ImagemagickExecArguments::setSourceLocalPath() instead.
+   *
+   * @see https://www.drupal.org/project/imagemagick/issues/2938375
    */
   public function setSourceLocalPath($path) {
-    $this->arguments->setSourceLocalPath($path);
+    @trigger_error('setSourceLocalPath() is deprecated in 8.x-2.3, will be removed in 8.x-3.0. Use ImagemagickExecArguments::setSourceLocalPath() instead. See https://www.drupal.org/project/imagemagick/issues/2938375.', E_USER_DEPRECATED);
+    $this->arguments()->setSourceLocalPath($path);
     return $this;
   }
 
@@ -571,9 +664,15 @@ class ImagemagickToolkit extends ImageToolkitBase {
    *
    * @return string
    *   The source image format.
+   *
+   * @deprecated in 8.x-2.3, will be removed in 8.x-3.0. Use
+   *   ImagemagickExecArguments::getSourceFormat() instead.
+   *
+   * @see https://www.drupal.org/project/imagemagick/issues/2938375
    */
   public function getSourceFormat() {
-    return $this->arguments->getSourceFormat();
+    @trigger_error('getSourceFormat() is deprecated in 8.x-2.3, will be removed in 8.x-3.0. Use ImagemagickExecArguments::getSourceFormat() instead. See https://www.drupal.org/project/imagemagick/issues/2938375.', E_USER_DEPRECATED);
+    return $this->arguments()->getSourceFormat();
   }
 
   /**
@@ -583,9 +682,15 @@ class ImagemagickToolkit extends ImageToolkitBase {
    *   The image format.
    *
    * @return $this
+   *
+   * @deprecated in 8.x-2.3, will be removed in 8.x-3.0. Use
+   *   ImagemagickExecArguments::setSourceFormat() instead.
+   *
+   * @see https://www.drupal.org/project/imagemagick/issues/2938375
    */
   public function setSourceFormat($format) {
-    $this->arguments->setSourceFormat($this->formatMapper->isFormatEnabled($format) ? $format : '');
+    @trigger_error('setSourceFormat() is deprecated in 8.x-2.3, will be removed in 8.x-3.0. Use ImagemagickExecArguments::setSourceFormat() instead. See https://www.drupal.org/project/imagemagick/issues/2938375.', E_USER_DEPRECATED);
+    $this->arguments()->setSourceFormat($format);
     return $this;
   }
 
@@ -596,10 +701,15 @@ class ImagemagickToolkit extends ImageToolkitBase {
    *   The image file extension.
    *
    * @return $this
+   *
+   * @deprecated in 8.x-2.3, will be removed in 8.x-3.0. Use
+   *   ImagemagickExecArguments::setSourceFormatFromExtension() instead.
+   *
+   * @see https://www.drupal.org/project/imagemagick/issues/2938375
    */
   public function setSourceFormatFromExtension($extension) {
-    $format = $this->formatMapper->getFormatFromExtension($extension);
-    $this->arguments->setSourceFormat($format ?: '');
+    @trigger_error('setSourceFormatFromExtension() is deprecated in 8.x-2.3, will be removed in 8.x-3.0. Use ImagemagickExecArguments::setSourceFormatFromExtension() instead. See https://www.drupal.org/project/imagemagick/issues/2938375.', E_USER_DEPRECATED);
+    $this->arguments()->setSourceFormatFromExtension($extension);
     return $this;
   }
 
@@ -614,7 +724,7 @@ class ImagemagickToolkit extends ImageToolkitBase {
       if ($this->getSource() !== NULL) {
         $file_md = $this->fileMetadataManager->uri($this->getSource());
         if ($file_md->getLocalTempPath() === NULL) {
-          $file_md->setLocalTempPath($this->getSourceLocalPath());
+          $file_md->setLocalTempPath($this->ensureSourceLocalPath());
         }
         $orientation = $file_md->getMetadata('exif', 'Orientation');
         $this->setExifOrientation(isset($orientation['value']) ? $orientation['value'] : NULL);
@@ -636,6 +746,52 @@ class ImagemagickToolkit extends ImageToolkitBase {
    */
   public function setExifOrientation($exif_orientation) {
     $this->exifOrientation = $exif_orientation ? (int) $exif_orientation : NULL;
+    return $this;
+  }
+
+  /**
+   * Gets the source colorspace.
+   *
+   * @return string
+   *   The source colorspace.
+   */
+  public function getColorspace() {
+    return $this->colorspace;
+  }
+
+  /**
+   * Sets the source colorspace.
+   *
+   * @param string $colorspace
+   *   The image colorspace.
+   *
+   * @return $this
+   */
+  public function setColorspace($colorspace) {
+    $this->colorspace = Unicode::strtoupper($colorspace);
+    return $this;
+  }
+
+  /**
+   * Gets the source profiles.
+   *
+   * @return string[]
+   *   The source profiles.
+   */
+  public function getProfiles() {
+    return $this->profiles;
+  }
+
+  /**
+   * Sets the source profiles.
+   *
+   * @param array $profiles
+   *   The image profiles.
+   *
+   * @return $this
+   */
+  public function setProfiles(array $profiles) {
+    $this->profiles = $profiles;
     return $this;
   }
 
@@ -667,9 +823,15 @@ class ImagemagickToolkit extends ImageToolkitBase {
    *
    * @return string
    *   The image destination URI/path.
+   *
+   * @deprecated in 8.x-2.3, will be removed in 8.x-3.0. Use
+   *   ImagemagickExecArguments::getDestination() instead.
+   *
+   * @see https://www.drupal.org/project/imagemagick/issues/2938375
    */
   public function getDestination() {
-    return $this->arguments->getDestination();
+    @trigger_error('getDestination() is deprecated in 8.x-2.3, will be removed in 8.x-3.0. Use ImagemagickExecArguments::getDestination() instead. See https://www.drupal.org/project/imagemagick/issues/2938375.', E_USER_DEPRECATED);
+    return $this->arguments()->getDestination();
   }
 
   /**
@@ -679,9 +841,15 @@ class ImagemagickToolkit extends ImageToolkitBase {
    *   The image destination URI/path.
    *
    * @return $this
+   *
+   * @deprecated in 8.x-2.3, will be removed in 8.x-3.0. Use
+   *   ImagemagickExecArguments::setDestination() instead.
+   *
+   * @see https://www.drupal.org/project/imagemagick/issues/2938375
    */
   public function setDestination($destination) {
-    $this->arguments->setDestination($destination);
+    @trigger_error('setDestination() is deprecated in 8.x-2.3, will be removed in 8.x-3.0. Use ImagemagickExecArguments::setDestination() instead. See https://www.drupal.org/project/imagemagick/issues/2938375.', E_USER_DEPRECATED);
+    $this->arguments()->setDestination($destination);
     return $this;
   }
 
@@ -690,9 +858,15 @@ class ImagemagickToolkit extends ImageToolkitBase {
    *
    * @return string
    *   A filesystem path.
+   *
+   * @deprecated in 8.x-2.3, will be removed in 8.x-3.0. Use
+   *   ImagemagickExecArguments::getDestinationLocalPath() instead.
+   *
+   * @see https://www.drupal.org/project/imagemagick/issues/2938375
    */
   public function getDestinationLocalPath() {
-    return $this->arguments->getDestinationLocalPath();
+    @trigger_error('getDestinationLocalPath() is deprecated in 8.x-2.3, will be removed in 8.x-3.0. Use ImagemagickExecArguments::getDestinationLocalPath() instead. See https://www.drupal.org/project/imagemagick/issues/2938375.', E_USER_DEPRECATED);
+    return $this->arguments()->getDestinationLocalPath();
   }
 
   /**
@@ -702,9 +876,15 @@ class ImagemagickToolkit extends ImageToolkitBase {
    *   A filesystem path.
    *
    * @return $this
+   *
+   * @deprecated in 8.x-2.3, will be removed in 8.x-3.0. Use
+   *   ImagemagickExecArguments::setDestinationLocalPath() instead.
+   *
+   * @see https://www.drupal.org/project/imagemagick/issues/2938375
    */
   public function setDestinationLocalPath($path) {
-    $this->arguments->setDestinationLocalPath($path);
+    @trigger_error('setDestinationLocalPath() is deprecated in 8.x-2.3, will be removed in 8.x-3.0. Use ImagemagickExecArguments::setDestinationLocalPath() instead. See https://www.drupal.org/project/imagemagick/issues/2938375.', E_USER_DEPRECATED);
+    $this->arguments()->setDestinationLocalPath($path);
     return $this;
   }
 
@@ -717,9 +897,15 @@ class ImagemagickToolkit extends ImageToolkitBase {
    *
    * @return string
    *   The image destination format.
+   *
+   * @deprecated in 8.x-2.3, will be removed in 8.x-3.0. Use
+   *   ImagemagickExecArguments::getDestinationFormat() instead.
+   *
+   * @see https://www.drupal.org/project/imagemagick/issues/2938375
    */
   public function getDestinationFormat() {
-    return $this->arguments->getDestinationFormat();
+    @trigger_error('getDestinationFormat() is deprecated in 8.x-2.3, will be removed in 8.x-3.0. Use ImagemagickExecArguments::getDestinationFormat() instead. See https://www.drupal.org/project/imagemagick/issues/2938375.', E_USER_DEPRECATED);
+    return $this->arguments()->getDestinationFormat();
   }
 
   /**
@@ -733,9 +919,15 @@ class ImagemagickToolkit extends ImageToolkitBase {
    *   The image destination format.
    *
    * @return $this
+   *
+   * @deprecated in 8.x-2.3, will be removed in 8.x-3.0. Use
+   *   ImagemagickExecArguments::setDestinationFormat() instead.
+   *
+   * @see https://www.drupal.org/project/imagemagick/issues/2938375
    */
   public function setDestinationFormat($format) {
-    $this->arguments->setDestinationFormat($this->formatMapper->isFormatEnabled($format) ? $format : '');
+    @trigger_error('setDestinationFormat() is deprecated in 8.x-2.3, will be removed in 8.x-3.0. Use ImagemagickExecArguments::setDestinationFormat() instead. See https://www.drupal.org/project/imagemagick/issues/2938375.', E_USER_DEPRECATED);
+    $this->arguments()->setDestinationFormat($this->formatMapper->isFormatEnabled($format) ? $format : '');
     return $this;
   }
 
@@ -750,10 +942,15 @@ class ImagemagickToolkit extends ImageToolkitBase {
    *   The destination image file extension.
    *
    * @return $this
+   *
+   * @deprecated in 8.x-2.3, will be removed in 8.x-3.0. Use
+   *   ImagemagickExecArguments::setDestinationFormatFromExtension() instead.
+   *
+   * @see https://www.drupal.org/project/imagemagick/issues/2938375
    */
   public function setDestinationFormatFromExtension($extension) {
-    $format = $this->formatMapper->getFormatFromExtension($extension);
-    $this->arguments->setDestinationFormat($format ?: '');
+    @trigger_error('setDestinationFormatFromExtension() is deprecated in 8.x-2.3, will be removed in 8.x-3.0. Use ImagemagickExecArguments::setDestinationFormatFromExtension() instead. See https://www.drupal.org/project/imagemagick/issues/2938375.', E_USER_DEPRECATED);
+    $this->arguments()->setDestinationFormatFromExtension($extension);
     return $this;
   }
 
@@ -801,7 +998,17 @@ class ImagemagickToolkit extends ImageToolkitBase {
    * {@inheritdoc}
    */
   public function getMimeType() {
-    return $this->formatMapper->getMimeTypeFromFormat($this->getSourceFormat());
+    return $this->formatMapper->getMimeTypeFromFormat($this->arguments()->getSourceFormat());
+  }
+
+  /**
+   * Returns the current ImagemagickExecArguments object.
+   *
+   * @return \Drupal\imagemagick\ImagemagickExecArguments
+   *   The current ImagemagickExecArguments object.
+   */
+  public function arguments() {
+    return $this->arguments;
   }
 
   /**
@@ -809,9 +1016,15 @@ class ImagemagickToolkit extends ImageToolkitBase {
    *
    * @return string[]
    *   The array of command line arguments.
+   *
+   * @deprecated in 8.x-2.3, will be removed in 8.x-3.0. Use ::arguments()
+   *   instead, using ImagemagickExecArguments methods to manipulate arguments.
+   *
+   * @see https://www.drupal.org/project/imagemagick/issues/2925780
    */
   public function getArguments() {
-    return $this->arguments->getArguments();
+    @trigger_error('getArguments() is deprecated in 8.x-2.3, will be removed in 8.x-3.0. Use ::arguments() instead, using ImagemagickExecArguments methods to manipulate arguments. See https://www.drupal.org/project/imagemagick/issues/2925780.', E_USER_DEPRECATED);
+    return $this->arguments()->getArguments();
   }
 
   /**
@@ -821,9 +1034,15 @@ class ImagemagickToolkit extends ImageToolkitBase {
    *
    * @return string
    *   The string of command line arguments.
+   *
+   * @deprecated in 8.x-2.3, will be removed in 8.x-3.0. Use
+   *   ImageMagickExecArguments::toString() instead.
+   *
+   * @see https://www.drupal.org/project/imagemagick/issues/2925780
    */
   public function getStringForBinary() {
-    return $this->arguments->getStringForBinary();
+    @trigger_error('getStringForBinary() is deprecated in 8.x-2.3, will be removed in 8.x-3.0. Use ImageMagickExecArguments::toString() instead. See https://www.drupal.org/project/imagemagick/issues/2925780.', E_USER_DEPRECATED);
+    return $this->arguments()->getStringForBinary();
   }
 
   /**
@@ -833,9 +1052,15 @@ class ImagemagickToolkit extends ImageToolkitBase {
    *   The command line argument to be added.
    *
    * @return $this
+   *
+   * @deprecated in 8.x-2.3, will be removed in 8.x-3.0. Use
+   *   ImageMagickExecArguments::add() instead.
+   *
+   * @see https://www.drupal.org/project/imagemagick/issues/2925780
    */
   public function addArgument($arg) {
-    $this->arguments->addArgument($arg);
+    @trigger_error('addArgument() is deprecated in 8.x-2.3, will be removed in 8.x-3.0. Use ImageMagickExecArguments::add() instead. See https://www.drupal.org/project/imagemagick/issues/2925780.', E_USER_DEPRECATED);
+    $this->arguments()->addArgument($arg);
     return $this;
   }
 
@@ -846,9 +1071,15 @@ class ImagemagickToolkit extends ImageToolkitBase {
    *   The command line argument to be prepended.
    *
    * @return $this
+   *
+   * @deprecated in 8.x-2.3, will be removed in 8.x-3.0. Use
+   *   ImageMagickExecArguments::add() instead.
+   *
+   * @see https://www.drupal.org/project/imagemagick/issues/2925780
    */
   public function prependArgument($arg) {
-    $this->arguments->prependArgument($arg);
+    @trigger_error('prependArgument() is deprecated in 8.x-2.3, will be removed in 8.x-3.0. Use ImageMagickExecArguments::add() instead. See https://www.drupal.org/project/imagemagick/issues/2925780.', E_USER_DEPRECATED);
+    $this->arguments()->prependArgument($arg);
     return $this;
   }
 
@@ -861,9 +1092,15 @@ class ImagemagickToolkit extends ImageToolkitBase {
    * @return bool
    *   Returns the array key for the argument if it is found in the array,
    *   FALSE otherwise.
+   *
+   * @deprecated in 8.x-2.3, will be removed in 8.x-3.0. Use
+   *   ImageMagickExecArguments::find() instead.
+   *
+   * @see https://www.drupal.org/project/imagemagick/issues/2925780
    */
   public function findArgument($arg) {
-    return $this->arguments->findArgument($arg);
+    @trigger_error('findArgument() is deprecated in 8.x-2.3, will be removed in 8.x-3.0. Use ImageMagickExecArguments::find() instead. See https://www.drupal.org/project/imagemagick/issues/2925780.', E_USER_DEPRECATED);
+    return $this->arguments()->findArgument($arg);
   }
 
   /**
@@ -873,9 +1110,15 @@ class ImagemagickToolkit extends ImageToolkitBase {
    *   The index of the command line argument to be removed.
    *
    * @return $this
+   *
+   * @deprecated in 8.x-2.3, will be removed in 8.x-3.0. Use
+   *   ImageMagickExecArguments::remove() instead.
+   *
+   * @see https://www.drupal.org/project/imagemagick/issues/2936615
    */
   public function removeArgument($index) {
-    $this->arguments->removeArgument($index);
+    @trigger_error('removeArgument() is deprecated in 8.x-2.3, will be removed in 8.x-3.0. Use ImageMagickExecArguments::remove() instead. See https://www.drupal.org/project/imagemagick/issues/2936615.', E_USER_DEPRECATED);
+    $this->arguments()->removeArgument($index);
     return $this;
   }
 
@@ -883,9 +1126,15 @@ class ImagemagickToolkit extends ImageToolkitBase {
    * Resets the command line arguments.
    *
    * @return $this
+   *
+   * @deprecated in 8.x-2.3, will be removed in 8.x-3.0. Use
+   *   ImageMagickExecArguments::reset() instead.
+   *
+   * @see https://www.drupal.org/project/imagemagick/issues/2936615
    */
   public function resetArguments() {
-    $this->arguments->resetArguments();
+    @trigger_error('resetArguments() is deprecated in 8.x-2.3, will be removed in 8.x-3.0. Use ImageMagickExecArguments::reset() instead. See https://www.drupal.org/project/imagemagick/issues/2936615.', E_USER_DEPRECATED);
+    $this->arguments()->resetArguments();
     return $this;
   }
 
@@ -893,9 +1142,15 @@ class ImagemagickToolkit extends ImageToolkitBase {
    * Returns the count of command line arguments.
    *
    * @return $this
+   *
+   * @deprecated in 8.x-2.3, will be removed in 8.x-3.0. Use
+   *   ImageMagickExecArguments::find() instead, then count the result.
+   *
+   * @see https://www.drupal.org/project/imagemagick/issues/2936615
    */
   public function countArguments() {
-    return $this->arguments->countArguments();
+    @trigger_error('countArguments() is deprecated in 8.x-2.3, will be removed in 8.x-3.0. Use ImageMagickExecArguments::find() instead, then count the result. See https://www.drupal.org/project/imagemagick/issues/2936615.', E_USER_DEPRECATED);
+    return $this->arguments()->countArguments();
   }
 
   /**
@@ -907,21 +1162,27 @@ class ImagemagickToolkit extends ImageToolkitBase {
    * @return string
    *   An escaped string for use in the
    *   ImagemagickExecManagerInterface::execute method.
+   *
+   * @deprecated in 8.x-2.3, will be removed in 8.x-3.0. Use
+   *   ImageMagickExecArguments::escape() instead.
+   *
+   * @see https://www.drupal.org/project/imagemagick/issues/2936680
    */
   public function escapeShellArg($arg) {
-    return $this->execManager->escapeShellArg($arg);
+    @trigger_error('escapeShellArg() is deprecated in 8.x-2.3, will be removed in 8.x-3.0. Use ImageMagickExecArguments::escape() instead. See https://www.drupal.org/project/imagemagick/issues/2936680.', E_USER_DEPRECATED);
+    return $this->getExecManager()->escapeShellArg($arg);
   }
 
   /**
    * {@inheritdoc}
    */
   public function save($destination) {
-    $this->setDestination($destination);
+    $this->arguments()->setDestination($destination);
     if ($ret = $this->convert()) {
       // Allow modules to alter the destination file.
       $this->moduleHandler->alter('imagemagick_post_save', $this->arguments);
       // Reset local path to allow saving to other file.
-      $this->setDestinationLocalPath('');
+      $this->arguments()->setDestinationLocalPath('');
     }
     return $ret;
   }
@@ -958,18 +1219,25 @@ class ImagemagickToolkit extends ImageToolkitBase {
 
     // Sets the local file path to the one retrieved by identify if available.
     if ($source_local_path = $file_md->getMetadata('imagemagick_identify', 'source_local_path')) {
-      $this->setSourceLocalPath($source_local_path);
+      $this->arguments()->setSourceLocalPath($source_local_path);
     }
 
     // Process parsed data from the first frame.
     $format = $file_md->getMetadata('imagemagick_identify', 'format');
     if ($this->formatMapper->isFormatEnabled($format)) {
       $this
-        ->setSourceFormat($format)
         ->setWidth((int) $file_md->getMetadata('imagemagick_identify', 'width'))
         ->setHeight((int) $file_md->getMetadata('imagemagick_identify', 'height'))
         ->setExifOrientation($file_md->getMetadata('imagemagick_identify', 'exif_orientation'))
         ->setFrames($file_md->getMetadata('imagemagick_identify', 'frames_count'));
+      $this->arguments()
+        ->setSourceFormat($format);
+      // Only Imagemagick allows to get colorspace and profiles information
+      // via 'identify'.
+      if ($this->getExecManager()->getPackage() === 'imagemagick') {
+        $this->setColorspace($file_md->getMetadata('imagemagick_identify', 'colorspace'));
+        $this->setProfiles($file_md->getMetadata('imagemagick_identify', 'profiles'));
+      }
       return TRUE;
     }
 
@@ -981,8 +1249,14 @@ class ImagemagickToolkit extends ImageToolkitBase {
    *
    * @return bool
    *   TRUE if the file could be found and is an image, FALSE otherwise.
+   *
+   * @deprecated in 8.x-2.3, will be removed in 8.x-3.0. Use
+   *   parseFileViaIdentify() instead.
+   *
+   * @see https://www.drupal.org/project/imagemagick/issues/2938377
    */
   protected function parseFileViaGetImageSize() {
+    @trigger_error('Image file parsing via \'getimagesize\' is deprecated in 8.x-2.3, will be removed in 8.x-3.0. Use parsing via \'identify\' instead. See https://www.drupal.org/project/imagemagick/issues/2938377.', E_USER_DEPRECATED);
     // Allow modules to alter the source file.
     $this->moduleHandler->alter('imagemagick_pre_parse_file', $this->arguments);
 
@@ -999,13 +1273,14 @@ class ImagemagickToolkit extends ImageToolkitBase {
     $format = $this->formatMapper->getFormatFromExtension(image_type_to_extension($data[2], FALSE));
     if ($format) {
       $this
-        ->setSourceFormat($format)
         ->setWidth($data[0])
         ->setHeight($data[1])
         // 'getimagesize' cannot provide information on number of frames in an
         // image and EXIF orientation, so set to defaults.
         ->setExifOrientation(static::EXIF_ORIENTATION_NOT_FETCHED)
         ->setFrames(NULL);
+      $this->arguments()
+        ->setSourceFormat($format);
       return TRUE;
     }
 
@@ -1022,7 +1297,7 @@ class ImagemagickToolkit extends ImageToolkitBase {
     $config = $this->configFactory->get('imagemagick.settings');
 
     // Ensure sourceLocalPath is prepared.
-    $this->getSourceLocalPath();
+    $this->ensureSourceLocalPath();
 
     // Allow modules to alter the command line parameters.
     $command = 'convert';
@@ -1031,39 +1306,18 @@ class ImagemagickToolkit extends ImageToolkitBase {
     // Delete any cached file metadata for the destination image file, before
     // creating a new one, and release the URI from the manager so that
     // metadata will not stick in the same request.
-    $this->fileMetadataManager->deleteCachedMetadata($this->getDestination());
-    $this->fileMetadataManager->release($this->getDestination());
+    $this->fileMetadataManager->deleteCachedMetadata($this->arguments()->getDestination());
+    $this->fileMetadataManager->release($this->arguments()->getDestination());
 
     // When destination format differs from source format, and source image
     // is multi-frame, convert only the first frame.
-    $destination_format = $this->getDestinationFormat() ?: $this->getSourceFormat();
-    if ($this->getSourceFormat() !== $destination_format && ($this->getFrames() === NULL || $this->getFrames() > 1)) {
-      $this->arguments->setSourceFrames('[0]');
+    $destination_format = $this->arguments()->getDestinationFormat() ?: $this->arguments()->getSourceFormat();
+    if ($this->arguments()->getSourceFormat() !== $destination_format && ($this->getFrames() === NULL || $this->getFrames() > 1)) {
+      $this->arguments()->setSourceFrames('[0]');
     }
 
-    // Execute the command.
-    $success = $this->execManager->execute($command, $this->arguments) && file_exists($this->getDestinationLocalPath());
-
-    // If successful, parsing was done via identify, single frame image, and
-    // both width and height are defined, we can safely build a new
-    // FileMetadata entry and assign data to it.
-    if ($success && $config->get('use_identify') && $this->getFrames() === 1 && $this->getWidth() !== NULL && $this->getHeight() !== NULL) {
-      $destination_image_md = $this->fileMetadataManager->uri($this->getDestination());
-      $metadata = [
-        'frames' => [
-          0 => [
-            'format' => $this->getDestinationFormat() ?: $this->getSourceFormat(),
-            'width' => $this->getWidth(),
-            'height' => $this->getHeight(),
-            'exif_orientation' => $this->getExifOrientation(),
-          ],
-        ],
-        'source_local_path' => $this->getDestinationLocalPath(),
-      ];
-      $destination_image_md->loadMetadata('imagemagick_identify', $metadata);
-    }
-
-    return $success;
+    // Execute the command and return.
+    return $this->getExecManager()->execute($command, $this->arguments) && file_exists($this->arguments()->getDestinationLocalPath());
   }
 
   /**
@@ -1080,7 +1334,7 @@ class ImagemagickToolkit extends ImageToolkitBase {
       ]);
     }
     else {
-      $status = $this->execManager->checkPath($this->configFactory->get('imagemagick.settings')->get('path_to_binaries'));
+      $status = $this->getExecManager()->checkPath($this->configFactory->get('imagemagick.settings')->get('path_to_binaries'));
       if (!empty($status['errors'])) {
         // Can not execute 'convert'.
         $severity = REQUIREMENT_ERROR;
@@ -1093,9 +1347,10 @@ class ImagemagickToolkit extends ImageToolkitBase {
         // No errors, report the version information.
         $severity = REQUIREMENT_INFO;
         $version_info = explode("\n", preg_replace('/\r/', '', Html::escape($status['output'])));
+        $value = array_shift($version_info);
         $more_info_available = FALSE;
         foreach ($version_info as $key => $item) {
-          if (stripos($item, 'feature') !== FALSE || $key > 4) {
+          if (stripos($item, 'feature') !== FALSE || $key > 3) {
             $more_info_available = TRUE;
             break;
 
@@ -1111,15 +1366,31 @@ class ImagemagickToolkit extends ImageToolkitBase {
         ]);
       }
     }
-    return [
+    $requirements = [
       'imagemagick' => [
         'title' => $this->t('ImageMagick'),
+        'value' => isset($value) ? $value : NULL,
         'description' => [
           '#markup' => implode('<br />', $reported_info),
         ],
         'severity' => $severity,
       ],
     ];
+
+    // Warn if parsing via 'getimagesize'.
+    // @todo remove in 8.x-3.0.
+    if ($this->configFactory->getEditable('imagemagick.settings')->get('use_identify') === FALSE) {
+      $requirements['imagemagick_getimagesize'] = [
+        'title' => $this->t('ImageMagick'),
+        'value' => $this->t('Use "identify" to parse image files'),
+        'description' => $this->t('The toolkit is set to use the <kbd>getimagesize</kbd> PHP function to parse image files. This functionality will be dropped in the next major release of the Imagemagick module. Go to the <a href=":url">Image toolkit</a> settings page, and ensure that the \'Use "identify"\' flag in the \'Execution options\' tab is selected.', [
+          ':url' => Url::fromRoute('system.image_toolkit_settings')->toString(),
+        ]),
+        'severity' => REQUIREMENT_WARNING,
+      ];
+    }
+
+    return $requirements;
   }
 
   /**

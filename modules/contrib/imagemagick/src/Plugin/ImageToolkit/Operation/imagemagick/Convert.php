@@ -40,7 +40,7 @@ class Convert extends ImagemagickImageToolkitOperationBase {
    * {@inheritdoc}
    */
   protected function execute(array $arguments) {
-    $this->getToolkit()->setDestinationFormatFromExtension($arguments['extension']);
+    $this->getToolkit()->arguments()->setDestinationFormatFromExtension($arguments['extension']);
     return TRUE;
   }
 

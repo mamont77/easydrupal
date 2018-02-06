@@ -58,9 +58,9 @@ class Resize extends ImagemagickImageToolkitOperationBase {
    */
   protected function execute(array $arguments = []) {
     if (!empty($arguments['filter'])) {
-      $this->getToolkit()->addArgument('-filter ' . $arguments['filter']);
+      $this->addArgument('-filter ' . $arguments['filter']);
     }
-    $this->getToolkit()->addArgument('-resize ' . $arguments['width'] . 'x' . $arguments['height'] . '!');
+    $this->addArgument('-resize ' . $arguments['width'] . 'x' . $arguments['height'] . '!');
     $this->getToolkit()->setWidth($arguments['width'])->setHeight($arguments['height']);
     return TRUE;
   }

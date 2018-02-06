@@ -48,7 +48,7 @@ function imagemagick_imagemagick_arguments_alter(ImagemagickExecArguments $argum
 
   // Add prepended arguments if needed.
   if ($prepend = $config->get('prepend')) {
-    $arguments->prependArgument($prepend);
+    $arguments->add($prepend, $config->get('prepend_pre_source') ? ImagemagickExecArguments::PRE_SOURCE : ImagemagickExecArguments::POST_SOURCE, 0);
   }
 
   if ($command == 'convert') {
@@ -79,28 +79,28 @@ function imagemagick_imagemagick_arguments_alter(ImagemagickExecArguments $argum
       }
     }
 
-    // Change image density.
-    if ($arguments->findArgument('-density') === FALSE && $density = (int) $config->get('advanced.density')) {
-      $arguments->addArgument("-density {$density} -units PixelsPerInch");
+    // Change output image resolution to 72 ppi, if specified in settings.
+    if (empty($arguments->find('/^\-density/')) && $density = (int) $config->get('advanced.density')) {
+      $arguments->add("-density {$density} -units PixelsPerInch");
     }
 
     // Apply color profile.
     if ($profile = $config->get('advanced.profile')) {
       if (file_exists($profile)) {
-        $arguments->addArgument('-profile ' . $arguments->escapeShellArg($profile));
+        $arguments->add('-profile ' . $arguments->escape($profile));
       }
     }
     // Or alternatively apply colorspace.
     elseif ($colorspace = $config->get('advanced.colorspace')) {
       // Do not hi-jack settings made by effects.
-      if ($arguments->findArgument('-colorspace') === FALSE) {
-        $arguments->addArgument('-colorspace ' . $arguments->escapeShellArg($colorspace));
+      if (empty($arguments->find('/^\-colorspace/'))) {
+        $arguments->add('-colorspace ' . $arguments->escape($colorspace));
       }
     }
 
     // Change image quality.
-    if ($arguments->findArgument('-quality') === FALSE) {
-      $arguments->addArgument('-quality ' . \Drupal::config('imagemagick.settings')->get('quality'));
+    if (empty($arguments->find('/^\-quality/'))) {
+      $arguments->add('-quality ' . \Drupal::config('imagemagick.settings')->get('quality'));
     }
   }
 }
