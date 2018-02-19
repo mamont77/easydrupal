@@ -67,6 +67,7 @@ return array(
     'Grasmash\\YamlExpander\\' => array($vendorDir . '/grasmash/yaml-expander/src'),
     'Grasmash\\Expander\\' => array($vendorDir . '/grasmash/expander/src'),
     'Goutte\\' => array($vendorDir . '/fabpot/goutte/Goutte'),
+    'Drush\\Internal\\' => array($vendorDir . '/drush/drush/internal-copy'),
     'Drush\\' => array($vendorDir . '/drush/drush/src'),
     'Drupal\\Driver\\' => array($baseDir . '/drivers/lib/Drupal/Driver'),
     'Drupal\\Core\\Composer\\' => array($baseDir . '/core/lib/Drupal/Core/Composer'),

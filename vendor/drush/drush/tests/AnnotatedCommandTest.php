@@ -7,11 +7,12 @@ use Webmozart\PathUtil\Path;
 /**
  * @group base
  */
-class AnnotatedCommandCase extends CommandUnishTestCase {
+class AnnotatedCommandCase extends CommandUnishTestCase
+{
 
     public function testGlobal()
     {
-        $globalExtensions = $this->setupGlobalExtensionsForTests();
+        $globalIncludes = $targetDir = Path::join(__DIR__, 'resources/global-includes');
 
         $options = [];
 
@@ -19,7 +20,7 @@ class AnnotatedCommandCase extends CommandUnishTestCase {
         $this->drush('cc', ['drush'], $options);
 
         // drush foobar
-        $options['include'] = "$globalExtensions";
+        $options['include'] = "$globalIncludes";
         $this->drush('foobar', [], $options);
         $output = $this->getOutput();
         $this->assertEquals('baz', $output);
@@ -28,12 +29,27 @@ class AnnotatedCommandCase extends CommandUnishTestCase {
         $this->drush('foobaz', [], $options);
         $output = $this->getOutput();
         $this->assertEquals('bar', $output);
+
+        $options = [
+            'yes' => null,
+            'include' => $globalIncludes,
+            'directory' => self::getSandbox(),
+        ];
+
+        $original = getenv('SHELL_INTERACTIVE');
+        $this->setEnv(['SHELL_INTERACTIVE' => 1]);
+        $this->drush('generate', ['foo-example'], $options);
+        $this->setEnv(['SHELL_INTERACTIVE' => $original]);
+
+        $target = Path::join($this->getSandbox(), 'foo.php');
+        $actual = trim(file_get_contents($target));
+        $this->assertEquals('Foo.', $actual);
+        unlink($target);
     }
 
     public function testExecute()
     {
-        $sites = $this->setUpDrupal(1, true);
-        $uri = key($sites);
+        $this->setUpDrupal(1, true);
         $root = $this->webroot();
 
         // Copy the 'woot' module over to the Drupal site we just set up.
@@ -47,14 +63,15 @@ class AnnotatedCommandCase extends CommandUnishTestCase {
 
         // Make sure that modules can supply DCG Generators and they work.
         $optionsExample['answers'] = json_encode([
-        'name' => 'foo',
-        'machine_name' => 'bar',
+            'name' => 'foo',
+            'machine_name' => 'bar',
         ]);
         $optionsExample['directory'] = self::getSandbox();
+        $optionsExample['yes'] = null;
         $original = getenv('SHELL_INTERACTIVE');
-        putenv('SHELL_INTERACTIVE=1');
+        $this->setEnv(['SHELL_INTERACTIVE' => 1]);
         $this->drush('generate', ['woot-example'], $optionsExample);
-        putenv('SHELL_INTERACTIVE=' . $original);
+        $this->setEnv(['SHELL_INTERACTIVE' => $original]);
         $target = Path::join(self::getSandbox(), '/src/Commands/ExampleBarCommands.php');
         $actual = trim(file_get_contents($target));
         $this->assertEquals('ExampleBarCommands says Woot mightily.', $actual);
@@ -188,15 +205,6 @@ EOT;
         // TODO: Support --ignored-modules
         // drush woot --help with the 'woot' module ignored
         $this->drush('woot', [], ['help' => null, 'ignored-modules' => 'woot'], null, null, self::EXIT_ERROR);
-    }
-
-    public function setupGlobalExtensionsForTests()
-    {
-        $globalExtension = __DIR__ . '/resources/global-includes';
-        $targetDir = Path::join(self::getSandbox(), 'global-includes');
-        $this->mkdir($targetDir);
-        $this->recursiveCopy($globalExtension, $targetDir);
-        return $targetDir;
     }
 
     public function setupModulesForTests($root)

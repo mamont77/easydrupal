@@ -1,10 +1,12 @@
 <?php
 
 namespace Unish;
+
 use Symfony\Component\Yaml\Yaml;
 use Webmozart\PathUtil\Path;
 
-abstract class UnishTestCase extends \PHPUnit_Framework_TestCase {
+abstract class UnishTestCase extends \PHPUnit_Framework_TestCase
+{
 
     /**
      * A list of Drupal sites that have been recently installed. They key is the
@@ -155,17 +157,16 @@ abstract class UnishTestCase extends \PHPUnit_Framework_TestCase {
         self::$sandbox = $unish_sandbox;
         self::$usergroup = isset($GLOBALS['UNISH_USERGROUP']) ? $GLOBALS['UNISH_USERGROUP'] : null;
 
-        putenv("CACHE_PREFIX=" . $unish_cache);
+        self::setEnv(['CACHE_PREFIX' => $unish_cache]);
         $home = $unish_sandbox . '/home';
-        putenv("HOME=$home");
-        putenv("HOMEDRIVE=$home");
+        self::setEnv(['HOME' => $home]);
+        self::setEnv(['HOMEDRIVE' => $home]);
         $composer_home = $unish_cache . '/.composer';
-        putenv("COMPOSER_HOME=$composer_home");
-
-        putenv('ETC_PREFIX=' . $unish_sandbox);
-        putenv('SHARE_PREFIX=' . $unish_sandbox);
-        putenv('TEMP=' . Path::join($unish_sandbox, 'tmp'));
-        putenv('DRUSH_AUTOLOAD_PHP=' . PHPUNIT_COMPOSER_INSTALL);
+        self::setEnv(['COMPOSER_HOME' => $composer_home]);
+        self::setEnv(['ETC_PREFIX' => $unish_sandbox]);
+        self::setEnv(['SHARE_PREFIX' => $unish_sandbox]);
+        self::setEnv(['TEMP' => Path::join($unish_sandbox, 'tmp')]);
+        self::setEnv(['DRUSH_AUTOLOAD_PHP' => PHPUNIT_COMPOSER_INSTALL]);
     }
 
     /**
@@ -219,15 +220,15 @@ abstract class UnishTestCase extends \PHPUnit_Framework_TestCase {
                 if (in_array($type, ['notice', 'verbose'])) {
                     fwrite(STDERR, $line);
                 }
-              break;
+                break;
             case 'debug':
                 fwrite(STDERR, $line);
-              break;
+                break;
             default:
                 if ($type == 'notice') {
                     fwrite(STDERR, $line);
                 }
-              break;
+                break;
         }
     }
 
@@ -360,9 +361,9 @@ abstract class UnishTestCase extends \PHPUnit_Framework_TestCase {
     {
         $dir = opendir($src);
         self::mkdir($dst);
-        while (false !== ( $file = readdir($dir)) ) {
+        while (false !== ( $file = readdir($dir))) {
             if (( $file != '.' ) && ( $file != '..' )) {
-                if ( is_dir($src . '/' . $file) ) {
+                if (is_dir($src . '/' . $file)) {
                     self::recursiveCopy($src . '/' . $file, $dst . '/' . $file);
                 } else {
                     copy($src . '/' . $file, $dst . '/' . $file);
@@ -639,5 +640,22 @@ EOT;
     public function drupalSitewideDirectory()
     {
         return '/sites/all';
+    }
+
+    /**
+     * Set environment variables that should be passed to child processes.
+     *
+     * @param array $vars
+     *   The variables to set.
+     *
+     *   We will change implementation to take advantage of https://github.com/symfony/symfony/pull/19053/files once we drop Symfony 2 compat.
+     */
+    public static function setEnv(array $vars)
+    {
+        foreach ($vars as $k => $v) {
+            putenv($k . '=' . $v);
+            // Value must be a string. See \Symfony\Component\Process\Process::getDefaultEnv.
+            $_SERVER[$k]= (string) $v;
+        }
     }
 }

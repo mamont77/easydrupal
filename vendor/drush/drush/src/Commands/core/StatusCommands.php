@@ -25,6 +25,10 @@ class StatusCommands extends DrushCommands implements SiteAliasManagerAwareInter
      * @command core:status
      * @param $filter A field to filter on. @deprecated - use --field option instead.
      * @option project A comma delimited list of projects. Their paths will be added to path-aliases section.
+     * @usage drush core-status --field=files
+     *   Emit just one field, not all the default fields.
+     * @usage drush core-status --fields=*
+     *   Emit all fields, not just the default ones.
      * @aliases status,st,core-status
      * @table-style compact
      * @list-delimiter :
@@ -107,7 +111,9 @@ class StatusCommands extends DrushCommands implements SiteAliasManagerAwareInter
                     $status_table['db-name'] = isset($db_spec['database']) ? $db_spec['database'] : null;
                     $status_table['db-port'] = isset($db_spec['port']) ? $db_spec['port'] : null;
                     if ($boot_manager->hasBootstrapped(DRUSH_BOOTSTRAP_DRUPAL_CONFIGURATION)) {
-                        $status_table['install-profile'] = \Drupal::installProfile();
+                        if (method_exists('Drupal', 'installProfile')) {
+                            $status_table['install-profile'] = \Drupal::installProfile();
+                        }
                         if ($boot_manager->hasBootstrapped(DRUSH_BOOTSTRAP_DRUPAL_DATABASE)) {
                             $status_table['db-status'] = dt('Connected');
                             if ($boot_manager->hasBootstrapped(DRUSH_BOOTSTRAP_DRUPAL_FULL)) {

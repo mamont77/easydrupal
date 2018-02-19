@@ -151,7 +151,11 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
     // Render all assets.
     $renderer = $this->getHelper('dcg_renderer');
     foreach ($this->getAssets() as $asset) {
-      $asset->render($renderer, $this->vars);
+      // Supply the asset with all collected variables if it has no local ones.
+      if (!$asset->getVars()) {
+        $asset->vars($this->vars);
+      }
+      $asset->render($renderer);
     }
 
     $dumped_files = $this->getHelper('dcg_dumper')->dump($input, $output);
@@ -338,7 +342,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
    * @param array $vars
    *   Twig variables.
    *
-   * @deprecated Use self::createFile() or self::createDirectory().
+   * @deprecated Use self::addFile() or self::addDirectory().
    */
   protected function setFile($path = NULL, $template = NULL, array $vars = []) {
     $this->addFile()
@@ -357,7 +361,7 @@ abstract class BaseGenerator extends Command implements GeneratorInterface {
    * @param array $vars
    *   Twig variables.
    *
-   * @deprecated Use self::createFile().
+   * @deprecated Use self::addServiceFile().
    */
   protected function setServicesFile($path, $template, array $vars) {
     $this->addServicesFile()

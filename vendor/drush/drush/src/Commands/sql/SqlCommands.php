@@ -14,7 +14,7 @@ class SqlCommands extends DrushCommands
      * Print database connection details using print_r().
      *
      * @command sql:conf
-     * @command sql-conf
+     * @aliases sql-conf
      * @option all Show all database connections, instead of just one.
      * @option show-passwords Show database password.
      * @optionset_sql
@@ -123,8 +123,8 @@ class SqlCommands extends DrushCommands
      * Open a SQL command-line interface using Drupal's credentials.
      *
      * @command sql:cli
+     * @option extra Add custom options to the connect string (e.g. --extra=--skip-column-names)
      * @optionset_sql
-     * @allow-additional-options sql-connect
      * @aliases sqlc,sql-cli
      * @usage drush sql:cli
      *   Open a SQL command-line interface using Drupal's credentials.

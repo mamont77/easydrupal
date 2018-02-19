@@ -124,6 +124,7 @@ class ComposerStaticInitDrupal8
         ),
         'D' => 
         array (
+            'Drush\\Internal\\' => 15,
             'Drush\\' => 6,
             'Drupal\\Driver\\' => 14,
             'Drupal\\Core\\Composer\\' => 21,
@@ -408,6 +409,10 @@ class ComposerStaticInitDrupal8
         'Goutte\\' => 
         array (
             0 => __DIR__ . '/..' . '/fabpot/goutte/Goutte',
+        ),
+        'Drush\\Internal\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/drush/drush/internal-copy',
         ),
         'Drush\\' => 
         array (
