@@ -1,0 +1,7 @@
+name: Update Manager Advanced
+type: module
+description: "This module modifies the Drupal \"Updates available\" email to include the information normally shown at /admin/reports/updates/update, with links to the module updates and their release notes."
+core: 8.x
+package: Development
+dependencies:
+  - update

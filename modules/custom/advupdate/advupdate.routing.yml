@@ -1,0 +1,7 @@
+advupdate:
+  path: 'advupdate'
+  defaults:
+    _controller: '\Drupal\advupdate\Controller\AdvUpdateController::simple'
+    _title: 'Simple - no arguments'
+  requirements:
+    _permission: 'access content'

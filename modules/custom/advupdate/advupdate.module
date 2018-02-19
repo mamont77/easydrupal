@@ -1,0 +1,105 @@
+<?php
+/**
+ * @file
+ * Contains advupdate.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Component\Utility\Html;
+
+/**
+ * Implements hook_help().
+ */
+function advupdate_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the advupdate module.
+    case 'help.page.advupdate':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('This module modifies the Drupal "Updates available" email to include the information normally shown at /admin/reports/updates/update, with links to the module updates and their release notes.') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_mail_alter().
+ */
+function advupdate_mail_alter(&$message) {
+  if ($message['id'] == 'update_status_notify') {
+    $message['body'][] = "--\nMail sent out from " . \Drupal::config('system.site')
+        ->get('name');
+  }
+}
+
+
+/**
+ * Implements hook_mail().
+ */
+function advupdate_mail($key, &$message, $params) {
+  switch ($key) {
+    case 'testing':
+      //      $message['from'] = 'no-reply@stat.org.uk';
+      $message['subject'] = Html::escape($params['subject']);
+      $message['body'][] = Html::escape($params['message']);
+      break;
+  }
+}
+
+$data = [
+  'mail_type' => 'testing',
+  'mail_to' => 'ruslan.piskarev@gmail.com',
+
+];
+//advupdate_send_mail($data);
+
+/**
+ * Custom function for mail.
+ *
+ * @param $data
+ */
+function advupdate_send_mail($data) {
+//  module_load_install('update');
+  module_load_include('inc', 'update', 'update.compare');
+
+  $available = update_get_available(TRUE);
+  echo '<pre>';
+  print_r($available);
+  echo '</pre>';
+
+
+  $project_data = update_calculate_project_data($available);
+
+//  $status = update_get_available();
+//  echo '<pre>';
+//  print_r($status);
+//  echo '</pre>';
+//  exit;
+//  // Load the site name out of configuration.
+//  $config = \Drupal::config('system.site');
+//  $site_name = $config->get('name');
+//
+//  $mailManager = \Drupal::service('plugin.manager.mail');
+//  $module = 'advupdate';
+//  $key = $data['mail_type'];
+//  $to = $data['mail_to'];
+//
+//  $params['subject'] = $site_name . ' sent you a message';
+//  $params['message'] = 'Dear Ruslan.';
+//
+//  echo '<pre>';
+//  print_r($params);
+//  echo '</pre>';
+//
+//  $langcode = \Drupal::currentUser()->getPreferredLangcode();
+//  $send = TRUE;
+//
+//  $result = $mailManager->mail($module, $key, $to, $langcode, $params, NULL, $send);
+//  if ($result['result'] != TRUE) {
+//    $message = t('There was a problem sending your email notification to @email.', ['@email' => $to]);
+//    drupal_set_message($message, 'error');
+//    \Drupal::logger('advupdate')->error($message);
+//    return;
+//  }
+}
