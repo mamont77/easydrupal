@@ -126,7 +126,7 @@ class AdvUpdateController extends ControllerBase {
           continue 2;
       }
 
-      // Use the project title for the tableselect checkboxes.
+      // Use the project title for the table.
       $entry['title'] = [
         'data' => [
           '#title' => $entry['title'],

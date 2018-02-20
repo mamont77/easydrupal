@@ -5,7 +5,9 @@
  */
 
 use Drupal\Core\Routing\RouteMatchInterface;
-use Drupal\Component\Utility\Html;
+use Drupal\Core\Url;
+use Drupal\update\UpdateManagerInterface;
+use Drupal\update\UpdateFetcherInterface;
 
 /**
  * Implements hook_help().
@@ -28,78 +30,195 @@ function advupdate_help($route_name, RouteMatchInterface $route_match) {
  */
 function advupdate_mail_alter(&$message) {
   if ($message['id'] == 'update_status_notify') {
-    $message['body'][] = "--\nMail sent out from " . \Drupal::config('system.site')
-        ->get('name');
+    $message['body'][] = _advupdate_mail_additional_data();
+    $message['body'][] = "\n" . t('The additional data was added by "Update Manager Advanced".');
   }
 }
 
-
-/**
- * Implements hook_mail().
- */
-function advupdate_mail($key, &$message, $params) {
-  switch ($key) {
-    case 'testing':
-      //      $message['from'] = 'no-reply@stat.org.uk';
-      $message['subject'] = Html::escape($params['subject']);
-      $message['body'][] = Html::escape($params['message']);
-      break;
-  }
-}
-
-$data = [
-  'mail_type' => 'testing',
-  'mail_to' => 'ruslan.piskarev@gmail.com',
-
-];
-//advupdate_send_mail($data);
-
-/**
- * Custom function for mail.
- *
- * @param $data
- */
-function advupdate_send_mail($data) {
-//  module_load_install('update');
-  module_load_include('inc', 'update', 'update.compare');
+function _advupdate_mail_additional_data() {
+  module_load_include('inc', 'update', 'update.manager');
 
   $available = update_get_available(TRUE);
-  echo '<pre>';
-  print_r($available);
-  echo '</pre>';
+  if (empty($available)) {
+    $build['message'] = [
+      '#markup' => t('There was a problem getting update information. Try again later.'),
+    ];
+    return $build;
+  }
 
+  // This will be a nested array. The first key is the kind of project, which
+  // can be either 'enabled', 'disabled', 'manual' (projects which require
+  // manual updates, such as core). Then, each subarray is an array of
+  // projects of that type, indexed by project short name, and containing an
+  // array of data for cells in that project's row in the appropriate table.
+  $projects = [];
+
+  // This stores the actual download link we're going to update from for each
+  // project in the build, regardless of if it's enabled or disabled.
+  $build['project_downloads'] = ['#tree' => TRUE];
+  module_load_include('inc', 'update', 'update.compare');
 
   $project_data = update_calculate_project_data($available);
+  foreach ($project_data as $name => $project) {
+    // Filter out projects which are up to date already.
+    if ($project['status'] == UpdateManagerInterface::CURRENT) {
+      continue;
+    }
+    // The project name to display can vary based on the info we have.
+    if (!empty($project['title'])) {
+      if (!empty($project['link'])) {
+        $project_name = $this->l($project['title'], Url::fromUri($project['link']));
+      }
+      else {
+        $project_name = $project['title'];
+      }
+    }
+    elseif (!empty($project['info']['name'])) {
+      $project_name = $project['info']['name'];
+    }
+    else {
+      $project_name = $name;
+    }
+    if ($project['project_type'] == 'theme' || $project['project_type'] == 'theme-disabled') {
+      $project_name .= ' ' . t('(Theme)');
+    }
 
-//  $status = update_get_available();
-//  echo '<pre>';
-//  print_r($status);
-//  echo '</pre>';
-//  exit;
-//  // Load the site name out of configuration.
-//  $config = \Drupal::config('system.site');
-//  $site_name = $config->get('name');
-//
-//  $mailManager = \Drupal::service('plugin.manager.mail');
-//  $module = 'advupdate';
-//  $key = $data['mail_type'];
-//  $to = $data['mail_to'];
-//
-//  $params['subject'] = $site_name . ' sent you a message';
-//  $params['message'] = 'Dear Ruslan.';
-//
-//  echo '<pre>';
-//  print_r($params);
-//  echo '</pre>';
-//
-//  $langcode = \Drupal::currentUser()->getPreferredLangcode();
-//  $send = TRUE;
-//
-//  $result = $mailManager->mail($module, $key, $to, $langcode, $params, NULL, $send);
-//  if ($result['result'] != TRUE) {
-//    $message = t('There was a problem sending your email notification to @email.', ['@email' => $to]);
-//    drupal_set_message($message, 'error');
-//    \Drupal::logger('advupdate')->error($message);
-//    return;
-//  }
+    if (empty($project['recommended'])) {
+      // If we don't know what to recommend they upgrade to, we should skip
+      // the project entirely.
+      continue;
+    }
+
+    $recommended_release = $project['releases'][$project['recommended']];
+    $recommended_version = '{{ release_version }} (<a href="{{ release_link }}" title="{{ project_title }}">{{ release_notes }}</a>)';
+    if ($recommended_release['version_major'] != $project['existing_major']) {
+      $recommended_version .= '<div title="{{ major_update_warning_title }}" class="update-major-version-warning">{{ major_update_warning_text }}</div>';
+    }
+
+    $recommended_version = [
+      '#type' => 'inline_template',
+      '#template' => $recommended_version,
+      '#context' => [
+        'release_version' => $recommended_release['version'],
+        'release_link' => $recommended_release['release_link'],
+        'project_title' => t('Release notes for @project_title', ['@project_title' => $project['title']]),
+        'major_update_warning_title' => t('Major upgrade warning'),
+        'major_update_warning_text' => t('This update is a major version update which means that it may not be backwards compatible with your currently running version. It is recommended that you read the release notes and proceed at your own risk.'),
+        'release_notes' => t('Release notes'),
+      ],
+    ];
+
+    // Create an entry for this project.
+    $entry = [
+      'title' => $project_name,
+      'installed_version' => $project['existing_version'],
+      'recommended_version' => ['data' => $recommended_version],
+    ];
+
+    switch ($project['status']) {
+      case UpdateManagerInterface::NOT_SECURE:
+      case UpdateManagerInterface::REVOKED:
+        $entry['title'] .= ' ' . t('(Security update)');
+        $entry['#weight'] = -2;
+        $type = 'security';
+        break;
+
+      case UpdateManagerInterface::NOT_SUPPORTED:
+        $type = 'unsupported';
+        $entry['title'] .= ' ' . t('(Unsupported)');
+        $entry['#weight'] = -1;
+        break;
+
+      case UpdateFetcherInterface::UNKNOWN:
+      case UpdateFetcherInterface::NOT_FETCHED:
+      case UpdateFetcherInterface::NOT_CHECKED:
+      case UpdateManagerInterface::NOT_CURRENT:
+        $type = 'recommended';
+        break;
+
+      default:
+        // Jump out of the switch and onto the next project in foreach.
+        continue 2;
+    }
+
+    // Use the project title for the table.
+    $entry['title'] = [
+      'data' => [
+        '#title' => $entry['title'],
+        '#markup' => $entry['title'],
+      ],
+    ];
+    $entry['#attributes'] = ['class' => ['update-' . $type]];
+
+    // Since the data formats are incompatible,
+    // we convert now to the format expected by '#theme' => 'table'.
+    unset($entry['#weight']);
+    $attributes = $entry['#attributes'];
+    unset($entry['#attributes']);
+    $entry = [
+        'data' => $entry,
+      ] + $attributes;
+
+    // Based on what kind of project this is, save the entry into the
+    // appropriate subarray.
+    switch ($project['project_type']) {
+      case 'core':
+        // Core needs manual updates at this time.
+        $projects['manual'][$name] = $entry;
+        break;
+
+      case 'module':
+      case 'theme':
+        $projects['enabled'][$name] = $entry;
+        break;
+
+      case 'module-disabled':
+      case 'theme-disabled':
+        $projects['disabled'][$name] = $entry;
+        break;
+    }
+  }
+
+  $headers = [
+    'title' => [
+      'data' => t('Name'),
+      'class' => ['update-project-name'],
+    ],
+    'installed_version' => t('Installed version'),
+    'recommended_version' => t('Recommended version'),
+  ];
+
+  if (!empty($projects['enabled'])) {
+    $build['projects'] = [
+      '#type' => 'table',
+      '#header' => $headers,
+      '#rows' => $projects['enabled'],
+    ];
+    if (!empty($projects['disabled'])) {
+      $build['projects']['#prefix'] = '<h2>' . t('Enabled') . '</h2>';
+    }
+  }
+
+  if (!empty($projects['disabled'])) {
+    $build['disabled_projects'] = [
+      '#type' => 'table',
+      '#header' => $headers,
+      '#rows' => $projects['disabled'],
+      '#weight' => 1,
+      '#prefix' => '<h2>' . t('Disabled') . '</h2>',
+    ];
+  }
+
+  if (!empty($projects['manual'])) {
+    $prefix = '<h2>' . t('Manual updates required') . '</h2>';
+    $build['manual_updates'] = [
+      '#type' => 'table',
+      '#header' => $headers,
+      '#rows' => $projects['manual'],
+      '#prefix' => $prefix,
+      '#weight' => 120,
+    ];
+  }
+
+  return drupal_render($build);
 }
