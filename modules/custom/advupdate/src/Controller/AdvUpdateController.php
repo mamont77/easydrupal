@@ -3,6 +3,8 @@
 namespace Drupal\advupdate\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\update\UpdateManagerInterface;
+use Drupal\update\UpdateFetcherInterface;
 use Drupal\Core\Link;
 use Drupal\Core\Url;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
@@ -14,16 +16,6 @@ class AdvUpdateController extends ControllerBase {
 
   public function simple() {
 
-//    $build = [
-//      '#theme' => 'update_report'
-//    ];
-//    if ($available = update_get_available(FALSE)) {
-//      $this->moduleHandler()->loadInclude('update', 'compare.inc');
-//      $build['#data'] = update_calculate_project_data($available);
-//    }
-//    return $build;
-
-
     module_load_include('inc', 'update', 'update.manager');
 
     if (!_update_manager_check_backends($build, 'update')) {
@@ -33,7 +25,7 @@ class AdvUpdateController extends ControllerBase {
     $available = update_get_available(TRUE);
     if (empty($available)) {
       $build['message'] = [
-        '#markup' => $this->t('There was a problem getting update information. Try again later.'),
+        '#markup' => t('There was a problem getting update information. Try again later.'),
       ];
       return $build;
     }
@@ -54,7 +46,7 @@ class AdvUpdateController extends ControllerBase {
     $project_data = update_calculate_project_data($available);
     foreach ($project_data as $name => $project) {
       // Filter out projects which are up to date already.
-      if ($project['status'] == UPDATE_CURRENT) {
+      if ($project['status'] == UpdateManagerInterface::CURRENT) {
         continue;
       }
       // The project name to display can vary based on the info we have.
@@ -73,7 +65,7 @@ class AdvUpdateController extends ControllerBase {
         $project_name = $name;
       }
       if ($project['project_type'] == 'theme' || $project['project_type'] == 'theme-disabled') {
-        $project_name .= ' ' . $this->t('(Theme)');
+        $project_name .= ' ' . t('(Theme)');
       }
 
       if (empty($project['recommended'])) {
@@ -94,10 +86,10 @@ class AdvUpdateController extends ControllerBase {
         '#context' => [
           'release_version' => $recommended_release['version'],
           'release_link' => $recommended_release['release_link'],
-          'project_title' => $this->t('Release notes for @project_title', ['@project_title' => $project['title']]),
-          'major_update_warning_title' => $this->t('Major upgrade warning'),
-          'major_update_warning_text' => $this->t('This update is a major version update which means that it may not be backwards compatible with your currently running version. It is recommended that you read the release notes and proceed at your own risk.'),
-          'release_notes' => $this->t('Release notes'),
+          'project_title' => t('Release notes for @project_title', ['@project_title' => $project['title']]),
+          'major_update_warning_title' => t('Major upgrade warning'),
+          'major_update_warning_text' => t('This update is a major version update which means that it may not be backwards compatible with your currently running version. It is recommended that you read the release notes and proceed at your own risk.'),
+          'release_notes' => t('Release notes'),
         ],
       ];
 
@@ -109,23 +101,23 @@ class AdvUpdateController extends ControllerBase {
       ];
 
       switch ($project['status']) {
-        case UPDATE_NOT_SECURE:
-        case UPDATE_REVOKED:
-          $entry['title'] .= ' ' . $this->t('(Security update)');
+        case UpdateManagerInterface::NOT_SECURE:
+        case UpdateManagerInterface::REVOKED:
+          $entry['title'] .= ' ' . t('(Security update)');
           $entry['#weight'] = -2;
           $type = 'security';
           break;
 
-        case UPDATE_NOT_SUPPORTED:
+        case UpdateManagerInterface::NOT_SUPPORTED:
           $type = 'unsupported';
-          $entry['title'] .= ' ' . $this->t('(Unsupported)');
+          $entry['title'] .= ' ' . t('(Unsupported)');
           $entry['#weight'] = -1;
           break;
 
-        case UPDATE_UNKNOWN:
-        case UPDATE_NOT_FETCHED:
-        case UPDATE_NOT_CHECKED:
-        case UPDATE_NOT_CURRENT:
+        case UpdateFetcherInterface::UNKNOWN:
+        case UpdateFetcherInterface::NOT_FETCHED:
+        case UpdateFetcherInterface::NOT_CHECKED:
+        case UpdateManagerInterface::NOT_CURRENT:
           $type = 'recommended';
           break;
 
@@ -143,6 +135,8 @@ class AdvUpdateController extends ControllerBase {
       ];
       $entry['#attributes'] = ['class' => ['update-' . $type]];
 
+      // Since the data formats are incompatible,
+      // we convert now to the format expected by '#theme' => 'table'.
       unset($entry['#weight']);
       $attributes = $entry['#attributes'];
       unset($entry['#attributes']);
@@ -150,28 +144,6 @@ class AdvUpdateController extends ControllerBase {
           'data' => $entry,
         ] + $attributes;
       
-      // Drupal core needs to be upgraded manually.
-//      $needs_manual = $project['project_type'] == 'core';
-//
-//      if ($needs_manual) {
-//        // There are no checkboxes in the 'Manual updates' table so it will be
-//        // rendered by '#theme' => 'table', not '#theme' => 'tableselect'. Since
-//        // the data formats are incompatible, we convert now to the format
-//        // expected by '#theme' => 'table'.
-//        unset($entry['#weight']);
-//        $attributes = $entry['#attributes'];
-//        unset($entry['#attributes']);
-//        $entry = [
-//            'data' => $entry,
-//          ] + $attributes;
-//      }
-//      else {
-//        $build['project_downloads'][$name] = [
-//          '#type' => 'value',
-//          '#value' => $recommended_release['download_link'],
-//        ];
-//      }
-
       // Based on what kind of project this is, save the entry into the
       // appropriate subarray.
       switch ($project['project_type']) {
@@ -194,11 +166,11 @@ class AdvUpdateController extends ControllerBase {
 
     $headers = [
       'title' => [
-        'data' => $this->t('Name'),
+        'data' => t('Name'),
         'class' => ['update-project-name'],
       ],
-      'installed_version' => $this->t('Installed version'),
-      'recommended_version' => $this->t('Recommended version'),
+      'installed_version' => t('Installed version'),
+      'recommended_version' => t('Recommended version'),
     ];
 
     if (!empty($projects['enabled'])) {
@@ -208,7 +180,7 @@ class AdvUpdateController extends ControllerBase {
         '#rows' => $projects['enabled'],
       ];
       if (!empty($projects['disabled'])) {
-        $build['projects']['#prefix'] = '<h2>' . $this->t('Enabled') . '</h2>';
+        $build['projects']['#prefix'] = '<h2>' . t('Enabled') . '</h2>';
       }
     }
 
@@ -218,13 +190,12 @@ class AdvUpdateController extends ControllerBase {
         '#header' => $headers,
         '#rows' => $projects['disabled'],
         '#weight' => 1,
-        '#prefix' => '<h2>' . $this->t('Disabled') . '</h2>',
+        '#prefix' => '<h2>' . t('Disabled') . '</h2>',
       ];
     }
 
     if (!empty($projects['manual'])) {
-      $prefix = '<h2>' . $this->t('Manual updates required') . '</h2>';
-      $prefix .= '<p>' . $this->t('Automatic updates of Drupal core are not supported at this time.') . '</p>';
+      $prefix = '<h2>' . t('Manual updates required') . '</h2>';
       $build['manual_updates'] = [
         '#type' => 'table',
         '#header' => $headers,
@@ -236,7 +207,5 @@ class AdvUpdateController extends ControllerBase {
 
     return $build;
   }
-
-
 
 }
