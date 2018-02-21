@@ -55,7 +55,7 @@ function advupdate_form_update_settings_submit_handler($form, FormStateInterface
     ->set('notification.extend_email_report', $form_state->getValue('extend_email_report'))
     ->save();
 
-  // \Drupal::service('plugin.manager.mail')->mail('update', 'status_notify', 'ruslan.piskarev@gmail.com', 'en');
+   \Drupal::service('plugin.manager.mail')->mail('update', 'status_notify', 'ruslan.piskarev@gmail.com', 'en');
 
 }
 
