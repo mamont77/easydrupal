@@ -32,12 +32,12 @@ function advupdate_help($route_name, RouteMatchInterface $route_match) {
  * Implements hook_form_FORM_ID_alter().
  */
 function advupdate_form_update_settings_alter(&$form, FormStateInterface $form_state, $form_id) {
-  $config = \Drupal::config('advupdate.settings');
+  $advupdate_config = \Drupal::config('advupdate.settings');
 
-  $form['extend_email_report'] = [
+  $form['update_notification_extend_email_report'] = [
     '#type' => 'checkbox',
     '#title' => t('Expand the report using "Update Manager Advanced" module'),
-    '#default_value' => $config->get('notification.extend_email_report'),
+    '#default_value' => $advupdate_config->get('notification.extend_email_report'),
     '#description' => t('An email will include more detailed information with a list of modules.'),
   ];
 
@@ -52,11 +52,8 @@ function advupdate_form_update_settings_alter(&$form, FormStateInterface $form_s
  */
 function advupdate_form_update_settings_submit_handler($form, FormStateInterface $form_state) {
   \Drupal::configFactory()->getEditable('advupdate.settings')
-    ->set('notification.extend_email_report', $form_state->getValue('extend_email_report'))
+    ->set('notification.extend_email_report', $form_state->getValue('update_notification_extend_email_report'))
     ->save();
-
-   \Drupal::service('plugin.manager.mail')->mail('update', 'status_notify', 'ruslan.piskarev@gmail.com', 'en');
-
 }
 
 /**
@@ -65,14 +62,11 @@ function advupdate_form_update_settings_submit_handler($form, FormStateInterface
 function advupdate_mail_alter(&$message) {
   if ($message['id'] == 'update_status_notify'
     && \Drupal::config('advupdate.settings')->get('notification.extend_email_report') == 1) {
-    $message['body'][] = _advupdate_mail_additional_data();
+    $message['body'][] = "\n" . _advupdate_mail_additional_data();
     $message['body'][] = "\n"
-      . t('The additional data was added by "%module_name" module.',
-        [
-          '%module_name' => Link::fromTextAndUrl('Update Manager Advanced',
-            Url::fromUri('https://www.drupal.org/project/advupdate'))
-            ->toString(),
-        ]
+      . t('The additional data was added by Update Manager Advanced module :url.', [
+        ':url' => Url::fromUri('https://www.drupal.org/project/advupdate', ['absolute' => TRUE])->toString(),
+      ]
       );
   }
 }
@@ -112,7 +106,8 @@ function _advupdate_mail_additional_data() {
     // The project name to display can vary based on the info we have.
     if (!empty($project['title'])) {
       if (!empty($project['link'])) {
-        $project_name = Link::fromTextAndUrl($project['title'], Url::fromUri($project['link']))->toString();
+        $project_name = Link::fromTextAndUrl($project['title'], Url::fromUri($project['link'], ['absolute' => TRUE]))
+          ->toString();
       }
       else {
         $project_name = $project['title'];
