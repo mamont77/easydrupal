@@ -6,6 +6,7 @@
 
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Url;
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\update\UpdateManagerInterface;
 use Drupal\update\UpdateFetcherInterface;
 
@@ -25,13 +26,47 @@ function advupdate_help($route_name, RouteMatchInterface $route_match) {
   }
 }
 
+//update-settings
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function advupdate_form_update_settings_alter(&$form, FormStateInterface $form_state, $form_id) {
+  $config = \Drupal::config('advupdate.settings');
+
+  $form['extend_email_report'] = [
+    '#type' => 'checkbox',
+    '#title' => t('Expand the report using "Update Manager Advanced" module'),
+    '#default_value' => $config->get('notification.extend_email_report'),
+    '#description' => t('An email will include more detailed information with a list of modules.'),
+  ];
+
+  $form['actions']['submit']['#submit'][] = 'advupdate_form_update_settings_submit_handler';
+}
+
+
+/**
+ * Save "extend_email_report" to configuration.
+ *
+ * @param $form
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ */
+function advupdate_form_update_settings_submit_handler($form, FormStateInterface $form_state) {
+  \Drupal::configFactory()->getEditable('advupdate.settings')
+    ->set('notification.extend_email_report', $form_state->getValue('extend_email_report'))
+    ->save();
+}
+
 /**
  * Implements hook_mail_alter().
  */
 function advupdate_mail_alter(&$message) {
   if ($message['id'] == 'update_status_notify') {
-    $message['body'][] = _advupdate_mail_additional_data();
-    $message['body'][] = "\n" . t('The additional data was added by "Update Manager Advanced".');
+    $config = \Drupal::config('advupdate.settings');
+    if ($config->get('notification.extend_email_report') == 1) {
+      $message['body'][] = _advupdate_mail_additional_data();
+      $message['body'][] = "\n" . t('The additional data was added by "Update Manager Advanced".');
+    }
   }
 }
 
