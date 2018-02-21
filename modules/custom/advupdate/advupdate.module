@@ -55,7 +55,7 @@ function advupdate_form_update_settings_submit_handler($form, FormStateInterface
     ->set('notification.extend_email_report', $form_state->getValue('extend_email_report'))
     ->save();
 
-  \Drupal::service('plugin.manager.mail')->mail('update', 'status_notify', 'ruslan.piskarev@gmail.com', 'en');
+  // \Drupal::service('plugin.manager.mail')->mail('update', 'status_notify', 'ruslan.piskarev@gmail.com', 'en');
 
 }
 
@@ -66,7 +66,14 @@ function advupdate_mail_alter(&$message) {
   if ($message['id'] == 'update_status_notify'
     && \Drupal::config('advupdate.settings')->get('notification.extend_email_report') == 1) {
     $message['body'][] = _advupdate_mail_additional_data();
-    $message['body'][] = "\n" . t('The additional data was added by "Update Manager Advanced".');
+    $message['body'][] = "\n"
+      . t('The additional data was added by "%module_name" module.',
+        [
+          '%module_name' => Link::fromTextAndUrl('Update Manager Advanced',
+            Url::fromUri('https://www.drupal.org/project/advupdate'))
+            ->toString(),
+        ]
+      );
   }
 }
 
@@ -193,10 +200,7 @@ function _advupdate_mail_additional_data() {
     unset($entry['#weight']);
     $attributes = $entry['#attributes'];
     unset($entry['#attributes']);
-    $entry = [
-      'data' => $entry,
-    ] + $attributes;
-
+    $entry = ['data' => $entry] + $attributes;
     // Based on what kind of project this is, save the entry into the
     // appropriate subarray.
     switch ($project['project_type']) {
