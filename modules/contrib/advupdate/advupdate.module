@@ -41,7 +41,7 @@ function advupdate_form_update_settings_alter(&$form, FormStateInterface $form_s
     '#description' => t('An email will include more detailed information with a list of modules.'),
   ];
 
-  $form['actions']['submit']['#submit'][] = 'advupdate_form_update_settings_submit_handler';
+  $form['#submit'][] = 'advupdate_form_update_settings_submit_handler';
 }
 
 /**
@@ -61,12 +61,14 @@ function advupdate_form_update_settings_submit_handler($form, FormStateInterface
  */
 function advupdate_mail_alter(&$message) {
   if ($message['id'] == 'update_status_notify'
-    && \Drupal::config('advupdate.settings')->get('notification.extend_email_report') == 1) {
+    && \Drupal::config('advupdate.settings')
+      ->get('notification.extend_email_report') == 1) {
     $message['body'][] = "\n" . _advupdate_mail_additional_data();
     $message['body'][] = "\n"
-      . t('The additional data was added by Update Manager Advanced module :url.', [
-        ':url' => Url::fromUri('https://www.drupal.org/project/advupdate', ['absolute' => TRUE])->toString(),
-      ]
+      . t('This mail also uses an additional information added by "Update Manager Advanced" module :url if the data available.', [
+          ':url' => Url::fromUri('https://www.drupal.org/project/advupdate', ['absolute' => TRUE])
+            ->toString(),
+        ]
       );
   }
 }
@@ -79,10 +81,7 @@ function _advupdate_mail_additional_data() {
 
   $available = update_get_available(TRUE);
   if (empty($available)) {
-    $build['message'] = [
-      '#markup' => t('There was a problem getting update information. Try again later.'),
-    ];
-    return $build;
+    return '';
   }
 
   // This will be a nested array. The first key is the kind of project, which
