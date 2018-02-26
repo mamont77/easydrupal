@@ -8,6 +8,7 @@ use Drupal\Tests\examples\Functional\ExamplesBrowserTestBase;
  * Tests paging.
  *
  * @group pager_example
+ * @group examples
  */
 class PagerExampleTest extends ExamplesBrowserTestBase {
 
@@ -57,7 +58,7 @@ class PagerExampleTest extends ExamplesBrowserTestBase {
     $assert->pageTextContains($nodes[5]->getTitle());
 
     // Check the last page.
-    $this->drupalGet('examples/pager-example', array('query' => array('page' => 2)));
+    $this->drupalGet('examples/pager-example', ['query' => ['page' => 2]]);
     $assert->statusCodeEquals(200);
     $assert->linkNotExists('Next');
     $assert->linkByHrefExists('?page=1');

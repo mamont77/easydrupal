@@ -18,10 +18,9 @@ class ExampleUppercaseBlock extends BlockBase {
    * {@inheritdoc}
    */
   public function build() {
-    return array(
-      '#type' => 'markup',
-      '#markup' => $this->t("This block's title will be changed to uppercase. Any other block with 'uppercase' in the subject or title will also be altered. If you change this block's title through the UI to omit the word 'uppercase', it will still be altered to uppercase as the subject key has not been changed."),
-    );
+    return [
+      '#markup' => t("This block's title is changed to uppercase. Any block title which contains 'uppercase' will also be changed to uppercase."),
+    ];
   }
 
 }

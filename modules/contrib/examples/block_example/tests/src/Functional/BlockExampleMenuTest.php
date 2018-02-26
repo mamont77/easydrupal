@@ -19,7 +19,7 @@ class BlockExampleMenuTest extends BrowserTestBase {
    *
    * @var array
    */
-  public static $modules = array('block', 'block_example');
+  public static $modules = ['block', 'block_example'];
 
   /**
    * The installation profile to use with this test.
@@ -36,14 +36,15 @@ class BlockExampleMenuTest extends BrowserTestBase {
   public function testBlockExampleLink() {
     $this->drupalGet('');
     $this->assertLinkByHref('examples/block-example');
-  }
 
-  /**
-   * Tests block_example menus.
-   */
-  public function testBlockExampleMenu() {
     $this->drupalGet('examples/block-example');
     $this->assertResponse(200, 'Description page exists.');
+
+    // Verify that the block admin page link works.
+    $this->clickLink('the block admin page');
+    // Since it links to the admin page, we should get a permissions error and
+    // not 404.
+    $this->assertResponse(403);
   }
 
 }

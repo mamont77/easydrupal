@@ -18,14 +18,14 @@ class ExamplesTest extends WebTestBase {
    *
    * @var array
    */
-  public static $modules = array('examples', 'toolbar');
+  public static $modules = ['examples', 'toolbar'];
 
   /**
    * Test whether the module was installed.
    */
   public function testExamples() {
     // Verify that the toolbar tab and tray are showing and functioning.
-    $user = $this->drupalCreateUser(array('access toolbar'));
+    $user = $this->drupalCreateUser(['access toolbar']);
     $this->drupalLogin($user);
 
     // Check for the 'Examples' tab.
@@ -48,18 +48,19 @@ class ExamplesTest extends WebTestBase {
       'Found the Examples toolbar tray.'
     );
     // Assert that PHPUnit link does not appears in the tray.
-    $this->assertNoLink('PHPUnit example');
+    $phpunit_link = 'PHPUnit Example';
+    $this->assertNoLink($phpunit_link);
     $this->assertNoRaw('<li class="phpunit-example">');
 
     // Install phpunit_example and see if it appears in the toolbar. We use
     // phpunit_example because it's very light-weight.
-    $this->container->get('module_installer')->install(array('phpunit_example'), TRUE);
+    $this->container->get('module_installer')->install(['phpunit_example'], TRUE);
     // SimpleTest needs for us to reset all the caches.
     $this->resetAll();
 
     // Verify that PHPUnit appears in the tray.
     $this->drupalGet('');
-    $this->assertLink('PHPUnit example');
+    $this->assertLink($phpunit_link);
     // Assert that the PHPUnit tray item is present.
     $this->assertEqual(
       \count($this->xpath('//nav/div/div/nav/ul/li[@class="phpunit-example"]')),

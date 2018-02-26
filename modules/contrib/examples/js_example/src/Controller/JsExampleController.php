@@ -2,44 +2,22 @@
 
 namespace Drupal\js_example\Controller;
 
-use Drupal\Core\Controller\ControllerBase;
+use Drupal\examples\Utility\DescriptionTemplateTrait;
 
 /**
- * Controller for js_example pages.
+ * Controller for Hooks example description page.
  *
- * @ingroup js_example
+ * This class uses the DescriptionTemplateTrait to display text we put in the
+ * templates/description.html.twig file.
  */
-class JsExampleController extends ControllerBase {
+class JsExampleController {
+  use DescriptionTemplateTrait;
 
   /**
-   * Example info page.
-   *
-   * @return array
-   *   A renderable array.
+   * {@inheritdoc}
    */
-  public function info() {
-    $build['content'] = [
-      'first_line' => [
-        '#prefix' => '<p>',
-        '#markup' => 'Drupal includes jQuery and jQuery UI.',
-        '#suffix' => '</p>',
-      ],
-      'second_line' => [
-        '#prefix' => '<p>',
-        '#markup' => 'We have two examples of using these:',
-        '#suffix' => '</p>',
-      ],
-      'examples_list' => [
-        '#theme' => 'item_list',
-        '#items' => [
-          'An accordion-style section reveal effect. This demonstrates calling a jQuery UI function using Drupal&#39;s rendering system.',
-          'Sorting according to numeric &#39;weight.&#39; This demonstrates attaching your own JavaScript code to individual page elements using Drupal&#39;s rendering system.',
-        ],
-        '#type' => 'ol',
-      ],
-    ];
-
-    return $build;
+  protected function getModuleName() {
+    return 'js_example';
   }
 
   /**
@@ -77,22 +55,22 @@ class JsExampleController extends ControllerBase {
    */
   public function getJsWeightImplementation() {
     // Create an array of items with random-ish weight values.
-    $weights = array(
+    $weights = [
       'red' => -4,
       'blue' => -2,
       'green' => -1,
       'brown' => -2,
       'black' => -1,
       'purple' => -5,
-    );
+    ];
 
     // Start building the content.
-    $build = array();
+    $build = [];
     // Main container DIV. We give it a unique ID so that the JavaScript can
     // find it using jQuery.
-    $build['content'] = array(
-      '#markup' => '<div id="js-weights"></div>',
-    );
+    $build['content'] = [
+      '#markup' => '<div id="js-weights" class="js-weights"></div>',
+    ];
     // Attach library containing css and js files.
     $build['#attached']['library'][] = 'js_example/js_example.weights';
     // Attach the weights array to our JavaScript settings. This allows the
@@ -118,10 +96,10 @@ class JsExampleController extends ControllerBase {
     $title = t('Click sections to expand or collapse:');
     // Build using our theme. This gives us content, which is not a good
     // practice, but which allows us to demonstrate adding JavaScript here.
-    $build['myelement'] = array(
+    $build['myelement'] = [
       '#theme' => 'js_example_accordion',
       '#title' => $title,
-    );
+    ];
     // Add our script. It is tiny, but this demonstrates how to add it. We pass
     // our module name followed by the internal library name declared in
     // libraries yml file.

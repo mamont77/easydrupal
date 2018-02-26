@@ -5,9 +5,7 @@ namespace Drupal\Tests\field_permission_example\Kernel;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\FieldItemInterface;
 use Drupal\Tests\field\Kernel\FieldKernelTestBase;
-
-// We can use UserCreationTrait in Kernel tests as well as with Simpletests.
-use Drupal\simpletest\UserCreationTrait;
+use Drupal\Tests\user\Traits\UserCreationTrait;
 
 /**
  * Tests our sticky-note field type.
@@ -21,6 +19,7 @@ use Drupal\simpletest\UserCreationTrait;
  * @see \Drupal\KernelTests\KernelTestBase
  *
  * @group field_permission_example
+ * @group examples
  */
 class FieldNoteItemTest extends FieldKernelTestBase {
 
