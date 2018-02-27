@@ -65,7 +65,7 @@ function advupdate_mail_alter(&$message) {
       ->get('notification.extend_email_report') == 1) {
     $message['body'][] = "\n" . _advupdate_mail_additional_data();
     $message['body'][] = "\n"
-      . t('This mail also uses an additional information added by "Update Manager Advanced" module :url if the data available.', [
+      . t('This email also uses an additional information added by "Update Manager Advanced" module :url if the data available.', [
           ':url' => Url::fromUri('https://www.drupal.org/project/advupdate', ['absolute' => TRUE])
             ->toString(),
         ]
@@ -74,10 +74,12 @@ function advupdate_mail_alter(&$message) {
 }
 
 /**
- * Render table for availables for updating core/modules/themes.
+ * Render a list for available updating of core/modules/themes.
  */
 function _advupdate_mail_additional_data() {
+  module_load_include('module', 'update');
   module_load_include('inc', 'update', 'update.manager');
+  module_load_include('inc', 'update', 'update.compare');
 
   $available = update_get_available(TRUE);
   if (empty($available)) {
@@ -86,15 +88,14 @@ function _advupdate_mail_additional_data() {
 
   // This will be a nested array. The first key is the kind of project, which
   // can be either 'enabled', 'disabled', 'manual' (projects which require
-  // manual updates, such as core). Then, each subarray is an array of
+  // manual updates, such as core). Then, each sub-array is an array of
   // projects of that type, indexed by project short name, and containing an
-  // array of data for cells in that project's row in the appropriate table.
+  // array of data for items.
   $projects = [];
 
   // This stores the actual download link we're going to update from for each
   // project in the build, regardless of if it's enabled or disabled.
   $build['project_downloads'] = ['#tree' => TRUE];
-  module_load_include('inc', 'update', 'update.compare');
 
   $project_data = update_calculate_project_data($available);
   foreach ($project_data as $name => $project) {
@@ -129,50 +130,24 @@ function _advupdate_mail_additional_data() {
     }
 
     $recommended_release = $project['releases'][$project['recommended']];
-    $recommended_version = '{{ release_version }} (<a href="{{ release_link }}" title="{{ project_title }}">{{ release_notes }}</a>)';
-    if ($recommended_release['version_major'] != $project['existing_major']) {
-      $recommended_version .= '<div title="{{ major_update_warning_title }}" class="update-major-version-warning">{{ major_update_warning_text }}</div>';
-    }
-
-    $recommended_version = [
-      '#type' => 'inline_template',
-      '#template' => $recommended_version,
-      '#context' => [
-        'release_version' => $recommended_release['version'],
-        'release_link' => $recommended_release['release_link'],
-        'project_title' => t('Release notes for @project_title', ['@project_title' => $project['title']]),
-        'major_update_warning_title' => t('Major upgrade warning'),
-        'major_update_warning_text' => t('This update is a major version update which means that it may not be backwards compatible with your currently running version. It is recommended that you read the release notes and proceed at your own risk.'),
-        'release_notes' => t('Release notes'),
-      ],
-    ];
 
     // Create an entry for this project.
-    $entry = [
-      'title' => $project_name,
-      'installed_version' => $project['existing_version'],
-      'recommended_version' => ['data' => $recommended_version],
-    ];
+    $entry = [];
 
     switch ($project['status']) {
       case UpdateManagerInterface::NOT_SECURE:
       case UpdateManagerInterface::REVOKED:
-        $entry['title'] .= ' ' . t('(Security update)');
-        $entry['#weight'] = -2;
-        $type = 'security';
+        $project_name .= ' ' . t('(Security update)');
         break;
 
       case UpdateManagerInterface::NOT_SUPPORTED:
-        $type = 'unsupported';
-        $entry['title'] .= ' ' . t('(Unsupported)');
-        $entry['#weight'] = -1;
+        $project_name .= ' ' . t('(Unsupported)');
         break;
 
       case UpdateFetcherInterface::UNKNOWN:
       case UpdateFetcherInterface::NOT_FETCHED:
       case UpdateFetcherInterface::NOT_CHECKED:
       case UpdateManagerInterface::NOT_CURRENT:
-        $type = 'recommended';
         break;
 
       default:
@@ -180,23 +155,18 @@ function _advupdate_mail_additional_data() {
         continue 2;
     }
 
-    // Use the project title for the table.
+    // Use the project title and an additional information.
     $entry['title'] = [
       'data' => [
-        '#title' => $entry['title'],
-        '#markup' => $entry['title'],
+        '#markup' => $project_name . ': '
+          . t('Installed') . ' [' . $project['existing_version'] . '] -> '
+          . t('Recommended') . ' [' . $recommended_release['version'] . '] | '
+          . t('Release notes') . ' [' . $recommended_release['release_link'] . ']',
       ],
     ];
-    $entry['#attributes'] = ['class' => ['update-' . $type]];
 
-    // Since the data formats are incompatible,
-    // we convert now to the format expected by '#theme' => 'table'.
-    unset($entry['#weight']);
-    $attributes = $entry['#attributes'];
-    unset($entry['#attributes']);
-    $entry = ['data' => $entry] + $attributes;
     // Based on what kind of project this is, save the entry into the
-    // appropriate subarray.
+    // appropriate sub-array.
     switch ($project['project_type']) {
       case 'core':
         // Core needs manual updates at this time.
@@ -215,44 +185,27 @@ function _advupdate_mail_additional_data() {
     }
   }
 
-  $headers = [
-    'title' => [
-      'data' => t('Name'),
-      'class' => ['update-project-name'],
-    ],
-    'installed_version' => t('Installed version'),
-    'recommended_version' => t('Recommended version'),
-  ];
-
   if (!empty($projects['enabled'])) {
     $build['projects'] = [
-      '#type' => 'table',
-      '#header' => $headers,
-      '#rows' => $projects['enabled'],
+      '#theme' => 'item_list',
+      '#title' => t('Enabled'),
+      '#items' => $projects['enabled'],
     ];
-    if (!empty($projects['disabled'])) {
-      $build['projects']['#prefix'] = '<h2>' . t('Enabled') . '</h2>';
-    }
   }
 
   if (!empty($projects['disabled'])) {
     $build['disabled_projects'] = [
-      '#type' => 'table',
-      '#header' => $headers,
-      '#rows' => $projects['disabled'],
-      '#weight' => 1,
-      '#prefix' => '<h2>' . t('Disabled') . '</h2>',
+      '#theme' => 'item_list',
+      '#title' => t('Disabled'),
+      '#items' => $projects['disabled'],
     ];
   }
 
   if (!empty($projects['manual'])) {
-    $prefix = '<h2>' . t('Manual updates required') . '</h2>';
     $build['manual_updates'] = [
-      '#type' => 'table',
-      '#header' => $headers,
-      '#rows' => $projects['manual'],
-      '#prefix' => $prefix,
-      '#weight' => 120,
+      '#theme' => 'item_list',
+      '#title' => t('Manual updates required'),
+      '#items' => $projects['manual'],
     ];
   }
 
