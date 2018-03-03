@@ -7,7 +7,6 @@
 
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Url;
-use Drupal\Core\Link;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\update\UpdateManagerInterface;
 use Drupal\update\UpdateFetcherInterface;
@@ -45,7 +44,7 @@ function advupdate_form_update_settings_alter(&$form, FormStateInterface $form_s
 }
 
 /**
- * Save "extend_email_report" to configuration.
+ * Save "notification.extend_email_report" to the configuration.
  *
  * @param $form
  * @param \Drupal\Core\Form\FormStateInterface $form_state
@@ -63,13 +62,16 @@ function advupdate_mail_alter(&$message) {
   if ($message['id'] == 'update_status_notify'
     && \Drupal::config('advupdate.settings')
       ->get('notification.extend_email_report') == 1) {
-    $message['body'][] = "\n" . _advupdate_mail_additional_data();
-    $message['body'][] = "\n"
-      . t('This email also uses an additional information added by "Update Manager Advanced" module :url if the data available.', [
-          ':url' => Url::fromUri('https://www.drupal.org/project/advupdate', ['absolute' => TRUE])
-            ->toString(),
-        ]
-      );
+    $additional_data = _advupdate_mail_additional_data();
+    if ($additional_data != '') {
+      $message['body'][] = "\n" . $additional_data;
+      $message['body'][] = "\n"
+        . t('This email also uses an additional information added by "Update Manager Advanced" module :url if the data available.', [
+            ':url' => Url::fromUri('https://www.drupal.org/project/advupdate', ['absolute' => TRUE])
+              ->toString(),
+          ]
+        );
+    }
   }
 }
 
@@ -105,13 +107,7 @@ function _advupdate_mail_additional_data() {
     }
     // The project name to display can vary based on the info we have.
     if (!empty($project['title'])) {
-      if (!empty($project['link'])) {
-        $project_name = Link::fromTextAndUrl($project['title'], Url::fromUri($project['link'], ['absolute' => TRUE]))
-          ->toString();
-      }
-      else {
-        $project_name = $project['title'];
-      }
+      $project_name = $project['title'];
     }
     elseif (!empty($project['info']['name'])) {
       $project_name = $project['info']['name'];
@@ -130,9 +126,6 @@ function _advupdate_mail_additional_data() {
     }
 
     $recommended_release = $project['releases'][$project['recommended']];
-
-    // Create an entry for this project.
-    $entry = [];
 
     switch ($project['status']) {
       case UpdateManagerInterface::NOT_SECURE:
@@ -155,13 +148,19 @@ function _advupdate_mail_additional_data() {
         continue 2;
     }
 
-    // Use the project title and an additional information.
+    if (!empty($project['link'])) {
+      $project_name .= "\n" . Url::fromUri($project['link'], ['absolute' => TRUE])
+          ->toString();
+    }
+
+    // Create an entry for this project and use the project title
+    // and an additional information.
     $entry['title'] = [
       'data' => [
-        '#markup' => $project_name . ': '
-          . t('Installed') . ' [' . $project['existing_version'] . '] -> '
-          . t('Recommended') . ' [' . $recommended_release['version'] . '] | '
-          . t('Release notes') . ' [' . $recommended_release['release_link'] . ']',
+        '#markup' => $project_name . "\n"
+          . t('Installed') . ': ' . $project['existing_version'] . "\n"
+          . t('Recommended') . ' : ' . $recommended_release['version'] . "\n"
+          . t('Release notes') . ': ' . $recommended_release['release_link'] . "\n",
       ],
     ];
 
