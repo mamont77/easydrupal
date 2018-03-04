@@ -8,8 +8,8 @@ dependencies:
   - update
 configure: update.settings
 
-# Information added by Drupal.org packaging script on 2018-03-03
-version: '8.x-1.x-dev'
+# Information added by Drupal.org packaging script on 2018-03-04
+version: '8.x-1.0'
 core: '8.x'
 project: 'advupdate'
-datestamp: 1520082786
+datestamp: 1520169192
