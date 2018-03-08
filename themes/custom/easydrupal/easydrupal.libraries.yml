@@ -11,7 +11,12 @@ easing:
   dependencies:
     - core/jquery
 
-bootstrap-scripts:
+framework:
+  css:
+    theme:
+      css/style.css: {}
+      css/landing-page.css: {}
+      css/geshifilter.generate_css.css: {}
   js:
 #    bootstrap/assets/javascripts/bootstrap/affix.js: {}
 #    bootstrap/assets/javascripts/bootstrap/alert.js: {}
@@ -25,19 +30,5 @@ bootstrap-scripts:
 #    bootstrap/assets/javascripts/bootstrap/scrollspy.js: {}
 #    bootstrap/assets/javascripts/bootstrap/tab.js: {}
     bootstrap/assets/javascripts/bootstrap/transition.js: {}
-
-global-styling:
-  css:
-    theme:
-      css/style.css: {}
-      css/landing-page.css: {}
-      css/geshifilter.generate_css.css: {}
-  js:
     js/scripts.js: {}
     js/landing_page.js: {}
-  dependencies:
-    - core/jquery
-    - core/drupal.ajax
-    - core/drupal
-    - core/drupalSettings
-    - core/jquery.once
