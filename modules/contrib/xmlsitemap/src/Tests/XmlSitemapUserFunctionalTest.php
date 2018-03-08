@@ -12,7 +12,7 @@ use Drupal\user\Entity\Role;
  */
 class XmlSitemapUserFunctionalTest extends XmlSitemapTestBase {
 
-  protected $accounts = [];
+  protected $accounts = array();
 
   /**
    * {@inheritdoc}
@@ -20,20 +20,16 @@ class XmlSitemapUserFunctionalTest extends XmlSitemapTestBase {
   protected function setUp() {
     parent::setUp();
 
-    // Allow anonymous user to view user profiles.
+    // allow anonymous user to view user profiles
     $user_role = Role::load(AccountInterface::ANONYMOUS_ROLE);
     $user_role->grantPermission('access user profiles');
     $user_role->save();
 
     xmlsitemap_link_bundle_enable('user', 'user');
 
-    // Create the users.
-    $this->admin_user = $this->drupalCreateUser([
-      'administer users',
-      'administer permissions',
-      'administer xmlsitemap',
-    ]);
-    $this->normal_user = $this->drupalCreateUser(['access content']);
+    // Create the users
+    $this->admin_user = $this->drupalCreateUser(array('administer users', 'administer permissions', 'administer xmlsitemap'));
+    $this->normal_user = $this->drupalCreateUser(array('access content'));
 
     // Update the normal user to make its sitemap link visible.
     $account = clone $this->normal_user;
@@ -48,11 +44,11 @@ class XmlSitemapUserFunctionalTest extends XmlSitemapTestBase {
     $this->assertSitemapLinkNotVisible('user', $this->normal_user->id());
 
     // Mark the user as blocked.
-    $edit = [
+    $edit = array(
       'xmlsitemap[status]' => 1,
-    ];
+    );
 
-    // This will pass when https://www.drupal.org/node/360925 is fixed.
+    // This will pass when http://drupal.org/node/360925 is fixed.
     $this->drupalPostForm('user/' . $this->normal_user->id() . '/edit', $edit, t('Save'));
     $this->assertText('The changes have been saved.');
     $this->assertSitemapLinkVisible('user', $this->normal_user->id());

@@ -126,7 +126,7 @@ interface XmlSitemapInterface extends ConfigEntityInterface {
   /**
    * Sets if the sitemap was updated.
    *
-   * @param bool $updated
+   * @param updated
    *   Check is sitemap was updated.
    *
    * @return \Drupal\xmlsitemap\XmlSitemapInterface

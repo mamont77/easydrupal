@@ -1,20 +1,17 @@
 <?php
 
-/**
- * @file
- * Main file for the XML sitemap engines test.
- */
-
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Drupal\Component\Utility\UrlHelper;
 use Drupal\Core\Url;
 
 /**
  * Implements hook_xmlsitemap_engine_info().
  */
 function xmlsitemap_engines_test_xmlsitemap_engine_info() {
-  $engines['simpletest'] = [
+  $engines['simpletest'] = array(
     'name' => t('SimpleTest'),
     'url' => 'http://example.com/',
-  ];
+  );
   return $engines;
 }
 
@@ -22,5 +19,5 @@ function xmlsitemap_engines_test_xmlsitemap_engine_info() {
  * Implements hook_xmlsitemap_engine_info_alter().
  */
 function xmlsitemap_engines_test_xmlsitemap_engine_info_alter(&$engines) {
-  $engines['simpletest']['url'] = Url::fromUri('internal:/ping', ['absolute' => TRUE, 'query' => ['sitemap' => '']])->toString() . '[sitemap]';
+  $engines['simpletest']['url'] = Url::fromUri('internal:/ping', array('absolute' => TRUE, 'query' => array('sitemap' => '')))->toString() . '[sitemap]';
 }

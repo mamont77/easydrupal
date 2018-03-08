@@ -14,10 +14,10 @@
  * Provide a list of supported sitemap engines.
  */
 function hook_xmlsitemap_engine_info() {
-  $engines['example'] = [
+  $engines['example'] = array(
     'name' => t('Example search engine'),
     'url' => 'http://example.com/ping?sitemap=[sitemap]',
-  ];
+  );
   return $engines;
 }
 

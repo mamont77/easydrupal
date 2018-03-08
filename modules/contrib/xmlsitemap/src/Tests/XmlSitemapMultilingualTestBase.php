@@ -22,13 +22,7 @@ abstract class XmlSitemapMultilingualTestBase extends XmlSitemapTestBase {
     // Call parent::setUp() allowing test cases to pass further modules.
     parent::setUp();
 
-    $this->admin_user = $this->drupalCreateUser([
-      'administer languages',
-      'access administration pages',
-      'administer site configuration',
-      'administer xmlsitemap',
-      'access content',
-    ]);
+    $this->admin_user = $this->drupalCreateUser(array('administer languages', 'access administration pages', 'administer site configuration', 'administer xmlsitemap', 'access content'));
     $this->drupalLogin($this->admin_user);
 
     if (!$this->languageManager->getLanguage('fr')) {
@@ -48,10 +42,10 @@ abstract class XmlSitemapMultilingualTestBase extends XmlSitemapTestBase {
     }
 
     $sitemap = XmlSitemap::create();
-    $sitemap->context = ['language' => 'en'];
+    $sitemap->context = array('language' => 'en');
     xmlsitemap_sitemap_save($sitemap);
     $sitemap = XmlSitemap::create();
-    $sitemap->context = ['language' => 'fr'];
+    $sitemap->context = array('language' => 'fr');
     xmlsitemap_sitemap_save($sitemap);
   }
 

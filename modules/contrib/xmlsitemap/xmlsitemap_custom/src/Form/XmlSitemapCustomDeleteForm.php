@@ -25,8 +25,6 @@ class XmlSitemapCustomDeleteForm extends ConfirmFormBase {
    * The path of the custom link.
    *
    * @var string
-   *
-   * @codingStandardsIgnoreStart
    */
   protected $custom_link;
 
@@ -35,8 +33,6 @@ class XmlSitemapCustomDeleteForm extends ConfirmFormBase {
    *
    * @param \Drupal\xmlsitemap\XmlSitemapLinkStorageInterface $link_storage
    *   The xmlsitemap link storage service.
-   *
-   * @codingStandardsIgnoreEnd
    */
   public function __construct(XmlSitemapLinkStorageInterface $link_storage) {
     $this->linkStorage = $link_storage;
@@ -89,7 +85,7 @@ class XmlSitemapCustomDeleteForm extends ConfirmFormBase {
    * {@inheritdoc}
    */
   public function getQuestion() {
-    return $this->t('Are you sure you want to delete %link?', ['%link' => $this->custom_link['loc']]);
+    return $this->t('Are you sure you want to delete %link?', array('%link' => $this->custom_link['loc']));
   }
 
   /**
@@ -97,8 +93,8 @@ class XmlSitemapCustomDeleteForm extends ConfirmFormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $this->linkStorage->delete('custom', $this->custom_link['id']);
-    $this->logger('xmlsitemap')->debug('The custom link for %loc has been deleted.', ['%loc' => $this->custom_link['loc']]);
-    drupal_set_message($this->t('The custom link for %loc has been deleted.', ['%loc' => $this->custom_link['loc']]));
+    $this->logger('xmlsitemap')->debug('The custom link for %loc has been deleted.', array('%loc' => $this->custom_link['loc']));
+    drupal_set_message($this->t('The custom link for %loc has been deleted.', array('%loc' => $this->custom_link['loc'])));
 
     $form_state->setRedirectUrl($this->getCancelUrl());
   }

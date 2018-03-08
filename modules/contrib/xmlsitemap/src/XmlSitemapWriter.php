@@ -19,14 +19,14 @@ class XmlSitemapWriter extends \XMLWriter {
   /**
    * Counter for the sitemap elements.
    *
-   * @var int
+   * @var integer
    */
   protected $sitemapElementCount = 0;
 
   /**
    * Flush counter for sitemap links.
    *
-   * @var int
+   * @var integer
    */
   protected $linkCountFlush = 500;
 
@@ -41,11 +41,8 @@ class XmlSitemapWriter extends \XMLWriter {
    * Sitemap page to be written.
    *
    * @var string
-   *
-   * @codingStandardsIgnoreStart
    */
   protected $sitemap_page = NULL;
-  // @codingStandardsIgnoreEnd
 
   /**
    * Name of the root element of the document.
@@ -84,7 +81,7 @@ class XmlSitemapWriter extends \XMLWriter {
   public function openUri($uri) {
     $return = parent::openUri($uri);
     if (!$return) {
-      throw new XmlSitemapGenerationException(t('Could not open file @file for writing.', ['@file' => $uri]));
+      throw new XmlSitemapGenerationException(t('Could not open file @file for writing.', array('@file' => $uri)));
     }
     return $return;
   }
@@ -98,7 +95,6 @@ class XmlSitemapWriter extends \XMLWriter {
    *   The encoding of the document.
    * @param string $standalone
    *   Yes or No.
-   *
    * @throws XmlSitemapGenerationException
    *   Throws exception when document cannot be started.
    *
@@ -109,7 +105,7 @@ class XmlSitemapWriter extends \XMLWriter {
     $this->setIndent(FALSE);
     $result = parent::startDocument($version, $encoding);
     if (!$result) {
-      throw new XmlSitemapGenerationException(t('Unknown error occurred while writing to file @file.', ['@file' => $this->uri]));
+      throw new XmlSitemapGenerationException(t('Unknown error occurred while writing to file @file.', array('@file' => $this->uri)));
     }
     if (\Drupal::config('xmlsitemap.settings')->get('xsl')) {
       $this->writeXSL();
@@ -121,13 +117,10 @@ class XmlSitemapWriter extends \XMLWriter {
   /**
    * Adds the XML stylesheet to the XML page.
    *
-   * @return mixed
+   * @return bool
    *   Returns TRUE on success.
-   *
-   * @codingStandardsIgnoreStart
    */
   public function writeXSL() {
-    // @codingStandardsIgnoreEnd
     $this->writePi('xml-stylesheet', 'type="text/xsl" href="' . Url::fromRoute('xmlsitemap.sitemap_xsl')->toString() . '"');
     $this->writeRaw(PHP_EOL);
   }
@@ -150,13 +143,10 @@ class XmlSitemapWriter extends \XMLWriter {
   /**
    * Generate one chunk of the sitemap.
    *
-   * @return int
+   * @return integer
    *   Number of XML elements written.
-   *
-   * @codingStandardsIgnoreStart
    */
   public function generateXML() {
-    // @codingStandardsIgnoreEnd
     return \Drupal::service('xmlsitemap_generator')->generateChunk($this->sitemap, $this, $this->sitemap_page);
   }
 
@@ -165,6 +155,7 @@ class XmlSitemapWriter extends \XMLWriter {
    *
    * @param string $name
    *   Element name.
+   *
    * @param bool $root
    *   Specify if it is root element or not.
    */
@@ -225,11 +216,8 @@ class XmlSitemapWriter extends \XMLWriter {
    *
    * @return string
    *   Document uri.
-   *
-   * @codingStandardsIgnoreStart
    */
   public function getURI() {
-    // @codingStandardsIgnoreEnd
     return $this->uri;
   }
 
@@ -255,15 +243,13 @@ class XmlSitemapWriter extends \XMLWriter {
     $return = parent::endDocument();
 
     if (!$return) {
-      throw new XmlSitemapGenerationException(t('Unknown error occurred while writing to file @file.', ['@file' => $this->uri]));
+      throw new XmlSitemapGenerationException(t('Unknown error occurred while writing to file @file.', array('@file' => $this->uri)));
     }
 
-    // @codingStandardsIgnoreStart
     if (xmlsitemap_var('gz')) {
       $file_gz = $file . '.gz';
       file_put_contents($file_gz, gzencode(file_get_contents($file), 9));
     }
-    // @codingStandardsIgnoreEnd
 
     return $return;
   }

@@ -15,11 +15,7 @@ class XmlSitemapUnitTest extends XmlSitemapTestBase {
   protected function setUp() {
     parent::setUp();
 
-    $this->admin_user = $this->drupalCreateUser([
-      'access content',
-      'administer site configuration',
-      'administer xmlsitemap',
-    ]);
+    $this->admin_user = $this->drupalCreateUser(array('access content', 'administer site configuration', 'administer xmlsitemap'));
   }
 
   /**
@@ -41,7 +37,7 @@ class XmlSitemapUnitTest extends XmlSitemapTestBase {
    */
   public function testGetChangefreq() {
     // The test values.
-    $values = [
+    $values = array(
       0,
       mt_rand(1, XMLSITEMAP_FREQUENCY_ALWAYS),
       mt_rand(XMLSITEMAP_FREQUENCY_ALWAYS + 1, XMLSITEMAP_FREQUENCY_HOURLY),
@@ -50,10 +46,10 @@ class XmlSitemapUnitTest extends XmlSitemapTestBase {
       mt_rand(XMLSITEMAP_FREQUENCY_WEEKLY + 1, XMLSITEMAP_FREQUENCY_MONTHLY),
       mt_rand(XMLSITEMAP_FREQUENCY_MONTHLY + 1, XMLSITEMAP_FREQUENCY_YEARLY),
       mt_rand(XMLSITEMAP_FREQUENCY_YEARLY + 1, mt_getrandmax()),
-    ];
+    );
 
     // The expected values.
-    $expected = [
+    $expected = array(
       FALSE,
       'always',
       'hourly',
@@ -62,7 +58,7 @@ class XmlSitemapUnitTest extends XmlSitemapTestBase {
       'monthly',
       'yearly',
       'never',
-    ];
+    );
 
     foreach ($values as $i => $value) {
       $actual = xmlsitemap_get_changefreq($value);
@@ -86,7 +82,7 @@ class XmlSitemapUnitTest extends XmlSitemapTestBase {
     $this->assertEqual(db_query("SELECT COUNT(id) FROM {xmlsitemap}")->fetchField(), 4);
 
     // Add a disabled link, should not change the chunk count.
-    $this->addSitemapLink(['status' => FALSE]);
+    $this->addSitemapLink(array('status' => FALSE));
     $this->assertEqual(xmlsitemap_get_chunk_count(TRUE), 1);
 
     // Add a visible link, should finally bump up the chunk count.
@@ -109,15 +105,15 @@ class XmlSitemapUnitTest extends XmlSitemapTestBase {
    */
   public function testCalculateChangefreq() {
     // The test values.
-    $values = [
-      [],
-      [REQUEST_TIME],
-      [REQUEST_TIME, REQUEST_TIME - 200],
-      [REQUEST_TIME - 200, REQUEST_TIME, REQUEST_TIME - 600],
-    ];
+    $values = array(
+      array(),
+      array(REQUEST_TIME),
+      array(REQUEST_TIME, REQUEST_TIME - 200),
+      array(REQUEST_TIME - 200, REQUEST_TIME, REQUEST_TIME - 600),
+    );
 
     // Expected values.
-    $expected = [0, 0, 200, 300];
+    $expected = array(0, 0, 200, 300);
 
     foreach ($values as $i => $value) {
       $actual = xmlsitemap_calculate_changefreq($value);
@@ -130,18 +126,14 @@ class XmlSitemapUnitTest extends XmlSitemapTestBase {
    */
   public function testRecalculateChangefreq() {
     // The starting test value.
-    $value = [
-      'lastmod' => REQUEST_TIME - 1000,
-      'changefreq' => 0,
-      'changecount' => 0,
-    ];
+    $value = array('lastmod' => REQUEST_TIME - 1000, 'changefreq' => 0, 'changecount' => 0);
 
     // Expected values.
-    $expecteds = [
-      ['lastmod' => REQUEST_TIME, 'changefreq' => 1000, 'changecount' => 1],
-      ['lastmod' => REQUEST_TIME, 'changefreq' => 500, 'changecount' => 2],
-      ['lastmod' => REQUEST_TIME, 'changefreq' => 333, 'changecount' => 3],
-    ];
+    $expecteds = array(
+      array('lastmod' => REQUEST_TIME, 'changefreq' => 1000, 'changecount' => 1),
+      array('lastmod' => REQUEST_TIME, 'changefreq' => 500, 'changecount' => 2),
+      array('lastmod' => REQUEST_TIME, 'changefreq' => 333, 'changecount' => 3),
+    );
 
     foreach ($expecteds as $expected) {
       xmlsitemap_recalculate_changefreq($value);
@@ -153,13 +145,7 @@ class XmlSitemapUnitTest extends XmlSitemapTestBase {
    * Tests for XmlSitemapLinkStorage::save().
    */
   public function testSaveLink() {
-    $link = [
-      'type' => 'testing',
-      'subtype' => '',
-      'id' => 1,
-      'loc' => 'testing',
-      'status' => 1,
-    ];
+    $link = array('type' => 'testing', 'subtype' => '', 'id' => 1, 'loc' => 'testing', 'status' => 1);
     $this->linkStorage->save($link);
     $this->assertFlag('xmlsitemap_regenerate_needed', TRUE);
 
@@ -209,14 +195,14 @@ class XmlSitemapUnitTest extends XmlSitemapTestBase {
    */
   public function testLinkDelete() {
     // Add our testing data.
-    $link1 = $this->addSitemapLink(['loc' => '/testing1', 'status' => 0]);
-    $link2 = $this->addSitemapLink(['loc' => '/testing1', 'status' => 1]);
-    $link3 = $this->addSitemapLink(['status' => 0]);
+    $link1 = $this->addSitemapLink(array('loc' => 'testing1', 'status' => 0));
+    $link2 = $this->addSitemapLink(array('loc' => 'testing1', 'status' => 1));
+    $link3 = $this->addSitemapLink(array('status' => 0));
     $this->state->set('xmlsitemap_regenerate_needed', FALSE);
 
     // Test delete multiple links.
     // Test that the regenerate flag is set when visible links are deleted.
-    $deleted = $this->linkStorage->deleteMultiple(['loc' => '/testing1']);
+    $deleted = $this->linkStorage->deleteMultiple(array('loc' => 'testing1'));
     $this->assertEqual($deleted, 2);
     $this->assertFalse($this->linkStorage->load($link1['type'], $link1['id']));
     $this->assertFalse($this->linkStorage->load($link2['type'], $link2['id']));
@@ -230,64 +216,47 @@ class XmlSitemapUnitTest extends XmlSitemapTestBase {
   }
 
   /**
-   * TestUpdateLinks.
-   *
-   * Tests for
-   * \Drupal\xmlsitemap\XmlSitemapLinkStorageInterface::updateMultiple().
+   * Tests for \Drupal\xmlsitemap\XmlSitemapLinkStorageInterface::updateMultiple().
    */
   public function testUpdateLinks() {
     // Add our testing data.
-    // @codingStandardsIgnoreLine
-    $links = [];
-    $links[1] = $this->addSitemapLink(['subtype' => 'group1']);
-    $links[2] = $this->addSitemapLink(['subtype' => 'group1']);
-    $links[3] = $this->addSitemapLink(['subtype' => 'group2']);
+    $links = array();
+    $links[1] = $this->addSitemapLink(array('subtype' => 'group1'));
+    $links[2] = $this->addSitemapLink(array('subtype' => 'group1'));
+    $links[3] = $this->addSitemapLink(array('subtype' => 'group2'));
     $this->state->set('xmlsitemap_regenerate_needed', FALSE);
-    // Id | type    | subtype | language | access | status | priority
+    // id | type    | subtype | language | access | status | priority
     // 1  | testing | group1  | ''       | 1      | 1      | 0.5
     // 2  | testing | group1  | ''       | 1      | 1      | 0.5
-    // 3  | testing | group2  | ''       | 1      | 1      | 0.5.
-    $updated = $this->linkStorage->updateMultiple(['status' => 0], [
-      'type' => 'testing',
-      'subtype' => 'group1',
-      'status_override' => 0,
-    ]);
+    // 3  | testing | group2  | ''       | 1      | 1      | 0.5
+    $updated = $this->linkStorage->updateMultiple(array('status' => 0), array('type' => 'testing', 'subtype' => 'group1', 'status_override' => 0));
     $this->assertEqual($updated, 2);
     $this->assertFlag('xmlsitemap_regenerate_needed', TRUE);
-    // Id | type    | subtype | language | status | priority
+    // id | type    | subtype | language | status | priority
     // 1  | testing | group1  | ''       | 0      | 0.5
     // 2  | testing | group1  | ''       | 0      | 0.5
-    // 3  | testing | group2  | ''       | 1      | 0.5.
-    $updated = $this->linkStorage->updateMultiple(['priority' => 0.0], [
-      'type' => 'testing',
-      'subtype' => 'group1',
-      'priority_override' => 0,
-    ]);
+    // 3  | testing | group2  | ''       | 1      | 0.5
+    $updated = $this->linkStorage->updateMultiple(array('priority' => 0.0), array('type' => 'testing', 'subtype' => 'group1', 'priority_override' => 0));
     $this->assertEqual($updated, 2);
     $this->assertFlag('xmlsitemap_regenerate_needed', FALSE);
-    // Id | type    | subtype | language | status | priority
+    // id | type    | subtype | language | status | priority
     // 1  | testing | group1  | ''       | 0      | 0.0
     // 2  | testing | group1  | ''       | 0      | 0.0
-    // 3  | testing | group2  | ''       | 1      | 0.5.
-    $updated = $this->linkStorage->updateMultiple(['subtype' => 'group2'], ['type' => 'testing', 'subtype' => 'group1']);
+    // 3  | testing | group2  | ''       | 1      | 0.5
+    $updated = $this->linkStorage->updateMultiple(array('subtype' => 'group2'), array('type' => 'testing', 'subtype' => 'group1'));
     $this->assertEqual($updated, 2);
     $this->assertFlag('xmlsitemap_regenerate_needed', FALSE);
-    // Id | type    | subtype | language | status | priority
+    // id | type    | subtype | language | status | priority
     // 1  | testing | group2  | ''       | 0      | 0.0
     // 2  | testing | group2  | ''       | 0      | 0.0
-    // 3  | testing | group2  | ''       | 1      | 0.5.
-    $updated = $this->linkStorage->updateMultiple(['status' => 1], [
-      'type' => 'testing',
-      'subtype' => 'group2',
-      'status_override' => 0,
-      'status' => 0,
-    ]);
+    // 3  | testing | group2  | ''       | 1      | 0.5
+    $updated = $this->linkStorage->updateMultiple(array('status' => 1), array('type' => 'testing', 'subtype' => 'group2', 'status_override' => 0, 'status' => 0));
     $this->assertEqual($updated, 2);
     $this->assertFlag('xmlsitemap_regenerate_needed', TRUE);
-    // Id | type    | subtype | language | status | priority
+    // id | type    | subtype | language | status | priority
     // 1  | testing | group2  | ''       | 1      | 0.0
     // 2  | testing | group2  | ''       | 1      | 0.0
-    // 3  | testing | group2  | ''       | 1      | 0.5.
+    // 3  | testing | group2  | ''       | 1      | 0.5
   }
 
   /**
@@ -295,10 +264,8 @@ class XmlSitemapUnitTest extends XmlSitemapTestBase {
    */
   public function testDuplicatePaths() {
     $this->drupalLogin($this->admin_user);
-    // @codingStandardsIgnoreStart
-    $link1 = $this->addSitemapLink(['loc' => '/duplicate']);
-    $link2 = $this->addSitemapLink(['loc' => '/duplicate']);
-    // @codingStandardsIgnoreEnd
+    $link1 = $this->addSitemapLink(array('loc' => 'duplicate'));
+    $link2 = $this->addSitemapLink(array('loc' => 'duplicate'));
     $this->regenerateSitemap();
     $this->drupalGetSitemap();
     $this->assertUniqueText('duplicate');
@@ -312,7 +279,7 @@ class XmlSitemapUnitTest extends XmlSitemapTestBase {
     $this->config->set('minimum_lifetime', 300)->save();
     $this->regenerateSitemap();
 
-    $link = $this->addSitemapLink(['loc' => '/lifetime-test']);
+    $link = $this->addSitemapLink(array('loc' => 'lifetime-test'));
     $this->cronRun();
     $this->drupalGetSitemap();
     $this->assertResponse(200);
