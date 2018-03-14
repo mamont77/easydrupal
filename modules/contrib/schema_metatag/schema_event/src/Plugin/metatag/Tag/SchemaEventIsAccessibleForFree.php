@@ -2,7 +2,7 @@
 
 namespace Drupal\schema_event\Plugin\metatag\Tag;
 
-use Drupal\schema_metatag\Plugin\metatag\Tag\SchemaIsAccessibleForFreeBase;
+use Drupal\schema_metatag\Plugin\metatag\Tag\SchemaTrueFalseBase;
 
 /**
  * Provides a plugin for the 'schema_event_is_accessible_for_free' meta tag.
@@ -14,7 +14,7 @@ use Drupal\schema_metatag\Plugin\metatag\Tag\SchemaIsAccessibleForFreeBase;
  * @MetatagTag(
  *   id = "schema_event_is_accessible_for_free",
  *   label = @Translation("isAccessibleForFree"),
- *   description = @Translation(""),
+ *   description = @Translation("Is this event accessible for free?"),
  *   name = "isAccessibleForFree",
  *   group = "schema_event",
  *   weight = 4,
@@ -23,6 +23,6 @@ use Drupal\schema_metatag\Plugin\metatag\Tag\SchemaIsAccessibleForFreeBase;
  *   multiple = FALSE
  * )
  */
-class SchemaEventIsAccessibleForFree extends SchemaIsAccessibleForFreeBase {
+class SchemaEventIsAccessibleForFree extends SchemaTrueFalseBase {
 
 }

@@ -17,7 +17,7 @@ use Drupal\schema_metatag\Plugin\metatag\Tag\SchemaMainEntityOfPageBase;
  *   description = @Translation(""),
  *   name = "mainEntityOfPage",
  *   group = "schema_organization",
- *   weight = 10,
+ *   weight = 2,
  *   type = "string",
  *   secure = FALSE,
  *   multiple = FALSE

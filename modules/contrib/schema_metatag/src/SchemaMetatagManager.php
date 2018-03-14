@@ -34,7 +34,7 @@ class SchemaMetatagManager implements SchemaMetatagManagerInterface {
     $group_key = 0;
     foreach ($schema_metatags as $group_name => $data) {
       if (empty($items)) {
-        $items['@context'] = 'http://schema.org';
+        $items['@context'] = 'https://schema.org';
       }
       $items['@graph'][$group_key] = $data;
       $group_key++;
@@ -104,17 +104,32 @@ class SchemaMetatagManager implements SchemaMetatagManagerInterface {
    * {@inheritdoc}
    */
   public static function pivot($content) {
-    $count = max(array_map('count', $content));
+    if (!is_array($content) || empty($content)) {
+      return $content;
+    }
+    // Figure out the maximum number of items to include in the pivot.
+    // Nested associative arrays should be excluded, only count numeric arrays.
+    $count = max(array_map('self::countNumericKeys', $content));
     $pivoted = [];
     for ($i = 0; $i < $count; $i++) {
       foreach ($content as $key => $item) {
         // Some properties, like @type, may need to repeat the first item,
         // others may have too few values to fill out the array.
         // Make sure all properties have the right number of values.
-        if (is_string($item) || count($item) < $count) {
+        if (is_string($item) || (!is_string($item) && self::countNumericKeys($item) < $count)) {
           $content[$key] = [];
+          $prev = '';
           for ($x = 0; $x < $count; $x++) {
-            $content[$key][$x] = $item;
+            if (!is_string($item) && self::countNumericKeys($item) > $x) {
+              $content[$key][$x] = $item[$x];
+              $prev = $item[$x];
+            }
+            elseif (!is_string($item) && self::countNumericKeys($item) > 0) {
+              $content[$key][$x] = $prev;
+            }
+            else {
+              $content[$key][$x] = $item;
+            }
           }
         }
         $pivoted[$i][$key] = $content[$key][$i];
@@ -124,12 +139,27 @@ class SchemaMetatagManager implements SchemaMetatagManagerInterface {
   }
 
   /**
+   * If the item is an array with numeric keys, count the keys.
+   */
+  public static function countNumericKeys($item) {
+    if (!is_array($item)) {
+      return FALSE;
+    }
+    foreach (array_keys($item) as $key) {
+      if (!is_numeric($key)) {
+        return FALSE;
+      }
+    }
+    return count($item);
+  }
+
+  /**
    * {@inheritdoc}
    */
   public static function explode($value) {
     $value = explode(',', $value);
     $value = array_map('trim', $value);
-    $value = array_unique($value);
+    //$value = array_unique($value);
     if (count($value) == 1) {
       return $value[0];
     }
@@ -151,7 +181,7 @@ class SchemaMetatagManager implements SchemaMetatagManagerInterface {
         return '';
       }
       else {
-        $value = serialize($value);
+        $value = serialize($trimmed);
       }
     }
     return $value;
@@ -165,10 +195,20 @@ class SchemaMetatagManager implements SchemaMetatagManagerInterface {
     // the same value isn't unserialized more than once if this is called
     // multiple times.
     if (self::isSerialized($value)) {
+      // If a line break made it into the serialized array, it can't be
+      // unserialized.
+      $value = str_replace("\n", "", $value);
       // Fix problems created if token replacements are a different size
       // than the original tokens.
       $value = self::recomputeSerializedLength($value);
-      $value = self::arrayTrim(unserialize($value));
+      // Keep broken unserialization from throwing errors on the page.
+      if ($value = @unserialize($value)) {
+        $value = self::arrayTrim($value);
+      }
+      else {
+        // Fail safe if unserialization is broken.
+        $value = '';
+      }
     }
     return $value;
   }
@@ -210,30 +250,34 @@ class SchemaMetatagManager implements SchemaMetatagManagerInterface {
   }
 
   /**
-   * Not used, test to remove empty element from array.
-   */
-  public static function test($input) {
-    $iterator = new \RecursiveIteratorIterator(
-      new \RecursiveCallbackFilterIterator(
-        new \RecursiveArrayIterator($input),
-        function ($value) {
-          return trim($value) !== NULL && trim($value) !== '';
-        }
-      ), \RecursiveIteratorIterator::CHILD_FIRST
-    );
-    $result = $iterator->getArrayCopy();
-    return $result;
-  }
-
-  /**
    * {@inheritdoc}
    */
-  public static function arrayTrim($input) {
-    return is_array($input) ? array_filter($input,
-      function (& $value) {
-        return $value = self::arrayTrim($value);
+  public static function arrayTrim($array) {
+    foreach ($array as $key => &$value) {
+      if (empty($value)) {
+        unset($array[$key]);
       }
-    ) : $input;
+      else {
+        if (is_array($value)) {
+          $value = static::arrayTrim($value);
+          if (empty($value)) {
+            unset($array[$key]);
+          }
+        }
+      }
+    }
+    // If all that's left is the pivot, return empty.
+    if ($array == ['pivot' => 1]) {
+      return '';
+    }
+    // If all that's left is @type, return empty.
+    elseif (count($array) == 1 && key($array) == '@type') {
+      return '';
+    }
+    // Otherwise return the cleaned up array.
+    else {
+      return $array;
+    }
   }
 
   /**
@@ -247,13 +291,7 @@ class SchemaMetatagManager implements SchemaMetatagManagerInterface {
   }
 
   /**
-   * Generates a pseudo-random string of ASCII characters of codes 32 to 126.
-   *
-   * @param int $length
-   *   Length of random string to generate.
-   *
-   * @return string
-   *   Pseudo-randomly generated unique string including special characters.
+   * {@inheritdoc}
    */
   public static function randomString($length = 8) {
     $randomGenerator = new Random();
@@ -267,17 +305,74 @@ class SchemaMetatagManager implements SchemaMetatagManagerInterface {
   }
 
   /**
-   * Generates a unique random string containing letters and numbers.
-   *
-   * @param int $length
-   *   Length of random string to generate.
-   *
-   * @return string
-   *   Randomly generated unique string.
+   * {@inheritdoc}
    */
   public static function randomMachineName($length = 8) {
     $randomGenerator = new Random();
     return $randomGenerator->name($length, TRUE);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function defaultInputValues() {
+    return [
+      'title' => '',
+      'description' => '',
+      'value' => [],
+      '#required' => FALSE,
+      'visibility_selector' => '',
+      'actionTypes' => [],
+      'actions' => [],
+    ];
+  }
+
+  /**
+   * Alternate visibility selector for the field element.
+   *
+   * This is necessary because the form elements on the general configuration
+   * form have different parents than the form elements in the metatags field
+   * widget. This function makes is possible to convert the #states visibility
+   * selectors for the general configuration form into the right pattern
+   * so they will work on the field widget.
+   *
+   * @param string $selector
+   *   The selector constructed for the main metatag form.
+   * @param string $group
+   *   The group this part of the form belongs in.
+   * @param string $id
+   *   The id of the individual element.
+   *
+   * @return string
+   *   A rewritten selector that will work in the field form.
+   */
+  public static function altSelector($selector) {
+
+    $metatag_manager = \Drupal::service('metatag.manager');
+    $metatag_groups = $metatag_manager->sortedGroupsWithTags();
+
+    $group = '';
+    $matches = [];
+    $regex = '/:input\[name="(\w+)\[/';
+    preg_match($regex, $selector, $matches);
+    $id = $matches[1];
+    foreach ($metatag_groups as $group_name => $group_info) {
+      if (!empty($group_info['tags'])) {
+        if (array_key_exists($id, $group_info['tags'])) {
+          $tag = $group_info['tags'][$id];
+          $group = $tag['group'];
+          break;
+        }
+      }
+    }
+    // Original pattern, general configuration form:
+    // - schema_web_page_publisher[@type]
+    // Alternate pattern, field widget form:
+    // - field_metatags[0][schema_web_page][schema_web_page_publisher][@type]
+    $original = $id . '[';
+    $alternate = 'field_metatags[0][' . $group . '][' . $id . '][';
+    $new = str_replace($original, $alternate, $selector);
+    return $new;
   }
 
 }

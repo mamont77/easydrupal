@@ -36,6 +36,9 @@ class SchemaWebPageTest extends SchemaMetatagTagsTestBase {
     'schema_web_page_id' => 'SchemaWebPageId',
     'schema_web_page_is_accessible_for_free' => 'SchemaWebPageIsAccessibleForFree',
     'schema_web_page_type' => 'SchemaWebPageType',
+    'schema_web_page_author' => 'SchemaWebPageAuthor',
+    'schema_web_page_description' => 'SchemaWebPageDescription',
+    'schema_web_page_publisher' => 'SchemaWebPagePublisher',
   ];
 
 }

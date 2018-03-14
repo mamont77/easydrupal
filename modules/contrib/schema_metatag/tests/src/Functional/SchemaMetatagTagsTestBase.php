@@ -55,17 +55,15 @@ abstract class SchemaMetatagTagsTestBase extends BrowserTestBase {
    *   The key used in the JSON array for this tag.
    */
   public function getKey($tag_name) {
-    $replace = [
-      '_type' => '_@type',
-      '_id' => '_@id',
-    ];
-    $key = strtr($tag_name, $replace);
-    $key = str_replace($this->moduleName . '_', '', $key);
+    $key = str_replace($this->moduleName . '_', '', $tag_name);
     $parts = explode('_', $key);
     foreach ($parts as $i => $part) {
       $parts[$i] = $i > 0 ? ucfirst($part) : $part;
     }
     $key = implode($parts);
+    if (in_array($key, ['type', 'id'])) {
+      $key = '@' . $key;
+    }
     return $key;
   }
 
@@ -147,8 +145,16 @@ abstract class SchemaMetatagTagsTestBase extends BrowserTestBase {
               foreach ($value as $key2 => $value2) {
                 if (is_array($value2)) {
                   foreach ($value2 as $key3 => $value3) {
-                    $keys = implode('][', [$key, $key2, $key3]);
-                    $form_values[$tag_name . '[' . $keys . ']'] = $value3;
+                    if (is_array($value3)) {
+                      foreach ($value3 as $key4 => $value4) {
+                        $keys = implode('][', [$key, $key2, $key3, $key4]);
+                        $form_values[$tag_name . '[' . $keys . ']'] = $value4;
+                      }
+                    }
+                    else {
+                      $keys = implode('][', [$key, $key2, $key3]);
+                      $form_values[$tag_name . '[' . $keys . ']'] = $value3;
+                    }
                   }
                 }
                 else {

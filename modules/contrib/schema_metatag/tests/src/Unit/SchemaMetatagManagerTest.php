@@ -84,7 +84,7 @@ class SchemaMetatagManagerTest extends UnitTestCase {
     $processed = SchemaMetatagManager::recomputeSerializedLength($replaced);
     $unserialized = unserialize($processed);
     $this->assertTrue(is_array($unserialized));
-    $this->assertTrue(array_key_exists('ReallyBigOrganization', $unserialized['@type']));
+    $this->assertTrue(in_array('ReallyBigOrganization', $unserialized));
   }
 
   /**
@@ -146,23 +146,96 @@ class SchemaMetatagManagerTest extends UnitTestCase {
         'recompute',
       ],
       [
-        '@type' => [
-          'Organization' => [
-            'name' => 'test',
-            'description' => 'more text',
-          ],
+        '@type' => 'Organization',
+        'memberOf' => [
+          '@type' => 'Organization',
+          'name' => 'test',
+          'description' => 'more text',
         ],
       ],
-      'a:1:{s:5:"@type";a:1:{s:12:"Organization";a:2:{s:4:"name";s:4:"test";s:11:"description";s:9:"more text";}}}',
+      'a:2:{s:5:"@type";s:12:"Organization";s:8:"memberOf";a:3:{s:5:"@type";s:12:"Organization";s:4:"name";s:4:"test";s:11:"description";s:9:"more text";}}',
       [
-        '@type' => [
-          'Organization' => [
-            'name' => 'test',
-            'description' => 'more text',
+        '@type' => 'Organization',
+        'memberOf' => [
+          '@type' => 'Organization',
+          'name' => 'test',
+          'description' => 'more text',
+        ],
+      ],
+      'a:2:{s:5:"@type";s:12:"Organization";s:8:"memberOf";a:3:{s:5:"@type";s:12:"Organization";s:4:"name";s:4:"test";s:11:"description";s:9:"more text";}}',
+    ];
+    $values['Nested array2'] = [
+      [
+        'arraytrim',
+        'serialize',
+        'unserialize',
+        'explode',
+        'recompute',
+      ],
+      [
+        '@type' => 'Organization',
+        'publishedIn' => [
+          '@type' => 'CreativeWork',
+          'name' => 'test',
+          'description' => 'more text',
+          'level3' => [
+            '@type' => 'Book',
+            'name' => 'Book Name',
           ],
         ],
       ],
-      'a:1:{s:5:"@type";a:1:{s:12:"Organization";a:2:{s:4:"name";s:4:"test";s:11:"description";s:9:"more text";}}}',
+      'a:2:{s:5:"@type";s:12:"Organization";s:11:"publishedIn";a:4:{s:5:"@type";s:12:"CreativeWork";s:4:"name";s:4:"test";s:11:"description";s:9:"more text";s:6:"level3";a:2:{s:5:"@type";s:4:"Book";s:4:"name";s:9:"Book Name";}}}',
+      [
+        '@type' => 'Organization',
+        'publishedIn' => [
+          '@type' => 'CreativeWork',
+          'name' => 'test',
+          'description' => 'more text',
+          'level3' => [
+            '@type' => 'Book',
+            'name' => 'Book Name',
+          ],
+        ],
+      ],
+      'a:2:{s:5:"@type";s:12:"Organization";s:11:"publishedIn";a:4:{s:5:"@type";s:12:"CreativeWork";s:4:"name";s:4:"test";s:11:"description";s:9:"more text";s:6:"level3";a:2:{s:5:"@type";s:4:"Book";s:4:"name";s:9:"Book Name";}}}',
+    ];
+    $values['Nested array3'] = [
+      [
+        'arraytrim',
+        'serialize',
+        'unserialize',
+        'explode',
+        'recompute',
+      ],
+      [
+        '@type' => 'Organization',
+        'publishedIn' => [
+          '@type' => 'CreativeWork',
+        ],
+        'anotherThing' => [
+          '@type' => 'Thing',
+          'name' => 'test',
+          'description' => 'more text',
+          'level3' => [
+            '@type' => 'Book',
+            'name' => 'Book Name',
+          ],
+        ],
+      ],
+      'a:3:{s:5:"@type";s:12:"Organization";s:11:"publishedIn";a:1:{s:5:"@type";s:12:"CreativeWork";}s:12:"anotherThing";a:4:{s:5:"@type";s:5:"Thing";s:4:"name";s:4:"test";s:11:"description";s:9:"more text";s:6:"level3";a:2:{s:5:"@type";s:4:"Book";s:4:"name";s:9:"Book Name";}}}',
+      [
+        '@type' => 'Organization',
+        'anotherThing' => [
+          '@type' => 'Thing',
+          'name' => 'test',
+          'description' => 'more text',
+          'level3' => [
+            '@type' => 'Book',
+            'name' => 'Book Name',
+          ],
+        ],
+      ],
+      'a:2:{s:5:"@type";s:12:"Organization";s:12:"anotherThing";a:4:{s:5:"@type";s:5:"Thing";s:4:"name";s:4:"test";s:11:"description";s:9:"more text";s:6:"level3";a:2:{s:5:"@type";s:4:"Book";s:4:"name";s:9:"Book Name";}}}',
     ];
     $values['Empty array'] = [
       [
@@ -172,36 +245,36 @@ class SchemaMetatagManagerTest extends UnitTestCase {
         'explode',
       ],
       [
-        '@type' => [
+        'name' => [
           'Organization' => [
+            '@type' => '',
             'name' => '',
-            'description' => '',
           ],
         ],
       ],
-      'a:1:{s:5:"@type";a:1:{s:12:"Organization";a:2:{s:4:"name";s:0:"";s:11:"description";s:0:"";}}}',
+      'a:1:{s:4:"name";a:1:{s:12:"Organization";a:2:{s:5:"@type";s:0:"";s:4:"name";s:0:"";}}}',
       [],
       '',
     ];
     $values['Empty parts'] = [
       ['recompute'],
       [
-        '@type' => [
-          'Organization' => [
-            'name' => 'test',
-            'description' => '',
-          ],
+        '@type' => 'Organization',
+        'memberOf' => [
+          '@type' => 'Organization',
+          'name' => '',
+          'description' => 'more text',
         ],
       ],
-      'a:1:{s:5:"@type";a:1:{s:12:"Organization";a:2:{s:4:"name";s:4:"test";s:11:"description";s:0:"";}}}',
+      'a:2:{s:5:"@type";s:12:"Organization";s:8:"memberOf";a:3:{s:5:"@type";s:12:"Organization";s:4:"name";s:0:"";s:11:"description";s:9:"more text";}}',
       [
-        '@type' => [
-          'Organization' => [
-            'description' => 'more text',
-          ],
+        '@type' => 'Organization',
+        'memberOf' => [
+          '@type' => 'Organization',
+          'description' => 'more text',
         ],
       ],
-      'a:1:{s:5:"@type";a:1:{s:12:"Organization";a:1:{s:11:"description";s:9:"more text";}}}',
+      'a:2:{s:5:"@type";s:12:"Organization";s:8:"memberOf";a:3:{s:5:"@type";s:12:"Organization";s:11:"description";s:9:"more text";}}',
     ];
     return $values;
   }

@@ -4,9 +4,6 @@
 metatag.metatag_tag.schema_event_actor:
   type: text
   label: 'actor'
-metatag.metatag_tag.schema_event_aggregate_rating:
-  type: text
-  label: 'aggregateRating'
 metatag.metatag_tag.schema_event_description:
   type: text
   label: 'description'
@@ -39,7 +36,13 @@ metatag.metatag_tag.schema_event_start_date:
   label: 'startDate'
 metatag.metatag_tag.schema_event_type:
   type: text
-  label: 'type'
+  label: '@type'
 metatag.metatag_tag.schema_event_url:
   type: text
   label: 'url'
+metatag.metatag_tag.schema_event_aggregate_rating:
+  type: label
+  label: 'aggregateRating'
+metatag.metatag_tag.schema_event_review:
+  type: label
+  label: 'review'

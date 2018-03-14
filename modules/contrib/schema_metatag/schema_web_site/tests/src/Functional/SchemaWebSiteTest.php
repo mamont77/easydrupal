@@ -36,6 +36,7 @@ class SchemaWebSiteTest extends SchemaMetatagTagsTestBase {
     'schema_web_site_publisher' => 'SchemaWebSitePublisher',
     'schema_web_site_type' => 'SchemaWebSiteType',
     'schema_web_site_url' => 'SchemaWebSiteUrl',
+    'schema_web_site_potential_action' => 'SchemaWebSitePotentialAction',
   ];
 
 }

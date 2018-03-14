@@ -14,7 +14,7 @@ use Drupal\schema_metatag\Plugin\metatag\Tag\SchemaNameBase;
  * @MetatagTag(
  *   id = "schema_organization_telephone",
  *   label = @Translation("telephone"),
- *   description = @Translation("The telephone of the web site."),
+ *   description = @Translation("RECOMMENDED BY GOOGLE. The telephone of the web site."),
  *   name = "telephone",
  *   group = "schema_organization",
  *   weight = 1,

@@ -7,7 +7,7 @@ use Drupal\schema_metatag\SchemaMetatagManager;
 /**
  * All Schema.org itemListElement tags should extend this class.
  */
-abstract class SchemaItemListElementBase extends SchemaNameBase {
+class SchemaItemListElementBase extends SchemaNameBase {
 
   /**
    * {@inheritdoc}

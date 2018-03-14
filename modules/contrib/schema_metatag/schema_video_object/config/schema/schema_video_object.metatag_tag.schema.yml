@@ -1,9 +1,6 @@
 # The 'type' should be "label" for short meta tags and "text" for ones which
 # could get longer, especially ones which use a textarea field instead of a
 # textfield.
-metatag.metatag_tag.schema_video_object_aggregate_rating:
-  type: text
-  label: 'aggregateRating'
 metatag.metatag_tag.schema_video_object_content_url:
   type: text
   label: 'contentUrl'
@@ -40,3 +37,12 @@ metatag.metatag_tag.schema_video_object_type:
 metatag.metatag_tag.schema_video_object_upload_date:
   type: text
   label: 'uploadDate'
+metatag.metatag_tag.schema_video_object_aggregate_rating:
+  type: label
+  label: 'aggregateRating'
+metatag.metatag_tag.schema_video_object_review:
+  type: label
+  label: 'review'
+metatag.metatag_tag.schema_video_object_transcript:
+  type: text
+  label: 'transcript'

@@ -33,6 +33,7 @@ class SchemaEventTest extends SchemaMetatagTagsTestBase {
   public $schemaTags = [
     'schema_event_actor' => 'SchemaEventActor',
     'schema_event_aggregate_rating' => 'SchemaEventAggregateRating',
+    'schema_event_review' => 'SchemaEventReview',
     'schema_event_description' => 'SchemaEventDescription',
     'schema_event_door_time' => 'SchemaEventDoorTime',
     'schema_event_end_date' => 'SchemaEventEndDate',

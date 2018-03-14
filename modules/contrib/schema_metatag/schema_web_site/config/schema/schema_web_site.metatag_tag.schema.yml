@@ -17,3 +17,6 @@ metatag.metatag_tag.schema_web_site_type:
 metatag.metatag_tag.schema_web_site_url:
   type: text
   label: 'url'
+metatag.metatag_tag.schema_web_site_potential_action:
+  type: text
+  label: 'potentialAction'

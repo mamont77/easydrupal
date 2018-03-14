@@ -7,15 +7,14 @@ use Drupal\Core\Url;
 /**
  * All Schema.org views itemListElement tags should extend this class.
  */
-abstract class SchemaItemListElementViewsBase extends SchemaItemListElementBase {
+class SchemaItemListElementViewsBase extends SchemaItemListElementBase {
 
   /**
    * {@inheritdoc}
    */
   public function form(array $element = []) {
     $form = parent::form($element);
-    $form['#attributes']['placeholder'] = 'view_name:display_id';
-    $form['#description'] = $this->t('To display a Views list in Schema.org structured data, provide the machine name of the view, and the machine name of the display, separated by a colon.');
+    $form['#description'] = $this->t("Provide the machine name of the view, and the machine name of the display, separated by a colon, i.e. 'view_name:display_id'.");
     return $form;
   }
 
@@ -52,6 +51,7 @@ abstract class SchemaItemListElementViewsBase extends SchemaItemListElementBase 
           $values[$key] = [
             '@id' => $url,
             'name' => $item->_entity->label(),
+            'url' => $url,
           ];
           $key++;
         }
