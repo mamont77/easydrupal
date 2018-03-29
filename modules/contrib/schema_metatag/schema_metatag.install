@@ -87,3 +87,61 @@ function schema_metatag_update_8104(&$sandbox) {
 
 }
 
+/**
+ * Fix broken review tags.
+ *
+ * itemReviewed and reviewBody were using the wrong classes. Previous values
+ * need to be emptied out because they contain invalid data.
+ */
+function schema_metatag_update_8105() {
+  /* @var $configs Drupal\metatag\Entity\MetatagDefaults */
+  $configs = MetatagDefaults::loadMultiple();
+
+  foreach ($configs as $config) {
+    $changed = FALSE;
+    $tags = $config->get('tags');
+    foreach ($tags as $tag_name => $tag) {
+      if ($tag_name == 'schema_review_item_reviewed' || $tag_name == 'schema_review_review_body') {
+        unset($tags[$tag_name]);
+        $changed = TRUE;
+      }
+    }
+    if ($changed) {
+      $config->set("tags", $tags);
+      $config->save();
+    }
+  }
+  return (string) t("Fields on the Schema.org Review object have been emptied since the original values are invalid. Please re-configure them.");
+}
+
+
+/**
+ * Delete unneeded tags.
+ */
+function schema_metatag_update_8106() {
+  /* @var $configs Drupal\metatag\Entity\MetatagDefaults */
+  $configs = MetatagDefaults::loadMultiple();
+
+  $delete = [
+    'schema_event_actor',
+    'schema_event_is_accessible_for_free',
+    'schema_organization_main_entity_of_page',
+    'schema_video_object_main_entity_of_page',
+  ];
+
+  foreach ($configs as $config) {
+    $changed = FALSE;
+    $tags = $config->get('tags');
+    foreach ($tags as $tag_name => $tag) {
+      if (in_array($tag_name, $delete)) {
+        unset($tags[$tag_name]);
+        $changed = TRUE;
+      }
+    }
+    if ($changed) {
+      $config->set("tags", $tags);
+      $config->save();
+    }
+  }
+  return (string) t("Deleted some unneeded tags.");
+}

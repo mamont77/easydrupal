@@ -14,7 +14,9 @@ use Drupal\schema_metatag\Plugin\metatag\Tag\SchemaTrueFalseBase;
  * @MetatagTag(
  *   id = "schema_article_is_accessible_for_free",
  *   label = @Translation("isAccessibleForFree"),
- *   description = @Translation("Is this article accessible for free? If False, also define hasPart and list the classes of the parts of the page that are not free."),
+ *   description = @Translation("RECOMMENDED BY GOOGLE. Use for <a href="":url"">Paywalled content</a>.", arguments = {
+ *     ":url" = "https://developers.google.com/search/docs/data-types/paywalled-content",
+ *   }),
  *   name = "isAccessibleForFree",
  *   group = "schema_article",
  *   weight = 4,

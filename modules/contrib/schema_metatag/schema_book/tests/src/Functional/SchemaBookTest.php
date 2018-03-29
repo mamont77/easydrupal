@@ -34,10 +34,14 @@ class SchemaBookTest extends SchemaMetatagTagsTestBase {
     'schema_book_author' => 'SchemaBookAuthor',
     'schema_book_id' => 'SchemaBookId',
     'schema_book_name' => 'SchemaBookName',
+    'schema_book_description' => 'SchemaBookDescription',
     'schema_book_same_as' => 'SchemaBookSameAs',
     'schema_book_type' => 'SchemaBookType',
     'schema_book_url' => 'SchemaBookUrl',
     'schema_book_work_example' => 'SchemaBookWorkExample',
+    'schema_book_image' => 'SchemaBookImage',
+    'schema_book_review' => 'SchemaBookReview',
+    'schema_book_aggregate_rating' => 'SchemaBookAggregateRating',
   ];
 
 }

@@ -1,9 +1,6 @@
 # The 'type' should be "label" for short meta tags and "text" for ones which
 # could get longer, especially ones which use a textarea field instead of a
 # textfield.
-metatag.metatag_tag.schema_event_actor:
-  type: text
-  label: 'actor'
 metatag.metatag_tag.schema_event_description:
   type: text
   label: 'description'
@@ -16,9 +13,9 @@ metatag.metatag_tag.schema_event_end_date:
 metatag.metatag_tag.schema_event_image:
   type: text
   label: 'image'
-metatag.metatag_tag.schema_event_is_accessible_for_free:
+metatag.metatag_tag.schema_event_id:
   type: text
-  label: 'isAccessibleForFree'
+  label: '@id'
 metatag.metatag_tag.schema_event_location:
   type: text
   label: 'location'

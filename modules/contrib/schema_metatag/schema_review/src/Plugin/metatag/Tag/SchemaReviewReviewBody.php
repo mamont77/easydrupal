@@ -2,7 +2,7 @@
 
 namespace Drupal\schema_review\Plugin\metatag\Tag;
 
-use Drupal\schema_metatag\Plugin\metatag\Tag\SchemaReviewBase;
+use Drupal\schema_metatag\Plugin\metatag\Tag\SchemaNameBase;
 
 /**
  * Provides a plugin for the 'schema_review_review_body' meta tag.
@@ -23,6 +23,6 @@ use Drupal\schema_metatag\Plugin\metatag\Tag\SchemaReviewBase;
  *   multiple = TRUE
  * )
  */
-class SchemaReviewReviewBody extends SchemaReviewBase {
+class SchemaReviewReviewBody extends SchemaNameBase {
 
 }

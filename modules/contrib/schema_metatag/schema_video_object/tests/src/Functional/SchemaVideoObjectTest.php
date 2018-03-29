@@ -40,7 +40,6 @@ class SchemaVideoObjectTest extends SchemaMetatagTagsTestBase {
     'schema_video_object_expires' => 'SchemaVideoObjectExpires',
     'schema_video_object_id' => 'SchemaVideoObjectId',
     'schema_video_object_interaction_count' => 'SchemaVideoObjectInteractionCount',
-    'schema_video_object_main_entity_of_page' => 'SchemaVideoObjectMainEntityOfPage',
     'schema_video_object_name' => 'SchemaVideoObjectName',
     'schema_video_object_thumbnail_url' => 'SchemaVideoObjectThumbnailUrl',
     'schema_video_object_type' => 'SchemaVideoObjectType',

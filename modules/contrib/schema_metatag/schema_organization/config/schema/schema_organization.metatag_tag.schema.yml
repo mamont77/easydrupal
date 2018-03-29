@@ -16,9 +16,6 @@ metatag.metatag_tag.schema_organization_image:
 metatag.metatag_tag.schema_organization_logo:
   type: text
   label: 'logo'
-metatag.metatag_tag.schema_organization_main_entity_of_page:
-  type: text
-  label: 'mainEntityOfPage'
 metatag.metatag_tag.schema_organization_name:
   type: text
   label: 'name'

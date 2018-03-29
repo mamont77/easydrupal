@@ -22,6 +22,7 @@
              $select.get(0).selectedIndex = 0;
              $this.find('[type=submit]').trigger('click');
              $this.find('a').addClass('disabled');
+             $this.find('.vote-result').html();
            })
          })
          $this.find('.useful-rating a').eq(1).each(function () {
@@ -33,6 +34,7 @@
              $select.get(0).selectedIndex = 1;
              $this.find('[type=submit]').trigger('click');
              $this.find('a').addClass('disabled');
+             $this.find('.vote-result').html();
            })
          })
        })

@@ -34,10 +34,7 @@ class TestBlock extends BlockBase {
     $options = ['absolute' => 'true'];
     $drupal_url = Url::fromRoute('<current>', [], $options)->toString();
 
-    // Create the Google path with a fragment identifying the Drupal path.
-    $google_url = Url::fromUri('https://search.google.com/structured-data/testing-tool' . '#url=' . $drupal_url);
-
-    // Finally, create a link to Google that includes the current path.
+    $google_url = Url::fromUri('https://search.google.com/structured-data/testing-tool');
     $link = Link::fromTextAndUrl(t('Test on Google'), $google_url);
 
     $build = [

@@ -21,7 +21,7 @@
       }
       var options = {
         theme: ($select.data('style') == 'default') ? 'css-stars' : $select.data('style'),
-        initialRating: show_own_vote ? vote_own_value : value,
+        initialRating: show_own_vote ? (vote_own_value ? vote_own_value : -1) : value,
         allowEmpty: true,
         emptyValue: '',
         readonly: ($select.attr('disabled')) ? true : false,
@@ -32,8 +32,10 @@
           $this.find('select').barrating('readonly', true);
           $this.find('[type=submit]').trigger('click');
           $this.find('a').addClass('disabled');
+          $this.find('.vote-result').html();
         },
       };
+
       $this.find('select').once('processed').barrating('show', options);
       $this.find('[type=submit]').hide();
     });

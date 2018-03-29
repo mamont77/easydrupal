@@ -111,7 +111,13 @@ class SchemaNameBase extends MetaNameBase {
       $value = str_replace('http://', 'https://', $value);
     }
 
-    $value = $this->multiple() ? SchemaMetatagManager::explode($value) : $value;
+    if ($this->multiple()) {
+      $value = SchemaMetatagManager::explode($value);
+      // Clean out any empty values that might have been added by explode().
+      if (is_array($value)) {
+        $value = array_filter($value);
+      }
+    }
   }
 
   /**

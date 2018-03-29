@@ -75,7 +75,7 @@ trait SchemaEntryPointTrait {
       '#default_value' => !empty($value['actionPlatform']) ? $value['actionPlatform'] : '',
       '#maxlength' => 255,
       '#required' => $input_values['#required'],
-      '#description' => $this->t("Comma-separated list of the high level platform(s) where the Action can be performed for the given URL. Examples: https://schema.org/DesktopWebPlatform, https://schema.org/MobileWebPlatform, https://schema.org/IOSPlatform, https://schema.googleapis.com/GoogleVideoCast."),
+      '#description' => $this->t("Comma-separated list of the high level platform(s) where the Action can be performed for the given URL. Examples: http://schema.org/DesktopWebPlatform, http://schema.org/MobileWebPlatform, http://schema.org/IOSPlatform, http://schema.googleapis.com/GoogleVideoCast."),
     ];
 
     $form['inLanguage'] = [

@@ -5,7 +5,12 @@ namespace Drupal\votingapi_widgets\Plugin\Field\FieldWidget;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\WidgetBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\StringTranslation\StringTranslationTrait;
+
+use Drupal\Core\Field\FieldDefinitionInterface;
+use Drupal\votingapi_widgets\Plugin\VotingApiWidgetManager;
+use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\Core\Session\AccountInterface;
 
 /**
  * Plugin implementation of the 'voting_api_widget' widget.
@@ -18,15 +23,47 @@ use Drupal\Core\StringTranslation\StringTranslationTrait;
  *   }
  * )
  */
-class VotingApiWidget extends WidgetBase {
-
-  use StringTranslationTrait;
+class VotingApiWidget extends WidgetBase implements ContainerFactoryPluginInterface {
 
   /**
    * {@inheritdoc}
    */
   public static function defaultSettings() {
     return ['show_initial_vote' => 0];
+  }
+
+  /**
+   * @var VotingApiWidgetManager $votingapiWidgetProcessor
+   */
+  protected $votingapiWidgetProcessor;
+
+  /**
+   * @var AccountInterface $account
+   */
+  protected $account;
+
+  /**
+   * {@inheritdoc}
+   */
+  public function __construct($plugin_id, $plugin_definition, FieldDefinitionInterface $field_definition, array $settings, array $third_party_settings, VotingApiWidgetManager $widget_manager, AccountInterface $account) {
+    parent::__construct($plugin_id, $plugin_definition, $field_definition, $settings, $third_party_settings);
+    $this->account = $account;
+    $this->votingapiWidgetProcessor = $widget_manager;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+    return new static(
+      $plugin_id,
+      $plugin_definition,
+      $configuration['field_definition'],
+      $configuration['settings'],
+      $configuration['third_party_settings'],
+      $container->get('plugin.manager.voting_api_widget.processor'),
+      $container->get('current_user')
+    );
   }
 
   /**
@@ -59,14 +96,13 @@ class VotingApiWidget extends WidgetBase {
     $bundle = $this->fieldDefinition->getTargetBundle();
     $field_name = $this->fieldDefinition->getName();
     $permission = 'edit voting status on ' . $entity_type . ':' . $bundle . ':' . $field_name;
-    $account = \Drupal::currentUser();
-    $element['status']['#access'] = $account->hasPermission($permission);
+    $element['status']['#access'] = $this->account->hasPermission($permission);
 
     $plugin = $this->fieldDefinition->getSetting('vote_plugin');
     /**
      * @var VotingApiWidgetBase $plugin
      */
-    $plugin = \Drupal::service('plugin.manager.voting_api_widget.processor')->createInstance($plugin);
+    $plugin = $this->votingapiWidgetProcessor->createInstance($plugin);
 
     $permission = 'vote on ' . $entity_type . ':' . $bundle . ':' . $field_name;
     $options = [
@@ -81,7 +117,7 @@ class VotingApiWidget extends WidgetBase {
       '#title' => $this->t('Your vote'),
       '#options' => $options,
       '#default_value' => $vote->getValue(),
-      '#access' => ($this->getSetting('show_initial_vote') && $account->hasPermission($permission)) ? TRUE : FALSE,
+      '#access' => ($this->getSetting('show_initial_vote') && $this->account->hasPermission($permission)) ? TRUE : FALSE,
     ];
 
     $plugin->getInitialVotingElement($element);

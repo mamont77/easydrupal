@@ -10,6 +10,9 @@ metatag.metatag_tag.schema_book_id:
 metatag.metatag_tag.schema_book_name:
   type: text
   label: 'name'
+metatag.metatag_tag.schema_book_description:
+  type: text
+  label: 'description'
 metatag.metatag_tag.schema_book_same_as:
   type: text
   label: 'sameAs'
@@ -22,3 +25,12 @@ metatag.metatag_tag.schema_book_url:
 metatag.metatag_tag.schema_book_work_example:
   type: text
   label: 'workExample'
+metatag.metatag_tag.schema_book_review:
+  type: text
+  label: 'review'
+metatag.metatag_tag.schema_book_aggregate_rating:
+  type: text
+  label: 'aggregateRating'
+metatag.metatag_tag.schema_book_image:
+  type: text
+  label: 'image'

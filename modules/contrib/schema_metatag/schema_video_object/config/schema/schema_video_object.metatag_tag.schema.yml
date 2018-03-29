@@ -22,9 +22,6 @@ metatag.metatag_tag.schema_video_object_id:
 metatag.metatag_tag.schema_video_object_interaction_count:
   type: text
   label: 'interactionCount'
-metatag.metatag_tag.schema_video_object_main_entity_of_page:
-  type: text
-  label: 'mainEntityOfPage'
 metatag.metatag_tag.schema_video_object_name:
   type: text
   label: 'name'

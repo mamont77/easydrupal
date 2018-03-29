@@ -83,7 +83,7 @@ trait SchemaReviewTrait {
       '#default_value' => !empty($value['datePublished']) ? $value['datePublished'] : '',
       '#maxlength' => 255,
       '#required' => $input_values['#required'],
-      '#description' => $this->t('To format the date properly, use a token like [node:created:custom:Y-m-d\TH:i:sO].'),
+      '#description' => $this->t('To format the date properly, use a token like [node:created:html_datetime].'),
     ];
 
     $input_values = [

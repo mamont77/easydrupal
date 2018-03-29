@@ -39,7 +39,6 @@ class SchemaOrganizationTest extends SchemaMetatagTagsTestBase {
     'schema_organization_id' => 'SchemaOrganizationId',
     'schema_organization_image' => 'SchemaOrganizationImage',
     'schema_organization_logo' => 'SchemaOrganizationLogo',
-    'schema_organization_main_entity_of_page' => 'SchemaOrganizationMainEntityOfPage',
     'schema_organization_name' => 'SchemaOrganizationName',
     'schema_organization_price_range' => 'SchemaOrganizationPriceRange',
     'schema_organization_same_as' => 'SchemaOrganizationSameAs',

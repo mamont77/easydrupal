@@ -109,30 +109,40 @@ class SchemaMetatagManager implements SchemaMetatagManagerInterface {
     }
     // Figure out the maximum number of items to include in the pivot.
     // Nested associative arrays should be excluded, only count numeric arrays.
-    $count = max(array_map('self::countNumericKeys', $content));
+    $count = max(array_map([__CLASS__, 'countNumericKeys'], $content));
     $pivoted = [];
+    $exploded = [];
+    $keys = array_keys($content);
     for ($i = 0; $i < $count; $i++) {
       foreach ($content as $key => $item) {
+        // If a lower array is pivoted, pivot that first.
+        if (is_array($item) && array_key_exists('pivot', $item)) {
+          unset($item['pivot']);
+          $item = self::pivot($item);
+        }
         // Some properties, like @type, may need to repeat the first item,
         // others may have too few values to fill out the array.
         // Make sure all properties have the right number of values.
-        if (is_string($item) || (!is_string($item) && self::countNumericKeys($item) < $count)) {
-          $content[$key] = [];
+        if (is_string($item) || (!is_string($item) && self::countNumericKeys($item) <= $count)) {
+          $exploded[$key] = [];
           $prev = '';
           for ($x = 0; $x < $count; $x++) {
             if (!is_string($item) && self::countNumericKeys($item) > $x) {
-              $content[$key][$x] = $item[$x];
+              $exploded[$key][$x] = $item[$x];
               $prev = $item[$x];
             }
             elseif (!is_string($item) && self::countNumericKeys($item) > 0) {
-              $content[$key][$x] = $prev;
+              $exploded[$key][$x] = $prev;
             }
             else {
-              $content[$key][$x] = $item;
+              $exploded[$key][$x] = $item;
             }
           }
+          $pivoted[$i][$key] = $exploded[$key][$i];
         }
-        $pivoted[$i][$key] = $content[$key][$i];
+        else {
+          $pivoted[$i][$key] = $item;
+        }
       }
     }
     return $pivoted;
@@ -143,11 +153,11 @@ class SchemaMetatagManager implements SchemaMetatagManagerInterface {
    */
   public static function countNumericKeys($item) {
     if (!is_array($item)) {
-      return FALSE;
+      return 0;
     }
     foreach (array_keys($item) as $key) {
       if (!is_numeric($key)) {
-        return FALSE;
+        return 0;
       }
     }
     return count($item);
