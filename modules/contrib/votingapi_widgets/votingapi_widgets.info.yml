@@ -7,8 +7,8 @@ package: Voting
 dependencies:
   - votingapi
 
-# Information added by Drupal.org packaging script on 2018-03-27
-version: '8.x-1.0-alpha3+56-dev'
+# Information added by Drupal.org packaging script on 2018-04-27
+version: '8.x-1.0-alpha4'
 core: '8.x'
 project: 'votingapi_widgets'
-datestamp: 1522159686
+datestamp: 1524826997

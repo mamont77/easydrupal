@@ -1,17 +1,21 @@
 <?php
 
-namespace Drupal\extlink\Tests;
+namespace Drupal\Tests\extlink\FunctionalJavascript;
 
-use Drupal\simpletest\WebTestBase;
+use Drupal\FunctionalJavascriptTests\JavascriptTestBase;
+use Drupal\filter\Entity\FilterFormat;
 
 /**
  * Base class for External Link tests.
  *
  * Provides common setup stuff and various helper functions.
  */
-abstract class ExtlinkTestBase extends WebTestBase {
+abstract class ExtlinkTestBase extends JavascriptTestBase {
 
-  public static $modules = ['extlink'];
+  /**
+   * {@inheritdoc}
+   */
+  public static $modules = ['extlink', 'node', 'filter'];
 
   /**
    * User with various administrative permissions.
@@ -26,6 +30,13 @@ abstract class ExtlinkTestBase extends WebTestBase {
    * @var Drupaluser
    */
   protected $normalUser;
+
+  /**
+   * Normal visitor with limited permissions.
+   *
+   * @var Drupaluser
+   */
+  protected $emptyFormat;
 
   /**
    * Drupal path of the (general) External Links admin page.
@@ -46,6 +57,18 @@ abstract class ExtlinkTestBase extends WebTestBase {
     $permissions[] = 'administer site configuration';
     $permissions[] = 'administer permissions';
     $this->adminUser = $this->drupalCreateUser($permissions);
+    $this->adminUser->roles[] = 'administrator';
+    $this->adminUser->save();
+
+    // Create page content type that we will use for testing.
+    $this->drupalCreateContentType(['type' => 'page']);
+
+    // Add a text format with minimum data only.
+    $this->emptyFormat = FilterFormat::create([
+      'format' => 'empty_format',
+      'name' => 'Empty format',
+    ]);
+    $this->emptyFormat->save();
   }
 
 }
