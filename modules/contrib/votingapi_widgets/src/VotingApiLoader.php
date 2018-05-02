@@ -30,7 +30,7 @@ class VotingApiLoader {
       return [];
     }
     if ($fieldDefinition->get('status') != 1) {
-      $read_only = TRUE;
+      $settings['read_only'];
     }
     return $plugin->buildForm($entity_type, $entity_bundle, $entity_id, $vote_type, $field_name, unserialize($settings));
   }

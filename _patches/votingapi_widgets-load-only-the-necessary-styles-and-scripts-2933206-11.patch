@@ -1,0 +1,308 @@
+diff --git a/src/Plugin/Field/FieldFormatter/VotingApiFormatter.php b/src/Plugin/Field/FieldFormatter/VotingApiFormatter.php
+index 616dfac..c864cad 100644
+--- a/src/Plugin/Field/FieldFormatter/VotingApiFormatter.php
++++ b/src/Plugin/Field/FieldFormatter/VotingApiFormatter.php
+@@ -29,6 +29,8 @@ class VotingApiFormatter extends FormatterBase {
+       'show_results'  => FALSE,
+       'values'        => [],
+       'show_own_vote' => FALSE,
++      'attach_fontawesome' => TRUE,
++      'attach_glyphicons'  => TRUE,
+       // Implement default settings.
+     ] + parent::defaultSettings();
+   }
+@@ -42,7 +44,6 @@ class VotingApiFormatter extends FormatterBase {
+     $voteService = \Drupal::service('plugin.manager.voting_api_widget.processor');
+ 
+     $options = [];
+-    $styles = [];
+ 
+     $votePlugin = $voteService->createInstance($this->getFieldSetting('vote_plugin'));
+     $styles = $votePlugin->getStyles();
+@@ -54,6 +55,7 @@ class VotingApiFormatter extends FormatterBase {
+       }
+     }
+ 
++    $additional_help_text = $this->t('Leave it selected if you are not sure that the current theme has necessary style.');
+     return [
+       // Implement settings form.
+       'style'        => [
+@@ -74,11 +76,32 @@ class VotingApiFormatter extends FormatterBase {
+       ],
+       'show_own_vote' => [
+         '#title'         => $this->t('Show own vote'),
+-        '#description'   => $this->t('Show own cast vote instead of results. (Useful on add/ edit forms with rate widget).'),
++        '#description'   => $this->t('Show own cast vote instead of results. (Useful on add/edit forms with rate widget).'),
+         '#type'          => 'checkbox',
+         '#return_value'  => 1,
+         '#default_value' => $this->getSetting('show_own_vote'),
+       ],
++      'attach_fontawesome'  => [
++        '#title'         => $this->t('Attach Font Awesome Styles'),
++        '#type'          => 'checkbox',
++        '#default_value' => $this->getSetting('attach_fontawesome'),
++        '#description'   => $this->t('Adds font-awesome.min.css. Required by a few styles and "Useful" vote plugin.'
++          . ' ' . $additional_help_text),
++        // TODO: Make fields visible only for some styles.
++        // '#states' => [
++        // // Show the settings if some values have been selected for 'style'.
++        //   'visible' => [
++        //      ':select[name="style"]' => ['value' => 'bars-horizontal'],
++        //   ],
++        // ],
++      ],
++      'attach_glyphicons' => [
++        '#title'         => $this->t('Attach Glyphicons Styles'),
++        '#type'          => 'checkbox',
++        '#default_value' => $this->getSetting('attach_glyphicons'),
++        '#description'   => $this->t('Adds bootstrap-glyphicons.css. Required by "Bootstrap stars" style only.'
++          . ' ' . $additional_help_text),
++      ],
+     ] + parent::settingsForm($form, $form_state);
+   }
+ 
+@@ -91,6 +114,8 @@ class VotingApiFormatter extends FormatterBase {
+     $summary[] = $this->t('Readonly: @readonly', ['@readonly' => $this->getSetting('readonly') ? $this->t('yes') : $this->t('no')]);
+     $summary[] = $this->t('Show results: @results', ['@results' => $this->getSetting('show_results') ? $this->t('yes') : $this->t('no')]);
+     $summary[] = $this->t('Show own vote: @show_own_vote', ['@show_own_vote' => $this->getSetting('show_own_vote') ? $this->t('yes') : $this->t('no')]);
++    $summary[] = $this->t('Attach Font Awesome Styles: @attach_fontawesome', ['@attach_fontawesome' => $this->getSetting('attach_fontawesome') ? $this->t('yes') : $this->t('no')]);
++    $summary[] = $this->t('Attach Glyphicons Styles: @attach_glyphicons', ['@attach_glyphicons' => $this->getSetting('attach_glyphicons') ? $this->t('yes') : $this->t('no')]);
+ 
+     return $summary;
+   }
+@@ -107,13 +132,6 @@ class VotingApiFormatter extends FormatterBase {
+ 
+     $vote_type = $field_settings['vote_type'];
+     $vote_plugin = $field_settings['vote_plugin'];
+-    $readonly = $this->getSetting('readonly');
+-
+-    $show_own_vote = $this->getSetting('show_own_vote') ? TRUE : FALSE;
+-
+-    if ($items->status === "0") {
+-      $readonly = TRUE;
+-    }
+ 
+     $elements[] = [
+       'vote_form' => [
+diff --git a/src/Plugin/votingapi_widget/FiveStarWidget.php b/src/Plugin/votingapi_widget/FiveStarWidget.php
+index d872877..ba5d7e5 100644
+--- a/src/Plugin/votingapi_widget/FiveStarWidget.php
++++ b/src/Plugin/votingapi_widget/FiveStarWidget.php
+@@ -44,9 +44,16 @@ class FiveStarWidget extends VotingApiWidgetBase {
+         ],
+       ],
+       '#attached' => [
+-        'library' => ['votingapi_widgets/fivestar'],
++        'library' => ['votingapi_widgets/' . $settings['style']],
+       ],
+     ];
++    if ($settings['attach_fontawesome'] == 1) {
++      $build['#attached']['library'][] = 'votingapi_widgets/fontawesome';
++    }
++    if ($settings['attach_glyphicons'] == 1) {
++      $build['#attached']['library'][] = 'votingapi_widgets/glyphicons';
++    }
++
+     return $build;
+   }
+ 
+diff --git a/src/Plugin/votingapi_widget/UsefulWidget.php b/src/Plugin/votingapi_widget/UsefulWidget.php
+index 0a6a036..8157a83 100644
+--- a/src/Plugin/votingapi_widget/UsefulWidget.php
++++ b/src/Plugin/votingapi_widget/UsefulWidget.php
+@@ -24,8 +24,8 @@ class UsefulWidget extends VotingApiWidgetBase {
+   /**
+    * Vote form.
+    */
+-  public function buildForm($entity_type, $entity_bundle, $entity_id, $vote_type, $field_name, $style, $show_results, $read_only = FALSE, $show_own_vote = FALSE) {
+-    $form = $this->getForm($entity_type, $entity_bundle, $entity_id, $vote_type, $field_name, $style, $show_results, $read_only, $show_own_vote);
++  public function buildForm($entity_type, $entity_bundle, $entity_id, $vote_type, $field_name, $settings) {
++    $form = $this->getForm($entity_type, $entity_bundle, $entity_id, $vote_type, $field_name, $settings);
+     $build = [
+       'rating' => [
+         '#theme' => 'container',
+@@ -33,7 +33,7 @@ class UsefulWidget extends VotingApiWidgetBase {
+           'class' => [
+             'votingapi-widgets',
+             'useful',
+-            ($read_only) ? 'read_only' : '',
++            ($settings['readonly'] === 1) ? 'read_only' : '',
+           ],
+         ],
+         '#children' => [
+@@ -44,6 +44,10 @@ class UsefulWidget extends VotingApiWidgetBase {
+         'library' => ['votingapi_widgets/useful'],
+       ],
+     ];
++    if ($settings['attach_fontawesome'] == 1) {
++      $build['#attached']['library'][] = 'votingapi_widgets/fontawesome';
++    }
++
+     return $build;
+   }
+ 
+@@ -52,7 +56,7 @@ class UsefulWidget extends VotingApiWidgetBase {
+    */
+   public function getInitialVotingElement(array &$form) {
+     $form['value']['#prefix'] = '<div class="votingapi-widgets useful">';
+-    $form['value']['#attached']  = [
++    $form['value']['#attached'] = [
+       'library' => ['votingapi_widgets/useful'],
+     ];
+     $form['value']['#suffix'] = '</div>';
+diff --git a/src/VotingApiLoader.php b/src/VotingApiLoader.php
+index a66ec1f..c37c965 100644
+--- a/src/VotingApiLoader.php
++++ b/src/VotingApiLoader.php
+@@ -30,7 +30,7 @@ class VotingApiLoader {
+       return [];
+     }
+     if ($fieldDefinition->get('status') != 1) {
+-      $read_only = TRUE;
++      $settings['read_only'];
+     }
+     return $plugin->buildForm($entity_type, $entity_bundle, $entity_id, $vote_type, $field_name, unserialize($settings));
+   }
+diff --git a/votingapi_widgets.libraries.yml b/votingapi_widgets.libraries.yml
+index 4e70c18..4008930 100644
+--- a/votingapi_widgets.libraries.yml
++++ b/votingapi_widgets.libraries.yml
+@@ -1,36 +1,116 @@
+-fivestar:
++fontawesome:
++  version: VERSION
++  css:
++    theme:
++      //cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css: {}
++
++glyphicons:
++  version: VERSION
++  css:
++    theme:
++      //netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css: {}
++
++common:
+   version: VERSION
+   js:
+-    js/fivestars.js : {}
++    /libraries/jquery-bar-rating/dist/jquery.barrating.min.js: {}
+   css:
+     theme:
+-      https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css: {}
+-      css/fivestar.css: {}
++      /libraries/jquery-bar-rating/dist/themes/css-stars.css: {}
+   dependencies:
+     - core/jquery
+     - core/drupal
+-    - votingapi_widgets/fontawesome
+-    - votingapi_widgets/barrating
+ 
+-fontawesome:
++fivestar-js:
++  js:
++    js/fivestars.js : {}
++  dependencies:
++    - core/jquery
++    - core/drupal
++
++fivestar-css:
+   css:
+     theme:
+-      https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css: {}
++      css/fivestar.css: {}
+ 
+-barrating:
+-  js:
+-    /libraries/jquery-bar-rating/dist/jquery.barrating.min.js: { minified: true }
++default:
++  js: {}
++  css:
++    theme: {}
++  dependencies:
++    - votingapi_widgets/common
++    - votingapi_widgets/fivestar-js
++    - votingapi_widgets/fivestar-css
++
++bars-horizontal:
+   css:
+     theme:
+-      /libraries/jquery-bar-rating/dist/themes/css-stars.css: {}
+-      /libraries/jquery-bar-rating/dist/themes/bars-square.css: {}
+-      /libraries/jquery-bar-rating/dist/themes/bars-pill.css: {}
+-      /libraries/jquery-bar-rating/dist/themes/bars-movie.css: {}
+       /libraries/jquery-bar-rating/dist/themes/bars-horizontal.css: {}
+-      /libraries/jquery-bar-rating/dist/themes/fontawesome-stars.css: {}
++  dependencies:
++    - votingapi_widgets/common
++    - votingapi_widgets/fivestar-js
++    - votingapi_widgets/fivestar-css
++
++css-stars:
++  css:
++    theme: {}
++  dependencies:
++    - votingapi_widgets/common
++    - votingapi_widgets/fivestar-js
++    - votingapi_widgets/fivestar-css
++
++bars-movie:
++  css:
++    theme:
++      /libraries/jquery-bar-rating/dist/themes/bars-movie.css: {}
++  dependencies:
++    - votingapi_widgets/common
++    - votingapi_widgets/fivestar-js
++    - votingapi_widgets/fivestar-css
++
++bars-pill:
++  css:
++    theme:
++      /libraries/jquery-bar-rating/dist/themes/bars-pill.css: {}
++  dependencies:
++    - votingapi_widgets/common
++    - votingapi_widgets/fivestar-js
++    - votingapi_widgets/fivestar-css
++
++bars-square:
++  css:
++    theme:
++      /libraries/jquery-bar-rating/dist/themes/bars-square.css: {}
++  dependencies:
++    - votingapi_widgets/common
++    - votingapi_widgets/fivestar-js # We should use "fivestar-js" only without "fivestar-css".
++
++fontawesome-stars-o:
++  css:
++    theme:
+       /libraries/jquery-bar-rating/dist/themes/fontawesome-stars-o.css: {}
+-      /libraries/jquery-bar-rating/dist/themes/bars-reversed.css: {}
++  dependencies:
++    - votingapi_widgets/common
++    - votingapi_widgets/fivestar-js
++    - votingapi_widgets/fivestar-css
++
++fontawesome-stars:
++  css:
++    theme:
++      /libraries/jquery-bar-rating/dist/themes/fontawesome-stars.css: {}
++  dependencies:
++    - votingapi_widgets/common
++    - votingapi_widgets/fivestar-js
++    - votingapi_widgets/fivestar-css
++
++bootstrap-stars:
++  css:
++    theme:
+       /libraries/jquery-bar-rating/dist/themes/bootstrap-stars.css: {}
++  dependencies:
++    - votingapi_widgets/common
++    - votingapi_widgets/fivestar-js
++    - votingapi_widgets/fivestar-css
+ 
+ useful:
+   version: VERSION
+@@ -42,4 +122,3 @@ useful:
+   dependencies:
+     - core/jquery
+     - core/drupal
+-    - votingapi_widgets/fontawesome

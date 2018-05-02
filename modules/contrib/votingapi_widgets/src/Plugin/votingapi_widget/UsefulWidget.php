@@ -44,6 +44,10 @@ class UsefulWidget extends VotingApiWidgetBase {
         'library' => ['votingapi_widgets/useful'],
       ],
     ];
+    if ($settings['attach_fontawesome'] == 1) {
+      $build['#attached']['library'][] = 'votingapi_widgets/fontawesome';
+    }
+
     return $build;
   }
 
@@ -52,7 +56,7 @@ class UsefulWidget extends VotingApiWidgetBase {
    */
   public function getInitialVotingElement(array &$form) {
     $form['value']['#prefix'] = '<div class="votingapi-widgets useful">';
-    $form['value']['#attached']  = [
+    $form['value']['#attached'] = [
       'library' => ['votingapi_widgets/useful'],
     ];
     $form['value']['#suffix'] = '</div>';

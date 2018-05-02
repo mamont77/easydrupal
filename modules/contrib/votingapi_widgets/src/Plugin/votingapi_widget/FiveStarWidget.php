@@ -44,9 +44,16 @@ class FiveStarWidget extends VotingApiWidgetBase {
         ],
       ],
       '#attached' => [
-        'library' => ['votingapi_widgets/fivestar'],
+        'library' => ['votingapi_widgets/' . $settings['style']],
       ],
     ];
+    if ($settings['attach_fontawesome'] == 1) {
+      $build['#attached']['library'][] = 'votingapi_widgets/fontawesome';
+    }
+    if ($settings['attach_glyphicons'] == 1) {
+      $build['#attached']['library'][] = 'votingapi_widgets/glyphicons';
+    }
+
     return $build;
   }
 
