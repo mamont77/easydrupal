@@ -8,6 +8,7 @@
         "drupal/console": "~1.0",
         "drupal/geshifilter": "^1.2",
         "drupal/sticky_sharrre_bar": "1.x-dev",
+        "drupal/yoast_seo": "2.0.0-alpha2",
         "drush/drush": "~9.0",
         "wikimedia/composer-merge-plugin": "^1.4"
     },
