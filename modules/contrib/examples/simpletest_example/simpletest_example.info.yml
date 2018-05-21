@@ -3,7 +3,7 @@ type: module
 hidden: false
 description: 'Demonstrates some SimpleTest-based tests in Drupal 8.'
 package: Example modules
-# core: 8.x
+core: 8.x
 # We have to be as explicit as possible about the dependencies for this module.
 # If you look at the config info in the config/install/ directory, you'll see
 # that they depend on some of these modules.
@@ -14,9 +14,3 @@ dependencies:
   - drupal:path
   - drupal:text
   - examples:examples
-
-# Information added by Drupal.org packaging script on 2018-02-15
-version: '8.x-1.x-dev'
-core: '8.x'
-project: 'examples'
-datestamp: 1518719289
