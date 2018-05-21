@@ -28,6 +28,7 @@ class FiveStarWidget extends VotingApiWidgetBase {
    * Vote form.
    */
   public function buildForm($entity_type, $entity_bundle, $entity_id, $vote_type, $field_name, $settings) {
+    $global_config = $this->configFactory->get('votingapi_widgets.settings');
     $form = $this->getForm($entity_type, $entity_bundle, $entity_id, $vote_type, $field_name, $settings);
     $build = [
       'rating' => [
@@ -47,10 +48,11 @@ class FiveStarWidget extends VotingApiWidgetBase {
         'library' => ['votingapi_widgets/' . $settings['style']],
       ],
     ];
-    if ($settings['attach_fontawesome'] == 1) {
+
+    if (!$global_config->get('libraries.exclude_fontawesome')) {
       $build['#attached']['library'][] = 'votingapi_widgets/fontawesome';
     }
-    if ($settings['attach_glyphicons'] == 1) {
+    if (!$global_config->get('libraries.exclude_glyphicons')) {
       $build['#attached']['library'][] = 'votingapi_widgets/glyphicons';
     }
 
@@ -63,7 +65,7 @@ class FiveStarWidget extends VotingApiWidgetBase {
   public function getInitialVotingElement(array &$form) {
     $form['value']['#prefix'] = '<div class="votingapi-widgets fivestar">';
     $form['value']['#attached'] = [
-      'library' => ['votingapi_widgets/fivestar'],
+      'library' => ['votingapi_widgets/' . $settings['style']],
     ];
     $form['value']['#suffix'] = '</div>';
     $form['value']['#attributes'] = [

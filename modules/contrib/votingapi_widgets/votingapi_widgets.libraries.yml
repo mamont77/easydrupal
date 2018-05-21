@@ -21,17 +21,20 @@ common:
     - core/jquery
     - core/drupal
 
-fivestar-js:
+# Split out js since votingapi_widgets/bars-square only needs the js logic
+fivestar-js-only:
   js:
     js/fivestars.js : {}
   dependencies:
     - core/jquery
     - core/drupal
 
-fivestar-css:
+fivestar:
   css:
     theme:
       css/fivestar.css: {}
+  dependencies:
+    - votingapi_widgets/fivestar-js-only
 
 default:
   js: {}
@@ -39,25 +42,23 @@ default:
     theme: {}
   dependencies:
     - votingapi_widgets/common
-    - votingapi_widgets/fivestar-js
-    - votingapi_widgets/fivestar-css
+    - votingapi_widgets/fivestar
 
 bars-horizontal:
   css:
     theme:
       /libraries/jquery-bar-rating/dist/themes/bars-horizontal.css: {}
+      /libraries/jquery-bar-rating/dist/themes/fontawesome-stars.css: {}
   dependencies:
     - votingapi_widgets/common
-    - votingapi_widgets/fivestar-js
-    - votingapi_widgets/fivestar-css
+    - votingapi_widgets/fivestar
 
 css-stars:
   css:
     theme: {}
   dependencies:
     - votingapi_widgets/common
-    - votingapi_widgets/fivestar-js
-    - votingapi_widgets/fivestar-css
+    - votingapi_widgets/fivestar
 
 bars-movie:
   css:
@@ -65,8 +66,7 @@ bars-movie:
       /libraries/jquery-bar-rating/dist/themes/bars-movie.css: {}
   dependencies:
     - votingapi_widgets/common
-    - votingapi_widgets/fivestar-js
-    - votingapi_widgets/fivestar-css
+    - votingapi_widgets/fivestar
 
 bars-pill:
   css:
@@ -74,8 +74,7 @@ bars-pill:
       /libraries/jquery-bar-rating/dist/themes/bars-pill.css: {}
   dependencies:
     - votingapi_widgets/common
-    - votingapi_widgets/fivestar-js
-    - votingapi_widgets/fivestar-css
+    - votingapi_widgets/fivestar
 
 bars-square:
   css:
@@ -83,7 +82,7 @@ bars-square:
       /libraries/jquery-bar-rating/dist/themes/bars-square.css: {}
   dependencies:
     - votingapi_widgets/common
-    - votingapi_widgets/fivestar-js # We should use "fivestar-js" only without "fivestar-css".
+    - votingapi_widgets/fivestar-js-only
 
 fontawesome-stars-o:
   css:
@@ -91,8 +90,7 @@ fontawesome-stars-o:
       /libraries/jquery-bar-rating/dist/themes/fontawesome-stars-o.css: {}
   dependencies:
     - votingapi_widgets/common
-    - votingapi_widgets/fivestar-js
-    - votingapi_widgets/fivestar-css
+    - votingapi_widgets/fivestar
 
 fontawesome-stars:
   css:
@@ -100,8 +98,7 @@ fontawesome-stars:
       /libraries/jquery-bar-rating/dist/themes/fontawesome-stars.css: {}
   dependencies:
     - votingapi_widgets/common
-    - votingapi_widgets/fivestar-js
-    - votingapi_widgets/fivestar-css
+    - votingapi_widgets/fivestar
 
 bootstrap-stars:
   css:
@@ -109,8 +106,7 @@ bootstrap-stars:
       /libraries/jquery-bar-rating/dist/themes/bootstrap-stars.css: {}
   dependencies:
     - votingapi_widgets/common
-    - votingapi_widgets/fivestar-js
-    - votingapi_widgets/fivestar-css
+    - votingapi_widgets/fivestar
 
 useful:
   version: VERSION

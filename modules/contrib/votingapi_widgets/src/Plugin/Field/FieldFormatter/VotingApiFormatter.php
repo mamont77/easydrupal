@@ -34,8 +34,6 @@ class VotingApiFormatter extends FormatterBase implements ContainerFactoryPlugin
       'show_results'  => FALSE,
       'values'        => [],
       'show_own_vote' => FALSE,
-      'attach_fontawesome' => TRUE,
-      'attach_glyphicons'  => TRUE,
       // Implement default settings.
     ] + parent::defaultSettings();
   }
@@ -102,6 +100,7 @@ class VotingApiFormatter extends FormatterBase implements ContainerFactoryPlugin
     $plugins = $this->votingapiResult->getDefinitions();
 
     $options = [];
+    $styles = [];
 
     $votePlugin = $this->votingapiWidgetProcessor->createInstance($this->getFieldSetting('vote_plugin'));
     $styles = $votePlugin->getStyles();
@@ -113,7 +112,6 @@ class VotingApiFormatter extends FormatterBase implements ContainerFactoryPlugin
       }
     }
 
-    $additional_help_text = $this->t('Leave it selected if you are not sure that the current theme has necessary style.');
     return [
       // Implement settings form.
       'style'        => [
@@ -139,27 +137,6 @@ class VotingApiFormatter extends FormatterBase implements ContainerFactoryPlugin
         '#return_value'  => 1,
         '#default_value' => $this->getSetting('show_own_vote'),
       ],
-      'attach_fontawesome'  => [
-        '#title'         => $this->t('Attach Font Awesome Styles'),
-        '#type'          => 'checkbox',
-        '#default_value' => $this->getSetting('attach_fontawesome'),
-        '#description'   => $this->t('Adds font-awesome.min.css. Required by a few styles and "Useful" vote plugin.'
-          . ' ' . $additional_help_text),
-        // TODO: Make fields visible only for some styles.
-        // '#states' => [
-        // // Show the settings if some values have been selected for 'style'.
-        //   'visible' => [
-        //      ':select[name="style"]' => ['value' => 'bars-horizontal'],
-        //   ],
-        // ],
-      ],
-      'attach_glyphicons' => [
-        '#title'         => $this->t('Attach Glyphicons Styles'),
-        '#type'          => 'checkbox',
-        '#default_value' => $this->getSetting('attach_glyphicons'),
-        '#description'   => $this->t('Adds bootstrap-glyphicons.css. Required by "Bootstrap stars" style only.'
-          . ' ' . $additional_help_text),
-      ],
     ] + parent::settingsForm($form, $form_state);
   }
 
@@ -172,8 +149,6 @@ class VotingApiFormatter extends FormatterBase implements ContainerFactoryPlugin
     $summary[] = $this->t('Readonly: @readonly', ['@readonly' => $this->getSetting('readonly') ? $this->t('yes') : $this->t('no')]);
     $summary[] = $this->t('Show results: @results', ['@results' => $this->getSetting('show_results') ? $this->t('yes') : $this->t('no')]);
     $summary[] = $this->t('Show own vote: @show_own_vote', ['@show_own_vote' => $this->getSetting('show_own_vote') ? $this->t('yes') : $this->t('no')]);
-    $summary[] = $this->t('Attach Font Awesome Styles: @attach_fontawesome', ['@attach_fontawesome' => $this->getSetting('attach_fontawesome') ? $this->t('yes') : $this->t('no')]);
-    $summary[] = $this->t('Attach Glyphicons Styles: @attach_glyphicons', ['@attach_glyphicons' => $this->getSetting('attach_glyphicons') ? $this->t('yes') : $this->t('no')]);
 
     return $summary;
   }
@@ -190,6 +165,13 @@ class VotingApiFormatter extends FormatterBase implements ContainerFactoryPlugin
 
     $vote_type = $field_settings['vote_type'];
     $vote_plugin = $field_settings['vote_plugin'];
+    $readonly = $this->getSetting('readonly');
+
+    $show_own_vote = $this->getSetting('show_own_vote') ? TRUE : FALSE;
+
+    if ($items->status === "0") {
+      $readonly = TRUE;
+    }
 
     $elements[] = [
       'vote_form' => [

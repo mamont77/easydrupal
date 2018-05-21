@@ -143,11 +143,6 @@ class BaseRatingForm extends ContentEntityForm {
     }
     $resultCache = &drupal_static(__FUNCTION__);
 
-    if (!$resultCache) {
-      \Drupal::service('plugin.cache_clearer')
-        ->clearCachedDefinitions();
-    }
-
     if (!$result_function && isset($resultCache[$entity->getEntityTypeId()][$entity->getVotedEntityId()])) {
       return $resultCache[$entity->getEntityTypeId()][$entity->getVotedEntityId()];
     }

@@ -83,9 +83,10 @@ class VotingApiWidget extends WidgetBase implements ContainerFactoryPluginInterf
    */
   public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state) {
     $entity = $items->getEntity();
+    $field_label = $this->fieldDefinition->getLabel();
     $element['status'] = array(
       '#type' => 'radios',
-      '#title' => $this->t('Votes'),
+      '#title' => $this->t($field_label),
       '#default_value' => isset($items->getValue('status')[0]['status']) ? $items->getValue('status')[0]['status'] : 1,
       '#options' => array(
         1 => $this->t('Open'),
