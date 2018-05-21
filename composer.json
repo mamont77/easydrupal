@@ -5,9 +5,11 @@
     "license": "GPL-2.0-or-later",
     "require": {
         "composer/installers": "^1.0.24",
+        "cweagans/composer-patches": "^1.6",
         "drupal/console": "~1.0",
         "drupal/geshifilter": "^1.2",
         "drupal/sticky_sharrre_bar": "1.x-dev",
+        "drupal/varnish": "1.x-dev",
         "drupal/yoast_seo": "2.0.0-alpha2",
         "drush/drush": "~9.0",
         "wikimedia/composer-merge-plugin": "^1.4"
@@ -47,6 +49,21 @@
             "modules/custom/{$name}": ["type:drupal-custom-module"],
             "themes/custom/{$name}": ["type:drupal-custom-theme"],
             "libraries/{$name}": ["type:drupal-library"]
+        },
+        "enable-patching": true,
+        "patches": {
+            "drupal/votingapi_widgets": {
+                "Load only the necessary styles and scripts": "_patches/2933206-16-split-libraries.patch"
+            },
+            "drupal/yoast_seo": {
+                "Add a point to the end of the sentence": "https://www.drupal.org/files/issues/2018-05-21/add-a-point-to-the-end-of-the-sentence-2974202-2.patch"
+            },
+            "drupal/votingapi": {
+                "Add a point to the end of the sentence": "https://www.drupal.org/files/issues/2018-05-21/add-a-point-to-the-end-of-the-sentence-2974200-2.patch"
+            },
+            "drupal/varnish": {
+                "Add a point to the end of the sentence": "https://www.drupal.org/files/issues/2018-05-21/add-a-point-to-the-end-of-the-sentence-2974197-2.patch"
+            }
         }
     },
     "autoload": {

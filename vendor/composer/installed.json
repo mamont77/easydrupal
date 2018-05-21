@@ -7319,6 +7319,52 @@
         "homepage": "https://github.com/goalgorilla/RTSEO.js"
     },
     {
+        "name": "cweagans/composer-patches",
+        "version": "1.6.4",
+        "version_normalized": "1.6.4.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/cweagans/composer-patches.git",
+            "reference": "462e65061606dc6149349535d4322241515d1b16"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/cweagans/composer-patches/zipball/462e65061606dc6149349535d4322241515d1b16",
+            "reference": "462e65061606dc6149349535d4322241515d1b16",
+            "shasum": ""
+        },
+        "require": {
+            "composer-plugin-api": "^1.0",
+            "php": ">=5.3.0"
+        },
+        "require-dev": {
+            "composer/composer": "~1.0",
+            "phpunit/phpunit": "~4.6"
+        },
+        "time": "2017-12-07T16:16:31+00:00",
+        "type": "composer-plugin",
+        "extra": {
+            "class": "cweagans\\Composer\\Patches"
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "cweagans\\Composer\\": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-2-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Cameron Eagans",
+                "email": "me@cweagans.net"
+            }
+        ],
+        "description": "Provides a way to patch Composer packages."
+    },
+    {
         "name": "drupal/yoast_seo",
         "version": "2.0.0-alpha2",
         "version_normalized": "2.0.0.0-alpha2",
@@ -7350,6 +7396,9 @@
                     "status": "not-covered",
                     "message": "Alpha releases are not covered by Drupal security advisories."
                 }
+            },
+            "patches_applied": {
+                "Add a point to the end of the sentence": "https://www.drupal.org/files/issues/2018-05-21/add-a-point-to-the-end-of-the-sentence-2974202-2.patch"
             }
         },
         "installation-source": "dist",
@@ -7396,6 +7445,68 @@
         "support": {
             "source": "http://cgit.drupalcode.org/yoast_seo",
             "issues": "http://drupal.org/project/yoast_seo"
+        }
+    },
+    {
+        "name": "drupal/varnish",
+        "version": "dev-1.x",
+        "version_normalized": "dev-1.x",
+        "source": {
+            "type": "git",
+            "url": "https://git.drupal.org/project/varnish",
+            "reference": "8a81063b8b8f98a1ef37deb6a7e3c8a047ca989b"
+        },
+        "require": {
+            "drupal/core": "~8.0"
+        },
+        "type": "drupal-module",
+        "extra": {
+            "branch-alias": {
+                "dev-1.x": "1.x-dev"
+            },
+            "drupal": {
+                "version": "8.x-1.x-dev",
+                "datestamp": "1509973985",
+                "security-coverage": {
+                    "status": "not-covered",
+                    "message": "Dev releases are not covered by Drupal security advisories."
+                }
+            },
+            "patches_applied": {
+                "Add a point to the end of the sentence": "https://www.drupal.org/files/issues/2018-05-21/add-a-point-to-the-end-of-the-sentence-2974197-2.patch"
+            }
+        },
+        "installation-source": "source",
+        "notification-url": "https://packages.drupal.org/8/downloads",
+        "license": [
+            "GPL-2.0+"
+        ],
+        "authors": [
+            {
+                "name": "JeremyFrench",
+                "homepage": "https://www.drupal.org/user/419876"
+            },
+            {
+                "name": "MiSc",
+                "homepage": "https://www.drupal.org/user/382892"
+            },
+            {
+                "name": "deadbeef",
+                "homepage": "https://www.drupal.org/user/93644"
+            },
+            {
+                "name": "fabsor",
+                "homepage": "https://www.drupal.org/user/255704"
+            },
+            {
+                "name": "joshk",
+                "homepage": "https://www.drupal.org/user/3313"
+            }
+        ],
+        "description": "Integration with varnish from Drupal.",
+        "homepage": "https://www.drupal.org/project/varnish",
+        "support": {
+            "source": "http://cgit.drupalcode.org/varnish"
         }
     }
 ]
