@@ -1,0 +1,5 @@
+votingapi_widgets.admin_settings:
+  title: Voting API Widgets Settings
+  description: 'Configure Voting API Widgets'
+  route_name: votingapi_widgets.admin_settings
+  parent: votingapi.admin_settings

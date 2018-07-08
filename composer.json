@@ -54,6 +54,7 @@
         "drupal/views_bootstrap": "^3.0",
         "drupal/views_infinite_scroll": "^1.5",
         "drupal/votingapi": "^3.0@alpha",
+        "drupal/votingapi_widgets": "^1.0@alpha",
         "drupal/xmlsitemap": "^1.0@alpha",
         "drupal/yoast_seo": "2.0-alpha2",
         "drush/drush": "~9.0",
