@@ -31,6 +31,7 @@ class ModalForm extends FormBase {
     $form = new static();
     $form->setRequestStack($container->get('request_stack'));
     $form->setStringTranslation($container->get('string_translation'));
+    $form->setMessenger($container->get('messenger'));
     return $form;
   }
 
@@ -136,8 +137,9 @@ class ModalForm extends FormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $title = $form_state->getValue('title');
-    $message = $this->t('Submit handler: You specified a title of @title.', ['@title' => $title]);
-    drupal_set_message($message);
+    $this->messenger()->addMessage(
+      $this->t('Submit handler: You specified a title of @title.', ['@title' => $title])
+    );
   }
 
   /**
@@ -170,14 +172,14 @@ class ModalForm extends FormBase {
     // If there are no errors, show the output dialog.
     else {
       // We don't want any messages that were added by submitForm().
-      drupal_get_messages();
+      $this->messenger()->deleteAll();
       // We use FormattableMarkup to handle sanitizing the input.
       // @todo: There's probably a better way to do this.
       $title = new FormattableMarkup(':title', [':title' => $form_state->getValue('title')]);
       // This will be the contents for the modal dialog.
       $content = [
         '#type' => 'item',
-        '#markup' => $this->t('Your specified title of \'%title\' appears in this modal dialog.', ['%title' => $title]),
+        '#markup' => $this->t("Your specified title of '%title' appears in this modal dialog.", ['%title' => $title]),
       ];
       // Add the OpenModalDialogCommand to the response. This will cause Drupal
       // AJAX to show the modal dialog. The user can click the little X to close

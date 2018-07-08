@@ -228,3 +228,5 @@ if (defined('PANTHEON_ENVIRONMENT')) {
     $config['advagg.settings']['enabled'] = FALSE;
   }
 }
+
+$config['system.logging']['error_level'] = ERROR_REPORTING_DISPLAY_VERBOSE;

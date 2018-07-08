@@ -66,7 +66,7 @@ class StateDemo extends DemoBase {
 
     $form['accommodation']['diet'] = [
       '#type' => 'textfield',
-      '#title' => t('Dietary Restrictions'),
+      '#title' => $this->t('Dietary Restrictions'),
     ];
 
     // Add a submit button that handles the submission of the form.
@@ -96,7 +96,7 @@ class StateDemo extends DemoBase {
     // Find out what was submitted.
     $values = $form_state->getValues();
     if ($values['needs_accommodation']) {
-      drupal_set_message($this->t('Dietary Restriction Requested: %diet', ['%diet' => $values['diet']]));
+      $this->messenger()->addMessage($this->t('Dietary Restriction Requested: %diet', ['%diet' => $values['diet']]));
     }
   }
 

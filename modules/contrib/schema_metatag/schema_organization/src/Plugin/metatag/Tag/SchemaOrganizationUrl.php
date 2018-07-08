@@ -17,7 +17,7 @@ use Drupal\schema_metatag\Plugin\metatag\Tag\SchemaNameBase;
  *   description = @Translation("RECOMMENDED BY GOOGLE. The url of the organization."),
  *   name = "url",
  *   group = "schema_organization",
- *   weight = 2,
+ *   weight = 1,
  *   type = "string",
  *   secure = FALSE,
  *   multiple = FALSE

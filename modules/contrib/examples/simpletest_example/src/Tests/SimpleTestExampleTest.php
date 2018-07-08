@@ -2,6 +2,7 @@
 
 namespace Drupal\simpletest_example\Tests;
 
+use Drupal\Component\Render\FormattableMarkup;
 use Drupal\simpletest\WebTestBase;
 
 /**
@@ -86,7 +87,7 @@ class SimpleTestExampleTest extends WebTestBase {
     $this->drupalPostForm('node/add/simpletest_example', $edit, 'Save');
 
     // Check that our simpletest_example node has been created.
-    $this->assertText(t('@post @title has been created.', [
+    $this->assertText((string) new FormattableMarkup('@post @title has been created.', [
       '@post' => 'SimpleTest Example Node Type',
       '@title' => $edit['title[0][value]'],
     ]));
@@ -137,14 +138,14 @@ class SimpleTestExampleTest extends WebTestBase {
       $this->drupalGet('node/' . $node->id() . '/edit');
       // The debug() statement will output information into the test results.
       // It can also be used in Drupal anywhere in code and will come out
-      // as a drupal_set_message().
+      // as a message from the Messenger service.
       debug('The following test should fail. Examine the verbose message above it to see why.');
       // Make sure we don't get a 401 unauthorized response:
       $this->assertResponse(200, 'User is allowed to edit the content.');
 
       // Looking for title text in the page to determine whether we were
       // successful opening edit form.
-      $this->assertText(t("@title", ['@title' => $settings['title']]), "Found title in edit form");
+      $this->assertText((string) new FormattableMarkup('@title', ['@title' => $settings['title']]), "Found title in edit form");
     }
   }
 

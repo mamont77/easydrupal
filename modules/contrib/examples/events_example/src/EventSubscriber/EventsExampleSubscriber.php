@@ -2,10 +2,11 @@
 
 namespace Drupal\events_example\EventSubscriber;
 
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\events_example\Event\IncidentEvents;
 use Drupal\events_example\Event\IncidentReportEvent;
+use Drupal\Core\Messenger\MessengerTrait;
+use Drupal\Core\StringTranslation\StringTranslationTrait;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
  * Subscribe to IncidentEvents::NEW_REPORT events and react to new reports.
@@ -24,6 +25,7 @@ use Drupal\events_example\Event\IncidentReportEvent;
 class EventsExampleSubscriber implements EventSubscriberInterface {
 
   use StringTranslationTrait;
+  use MessengerTrait;
 
   /**
    * {@inheritdoc}
@@ -61,6 +63,10 @@ class EventsExampleSubscriber implements EventSubscriberInterface {
     // of priority. If no priority is set the default is 0.
     $events[IncidentEvents::NEW_REPORT][] = ['notifyBatman', -100];
 
+    // We'll set an event listener with a very low priority to catch incident
+    // types not yet defined. In practice, this will be the 'cat' incident.
+    $events[IncidentEvents::NEW_REPORT][] = ['notifyDefault', -255];
+
     return $events;
   }
 
@@ -88,7 +94,11 @@ class EventsExampleSubscriber implements EventSubscriberInterface {
     // You can use the event object to access information about the event passed
     // along by the event dispatcher.
     if ($event->getType() == 'stolen_princess') {
-      drupal_set_message($this->t('Mario has been alerted. Thank you. This message was set by an event subscriber. See \Drupal\events_example\EventSubscriber\EventsExampleSubscriber::notifyMario()'), 'status');
+      $this->messenger()->addStatus($this->t('Mario has been alerted. Thank you. This message was set by an event subscriber. See @method()', ['@method' => __METHOD__]));
+      // Optionally use the event object to stop propagation.
+      // If there are other subscribers that have not been called yet this will
+      // cause them to be skipped.
+      $event->stopPropagation();
     }
   }
 
@@ -100,12 +110,20 @@ class EventsExampleSubscriber implements EventSubscriberInterface {
    */
   public function notifyBatman(IncidentReportEvent $event) {
     if ($event->getType() == 'joker') {
-      drupal_set_message($this->t('Batman has been alerted. Thank you. This message was set by an event subscriber. See \Drupal\events_example\EventSubscriber\EventsExampleSubscriber::notifyBatman()'), 'status');
-      // Optionally use the event object to stop propagation.
-      // If there are other subscribers that have not been called yet this will
-      // cause them to be skipped.
+      $this->messenger()->addStatus($this->t('Batman has been alerted. Thank you. This message was set by an event subscriber. See @method()', ['@method' => __METHOD__]));
       $event->stopPropagation();
     }
+  }
+
+  /**
+   * Handle incidents not handled by the other handlers.
+   *
+   * @param \Drupal\events_example\Event\IncidentReportEvent $event
+   *   The event object containing the incident report.
+   */
+  public function notifyDefault(IncidentReportEvent $event) {
+    $this->messenger()->addStatus($this->t('Thank you for reporting this incident. This message was set by an event subscriber. See @method()', ['@method' => __METHOD__]));
+    $event->stopPropagation();
   }
 
 }

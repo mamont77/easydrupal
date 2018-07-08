@@ -60,7 +60,7 @@ class DynamicFormSections extends FormBase {
     $form['question_type_select'] = [
       // This is our select dropdown.
       '#type' => 'select',
-      '#title' => t('Question style'),
+      '#title' => $this->t('Question style'),
       // We have a variety of form items you can use to get input from the user.
       '#options' => [
         'Choose question style' => 'Choose question style',
@@ -80,7 +80,7 @@ class DynamicFormSections extends FormBase {
     // The CSS for this module hides this next button if JS is enabled.
     $form['question_type_submit'] = [
       '#type' => 'submit',
-      '#value' => t('Choose'),
+      '#value' => $this->t('Choose'),
       '#attributes' => ['class' => ['ajax-example-inline']],
       // No need to validate when submitting this.
       '#limit_validation_errors' => [],
@@ -117,7 +117,7 @@ class DynamicFormSections extends FormBase {
     if (!empty($question_type) && $question_type !== 'Choose question style') {
 
       $form['questions_fieldset']['question'] = [
-        '#markup' => t('Who was the first president of the U.S.?'),
+        '#markup' => $this->t('Who was the first president of the U.S.?'),
       ];
 
       // Build up a secondary form, based on the type of question the user
@@ -126,7 +126,7 @@ class DynamicFormSections extends FormBase {
         case 'Multiple Choice':
           $form['questions_fieldset']['question'] = [
             '#type' => 'radios',
-            '#title' => t('Who was the first president of the United States'),
+            '#title' => $this->t('Who was the first president of the United States'),
             '#options' => [
               'George Bush' => 'George Bush',
               'Adam McGuire' => 'Adam McGuire',
@@ -172,6 +172,7 @@ class DynamicFormSections extends FormBase {
    * Reports what values were finally set.
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
+    $messenger = $this->messenger();
     // This is only executed when a button is pressed, not when the AJAXfield
     // select is changed.
     // Now handle the case of the next, previous, and submit buttons.
@@ -189,10 +190,10 @@ class DynamicFormSections extends FormBase {
         $answer = $form['questions_fieldset']['question']['#title'];
       }
       if ($answer == $this->t('George Washington')) {
-        drupal_set_message($this->t('You got the right answer: @answer', ['@answer' => $answer]));
+        $messenger->addMessage($this->t('You got the right answer: @answer', ['@answer' => $answer]));
       }
       else {
-        drupal_set_message($this->t('Sorry, your answer (@answer) is wrong', ['@answer' => $answer]));
+        $messenger->addMessage($this->t('Sorry, your answer (@answer) is wrong', ['@answer' => $answer]));
       }
       return;
     }

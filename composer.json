@@ -96,6 +96,9 @@
             "libraries/{$name}": ["type:drupal-library"]
         },
         "enable-patching": true,
+        "patchLevel": {
+            "drupal/core": "-p2"
+        },
         "patches": {
             "drupal/disqus": {
                 "Wrong URL in ssoSettings(), array instead of string": "https://www.drupal.org/files/issues/2829210-wrong-url-in-ssosettings-array-instead-of-string.patch"
@@ -108,9 +111,6 @@
             },
             "drupal/votingapi_widgets": {
                 "Load only the necessary styles and scripts": "https://www.drupal.org/files/issues/2018-05-15/2933206-16-split-libraries.patch"
-            },
-            "drupal/yoast_seo": {
-                "Add a point to the end of the sentence": "https://www.drupal.org/files/issues/2018-05-21/add-a-point-to-the-end-of-the-sentence-2974202-2.patch"
             }
         }
     },

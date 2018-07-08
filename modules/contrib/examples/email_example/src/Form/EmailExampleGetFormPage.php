@@ -46,10 +46,13 @@ class EmailExampleGetFormPage extends FormBase {
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
-    return new static(
+    $form = new static(
       $container->get('plugin.manager.mail'),
       $container->get('language_manager')
     );
+    $form->setMessenger($container->get('messenger'));
+    $form->setStringTranslation($container->get('string_translation'));
+    return $form;
   }
 
   /**
@@ -64,21 +67,21 @@ class EmailExampleGetFormPage extends FormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
     $form['intro'] = [
-      '#markup' => t('Use this form to send a message to an e-mail address. No spamming!'),
+      '#markup' => $this->t('Use this form to send a message to an e-mail address. No spamming!'),
     ];
     $form['email'] = [
       '#type' => 'textfield',
-      '#title' => t('E-mail address'),
+      '#title' => $this->t('E-mail address'),
       '#required' => TRUE,
     ];
     $form['message'] = [
       '#type' => 'textarea',
-      '#title' => t('Message'),
+      '#title' => $this->t('Message'),
       '#required' => TRUE,
     ];
     $form['submit'] = [
       '#type' => 'submit',
-      '#value' => t('Submit'),
+      '#value' => $this->t('Submit'),
     ];
     return $form;
   }
@@ -88,7 +91,7 @@ class EmailExampleGetFormPage extends FormBase {
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
     if (!valid_email_address($form_state->getValue('email'))) {
-      $form_state->setErrorByName('email', t('That e-mail address is not valid.'));
+      $form_state->setErrorByName('email', $this->t('That e-mail address is not valid.'));
     }
   }
 
@@ -138,10 +141,10 @@ class EmailExampleGetFormPage extends FormBase {
     // while sending.
     $result = $this->mailManager->mail($module, $key, $to, $language_code, $params, $from, $send_now);
     if ($result['result'] == TRUE) {
-      drupal_set_message(t('Your message has been sent.'));
+      $this->messenger()->addMessage($this->t('Your message has been sent.'));
     }
     else {
-      drupal_set_message(t('There was a problem sending your message and it was not sent.'), 'error');
+      $this->messenger()->addMessage($this->t('There was a problem sending your message and it was not sent.'), 'error');
     }
   }
 

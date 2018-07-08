@@ -65,4 +65,22 @@ class SchemaCreativeWorkBase extends SchemaNameBase {
     return $items;
   }
 
+  /**
+   * {@inheritdoc}
+   */
+  public static function processedTestValue($items) {
+    foreach ($items as $key => $value) {
+      switch ($key) {
+        case 'author':
+          $items[$key] = SchemaPersonOrgBase::processedTestValue($items[$key]);
+          break;
+
+        case 'potentialAction':
+          $items[$key] = SchemaActionBase::processedTestValue($items[$key]);
+          break;
+
+      }
+    }
+    return $items;
+  }
 }

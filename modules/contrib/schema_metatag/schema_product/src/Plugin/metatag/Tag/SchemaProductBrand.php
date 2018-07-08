@@ -2,7 +2,7 @@
 
 namespace Drupal\schema_product\Plugin\metatag\Tag;
 
-use Drupal\schema_metatag\Plugin\metatag\Tag\SchemaNameBase;
+use Drupal\schema_metatag\Plugin\metatag\Tag\SchemaBrandBase;
 
 /**
  * Provides a plugin for the 'brand' meta tag.
@@ -17,12 +17,12 @@ use Drupal\schema_metatag\Plugin\metatag\Tag\SchemaNameBase;
  *   description = @Translation("RECOMMENDED BY GOOGLE. The brand of the product."),
  *   name = "brand",
  *   group = "schema_product",
- *   weight = 0,
+ *   weight = 10,
  *   type = "string",
  *   secure = FALSE,
  *   multiple = FALSE
  * )
  */
-class SchemaProductBrand extends SchemaNameBase {
+class SchemaProductBrand extends SchemaBrandBase {
 
 }

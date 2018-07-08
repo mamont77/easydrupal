@@ -38,6 +38,7 @@ class SchemaServiceTest extends SchemaMetatagTagsTestBase {
     'schema_service_name' => 'SchemaServiceName',
     'schema_service_offers' => 'SchemaServiceOffers',
     'schema_service_type' => 'SchemaServiceType',
+    'schema_service_brand' => 'SchemaServiceBrand',
   ];
 
 }
