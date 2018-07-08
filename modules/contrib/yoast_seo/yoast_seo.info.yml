@@ -15,8 +15,8 @@ dependencies:
 test_dependencies:
   - node
 
-# Information added by Drupal.org packaging script on 2018-03-19
-version: '8.x-2.0-alpha2'
+# Information added by Drupal.org packaging script on 2018-06-04
+version: '8.x-2.0-alpha3'
 core: '8.x'
 project: 'yoast_seo'
-datestamp: 1521471488
+datestamp: 1528107187

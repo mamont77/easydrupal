@@ -8,6 +8,7 @@ use Drupal\Core\DependencyInjection\DependencySerializationTrait;
 use Drupal\Core\Entity\EntityHandlerInterface;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\yoast_seo\EntityAnalyser;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -26,13 +27,23 @@ class AnalysisFormHandler implements EntityHandlerInterface {
   protected $entityAnalyser;
 
   /**
+   * The messenger service.
+   *
+   * @var \Drupal\Core\Messenger\MessengerInterface
+   */
+  protected $messenger;
+
+  /**
    * SeoPreviewFormHandler constructor.
    *
    * @param \Drupal\yoast_seo\EntityAnalyser $entity_analyser
    *   The entity analyser.
+   * @param \Drupal\Core\Messenger\MessengerInterface $messenger
+   *   The messenger service.
    */
-  public function __construct(EntityAnalyser $entity_analyser) {
+  public function __construct(EntityAnalyser $entity_analyser, MessengerInterface $messenger) {
     $this->entityAnalyser = $entity_analyser;
+    $this->messenger = $messenger;
   }
 
   /**
@@ -40,7 +51,8 @@ class AnalysisFormHandler implements EntityHandlerInterface {
    */
   public static function createInstance(ContainerInterface $container, EntityTypeInterface $entity_type) {
     return new static(
-      $container->get('yoast_seo.entity_analyser')
+      $container->get('yoast_seo.entity_analyser'),
+      $container->get('messenger')
     );
   }
 
@@ -56,6 +68,10 @@ class AnalysisFormHandler implements EntityHandlerInterface {
    *   The ajax response.
    */
   public function analysisSubmitAjax(array &$form, FormStateInterface $form_state) {
+
+    // Prevent firing accidental submissions from entity builder callbacks.
+    $form_state->setTemporaryValue('entity_validated', FALSE);
+
     $preview_entity = $form_state->getFormObject()->buildEntity($form, $form_state);
     $preview_entity->in_preview = TRUE;
 
@@ -72,7 +88,7 @@ class AnalysisFormHandler implements EntityHandlerInterface {
     // rendered. Any new messages are from form validation. We don't want to
     // leak those to the user because they'll get them during normal submission
     // so we clear them here.
-    drupal_get_messages();
+    $this->messenger->all();
 
     $response = new AjaxResponse();
     $response->addCommand(new InvokeCommand('body', 'trigger', ['updateSeoData', $entity_data]));
