@@ -11,12 +11,12 @@
 
 namespace Symfony\Component\HttpFoundation\Session;
 
-use Symfony\Component\HttpFoundation\Session\Storage\SessionStorageInterface;
 use Symfony\Component\HttpFoundation\Session\Attribute\AttributeBag;
 use Symfony\Component\HttpFoundation\Session\Attribute\AttributeBagInterface;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBag;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpFoundation\Session\Storage\NativeSessionStorage;
+use Symfony\Component\HttpFoundation\Session\Storage\SessionStorageInterface;
 
 /**
  * @author Fabien Potencier <fabien@symfony.com>
@@ -140,7 +140,7 @@ class Session implements SessionInterface, \IteratorAggregate, \Countable
      */
     public function count()
     {
-        return count($this->getAttributeBag()->all());
+        return \count($this->getAttributeBag()->all());
     }
 
     /**
@@ -160,7 +160,9 @@ class Session implements SessionInterface, \IteratorAggregate, \Countable
      */
     public function isEmpty()
     {
-        ++$this->usageIndex;
+        if ($this->isStarted()) {
+            ++$this->usageIndex;
+        }
         foreach ($this->data as &$data) {
             if (!empty($data)) {
                 return false;
