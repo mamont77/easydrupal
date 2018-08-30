@@ -112,7 +112,7 @@
                 "Add a point to the end of the sentence": "https://www.drupal.org/files/issues/2018-05-21/add-a-point-to-the-end-of-the-sentence-2974200-2.patch"
             },
             "drupal/votingapi_widgets": {
-                "Load only the necessary styles and scripts": "https://www.drupal.org/files/issues/2018-05-15/2933206-16-split-libraries.patch"
+                "Load only the necessary styles and scripts": "https://www.drupal.org/files/issues/2018-05-21/votingapi_widgets-split-libraries-2933206-21.patch"
             }
         }
     },

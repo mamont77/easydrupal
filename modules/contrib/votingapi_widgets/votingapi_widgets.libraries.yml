@@ -1,36 +1,112 @@
-fivestar:
+fontawesome:
+  version: VERSION
+  css:
+    theme:
+      //cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css: {}
+
+glyphicons:
+  version: VERSION
+  css:
+    theme:
+      //netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css: {}
+
+common:
   version: VERSION
   js:
-    js/fivestars.js : {}
-  css:
-    theme:
-      https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css: {}
-      css/fivestar.css: {}
-  dependencies:
-    - core/jquery
-    - core/drupal
-    - votingapi_widgets/fontawesome
-    - votingapi_widgets/barrating
-
-fontawesome:
-  css:
-    theme:
-      https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css: {}
-
-barrating:
-  js:
-    /libraries/jquery-bar-rating/dist/jquery.barrating.min.js: { minified: true }
+    /libraries/jquery-bar-rating/dist/jquery.barrating.min.js: {}
   css:
     theme:
       /libraries/jquery-bar-rating/dist/themes/css-stars.css: {}
-      /libraries/jquery-bar-rating/dist/themes/bars-square.css: {}
-      /libraries/jquery-bar-rating/dist/themes/bars-pill.css: {}
-      /libraries/jquery-bar-rating/dist/themes/bars-movie.css: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+
+# Split out js since votingapi_widgets/bars-square only needs the js logic
+fivestar-js-only:
+  js:
+    js/fivestars.js : {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+
+fivestar:
+  css:
+    theme:
+      css/fivestar.css: {}
+  dependencies:
+    - votingapi_widgets/fivestar-js-only
+
+default:
+  js: {}
+  css:
+    theme: {}
+  dependencies:
+    - votingapi_widgets/common
+    - votingapi_widgets/fivestar
+
+bars-horizontal:
+  css:
+    theme:
       /libraries/jquery-bar-rating/dist/themes/bars-horizontal.css: {}
       /libraries/jquery-bar-rating/dist/themes/fontawesome-stars.css: {}
+  dependencies:
+    - votingapi_widgets/common
+    - votingapi_widgets/fivestar
+
+css-stars:
+  css:
+    theme: {}
+  dependencies:
+    - votingapi_widgets/common
+    - votingapi_widgets/fivestar
+
+bars-movie:
+  css:
+    theme:
+      /libraries/jquery-bar-rating/dist/themes/bars-movie.css: {}
+  dependencies:
+    - votingapi_widgets/common
+    - votingapi_widgets/fivestar
+
+bars-pill:
+  css:
+    theme:
+      /libraries/jquery-bar-rating/dist/themes/bars-pill.css: {}
+  dependencies:
+    - votingapi_widgets/common
+    - votingapi_widgets/fivestar
+
+bars-square:
+  css:
+    theme:
+      /libraries/jquery-bar-rating/dist/themes/bars-square.css: {}
+  dependencies:
+    - votingapi_widgets/common
+    - votingapi_widgets/fivestar-js-only
+
+fontawesome-stars-o:
+  css:
+    theme:
       /libraries/jquery-bar-rating/dist/themes/fontawesome-stars-o.css: {}
-      /libraries/jquery-bar-rating/dist/themes/bars-reversed.css: {}
+  dependencies:
+    - votingapi_widgets/common
+    - votingapi_widgets/fivestar
+
+fontawesome-stars:
+  css:
+    theme:
+      /libraries/jquery-bar-rating/dist/themes/fontawesome-stars.css: {}
+  dependencies:
+    - votingapi_widgets/common
+    - votingapi_widgets/fivestar
+
+bootstrap-stars:
+  css:
+    theme:
       /libraries/jquery-bar-rating/dist/themes/bootstrap-stars.css: {}
+  dependencies:
+    - votingapi_widgets/common
+    - votingapi_widgets/fivestar
 
 useful:
   version: VERSION
@@ -42,7 +118,6 @@ useful:
   dependencies:
     - core/jquery
     - core/drupal
-    - votingapi_widgets/fontawesome
 
 like:
   version: VERSION
