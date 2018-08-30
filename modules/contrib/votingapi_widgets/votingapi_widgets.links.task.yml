@@ -1,4 +1,0 @@
-votingapi_widgets.admin_settings:
-  title: 'Widget Settings'
-  route_name: votingapi_widgets.admin_settings
-  base_route: votingapi.admin_settings

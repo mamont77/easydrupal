@@ -156,7 +156,8 @@ class BaseRatingForm extends ContentEntityForm {
       return $resultCache[$entity->getEntityTypeId()][$entity->getVotedEntityId()];
     }
 
-    if (isset($resultCache[$entity->getEntityTypeId()][$entity->getVotedEntityId()])) {
+    if (isset($resultCache[$entity->getEntityTypeId()][$entity->getVotedEntityId()])
+        && isset($resultCache[$entity->getEntityTypeId()][$entity->getVotedEntityId()][$result_function])) {
       return $resultCache[$entity->getEntityTypeId()][$entity->getVotedEntityId()][$result_function];
     }
 

@@ -29,9 +29,6 @@ class VotingApiLoader {
     if (empty($plugin) || empty($entity) || !$entity->hasField($field_name)) {
       return [];
     }
-    if ($fieldDefinition->get('status') != 1) {
-      $read_only = TRUE;
-    }
     return $plugin->buildForm($entity_type, $entity_bundle, $entity_id, $vote_type, $field_name, unserialize($settings));
   }
 

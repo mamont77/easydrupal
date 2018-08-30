@@ -132,7 +132,7 @@ class VotingApiFormatter extends FormatterBase implements ContainerFactoryPlugin
       ],
       'show_own_vote' => [
         '#title'         => $this->t('Show own vote'),
-        '#description'   => $this->t('Show own cast vote instead of results. (Useful on add/edit forms with rate widget).'),
+        '#description'   => $this->t('Show own cast vote instead of results. (Useful on add/ edit forms with rate widget).'),
         '#type'          => 'checkbox',
         '#return_value'  => 1,
         '#default_value' => $this->getSetting('show_own_vote'),
@@ -165,13 +165,8 @@ class VotingApiFormatter extends FormatterBase implements ContainerFactoryPlugin
 
     $vote_type = $field_settings['vote_type'];
     $vote_plugin = $field_settings['vote_plugin'];
-    $readonly = $this->getSetting('readonly');
 
     $show_own_vote = $this->getSetting('show_own_vote') ? TRUE : FALSE;
-
-    if ($items->status === "0") {
-      $readonly = TRUE;
-    }
 
     $elements[] = [
       'vote_form' => [
