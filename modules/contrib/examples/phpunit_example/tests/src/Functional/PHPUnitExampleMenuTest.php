@@ -2,6 +2,7 @@
 
 namespace Drupal\Tests\phpunit_example\Functional;
 
+use Drupal\Core\Url;
 use Drupal\Tests\BrowserTestBase;
 
 /**
@@ -35,36 +36,24 @@ class PHPUnitExampleMenuTest extends BrowserTestBase {
   protected $profile = 'minimal';
 
   /**
-   * Data provider for testing menu links.
-   *
-   * @return array
-   *   Array of page -> link relationships to check for.
-   *   The key is the path to the page where our link should appear.
-   *   The value is the link that should appear on that page.
-   */
-  protected function providerMenuLinks() {
-    return [
-      '' => '/examples/phpunit-example',
-    ];
-  }
-
-  /**
    * Verify and validate that default menu links were loaded for this module.
    */
-  public function testPhpUnitExampleLink() {
-    $links = $this->providerMenuLinks();
+  public function testLinksAndPages() {
+    $this->drupalLogin($this->createUser(['access content']));
+    $assert = $this->assertSession();
+    $links = [
+      '' => Url::fromRoute('phpunit_example.description'),
+    ];
+    // Go to the page and see if the link appears on it.
     foreach ($links as $page => $path) {
       $this->drupalGet($page);
-      $this->assertLinkByHref($path);
+      $assert->linkByHrefExists($path->getInternalPath());
     }
-  }
-
-  /**
-   * Tests phpunit_example menus.
-   */
-  public function testPhpUnitExampleMenu() {
-    $this->drupalGet('/examples/phpunit-example');
-    $this->assertResponse(200, 'Description page exists.');
+    // Visit all the links and make sure they return 200.
+    foreach ($links as $path) {
+      $this->drupalGet($path);
+      $assert->statusCodeEquals(200);
+    }
   }
 
 }

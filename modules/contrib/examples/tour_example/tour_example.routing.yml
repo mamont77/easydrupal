@@ -1,4 +1,4 @@
-tour_example_description:
+tour_example.description:
   path: '/examples/tour-example'
   options:
     _admin_route: TRUE

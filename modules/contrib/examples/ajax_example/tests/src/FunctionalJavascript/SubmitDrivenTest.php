@@ -3,14 +3,14 @@
 namespace Drupal\Tests\ajax_example\FunctionalJavascript;
 
 use Drupal\Core\Url;
-use Drupal\FunctionalJavascriptTests\JavascriptTestBase;
+use Drupal\FunctionalJavascriptTests\WebDriverTestBase;
 
 /**
  * Tests the behavior of the submit-driven AJAX example.
  *
  * @group ajax_example
  */
-class SubmitDrivenTest extends JavascriptTestBase {
+class SubmitDrivenTest extends WebDriverTestBase {
 
   /**
    * {@inheritdoc}

@@ -3,7 +3,7 @@
 namespace Drupal\Tests\ajax_example\FunctionalJavascript;
 
 use Drupal\Core\Url;
-use Drupal\FunctionalJavascriptTests\JavascriptTestBase;
+use Drupal\FunctionalJavascriptTests\WebDriverTestBase;
 
 /**
  * Functional test of dependent dropdown example.
@@ -12,7 +12,7 @@ use Drupal\FunctionalJavascriptTests\JavascriptTestBase;
  *
  * @see \Drupal\Tests\ajax_example\FunctionalJavascript\DependentDropdownTest
  */
-class DependentDropdownTest extends JavascriptTestBase {
+class DependentDropdownTest extends WebDriverTestBase {
 
   /**
    * {@inheritdoc}

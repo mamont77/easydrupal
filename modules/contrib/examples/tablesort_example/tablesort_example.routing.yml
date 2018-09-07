@@ -1,4 +1,4 @@
-tablesort_example_description:
+tablesort_example.description:
   path: '/examples/tablesort-example'
   defaults:
     _controller: '\Drupal\tablesort_example\Controller\TableSortExampleController::description'

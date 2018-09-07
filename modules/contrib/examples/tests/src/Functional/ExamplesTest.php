@@ -2,6 +2,8 @@
 
 namespace Drupal\Tests\examples\Functional;
 
+use Drupal\Core\Url;
+
 /**
  * Minimal test case for the examples module.
  *
@@ -19,16 +21,15 @@ class ExamplesTest extends ExamplesBrowserTestBase {
   public static $modules = ['examples', 'toolbar'];
 
   /**
-   * Test whether the module was installed.
+   * Verify that the toolbar tab and tray are showing and functioning.
    */
-  public function testExamples() {
+  public function testExampleToolbar() {
     $assert = $this->assertSession();
 
-    // Verify that the toolbar tab and tray are showing and functioning.
-    $user = $this->drupalCreateUser(['access toolbar']);
-    $this->drupalLogin($user);
+    // Log in a user who can see the toolbar and all the routes in it.
+    $this->drupalLogin($this->drupalCreateUser(['access content', 'access toolbar']));
 
-    // Check for the 'Examples' tab.
+    // All this should be on the front page.
     $this->drupalGet('');
     $assert->statusCodeEquals(200);
 
@@ -36,39 +37,42 @@ class ExamplesTest extends ExamplesBrowserTestBase {
     $assert->linkExists('Examples');
 
     // Assert that the toolbar tab registered by examples is present.
-    $this->assertEquals(
-      1,
-      \count($this->xpath('//nav/div/a[@data-toolbar-tray="toolbar-item-examples-tray"]')),
-      'Found the Examples toolbar tab.'
-    );
+    $this->assertNotEmpty($this->xpath('//nav/div/a[@data-toolbar-tray="toolbar-item-examples-tray"]'));
 
     // Assert that the toolbar tray registered by examples is present.
-    $this->assertEquals(
-      1,
-      \count($this->xpath('//nav/div/div[@data-toolbar-tray="toolbar-item-examples-tray"]')),
-      'Found the Examples toolbar tray.'
-    );
-    // Assert that PHPUnit link does not appears in the tray.
-    $phpunit_link = 'PHPUnit Example';
-    $assert->linkNotExists($phpunit_link);
-    $assert->pageTextNotContains('<li class="phpunit-example">');
+    $this->assertNotEmpty($this->xpath('//nav/div/div[@data-toolbar-tray="toolbar-item-examples-tray"]'));
 
-    // Install phpunit_example and see if it appears in the toolbar. We use
-    // phpunit_example because it's very light-weight.
-    $this->container->get('module_installer')->install(['phpunit_example'], TRUE);
-    // SimpleTest needs for us to reset all the caches.
-    $this->resetAll();
+    /* @var $module_installer \Drupal\Core\Extension\ModuleInstallerInterface */
+    $module_installer = $this->container->get('module_installer');
 
-    // Verify that PHPUnit appears in the tray.
-    $this->drupalGet('');
-    $assert->linkExists($phpunit_link);
-    // Assert that the PHPUnit tray item is present.
-    $this->assertEquals(
-      1,
-      \count($this->xpath('//nav/div/div/nav/ul/li[@class="phpunit-example"]')),
-      'Found the PHPUnit Example tray item.'
-    );
+    // Loop through all the routes. Check that they are not present in the
+    // toolbar, enable the module, and then check that they are present in the
+    // toolbar.
+    foreach (_examples_toolbar_routes() as $module => $route) {
+      // Convert the module name to the HTML class.
+      $class = str_replace('_', '-', $module);
+      $xpath = "//li[@class=\"$class\"]";
 
+      // Assert that the toolbar link item isn't present.
+      $this->assertEmpty($this->xpath($xpath), 'Found li with this class: ' . $class);
+
+      // Install the module.
+      $module_installer->install([$module], TRUE);
+      $this->resetAll();
+
+      // Load the route.
+      $this->drupalGet(Url::fromRoute($route));
+
+      // Assert that the toolbar link is present.
+      $this->assertNotEmpty($this->xpath($xpath), 'Unable to find toolbar link for module: ' . $module);
+
+      // Handle some special cases where modules depend on each other so they
+      // might have already put the toolbar link in the toolbar.
+      if ($module == 'file_example') {
+        $module_installer->uninstall(['file_example', 'stream_wrapper_example']);
+      }
+
+    }
   }
 
 }

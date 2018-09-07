@@ -1,0 +1,38 @@
+diff --git a/composer.json b/composer.json
+old mode 100644
+new mode 100755
+index 7198b73..42d70eb
+--- a/composer.json
++++ b/composer.json
+@@ -2,29 +2,12 @@
+   "name": "drupal/votingapi_widgets",
+   "type": "drupal-module",
+   "description": "Voting API Widgets",
+-  "keywords": ["Drupal"],
+-  "license": "GPL-2.0+",
++  "license": "GPL-2.0-or-later",
+   "homepage": "https://www.drupal.org/project/votingapi_widgets",
+   "minimum-stability": "dev",
+   "support": {
+     "issues": "https://www.drupal.org/project/issues/votingapi_widgets",
+     "source": "http://cgit.drupalcode.org/votingapi_widgets"
+   },
+-  "repositories": [
+-    {
+-      "type": "package",
+-      "package": {
+-        "name": "antennaio/jquery-bar-rating",
+-        "version": "1.2.2",
+-        "type": "drupal-library",
+-        "dist": {
+-          "type": "zip",
+-          "url": "https://github.com/antennaio/jquery-bar-rating/archive/v1.2.2.zip"
+-        }
+-      }
+-    }
+-  ],
+-  "require": {
+-    "antennaio/jquery-bar-rating": "1.2.2"
+-  }
++  "require": {  }
+ }

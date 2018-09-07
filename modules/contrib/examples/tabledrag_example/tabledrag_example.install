@@ -80,11 +80,13 @@ function tabledrag_example_schema() {
  * @ingroup tabledrag_example
  */
 function tabledrag_example_install() {
+  /* @var $connection \Drupal\Core\Database\Connection */
+  $connection = \Drupal::database();
   // Insert some values into the database.
   $rows = tabledrag_example_data();
-  if (db_table_exists('tabledrag_example')) {
+  if ($connection->schema()->tableExists('tabledrag_example')) {
     foreach ($rows as $row) {
-      db_insert('tabledrag_example')->fields($row)->execute();
+      $connection->insert('tabledrag_example')->fields($row)->execute();
     }
   }
 }

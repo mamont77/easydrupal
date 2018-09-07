@@ -24,7 +24,7 @@ Drupal projects use patches related to issues. You should know how to make a
 patch and an interdiff using git. It's fine to develop on github or
 what-have-you, but eventually it has to be a patch that can be reviewed in the
 normal Drupal issue process. See the list of resources for some information on
-how to do do this.
+how to do this.
 
 Your patch will also need to be reviewed by someone other than yourself. Learn
 about the review process in the resources section.

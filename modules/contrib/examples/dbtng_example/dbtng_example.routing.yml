@@ -1,4 +1,4 @@
-dbtng_example:
+dbtng_example.generate_entry_list:
   path: '/examples/dbtng-example'
   defaults:
     _title: 'DBTNG Example'
@@ -6,7 +6,7 @@ dbtng_example:
   requirements:
     _permission: 'access content'
 
-dbtng_list:
+dbtng_example.list:
   path: '/examples/dbtng-example/list'
   defaults:
     _title: 'List'
@@ -14,7 +14,7 @@ dbtng_list:
   requirements:
     _permission: 'access content'
 
-dbtng_add:
+dbtng_example.add:
   path: '/examples/dbtng-example/add'
   defaults:
     _title: 'Add entry'
@@ -22,7 +22,7 @@ dbtng_add:
   requirements:
     _permission: 'access content'
 
-dbtng_update:
+dbtng_example.update:
   path: '/examples/dbtng-example/update'
   defaults:
     _title: 'Update entry'
@@ -30,7 +30,7 @@ dbtng_update:
   requirements:
     _permission: 'access content'
 
-dbtng_advanced:
+dbtng_example.advanced:
   path: '/examples/dbtng-example/advanced'
   defaults:
     _title: 'Advanced list'

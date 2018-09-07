@@ -47,7 +47,7 @@ class CronExampleTest extends ExamplesBrowserTestBase {
   public function testCronExampleBasic() {
     $assert = $this->assertSession();
 
-    $cron_form = Url::fromRoute('cron_example');
+    $cron_form = Url::fromRoute('cron_example.description');
 
     // Pretend that cron has never been run (even though simpletest seems to
     // run it once...).

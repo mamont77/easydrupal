@@ -2,7 +2,7 @@
 
 namespace Drupal\Tests\form_api_example\FunctionalJavascript;
 
-use Drupal\FunctionalJavascriptTests\JavascriptTestBase;
+use Drupal\FunctionalJavascriptTests\WebDriverTestBase;
 use Drupal\Core\Url;
 
 /**
@@ -10,7 +10,7 @@ use Drupal\Core\Url;
  *
  * @ingroup form_api_example
  */
-class ModalFormTest extends JavascriptTestBase {
+class ModalFormTest extends WebDriverTestBase {
 
   /**
    * Our module dependencies.

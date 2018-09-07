@@ -45,7 +45,7 @@ use Drupal\Core\Routing\RouteMatchInterface;
  */
 function page_example_help($route_name, RouteMatchInterface $route_match) {
   switch ($route_name) {
-    case 'page_example_simple':
+    case 'page_example.simple':
       // Help text for the simple page registered for this path.
       return t('This is help text for the simple page.');
 

@@ -41,13 +41,21 @@ class TourExampleTest extends TourTestBasic {
   public function testTourExample() {
     $assert = $this->assertSession();
 
+    // Create a user with the permissions we need in order to display the
+    // toolbar and run a tour from it.
+    $this->drupalLogin($this->createUser([
+      'access content',
+      'access toolbar',
+      'access tour',
+    ]));
+
     // Test for a link to the tour_example in the Tools menu.
     $this->drupalGet(Url::fromRoute('<front>'));
     $assert->statusCodeEquals(200);
     $assert->linkByHrefExists('examples/tour-example');
 
     // Verify anonymous user can successfully access the tour_examples page.
-    $this->drupalGet(Url::fromRoute('tour_example_description'));
+    $this->drupalGet(Url::fromRoute('tour_example.description'));
     $assert->statusCodeEquals(200);
 
     // Get all the tour elements. These are the IDs of each tour tip. See them

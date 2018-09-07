@@ -42,9 +42,11 @@ use Drupal\Core\Entity\EntityChangedTrait;
  *
  * - form: We derive our own forms to add functionality like additional fields,
  *   redirects etc. These forms are used when the route specifies an
- *   '_entity_form' default for the entity type. Depending on the suffix
- *   (.add/.edit/.delete) of the '_entity_form' default, the form specified in
- *   the annotation is used.
+ *   '_entity_form' or '_entity_create_access' for the entity type. Depending on
+ *   the suffix (.add/.default/.delete) of the '_entity_form' default in the
+ *   route, the form specified in the annotation is used. The suffix then also
+ *   becomes the $operation parameter to the access handler. We use the
+ *   '.default' suffix for all operations that are not 'delete'.
  *
  * - access: Our own access controller, where we determine access rights based
  *   on permissions.
@@ -81,15 +83,14 @@ use Drupal\Core\Entity\EntityChangedTrait;
  *     "view_builder" = "Drupal\Core\Entity\EntityViewBuilder",
  *     "list_builder" = "Drupal\content_entity_example\Entity\Controller\ContactListBuilder",
  *     "form" = {
- *       "add" = "Drupal\content_entity_example\Form\ContactForm",
- *       "edit" = "Drupal\content_entity_example\Form\ContactForm",
+ *       "default" = "Drupal\content_entity_example\Form\ContactForm",
  *       "delete" = "Drupal\content_entity_example\Form\ContactDeleteForm",
  *     },
  *     "access" = "Drupal\content_entity_example\ContactAccessControlHandler",
  *   },
  *   list_cache_contexts = { "user" },
  *   base_table = "contact",
- *   admin_permission = "administer content_entity_example entity",
+ *   admin_permission = "administer contact entity",
  *   entity_keys = {
  *     "id" = "id",
  *     "label" = "name",
@@ -107,10 +108,12 @@ use Drupal\Core\Entity\EntityChangedTrait;
  * The 'links' above are defined by their path. For core to find the
  * corresponding route, the route name must follow the correct pattern:
  *
- * entity.<entity-name>.<link-name> (replace dashes with underscores)
- * Example: 'entity.content_entity_example_contact.canonical'
+ * entity.<entity_type>.<link_name>
  *
- * See routing file above for the corresponding implementation
+ * Example: 'entity.content_entity_example_contact.canonical'.
+ *
+ * See the routing file at content_entity_example.routing.yml for the
+ * corresponding implementation.
  *
  * The Contact class defines methods and fields for the contact entity.
  *
@@ -243,32 +246,6 @@ class Contact extends ContentEntityBase implements ContactInterface {
       ->setDisplayOptions('form', [
         'type' => 'string_textfield',
         'weight' => -5,
-      ])
-      ->setDisplayConfigurable('form', TRUE)
-      ->setDisplayConfigurable('view', TRUE);
-
-    // Gender field for the contact.
-    // ListTextType with a drop down menu widget.
-    // The values shown in the menu are 'male' and 'female'.
-    // In the view the field content is shown as string.
-    // In the form the choices are presented as options list.
-    $fields['gender'] = BaseFieldDefinition::create('list_string')
-      ->setLabel(t('Gender'))
-      ->setDescription(t('The gender of the Contact entity.'))
-      ->setSettings([
-        'allowed_values' => [
-          'female' => 'female',
-          'male' => 'male',
-        ],
-      ])
-      ->setDisplayOptions('view', [
-        'label' => 'above',
-        'type' => 'string',
-        'weight' => -4,
-      ])
-      ->setDisplayOptions('form', [
-        'type' => 'options_select',
-        'weight' => -4,
       ])
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);

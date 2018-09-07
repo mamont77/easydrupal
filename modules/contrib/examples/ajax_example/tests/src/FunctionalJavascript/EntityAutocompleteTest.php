@@ -3,14 +3,14 @@
 namespace Drupal\Tests\ajax_example\FunctionalJavascript;
 
 use Drupal\Core\Url;
-use Drupal\FunctionalJavascriptTests\JavascriptTestBase;
+use Drupal\FunctionalJavascriptTests\WebDriverTestBase;
 
 /**
  * Tests the behavior of the entity_autocomplete example.
  *
  * @group ajax_example
  */
-class EntityAutocompleteTest extends JavascriptTestBase {
+class EntityAutocompleteTest extends WebDriverTestBase {
 
   /**
    * {@inheritdoc}
@@ -40,18 +40,21 @@ class EntityAutocompleteTest extends JavascriptTestBase {
     $session = $this->getSession();
     $page = $session->getPage();
     // We'll be using the users field quite a bit, so let's make it a variable.
-    $users_field_name = 'edit-users';
+    $users_field_id = 'edit-users';
 
     // Get the form.
     $this->drupalGet(Url::fromRoute('ajax_example.autocomplete_user'));
     // Examine the DOM to make sure our change hasn't happened yet.
-    $assert->fieldValueEquals($users_field_name, '');
+    $assert->fieldValueEquals($users_field_id, '');
 
     // Send an event to the DOM. This will start the autocomplete process.
-    $autocomplete_field = $page->findField($users_field_name);
-    $session->getDriver()->keyDown($autocomplete_field->getXpath(), 'b');
+    $autocomplete_field = $page->findById($users_field_id);
+    // We can cause the autocomplete to happen by setting the value in the
+    // element.
+    $autocomplete_field->setValue('b');
 
-    // Wait for the autocomplete request to complete.
+    // Wait for the autocomplete request to complete. Our code is much quicker
+    // than the request time.
     $assert->waitOnAutocomplete();
 
     // Examine the DOM to see if our expected change happened.
@@ -62,7 +65,8 @@ class EntityAutocompleteTest extends JavascriptTestBase {
     }
 
     // Submit to see if our form processed the user properly.
-    $this->submitForm([$users_field_name => 'bb, bc'], 'Submit');
+    $autocomplete_field->blur();
+    $this->submitForm([$users_field_id => 'bb, bc'], 'Submit');
     $assert->pageTextContains('These are your users: bb bc');
   }
 

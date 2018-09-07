@@ -3,7 +3,7 @@
 namespace Drupal\Tests\ajax_example\FunctionalJavascript;
 
 use Drupal\Core\Url;
-use Drupal\FunctionalJavascriptTests\JavascriptTestBase;
+use Drupal\FunctionalJavascriptTests\WebDriverTestBase;
 
 /**
  * Test the user interactions for the Ajax Wizard example.
@@ -11,7 +11,7 @@ use Drupal\FunctionalJavascriptTests\JavascriptTestBase;
  * @group ajax_example
  * @group examples
  */
-class AjaxWizardTest extends JavascriptTestBase {
+class AjaxWizardTest extends WebDriverTestBase {
 
   /**
    * {@inheritdoc}

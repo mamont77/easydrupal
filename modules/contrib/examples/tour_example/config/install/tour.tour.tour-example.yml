@@ -57,7 +57,7 @@ module: tour_example
 label: 'Tour an example admin page'
 langcode: en
 routes:
-  - route_name: tour_example_description
+  - route_name: tour_example.description
 tips:
   introduction:
     id: introduction

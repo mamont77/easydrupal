@@ -4,6 +4,7 @@ namespace Drupal\Tests\content_entity_example\Functional;
 
 use Drupal\content_entity_example\Entity\Contact;
 use Drupal\Tests\examples\Functional\ExamplesBrowserTestBase;
+use Drupal\Core\Url;
 
 /**
  * Tests the basic functions of the Content Entity Example module.
@@ -35,14 +36,14 @@ class ContentEntityExampleTest extends ExamplesBrowserTestBase {
     ]);
 
     // Anonymous User should not see the link to the listing.
-    $assert->pageTextNotContains('Content Entity Example: Contacts listing');
+    $assert->pageTextNotContains('Content Entity Example');
 
     $this->drupalLogin($web_user);
 
     // Web_user user has the right to view listing.
-    $assert->linkExists('Content Entity Example: Contacts listing');
+    $assert->linkExists('Content Entity Example');
 
-    $this->clickLink('Content Entity Example: Contacts listing');
+    $this->clickLink('Content Entity Example');
 
     // WebUser can add entity content.
     $assert->linkExists('Add contact');
@@ -61,7 +62,6 @@ class ContentEntityExampleTest extends ExamplesBrowserTestBase {
     $edit = [
       'name[0][value]' => 'test name',
       'first_name[0][value]' => 'test first name',
-      'gender' => 'male',
       'role' => 'administrator',
     ];
     $this->drupalPostForm(NULL, $edit, 'Save');
@@ -76,7 +76,6 @@ class ContentEntityExampleTest extends ExamplesBrowserTestBase {
     $assert->pageTextContains('test name');
     $assert->pageTextContains('test first name');
     $assert->pageTextContains('administrator');
-    $assert->pageTextContains('male');
     $assert->linkExists('Add contact');
     $assert->linkExists('Edit');
     $assert->linkExists('Delete');
@@ -112,7 +111,6 @@ class ContentEntityExampleTest extends ExamplesBrowserTestBase {
     $contact = Contact::create([
       'name' => 'somename',
       'first_name' => 'Joe',
-      'gender' => 'female',
       'role' => 'administrator',
     ]);
     $contact->save();
@@ -242,6 +240,63 @@ class ContentEntityExampleTest extends ExamplesBrowserTestBase {
     // Fetch url without query parameters.
     $current_path = strtok($this->getUrl(), '?');
     $this->assertEquals($expected_path, $current_path);
+  }
+
+  /**
+   * Ensure admin and permissioned users can create contacts.
+   */
+  public function testCreateAdminPermission() {
+    $assert = $this->assertSession();
+    $add_url = Url::fromRoute('content_entity_example.contact_add');
+
+    // Create a Contact entity object so that we can query it for it's annotated
+    // properties. We don't need to save it.
+    /* @var $contact \Drupal\content_entity_example\Entity\Contact */
+    $contact = Contact::create();
+
+    // Create an admin user and log them in. We use the entity annotation for
+    // admin_permission in order to validate it. We also have to add the view
+    // list permission because the add form redirects to the list on success.
+    $this->drupalLogin($this->drupalCreateUser([
+      $contact->getEntityType()->getAdminPermission(),
+      'view contact entity',
+    ]));
+
+    // Post a contact.
+    $edit = [
+      'name[0][value]' => 'Test Admin Name',
+      'first_name[0][value]' => 'Admin First Name',
+      'role' => 'administrator',
+    ];
+    $this->drupalPostForm($add_url, $edit, 'Save');
+    $assert->statusCodeEquals(200);
+    $assert->pageTextContains('Test Admin Name');
+
+    // Create a user with 'add contact entity' permission. We also have to add
+    // the view list permission because the add form redirects to the list on
+    // success.
+    $this->drupalLogin($this->drupalCreateUser([
+      'add contact entity',
+      'view contact entity',
+    ]));
+
+    // Post a contact.
+    $edit = [
+      'name[0][value]' => 'Mere Mortal Name',
+      'first_name[0][value]' => 'Mortal First Name',
+      'role' => 'user',
+    ];
+    $this->drupalPostForm($add_url, $edit, 'Save');
+    $assert->statusCodeEquals(200);
+    $assert->pageTextContains('Mere Mortal Name');
+
+    // Finally, a user who can only view should not be able to get to the add
+    // form.
+    $this->drupalLogin($this->drupalCreateUser([
+      'view contact entity',
+    ]));
+    $this->drupalGet($add_url);
+    $assert->statusCodeEquals(403);
   }
 
 }

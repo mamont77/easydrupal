@@ -2,7 +2,6 @@
 
 namespace Drupal\Tests\block_example\Functional;
 
-use Drupal\Component\Utility\Unicode;
 use Drupal\Tests\BrowserTestBase;
 
 /**
@@ -68,7 +67,7 @@ class BlockExampleTest extends BrowserTestBase {
     $this->drupalGet('');
     $assert->pageTextContains($settings_configurable['label']);
     $assert->pageTextContains($settings_uppercase['label']);
-    $assert->pageTextContains(Unicode::strtoupper($settings_uppercase['label']));
+    $assert->pageTextContains(mb_strtoupper($settings_uppercase['label']));
     $assert->pageTextNotContains($settings_empty['label']);
 
     // Change content of configurable text block.

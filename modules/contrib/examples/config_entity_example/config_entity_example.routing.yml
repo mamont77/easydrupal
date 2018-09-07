@@ -9,7 +9,7 @@ entity.robot.list:
     # We give the entity ID here. Drupal then looks in the entity's annotation
     # and looks for the "list" entry under "controllers" for the class to load.
     # @see \Drupal\Core\Entity\Enhancer\EntityRouteEnhancer
-    _entity_list: 'robot'
+    _entity_list: robot
     _title: 'Config Entity Example'
   requirements:
     _permission: 'administer robots'

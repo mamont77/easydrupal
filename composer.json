@@ -112,7 +112,9 @@
                 "Add a point to the end of the sentence": "https://www.drupal.org/files/issues/2018-05-21/add-a-point-to-the-end-of-the-sentence-2974200-2.patch"
             },
             "drupal/votingapi_widgets": {
-                "Load only the necessary styles and scripts": "https://www.drupal.org/files/issues/2018-05-21/votingapi_widgets-split-libraries-2933206-21.patch"
+                "Load only the necessary styles and scripts": "https://www.drupal.org/files/issues/2018-05-21/votingapi_widgets-split-libraries-2933206-21.patch",
+                "Composer Install Fails": "https://www.drupal.org/files/issues/2018-04-01/2954719-6.patch",
+                "Exceptions on every page after Drupal 8.6 update": "https://www.drupal.org/files/issues/2018-08-31/2996444.patch"
             }
         }
     },

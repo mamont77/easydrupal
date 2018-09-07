@@ -3,6 +3,7 @@
 namespace Drupal\Tests\tablesort_example\Functional;
 
 use Drupal\Tests\examples\Functional\ExamplesBrowserTestBase;
+use Drupal\Core\Url;
 
 /**
  * Verify the tablesort functionality.
@@ -17,7 +18,7 @@ class TableSortExampleTest extends ExamplesBrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = ['tablesort_example'];
+  public static $modules = ['tablesort_example', 'toolbar'];
 
   /**
    * The installation profile to use with this test.
@@ -77,40 +78,30 @@ class TableSortExampleTest extends ExamplesBrowserTestBase {
   }
 
   /**
-   * Data provider for testing menu links.
-   *
-   * @return array
-   *   Array of page -> link relationships to check for.
-   *   The key is the path to the page where our link should appear.
-   *   The value is the link that should appear on that page.
-   */
-  protected function providerMenuLinks() {
-    return [
-      '' => '/examples/tablesort-example',
-    ];
-  }
-
-  /**
    * Verify and validate that default menu links were loaded for this module.
    */
   public function testTableSortExampleLink() {
     $assert = $this->assertSession();
-
-    $links = $this->providerMenuLinks();
-    foreach ($links as $page => $path) {
+    // Create a user with the permissions we need in order to display the
+    // toolbar.
+    $this->drupalLogin($this->createUser([
+      'access content',
+      'access toolbar',
+    ]));
+    // Our module's routes.
+    $links = [
+      '' => Url::fromRoute('tablesort_example.description'),
+    ];
+    // Go to the page and check that the link exists.
+    foreach ($links as $page => $url) {
       $this->drupalGet($page);
-      $assert->linkByHrefExists($path);
+      $assert->linkByHrefExists($url->getInternalPath());
     }
-  }
-
-  /**
-   * Tests tablesort_example menus.
-   */
-  public function testTableSortExampleMenu() {
-    $assert = $this->assertSession();
-
-    $this->drupalGet('/examples/tablesort-example');
-    $assert->statusCodeEquals(200);
+    // Visit the link and make sure we get a 200 back.
+    foreach ($links as $url) {
+      $this->drupalGet($url);
+      $assert->statusCodeEquals(200);
+    }
   }
 
 }
