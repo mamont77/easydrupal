@@ -54,8 +54,6 @@ class Session implements SessionInterface, \IteratorAggregate, \Countable
      */
     public function start()
     {
-        ++$this->usageIndex;
-
         return $this->storage->start();
     }
 
@@ -187,8 +185,6 @@ class Session implements SessionInterface, \IteratorAggregate, \Countable
      */
     public function migrate($destroy = false, $lifetime = null)
     {
-        ++$this->usageIndex;
-
         return $this->storage->regenerate($destroy, $lifetime);
     }
 
@@ -197,8 +193,6 @@ class Session implements SessionInterface, \IteratorAggregate, \Countable
      */
     public function save()
     {
-        ++$this->usageIndex;
-
         $this->storage->save();
     }
 
