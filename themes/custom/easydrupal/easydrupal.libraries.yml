@@ -15,7 +15,6 @@ framework:
   css:
     theme:
       css/style.css: {}
-      css/landing-page.css: {}
       css/geshifilter.generate_css.css: {}
   js:
 #    bootstrap/assets/javascripts/bootstrap/affix.js: {}
@@ -31,4 +30,15 @@ framework:
 #    bootstrap/assets/javascripts/bootstrap/tab.js: {}
     bootstrap/assets/javascripts/bootstrap/transition.js: {}
     js/scripts.js: {}
+  dependencies:
+  - core/jquery
+
+landing_page:
+  css:
+    theme:
+      css/landing-page.css: {}
+  js:
     js/landing_page.js: {}
+  dependencies:
+  - core/jquery
+

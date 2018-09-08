@@ -6,6 +6,19 @@
  * Place your custom PHP code in this file.
  */
 
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements template_preprocess_page().
+ */
+function easydrupal_preprocess_page(&$variables) {
+  if (\Drupal::service('path.matcher')->isFrontPage()) {
+    $variables['#attached']['library'][] = 'easydrupal/wow';
+    $variables['#attached']['library'][] = 'easydrupal/easing';
+    $variables['#attached']['library'][] = 'easydrupal/landing_page';
+  }
+}
+
 /**
  * Implements hook_theme_suggestions_page_alter() to set 40x template suggestions.
  *
@@ -50,7 +63,7 @@ function easydrupal_theme($existing, $type, $theme, $path) {
  * @param \Drupal\Core\Form\FormStateInterface $form_state
  * @param $form_id
  */
-function easydrupal_form_contact_message_feedback_contact_form_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+function easydrupal_form_contact_message_feedback_contact_form_form_alter(&$form, FormStateInterface $form_state, $form_id) {
 
   // Checking field type because it is markup for logged user and we wan't any placeholder.
   if (isset($form['name']) && $form['name']['#type'] == 'textfield') {
@@ -83,7 +96,7 @@ function easydrupal_form_contact_message_feedback_contact_form_form_alter(&$form
  * @param \Drupal\Core\Form\FormStateInterface $form_state
  * @param $form_id
  */
-function easydrupal_form_user_login_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+function easydrupal_form_user_login_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   $form['name']['#attributes']['placeholder'][] = $form['name']['#title'] . ' *';
   unset($form['name']['#title'], $form['name']['#description']);
 

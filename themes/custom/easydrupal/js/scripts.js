@@ -8,18 +8,38 @@
   'use strict';
 
   /**
+   * Equal height.
    *
-   * @param group
+   * @param container
    */
-  $.equalHeight = function (group) {
-    var tallest = 0;
-    group.removeAttr('style').each(function () {
-      var thisHeight = $(this).height();
-      if (thisHeight > tallest) {
-        tallest = thisHeight;
+  $.equalHeight = function (container) {
+    var currentTallest = 0,
+      currentRowStart = 0,
+      rowDivs = [],
+      $el;
+
+    $(container).each(function () {
+      $el = $(this);
+      $($el).height('auto');
+      var topPosition = $el.position().top;
+
+      if (currentRowStart !== topPosition) {
+        for (var currentDiv = 0; currentDiv < rowDivs.length; currentDiv++) {
+          rowDivs[currentDiv].height(currentTallest);
+        }
+        rowDivs.length = 0; // Empty the array.
+        currentRowStart = topPosition;
+        currentTallest = $el.height();
+        rowDivs.push($el);
+      }
+      else {
+        rowDivs.push($el);
+        currentTallest = (currentTallest < $el.height()) ? ($el.height()) : (currentTallest);
+      }
+      for (currentDiv = 0; currentDiv < rowDivs.length; currentDiv++) {
+        rowDivs[currentDiv].height(currentTallest);
       }
     });
-    group.height(tallest);
   };
 
   /**
@@ -32,13 +52,16 @@
     if (window.innerHeight && window.scrollMaxY) {
       xScroll = document.body.scrollWidth;
       yScroll = window.innerHeight + window.scrollMaxY;
-    } else if (document.body.scrollHeight > document.body.offsetHeight) { // all but Explorer Mac
+    }
+    else if (document.body.scrollHeight > document.body.offsetHeight) { // all but Explorer Mac
       xScroll = document.body.scrollWidth;
       yScroll = document.body.scrollHeight;
-    } else if (document.documentElement && document.documentElement.scrollHeight > document.documentElement.offsetHeight) { // Explorer 6 strict mode
+    }
+    else if (document.documentElement && document.documentElement.scrollHeight > document.documentElement.offsetHeight) { // Explorer 6 strict mode
       xScroll = document.documentElement.scrollWidth;
       yScroll = document.documentElement.scrollHeight;
-    } else { // Explorer Mac...would also work in Mozilla and Safari
+    }
+    else { // Explorer Mac...would also work in Mozilla and Safari
       xScroll = document.body.offsetWidth;
       yScroll = document.body.offsetHeight;
     }
@@ -46,10 +69,12 @@
     if (self.innerHeight) { // all except Explorer
       windowWidth = self.innerWidth;
       windowHeight = self.innerHeight;
-    } else if (document.documentElement && document.documentElement.clientHeight) { // Explorer 6 Strict Mode
+    }
+    else if (document.documentElement && document.documentElement.clientHeight) { // Explorer 6 Strict Mode
       windowWidth = document.documentElement.clientWidth;
       windowHeight = document.documentElement.clientHeight;
-    } else if (document.body) { // other Explorers
+    }
+    else if (document.body) { // other Explorers
       windowWidth = document.body.clientWidth;
       windowHeight = document.body.clientHeight;
     }
@@ -57,14 +82,16 @@
     // for small pages with total height less then height of the viewport
     if (yScroll < windowHeight) {
       pageHeight = windowHeight;
-    } else {
+    }
+    else {
       pageHeight = yScroll;
     }
 
     // for small pages with total width less then width of the viewport
     if (xScroll < windowWidth) {
       pageWidth = windowWidth;
-    } else {
+    }
+    else {
       pageWidth = xScroll;
     }
 
@@ -149,7 +176,8 @@
       $(window).resize(function () {
         if ($.getPageSize()[0] >= 768) {
           $.makeFeedbackMoreBeautifulStep2('.view-feedback .row, .section.feedback', context);
-        } else {
+        }
+        else {
           $.revertFeedbackMoreBeautiful('.view-feedback .row, .section.feedback', context);
         }
       });
@@ -184,7 +212,8 @@
       $(window).resize(function () {
         if ($.getPageSize()[0] <= 767) {
           makeMobileHTMLVersion();
-        } else {
+        }
+        else {
           revertMobileHTMLVersion();
         }
       });
@@ -221,7 +250,8 @@
       $(window).scroll(function () {
         if ($(this).scrollTop() > 100) {
           $('.upper').fadeIn();
-        } else {
+        }
+        else {
           $('.upper').fadeOut();
         }
       });
