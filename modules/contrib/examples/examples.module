@@ -137,7 +137,6 @@ function _examples_toolbar_routes() {
     'queue_example' => 'queue_example.form',
     'render_example' => 'render_example.description',
     'session_example' => 'session_example.form',
-    'simpletest_example' => 'simpletest_example.description',
     'stream_wrapper_example' => 'stream_wrapper_example.description',
     'tabledrag_example' => 'tabledrag_example.description',
     'tablesort_example' => 'tablesort_example.description',

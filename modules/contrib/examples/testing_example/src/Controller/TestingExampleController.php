@@ -23,4 +23,21 @@ class TestingExampleController {
     return 'testing_example';
   }
 
+  /**
+   * Generate a render array for the Simpletest description.
+   *
+   * @return array
+   *   A render array.
+   */
+  public function simpletestDescription() {
+    $template_file = drupal_get_path('module', 'testing_example') . '/templates/simpletest.description.html.twig';
+    $build = [
+      'description' => [
+        '#type' => 'inline_template',
+        '#template' => file_get_contents($template_file),
+      ],
+    ];
+    return $build;
+  }
+
 }
