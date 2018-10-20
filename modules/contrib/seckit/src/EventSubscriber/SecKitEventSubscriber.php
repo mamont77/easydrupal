@@ -7,6 +7,7 @@ use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Response;
+use Drupal\Component\Utility\UrlHelper;
 use Drupal\Component\Utility\Xss;
 
 /**
@@ -84,8 +85,6 @@ class SecKitEventSubscriber implements EventSubscriberInterface {
       $this->seckitExpectCt();
     }
 
-    $this->seckitXcontentTypeOptions($this->config->get('seckit_xss.x_content_type.checkbox'));
-
     // Always call this (regardless of the setting) since if it's disabled it
     // may be necessary to actively disable the core's clickjacking defense.
     $this->seckitXframe($this->config->get('seckit_clickjacking.x_frame'));
@@ -135,6 +134,7 @@ class SecKitEventSubscriber implements EventSubscriberInterface {
     $whitelist = explode(',', $this->config->get('seckit_csrf.origin_whitelist'));
     // Default origin is always allowed.
     $whitelist[] = $base_root;
+    $whitelist = array_values(array_filter(array_map('trim', $whitelist)));
     if (in_array($origin, $whitelist, TRUE)) {
       return;
       // n.b. RFC 6454 allows Origins to have more than one value (each
@@ -226,7 +226,8 @@ class SecKitEventSubscriber implements EventSubscriberInterface {
       $directives[] = "connect-src $csp_connect_src";
     }
     if ($csp_report_uri) {
-      $directives[] = "report-uri " . base_path() . $csp_report_uri;
+      $base_path = UrlHelper::isExternal($csp_report_uri) ? '' : base_path();
+      $directives[] = "report-uri " . $base_path . $csp_report_uri;
     }
     // Merge directives.
     $directives = implode('; ', $directives);
@@ -283,16 +284,6 @@ class SecKitEventSubscriber implements EventSubscriberInterface {
   }
 
   /**
-   * Sends X-Content-Type-Options HTTP response header.
-   */
-  public function seckitXcontentTypeOptions($enabled) {
-    // If we disabled this, remove the header set by core.
-    if (!$enabled) {
-      $this->response->headers->remove('X-Content-Type-Options');
-    }
-  }
-
-  /**
    * Sends X-Frame-Options HTTP header.
    *
    * X-Frame-Options controls should browser show frames or not.
@@ -306,12 +297,12 @@ class SecKitEventSubscriber implements EventSubscriberInterface {
     switch ($setting) {
       case SECKIT_X_FRAME_SAMEORIGIN:
         // Set X-Frame-Options to SameOrigin.
-        $this->response->headers->set('X-Frame-Options', 'SameOrigin');
+        $this->response->headers->set('X-Frame-Options', 'SAMEORIGIN');
         break;
 
       case SECKIT_X_FRAME_DENY:
         // Set X-Frame-Options to Deny.
-        $this->response->headers->set('X-Frame-Options', 'Deny');
+        $this->response->headers->set('X-Frame-Options', 'DENY');
         break;
 
       case SECKIT_X_FRAME_ALLOW_FROM:
@@ -325,7 +316,7 @@ class SecKitEventSubscriber implements EventSubscriberInterface {
         if (!in_array($origin, $allowed, TRUE)) {
           $origin = array_pop($allowed);
         }
-        $this->response->headers->set('X-Frame-Options', "Allow-From: $origin");
+        $this->response->headers->set('X-Frame-Options', "ALLOW-FROM $origin");
         break;
 
       case SECKIT_X_FRAME_DISABLE:

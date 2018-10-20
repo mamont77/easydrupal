@@ -74,13 +74,6 @@ seckit.settings:
             select:
               type: integer
               label: 'Select'
-        x_content_type:
-          type: mapping
-          label: 'X-Content-Type-Options'
-          mapping:
-            checkbox:
-              type: boolean
-              label: 'Send HTTP response header'
     seckit_csrf:
       type: mapping
       label: 'CSRF'

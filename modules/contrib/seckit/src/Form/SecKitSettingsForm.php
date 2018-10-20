@@ -2,13 +2,48 @@
 
 namespace Drupal\seckit\Form;
 
+use Drupal\Component\Utility\UrlHelper;
+use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Path\PathValidatorInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Implements a form to collect security check configuration.
  */
 class SecKitSettingsForm extends ConfigFormBase {
+
+  /**
+   * The path validator.
+   *
+   * @var \Drupal\Core\Path\PathValidatorInterface
+   */
+  protected $pathValidator;
+
+  /**
+   * Constructs a SecKitSettingsForm object.
+   *
+   * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
+   *   The factory for configuration objects.
+   * @param \Drupal\Core\Path\PathValidatorInterface $path_validator
+   *   The path validator.
+   */
+  public function __construct(ConfigFactoryInterface $config_factory, PathValidatorInterface $path_validator) {
+    parent::__construct($config_factory);
+
+    $this->pathValidator = $path_validator;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    return new static(
+      $container->get('config.factory'),
+      $container->get('path.validator')
+    );
+  }
 
   /**
    * {@inheritdoc}
@@ -197,14 +232,14 @@ class SecKitSettingsForm extends ConfigFormBase {
       '#description' => $this->t('Specify trustworthy sources for XMLHttpRequest, WebSocket and EventSource connections.'),
     ];
 
-    $report_default = !empty($config->get('seckit_xss.report-uri')) ? $config->get('seckit_xss.report-uri') : SECKIT_CSP_REPORT_URL;
+    $report_default = !empty($config->get('seckit_xss.csp.report-uri')) ? $config->get('seckit_xss.csp.report-uri') : SECKIT_CSP_REPORT_URL;
     // CSP report-uri directive.
     $form['seckit_xss']['csp']['report-uri'] = [
       '#type' => 'textfield',
       '#maxlength' => 1024,
       '#default_value' => $report_default,
       '#title' => 'report-uri',
-      '#description' => $this->t('Specify a URL (relative to the Drupal root) to which user-agents will report CSP violations. Use the default value, unless you have set up an alternative handler for these reports. Defaults to <code>@report-url</code> which logs the report data.', ['@report-url' => SECKIT_CSP_REPORT_URL]),
+      '#description' => $this->t('Specify a URL (can be relative to the Drupal root, or absolute) to which user-agents will report CSP violations. Use the default value, unless you have set up an alternative handler for these reports. Note that if you specify a custom relative path, it should typically be accessible by all users (including anonymous). Defaults to <code>@report-url</code> which logs the report data.', ['@report-url' => SECKIT_CSP_REPORT_URL]),
     ];
     // CSP policy-uri directive.
     $form['seckit_xss']['csp']['policy-uri'] = [
@@ -253,30 +288,6 @@ class SecKitSettingsForm extends ConfigFormBase {
       '#options' => $x_xss_protection_options,
       '#default_value' => $config->get('seckit_xss.x_xss.select'),
       '#description' => $this->t('@values', $args),
-    ];
-
-    // Fieldset for X-Content-Type-Options.
-    $args = [
-      ':link' => 'http://blogs.msdn.com/b/ie/archive/2010/10/26/mime-handling-changes-in-internet-explorer.aspx',
-      '@link' => 'MSDN article',
-    ];
-
-    // We should leave this one open so users can see immediately when this is
-    // disabled, as it is recommended to always be enabled.
-    $form['seckit_xss']['x_content_type'] = [
-      '#type' => 'details',
-      '#title' => $this->t('X-Content-Type-Options header'),
-      '#collapsible' => FALSE,
-      '#open' => TRUE,
-      '#tree' => TRUE,
-      '#description' => $this->t('X-Content-Type-Options HTTP response header prevents browser from upsniffing content and serving files with inappropriate MIME type. More information is available at <a href=":link">@link</a>.', $args),
-    ];
-    // Enable/disable X-Content-Type-Options.
-    $form['seckit_xss']['x_content_type']['checkbox'] = [
-      '#type' => 'checkbox',
-      '#title' => $this->t('Send HTTP response header'),
-      '#default_value' => $config->get('seckit_xss.x_content_type.checkbox'),
-      '#description' => $this->t('Enable X-Content-Type-Options: nosniff HTTP response header.  It is HIGHLY recommended that this value always be be set to "ON" to mitigate security risks, please read the link above.'),
     ];
 
     // Main fieldset for CSRF.
@@ -328,16 +339,16 @@ class SecKitSettingsForm extends ConfigFormBase {
     // Options for X-Frame-Options.
     $x_frame_options = [
       SECKIT_X_FRAME_DISABLE => $this->t('Disabled'),
-      SECKIT_X_FRAME_SAMEORIGIN => 'SameOrigin',
-      SECKIT_X_FRAME_DENY => 'Deny',
-      SECKIT_X_FRAME_ALLOW_FROM => 'Allow-From',
+      SECKIT_X_FRAME_SAMEORIGIN => 'SAMEORIGIN',
+      SECKIT_X_FRAME_DENY => 'DENY',
+      SECKIT_X_FRAME_ALLOW_FROM => 'ALLOW-FROM',
     ];
     // Configure X-Frame-Options.
     $items = [
       'Disabled - turn off X-Frame-Options',
-      'SameOrigin - browser allows all the attempts of framing website within its domain. Enabled by default',
-      'Deny - browser rejects any attempt of framing website',
-      'Allow-From - browser allows framing website only from specified source',
+      'SAMEORIGIN - browser allows all the attempts of framing website within its domain. Enabled by default',
+      'DENY - browser rejects any attempt of framing website',
+      'ALLOW-FROM - browser allows framing website only from specified source',
     ];
 
     $args = [
@@ -679,6 +690,24 @@ class SecKitSettingsForm extends ConfigFormBase {
     if ($js_css_noscript_enable && !$noscript_message) {
       $form_state->setErrorByName('seckit_clickjacking][noscript_message', $this->t('You have to set up Custom text for disabled JavaScript message when JS + CSS + Noscript protection is enabled.'));
     }
+    // Check the value of CSP report-uri seems valid.
+    $report_uri = $form_state->getValue(['seckit_xss', 'csp', 'report-uri']);
+    if (UrlHelper::isExternal($report_uri)) {
+      // UrlHelper::isValid will reject URIs beginning with '//' (i.e. without a
+      // scheme). So add a fake scheme just for validation.
+      if (strpos($report_uri, '//') === 0) {
+        $report_uri = 'https:' . $report_uri;
+      }
+      if (!UrlHelper::isValid($report_uri)) {
+        $form_state->setErrorByName('seckit_xss][csp][report-uri', $this->t('The CSP report-uri seems absolute but does not seem to be a valid URI.'));
+      }
+    }
+    else {
+      // Check that the internal path seems valid.
+      if (!(bool) $this->pathValidator->getUrlIfValidWithoutAccessCheck($report_uri)) {
+        $form_state->setErrorByName('seckit_xss][csp][report-uri', $this->t('The CSP report-uri seems relative but does not seem to be a valid path.'));
+      }
+    }
   }
 
   /**
@@ -696,14 +725,9 @@ class SecKitSettingsForm extends ConfigFormBase {
     $config->save();
 
     $from_origin_enable = $form_state->getValue('seckit_various', 'from_origin');
-    $x_content_type_options_enable = $form_state->getValue('seckit_xss', 'x_content_type', 'checkbox');
     $file_system = file_default_scheme();
     if ($from_origin_enable && ($file_system == 'public')) {
       $msg = $this->t('From-Origin HTTP response header will not be served for files because of public file system. It is recommended to enable private file system to ensure provided by From-Origin security.');
-      drupal_set_message($msg, 'warning');
-    }
-    if ($x_content_type_options_enable && ($file_system == 'public')) {
-      $msg = $this->t('X-Content-Type-Options HTTP response header will not be served for files because of public file system. It is recommended to enable private file system to ensure provided by X-Content-Type-Options security.');
       drupal_set_message($msg, 'warning');
     }
 

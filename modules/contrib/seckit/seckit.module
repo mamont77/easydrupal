@@ -20,11 +20,11 @@ define('SECKIT_X_XSS_1_BLOCK', 2);
 define('SECKIT_X_XSS_1', 3);
 // Disable X-Frame-Options HTTP header.
 define('SECKIT_X_FRAME_DISABLE', 0);
-// Set X-Frame-Options HTTP header to SameOrigin.
+// Set X-Frame-Options HTTP header to SAMEORIGIN.
 define('SECKIT_X_FRAME_SAMEORIGIN', 1);
-// Set X-Frame-Options HTTP header to Deny.
+// Set X-Frame-Options HTTP header to DENY.
 define('SECKIT_X_FRAME_DENY', 2);
-// Set X-Frame-Options HTTP header to Allow-From.
+// Set X-Frame-Options HTTP header to ALLOW-FROM.
 define('SECKIT_X_FRAME_ALLOW_FROM', 3);
 define('SECKIT_CSP_REPORT_URL', 'report-csp-violation');
 

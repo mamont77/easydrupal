@@ -30,7 +30,7 @@ class SecKitTestCaseTest extends WebTestBase {
    *
    * @var array
    */
-  public static $modules = ['seckit'];
+  public static $modules = ['seckit', 'filter'];
 
   /**
    * Implements getInfo().
@@ -176,6 +176,70 @@ class SecKitTestCaseTest extends WebTestBase {
   }
 
   /**
+   * Tests different values for Content Security Policy report-uri.
+   */
+  public function testCspReportUri() {
+    $report_uris = [
+      [
+        'uri' => '//example.com/csp-report',
+        'absolute' => TRUE,
+        'valid' => TRUE,
+      ],
+      [
+        'uri' => 'https://example.com/report-uri',
+        'absolute' => TRUE,
+        'valid' => TRUE,
+      ],
+      [
+        'uri' => 'http://in<val>.id/url',
+        'absolute' => TRUE,
+        'valid' => FALSE,
+      ],
+      [
+        'uri' => $this->reportPath,
+        'absolute' => FALSE,
+        'valid' => TRUE,
+      ],
+      [
+        // This path should be accessible to all users.
+        'uri' => 'filter/tips',
+        'absolute' => FALSE,
+        'valid' => TRUE,
+      ],
+      [
+        'uri' => 'non-existent-path',
+        'absolute' => FALSE,
+        'valid' => FALSE,
+      ],
+    ];
+    foreach ($report_uris as $report_uri) {
+      $form['seckit_xss[csp][checkbox]'] = TRUE;
+      $form['seckit_xss[csp][default-src]'] = 'self';
+      $form['seckit_xss[csp][report-uri]'] = $report_uri['uri'];
+      $this->drupalPostForm('admin/config/system/seckit', $form, t('Save configuration'));
+      if ($report_uri['valid']) {
+        $base_path = ($report_uri['absolute']) ? '' : base_path();
+        $expected = 'default-src self; report-uri ' . $base_path . $report_uri['uri'];
+        $args = ['%uri' => $report_uri['uri']];
+        $this->assertEqual($expected, $this->drupalGetHeader('Content-Security-Policy'), t('Content-Security-Policy specifies the report-uri %uri (Official).', $args));
+        $this->assertEqual($expected, $this->drupalGetHeader('X-Content-Security-Policy'), t('X-Content-Security-Policy specifies the report-uri %uri (Mozilla and IE10).', $args));
+        $this->assertEqual($expected, $this->drupalGetHeader('X-WebKit-CSP'), t('X-WebKit-CSP specifies the report-uri %uri (Chrome and Safari).', $args));
+      }
+      else {
+        if ($report_uri['absolute']) {
+          $expected = 'The CSP report-uri seems absolute but does not seem to be a valid URI.';
+          $uri_type = 'absolute';
+        }
+        else {
+          $expected = 'The CSP report-uri seems relative but does not seem to be a valid path.';
+          $uri_type = 'relative';
+        }
+        $this->assertRaw($expected, t('Invalid %uri_type setting for CSP report-uri was rejected.', ['%uri_type' => $uri_type]));
+      }
+    }
+  }
+
+  /**
    * Tests disabled X-XSS-Protection HTTP response header.
    */
   public function testXxssProtectionIsDisabled() {
@@ -212,24 +276,6 @@ class SecKitTestCaseTest extends WebTestBase {
   }
 
   /**
-   * Tests disabled X-Content-Type-Options HTTP response header.
-   */
-  public function testDisabledXcontentTypeOptions() {
-    $form['seckit_xss[x_content_type][checkbox]'] = FALSE;
-    $this->drupalPostForm('admin/config/system/seckit', $form, t('Save configuration'));
-    $this->assertFalse($this->drupalGetHeader('X-Content-Type-Options'), t('X-Content-Type-Options is disabled.'));
-  }
-
-  /**
-   * Tests enabled X-Content-Type-Options HTTP response header.
-   */
-  public function testEnabledXcontentTypeOptions() {
-    $form['seckit_xss[x_content_type][checkbox]'] = TRUE;
-    $this->drupalPostForm('admin/config/system/seckit', $form, t('Save configuration'));
-    $this->assertEqual('nosniff', $this->drupalGetHeader('X-Content-Type-Options'), t('X-Content-Type-Options is enabled and set to nosniff.'));
-  }
-
-  /**
    * Tests HTTP Origin allows requests from the site.
    */
   public function testOriginAllowsSite() {
@@ -254,6 +300,20 @@ class SecKitTestCaseTest extends WebTestBase {
   }
 
   /**
+   * Tests HTTP Origin allows requests from the specified source, with multiple
+   * values in the whitelist.
+   */
+  public function testOriginAllowsSpecifiedSourceMultiWhitelist() {
+    $form = [
+      'seckit_csrf[origin]' => TRUE,
+      'seckit_csrf[origin_whitelist]' => 'http://www.example.com, https://www.example.com, https://example.com:8080',
+    ];
+    $this->drupalPostForm('admin/config/system/seckit', $form, t('Save configuration'));
+    $this->drupalPostForm('admin/config/system/seckit', $form, t('Save configuration'), [], ['Origin: https://www.example.com']);
+    $this->assertResponse(200, t('Whitelisted request is allowed.'));
+  }
+
+  /**
    * Tests HTTP Origin denies request.
    */
   public function testOriginDeny() {
@@ -274,31 +334,31 @@ class SecKitTestCaseTest extends WebTestBase {
   }
 
   /**
-   * Tests set to SameOrigin X-Frame-Options HTTP response header.
+   * Tests set to SAMEORIGIN X-Frame-Options HTTP response header.
    */
   public function testXframeOptionsIsSameOrigin() {
     $form['seckit_clickjacking[x_frame]'] = SECKIT_X_FRAME_SAMEORIGIN;
     $this->drupalPostForm('admin/config/system/seckit', $form, t('Save configuration'));
-    $this->assertEqual('SameOrigin', $this->drupalGetHeader('X-Frame-Options'), t('X-Frame-Options is set to SameOrigin.'));
+    $this->assertEqual('SAMEORIGIN', $this->drupalGetHeader('X-Frame-Options'), t('X-Frame-Options is set to SAMEORIGIN.'));
   }
 
   /**
-   * Tests set to Deny X-Frame-Options HTTP response header.
+   * Tests set to DENY X-Frame-Options HTTP response header.
    */
   public function testXframeOptionsIsDeny() {
     $form['seckit_clickjacking[x_frame]'] = SECKIT_X_FRAME_DENY;
     $this->drupalPostForm('admin/config/system/seckit', $form, t('Save configuration'));
-    $this->assertEqual('Deny', $this->drupalGetHeader('X-Frame-Options'), t('X-Frame-Options is set to Deny.'));
+    $this->assertEqual('DENY', $this->drupalGetHeader('X-Frame-Options'), t('X-Frame-Options is set to DENY.'));
   }
 
   /**
-   * Tests set to Allow-From X-Frame-Options HTTP response header.
+   * Tests set to ALLOW-FROM X-Frame-Options HTTP response header.
    */
   public function testXframeOptionsIsAllowFrom() {
     $form['seckit_clickjacking[x_frame]'] = SECKIT_X_FRAME_ALLOW_FROM;
     $form['seckit_clickjacking[x_frame_allow_from]'] = 'http://www.google.com';
     $this->drupalPostForm('admin/config/system/seckit', $form, t('Save configuration'));
-    $this->assertEqual('Allow-From: http://www.google.com', $this->drupalGetHeader('X-Frame-Options'), t('X-Frame-Options is set to Allow-From.'));
+    $this->assertEqual('ALLOW-FROM http://www.google.com', $this->drupalGetHeader('X-Frame-Options'), t('X-Frame-Options is set to ALLOW-FROM.'));
   }
 
   /**
@@ -412,7 +472,7 @@ EOT;
       'seckit_ct[expect_ct]' => TRUE,
       'seckit_ct[max_age]' => 86400,
       'seckit_ct[enforce]' => TRUE,
-      'seckit_ct[report_uri]' => 'https://www.example.com/report'
+      'seckit_ct[report_uri]' => 'https://www.example.com/report',
     ];
     $this->drupalPostForm('admin/config/system/seckit', $form, t('Save configuration'));
     $expected = 'max-age=86400, enforce, report-uri="https://www.example.com/report"';
