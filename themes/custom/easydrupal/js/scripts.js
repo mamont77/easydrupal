@@ -1,3 +1,4 @@
+"use strict";
 /**
  * @file
  * easyDrupal functionality.
@@ -43,6 +44,7 @@
   };
 
   /**
+   * Get page size.
    *
    * @returns {*[]}
    */
@@ -99,24 +101,24 @@
   };
 
   /**
+   * Makes Feedback more good.
    *
-   * @param root_element_prefix
-   * @param context
+   * @param $root_element_prefix
    */
-  $.makeFeedbackMoreBeautifulStep1 = function (root_element_prefix, context) {
-    var $feedback_projects_urls = $(root_element_prefix + ' .field-name-field-project-title', context);
+  $.makeFeedbackMoreBeautifulStep1 = function ($root_element_prefix) {
+    var $feedback_projects_urls = $root_element_prefix.find('.field-name-field-project-title');
 
     // Add commas after each project in the feedback section.
     $feedback_projects_urls.find('a:not(:last-child)').after(', ');
   };
 
   /**
+   * Makes Feedback more good.
    *
-   * @param root_element_prefix
-   * @param context
+   * @param $root_element_prefix
    */
-  $.makeFeedbackMoreBeautifulStep2 = function (root_element_prefix, context) {
-    $(root_element_prefix).each(function () {
+  $.makeFeedbackMoreBeautifulStep2 = function ($root_element_prefix) {
+    $root_element_prefix.each(function () {
       var $feedback_titles = $(this).find('.field-name-node-title'),
         $feedback_projects_about = $(this).find('.about'),
         $feedback_projects_wrapper = $(this).find('.project-info'),
@@ -131,14 +133,15 @@
   };
 
   /**
+   * Use usual version for mobile.
    *
-   * @param root_element_prefix
+   * @param $root_element_prefix
    */
-  $.revertFeedbackMoreBeautiful = function (root_element_prefix) {
-    $(root_element_prefix).find('.field-name-node-title').height('auto');
-    $(root_element_prefix).find('.about').height('auto');
-    $(root_element_prefix).find('.project-info').height('auto');
-    $(root_element_prefix).find('blockquote').css('height', '');
+  $.revertFeedbackMoreBeautiful = function ($root_element_prefix) {
+    $root_element_prefix.find('.field-name-node-title').height('auto');
+    $root_element_prefix.find('.about').height('auto');
+    $root_element_prefix.find('.project-info').height('auto');
+    $root_element_prefix.find('blockquote').css('height', '');
   };
 
 
@@ -168,17 +171,19 @@
         return;
       }
 
-      $.makeFeedbackMoreBeautifulStep1('.view-feedback .row, .section.feedback', context);
+      var $feedback = $('.view-feedback .row, .section.feedback', context);
+
+      $.makeFeedbackMoreBeautifulStep1($feedback);
 
       if ($.getPageSize()[0] >= 768) {
-        $.makeFeedbackMoreBeautifulStep2('.view-feedback .row, .section.feedback', context);
+        $.makeFeedbackMoreBeautifulStep2($feedback);
       }
       $(window).resize(function () {
         if ($.getPageSize()[0] >= 768) {
-          $.makeFeedbackMoreBeautifulStep2('.view-feedback .row, .section.feedback', context);
+          $.makeFeedbackMoreBeautifulStep2($feedback);
         }
         else {
-          $.revertFeedbackMoreBeautiful('.view-feedback .row, .section.feedback', context);
+          $.revertFeedbackMoreBeautiful($feedback);
         }
       });
     }
@@ -191,8 +196,9 @@
   Drupal.behaviors.articlePageTweeks = {
     attach: function (context, settings) {
 
-      $('.page-header', context).prepend($('.page-node-type-article .date', context));
-      $('.page-header', context).append($('.page-node-type-article .field-name-field-vote', context).css('display', 'inline-block'));
+      $('.page-header', context).prepend($('.page-node-type-article .date', context))
+        .append($('.page-node-type-article .field-name-field-vote', context)
+          .css('display', 'inline-block'));
 
       var $region_sidebar_second = $('aside.col-sm-3', context),
         $region_sidebar_second_content = $('.region-sidebar-second', context),
@@ -241,7 +247,9 @@
         document.querySelector('head').appendChild(msViewportStyle)
       }
 
-      $('.upper').on('click', function (event) {
+      var $upper = $('.upper', context);
+
+      $upper.on('click', function (event) {
         event.preventDefault();
         $('html, body', context).animate({scrollTop: 0}, 1000);
         return false;
@@ -249,10 +257,10 @@
 
       $(window).scroll(function () {
         if ($(this).scrollTop() > 100) {
-          $('.upper').fadeIn();
+          $upper.fadeIn();
         }
         else {
-          $('.upper').fadeOut();
+          $upper.fadeOut();
         }
       });
     }

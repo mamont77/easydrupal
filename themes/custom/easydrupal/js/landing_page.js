@@ -8,6 +8,7 @@
   'use strict';
 
   /**
+   * Common functionality for Landing Page.
    *
    * @type {{attach: Drupal.behaviors.landingPageTweeks.attach}}
    */
@@ -23,9 +24,9 @@
       }
 
       /* ==============================================
-       Smooth Scroll To Anchor
+       Smooth Scroll To Anchor.
        =============================================== */
-      //jQuery for page scrolling feature - requires jQuery Easing plugin
+      // jQuery for page scrolling feature - requires jQuery Easing plugin.
       $('.navbar-nav a').bind('click', function (event) {
         var $anchor = $(this),
           header_offset = 78;
@@ -61,7 +62,7 @@
       $contact.addClass('fadeInUp wow').attr('data-wow-delay', ".1s");
 
       /* ==============================================
-       WOW plugin triggers animate.css on scroll
+       WOW plugin triggers animate.css on scroll.
        =============================================== */
       var wow = new WOW(
         {
