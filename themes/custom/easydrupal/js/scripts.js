@@ -249,7 +249,7 @@
 
       var $upper = $('.upper', context);
 
-      $upper.on('click', function (event) {
+      $upper.once('upperBehavior').on('click', function (event) {
         event.preventDefault();
         $('html, body', context).animate({scrollTop: 0}, 1000);
         return false;
