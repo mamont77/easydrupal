@@ -12,8 +12,6 @@ return array(
     'Stack' => array($vendorDir . '/stack/builder/src'),
     'Prophecy\\' => array($vendorDir . '/phpspec/prophecy/src'),
     'Michelf' => array($vendorDir . '/michelf/php-markdown'),
-    'JakubOnderka\\PhpConsoleHighlighter' => array($vendorDir . '/jakub-onderka/php-console-highlighter/src'),
-    'JakubOnderka\\PhpConsoleColor' => array($vendorDir . '/jakub-onderka/php-console-color/src'),
     'Egulias\\' => array($vendorDir . '/egulias/email-validator/src'),
     'EasyRdf_' => array($vendorDir . '/easyrdf/easyrdf/lib'),
     'Drupal\\' => array($vendorDir . '/drupal/coder/coder_sniffer/Drupal'),

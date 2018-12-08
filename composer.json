@@ -81,7 +81,9 @@
         ],
         "merge-plugin": {
             "include": [
-                "core/composer.json"
+                "core/composer.json",
+                "modules/custom/*/composer.json",
+                "themes/custom/*/composer.json"
             ],
             "recurse": true,
             "replace": false,
