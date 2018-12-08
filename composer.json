@@ -12,6 +12,7 @@
         "drupal/advupdate": "^1.0",
         "drupal/backup_migrate": "^4.0",
         "drupal/blazy": "^1.0@RC",
+        "drupal/bootstrap": "^3.16",
         "drupal/bootstrap_layouts": "^5.1",
         "drupal/captcha": "^1.0@beta",
         "drupal/console": "~1.0",
