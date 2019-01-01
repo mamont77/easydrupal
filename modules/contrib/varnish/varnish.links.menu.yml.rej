@@ -1,9 +1,0 @@
---- varnish.links.menu.yml
-+++ varnish.links.menu.yml
-@@ -1,5 +1,5 @@
- varnish.admin_settings:
-   title: Varnish
-   parent: system.admin_config_development
--  description: 'Configure Varnish servers and cache invalidation settings'
-+  description: 'Configure Varnish servers and cache invalidation settings.'
-   route_name: varnish.admin_settings
