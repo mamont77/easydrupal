@@ -60,6 +60,7 @@
         "drupal/xmlsitemap": "^1.0@alpha",
         "drupal/yoast_seo": "2.0.0-alpha3",
         "drush/drush": "~9.0",
+        "topfloor/composer-cleanup-vcs-dirs": "^1.0",
         "wikimedia/composer-merge-plugin": "^1.4"
     },
     "replace": {

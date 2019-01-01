@@ -71,6 +71,7 @@ class ComposerStaticInitDrupal8
         'T' => 
         array (
             'Twig\\' => 5,
+            'TopFloor\\ComposerCleanupVcsDirs\\' => 32,
         ),
         'S' => 
         array (
@@ -270,6 +271,10 @@ class ComposerStaticInitDrupal8
         'Twig\\' => 
         array (
             0 => __DIR__ . '/..' . '/twig/twig/src',
+        ),
+        'TopFloor\\ComposerCleanupVcsDirs\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/topfloor/composer-cleanup-vcs-dirs/src',
         ),
         'Symfony\\Polyfill\\Php70\\' => 
         array (

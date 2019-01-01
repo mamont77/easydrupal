@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cdbbbd87594cea32900ec128446cc524",
+    "content-hash": "a8808e6eaca478b9270531ca030ebe99",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -4965,8 +4965,7 @@
             "homepage": "https://www.drupal.org/project/varnish",
             "support": {
                 "source": "http://cgit.drupalcode.org/varnish"
-            },
-            "time": "2018-07-20T10:25:44+00:00"
+            }
         },
         {
             "name": "drupal/views_bootstrap",
@@ -8349,6 +8348,44 @@
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
             "time": "2018-11-11T19:48:54+00:00"
+        },
+        {
+            "name": "topfloor/composer-cleanup-vcs-dirs",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/TopFloorTech/composer-cleanup-vcs-dirs.git",
+                "reference": "0158853dd054321b5048108ed5532c4b5e002d1b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/TopFloorTech/composer-cleanup-vcs-dirs/zipball/0158853dd054321b5048108ed5532c4b5e002d1b",
+                "reference": "0158853dd054321b5048108ed5532c4b5e002d1b",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^1.0.0",
+                "php": ">=5.5",
+                "symfony/finder": "*"
+            },
+            "require-dev": {
+                "composer/composer": "dev-master"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "class": "TopFloor\\ComposerCleanupVcsDirs\\Plugin"
+            },
+            "autoload": {
+                "psr-4": {
+                    "TopFloor\\ComposerCleanupVcsDirs\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "description": "Automatically deletes .git directories in newly installed or updated dependencies.",
+            "time": "2016-10-06T04:35:51+00:00"
         },
         {
             "name": "twig/twig",
