@@ -48,7 +48,7 @@
         "drupal/redirect": "^1.2",
         "drupal/schema_metatag": "^1.2",
         "drupal/seckit": "^1.1",
-        "drupal/simple_sitemap": "^2.12",
+        "drupal/simple_sitemap": "^3.0",
         "drupal/slick": "^1.0",
         "drupal/sticky_sharrre_bar": "1.x-dev",
         "drupal/token": "^1.1",
