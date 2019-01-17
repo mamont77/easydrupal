@@ -21,6 +21,7 @@ return array(
     'Webmozart\\Assert\\' => array($vendorDir . '/webmozart/assert/src'),
     'Unish\\' => array($vendorDir . '/drush/drush/tests'),
     'Twig\\' => array($vendorDir . '/twig/twig/src'),
+    'TopFloor\\ComposerCleanupVcsDirs\\' => array($vendorDir . '/topfloor/composer-cleanup-vcs-dirs/src'),
     'TYPO3\\PharStreamWrapper\\' => array($vendorDir . '/typo3/phar-stream-wrapper/src'),
     'Symfony\\Polyfill\\Php70\\' => array($vendorDir . '/symfony/polyfill-php70'),
     'Symfony\\Polyfill\\Mbstring\\' => array($vendorDir . '/symfony/polyfill-mbstring'),
