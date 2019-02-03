@@ -2485,18 +2485,18 @@
     },
     {
         "name": "drupal/bootstrap",
-        "version": "3.16.0",
-        "version_normalized": "3.16.0.0",
+        "version": "3.17.0",
+        "version_normalized": "3.17.0.0",
         "source": {
             "type": "git",
             "url": "https://git.drupal.org/project/bootstrap",
-            "reference": "8.x-3.16"
+            "reference": "8.x-3.17"
         },
         "dist": {
             "type": "zip",
-            "url": "https://ftp.drupal.org/files/projects/bootstrap-8.x-3.16.zip",
-            "reference": "8.x-3.16",
-            "shasum": "1ea4d9bbbaf6435e074ade3408f4baef94e5cbe3"
+            "url": "https://ftp.drupal.org/files/projects/bootstrap-8.x-3.17.zip",
+            "reference": "8.x-3.17",
+            "shasum": "7fec8e6bc1435b97952844315035b36c2dbc07b2"
         },
         "require": {
             "drupal/core": "~8.0"
@@ -2507,8 +2507,8 @@
                 "dev-3.x": "3.x-dev"
             },
             "drupal": {
-                "version": "8.x-3.16",
-                "datestamp": "1544054280",
+                "version": "8.x-3.17",
+                "datestamp": "1548102180",
                 "security-coverage": {
                     "status": "covered",
                     "message": "Covered by Drupal's security advisory policy"
@@ -3686,7 +3686,7 @@
         "source": {
             "type": "git",
             "url": "https://git.drupal.org/project/field_collection",
-            "reference": "56eca91817d5fe6e261cb56d427e4c5431aa61a3"
+            "reference": "1b77ee0cd812c0ab03e961316c1d9601b7bed03d"
         },
         "require": {
             "drupal/core": "*"
@@ -3698,7 +3698,7 @@
             },
             "drupal": {
                 "version": "8.x-3.x-dev",
-                "datestamp": "1536176580",
+                "datestamp": "1548455280",
                 "security-coverage": {
                     "status": "not-covered",
                     "message": "Project has not opted into security advisory coverage!"
@@ -3728,6 +3728,10 @@
             {
                 "name": "larowlan",
                 "homepage": "https://www.drupal.org/user/395439"
+            },
+            {
+                "name": "nedjo",
+                "homepage": "https://www.drupal.org/user/4481"
             },
             {
                 "name": "ram4nd",
@@ -4019,21 +4023,21 @@
     },
     {
         "name": "drupal/google_analytics",
-        "version": "2.3.0",
-        "version_normalized": "2.3.0.0",
+        "version": "3.0.0",
+        "version_normalized": "3.0.0.0",
         "source": {
             "type": "git",
             "url": "https://git.drupal.org/project/google_analytics",
-            "reference": "8.x-2.3"
+            "reference": "8.x-3.0"
         },
         "dist": {
             "type": "zip",
-            "url": "https://ftp.drupal.org/files/projects/google_analytics-8.x-2.3.zip",
-            "reference": "8.x-2.3",
-            "shasum": "9ea88a81925ba538d9fa7ac6ce4f1598e5ee48e4"
+            "url": "https://ftp.drupal.org/files/projects/google_analytics-8.x-3.0.zip",
+            "reference": "8.x-3.0",
+            "shasum": "18179854152cae44be2a5ed5de5550bc6e131c70"
         },
         "require": {
-            "drupal/core": "~8.0"
+            "drupal/core": "~8.5"
         },
         "require-dev": {
             "drupal/php": "*",
@@ -4042,11 +4046,11 @@
         "type": "drupal-module",
         "extra": {
             "branch-alias": {
-                "dev-2.x": "2.x-dev"
+                "dev-3.x": "3.x-dev"
             },
             "drupal": {
-                "version": "8.x-2.3",
-                "datestamp": "1531469021",
+                "version": "8.x-3.0",
+                "datestamp": "1548968580",
                 "security-coverage": {
                     "status": "covered",
                     "message": "Covered by Drupal's security advisory policy"
@@ -4071,7 +4075,7 @@
         "description": "Allows your site to be tracked by Google Analytics by adding a Javascript tracking code to every page.",
         "homepage": "https://www.drupal.org/project/google_analytics",
         "support": {
-            "source": "http://git.drupal.org/project/google_analytics.git",
+            "source": "https://git.drupal.org/project/google_analytics.git",
             "issues": "https://www.drupal.org/project/issues/google_analytics"
         }
     },
@@ -4893,18 +4897,18 @@
     },
     {
         "name": "drupal/recaptcha",
-        "version": "2.3.0",
-        "version_normalized": "2.3.0.0",
+        "version": "2.4.0",
+        "version_normalized": "2.4.0.0",
         "source": {
             "type": "git",
             "url": "https://git.drupal.org/project/recaptcha",
-            "reference": "8.x-2.3"
+            "reference": "8.x-2.4"
         },
         "dist": {
             "type": "zip",
-            "url": "https://ftp.drupal.org/files/projects/recaptcha-8.x-2.3.zip",
-            "reference": "8.x-2.3",
-            "shasum": "bd77c79c33c6732328a7c582adbe0aaffe704e74"
+            "url": "https://ftp.drupal.org/files/projects/recaptcha-8.x-2.4.zip",
+            "reference": "8.x-2.4",
+            "shasum": "ee68020dc33f880313b83d8bbcb159ef85285c7a"
         },
         "require": {
             "drupal/captcha": "^1.0.0-alpha1",
@@ -4916,8 +4920,8 @@
                 "dev-2.x": "2.x-dev"
             },
             "drupal": {
-                "version": "8.x-2.3",
-                "datestamp": "1521320880",
+                "version": "8.x-2.4",
+                "datestamp": "1548967980",
                 "security-coverage": {
                     "status": "covered",
                     "message": "Covered by Drupal's security advisory policy"
@@ -4954,7 +4958,7 @@
         "description": "Protect your website from spam and abuse while letting real people pass through with ease.",
         "homepage": "https://www.drupal.org/project/recaptcha",
         "support": {
-            "source": "http://git.drupal.org/project/recaptcha.git",
+            "source": "https://git.drupal.org/project/recaptcha.git",
             "issues": "https://www.drupal.org/project/issues/recaptcha"
         }
     },

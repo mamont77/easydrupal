@@ -31,7 +31,7 @@
         "drupal/file_mdm": "^1.1",
         "drupal/filefield_paths": "^1.0@beta",
         "drupal/geshifilter": "^1.2",
-        "drupal/google_analytics": "^2.2",
+        "drupal/google_analytics": "^3.0",
         "drupal/hsts": "^1.0",
         "drupal/image_widget_crop": "^2.1",
         "drupal/imagemagick": "^2.3",
