@@ -10,7 +10,7 @@ dependencies:
 id: addtoanybuttons
 theme: easydrupal
 region: content
-weight: -10
+weight: -11
 provider: null
 plugin: addtoany_block
 settings:

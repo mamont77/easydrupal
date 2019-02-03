@@ -177,15 +177,18 @@ display:
     display_title: Page
     position: 1
     display_options:
-      display_extenders: {  }
+      display_extenders:
+        metatag_display_extender: {  }
       path: feedback
       menu:
         type: normal
-        title: Feedback
-        menu_name: main
-        enabled: true
+        title: Testimonials
+        description: ''
         expanded: false
+        parent: ''
         weight: -46
+        context: '0'
+        menu_name: main
     cache_metadata:
       max-age: -1
       contexts:

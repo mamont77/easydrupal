@@ -4,13 +4,11 @@ status: true
 dependencies:
   config:
     - field.storage.node.field_image
-    - field.storage.node.field_yoast_seo
     - image.style.max_100x150
   module:
     - image
     - node
     - user
-    - yoast_seo
 _core:
   default_config_hash: z8XxeJ_VN7B0PugrC1Xgj-FubvoLSKgnFJJ3DbXlAmA
 id: content
@@ -425,12 +423,6 @@ display:
           hide_alter_empty: true
           destination: true
           plugin_id: entity_operations
-        field_yoast_seo:
-          id: field_yoast_seo
-          table: node__field_yoast_seo
-          field: field_yoast_seo
-          type: yoastseo_formatter
-          plugin_id: field
       filters:
         status_extra:
           id: status_extra
@@ -553,6 +545,7 @@ display:
               authenticated: authenticated
               anonymous: '0'
               administrator: '0'
+            placeholder: ''
           is_grouped: false
           group_info:
             label: ''
@@ -650,7 +643,6 @@ display:
       max-age: 0
       tags:
         - 'config:field.storage.node.field_image'
-        - 'config:field.storage.node.field_yoast_seo'
   page_1:
     display_options:
       path: admin/content/node
@@ -684,4 +676,3 @@ display:
       max-age: 0
       tags:
         - 'config:field.storage.node.field_image'
-        - 'config:field.storage.node.field_yoast_seo'

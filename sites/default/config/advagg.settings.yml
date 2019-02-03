@@ -2,6 +2,7 @@ css:
   combine_media: false
   fix_type: true
   brotli: true
+  preserve_external: false
 dns_prefetch: true
 path:
   convert:
@@ -18,7 +19,7 @@ _core:
   default_config_hash: vRsxLXJ3AVIy7bfhzF1RBK6hXSeOMLg726F-KtB1erw
 js:
   fix_type: true
-  preserve_external: null
+  preserve_external: false
   brotli: true
 immutable: true
 symlinks: false

@@ -83,7 +83,8 @@ content:
   field_attachment:
     weight: 6
     label: above
-    settings: {  }
+    settings:
+      use_description_as_link_text: true
     third_party_settings: {  }
     type: file_default
     region: ds_content

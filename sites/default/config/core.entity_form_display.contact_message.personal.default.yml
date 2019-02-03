@@ -35,6 +35,8 @@ content:
   preview:
     weight: 50
     region: content
+    settings: {  }
+    third_party_settings: {  }
   recipient:
     weight: 2
     settings: {  }

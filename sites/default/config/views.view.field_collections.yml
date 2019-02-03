@@ -349,6 +349,8 @@ display:
           text: view
           entity_type: field_collection_item
           plugin_id: entity_link
+          output_url_as_text: false
+          absolute: false
       filters: {  }
       sorts: {  }
       title: 'Field Collections'

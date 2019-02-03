@@ -7,8 +7,10 @@ module:
   advagg_css_minify: 0
   advagg_js_minify: 0
   advagg_mod: 0
+  advupdate: 0
   automated_cron: 0
   backup_migrate: 0
+  big_pipe: 0
   blazy: 0
   block: 0
   block_content: 0
@@ -87,6 +89,7 @@ module:
   schema_web_site: 0
   seckit: 0
   shortcut: 0
+  simple_sitemap: 0
   slick: 0
   slick_ui: 0
   sticky_sharrre_bar: 0
@@ -104,9 +107,6 @@ module:
   views_ui: 0
   votingapi: 0
   votingapi_widgets: 0
-  xmlsitemap: 0
-  xmlsitemap_custom: 0
-  xmlsitemap_engines: 0
   yoast_seo: 0
   ds: 1
   extlink: 1

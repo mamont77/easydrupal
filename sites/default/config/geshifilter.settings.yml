@@ -44,5 +44,8 @@ language:
   text:
     enabled: true
     tags: text
+  twig:
+    enabled: true
+    tags: twig
 _core:
   default_config_hash: rFxYA6H7ZH3mYsXr2lgP8oCdXvPXiCTr0Hjaxgu5Mts

@@ -6,8 +6,10 @@ dependencies:
     - core.entity_view_mode.node.teaser
     - field.field.node.landingpage.field_about
     - field.field.node.landingpage.field_articles
+    - field.field.node.landingpage.field_clients
     - field.field.node.landingpage.field_contact_me
     - field.field.node.landingpage.field_feedback
+    - field.field.node.landingpage.field_meta_tags
     - field.field.node.landingpage.field_projects
     - node.type.landingpage
   module:
@@ -20,9 +22,13 @@ content:
   links:
     weight: 100
     region: content
+    settings: {  }
+    third_party_settings: {  }
 hidden:
   field_about: true
   field_articles: true
+  field_clients: true
   field_contact_me: true
   field_feedback: true
+  field_meta_tags: true
   field_projects: true

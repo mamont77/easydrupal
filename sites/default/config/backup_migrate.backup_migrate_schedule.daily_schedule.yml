@@ -7,8 +7,8 @@ _core:
 id: daily_schedule
 label: 'Daily Schedule'
 enabled: true
-keep: null
-period: 86400
+keep: 15
+period: 259200
 cron: null
 source_id: default_db
 destination_id: private_files

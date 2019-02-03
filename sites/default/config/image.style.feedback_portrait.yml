@@ -2,6 +2,8 @@ uuid: 0e03ec94-c83e-4991-b67c-fc54c4037fe3
 langcode: en
 status: true
 dependencies:
+  config:
+    - crop.type.feedback_portrait
   module:
     - crop
 name: feedback_portrait
@@ -20,3 +22,4 @@ effects:
     data:
       width: 150
       height: 150
+      anchor: center-center

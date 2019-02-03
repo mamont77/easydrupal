@@ -13,3 +13,11 @@ _core:
   default_config_hash: YrQtUD-tjwXmWch1oNpPqr3qb5S17-dXdlKwqhiHjNI
 enabled_entity_types:
   - user
+safe_tokens:
+  - alias
+  - alias
+  - path
+  - join-path
+  - login-url
+  - url
+  - url-brief
