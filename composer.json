@@ -53,7 +53,7 @@
         "drupal/sticky_sharrre_bar": "1.x-dev",
         "drupal/token": "^1.1",
         "drupal/varnish": "1.x-dev",
-        "drupal/views_bootstrap": "^3.0",
+        "drupal/views_bootstrap": "^4.1",
         "drupal/views_infinite_scroll": "^1.5",
         "drupal/votingapi": "^3.0@alpha",
         "drupal/votingapi_widgets": "^1.0@alpha",

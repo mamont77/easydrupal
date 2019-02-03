@@ -5455,18 +5455,18 @@
     },
     {
         "name": "drupal/views_bootstrap",
-        "version": "3.1.0",
-        "version_normalized": "3.1.0.0",
+        "version": "4.1.0",
+        "version_normalized": "4.1.0.0",
         "source": {
             "type": "git",
             "url": "https://git.drupal.org/project/views_bootstrap",
-            "reference": "8.x-3.1"
+            "reference": "8.x-4.1"
         },
         "dist": {
             "type": "zip",
-            "url": "https://ftp.drupal.org/files/projects/views_bootstrap-8.x-3.1.zip",
-            "reference": "8.x-3.1",
-            "shasum": "7fd556457f028fa736d1422a9b5a763566fd7d2e"
+            "url": "https://ftp.drupal.org/files/projects/views_bootstrap-8.x-4.1.zip",
+            "reference": "8.x-4.1",
+            "shasum": "61e907ad7e2aebf1d2132a206ad1818ef3a6491a"
         },
         "require": {
             "drupal/core": "*"
@@ -5474,11 +5474,11 @@
         "type": "drupal-module",
         "extra": {
             "branch-alias": {
-                "dev-3.x": "3.x-dev"
+                "dev-4.x": "4.x-dev"
             },
             "drupal": {
-                "version": "8.x-3.1",
-                "datestamp": "1537360681",
+                "version": "8.x-4.1",
+                "datestamp": "1548889080",
                 "security-coverage": {
                     "status": "covered",
                     "message": "Covered by Drupal's security advisory policy"
@@ -5488,7 +5488,7 @@
         "installation-source": "dist",
         "notification-url": "https://packages.drupal.org/8/downloads",
         "license": [
-            "GPL-2.0+"
+            "GPL-2.0-or-later"
         ],
         "authors": [
             {
@@ -5508,11 +5508,8 @@
                 "homepage": "https://www.drupal.org/user/556088"
             }
         ],
-        "description": "Integrate the Bootstrap framework with Views.",
+        "description": "Views Bootstrap v4",
         "homepage": "https://www.drupal.org/project/views_bootstrap",
-        "keywords": [
-            "Drupal"
-        ],
         "support": {
             "source": "http://cgit.drupalcode.org/views_bootstrap"
         }
