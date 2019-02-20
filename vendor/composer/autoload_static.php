@@ -147,6 +147,7 @@ class ComposerStaticInitDrupal8
         'F' => 
         array (
             'FontLib\\' => 8,
+            'FileEye\\MimeMap\\' => 16,
         ),
         'D' => 
         array (
@@ -468,6 +469,10 @@ class ComposerStaticInitDrupal8
         'FontLib\\' => 
         array (
             0 => __DIR__ . '/..' . '/phenx/php-font-lib/src/FontLib',
+        ),
+        'FileEye\\MimeMap\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/fileeye/mimemap/src',
         ),
         'Drush\\Internal\\' => 
         array (

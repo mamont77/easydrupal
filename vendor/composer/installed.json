@@ -4212,23 +4212,24 @@
     },
     {
         "name": "drupal/imagemagick",
-        "version": "2.3.0",
-        "version_normalized": "2.3.0.0",
+        "version": "2.4.0",
+        "version_normalized": "2.4.0.0",
         "source": {
             "type": "git",
             "url": "https://git.drupal.org/project/imagemagick",
-            "reference": "8.x-2.3"
+            "reference": "8.x-2.4"
         },
         "dist": {
             "type": "zip",
-            "url": "https://ftp.drupal.org/files/projects/imagemagick-8.x-2.3.zip",
-            "reference": "8.x-2.3",
-            "shasum": "8359921d4700e954364c2633332c20579bb75a34"
+            "url": "https://ftp.drupal.org/files/projects/imagemagick-8.x-2.4.zip",
+            "reference": "8.x-2.4",
+            "shasum": "7607cf3b98ac4d592791ea32e40d3625d6cc7c3f"
         },
         "require": {
             "drupal/core": "^8.3",
             "drupal/file_mdm": "^1.1",
-            "drupal/file_mdm_exif": "^1.1"
+            "drupal/file_mdm_exif": "^1.1",
+            "fileeye/mimemap": "^1.0"
         },
         "type": "drupal-module",
         "extra": {
@@ -4236,8 +4237,8 @@
                 "dev-2.x": "2.x-dev"
             },
             "drupal": {
-                "version": "8.x-2.3",
-                "datestamp": "1520958305",
+                "version": "8.x-2.4",
+                "datestamp": "1550494985",
                 "security-coverage": {
                     "status": "covered",
                     "message": "Covered by Drupal's security advisory policy"
@@ -6178,6 +6179,52 @@
         ]
     },
     {
+        "name": "fileeye/mimemap",
+        "version": "1.0.0",
+        "version_normalized": "1.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/FileEye/MimeMap.git",
+            "reference": "cb9eda0a7caaadd35d2de22abb44b59650072d9b"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/FileEye/MimeMap/zipball/cb9eda0a7caaadd35d2de22abb44b59650072d9b",
+            "reference": "cb9eda0a7caaadd35d2de22abb44b59650072d9b",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.4"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "<9",
+            "sebastian/comparator": "*",
+            "sebastian/diff": "*",
+            "squizlabs/php_codesniffer": "*",
+            "symfony/console": "*",
+            "symfony/filesystem": "*",
+            "symfony/var-dumper": "*",
+            "symfony/yaml": "*"
+        },
+        "time": "2019-02-16T15:57:06+00:00",
+        "bin": [
+            "bin/fileeye-mimemap"
+        ],
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "FileEye\\MimeMap\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "LGPL-3.0-or-later"
+        ],
+        "description": "A PHP library to handle MIME Content-Type fields and their related file extensions.",
+        "homepage": "https://github.com/FileEye/MimeMap"
+    },
+    {
         "name": "geshi/geshi",
         "version": "v1.0.9.0",
         "version_normalized": "1.0.9.0",
@@ -8024,7 +8071,8 @@
         "keywords": [
             "mock",
             "xunit"
-        ]
+        ],
+        "abandoned": true
     },
     {
         "name": "psr/container",
