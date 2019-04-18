@@ -81,9 +81,6 @@ ajax_example.ajax_link_callback:
   path: '/examples/ajax-example/ajax-link-callback/{nojs}'
   defaults:
     _controller: '\Drupal\ajax_example\Controller\AjaxExampleController::ajaxLinkCallback'
-    # We provide a default value for {nojs}, so that it can be an optional
-    # parameter.
-    nojs: 'nojs'
   requirements:
     _permission: 'access content'
 

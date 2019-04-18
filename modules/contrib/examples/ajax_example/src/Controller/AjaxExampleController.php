@@ -67,7 +67,7 @@ URL whether JS was enabled or not, letting it do different things based on that.
       // know whether the request was made by AJAX or some other means where
       // JavaScript won't be able to handle the result. If the {nojs} part of
       // the path is replaced with 'ajax', then the request was made by AJAX.
-      '#url' => Url::fromRoute('ajax_example.ajax_link_callback', ['nojs' => 'ajax']),
+      '#url' => Url::fromRoute('ajax_example.ajax_link_callback', ['nojs' => 'nojs']),
     ];
     // We provide a DIV that AJAX can append some text into.
     $build['ajax_link']['destination'] = [
@@ -92,7 +92,7 @@ URL whether JS was enabled or not, letting it do different things based on that.
    *   If $type == 'ajax', returns an array of AJAX Commands.
    *   Otherwise, just returns the content, which will end up being a page.
    */
-  public function ajaxLinkCallback($nojs = 'ajax') {
+  public function ajaxLinkCallback($nojs = 'nojs') {
     // Determine whether the request is coming from AJAX or not.
     if ($nojs == 'ajax') {
       $output = $this->t("This is some content delivered via AJAX");

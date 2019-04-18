@@ -58,9 +58,6 @@ use Drupal\Core\Entity\EntityChangedTrait;
  *    BaseFieldDefinitions below. The table is automatically created during
  *    installation.
  *
- *  - fieldable: Can additional fields be attached to the entity via the GUI?
- *    Can the user add fields, like they would to a node?
- *
  *  - entity_keys: How to access the fields. Specify fields from
  *    baseFieldDefinitions() which can be used as keys.
  *
@@ -68,6 +65,10 @@ use Drupal\Core\Entity\EntityChangedTrait;
  *    'delete-form' links are added to the list built by the
  *    entityListController. They will show up as action buttons in an additional
  *    column.
+ *
+ *  - field_ui_base_route: The route name used by Field UI to attach its
+ *    management pages. Field UI module will attach its Manage Fields,
+ *    Manage Display, and Manage Form Display tabs to this route.
  *
  * There are many more properties to be used in an entity type definition. For
  * a complete overview, please refer to the '\Drupal\Core\Entity\EntityType'
