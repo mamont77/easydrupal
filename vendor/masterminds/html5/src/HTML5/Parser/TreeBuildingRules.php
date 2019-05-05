@@ -127,6 +127,7 @@ class TreeBuildingRules
 
     protected function closeIfCurrentMatches($ele, $current, $match)
     {
+        $tname = $current->tagName;
         if (in_array($current->tagName, $match)) {
             $current->parentNode->appendChild($ele);
         } else {

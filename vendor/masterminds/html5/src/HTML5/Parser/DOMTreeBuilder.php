@@ -136,7 +136,6 @@ class DOMTreeBuilder implements EventHandler
     protected $stack = array();
 
     protected $current; // Pointer in the tag hierarchy.
-    protected $rules;
     protected $doc;
 
     protected $frag;
@@ -217,7 +216,7 @@ class DOMTreeBuilder implements EventHandler
      *
      * @see http://www.w3.org/TR/2012/CR-html5-20121217/syntax.html#concept-frag-parse-context
      *
-     * @return \DOMDocumentFragment
+     * @return \DOMFragmentDocumentFragment
      */
     public function fragment()
     {
@@ -434,15 +433,9 @@ class DOMTreeBuilder implements EventHandler
         else {
             $this->current->appendChild($ele);
 
+            // XXX: Need to handle self-closing tags and unary tags.
             if (! Elements::isA($name, Elements::VOID_TAG)) {
                 $this->current = $ele;
-            }
-
-            // Self-closing tags should only be respected on foreign elements
-            // (and are implied on void elements)
-            // See: https://www.w3.org/TR/html5/syntax.html#start-tags
-            if (Elements::isHtml5Element($name)) {
-                $selfClosing = false;
             }
         }
 
@@ -460,11 +453,6 @@ class DOMTreeBuilder implements EventHandler
                 array_shift($this->nsStack);
             }
         }
-
-        if ($selfClosing) {
-            $this->endTag($name);
-        }
-
         // Return the element mask, which the tokenizer can then use to set
         // various processing rules.
         return Elements::element($name);
@@ -651,19 +639,15 @@ class DOMTreeBuilder implements EventHandler
 
     /**
      * Automatically climb the tree and close the closest node with the matching $tag.
-     *
-     * @param string $tagName
-     *
-     * @return bool
      */
-    protected function autoclose($tagName)
+    protected function autoclose($tag)
     {
         $working = $this->current;
         do {
             if ($working->nodeType != XML_ELEMENT_NODE) {
                 return false;
             }
-            if ($working->tagName == $tagName) {
+            if ($working->tagName == $tag) {
                 $this->current = $working->parentNode;
 
                 return true;
@@ -677,16 +661,12 @@ class DOMTreeBuilder implements EventHandler
      *
      * If $this->current or anything above $this->current matches the given tag
      * name, this returns true.
-     *
-     * @param string $tagName
-     *
-     * @return bool
      */
-    protected function isAncestor($tagName)
+    protected function isAncestor($tagname)
     {
         $candidate = $this->current;
         while ($candidate->nodeType === XML_ELEMENT_NODE) {
-            if ($candidate->tagName == $tagName) {
+            if ($candidate->tagName == $tagname) {
                 return true;
             }
             $candidate = $candidate->parentNode;
@@ -697,13 +677,9 @@ class DOMTreeBuilder implements EventHandler
 
     /**
      * Returns true if the immediate parent element is of the given tagname.
-     *
-     * @param string $tagName
-     *
-     * @return bool
      */
-    protected function isParent($tagName)
+    protected function isParent($tagname)
     {
-        return $this->current->tagName == $tagName;
+        return $this->current->tagName == $tagname;
     }
 }

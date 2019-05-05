@@ -27,7 +27,7 @@ class CSS extends PHP
      * @param string                  $eolChar The EOL char used in the content.
      *
      * @return void
-     * @throws TokenizerException If the file appears to be minified.
+     * @throws \PHP_CodeSniffer\Exceptions\TokenizerException If the file appears to be minified.
      */
     public function __construct($content, Config $config, $eolChar='\n')
     {
@@ -35,7 +35,7 @@ class CSS extends PHP
             throw new TokenizerException('File appears to be minified and cannot be processed');
         }
 
-        return parent::__construct($content, $config, $eolChar);
+        parent::__construct($content, $config, $eolChar);
 
     }//end __construct()
 
@@ -91,6 +91,7 @@ class CSS extends PHP
                 || $token['code'] === T_FOREACH
                 || $token['code'] === T_WHILE
                 || $token['code'] === T_DEC
+                || $token['code'] === T_NEW
             ) {
                 $token['type'] = 'T_STRING';
                 $token['code'] = T_STRING;
@@ -106,7 +107,7 @@ class CSS extends PHP
                 && $tokens[($stackPtr + 1)]['content'] === 'PHPCS_CSS_T_OPEN_TAG'
             ) {
                 $content = '<?php';
-                for ($stackPtr = ($stackPtr + 3); $stackPtr < $numTokens; $stackPtr++) {
+                for ($stackPtr += 3; $stackPtr < $numTokens; $stackPtr++) {
                     if ($tokens[$stackPtr]['code'] === T_BITWISE_XOR
                         && $tokens[($stackPtr + 1)]['content'] === 'PHPCS_CSS_T_CLOSE_TAG'
                     ) {

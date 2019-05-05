@@ -1,5 +1,4 @@
 <?php
-
 namespace Masterminds\HTML5\Parser;
 
 /**
@@ -10,11 +9,10 @@ namespace Masterminds\HTML5\Parser;
  *
  * Currently provided InputStream implementations include
  * FileInputStream and StringInputStream.
- *
- * @deprecated since 2.4, to remove in 3.0. Use a string in the scanner instead.
  */
 interface InputStream extends \Iterator
 {
+
     /**
      * Returns the current line that is being consumed.
      *
