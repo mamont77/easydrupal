@@ -8,7 +8,7 @@
         "cweagans/composer-patches": "^1.6",
         "drupal/addtoany": "^1.9",
         "drupal/admin_toolbar": "^1.23",
-        "drupal/advagg": "^3.5",
+        "drupal/advagg": "^4.0",
         "drupal/advupdate": "^1.0",
         "drupal/backup_migrate": "^4.0",
         "drupal/blazy": "^1.0@RC",
