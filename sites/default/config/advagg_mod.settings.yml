@@ -15,7 +15,6 @@ js_preprocess: true
 prefetch: null
 _core:
   default_config_hash: DIsgflQr3uh-j0GWnPgGhZn0yCXGdImu4-u1m2Uv9IY
-ga_inline_to_file: null
 js_footer: null
 js_remove_console_log: false
 unified_multisite_dir: null

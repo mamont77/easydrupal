@@ -9,9 +9,12 @@ dependencies:
     - field.field.node.article.field_comments
     - field.field.node.article.field_conclusions
     - field.field.node.article.field_image
+    - field.field.node.article.field_meta_tags
     - field.field.node.article.field_sourse_code
     - field.field.node.article.field_tags
     - field.field.node.article.field_version
+    - field.field.node.article.field_vote
+    - field.field.node.article.field_yoast_seo
     - image.style.max_200x200
     - node.type.article
   module:
@@ -82,7 +85,10 @@ hidden:
   field_attachment: true
   field_comments: true
   field_conclusions: true
+  field_meta_tags: true
   field_sourse_code: true
   field_tags: true
   field_version: true
+  field_vote: true
+  field_yoast_seo: true
   links: true

@@ -5,5 +5,4 @@ dependencies: {  }
 name: Versions
 vid: versions
 description: 'Varsions of drupal'
-hierarchy: 0
 weight: 0

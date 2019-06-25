@@ -9,6 +9,7 @@ dependencies:
     - field.field.node.project.field_image
     - field.field.node.project.field_landing_page_background
     - field.field.node.project.field_logo
+    - field.field.node.project.field_meta_tags
     - field.field.node.project.field_project_images
     - field.field.node.project.field_project_url
     - field.field.node.project.field_skills
@@ -242,4 +243,5 @@ hidden:
   field_image: true
   field_landing_page_background: true
   field_logo: true
+  field_meta_tags: true
   links: true

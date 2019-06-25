@@ -39,10 +39,10 @@ image_formats:
     enabled: false
   BMP:
     mime_type: image/x-ms-bmp
-    enabled: false
+    enabled: true
   PSD:
     mime_type: image/x-photoshop
-    enabled: false
+    enabled: true
   WBMP:
     mime_type: image/vnd.wap.wbmp
     enabled: false

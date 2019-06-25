@@ -9,6 +9,7 @@ dependencies:
     - field.field.node.landingpage.field_clients
     - field.field.node.landingpage.field_contact_me
     - field.field.node.landingpage.field_feedback
+    - field.field.node.landingpage.field_meta_tags
     - field.field.node.landingpage.field_projects
     - node.type.landingpage
   module:
@@ -271,4 +272,5 @@ content:
     region: ds_content
 hidden:
   addtoany: true
+  field_meta_tags: true
   links: true

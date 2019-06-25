@@ -5,6 +5,7 @@ dependencies:
   config:
     - core.entity_view_mode.node.landing_page
     - field.field.node.page.body
+    - field.field.node.page.field_meta_tags
     - node.type.page
   module:
     - ds
@@ -75,4 +76,5 @@ content:
             fi-def-at: false
     region: ds_content
 hidden:
+  field_meta_tags: true
   links: true

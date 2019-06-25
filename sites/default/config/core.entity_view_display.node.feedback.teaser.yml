@@ -8,6 +8,7 @@ dependencies:
     - field.field.node.feedback.field_country_v2
     - field.field.node.feedback.field_date
     - field.field.node.feedback.field_image
+    - field.field.node.feedback.field_meta_tags
     - field.field.node.feedback.field_name
     - field.field.node.feedback.field_position
     - field.field.node.feedback.field_project_title
@@ -87,6 +88,7 @@ third_party_settings:
         attributes: ''
         effect: none
         speed: fast
+      region: content
     group_project_info:
       children:
         - field_date
@@ -105,6 +107,7 @@ third_party_settings:
         speed: fast
         id: ''
         classes: project-info
+      region: content
 id: node.feedback.teaser
 targetEntityType: node
 bundle: feedback
@@ -301,4 +304,5 @@ content:
             classes: {  }
     region: ds_content
 hidden:
+  field_meta_tags: true
   links: true
