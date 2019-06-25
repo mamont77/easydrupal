@@ -71,7 +71,10 @@
     "config": {
         "preferred-install": "dist",
         "autoloader-suffix": "Drupal8",
-        "sort-packages": true
+        "sort-packages": true,
+        "platform": {
+            "php": "7.2"
+        }
     },
     "extra": {
         "_readme": [
