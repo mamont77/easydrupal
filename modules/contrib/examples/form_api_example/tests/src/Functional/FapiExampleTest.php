@@ -20,7 +20,7 @@ class FapiExampleTest extends ExamplesBrowserTestBase {
    *
    * @var string[]
    */
-  static public $modules = ['form_api_example'];
+  public static $modules = ['form_api_example'];
 
   /**
    * The installation profile to use with this test.

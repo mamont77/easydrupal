@@ -45,7 +45,8 @@ function batch_example_update_8001(&$sandbox) {
   $limit = 10;
 
   // Retrieve the next group of nids.
-  $query = db_select('node', 'n');
+  $db_connection = \Drupal::database();
+  $query = $db_connection->select('node', 'n');
   $query->fields('n', ['nid']);
   $result = $query
     ->where('n.nid > :nid', [':nid' => $sandbox['current_node']])
@@ -54,7 +55,7 @@ function batch_example_update_8001(&$sandbox) {
     ->execute();
   foreach ($result as $row) {
     // Here we actually perform a dummy 'update' on the current node.
-    $node = db_query('SELECT nid FROM {node} WHERE nid = :nid', [':nid' => $row->nid])->fetchField();
+    $node = $db_connection->query('SELECT nid FROM {node} WHERE nid = :nid', [':nid' => $row->nid])->fetchField();
 
     // Update our progress information.
     $sandbox['progress']++;

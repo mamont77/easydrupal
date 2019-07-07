@@ -98,7 +98,7 @@ class CronExampleForm extends ConfigFormBase {
     $next_execution = !empty($next_execution) ? $next_execution : REQUEST_TIME;
 
     $args = [
-      '%time' => date_iso8601($this->state->get('cron_example.next_execution')),
+      '%time' => date('c', $this->state->get('cron_example.next_execution')),
       '%seconds' => $next_execution - REQUEST_TIME,
     ];
     $form['status']['last'] = [

@@ -39,7 +39,7 @@ class SimpleTestExampleTest extends WebTestBase {
    *
    * @var array
    */
-  static public $modules = ['testing_example'];
+  public static $modules = ['testing_example'];
 
   /**
    * The installation profile to use with this test.
@@ -100,8 +100,8 @@ class SimpleTestExampleTest extends WebTestBase {
 
     // Verify 'submitted by' information. Drupal adds a newline in there, so
     // we have to check for that.
-    $username = $this->loggedInUser->getUsername();
-    $datetime = format_date($node->getCreatedTime());
+    $username = $this->loggedInUser->getAccountName();
+    $datetime = $this->container->get('date.formatter')->format($node->getCreatedTime());
     $submitted_by = "Submitted by $username\n on $datetime";
 
     $this->drupalGet('node/' . $node->id());

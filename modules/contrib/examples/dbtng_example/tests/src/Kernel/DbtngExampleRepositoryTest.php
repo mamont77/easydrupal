@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\Tests\dbtng_example\Functional;
+namespace Drupal\Tests\dbtng_example\Kernel;
 
 use Drupal\KernelTests\KernelTestBase;
 

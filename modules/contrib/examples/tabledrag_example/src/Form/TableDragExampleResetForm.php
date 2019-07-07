@@ -2,9 +2,11 @@
 
 namespace Drupal\tabledrag_example\Form;
 
+use Drupal\Core\Database\Connection;
 use Drupal\Core\Form\ConfirmFormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Table drag example reset form.
@@ -26,6 +28,30 @@ class TableDragExampleResetForm extends ConfirmFormBase {
    * @var string
    */
   protected $name;
+
+  /**
+   * The database.
+   *
+   * @var \Drupal\Core\Database\Connection
+   */
+  protected $database;
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    return new static($container->get('database'));
+  }
+
+  /**
+   * Construct a form.
+   *
+   * @param Drupal\Core\Database\Connection $database
+   *   The database.
+   */
+  public function __construct(Connection $database) {
+    $this->database = $database;
+  }
 
   /**
    * {@inheritdoc}
@@ -73,6 +99,7 @@ class TableDragExampleResetForm extends ConfirmFormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
+    $db_connection = \Drupal::database();
     // Load tabledrag_example.install so that we can call
     // tabledrag_example_data().
     module_load_include('inc', 'tabledrag_example', 'tabledrag_example.data');
@@ -80,7 +107,7 @@ class TableDragExampleResetForm extends ConfirmFormBase {
     foreach ($data as $id => $item) {
       // Add 1 to each array key to match ID.
       $id++;
-      db_update('tabledrag_example')
+      $db_connection->update('tabledrag_example')
         ->fields([
           'weight' => 0,
           'pid' => 0,

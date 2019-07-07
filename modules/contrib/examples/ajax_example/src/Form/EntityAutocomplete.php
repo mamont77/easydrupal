@@ -119,7 +119,7 @@ class EntityAutocomplete implements FormInterface, ContainerInjectionInterface {
     $users = [];
     foreach ($state_users as $state_user) {
       $uid = $state_user['target_id'];
-      $users[] = $this->entityTypeManager->getStorage('user')->load($uid)->getUsername();
+      $users[] = $this->entityTypeManager->getStorage('user')->load($uid)->getDisplayName();
     }
     $this->messenger()->addMessage('These are your users: ' . implode(' ', $users));
   }

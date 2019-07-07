@@ -244,9 +244,11 @@ class FieldNoteItemTest extends FieldKernelTestBase {
     $arbitrary_user->user_fieldnote = $value;
     $arbitrary_user->save();
 
+    $storage = $this->container->get('entity_type.manager')->getStorage('entity_test');
+
     foreach ($scenarios as $name => $scenario) {
       $test_user = $this->createUser($scenario['perms'], $name);
-      $entity = entity_create('entity_test');
+      $entity = $storage->create(['entity_test']);
       $entity->field_fieldnote = $value;
       $entity->name->value = $this->randomMachineName();
       $entity->save();

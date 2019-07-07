@@ -7,8 +7,8 @@ package: Web services
 dependencies:
   - drupal:user
 
-# Information added by Drupal.org packaging script on 2019-06-05
-version: '8.7.3'
+# Information added by Drupal.org packaging script on 2019-07-04
+version: '8.7.4'
 core: '8.x'
 project: 'drupal'
-datestamp: 1559762708
+datestamp: 1562225734

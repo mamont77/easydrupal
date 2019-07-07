@@ -81,14 +81,14 @@ abstract class ReportWorkerBase extends QueueWorkerBase implements ContainerFact
         $this->t('Queue @worker worker processed item with sequence @sequence created at @time', [
           '@worker' => $worker,
           '@sequence' => $item->sequence,
-          '@time' => date_iso8601($item->created),
+          '@time' => date('c', $item->created),
         ])
       );
     }
     $this->logger->get('cron_example')->info('Queue @worker worker processed item with sequence @sequence created at @time', [
       '@worker' => $worker,
       '@sequence' => $item->sequence,
-      '@time' => date_iso8601($item->created),
+      '@time' => date('c', $item->created),
     ]);
   }
 

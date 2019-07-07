@@ -28,7 +28,7 @@ function tablesort_example_install() {
   $db_connection = \Drupal::database();
   if ($db_connection->schema()->tableExists('tablesort_example')) {
     foreach ($rows as $row) {
-      db_insert('tablesort_example')->fields($row)->execute();
+      $db_connection->insert('tablesort_example')->fields($row)->execute();
     }
   }
 }

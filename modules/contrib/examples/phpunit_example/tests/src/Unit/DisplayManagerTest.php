@@ -30,7 +30,8 @@ class DisplayManagerTest extends UnitTestCase {
     // Get a mock object belonging to our desired interface.
     // Note that we have to fully qualify the domain name
     // for PHPUnit's benefit.
-    $mock = $this->getMock('Drupal\phpunit_example\DisplayInfoInterface');
+    $mock = $this->getMockBuilder(DisplayInfoInterface::class)
+      ->getMockForAbstractClass();
     // Here we're illustrating that the mock object belongs to
     // our interface.
     $this->assertTrue($mock instanceof DisplayInfoInterface);

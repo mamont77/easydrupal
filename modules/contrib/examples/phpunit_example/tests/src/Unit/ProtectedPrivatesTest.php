@@ -99,8 +99,6 @@ class ProtectedPrivatesTest extends UnitTestCase {
    * non-numeric data. This lets us test the exception-throwing ability
    * of this private method.
    *
-   * @expectedException \InvalidArgumentException
-   *
    * @dataProvider addBadDataProvider
    */
   public function testPrivateAddBadData($a, $b) {
@@ -112,6 +110,7 @@ class ProtectedPrivatesTest extends UnitTestCase {
     $pp = new ProtectedPrivates();
     // Use the reflection to invoke on the object.
     // This should throw an exception.
+    $this->setExpectedException(\InvalidArgumentException::class);
     $private_method->invokeArgs($pp, [$a, $b]);
   }
 
@@ -137,12 +136,11 @@ class ProtectedPrivatesTest extends UnitTestCase {
    *
    * This test is similar to testProtectedAdd(), but expects an exception.
    *
-   * @expectedException \InvalidArgumentException
-   *
    * @dataProvider addBadDataProvider
    */
   public function testProtectedAddBadData($a, $b) {
     $stub = new ProtectedPrivatesSubclass();
+    $this->setExpectedException(\InvalidArgumentException::class);
     $stub->subclassProtectedAdd($a, $b);
   }
 

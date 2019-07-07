@@ -2,6 +2,7 @@
 
 namespace Drupal\cache_example\Form;
 
+use Drupal\Core\Datetime\DateFormatterInterface;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Cache\Cache;
@@ -31,6 +32,13 @@ class CacheExampleForm extends FormBase {
   protected $cacheBackend;
 
   /**
+   * The date formatter service.
+   *
+   * @var \Drupal\Core\Datetime\DateFormatterInterface
+   */
+  protected $dateFormatter;
+
+  /**
    * Dependency injection through the constructor.
    *
    * @param \Symfony\Component\HttpFoundation\RequestStack $request_stack
@@ -46,12 +54,14 @@ class CacheExampleForm extends FormBase {
     RequestStack $request_stack,
     TranslationInterface $translation,
     AccountProxyInterface $current_user,
-    CacheBackendInterface $cache_backend
+    CacheBackendInterface $cache_backend,
+    DateFormatterInterface $date_formatter
   ) {
     $this->setRequestStack($request_stack);
     $this->setStringTranslation($translation);
     $this->currentUser = $current_user;
     $this->cacheBackend = $cache_backend;
+    $this->dateFormatter = $date_formatter;
   }
 
   /**
@@ -67,7 +77,8 @@ class CacheExampleForm extends FormBase {
       $container->get('request_stack'),
       $container->get('string_translation'),
       $container->get('current_user'),
-      $container->get('cache.default')
+      $container->get('cache.default'),
+      $container->get('date.formatter')
     );
     $form->setMessenger($container->get('messenger'));
     return $form;
@@ -257,7 +268,7 @@ class CacheExampleForm extends FormBase {
     }
     else {
       $expiration = time() + $interval;
-      $expiration_friendly = format_date($expiration);
+      $expiration_friendly = $this->dateFormatter->format($expiration);
     }
     // Set the expiration to the actual Unix timestamp of the end of the
     // required interval. Also add a tag to it to be able to clear caches more

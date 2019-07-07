@@ -200,7 +200,7 @@ class RobotFormBase extends EntityForm {
     $status = $robot->save();
 
     // Grab the URL of the new entity. We'll use it in the message.
-    $url = $robot->urlInfo();
+    $url = $robot->toUrl();
 
     // Create an edit link.
     $edit_link = Link::fromTextAndUrl($this->t('Edit'), $url)->toString();

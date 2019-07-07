@@ -446,10 +446,11 @@ class FileExampleReadWriteForm extends FormBase {
    * operating system file, in other words.
    *
    * The key functions used here are:
-   * - file_unmanaged_save_data(), which takes a buffer and saves it to a named
-   *   file, but does not create any kind of tracking record in the database.
-   *   This example uses FILE_EXISTS_REPLACE for the third argument, meaning
-   *   that if there's an existing file at this location, it should be replaced.
+   * - FileSystemInterface::saveData(), which takes a buffer and saves it to a
+   *   named file, but does not create any kind of tracking record in the
+   *   database. This example uses FILE_EXISTS_REPLACE for the third argument,
+   *   meaning that if there's an existing file at this location, it should be
+   *   replaced.
    * - file_create_url(), which converts a URI in the form public://junk.txt or
    *   private://something/test.txt into a URL like
    *   http://example.com/sites/default/files/junk.txt.
@@ -467,7 +468,7 @@ class FileExampleReadWriteForm extends FormBase {
     $destination = !empty($form_values['destination']) ? $form_values['destination'] : NULL;
 
     // With the unmanaged file we just get a filename back.
-    $filename = file_unmanaged_save_data($data, $destination, FILE_EXISTS_REPLACE);
+    $filename = $this->fileSystem->saveData($data, $destination, FILE_EXISTS_REPLACE);
     if ($filename) {
       $url = $this->getExternalUrl($filename);
       $this->setDefaultFile($filename);
@@ -498,8 +499,9 @@ class FileExampleReadWriteForm extends FormBase {
    * Submit handler to write an unmanaged file using plain PHP functions.
    *
    * The key functions used here are:
-   * - file_unmanaged_save_data(), which takes a buffer and saves it to a named
-   *   file, but does not create any kind of tracking record in the database.
+   * - FileSystemInterface::saveData(), which takes a buffer and saves it to a
+   *   named file, but does not create any kind of tracking record in the
+   *   database.
    * - file_create_url(), which converts a URI in the form public://junk.txt or
    *   private://something/test.txt into a URL like
    *   http://example.com/sites/default/files/junk.txt.
@@ -577,8 +579,8 @@ class FileExampleReadWriteForm extends FormBase {
    * contents with file_get_contents(). Notice that's it's as simple as that:
    * file_get_contents("http://example.com") or
    * file_get_contents("public://somefile.txt") just works. Although it's
-   * not necessary, we use file_unmanaged_save_data() to save this file locally
-   * and then find a local URL for it by using file_create_url().
+   * not necessary, we use FileSystemInterface::saveData() to save this file
+   * locally and then find a local URL for it by using file_create_url().
    *
    * @param array $form
    *   An associative array containing the structure of the form.
@@ -601,7 +603,7 @@ class FileExampleReadWriteForm extends FormBase {
     $buffer = file_get_contents($uri);
 
     if ($buffer) {
-      $sourcename = file_unmanaged_save_data($buffer, 'public://' . $filename);
+      $sourcename = $this->fileSystem->saveData($buffer, 'public://' . $filename);
       if ($sourcename) {
         $url = $this->getExternalUrl($sourcename);
         $this->setDefaultFile($sourcename);
@@ -655,7 +657,8 @@ class FileExampleReadWriteForm extends FormBase {
       try {
         // This no longer returns a result code.  If things go bad,
         // it will throw an exception:
-        file_delete($file_object->id());
+        $storage = $this->entityTypeManager->getStorage('file');
+        $storage->delete([$file_object]);
         $this->messenger()->addMessage($this->t('Successfully deleted managed file %uri', ['%uri' => $uri]));
         $this->setDefaultFile($uri);
       }
@@ -666,9 +669,9 @@ class FileExampleReadWriteForm extends FormBase {
         ]), 'error');
       }
     }
-    // Else use file_unmanaged_delete().
+    // Else use FileSystemInterface::delete().
     else {
-      $result = file_unmanaged_delete($uri);
+      $result = $this->fileSystem->delete($uri);
       if ($result !== TRUE) {
         $this->messenger()->addMessage($this->t('Failed deleting unmanaged file %uri', ['%uri' => $uri, 'error']));
       }
@@ -697,20 +700,20 @@ class FileExampleReadWriteForm extends FormBase {
    * Submit handler for directory creation.
    *
    * Here we create a directory and set proper permissions on it using
-   * file_prepare_directory().
+   * FileSystemInterface::prepareDirectory().
    */
   public function handleDirectoryCreate(array &$form, FormStateInterface $form_state) {
     $form_values = $form_state->getValues();
     $directory = $form_values['directory_name'];
 
-    // The options passed to file_prepare_directory are a bitmask, so we can
-    // specify either FILE_MODIFY_PERMISSIONS (set permissions on the
-    // directory), FILE_CREATE_DIRECTORY, or both together:
+    // The options passed to FileSystemInterface::prepareDirectory() are a
+    // bitmask, so we can specify either FILE_MODIFY_PERMISSIONS (set
+    // permissions on the directory), FILE_CREATE_DIRECTORY, or both together:
     // FILE_MODIFY_PERMISSIONS | FILE_CREATE_DIRECTORY.
     // FILE_MODIFY_PERMISSIONS will set the permissions of the directory by
     // by default to 0755, or to the value of the variable
     // 'file_chmod_directory'.
-    if (!file_prepare_directory($directory, FILE_MODIFY_PERMISSIONS | FILE_CREATE_DIRECTORY)) {
+    if (!$this->fileSystem->prepareDirectory($directory, FILE_MODIFY_PERMISSIONS | FILE_CREATE_DIRECTORY)) {
       $this->messenger()->addMessage($this->t('Failed to create %directory.', ['%directory' => $directory]), 'error');
     }
     else {
@@ -723,13 +726,13 @@ class FileExampleReadWriteForm extends FormBase {
   /**
    * Submit handler for directory deletion.
    *
-   * @see file_unmanaged_delete_recursive()
+   * @see Drupal\Core\File\FileSystemInterface::deleteRecursive()
    */
   public function handleDirectoryDelete(array &$form, FormStateInterface $form_state) {
     $form_values = $form_state->getValues();
     $directory = $form_values['directory_name'];
 
-    $result = file_unmanaged_delete_recursive($directory);
+    $result = $this->fileSystem->deleteRecursive($directory);
     if (!$result) {
       $this->messenger()->addMessage($this->t('Failed to delete %directory.', ['%directory' => $directory]), 'error');
     }

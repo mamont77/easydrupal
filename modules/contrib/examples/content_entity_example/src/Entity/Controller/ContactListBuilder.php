@@ -29,7 +29,7 @@ class ContactListBuilder extends EntityListBuilder {
   public static function createInstance(ContainerInterface $container, EntityTypeInterface $entity_type) {
     return new static(
       $entity_type,
-      $container->get('entity.manager')->getStorage($entity_type->id()),
+      $container->get('entity_type.manager')->getStorage($entity_type->id()),
       $container->get('url_generator')
     );
   }
@@ -88,7 +88,7 @@ class ContactListBuilder extends EntityListBuilder {
   public function buildRow(EntityInterface $entity) {
     /* @var $entity \Drupal\content_entity_example\Entity\Contact */
     $row['id'] = $entity->id();
-    $row['name'] = $entity->link();
+    $row['name'] = $entity->toLink()->toString();
     $row['first_name'] = $entity->first_name->value;
     $row['role'] = $entity->role->value;
     return $row + parent::buildRow($entity);

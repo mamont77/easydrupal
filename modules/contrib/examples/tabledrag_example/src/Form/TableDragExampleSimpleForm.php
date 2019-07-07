@@ -2,8 +2,10 @@
 
 namespace Drupal\tabledrag_example\Form;
 
+use Drupal\Core\Database\Connection;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Table drag example simple form.
@@ -11,6 +13,30 @@ use Drupal\Core\Form\FormStateInterface;
  * @ingroup tabledrag_example
  */
 class TableDragExampleSimpleForm extends FormBase {
+
+  /**
+   * The database.
+   *
+   * @var \Drupal\Core\Database\Connection
+   */
+  protected $database;
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    return new static($container->get('database'));
+  }
+
+  /**
+   * Construct a form.
+   *
+   * @param Drupal\Core\Database\Connection $database
+   *   The database.
+   */
+  public function __construct(Connection $database) {
+    $this->database = $database;
+  }
 
   /**
    * {@inheritdoc}
@@ -65,7 +91,7 @@ class TableDragExampleSimpleForm extends FormBase {
     // About the condition id<8:
     // For the purpose of this 'simple table' we are only using the first 8 rows
     // of the database.  The others are for 'nested' example.
-    $results = db_select('tabledrag_example', 't')
+    $results = $this->database->select('tabledrag_example', 't')
       ->fields('t')
       ->orderBy('weight')
       ->condition('id', 8, '<')
@@ -141,7 +167,7 @@ class TableDragExampleSimpleForm extends FormBase {
     // we can simply iterate through the submitted values.
     $submission = $form_state->getValue('table-row');
     foreach ($submission as $id => $item) {
-      db_update('tabledrag_example')
+      $this->database->update('tabledrag_example')
         ->fields([
           'weight' => $item['weight'],
           'description' => $item['description'],

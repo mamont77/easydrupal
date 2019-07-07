@@ -2,8 +2,10 @@
 
 namespace Drupal\tabledrag_example\Form;
 
+use Drupal\Core\Database\Connection;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Table drag example root leaf form.
@@ -16,6 +18,30 @@ use Drupal\Core\Form\FormStateInterface;
  * @ingroup tabledrag_example
  */
 class TableDragExampleRootLeafForm extends FormBase {
+
+  /**
+   * The database.
+   *
+   * @var \Drupal\Core\Database\Connection
+   */
+  protected $database;
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    return new static($container->get('database'));
+  }
+
+  /**
+   * Construct a form.
+   *
+   * @param Drupal\Core\Database\Connection $database
+   *   The database.
+   */
+  public function __construct(Connection $database) {
+    $this->database = $database;
+  }
 
   /**
    * {@inheritdoc}
@@ -211,11 +237,12 @@ class TableDragExampleRootLeafForm extends FormBase {
    *   Current form state.
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
+    $db_connection = \Drupal::database();
     // Because the form elements were keyed with the item ids from the database,
     // we can simply iterate through the submitted values.
     $submissions = $form_state->getValue('table-row');
     foreach ($submissions as $id => $item) {
-      db_update('tabledrag_example')
+      $db_connection->update('tabledrag_example')
         ->fields([
           'weight' => $item['weight'],
           'pid' => $item['pid'],
@@ -240,8 +267,9 @@ class TableDragExampleRootLeafForm extends FormBase {
    *   An associative array storing our ordered tree structure.
    */
   public function getData() {
+    $db_connection = \Drupal::database();
     // Get all 'root node' items (items with no parents), sorted by weight.
-    $root_items = db_select('tabledrag_example', 't')
+    $root_items = $db_connection->select('tabledrag_example', 't')
       ->fields('t')
       ->condition('pid', '0', '=')
       ->orderBy('weight')
@@ -274,6 +302,7 @@ class TableDragExampleRootLeafForm extends FormBase {
    *   The depth of the item.
    */
   public function getTree($item, array &$tree = [], &$depth = 0) {
+    $db_connection = \Drupal::database();
     // Increase our $depth value by one.
     $depth++;
 
@@ -285,7 +314,7 @@ class TableDragExampleRootLeafForm extends FormBase {
     $tree[$item->id] = $item;
 
     // Retrieve each of the children belonging to this nested demo.
-    $children = db_select('tabledrag_example', 't')
+    $children = $db_connection->select('tabledrag_example', 't')
       ->fields('t')
       ->condition('pid', $item->id, '=')
       ->orderBy('weight')

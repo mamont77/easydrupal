@@ -2,8 +2,10 @@
 
 namespace Drupal\tabledrag_example\Form;
 
+use Drupal\Core\Database\Connection;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Table drag example nested form.
@@ -11,6 +13,30 @@ use Drupal\Core\Form\FormStateInterface;
  * @ingroup tabledrag_example
  */
 class TableDragExampleNestedForm extends FormBase {
+
+  /**
+   * The database.
+   *
+   * @var \Drupal\Core\Database\Connection
+   */
+  protected $database;
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    return new static($container->get('database'));
+  }
+
+  /**
+   * Construct a form.
+   *
+   * @param Drupal\Core\Database\Connection $database
+   *   The database.
+   */
+  public function __construct(Connection $database) {
+    $this->database = $database;
+  }
 
   /**
    * {@inheritdoc}
@@ -181,7 +207,7 @@ class TableDragExampleNestedForm extends FormBase {
     // we can simply iterate through the submitted values.
     $submissions = $form_state->getValue('table-row');
     foreach ($submissions as $id => $item) {
-      db_update('tabledrag_example')
+      $this->database->update('tabledrag_example')
         ->fields([
           'weight' => $item['weight'],
           'pid' => $item['pid'],
@@ -207,7 +233,7 @@ class TableDragExampleNestedForm extends FormBase {
    */
   public function getData() {
     // Get all 'root node' items (items with no parents), sorted by weight.
-    $root_items = db_select('tabledrag_example', 't')
+    $root_items = $this->database->select('tabledrag_example', 't')
       ->fields('t')
       ->condition('pid', '0', '=')
       ->condition('id', 11, '<')
@@ -252,7 +278,7 @@ class TableDragExampleNestedForm extends FormBase {
     $tree[$item->id] = $item;
 
     // Retrieve each of the children belonging to this nested demo.
-    $children = db_select('tabledrag_example', 't')
+    $children = $this->database->select('tabledrag_example', 't')
       ->fields('t')
       ->condition('pid', $item->id, '=')
       ->condition('id', 11, '<')

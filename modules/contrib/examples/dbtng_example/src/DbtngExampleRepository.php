@@ -69,8 +69,6 @@ class DbtngExampleRepository {
    *
    * @throws \Exception
    *   When the database insert fails.
-   *
-   * @see db_insert()
    */
   public function insert(array $entry) {
     $return_value = NULL;
@@ -80,7 +78,7 @@ class DbtngExampleRepository {
         ->execute();
     }
     catch (\Exception $e) {
-      $this->messenger()->addMessage(t('db_insert failed. Message = %message', [
+      $this->messenger()->addMessage(t('Insert failed. Message = %message', [
         '%message' => $e->getMessage(),
       ]), 'error');
     }
@@ -95,8 +93,6 @@ class DbtngExampleRepository {
    *
    * @return int
    *   The number of updated rows.
-   *
-   * @see db_update()
    */
   public function update(array $entry) {
     try {
@@ -107,7 +103,7 @@ class DbtngExampleRepository {
         ->execute();
     }
     catch (\Exception $e) {
-      $this->messenger()->addMessage(t('db_update failed. Message = %message, query= %query', [
+      $this->messenger()->addMessage(t('Update failed. Message = %message, query= %query', [
         '%message' => $e->getMessage(),
         '%query' => $e->query_string,
       ]

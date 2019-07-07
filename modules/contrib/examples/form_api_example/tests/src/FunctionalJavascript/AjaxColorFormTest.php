@@ -17,7 +17,7 @@ class AjaxColorFormTest extends WebDriverTestBase {
    *
    * @var string[]
    */
-  static public $modules = ['form_api_example'];
+  public static $modules = ['form_api_example'];
 
   /**
    * Functional test of the color temperature AJAX dropdown form.

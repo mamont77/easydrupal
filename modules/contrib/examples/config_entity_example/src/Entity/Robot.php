@@ -53,6 +53,12 @@ use Drupal\Core\Config\Entity\ConfigEntityBase;
  *   links = {
  *     "edit-form" = "/examples/config_entity_example/manage/{robot}",
  *     "delete-form" = "/examples/config_entity_example/manage/{robot}/delete"
+ *   },
+ *   config_export = {
+ *     "id",
+ *     "uuid",
+ *     "label",
+ *     "floopy"
  *   }
  * )
  */

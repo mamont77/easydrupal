@@ -8,7 +8,7 @@
 # https://drupal.org/node/1905070
 
 config_entity_example.robot.*:
-  type: mapping
+  type: config_entity
   label: 'Robot'
   mapping:
     id:

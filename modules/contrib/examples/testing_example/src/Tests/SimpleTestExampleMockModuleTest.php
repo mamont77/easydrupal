@@ -39,7 +39,7 @@ class SimpleTestExampleMockModuleTest extends WebTestBase {
    *
    * @var array
    */
-  static public $modules = [
+  public static $modules = [
     'testing_example',
     'testing_example_test',
   ];

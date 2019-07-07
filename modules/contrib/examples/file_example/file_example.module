@@ -79,7 +79,7 @@
  * @see \Drupal\system\FileDownloadController::download()
  */
 function file_example_file_download($uri) {
-  $scheme = file_uri_scheme($uri);
+  $scheme = \Drupal::service('file_system')->uriScheme($uri);
   if (in_array($scheme, ['private', 'temporary', 'session'])) {
     $permission = "read $scheme files";
     $current_user = \Drupal::currentUser();
