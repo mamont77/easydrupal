@@ -109,9 +109,6 @@
             "drupal/core": "-p2"
         },
         "patches": {
-            "drupal/disqus": {
-                "Wrong URL in ssoSettings(), array instead of string": "https://www.drupal.org/files/issues/2829210-wrong-url-in-ssosettings-array-instead-of-string.patch"
-            },
             "drupal/votingapi_widgets": {
                 "Load only the necessary styles and scripts": "https://www.drupal.org/files/issues/2018-05-21/votingapi_widgets-split-libraries-2933206-21.patch",
                 "Composer Install Fails": "https://www.drupal.org/files/issues/2018-04-01/2954719-6.patch",

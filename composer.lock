@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b2b22327d608e9f47206ca684b44b824",
+    "content-hash": "dba6a6994cf01373abc0a06cfaa876cd",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -1369,6 +1369,48 @@
             "time": "2012-10-28T21:08:28+00:00"
         },
         {
+            "name": "disqus/disqus-php",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/RobLoach/disqus-php.git",
+                "reference": "68bf75139c0bc0c40dd5a2fbf28fe9e326a32001"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/RobLoach/disqus-php/zipball/68bf75139c0bc0c40dd5a2fbf28fe9e326a32001",
+                "reference": "68bf75139c0bc0c40dd5a2fbf28fe9e326a32001",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "replace": {
+                "drexarj/disqus-php": "*",
+                "jakubzapletal/disqus-php": "*",
+                "jasonrgd/disqus-php": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "disqusapi/"
+                ],
+                "exclude-from-classmap": [
+                    "/disqusapi/tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "include-path": [
+                "./"
+            ],
+            "license": [
+                "Apache-2.0"
+            ],
+            "description": "Disqus API bindings for PHP",
+            "homepage": "https://github.com/RobLoach/disqus-php",
+            "time": "2019-07-24T04:13:30+00:00"
+        },
+        {
             "name": "dnoegel/php-xdg-base-dir",
             "version": "0.1",
             "source": {
@@ -1798,36 +1840,6 @@
                 "parser"
             ],
             "time": "2014-09-09T13:34:57+00:00"
-        },
-        {
-            "name": "drexarj/disqus-php",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/drexarj/disqus-php.git",
-                "reference": "67b735ac012443be7523b7d609edbcbc7e8e67eb"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/drexarj/disqus-php/zipball/67b735ac012443be7523b7d609edbcbc7e8e67eb",
-                "reference": "67b735ac012443be7523b7d609edbcbc7e8e67eb",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "type": "project",
-            "autoload": {
-                "classmap": {
-                    "": "disqusapi/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache-2.0"
-            ],
-            "description": "The official PHP client library for disqus, with added composer.json.",
-            "time": "2013-11-07T10:47:07+00:00"
         },
         {
             "name": "drupal/addtoany",
@@ -2934,20 +2946,20 @@
         },
         {
             "name": "drupal/disqus",
-            "version": "1.0.0-rc3",
+            "version": "1.0.0-rc4",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/disqus.git",
-                "reference": "8.x-1.0-rc3"
+                "reference": "8.x-1.0-rc4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/disqus-8.x-1.0-rc3.zip",
-                "reference": "8.x-1.0-rc3",
-                "shasum": "896a8cc049dec6f417447fdea89b8fb8722c2bc3"
+                "url": "https://ftp.drupal.org/files/projects/disqus-8.x-1.0-rc4.zip",
+                "reference": "8.x-1.0-rc4",
+                "shasum": "ad353c0f795aeea62e81267d1bb3511a7e1ecf01"
             },
             "require": {
-                "drexarj/disqus-php": "dev-master",
+                "disqus/disqus-php": "^1.0",
                 "drupal/core": "*"
             },
             "type": "drupal-module",
@@ -2956,20 +2968,18 @@
                     "dev-1.x": "1.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-1.0-rc3",
-                    "datestamp": "1476615539",
+                    "version": "8.x-1.0-rc4",
+                    "datestamp": "1565393585",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "RC releases are not covered by Drupal security advisories."
                     }
                 },
-                "patches_applied": {
-                    "Wrong URL in ssoSettings(), array instead of string": "https://www.drupal.org/files/issues/2829210-wrong-url-in-ssosettings-array-instead-of-string.patch"
-                }
+                "patches_applied": []
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
             "license": [
-                "GPL-2.0+"
+                "GPL-2.0-or-later"
             ],
             "authors": [
                 {
@@ -2997,7 +3007,7 @@
                     "homepage": "https://www.drupal.org/user/744628"
                 }
             ],
-            "description": ".",
+            "description": "Disqus module for Drupal.",
             "homepage": "http://drupal.org/project/disqus",
             "support": {
                 "source": "https://git.drupalcode.org/project/disqus"
@@ -9594,7 +9604,7 @@
             "version": "8.3.1",
             "source": {
                 "type": "git",
-                "url": "https://git.drupal.org/project/coder.git",
+                "url": "https://git.drupalcode.org/project/coder.git",
                 "reference": "29a25627e7148b3119c84f18e087fc3b8c85b959"
             },
             "require": {
