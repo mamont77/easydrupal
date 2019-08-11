@@ -2780,7 +2780,7 @@
         "version_normalized": "8.3.1.0",
         "source": {
             "type": "git",
-            "url": "https://git.drupal.org/project/coder.git",
+            "url": "https://git.drupalcode.org/project/coder.git",
             "reference": "29a25627e7148b3119c84f18e087fc3b8c85b959"
         },
         "require": {
