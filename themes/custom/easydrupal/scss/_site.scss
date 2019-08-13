@@ -4,19 +4,24 @@
   margin-top: 8px;
   margin-bottom: 8px;
 }
+
 .logo {
   margin-right: 8px;
+
   img {
     width: 62px;
     height: 62px;
   }
 }
+
 .navbar-nav {
   margin: 0 -15px;
 }
+
 @media (min-width: 768px) {
   .navbar-nav {
     margin: 0;
+
     > li > a {
       padding: 29px 15px;
     }
@@ -25,6 +30,7 @@
     ul {
       li {
         border-right: 1px solid $menuItemBorderColor;
+
         &:last-child {
           border: none;
         }
@@ -32,6 +38,7 @@
     }
   }
 }
+
 // Default navbar
 .navbar-default {
   .navbar-brand {
@@ -39,6 +46,7 @@
     line-height: 20px;
     font-weight: bold;
   }
+
   .navbar-nav {
     > li > a {
       text-transform: uppercase;
@@ -47,12 +55,14 @@
       transition: none;
       font-weight: bold;
       line-height: 20px;
+
       &:hover,
       &:focus {
         border-bottom: 8px solid $menuItemBorderBottomColor;
         padding-bottom: 21px;
       }
     }
+
     > .active > a {
       &,
       &:hover,
@@ -61,10 +71,12 @@
         padding-bottom: 21px;
       }
     }
+
     @media (max-width: 768px) {
       > li > a {
         padding-left: 23px;
         border-bottom: 1px solid #ddd;
+
         &:hover,
         &:focus {
           border-bottom: none;
@@ -91,16 +103,19 @@
     border-color: $btn-primary-border;
     background-color: $btn-primary-bg;
     margin-top: 20px;
+
     &:hover,
     &:focus {
       background-color: darken($btn-primary-bg, 10%);
     }
+
     .icon-bar {
       background-color: $body-bg;
     }
   }
 
 }
+
 @media (min-width: 768px) and (max-width: 991px) {
   .logo {
     margin-right: 30px;
@@ -111,23 +126,28 @@
     }
   }
 }
+
 @media (max-width: 768px) {
   .logo {
     margin-left: 15px;
   }
 }
+
 .dropdown-menu {
   padding: 0;
   background-color: $body-bg;
   border-radius: 0;
   border: 1px solid $menuItemBorderColor;
+
   > li {
     border-right: none;
+
     > a {
       padding: 6px 29px;
       text-transform: uppercase;
       color: $menuItemTextColor;
     }
+
     &:hover, &:focus {
       a {
         color: $menuItemActiveTextColor;
@@ -135,6 +155,7 @@
       }
     }
   }
+
   > .active {
     > a,
     > a:hover,
@@ -144,6 +165,7 @@
     }
   }
 }
+
 @media (max-width: 767px) {
   .navbar-default .navbar-nav .open .dropdown-menu > .active > a,
   .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
@@ -152,6 +174,7 @@
     background-color: inherit;
   }
 }
+
 .field--type-text-with-summary,
 .field-name-body,
 .cke_editable {
@@ -160,9 +183,11 @@
     padding: 0 0 0 30px;
     margin: 25px 0 30px;
     display: inline-block;
+
     li {
       padding-left: 1em;
       text-indent: -.7em;
+
       &:before {
         content: "\e013";
         color: $listPointsColor;
@@ -174,18 +199,22 @@
     }
   }
 }
+
 .region-sidebar-second {
   h2 {
     font-size: 23px;
     margin-top: 0;
   }
+
   section {
     margin-bottom: 15px;
   }
 }
+
 .main-container {
   padding-bottom: 15px;
 }
+
 .upper {
   position: fixed;
   text-align: center;
@@ -202,39 +231,47 @@
   cursor: pointer;
   z-index: 10;
   transition: all 0.2s ease-out;
+
   &:hover, &:focus, &:active {
     text-decoration: none;
     background-color: $upperBgHoverColor;
   }
+
   &:after {
     content: "\e253";
     color: #fff;
     font-family: 'Glyphicons Halflings';
   }
 }
+
 .breadcrumb {
   border-radius: 0;
   background: none transparent;
   padding: 0;
   margin-bottom: 20px;
+
   a {
     color: $breadcrumbColor;
   }
 }
+
 //Todo: Make beautiful instead of hiding.
 .feed-icons {
   display: none;
 }
+
 pre {
   border-color: $preBorderColor;
   background-color: $preBgColor;
   color: $preTextColor;
   font-size: 13px;
 }
+
 blockquote {
   border-left-color: $blockquoteBorderColor;
   color: $blockquoteTextColor;
 }
+
 .date {
   position: relative;
   background-color: $dateArticleBgColor;
@@ -245,17 +282,20 @@ blockquote {
   text-align: center;
   text-transform: uppercase;
   float: left;
+
   span.day {
     display: block;
     font-size: 18px;
     line-height: 18px;
     font-weight: bold;
   }
+
   span.year {
     display: block;
     font-size: 10px;
     line-height: 10px;
   }
+
   &:after {
     left: 100%;
     top: 50%;
@@ -270,6 +310,7 @@ blockquote {
     margin-top: -8px;
   }
 }
+
 .contact-message-form {
   .form-control {
     border: solid 1px $formFieldBorderColor;
@@ -280,53 +321,67 @@ blockquote {
     padding: 10px 15px;
     border-radius: 0;
     color: $formFieldTextColor;
+
     &:focus {
       outline: 0;
     }
+
     @include placeholder ($formFieldTextAlternativeColor, italic);
   }
+
   .form-textarea {
     height: 176px;
     resize: none;
   }
+
   .form-actions {
     text-align: center;
   }
 }
+
 .g-recaptcha {
   margin-bottom: 15px;
   opacity: .8;
+
   & > div {
     margin: 0 auto;
   }
 }
+
 .wow {
   visibility: hidden;
 }
+
 .user-login-page {
   h1 {
     display: none;
   }
+
   .tabs {
     max-width: 330px;
     margin: 0 auto;
   }
 }
+
 .user-login-form {
   max-width: 330px;
   padding: 15px;
   margin: 0 auto;
+
   .form-item {
     margin-bottom: 5px;
   }
+
   .form-submit {
     width: 100%;
     margin-right: 0;
   }
 }
+
 .field--label {
   color: $labelColor;
 }
+
 %tags {
   top: -3px;
   display: inline-block;
@@ -339,6 +394,7 @@ blockquote {
   position: relative;
   margin: 0 10px 0 0;
   text-decoration: none;
+
   &::before {
     background: $body-bg;
     border-radius: 4px;
@@ -350,6 +406,7 @@ blockquote {
     width: 4px;
     top: 9px;
   }
+
   &::after {
     background: $body-bg;
     border-bottom: 11px solid transparent;
@@ -360,14 +417,17 @@ blockquote {
     right: 0;
     top: 0;
   }
+
   &:hover {
     background-color: $tagBgHoverColor;
     color: $tagTextHoverColor;
+
     &::after {
       border-left-color: $tagBgHoverColor;
     }
   }
 }
+
 .addtoany_list {
   background-color: $body-bg;
   border-radius: 6px;
@@ -396,12 +456,14 @@ blockquote {
       display: block;
     }
   }
+
   > a {
     overflow: hidden;
     padding: 4px;
     text-decoration: none;
   }
 }
+
 .a2a_svg,
 .a2a_count,
 .a2a_menu,

@@ -9,6 +9,7 @@
   margin: 30px auto;
   padding: 27px 82px 197px 83px;
   overflow: hidden;
+
   .slide__caption {
     position: relative;
     padding: 5px 0;
@@ -31,16 +32,20 @@
       height: auto;
     }
   }
+
   .lazy {
     height: 385px !important;
   }
 }
+
 .slick__arrow {
   button {
     outline: 0;
   }
+
   //width: 100%;
 }
+
 .slick-arrow {
   padding: 0;
   background: transparent;
@@ -55,8 +60,10 @@
   font-weight: 100;
   overflow: hidden;
   text-align: center;
+
   &.slick-prev {
     left: 0;
+
     &:before {
       font-family: 'Glyphicons Halflings', sans-serif;
       content: "\e079";
@@ -65,8 +72,10 @@
       position: relative;
     }
   }
+
   &.slick-next {
     right: 0;
+
     &:after {
       font-family: 'Glyphicons Halflings', sans-serif;
       content: "\e080";
