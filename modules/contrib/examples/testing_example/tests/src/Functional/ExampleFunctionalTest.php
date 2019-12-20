@@ -27,14 +27,14 @@ class ExampleFunctionalTest extends ExamplesBrowserTestBase {
   /**
    * Fixture user with administrative powers.
    *
-   * @var \Drupal\user\Entity\UserInterface
+   * @var \Drupal\user\UserInterface
    */
   protected $adminUser;
 
   /**
    * Fixture authenticated user with no permissions.
    *
-   * @var \Drupal\user\Entity\UserInterface
+   * @var \Drupal\user\UserInterface
    */
   protected $authUser;
 

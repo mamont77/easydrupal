@@ -7,6 +7,7 @@ use Drupal\Core\Form\FormBase;
 use Drupal\Core\Mail\MailManagerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\Language\LanguageManagerInterface;
+use Drupal\Component\Utility\EmailValidator;
 
 /**
  * File test form class.
@@ -23,6 +24,13 @@ class EmailExampleGetFormPage extends FormBase {
   protected $mailManager;
 
   /**
+   * The email validator.
+   *
+   * @var \Drupal\Component\Utility\EmailValidator
+   */
+  protected $emailValidator;
+
+  /**
    * The language manager.
    *
    * @var \Drupal\Core\Language\LanguageManagerInterface
@@ -36,10 +44,13 @@ class EmailExampleGetFormPage extends FormBase {
    *   The mail manager.
    * @param \Drupal\Core\Language\LanguageManagerInterface $language_manager
    *   The language manager.
+   * @param \Drupal\Component\Utility\EmailValidator $email_validator
+   *   The email validator.
    */
-  public function __construct(MailManagerInterface $mail_manager, LanguageManagerInterface $language_manager) {
+  public function __construct(MailManagerInterface $mail_manager, LanguageManagerInterface $language_manager, EmailValidator $email_validator) {
     $this->mailManager = $mail_manager;
     $this->languageManager = $language_manager;
+    $this->emailValidator = $email_validator;
   }
 
   /**
@@ -48,7 +59,8 @@ class EmailExampleGetFormPage extends FormBase {
   public static function create(ContainerInterface $container) {
     $form = new static(
       $container->get('plugin.manager.mail'),
-      $container->get('language_manager')
+      $container->get('language_manager'),
+      $container->get('email.validator')
     );
     $form->setMessenger($container->get('messenger'));
     $form->setStringTranslation($container->get('string_translation'));
@@ -90,7 +102,7 @@ class EmailExampleGetFormPage extends FormBase {
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
-    if (!valid_email_address($form_state->getValue('email'))) {
+    if (!$this->emailValidator->isValid($form_state->getValue('email'))) {
       $form_state->setErrorByName('email', $this->t('That e-mail address is not valid.'));
     }
   }

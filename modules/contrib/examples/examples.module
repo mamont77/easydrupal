@@ -41,7 +41,7 @@ function examples_toolbar() {
   $links = [];
   foreach ($examples as $module => $route) {
     // Get the module info (title, description) from Drupal.
-    $info = system_get_info('module', $module);
+    $info = \Drupal::service('extension.list.module')->getExtensionInfo($module);
 
     // If there's no info, the example isn't enabled, so don't display it.
     if (!empty($info)) {

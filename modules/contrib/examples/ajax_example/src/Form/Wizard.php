@@ -113,6 +113,9 @@ class Wizard extends FormBase {
           '#required' => TRUE,
         ];
         break;
+
+      default:
+        $limit_validation_errors = [];
     }
 
     $form['actions'] = ['#type' => 'actions'];

@@ -71,7 +71,6 @@ class DbtngExampleRepository {
    *   When the database insert fails.
    */
   public function insert(array $entry) {
-    $return_value = NULL;
     try {
       $return_value = $this->connection->insert('dbtng_example')
         ->fields($entry)
@@ -82,7 +81,7 @@ class DbtngExampleRepository {
         '%message' => $e->getMessage(),
       ]), 'error');
     }
-    return $return_value;
+    return $return_value ?? NULL;
   }
 
   /**
@@ -109,7 +108,7 @@ class DbtngExampleRepository {
       ]
       ), 'error');
     }
-    return $count;
+    return $count ?? 0;
   }
 
   /**

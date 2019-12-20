@@ -2,8 +2,6 @@
 
 namespace Drupal\file_example\Form;
 
-use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
@@ -11,9 +9,9 @@ use Drupal\Core\State\StateInterface;
 use Drupal\Core\StreamWrapper\StreamWrapperManagerInterface;
 use Drupal\Core\Url;
 use Drupal\file\FileInterface;
+use Drupal\file\FileStorageInterface;
 use Drupal\stream_wrapper_example\SessionHelper;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * File test form class.
@@ -28,13 +26,6 @@ class FileExampleReadWriteForm extends FormBase {
    * @var \Drupal\Core\State\StateInterface
    */
   protected $state;
-
-  /**
-   * Object used to get request data, such as the session.
-   *
-   * @var \Symfony\Component\HttpFoundation\RequestStack
-   */
-  protected $requestStack;
 
   /**
    * Service for manipulating a file system.
@@ -58,18 +49,18 @@ class FileExampleReadWriteForm extends FormBase {
   protected $sessionHelper;
 
   /**
-   * Service for invoking hooks and other module operations.
+   * The dumper.
    *
-   * @var \Drupal\Core\Extension\ModuleHandlerInterface
+   * @var \Drupal\devel\DevelDumperManagerInterface
    */
-  protected $moduleHandler;
+  protected $dumper;
 
   /**
-   * Entity type manager service.
+   * The file entity storage.
    *
-   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+   * @var \Drupal\file\FileStorageInterface
    */
-  protected $entityTypeManager;
+  protected $fileStorage;
 
   /**
    * Constructs a new FileExampleReadWriteForm page.
@@ -81,13 +72,8 @@ class FileExampleReadWriteForm extends FormBase {
    * @param \Drupal\Core\StreamWrapper\StreamWrapperManagerInterface $stream_wrapper_manager
    *   Interface to obtain stream wrappers used to manipulate a given file
    *   scheme.
-   * @param \Drupal\Core\Extension\ModuleHandlerInterface $module_handler
-   *   Interface to get information about the status of modules and other
-   *   extensions.
-   * @param \Symfony\Component\HttpFoundation\RequestStack $request_stack
-   *   Access to the current request, including to session objects.
-   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
-   *   Entity type manager.
+   * @param \Drupal\file\FileStorageInterface $file_storage
+   *   The file entity storage.
    * @param \Drupal\stream_wrapper_example\SessionHelper $session_helper
    *   Session helper.
    */
@@ -95,17 +81,13 @@ class FileExampleReadWriteForm extends FormBase {
     StateInterface $state,
     FileSystemInterface $file_system,
     StreamWrapperManagerInterface $stream_wrapper_manager,
-    ModuleHandlerInterface $module_handler,
-    RequestStack $request_stack,
-    EntityTypeManagerInterface $entity_type_manager,
+    FileStorageInterface $file_storage,
     SessionHelper $session_helper
   ) {
     $this->state = $state;
     $this->fileSystem = $file_system;
     $this->streamWrapperManager = $stream_wrapper_manager;
-    $this->moduleHandler = $module_handler;
-    $this->requestStack = $request_stack;
-    $this->entityTypeManager = $entity_type_manager;
+    $this->fileStorage = $file_storage;
     $this->sessionHelper = $session_helper;
   }
 
@@ -117,11 +99,12 @@ class FileExampleReadWriteForm extends FormBase {
       $container->get('state'),
       $container->get('file_system'),
       $container->get('stream_wrapper_manager'),
-      $container->get('module_handler'),
-      $container->get('request_stack'),
-      $container->get('entity_type.manager'),
+      $container->get('entity_type.manager')->getStorage('file'),
       $container->get('stream_wrapper_example.session_helper')
     );
+    if ($container->has('devel.dumper')) {
+      $form->dumper = $container->get('devel.dumper');
+    }
     $form->setMessenger($container->get('messenger'));
     $form->setStringTranslation($container->get('string_translation'));
     return $form;
@@ -146,8 +129,7 @@ class FileExampleReadWriteForm extends FormBase {
    *   The URI of the default file.
    */
   protected function getDefaultFile() {
-    $default_file = $this->state->get('file_example_default_file', 'session://drupal.txt');
-    return $default_file;
+    return $this->state->get('file_example_default_file', 'session://drupal.txt');
   }
 
   /**
@@ -169,8 +151,7 @@ class FileExampleReadWriteForm extends FormBase {
    *   The URI of the default directory.
    */
   protected function getDefaultDirectory() {
-    $default_directory = $this->state->get('file_example_default_directory', 'session://directory1');
-    return $default_directory;
+    return $this->state->get('file_example_default_directory', 'session://directory1');
   }
 
   /**
@@ -194,12 +175,12 @@ class FileExampleReadWriteForm extends FormBase {
    * @param string $uri
    *   The URI of the file, like public://test.txt.
    *
-   * @return \Drupal\file\Entity\FileInterface|bool
+   * @return \Drupal\file\FileInterface|bool
    *   A file object that matches the URI, or FALSE if not a managed file.
    */
   protected function getManagedFile($uri) {
     // We'll use an entity query to get the managed part of the file.
-    $storage = $this->entityTypeManager->getStorage('file');
+    $storage = $this->fileStorage;
     $query = $storage->getQuery()
       ->condition('uri', $uri);
     $fid = $query->execute();
@@ -657,8 +638,7 @@ class FileExampleReadWriteForm extends FormBase {
       try {
         // This no longer returns a result code.  If things go bad,
         // it will throw an exception:
-        $storage = $this->entityTypeManager->getStorage('file');
-        $storage->delete([$file_object]);
+        $this->fileStorage->delete([$file_object]);
         $this->messenger()->addMessage($this->t('Successfully deleted managed file %uri', ['%uri' => $uri]));
         $this->setDefaultFile($uri);
       }
@@ -768,14 +748,9 @@ class FileExampleReadWriteForm extends FormBase {
    * Utility submit function to show the contents of $_SESSION.
    */
   public function handleShowSession(array &$form, FormStateInterface $form_state) {
-    $form_values = $form_state->getValues();
     // If the devel module is installed, use it's nicer message format.
-    if ($this->moduleHandler->moduleExists('devel')) {
-      // @codingStandardsIgnoreStart
-      // We wrap this in the coding standards ignore tags because the use of
-      // function dsm() is discouraged.
-      dsm($this->getStoredData(), $this->t('Entire $_SESSION["file_example"]'));
-      // @codingStandardsIgnoreEnd
+    if ($this->dumper) {
+      $this->dumper->message($this->getStoredData(), $this->t('Entire $_SESSION["file_example"]'));
     }
     else {
       $this->messenger()->addMessage(print_r($this->getStoredData(), TRUE));

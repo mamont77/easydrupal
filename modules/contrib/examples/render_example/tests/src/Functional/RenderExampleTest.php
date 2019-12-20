@@ -62,7 +62,7 @@ class RenderExampleTest extends BrowserTestBase {
         'render_example_reverse_sidebar' => FALSE,
         'render_example_wrap_blocks' => FALSE,
       ],
-      t('Save configuration')
+      'Save configuration'
     );
     $this->assertNotEmpty($this->xpath($breadcrumb_xpath));
 
@@ -81,7 +81,7 @@ class RenderExampleTest extends BrowserTestBase {
         'render_example_reverse_sidebar' => TRUE,
         'render_example_wrap_blocks' => FALSE,
       ],
-      t('Save configuration')
+      'Save configuration'
     );
     // Get the elements again.
     $elements = $this->xpath($breadcrumb_xpath);
@@ -100,7 +100,7 @@ class RenderExampleTest extends BrowserTestBase {
         'render_example_reverse_sidebar' => FALSE,
         'render_example_wrap_blocks' => TRUE,
       ],
-      t('Save configuration')
+      'Save configuration'
     );
     $this->assertNotEmpty($this->xpath($xpath));
 
@@ -111,7 +111,7 @@ class RenderExampleTest extends BrowserTestBase {
       // @todo: Add more of these.
       'foof' => 'Hello ' . $web_user->getAccountName() . ', welcome to the #cache example.',
     ];
-    foreach ($xpath_array as $key => $value) {
+    foreach ($xpath_array as $value) {
       $session->pageTextContains($value);
     }
   }

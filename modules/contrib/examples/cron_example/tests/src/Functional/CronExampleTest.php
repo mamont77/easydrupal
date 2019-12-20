@@ -16,13 +16,6 @@ use Drupal\Tests\examples\Functional\ExamplesBrowserTestBase;
 class CronExampleTest extends ExamplesBrowserTestBase {
 
   /**
-   * An editable config object for access to 'cron_example.settings'.
-   *
-   * @var \Drupal\Core\Config\Config
-   */
-  protected $cronConfig;
-
-  /**
    * Modules to install.
    *
    * @var array
@@ -37,8 +30,6 @@ class CronExampleTest extends ExamplesBrowserTestBase {
     // Create user. Search content permission granted for the search block to
     // be shown.
     $this->drupalLogin($this->drupalCreateUser(['administer site configuration', 'access content']));
-
-    $this->cronConfig = \Drupal::configFactory()->getEditable('cron_example.settings');
   }
 
   /**
@@ -51,7 +42,7 @@ class CronExampleTest extends ExamplesBrowserTestBase {
 
     // Pretend that cron has never been run (even though simpletest seems to
     // run it once...).
-    \Drupal::state()->set('cron_example.next_execution', 0);
+    $this->container->get('state')->set('cron_example.next_execution', 0);
     $this->drupalGet($cron_form);
 
     // Initial run should cause cron_example_cron() to fire.

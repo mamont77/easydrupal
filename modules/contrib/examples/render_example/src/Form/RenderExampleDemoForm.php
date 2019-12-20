@@ -83,23 +83,23 @@ class RenderExampleDemoForm extends ConfigFormBase {
 
     $form['page_fiddling'] = [
       '#type' => 'fieldset',
-      '#title' => t('Make changes on all pages via hook_preprocess_page()'),
+      '#title' => $this->t('Make changes on all pages via hook_preprocess_page()'),
       '#description' => $this->t('Theses changes are all made via the function render_example_preprocess_page()'),
       'render_example_move_breadcrumbs' => [
-        '#title' => t('Move the breadcrumbs to the top of the content area'),
-        '#description' => t('Uses hook_preprocess_page() to move the breadcrumbs into another region.'),
+        '#title' => $this->t('Move the breadcrumbs to the top of the content area'),
+        '#description' => $this->t('Uses hook_preprocess_page() to move the breadcrumbs into another region.'),
         '#type' => 'checkbox',
         '#default_value' => $config->get('move_breadcrumbs'),
       ],
       'render_example_reverse_sidebar' => [
-        '#title' => t('Reverse ordering of sidebar_first elements (if it exists)'),
-        '#description' => t('Uses hook_preprocess_page() to reverse the ordering of items in sidebar_first'),
+        '#title' => $this->t('Reverse ordering of sidebar_first elements (if it exists)'),
+        '#description' => $this->t('Uses hook_preprocess_page() to reverse the ordering of items in sidebar_first'),
         '#type' => 'checkbox',
         '#default_value' => $config->get('reverse_sidebar'),
       ],
       'render_example_wrap_blocks' => [
-        '#title' => t('Use #prefix and #suffix to wrap a div around every block'),
-        '#description' => t('Uses hook_block_view_alter() to wrap all blocks with a div using #prefix and #suffix'),
+        '#title' => $this->t('Use #prefix and #suffix to wrap a div around every block'),
+        '#description' => $this->t('Uses hook_block_view_alter() to wrap all blocks with a div using #prefix and #suffix'),
         '#type' => 'checkbox',
         '#default_value' => $config->get('wrap_blocks'),
       ],

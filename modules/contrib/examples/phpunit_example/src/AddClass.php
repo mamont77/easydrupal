@@ -17,7 +17,7 @@ class AddClass {
    * @param int|float $b
    *   Another number to add.
    *
-   * @return numeric
+   * @return int|float
    *   The sum of $a and $b.
    *
    * @throws \InvalidArgumentException

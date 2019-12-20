@@ -48,8 +48,7 @@ trait SlickFormatterTrait {
    * {@inheritdoc}
    */
   public function settingsSummary() {
-    // @todo: Remove second param post Blazy RC2+.
-    return $this->admin()->getSettingsSummary($this->getScopedFormElements(), $this);
+    return $this->admin()->settingsSummary($this);
   }
 
   /**

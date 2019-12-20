@@ -92,14 +92,14 @@ class FileExampleTest extends ExamplesBrowserTestBase {
           'destination' => $filename,
         ];
         $this->drupalPostForm('examples/file_example', $edit, $button);
-        $this->verbose($expected_text[$button], "Button Text");
+        $this->verbose($expected_text[$button]);
         $assert->pageTextContains($expected_text[$button]);
 
         // Capture the name of the output file, as it might have changed due
         // to file renaming.
         $element = $this->xpath('//span[@id="uri"]');
         $output_filename = (string) $element[0]->getText();
-        $this->verbose($output_filename, 'Name of output file');
+        $this->verbose($output_filename);
 
         // Click the link provided that is an easy way to get the data for
         // checking and make sure that the data we put in is what we get out.

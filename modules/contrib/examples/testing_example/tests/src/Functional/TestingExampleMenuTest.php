@@ -43,7 +43,7 @@ class TestingExampleMenuTest extends BrowserTestBase {
       $this->assertLinkByHref($path);
     }
     $this->drupalGet('/examples/testing-example');
-    $this->assertResponse(200, 'Description page exists.');
+    $this->assertResponse(200);
   }
 
 }

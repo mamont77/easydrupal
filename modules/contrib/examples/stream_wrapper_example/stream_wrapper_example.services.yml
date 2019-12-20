@@ -28,6 +28,7 @@ services:
     class: Drupal\stream_wrapper_example\StreamWrapper\SessionStreamWrapper
     tags:
       - { name: stream_wrapper, scheme: session }
+    arguments: ['@stream_wrapper_example.session_helper']
 
   stream_wrapper_example.session_helper:
     class: Drupal\stream_wrapper_example\SessionHelper

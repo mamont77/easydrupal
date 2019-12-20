@@ -37,7 +37,7 @@ class StateDemo extends DemoBase {
       '#title' => 'Need Special Accommodations?',
     ];
 
-    // The #states property used here binds the visibility of the of the
+    // The #states property used here binds the visibility of the
     // container element to the value of the needs_accommodation checkbox above.
     $form['accommodation'] = [
       '#type' => 'container',
@@ -49,7 +49,7 @@ class StateDemo extends DemoBase {
       // making a list of conditions that denote when the state should be
       // applied. Every condition is a key/value pair, whose key is a jQuery
       // selector that denotes another element on the page, and whose value is
-      // an array of conditions, which must bet met on in order for the state to
+      // an array of conditions, which must be met on in order for the state to
       // be applied.
       //
       // For additional documentation on the #states property including a list

@@ -46,9 +46,7 @@
   {% if settings.grid is empty %}<div{{ content_attributes.addClass(content_classes) }}>{% endif %}
 {% endif %}
 
-  {% if item.slide %}
-    {{ slide }}
-  {% endif %}
+  {{ slide }}
 
   {% if item.caption %}
     {% block slick_caption %}

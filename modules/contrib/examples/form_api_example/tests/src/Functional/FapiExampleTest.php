@@ -278,7 +278,7 @@ class FapiExampleTest extends ExamplesBrowserTestBase {
 
     // Verify that anonymous can access the ajax_add_more page.
     $this->drupalGet($ajax_addmore_url);
-    $this->assertResponse(200, 'The Demo of Container page is available.');
+    $this->assertResponse(200);
     // Verify that there is no remove button.
     $this->assertFalse($this->xpath($button_xpath));
 

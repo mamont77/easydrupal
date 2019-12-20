@@ -10,7 +10,7 @@ use Drupal\FunctionalJavascriptTests\WebDriverTestBase;
  *
  * @group ajax_example
  */
-class AutofieldsTest extends WebDriverTestBase {
+class AutotextfieldsTest extends WebDriverTestBase {
 
   /**
    * {@inheritdoc}

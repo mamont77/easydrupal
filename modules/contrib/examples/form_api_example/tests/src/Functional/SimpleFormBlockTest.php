@@ -25,7 +25,7 @@ class SimpleFormBlockTest extends BrowserTestBase {
     // Login the admin user.
     $this->drupalLogin($web_user);
 
-    $theme_name = \Drupal::config('system.theme')->get('default');
+    $theme_name = $this->config('system.theme')->get('default');
 
     // Place the block.
     $label = 'SimpleFormBlock-' . $this->randomString();

@@ -69,6 +69,7 @@ class DbtngExampleUpdateForm extends FormBase {
     }
 
     $keyed_entries = [];
+    $options = [];
     foreach ($entries as $entry) {
       $options[$entry->pid] = $this->t('@pid: @name @surname (@age)', [
         '@pid' => $entry->pid,

@@ -33,7 +33,7 @@ class PageExampleTest extends BrowserTestBase {
   /**
    * User object for our test.
    *
-   * @var \Drupal\user\Entity\User
+   * @var \Drupal\user\UserInterface
    */
   protected $webUser;
 

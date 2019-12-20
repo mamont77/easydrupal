@@ -71,7 +71,7 @@ class SandwichPluginManager extends DefaultPluginManager {
     // table using the sandwich_info key. All that is implementation details
     // however, all we care about it that caching for our plugin definition is
     // taken care of by this call.
-    $this->setCacheBackend($cache_backend, 'sandwich_info');
+    $this->setCacheBackend($cache_backend, 'sandwich_info', ['sandwich_info']);
   }
 
 }

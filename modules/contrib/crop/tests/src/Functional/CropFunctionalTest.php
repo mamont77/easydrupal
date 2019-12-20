@@ -182,10 +182,10 @@ class CropFunctionalTest extends BrowserTestBase {
 
     // Build an image style derivative for the file URI.
     $image_style_uri = $this->testStyle->buildUri($file_uri);
-
     $image_style_uri_url = file_create_url($image_style_uri);
     $this->assertTrue(strpos($image_style_uri_url, $shortened_hash) !== FALSE, 'The image style URL contains a shortened hash.');
 
+    // Build an image style URL.
     $image_style_url = $this->testStyle->buildUrl($file_uri);
     $this->assertTrue(strpos($image_style_url, $shortened_hash) !== FALSE, 'The image style URL contains a shortened hash.');
 
@@ -193,7 +193,6 @@ class CropFunctionalTest extends BrowserTestBase {
     $crop->setPosition('80', '80')->save();
     $old_hash = $shortened_hash;
     $new_hash = substr(md5(implode($crop->position()) . implode($crop->anchor())), 0, 8);
-
     $image_style_url = $this->testStyle->buildUrl($file_uri);
     $this->assertFalse(strpos($image_style_url, $old_hash) !== FALSE, 'The image style URL does not contain the old hash.');
     $this->assertTrue(strpos($image_style_url, $new_hash) !== FALSE, 'The image style URL contains an updated hash.');

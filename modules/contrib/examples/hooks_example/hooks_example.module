@@ -191,7 +191,7 @@ function hooks_example_node_view(array &$build, EntityInterface $entity, EntityV
  * Implements hook_form_alter().
  */
 function hooks_example_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-  // This is an example of what is known as an alter hook. The $form paremater
+  // This is an example of what is known as an alter hook. The $form parameter
   // in this case represents an already complete Form API array and our hook
   // implementation is being given the opportunity to make changes to the
   // existing data structure before it's used. Inovking and alter hooks is a

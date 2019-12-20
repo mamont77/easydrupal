@@ -6,6 +6,7 @@ use Drupal\Core\Database\Connection;
 use Drupal\Core\Form\ConfirmFormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
+use Drupal\tabledrag_example\Fixtures;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -16,21 +17,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class TableDragExampleResetForm extends ConfirmFormBase {
 
   /**
-   * The ID of the item to delete.
-   *
-   * @var int
-   */
-  protected $id;
-
-  /**
-   * The name of the item to delete.
-   *
-   * @var string
-   */
-  protected $name;
-
-  /**
-   * The database.
+   * The database connection.
    *
    * @var \Drupal\Core\Database\Connection
    */
@@ -46,8 +33,8 @@ class TableDragExampleResetForm extends ConfirmFormBase {
   /**
    * Construct a form.
    *
-   * @param Drupal\Core\Database\Connection $database
-   *   The database.
+   * @param \Drupal\Core\Database\Connection $database
+   *   The database connection.
    */
   public function __construct(Connection $database) {
     $this->database = $database;
@@ -99,15 +86,11 @@ class TableDragExampleResetForm extends ConfirmFormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $db_connection = \Drupal::database();
-    // Load tabledrag_example.install so that we can call
-    // tabledrag_example_data().
-    module_load_include('inc', 'tabledrag_example', 'tabledrag_example.data');
-    $data = tabledrag_example_data();
+    $data = Fixtures::getSampleItems();
     foreach ($data as $id => $item) {
       // Add 1 to each array key to match ID.
       $id++;
-      $db_connection->update('tabledrag_example')
+      $this->database->update('tabledrag_example')
         ->fields([
           'weight' => 0,
           'pid' => 0,

@@ -32,7 +32,7 @@ class BlockExampleTest extends BrowserTestBase {
     // Login the admin user.
     $this->drupalLogin($web_user);
 
-    $theme_name = \Drupal::config('system.theme')->get('default');
+    $theme_name = $this->config('system.theme')->get('default');
 
     // Verify the blocks are listed to be added.
     $this->drupalGet('/admin/structure/block/library/' . $theme_name, ['query' => ['region' => 'content']]);

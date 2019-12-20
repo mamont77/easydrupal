@@ -20,6 +20,10 @@ function template_preprocess_slick(&$variables) {
   $optionset = isset($element['#optionset']) ? $element['#optionset'] : Slick::load($settings['optionset']);
   $js        = $customs ? array_merge($optionset->getSettings(), $customs) : $optionset->getSettings();
 
+  if (isset($variables['settings'])) {
+    $settings = array_merge($settings, $variables['settings']);
+  }
+
   // Prepare attributes.
   $attributes = &$variables['attributes'];
   $content_attributes = new Attribute();
@@ -59,11 +63,8 @@ function template_preprocess_slick(&$variables) {
     }
   }
 
-  // Make slick language-direction-aware.
-  $language = \Drupal::languageManager()->getCurrentLanguage();
-  if ($language->getDirection() == 'rtl') {
-    $attributes['dir'] = $language->getDirection();
-    $js['rtl'] = $language->getDirection() ? TRUE : FALSE;
+  if (!empty($js['rtl'])) {
+    $attributes['dir'] = 'rtl';
   }
 
   // Prevents broken slick when only one item given, or an enforced unslick.
@@ -82,14 +83,12 @@ function template_preprocess_slick(&$variables) {
     }
 
     // Add the configuration as JSON object into the slick container.
-    $variables['js'] = isset($variables['js']) ? array_merge($js, $variables['js']) : $js;
-    if ($json = $optionset->removeDefaultValues($variables['js'])) {
+    if ($json = $optionset->removeDefaultValues($js)) {
       $content_attributes->setAttribute('data-slick', Json::encode($json));
     }
   }
 
   // Pass settings and attributes to twig.
-  $variables['js'] = $js;
   $variables['settings'] = $settings;
   $variables['content_attributes'] = $content_attributes;
 
@@ -168,7 +167,7 @@ function template_preprocess_slick_slide(&$variables) {
   // wrapper: Don't add divities for a single item to have clean markups.
   $item['slide']         = isset($item['slide']) ? $item['slide'] : [];
   $item['caption']       = array_filter($item['caption']);
-  $settings['split']     = !empty($item) && (!empty($settings['caption']) || !empty($settings['title']));
+  $settings['split']     = !empty($item) && !empty($settings['caption']);
   $settings['data']      = !empty($item['caption']['alt']) || !empty($item['caption']['title']) || !empty($item['caption']['data']);
   $settings['fullwidth'] = !empty($settings['skin']) && strpos($settings['skin'], 'full') !== FALSE;
   $settings['grid']      = empty($settings['grid']) ? FALSE : $settings['grid'];
@@ -225,7 +224,6 @@ function template_preprocess_slick_grid(&$variables) {
  * Prepares variables for slick-image.html.twig template.
  *
  * @deprecated: Just use blazy.html.twig to reduce function calls.
- * This is never used, and will be removed post 8.x-1.1.
  */
 function template_preprocess_slick_image(&$variables) {
   template_preprocess_blazy($variables);

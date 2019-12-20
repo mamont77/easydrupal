@@ -9,7 +9,13 @@
     "issues": "https://drupal.org/project/issues/slick",
     "source": "http://cgit.drupalcode.org/slick"
   },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://git.drupal.org/project/slick.git"
+    }
+  ],
   "require": {
-    "drupal/blazy": "~1.0"
+    "drupal/blazy": "8.*"
   }
 }

@@ -276,7 +276,7 @@ class RenderExampleController extends ControllerBase {
     // that are triggered at specific points during the rendering pipeline.
     $build['pre_render and post_render'] = [
       '#description' => $this->t('Example of using #pre_render and #post_render'),
-      '#markup' => '<div style="color:green">' . t('markup for pre_render and post_render example') . '</div>',
+      '#markup' => '<div style="color:green">' . $this->t('markup for pre_render and post_render example') . '</div>',
       // #pre_render callbacks are triggered early in the rendering process,
       // they get access to the element in the array where the callback is
       // named, and all of its children. They can be used to do things like

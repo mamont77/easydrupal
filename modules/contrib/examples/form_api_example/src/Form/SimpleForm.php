@@ -8,7 +8,7 @@ use Drupal\Core\Form\FormStateInterface;
 /**
  * Implements the SimpleForm form controller.
  *
- * This example demonstrates a simple form with a singe text input element. We
+ * This example demonstrates a simple form with a single text input element. We
  * extend FormBase which is the simplest form base class used in Drupal.
  *
  * @see \Drupal\Core\Form\FormBase

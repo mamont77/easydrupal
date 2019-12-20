@@ -163,15 +163,10 @@ class RobotFormBase extends EntityForm {
   }
 
   /**
-   * Overrides Drupal\Core\Entity\EntityFormController::validate().
-   *
-   * @param array $form
-   *   An associative array containing the structure of the form.
-   * @param \Drupal\Core\Form\FormStateInterface $form_state
-   *   An associative array containing the current state of the form.
+   * {@inheritdoc}
    */
-  public function validate(array $form, FormStateInterface $form_state) {
-    parent::validate($form, $form_state);
+  public function validateForm(array &$form, FormStateInterface $form_state) {
+    parent::validateForm($form, $form_state);
 
     // Add code here to validate your config entity's form elements.
     // Nothing to do here.

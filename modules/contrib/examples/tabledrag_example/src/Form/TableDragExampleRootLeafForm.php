@@ -6,6 +6,7 @@ use Drupal\Core\Database\Connection;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\Core\Render\RendererInterface;
 
 /**
  * Table drag example root leaf form.
@@ -20,27 +21,40 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class TableDragExampleRootLeafForm extends FormBase {
 
   /**
-   * The database.
+   * The database connection.
    *
    * @var \Drupal\Core\Database\Connection
    */
   protected $database;
 
   /**
+   * The renderer.
+   *
+   * @var \Drupal\Core\Render\RendererInterface
+   */
+  protected $render;
+
+  /**
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
-    return new static($container->get('database'));
+    return new static(
+      $container->get('database'),
+      $container->get('renderer')
+    );
   }
 
   /**
    * Construct a form.
    *
-   * @param Drupal\Core\Database\Connection $database
-   *   The database.
+   * @param \Drupal\Core\Database\Connection $database
+   *   The database connection.
+   * @param \Drupal\Core\Render\RendererInterface $render
+   *   The renderer.
    */
-  public function __construct(Connection $database) {
+  public function __construct(Connection $database, RendererInterface $render) {
     $this->database = $database;
+    $this->render = $render;
   }
 
   /**
@@ -116,7 +130,7 @@ class TableDragExampleRootLeafForm extends FormBase {
     // the respective table row, which are render elements on their own. For
     // single output elements, use the table cell itself for the render element.
     // If a cell should contain multiple elements, simply use nested sub-keys to
-    // build the render element structure for drupal_render() as you would
+    // build the render element structure for the renderer service as you would
     // everywhere else.
     $results = self::getData();
     foreach ($results as $row) {
@@ -153,7 +167,7 @@ class TableDragExampleRootLeafForm extends FormBase {
       // Some table columns containing raw markup.
       $form['table-row'][$row->id]['name'] = [
         '#markup' => $row->name,
-        '#prefix' => !empty($indentation) ? drupal_render($indentation) : '',
+        '#prefix' => !empty($indentation) ? $this->render->render($indentation) : '',
       ];
 
       $form['table-row'][$row->id]['description'] = [
@@ -237,12 +251,11 @@ class TableDragExampleRootLeafForm extends FormBase {
    *   Current form state.
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $db_connection = \Drupal::database();
     // Because the form elements were keyed with the item ids from the database,
     // we can simply iterate through the submitted values.
     $submissions = $form_state->getValue('table-row');
     foreach ($submissions as $id => $item) {
-      $db_connection->update('tabledrag_example')
+      $this->database->update('tabledrag_example')
         ->fields([
           'weight' => $item['weight'],
           'pid' => $item['pid'],
@@ -267,9 +280,8 @@ class TableDragExampleRootLeafForm extends FormBase {
    *   An associative array storing our ordered tree structure.
    */
   public function getData() {
-    $db_connection = \Drupal::database();
     // Get all 'root node' items (items with no parents), sorted by weight.
-    $root_items = $db_connection->select('tabledrag_example', 't')
+    $root_items = $this->database->select('tabledrag_example', 't')
       ->fields('t')
       ->condition('pid', '0', '=')
       ->orderBy('weight')
@@ -302,7 +314,6 @@ class TableDragExampleRootLeafForm extends FormBase {
    *   The depth of the item.
    */
   public function getTree($item, array &$tree = [], &$depth = 0) {
-    $db_connection = \Drupal::database();
     // Increase our $depth value by one.
     $depth++;
 
@@ -314,7 +325,7 @@ class TableDragExampleRootLeafForm extends FormBase {
     $tree[$item->id] = $item;
 
     // Retrieve each of the children belonging to this nested demo.
-    $children = $db_connection->select('tabledrag_example', 't')
+    $children = $this->database->select('tabledrag_example', 't')
       ->fields('t')
       ->condition('pid', $item->id, '=')
       ->orderBy('weight')

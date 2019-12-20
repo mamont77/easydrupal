@@ -13,14 +13,11 @@ function slick_requirements($phase) {
     return [];
   }
 
-  $path = DRUPAL_ROOT . '/libraries/slick/slick/slick.min.js';
-
   if (function_exists('libraries_get_path')) {
-    $library_path = libraries_get_path('slick') ?: libraries_get_path('slick-carousel');
-
-    if ($library_path) {
-      $path = $library_path . '/slick/slick.min.js';
-    }
+    $path = libraries_get_path('slick') . '/slick/slick.min.js';
+  }
+  else {
+    $path = DRUPAL_ROOT . '/libraries/slick/slick/slick.min.js';
   }
 
   $exists = is_file($path);

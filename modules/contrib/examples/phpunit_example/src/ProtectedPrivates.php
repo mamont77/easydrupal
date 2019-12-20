@@ -24,7 +24,7 @@ class ProtectedPrivates {
    * @param int|float $b
    *   Another number to add.
    *
-   * @return numeric
+   * @return int|float
    *   The sum of $a and $b.
    *
    * @throws \InvalidArgumentException
@@ -43,7 +43,7 @@ class ProtectedPrivates {
    * @param int|float $b
    *   Another number to add.
    *
-   * @return numeric
+   * @return int|float
    *   The sum of $a and $b.
    *
    * @throws \InvalidArgumentException

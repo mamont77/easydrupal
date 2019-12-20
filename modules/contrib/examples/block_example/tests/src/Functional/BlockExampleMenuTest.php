@@ -38,7 +38,7 @@ class BlockExampleMenuTest extends BrowserTestBase {
     $this->assertLinkByHref('examples/block-example');
 
     $this->drupalGet('examples/block-example');
-    $this->assertResponse(200, 'Description page exists.');
+    $this->assertResponse(200);
 
     // Verify that the block admin page link works.
     $this->clickLink('the block admin page');

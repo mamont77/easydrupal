@@ -63,7 +63,7 @@ class EmailExampleTest extends ExamplesBrowserTestBase {
     $this->assertMailString('to', $edit['email'], 1);
 
     // Verifiy correct email recieved.
-    $from = \Drupal::config('system.site')->get('mail');
+    $from = $this->config('system.site')->get('mail');
     $this->assertMailString('subject', "E-mail sent from $from", 1);
     $this->assertMailString('body', $edit['message'], 1);
     $this->assertMailString('body', "\n--\nMail altered by email_example module.", 1);

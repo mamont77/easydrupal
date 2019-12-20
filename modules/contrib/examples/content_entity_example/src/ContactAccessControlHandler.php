@@ -22,7 +22,7 @@ class ContactAccessControlHandler extends EntityAccessControlHandler {
     // Check the admin_permission as defined in your @ContentEntityType
     // annotation.
     $admin_permission = $this->entityType->getAdminPermission();
-    if (\Drupal::currentUser()->hasPermission($admin_permission)) {
+    if ($account->hasPermission($admin_permission)) {
       return AccessResult::allowed();
     }
     switch ($operation) {
@@ -48,7 +48,7 @@ class ContactAccessControlHandler extends EntityAccessControlHandler {
     // Check the admin_permission as defined in your @ContentEntityType
     // annotation.
     $admin_permission = $this->entityType->getAdminPermission();
-    if (\Drupal::currentUser()->hasPermission($admin_permission)) {
+    if ($account->hasPermission($admin_permission)) {
       return AccessResult::allowed();
     }
     return AccessResult::allowedIfHasPermission($account, 'add contact entity');

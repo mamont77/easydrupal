@@ -53,8 +53,8 @@ class InputDemo extends FormBase {
       '#type' => 'datetime',
       '#title' => 'Date Time',
       '#date_increment' => 1,
-      '#date_timezone' => drupal_get_user_timezone(),
-      '#default_value' => drupal_get_user_timezone(),
+      '#date_timezone' => date_default_timezone_get(),
+      '#default_value' => date_default_timezone_get(),
       '#description' => $this->t('Date time, #type = datetime'),
     ];
 

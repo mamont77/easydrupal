@@ -8,10 +8,7 @@
  * uninstall operations.
  */
 
-/**
- * Loads the basic data to be stored for all tabledrag examples.
- */
-module_load_include('inc', 'tabledrag_example', 'tabledrag_example.data');
+use Drupal\tabledrag_example\Fixtures;
 
 /**
  * Implements hook_schema().
@@ -75,29 +72,18 @@ function tabledrag_example_schema() {
 /**
  * Implements hook_install().
  *
- * This datafills the example items info which will be used in the example.
+ * Populates newly created database table with fixtures for all module's
+ * examples. This hook executed after hook_schema() tables are created by core.
+ *
+ * @see \Drupal\Core\Extension\ModuleInstaller::install()
  *
  * @ingroup tabledrag_example
  */
 function tabledrag_example_install() {
-  /* @var $connection \Drupal\Core\Database\Connection */
+  /** @var \Drupal\Core\Database\Connection $connection */
   $connection = \Drupal::database();
-  // Insert some values into the database.
-  $rows = tabledrag_example_data();
-  if ($connection->schema()->tableExists('tabledrag_example')) {
-    foreach ($rows as $row) {
-      $connection->insert('tabledrag_example')->fields($row)->execute();
-    }
+  $rows = Fixtures::getSampleItems();
+  foreach ($rows as $row) {
+    $connection->insert('tabledrag_example')->fields($row)->execute();
   }
-}
-
-/**
- * Implements hook_uninstall().
- *
- * This removes the example data when the module is uninstalled.
- *
- * @ingroup tabledrag_example
- */
-function tabledrag_example_uninstall() {
-  db_drop_table('tabledrag_example');
 }

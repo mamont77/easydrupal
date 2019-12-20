@@ -79,7 +79,7 @@ abstract class FieldExampleBrowserTestBase extends ExamplesBrowserTestBase {
 
     // Reset the permission cache.
     $create_permission = 'create ' . $this->contentTypeName . ' content';
-    $this->checkPermissions([$create_permission], TRUE);
+    $this->checkPermissions([$create_permission]);
 
     // Now that we have a new content type, create a user that has privileges
     // on the content type.

@@ -15,7 +15,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class TableDragExampleSimpleForm extends FormBase {
 
   /**
-   * The database.
+   * The database connection.
    *
    * @var \Drupal\Core\Database\Connection
    */
@@ -31,8 +31,8 @@ class TableDragExampleSimpleForm extends FormBase {
   /**
    * Construct a form.
    *
-   * @param Drupal\Core\Database\Connection $database
-   *   The database.
+   * @param \Drupal\Core\Database\Connection $database
+   *   The database connection.
    */
   public function __construct(Connection $database) {
     $this->database = $database;
@@ -85,7 +85,7 @@ class TableDragExampleSimpleForm extends FormBase {
     // the respective table row, which are render elements on their own. For
     // single output elements, use the table cell itself for the render element.
     // If a cell should contain multiple elements, simply use nested sub-keys to
-    // build the render element structure for drupal_render() as you would
+    // build the render element structure for the renderer service as you would
     // everywhere else.
     //
     // About the condition id<8:

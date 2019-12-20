@@ -7,8 +7,8 @@ package: Slick
 dependencies:
   - blazy:blazy
 
-# Information added by Drupal.org packaging script on 2018-12-19
-version: '8.x-1.1'
+# Information added by Drupal.org packaging script on 2016-12-27
+version: '8.x-1.0-beta6'
 core: '8.x'
 project: 'slick'
-datestamp: 1545236286
+datestamp: 1482819200
