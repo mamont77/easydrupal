@@ -1,9 +1,6 @@
 /**
  * @file
  * Provides colorbox integration.
- *
- * @requires coder shutup
- * Colorbox has no classes, just IDs, so shutup chatty coder.
  */
 
 .colorbox-on--media #colorbox,

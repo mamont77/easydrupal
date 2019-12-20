@@ -5,16 +5,14 @@ namespace Drupal\blazy\Plugin\views\style;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\views\Plugin\views\style\StylePluginBase;
 use Drupal\blazy\BlazyManagerInterface;
-use Drupal\blazy\BlazyDefault;
-use Drupal\blazy\Dejavu\BlazyStyleBaseTrait;
+use Drupal\blazy\Dejavu\BlazyDefault;
+use Drupal\blazy\BlazyGrid;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Blazy style plugin.
  */
 class BlazyViews extends StylePluginBase {
-
-  use BlazyStyleBaseTrait;
 
   /**
    * {@inheritdoc}
@@ -25,6 +23,13 @@ class BlazyViews extends StylePluginBase {
    * {@inheritdoc}
    */
   protected $usesGrouping = FALSE;
+
+  /**
+   * The blazy manager service.
+   *
+   * @var \Drupal\blazy\BlazyManagerInterface
+   */
+  protected $blazyManager;
 
   /**
    * Constructs a BlazyManager object.
@@ -49,6 +54,13 @@ class BlazyViews extends StylePluginBase {
   }
 
   /**
+   * Returns the blazy manager.
+   */
+  public function blazyManager() {
+    return $this->blazyManager;
+  }
+
+  /**
    * {@inheritdoc}
    */
   protected function defineOptions() {
@@ -64,31 +76,38 @@ class BlazyViews extends StylePluginBase {
    */
   public function buildOptionsForm(&$form, FormStateInterface $form_state) {
     $definition = [
-      'namespace'     => 'blazy',
-      'grid_form'     => TRUE,
-      'grid_required' => TRUE,
-      'settings'      => $this->options,
-      'style'         => TRUE,
-      'opening_class' => 'form--views',
-      '_views'        => TRUE,
+      'namespace' => 'blazy',
+      'grid_form' => TRUE,
+      'settings'  => $this->options,
+      'style'     => TRUE,
+      'form_opening_classes' => 'form--blazy form--slick form--views form--half has-tooltip',
     ];
 
     // Build the form.
     $this->admin()->openingForm($form, $definition);
     $this->admin()->gridForm($form, $definition);
+
+    if (isset($form['grid'])) {
+      $form['grid']['#description'] = $this->t('The amount of block grid columns for large monitors 64.063em.');
+    }
+
     $this->admin()->finalizeForm($form, $definition);
 
     // Blazy doesn't need complex grid with multiple groups.
-    unset($form['layout'], $form['preserve_keys'], $form['visible_items']);
+    unset($form['layout'], $form['preserve_keys'], $form['grid_header'], $form['visible_items'], $form['style']['#empty_option'], $form['grid']['#empty_option']);
   }
 
   /**
    * Overrides StylePluginBase::render().
    */
   public function render() {
-    $settings              = $this->buildSettings();
-    $settings['item_id']   = 'content';
-    $settings['namespace'] = 'blazy';
+    $settings = $this->options;
+
+    $settings['count']             = count($this->view->result);
+    $settings['current_view_mode'] = $this->view->current_display;
+    $settings['item_id']           = 'content';
+    $settings['namespace']         = 'blazy';
+    $settings['view_name']         = $this->view->storage->id();
 
     $elements = [];
     foreach ($this->renderGrouping($this->view->result, $settings['grouping']) as $rows) {
@@ -99,11 +118,12 @@ class BlazyViews extends StylePluginBase {
         $items[$index] = $this->view->rowPlugin->render($row);
       }
 
-      // Supports Blazy multi-breakpoint images if using Blazy formatter.
-      $settings['first_image'] = isset($rows[0]) ? $this->getFirstImage($rows[0]) : [];
+      // Supports Blazy formatter multi-breakpoint images if available.
+      $item = isset($items[0]) ? $items[0] : NULL;
+      $this->blazyManager->isBlazy($settings, $item);
 
-      $build = ['items' => $items, 'settings' => $settings];
-      $elements = $this->blazyManager->build($build);
+      $elements = BlazyGrid::build($items, $settings);
+      $elements['#attached'] = $this->blazyManager->attach($settings);
 
       unset($this->view->row_index, $items);
     }

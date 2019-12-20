@@ -9,7 +9,6 @@ use Drupal\views\Views;
  * Test Blazy Views Grid integration.
  *
  * @coversDefaultClass \Drupal\blazy\Plugin\views\style\BlazyViews
- *
  * @group blazy
  */
 class BlazyViewsGridTest extends BlazyViewsTestBase {
@@ -51,6 +50,8 @@ class BlazyViewsGridTest extends BlazyViewsTestBase {
     $this->assertInstanceOf('\Drupal\blazy\BlazyManagerInterface', $style_plugin->blazyManager(), 'BlazyManager implements interface.');
     $this->assertInstanceOf('\Drupal\blazy\Form\BlazyAdminInterface', $style_plugin->admin(), 'BlazyAdmin implements interface.');
 
+    $settings = $style_plugin->options;
+
     $form = [];
     $form_state = new FormState();
     $style_plugin->buildOptionsForm($form, $form_state);
@@ -59,12 +60,15 @@ class BlazyViewsGridTest extends BlazyViewsTestBase {
     $style_plugin->submitOptionsForm($form, $form_state);
     $view->destroy();
 
+    // @todo: Fields.
     $view = Views::getView('test_blazy_file');
     $this->executeView($view);
     $view->setDisplay('default');
 
-    // @todo $render = $view->getStyle()->render();
-    // @todo $this->assertArrayHasKey('data-blazy', $render['#attributes']);
+    // Render.
+    $render = $view->getStyle()->render();
+    $this->assertArrayHasKey('data-blazy', $render['#attributes']);
+
     $output = $view->preview();
     $output = $this->blazyManager->getRenderer()->renderRoot($output);
     $this->assertTrue(strpos($output, 'data-blazy') !== FALSE, 'Blazy attribute is added to DIV.');

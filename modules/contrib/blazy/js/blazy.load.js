@@ -1,6 +1,6 @@
 /**
  * @file
- * Provides Intersection Observer API or bLazy loader.
+ * Provides bLazy loader.
  */
 
 (function (Drupal, drupalSettings, _db, window, document) {
@@ -15,25 +15,20 @@
   Drupal.blazy = Drupal.blazy || {
     init: null,
     windowWidth: 0,
-    blazySettings: drupalSettings.blazy || {},
-    ioSettings: drupalSettings.blazyIo || {},
-    options: {},
+    done: false,
     globals: function () {
       var me = this;
+      var settings = drupalSettings.blazy || {};
       var commons = {
-        success: me.clearing.bind(me),
-        error: me.clearing.bind(me),
-        selector: '.b-lazy',
-        errorClass: 'b-error',
-        successClass: 'b-loaded'
+        success: me.clearing,
+        error: me.clearing
       };
 
-      return _db.extend(me.blazySettings, me.ioSettings, commons);
+      return _db.extend(settings, commons);
     },
 
     clearing: function (el) {
-      var me = this;
-      var ie = el.classList.contains('b-responsive') && el.hasAttribute('data-pfsrc');
+      var ie = _db.hasClass(el, 'b-responsive') && el.hasAttribute('data-pfsrc');
 
       // The .b-lazy element can be attached to IMG, or DIV as CSS background.
       el.className = el.className.replace(/(\S+)loading/, '');
@@ -51,6 +46,7 @@
         }
       });
 
+      // @todo: Remove when Blazy library fixes this.
       // @see http://scottjehl.github.io/picturefill/
       if (window.picturefill && ie) {
         window.picturefill({
@@ -58,46 +54,8 @@
           elements: [el]
         });
       }
-
-      // Provides event listeners for easy overrides without full overrides.
-      _db.trigger(el, 'blazy.done', {options: me.options});
-    },
-
-    isIo: function () {
-      return this.ioSettings && this.ioSettings.enabled && 'IntersectionObserver' in window;
-    },
-
-    isBlazy: function () {
-      return !this.isIo() && 'Blazy' in window;
-    },
-
-    run: function (opts) {
-      return this.isIo() ? new BioMedia(opts) : new Blazy(opts);
     }
   };
-
-  /**
-   * Initialize the default blazy instance.
-   */
-  var initBlazyDefault = function () {
-    var me = Drupal.blazy;
-    me.options = me.globals();
-    me.init = me.run(me.options);
-  };
-
-  /**
-   * Setup all blazy elements.
-   */
-  function doBlazyDefault(context) {
-    var me = Drupal.blazy;
-    initBlazyDefault();
-    if (typeof me.init.options.selector !== 'undefined' && me.init.options.selector !== null) {
-      var blazies = context.querySelectorAll(me.init.options.selector + ':not(.' + me.init.options.successClass + ')');
-      if (blazies.length > 0) {
-        _db.once(_db.forEach(blazies, doBlazy));
-      }
-    }
-  }
 
   /**
    * Blazy utility functions.
@@ -108,20 +66,11 @@
   function doBlazy(elm) {
     var me = Drupal.blazy;
     var dataAttr = elm.getAttribute('data-blazy');
-    var hasDefaultOptions = !dataAttr || dataAttr === '1';
-    var data = hasDefaultOptions ? {} : _db.parse(dataAttr);
-    var opts = _db.extend({}, me.globals(), data);
-    // Set docroot in case we are in an iframe.
-    // @see Blazy.toArray
-    var documentElement = elm.closest('html')
-    if (!document.documentElement.isSameNode(documentElement)) {
-      opts.root = documentElement;
-      hasDefaultOptions = false;
-    }
+    var empty = dataAttr === '' || dataAttr === '[]';
+    var data = empty ? false : _db.parse(dataAttr);
+    var opts = !data ? me.globals() : _db.extend({}, me.globals(), data);
     var ratios = elm.querySelectorAll('[data-dimensions]');
     var loopRatio = ratios.length > 0;
-    var fallbackRatios = elm.querySelectorAll('[data-ratio]');
-    var loopFallbackRatio = fallbackRatios.length > 0;
 
     /**
      * Updates the dynamic multi-breakpoint aspect ratio.
@@ -132,7 +81,7 @@
      * and will use CSS instead.
      *
      * @param {HTMLElement} el
-     *   The .media--ratio--fluid|enforced HTML element.
+     *   The .media--ratio HTML element.
      */
     function updateRatio(el) {
       var dimensions = !el.getAttribute('data-dimensions') ? false : _db.parse(el.getAttribute('data-dimensions'));
@@ -158,51 +107,30 @@
       if (pad !== 'undefined') {
         el.style.paddingBottom = pad + '%';
       }
-
-      el.removeAttribute('data-ratio');
     }
 
-    /**
-     * Fix for Twig inline_template and Views rewrite striping out style.
-     *
-     * @param {HTMLElement} el
-     *   The .media--ratio--fluid|enforced HTML element.
-     */
-    function updateFallbackRatio(el) {
-      // Only rewrites if the style is indeed stripped out by Twig, and not set.
-      if (!el.hasAttribute('style')) {
-        el.style.paddingBottom = el.getAttribute('data-ratio') + '%';
-      }
-      el.removeAttribute('data-ratio');
+    // Initializes Blazy instance.
+    me.init = new Blazy(opts);
+
+    // Reacts on resizing.
+    if (!me.done) {
+      me.init.revalidate();
+
+      _db.resize(function () {
+        me.windowWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+
+        if (loopRatio) {
+          _db.forEach(ratios, updateRatio, elm);
+        }
+
+        // Dispatch resizing event.
+        _db.trigger(elm, 'resizing', {windowWidth: me.windowWidth});
+      })();
+
+      me.done = true;
     }
 
-    // Initializes IntersectionObserver or Blazy instance.
-    if (hasDefaultOptions) {
-      initBlazyDefault();
-    }
-    else {
-      me.options = opts;
-      me.init = me.run(opts);
-    }
-
-    // Reacts on resizing per 200ms, and the magic () also does it on page load.
-    _db.resize(function () {
-      me.windowWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth || window.screen.width;
-
-      if (loopRatio) {
-        _db.forEach(ratios, updateRatio, elm);
-      }
-      else if (loopFallbackRatio) {
-        _db.forEach(fallbackRatios, updateFallbackRatio, elm);
-      }
-
-      // BC with bLazy, IO doesn't need to revalidate, Slick multiple-view does.
-      if (me.isBlazy() || elm.classList.contains('blazy--revalidate')) {
-        me.init.revalidate(true);
-      }
-    })();
-
-    elm.classList.add('blazy--on');
+    elm.className += ' blazy--on';
   }
 
   /**
@@ -212,16 +140,13 @@
    */
   Drupal.behaviors.blazy = {
     attach: function (context) {
-      // Drupal.attachBehaviors already does this so if this is necessary, someone
-      // does an invalid call. But let's be robust here.
-      context = context || document;
+      var me = Drupal.blazy;
       var el = context.querySelector('[data-blazy]');
 
-      // Runs basic Blazy if no [data-blazy] found, probably a single image or
-      // a theme that does not use field attributes.
+      // Runs basic Blazy if no [data-blazy] found, probably a single image.
       // Cannot use .contains(), as IE11 doesn't support method 'contains'.
       if (el === null) {
-        doBlazyDefault(context);
+        me.init = new Blazy(me.globals());
         return;
       }
 

@@ -33,11 +33,10 @@ class BlazyManagerBaseUnitTest extends UnitTestCase {
    * @covers ::__construct
    */
   public function testBlazyManagerCreate() {
-    $container = $this->createMock(ContainerInterface::class);
+    $container = $this->getMock(ContainerInterface::class);
     $exception = ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE;
 
     $map = [
-      ['entity.repository', $exception, $this->entityRepository],
       ['entity_type.manager', $exception, $this->entityTypeManager],
       ['module_handler', $exception, $this->moduleHandler],
       ['renderer', $exception, $this->renderer],

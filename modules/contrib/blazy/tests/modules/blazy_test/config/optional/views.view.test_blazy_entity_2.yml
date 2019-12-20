@@ -1,3 +1,4 @@
+﻿uuid: b0c27f59-a96d-4e0c-9e7b-8d68693c3d4a
 langcode: en
 status: true
 dependencies:
@@ -65,8 +66,8 @@ display:
             offset: false
             offset_label: Offset
           tags:
-            previous: '‹‹'
-            next: '››'
+            previous: ‹‹
+            next: ››
       style:
         type: blazy_test
         options:
@@ -80,8 +81,6 @@ display:
           grid_medium: 3
           grid_small: 2
           image: blazy_file
-          thumbnail: ''
-          overlay: ''
           title: filename
           link: ''
           class: ''

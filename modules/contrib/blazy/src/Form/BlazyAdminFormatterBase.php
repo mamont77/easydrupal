@@ -97,7 +97,7 @@ abstract class BlazyAdminFormatterBase extends BlazyAdminBase {
       if ($key == 'breakpoints') {
         $widths = [];
         if ($breakpoints) {
-          foreach ($breakpoints as $breakpoint) {
+          foreach ($breakpoints as $id => $breakpoint) {
             if (!empty($breakpoint['width'])) {
               $widths[] = $breakpoint['width'];
             }
@@ -154,6 +154,7 @@ abstract class BlazyAdminFormatterBase extends BlazyAdminBase {
     $plugin_id    = isset($definition['plugin_id']) ? $definition['plugin_id'] : '';
     $blazy        = $plugin_id && strpos($plugin_id, 'blazy') !== FALSE;
     $image_styles = function_exists('image_style_options') ? image_style_options(TRUE) : [];
+    $media_switch = empty($settings['media_switch']) ? '' : $settings['media_switch'];
 
     unset($image_styles['']);
 
@@ -161,6 +162,10 @@ abstract class BlazyAdminFormatterBase extends BlazyAdminBase {
 
     if ($blazy) {
       $excludes['optionset'] = TRUE;
+    }
+
+    if ($media_switch != 'media') {
+      $excludes['iframe_lazy'] = TRUE;
     }
 
     if (!empty($settings['responsive_image_style'])) {
@@ -210,7 +215,7 @@ abstract class BlazyAdminFormatterBase extends BlazyAdminBase {
 
     foreach ($target_bundles as $bundle => $label) {
       if ($fields = $storage->loadByProperties(['entity_type' => $entity_type, 'bundle' => $bundle])) {
-        foreach ((array) $fields as $field) {
+        foreach ((array) $fields as $field_name => $field) {
           if (in_array($field->getName(), $excludes)) {
             continue;
           }

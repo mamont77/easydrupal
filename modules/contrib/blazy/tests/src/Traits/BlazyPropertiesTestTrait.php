@@ -29,13 +29,6 @@ trait BlazyPropertiesTestTrait {
   protected $blazyManager;
 
   /**
-   * The blazy entity service.
-   *
-   * @var \Drupal\blazy\BlazyEntity
-   */
-  protected $blazyEntity;
-
-  /**
    * The entity manager.
    *
    * @var \Drupal\Core\Entity\EntityFieldManagerInterface
@@ -202,19 +195,5 @@ trait BlazyPropertiesTestTrait {
    * @var array
    */
   protected $skins = [];
-
-  /**
-   * The filter format.
-   *
-   * @var \Drupal\filter\Entity\FilterFormat
-   */
-  protected $filterFormatFull = NULL;
-
-  /**
-   * The filter format.
-   *
-   * @var \Drupal\filter\Entity\FilterFormat
-   */
-  protected $filterFormatRestricted = NULL;
 
 }

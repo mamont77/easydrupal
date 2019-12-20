@@ -16,6 +16,7 @@ class BlazyGridUnitTest extends UnitTestCase {
    * Tests \Drupal\blazy\BlazyGrid::build().
    *
    * @covers ::build
+   * @covers ::buildGridItemAttributes
    */
   public function testBuild() {
     $settings['grid']            = 4;
@@ -29,7 +30,7 @@ class BlazyGridUnitTest extends UnitTestCase {
 
     $items = [];
     foreach (range(1, 3) as $key) {
-      $items[] = ['#markup' => '<img src="/core/misc/druplicon.png" alt="thumbnail ' . $key . '">'];
+      $items[] = '<img src="/core/misc/druplicon.png" alt="thumbnail">';
     }
 
     $element = BlazyGrid::build($items, $settings);

@@ -18,15 +18,16 @@ function blazy_views_data_alter(&$data) {
     ],
   ];
 
-  // @todo recheck to use core Media post VEF/ VEM removal.
-  $data['media_field_data']['blazy_media'] = [
-    'title' => 'Blazy',
-    'help'  => t('Displays a preview of a Media using Blazy, if applicable.'),
-    'field' => [
-      'id' => 'blazy_media',
-      'click sortable' => FALSE,
-    ],
-  ];
+  if (\Drupal::moduleHandler()->moduleExists('video_embed_media')) {
+    $data['media_field_data']['blazy_media'] = [
+      'title' => 'Blazy',
+      'help'  => t('Displays a preview of a Media using Blazy, if applicable.'),
+      'field' => [
+        'id' => 'blazy_media',
+        'click sortable' => FALSE,
+      ],
+    ];
+  }
 }
 
 /**

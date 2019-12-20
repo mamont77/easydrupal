@@ -4,6 +4,7 @@ namespace Drupal\slick;
 
 use Drupal\slick\Entity\Slick;
 use Drupal\blazy\BlazyFormatterManager;
+use Drupal\image\Plugin\Field\FieldType\ImageItem;
 
 /**
  * Implements SlickFormatterInterface.
@@ -50,24 +51,37 @@ class SlickFormatter extends BlazyFormatterManager implements SlickFormatterInte
       $settings['nav'] = FALSE;
     }
 
-    $settings['overridables'] = array_filter($settings['overridables']);
+    // Only trim overridables options if disabled.
+    if (empty($settings['override']) && isset($settings['overridables'])) {
+      $settings['overridables'] = array_filter($settings['overridables']);
+    }
   }
 
   /**
-   * Gets the thumbnail image.
+   * Gets the thumbnail image using theme_image_style().
+   *
+   * @param array $settings
+   *   The array containing: thumbnail_style, etc.
+   * @param object $item
+   *   The \Drupal\image\Plugin\Field\FieldType\ImageItem object.
+   *
+   * @return array
+   *   The renderable array of thumbnail image.
    */
-  public function getThumbnail($settings = []) {
+  public function getThumbnail(array $settings = [], $item = NULL) {
     $thumbnail = [];
+    $thumbnail_alt = '';
+    if ($item instanceof ImageItem) {
+      $thumbnail_alt = $item->getValue()['alt'];
+    }
     if (!empty($settings['uri'])) {
       $thumbnail = [
         '#theme'      => 'image_style',
         '#style_name' => isset($settings['thumbnail_style']) ? $settings['thumbnail_style'] : 'thumbnail',
         '#uri'        => $settings['uri'],
+        '#item'       => $item,
+        '#alt'        => $thumbnail_alt,
       ];
-
-      foreach (['height', 'width', 'alt', 'title'] as $data) {
-        $thumbnail["#$data"] = isset($settings[$data]) ? $settings[$data] : NULL;
-      }
     }
     return $thumbnail;
   }

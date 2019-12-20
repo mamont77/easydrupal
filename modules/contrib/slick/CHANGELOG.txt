@@ -1,4 +1,88 @@
 
+Slick 8.x-1.0-dev, 2018-12-17
+-----------------------------
+- Issue #2964773 by fjgarlin: Support Slick library 1.9.0
+- Issue #2937960 by gausarts, WalkingDexter, a.sinitsa, igonzalez: Many
+  carousels on one page with custom AppendDots.
+- Change negative margins to transforms for center captions to allow more
+  flexible widths without hard-coding widths.
+- Added support for Video Embed Media 8.x-2.x.
+- Issue #2480245 by B-Prod, Ben Young: Breakpoint-specific options lost if same
+  as defaults
+- Issue #2920193 by ShaxA: Slick is not starting the autoplay after a modal is
+  closed
+- Issue #3010260 by bendeguz.csirmaz: Optimize slick_library_info_alter()
+- Issue #2996130 by huzooka, bendeguz.csirmaz: Misleading (false-negative)
+  report on status report page
+- Issue #2948735 by alaa abbad, Muath Khraisat: Adding the alt attribute to the
+  slick thumbnails
+- Issue #2945030 by alaa abbad: The button role is unnecessary for element button
+- Issue #2922036 by shaal, matio89: RTL Views Drupal 8
+
+Slick 8.x-1.0-dev, 2017-05-26
+-----------------------------
+- Added more tests.
+- Moved Functional tests into Kernel tests.
+- Added ImageItem into SlickFormatter::getThumbnail() parameters for potential
+  lazyloaded thumbnail images reasonable for hundreds of gallery images.
+- Removed settings overrides for Slick::create().
+- Added more relevant info into slick.api.php.
+
+Slick 8.x-1.0-dev, 2017-04-27
+-----------------------------
+- Fixed for leftover t().
+- #2873222 by Munavijayalakshmi, dhruveshdtripathi: Convert module to use short
+  array syntax (new coding standard).
+- #2872871 by elimw: Slick Images Not Showing in Drupal 8.3.
+
+Slick 8.x-1.0-dev, 2017-04-08
+-----------------------------
+- Fixed for .slide__media DIV wrapper being rendered when empty at
+  slick-slide.html.twig.
+- Cleaned up README and typos.
+
+Slick 8.x-1.0-dev, 2017-03-20
+-----------------------------
+- Added a list of available skins at optionset page as planned ages ago.
+
+Slick 8.x-1.0-dev, 2017-03-15
+-----------------------------
+- #2770005 by Shreya Shetty, gausarts, Nitesh Pawar: Replaces deprecated methods
+  with new and specified return value when condition not matched in switch.
+- #2855190 by daniel.bosen: Using bower or composer to download the slick
+  library is cumbersome.
+
+Slick 8.x-1.0-dev, 2017-03-11
+-----------------------------
+- Fixed for typo in comments.
+- Added supports for programmatic options defined within skin definitions to
+  allow addition of options with other libraries integrated with Slick without
+  modifying Optionset like Zoom, Reflection, Slicebox, etc.
+
+Slick 8.x-1.0-dev, 2017-02-11
+-----------------------------
+- Fixed for Slick libraries weight regression at hook_library_info_alter().
+- Fixed for hidden form element.
+- Cleaned up debris from old approach.
+- Added dependencies to skins.
+
+Slick 8.x-1.0-dev, 2017-02-10
+-----------------------------
+- Fixed for regression with Overridables option not being respected.
+
+Slick 8.x-1.0-dev, 2017-01-24
+-----------------------------
+- #2843870 by ruslan_03492: Requirements could not be resolved to an installable
+  set of packages drupal/blazy 8.*.
+- Arranged the form item weights for better visibility.
+
+Slick 8.x-1.0-dev, 2017-01-16
+-----------------------------
+- Moved slick_library_info_build() content into SlickManager to declutter
+  module file.
+- Removed unused params from slick.load.js.
+- Removed deprecated SafeMarkup::format() for Html::escape().
+
 Slick 8.x-1.0-dev, 2016-12-27
 -----------------------------
 - Marked it Beta6.
@@ -140,7 +224,7 @@ Slick 8.x-1.0-dev, 2016-08-03
 
 Slick 8.x-1.0-dev, 2016-07-14
 -----------------------------
-- Removed useles delay for an unslick since slick already kicks in.
+- Removed useless delay for an unslick since slick already kicks in.
 - #2765353 by Vinay15: Remove @file tag docblock from all the .php files.
 
 Slick 8.x-1.0-dev, 2016-06-19
