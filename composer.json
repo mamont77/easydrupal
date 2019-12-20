@@ -76,7 +76,10 @@
         "drupal/xmlsitemap": "^1.0@alpha",
         "drupal/yoast_seo": "2.0.0-alpha3",
         "drush/drush": "^10.1",
-        "topfloor/composer-cleanup-vcs-dirs": "^1.0"
+        "grasmash/drupal-security-warning": "^1.1",
+        "oomphinc/composer-installers-extender": "^1.1",
+        "topfloor/composer-cleanup-vcs-dirs": "^1.0",
+        "zaporylie/composer-drupal-optimizations": "^1.1"
     },
     "require-dev": {
         "drupal/examples": "1.x-dev"
@@ -88,8 +91,10 @@
     "prefer-stable": true,
     "config": {
         "sort-packages": true,
+        "discard-changes": true,
+        "optimize-autoloader": true,
         "platform": {
-            "php": "7.2"
+            "php": "7.3"
         }
     },
     "extra": {
@@ -98,9 +103,10 @@
                 "web-root": "./"
             }
         },
+        "installer-types": ["library", "bower-asset", "npm-asset"],
         "installer-paths": {
             "core": ["type:drupal-core"],
-            "libraries/{$name}": ["type:drupal-library"],
+            "libraries/{$name}": ["type:drupal-library", "type:bower-asset", "type:npm-asset"],
             "modules/contrib/{$name}": ["type:drupal-module"],
             "profiles/contrib/{$name}": ["type:drupal-profile"],
             "themes/contrib/{$name}": ["type:drupal-theme"],
@@ -128,6 +134,7 @@
             ]
         },
         "enable-patching": true,
+        "composer-exit-on-patch-failure": true,
         "patchLevel": {
             "drupal/core": "-p2"
         },

@@ -31,9 +31,17 @@ class ComposerStaticInitf58dd9d2e64a825de7df7497c1354a33
     );
 
     public static $prefixLengthsPsr4 = array (
+        'z' => 
+        array (
+            'zaporylie\\ComposerDrupalOptimizations\\' => 38,
+        ),
         'l' => 
         array (
             'lsolesen\\pel\\' => 13,
+        ),
+        'g' => 
+        array (
+            'grasmash\\DrupalSecurityWarning\\' => 31,
         ),
         'c' => 
         array (
@@ -101,6 +109,10 @@ class ComposerStaticInitf58dd9d2e64a825de7df7497c1354a33
             'Psr\\Http\\Message\\' => 17,
             'Psr\\Container\\' => 14,
             'PhpParser\\' => 10,
+        ),
+        'O' => 
+        array (
+            'OomphInc\\ComposerInstallersExtender\\' => 36,
         ),
         'M' => 
         array (
@@ -172,9 +184,17 @@ class ComposerStaticInitf58dd9d2e64a825de7df7497c1354a33
     );
 
     public static $prefixDirsPsr4 = array (
+        'zaporylie\\ComposerDrupalOptimizations\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/zaporylie/composer-drupal-optimizations/src',
+        ),
         'lsolesen\\pel\\' => 
         array (
             0 => __DIR__ . '/..' . '/lsolesen/pel/src',
+        ),
+        'grasmash\\DrupalSecurityWarning\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/grasmash/drupal-security-warning/src',
         ),
         'cweagans\\Composer\\' => 
         array (
@@ -347,6 +367,10 @@ class ComposerStaticInitf58dd9d2e64a825de7df7497c1354a33
         'PhpParser\\' => 
         array (
             0 => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser',
+        ),
+        'OomphInc\\ComposerInstallersExtender\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/oomphinc/composer-installers-extender/src',
         ),
         'Masterminds\\' => 
         array (
