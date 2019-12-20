@@ -23,7 +23,7 @@
         "cweagans/composer-patches": "^1.6",
         "drupal/core-composer-scaffold": "^8.8",
         "drupal/core-project-message": "^8.8",
-        "drupal/core-recommended": "8.8",
+        "drupal/core-recommended": "^8.8",
         "drupal/core-vendor-hardening": "^8.8",
         "drupal/addtoany": "^1.9",
         "drupal/admin_toolbar": "^2.0",
@@ -89,8 +89,7 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "config": {
-        "preferred-install": "dist",
-        "autoloader-suffix": "Drupal8",
+        "sort-packages": true
         "sort-packages": true,
         "platform": {
             "php": "7.2"
@@ -101,16 +100,6 @@
             "locations": {
                 "web-root": "./"
             }
-        },
-        "merge-plugin": {
-            "include": [
-                "core/composer.json",
-                "modules/custom/*/composer.json",
-                "themes/custom/*/composer.json"
-            ],
-            "recurse": true,
-            "replace": false,
-            "merge-extra": false
         },
         "installer-paths": {
             "core": ["type:drupal-core"],
