@@ -20,9 +20,9 @@ trait BlazyManagerUnitTestTrait {
     $this->entityTypeMock     = $this->getMock('\Drupal\Core\Entity\EntityTypeInterface');
     $this->entityFieldManager = $this->getMock('\Drupal\Core\Entity\EntityFieldManagerInterface');
     $this->entityTypeManager  = $this->getMock('\Drupal\Core\Entity\EntityTypeManagerInterface');
-    $this->moduleHandler      = $this->getMock('\Drupal\Core\Extension\ModuleHandlerInterface');
     $this->renderer           = $this->getMock('\Drupal\Core\Render\RendererInterface');
     $this->cache              = $this->getMock('\Drupal\Core\Cache\CacheBackendInterface');
+    $this->moduleHandler      = $this->getMockBuilder('Drupal\Core\Extension\ModuleHandler')->disableOriginalConstructor()->getMock();
 
     $this->token = $this->getMockBuilder('\Drupal\Core\Utility\Token')
       ->disableOriginalConstructor()
@@ -73,7 +73,7 @@ trait BlazyManagerUnitTestTrait {
     $styles = [];
 
     $dummies = ['blazy_crop', 'large', 'medium', 'small'];
-    foreach ($dummies as $key => $style) {
+    foreach ($dummies as $style) {
       $mock = $this->getMock('Drupal\Core\Config\Entity\ConfigEntityInterface');
       $mock->expects($this->any())
         ->method('getCacheTags')

@@ -4,7 +4,7 @@ namespace Drupal\Tests\blazy\Unit;
 
 use Drupal\Tests\UnitTestCase;
 use Drupal\blazy\Blazy;
-use Drupal\blazy\Dejavu\BlazyDefault;
+use Drupal\blazy\BlazyDefault;
 use Drupal\Tests\blazy\Traits\BlazyUnitTestTrait;
 use Drupal\Tests\blazy\Traits\BlazyManagerUnitTestTrait;
 
@@ -131,10 +131,10 @@ class BlazyUnitTest extends UnitTestCase {
    * @dataProvider providerBuildAttributes
    */
   public function testBuildAttributes(array $settings, $item, $expected_image, $expected_iframe) {
-    $content   = [];
     $variables = ['attributes' => []];
     $build     = $this->data;
     $settings  = array_merge($build['settings'], $settings);
+    $settings += BlazyDefault::itemSettings();
 
     $settings['breakpoints']     = [];
     $settings['blazy']           = TRUE;
@@ -164,7 +164,6 @@ class BlazyUnitTest extends UnitTestCase {
    * Provider for ::testBuildAttributes.
    */
   public function providerBuildAttributes() {
-    $breakpoints = $this->getDataBreakpoints();
     $uri = 'public://example.jpg';
 
     $data[] = [
@@ -242,11 +241,13 @@ class BlazyUnitTest extends UnitTestCase {
    */
   public function testPreRenderImageLightbox(array $settings = []) {
     $build                       = $this->data;
+    $settings                   += BlazyDefault::itemSettings();
     $settings['count']           = $this->maxItems;
     $settings['uri']             = $this->uri;
     $settings['box_style']       = '';
     $settings['box_media_style'] = '';
     $build['settings']           = array_merge($build['settings'], $settings);
+    $switch_css                  = str_replace('_', '-', $settings['media_switch']);
 
     foreach (['caption', 'media', 'wrapper'] as $key) {
       $build['settings'][$key . '_attributes']['class'][] = $key . '-test';
@@ -259,7 +260,7 @@ class BlazyUnitTest extends UnitTestCase {
       $this->assertArrayHasKey('#url', $element);
     }
     else {
-      $this->assertArrayHasKey('data-' . $settings['media_switch'] . '-trigger', $element['#url_attributes']);
+      $this->assertArrayHasKey('data-' . $switch_css . '-trigger', $element['#url_attributes']);
       $this->assertArrayHasKey('#url', $element);
     }
   }
@@ -355,6 +356,17 @@ if (!function_exists('file_create_url')) {
    * Dummy function.
    */
   function file_create_url() {
+    // Empty block to satisfy coder.
+  }
+
+}
+
+if (!function_exists('file_url_transform_relative')) {
+
+  /**
+   * Dummy function.
+   */
+  function file_url_transform_relative() {
     // Empty block to satisfy coder.
   }
 

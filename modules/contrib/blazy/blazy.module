@@ -5,10 +5,27 @@
  * Provides basic Blazy integration for lazy loading and multi-serving images.
  */
 
-use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Component\Serialization\Json;
 use Drupal\Component\Utility\NestedArray;
 use Drupal\blazy\Blazy;
+use Drupal\blazy\BlazyDefault;
+use Drupal\blazy\BlazyViews;
+
+/**
+ * Provides a convenient shortcut for procedural hooks.
+ *
+ * @return class
+ *   The Blazy manager class instance.
+ */
+function blazy() {
+  static $manager;
+
+  if (!isset($manager)) {
+    $manager = \Drupal::service('blazy.manager');
+  }
+
+  return $manager;
+}
 
 /**
  * Implements hook_theme().
@@ -28,7 +45,7 @@ function template_preprocess_blazy(&$variables) {
  * Overrides variables for responsive-image.html.twig templates.
  */
 function blazy_preprocess_responsive_image(&$variables) {
-  $config = Blazy::getConfig();
+  $config = blazy()->configLoad();
 
   // Do not proceed if disabled globally, or not a Blazy formatter.
   if (!$config['responsive_image'] || !isset($variables['attributes']['data-srcset'])) {
@@ -67,7 +84,7 @@ function blazy_views_pre_render($view) {
   if (!isset($view)) {
     return;
   }
-  \Drupal\blazy\BlazyViews::viewsPreRender($view);
+  BlazyViews::viewsPreRender($view);
 }
 
 /**
@@ -81,7 +98,7 @@ function blazy_field_formatter_info_alter(array &$info) {
     'provider'    => 'blazy',
   ];
 
-  if (\Drupal::moduleHandler()->moduleExists('video_embed_media')) {
+  if (blazy()->getModuleHandler()->moduleExists('video_embed_media')) {
     $info['blazy_file'] = $common + [
       'id'          => 'blazy_file',
       'label'       => t('Blazy Image with Media'),
@@ -150,9 +167,16 @@ function blazy_blazy_settings_alter(array &$build, $items) {
 }
 
 /**
+ * Alters blazy settings here due to static FormatterBase::defaultSettings().
+ */
+function blazy_alterable_settings(array &$settings) {
+  return BlazyDefault::getInstance()->alterableSettings($settings);
+}
+
+/**
  * Implements hook_help().
  */
-function blazy_help($route_name, RouteMatchInterface $route_match) {
+function blazy_help($route_name) {
   switch ($route_name) {
     case 'help.page.blazy':
       return check_markup(file_get_contents(dirname(__FILE__) . '/README.txt'));

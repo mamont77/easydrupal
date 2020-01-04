@@ -4,7 +4,6 @@ namespace Drupal\blazy\Dejavu;
 
 use Drupal\Component\Utility\Xss;
 use Drupal\Component\Utility\Html;
-use Drupal\Component\Utility\Unicode;
 
 /**
  * A Trait common for optional views style plugins.
@@ -32,6 +31,7 @@ trait BlazyStylePluginTrait {
     $field_names = $this->displayHandler->getFieldLabels();
     $definition = [];
     $stages = [
+      'blazy_media',
       'block_field',
       'colorbox',
       'entity_reference_entity_view',
@@ -200,7 +200,7 @@ trait BlazyStylePluginTrait {
    */
   public function isImageRenderable($row, $index, $field_image = '') {
     if (!empty($field_image) && $image = $this->getFieldRenderable($row, $index, $field_image)) {
-      if ($item = $this->getImageItem($image)) {
+      if ($this->getImageItem($image)) {
         return $image;
       }
 
@@ -324,13 +324,13 @@ trait BlazyStylePluginTrait {
         $tags = explode(',', $value);
         $rendered_tags = [];
         foreach ($tags as $tag) {
-          $rendered_tags[] = Html::cleanCssIdentifier(Unicode::strtolower(trim($tag)));
+          $rendered_tags[] = Html::cleanCssIdentifier(mb_strtolower(trim($tag)));
         }
         $values[$index] = implode(' ', $rendered_tags);
       }
       else {
         $value = is_string($value) ? $value : (isset($value[0]['value']) && !empty($value[0]['value']) ? $value[0]['value'] : '');
-        $values[$index] = empty($value) ? '' : Html::cleanCssIdentifier(Unicode::strtolower($value));
+        $values[$index] = empty($value) ? '' : Html::cleanCssIdentifier(mb_strtolower($value));
       }
     }
 
@@ -341,7 +341,7 @@ trait BlazyStylePluginTrait {
         foreach ($renderable as $key => $render) {
           $class = isset($render['rendered']['#title']) ? $render['rendered']['#title'] : $renderer->render($render['rendered']);
           $class = trim(strip_tags($class));
-          $value[$key] = Html::cleanCssIdentifier(Unicode::strtolower($class));
+          $value[$key] = Html::cleanCssIdentifier(mb_strtolower($class));
         }
         $values[$index] = empty($value) ? '' : implode(' ', $value);
       }

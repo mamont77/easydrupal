@@ -97,7 +97,7 @@ abstract class BlazyAdminFormatterBase extends BlazyAdminBase {
       if ($key == 'breakpoints') {
         $widths = [];
         if ($breakpoints) {
-          foreach ($breakpoints as $id => $breakpoint) {
+          foreach ($breakpoints as $breakpoint) {
             if (!empty($breakpoint['width'])) {
               $widths[] = $breakpoint['width'];
             }
@@ -215,7 +215,7 @@ abstract class BlazyAdminFormatterBase extends BlazyAdminBase {
 
     foreach ($target_bundles as $bundle => $label) {
       if ($fields = $storage->loadByProperties(['entity_type' => $entity_type, 'bundle' => $bundle])) {
-        foreach ((array) $fields as $field_name => $field) {
+        foreach ((array) $fields as $field) {
           if (in_array($field->getName(), $excludes)) {
             continue;
           }
