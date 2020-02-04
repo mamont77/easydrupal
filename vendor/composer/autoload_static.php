@@ -152,6 +152,7 @@ class ComposerStaticInitf58dd9d2e64a825de7df7497c1354a33
         array (
             'Drush\\Internal\\' => 15,
             'Drush\\' => 6,
+            'Drupal\\sophron\\' => 15,
             'Drupal\\Driver\\' => 14,
             'Drupal\\Core\\' => 12,
             'Drupal\\Composer\\Plugin\\VendorHardening\\' => 39,
@@ -431,6 +432,10 @@ class ComposerStaticInitf58dd9d2e64a825de7df7497c1354a33
         'Drush\\' => 
         array (
             0 => __DIR__ . '/..' . '/drush/drush/src',
+        ),
+        'Drupal\\sophron\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/modules/contrib/sophron/src',
         ),
         'Drupal\\Driver\\' => 
         array (
@@ -2909,6 +2914,13 @@ class ComposerStaticInitf58dd9d2e64a825de7df7497c1354a33
         'Drupal\\Core\\Validation\\Plugin\\Validation\\Constraint\\UniqueFieldValueValidator' => __DIR__ . '/../..' . '/core/lib/Drupal/Core/Validation/Plugin/Validation/Constraint/UniqueFieldValueValidator.php',
         'Drupal\\Core\\Validation\\Plugin\\Validation\\Constraint\\UuidConstraint' => __DIR__ . '/../..' . '/core/lib/Drupal/Core/Validation/Plugin/Validation/Constraint/UuidConstraint.php',
         'Drupal\\Core\\Validation\\TranslatorInterface' => __DIR__ . '/../..' . '/core/lib/Drupal/Core/Validation/TranslatorInterface.php',
+        'Drupal\\sophron\\CoreExtensionMimeTypeGuesserExtended' => __DIR__ . '/../..' . '/modules/contrib/sophron/src/CoreExtensionMimeTypeGuesserExtended.php',
+        'Drupal\\sophron\\EventSubscriber\\SophronEventSubscriber' => __DIR__ . '/../..' . '/modules/contrib/sophron/src/EventSubscriber/SophronEventSubscriber.php',
+        'Drupal\\sophron\\Event\\MapEvent' => __DIR__ . '/../..' . '/modules/contrib/sophron/src/Event/MapEvent.php',
+        'Drupal\\sophron\\Form\\SettingsForm' => __DIR__ . '/../..' . '/modules/contrib/sophron/src/Form/SettingsForm.php',
+        'Drupal\\sophron\\Map\\DrupalMap' => __DIR__ . '/../..' . '/modules/contrib/sophron/src/Map/DrupalMap.php',
+        'Drupal\\sophron\\MimeMapManager' => __DIR__ . '/../..' . '/modules/contrib/sophron/src/MimeMapManager.php',
+        'Drupal\\sophron\\MimeMapManagerInterface' => __DIR__ . '/../..' . '/modules/contrib/sophron/src/MimeMapManagerInterface.php',
         'Drush\\Application' => __DIR__ . '/..' . '/drush/drush/src/Application.php',
         'Drush\\Backend\\BackendPathEvaluator' => __DIR__ . '/..' . '/drush/drush/src/Backend/BackendPathEvaluator.php',
         'Drush\\Boot\\AutoloaderAwareInterface' => __DIR__ . '/..' . '/drush/drush/src/Boot/AutoloaderAwareInterface.php',

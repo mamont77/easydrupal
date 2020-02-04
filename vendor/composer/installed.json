@@ -2293,22 +2293,22 @@
     },
     {
         "name": "drupal/contact_storage",
-        "version": "1.0.0-beta10",
-        "version_normalized": "1.0.0.0-beta10",
+        "version": "1.0.0",
+        "version_normalized": "1.0.0.0",
         "source": {
             "type": "git",
             "url": "https://git.drupalcode.org/project/contact_storage.git",
-            "reference": "8.x-1.0-beta10"
+            "reference": "8.x-1.0"
         },
         "dist": {
             "type": "zip",
-            "url": "https://ftp.drupal.org/files/projects/contact_storage-8.x-1.0-beta10.zip",
-            "reference": "8.x-1.0-beta10",
-            "shasum": "3ca12e4fc4b92d8c90faa53dd62db30781e3d05a"
+            "url": "https://ftp.drupal.org/files/projects/contact_storage-8.x-1.0.zip",
+            "reference": "8.x-1.0",
+            "shasum": "2138da92bdd71bc8429178c19ab75549295f81a1"
         },
         "require": {
-            "drupal/core": "*",
-            "drupal/token": "*"
+            "drupal/core": "^8.7.7 || ^9",
+            "drupal/token": "^1.6"
         },
         "type": "drupal-module",
         "extra": {
@@ -2316,11 +2316,11 @@
                 "dev-1.x": "1.x-dev"
             },
             "drupal": {
-                "version": "8.x-1.0-beta10",
-                "datestamp": "1556703480",
+                "version": "8.x-1.0",
+                "datestamp": "1578466387",
                 "security-coverage": {
-                    "status": "not-covered",
-                    "message": "Beta releases are not covered by Drupal security advisories."
+                    "status": "covered",
+                    "message": "Covered by Drupal's security advisory policy"
                 }
             }
         },
@@ -3319,21 +3319,21 @@
     },
     {
         "name": "drupal/extlink",
-        "version": "1.1.0",
-        "version_normalized": "1.1.0.0",
+        "version": "1.2.0",
+        "version_normalized": "1.2.0.0",
         "source": {
             "type": "git",
             "url": "https://git.drupalcode.org/project/extlink.git",
-            "reference": "8.x-1.1"
+            "reference": "8.x-1.2"
         },
         "dist": {
             "type": "zip",
-            "url": "https://ftp.drupal.org/files/projects/extlink-8.x-1.1.zip",
-            "reference": "8.x-1.1",
-            "shasum": "0894f1cd12e2e1aa6b00ea4a6dd5e7234eb2b2b2"
+            "url": "https://ftp.drupal.org/files/projects/extlink-8.x-1.2.zip",
+            "reference": "8.x-1.2",
+            "shasum": "42252138bde4440c0edf2ceabee798f678ba2af1"
         },
         "require": {
-            "drupal/core": "~8.0"
+            "drupal/core": "^8 || ^9"
         },
         "type": "drupal-module",
         "extra": {
@@ -3341,8 +3341,8 @@
                 "dev-1.x": "1.x-dev"
             },
             "drupal": {
-                "version": "8.x-1.1",
-                "datestamp": "1524232684",
+                "version": "8.x-1.2",
+                "datestamp": "1580335956",
                 "security-coverage": {
                     "status": "covered",
                     "message": "Covered by Drupal's security advisory policy"
@@ -3516,21 +3516,21 @@
     },
     {
         "name": "drupal/field_group",
-        "version": "3.0.0-rc2",
-        "version_normalized": "3.0.0.0-RC2",
+        "version": "3.0.0",
+        "version_normalized": "3.0.0.0",
         "source": {
             "type": "git",
             "url": "https://git.drupalcode.org/project/field_group.git",
-            "reference": "8.x-3.0-rc2"
+            "reference": "8.x-3.0"
         },
         "dist": {
             "type": "zip",
-            "url": "https://ftp.drupal.org/files/projects/field_group-8.x-3.0-rc2.zip",
-            "reference": "8.x-3.0-rc2",
-            "shasum": "53a9f55fa579b881a5fe12a3c84702e52a3d0737"
+            "url": "https://ftp.drupal.org/files/projects/field_group-8.x-3.0.zip",
+            "reference": "8.x-3.0",
+            "shasum": "8d87cdc4abc417aa4d411bffcaeb0a3ef1afa497"
         },
         "require": {
-            "drupal/core": "*"
+            "drupal/core": "^8 || ^9"
         },
         "type": "drupal-module",
         "extra": {
@@ -3538,11 +3538,11 @@
                 "dev-3.x": "3.x-dev"
             },
             "drupal": {
-                "version": "8.x-3.0-rc2",
-                "datestamp": "1574279719",
+                "version": "8.x-3.0",
+                "datestamp": "1580250787",
                 "security-coverage": {
-                    "status": "not-covered",
-                    "message": "RC releases are not covered by Drupal security advisories."
+                    "status": "covered",
+                    "message": "Covered by Drupal's security advisory policy"
                 }
             }
         },
@@ -3565,12 +3565,12 @@
                 "homepage": "https://www.drupal.org/user/591438"
             },
             {
-                "name": "swentel",
-                "homepage": "https://www.drupal.org/user/107403"
+                "name": "nils.destoop",
+                "homepage": "https://www.drupal.org/user/361625"
             },
             {
-                "name": "zuuperman",
-                "homepage": "https://www.drupal.org/user/361625"
+                "name": "swentel",
+                "homepage": "https://www.drupal.org/user/107403"
             }
         ],
         "description": "Provides the field_group module.",
@@ -3932,31 +3932,33 @@
     },
     {
         "name": "drupal/imagemagick",
-        "version": "2.6.0",
-        "version_normalized": "2.6.0.0",
+        "version": "3.0.0",
+        "version_normalized": "3.0.0.0",
         "source": {
             "type": "git",
             "url": "https://git.drupalcode.org/project/imagemagick.git",
-            "reference": "8.x-2.6"
+            "reference": "8.x-3.0"
         },
         "dist": {
             "type": "zip",
-            "url": "https://ftp.drupal.org/files/projects/imagemagick-8.x-2.6.zip",
-            "reference": "8.x-2.6",
-            "shasum": "1696ef42d06461f420ef7761bc4a5d2d3bf6ac67"
+            "url": "https://ftp.drupal.org/files/projects/imagemagick-8.x-3.0.zip",
+            "reference": "8.x-3.0",
+            "shasum": "8e47abe42fb0cf3818c925919e9603f56a2b7978"
         },
         "require": {
-            "drupal/core": "^8.8",
-            "fileeye/mimemap": "^1.1.1"
+            "drupal/core": "^8.8 || ^9",
+            "drupal/file_mdm": "^2",
+            "drupal/sophron": "^1",
+            "php": ">=7"
         },
         "type": "drupal-module",
         "extra": {
             "branch-alias": {
-                "dev-2.x": "2.x-dev"
+                "dev-3.x": "3.x-dev"
             },
             "drupal": {
-                "version": "8.x-2.6",
-                "datestamp": "1566506585",
+                "version": "8.x-3.0",
+                "datestamp": "1578074883",
                 "security-coverage": {
                     "status": "covered",
                     "message": "Covered by Drupal's security advisory policy"
@@ -4631,18 +4633,18 @@
     },
     {
         "name": "drupal/recaptcha",
-        "version": "2.4.0",
-        "version_normalized": "2.4.0.0",
+        "version": "2.5.0",
+        "version_normalized": "2.5.0.0",
         "source": {
             "type": "git",
             "url": "https://git.drupalcode.org/project/recaptcha.git",
-            "reference": "8.x-2.4"
+            "reference": "8.x-2.5"
         },
         "dist": {
             "type": "zip",
-            "url": "https://ftp.drupal.org/files/projects/recaptcha-8.x-2.4.zip",
-            "reference": "8.x-2.4",
-            "shasum": "ee68020dc33f880313b83d8bbcb159ef85285c7a"
+            "url": "https://ftp.drupal.org/files/projects/recaptcha-8.x-2.5.zip",
+            "reference": "8.x-2.5",
+            "shasum": "ffc4e334c2b09cb04b75fa9e0df3f63d1ebde0bc"
         },
         "require": {
             "drupal/captcha": "^1.0.0-alpha1",
@@ -4654,8 +4656,8 @@
                 "dev-2.x": "2.x-dev"
             },
             "drupal": {
-                "version": "8.x-2.4",
-                "datestamp": "1548967980",
+                "version": "8.x-2.5",
+                "datestamp": "1580340616",
                 "security-coverage": {
                     "status": "covered",
                     "message": "Covered by Drupal's security advisory policy"
@@ -5009,6 +5011,61 @@
         }
     },
     {
+        "name": "drupal/sophron",
+        "version": "1.0.0",
+        "version_normalized": "1.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://git.drupalcode.org/project/sophron.git",
+            "reference": "8.x-1.0"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://ftp.drupal.org/files/projects/sophron-8.x-1.0.zip",
+            "reference": "8.x-1.0",
+            "shasum": "8cbfd6df04c2ae47ca4a8c35644644bbf54dd25b"
+        },
+        "require": {
+            "drupal/core": "^8.4 || ^9",
+            "fileeye/mimemap": "^1.1.3"
+        },
+        "type": "drupal-module",
+        "extra": {
+            "branch-alias": {
+                "dev-1.x": "1.x-dev"
+            },
+            "drupal": {
+                "version": "8.x-1.0",
+                "datestamp": "1576526880",
+                "security-coverage": {
+                    "status": "covered",
+                    "message": "Covered by Drupal's security advisory policy"
+                }
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Drupal\\sophron\\": "src/"
+            }
+        },
+        "notification-url": "https://packages.drupal.org/8/downloads",
+        "license": [
+            "GPL-2.0-or-later"
+        ],
+        "authors": [
+            {
+                "name": "mondrake",
+                "homepage": "https://www.drupal.org/user/1307444"
+            }
+        ],
+        "description": "Provides an extensive MIME types management API",
+        "homepage": "https://www.drupal.org/project/sophron",
+        "support": {
+            "source": "https://git.drupalcode.org/project/sophron"
+        }
+    },
+    {
         "name": "drupal/sticky_sharrre_bar",
         "version": "dev-1.x",
         "version_normalized": "dev-1.x",
@@ -5200,18 +5257,18 @@
     },
     {
         "name": "drupal/views_bootstrap",
-        "version": "4.1.0",
-        "version_normalized": "4.1.0.0",
+        "version": "4.2.0",
+        "version_normalized": "4.2.0.0",
         "source": {
             "type": "git",
             "url": "https://git.drupalcode.org/project/views_bootstrap.git",
-            "reference": "8.x-4.1"
+            "reference": "8.x-4.2"
         },
         "dist": {
             "type": "zip",
-            "url": "https://ftp.drupal.org/files/projects/views_bootstrap-8.x-4.1.zip",
-            "reference": "8.x-4.1",
-            "shasum": "61e907ad7e2aebf1d2132a206ad1818ef3a6491a"
+            "url": "https://ftp.drupal.org/files/projects/views_bootstrap-8.x-4.2.zip",
+            "reference": "8.x-4.2",
+            "shasum": "7354305f30f7018a39f6a22cad10e724112bccfd"
         },
         "require": {
             "drupal/core": "*"
@@ -5222,8 +5279,8 @@
                 "dev-4.x": "4.x-dev"
             },
             "drupal": {
-                "version": "8.x-4.1",
-                "datestamp": "1548889080",
+                "version": "8.x-4.2",
+                "datestamp": "1579753985",
                 "security-coverage": {
                     "status": "covered",
                     "message": "Covered by Drupal's security advisory policy"
@@ -5253,7 +5310,7 @@
                 "homepage": "https://www.drupal.org/user/556088"
             }
         ],
-        "description": "Views Bootstrap v4",
+        "description": "Allows for different styles to be used in views to work with Bootstrap 4 components.",
         "homepage": "https://www.drupal.org/project/views_bootstrap",
         "support": {
             "source": "https://git.drupalcode.org/project/views_bootstrap"
