@@ -141,6 +141,9 @@
         "patches": {
             "drupal/captcha": {
                 "Captcha Session ID broken with cacheable captcha backends": "https://www.drupal.org/files/issues/2019-12-11/3089263-24.captcha.Captcha-Session-ID-broken-with-cacheable-captcha-backends.patch"
+            },
+            "drupal/extlink": {
+                "Fix Notice: Undefined index: extlink_target_no_override in extlink_page_attachments()": "https://www.drupal.org/files/issues/2020-01-30/3110139-3.patch"
             }
         }
     }
