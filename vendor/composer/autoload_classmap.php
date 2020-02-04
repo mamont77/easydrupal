@@ -1085,6 +1085,7 @@ return array(
     'Drupal\\Core\\Config\\UnmetDependenciesException' => $baseDir . '/core/lib/Drupal/Core/Config/UnmetDependenciesException.php',
     'Drupal\\Core\\Config\\UnsupportedDataTypeConfigException' => $baseDir . '/core/lib/Drupal/Core/Config/UnsupportedDataTypeConfigException.php',
     'Drupal\\Core\\Controller\\ArgumentResolver\\Psr7RequestValueResolver' => $baseDir . '/core/lib/Drupal/Core/Controller/ArgumentResolver/Psr7RequestValueResolver.php',
+    'Drupal\\Core\\Controller\\ArgumentResolver\\RawParameterValueResolver' => $baseDir . '/core/lib/Drupal/Core/Controller/ArgumentResolver/RawParameterValueResolver.php',
     'Drupal\\Core\\Controller\\ArgumentResolver\\RouteMatchValueResolver' => $baseDir . '/core/lib/Drupal/Core/Controller/ArgumentResolver/RouteMatchValueResolver.php',
     'Drupal\\Core\\Controller\\ControllerBase' => $baseDir . '/core/lib/Drupal/Core/Controller/ControllerBase.php',
     'Drupal\\Core\\Controller\\ControllerResolver' => $baseDir . '/core/lib/Drupal/Core/Controller/ControllerResolver.php',
