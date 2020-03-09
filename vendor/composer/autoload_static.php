@@ -2761,6 +2761,7 @@ class ComposerStaticInitf58dd9d2e64a825de7df7497c1354a33
         'Drupal\\Core\\Template\\Attribute' => __DIR__ . '/../..' . '/core/lib/Drupal/Core/Template/Attribute.php',
         'Drupal\\Core\\Template\\AttributeArray' => __DIR__ . '/../..' . '/core/lib/Drupal/Core/Template/AttributeArray.php',
         'Drupal\\Core\\Template\\AttributeBoolean' => __DIR__ . '/../..' . '/core/lib/Drupal/Core/Template/AttributeBoolean.php',
+        'Drupal\\Core\\Template\\AttributeHelper' => __DIR__ . '/../..' . '/core/lib/Drupal/Core/Template/AttributeHelper.php',
         'Drupal\\Core\\Template\\AttributeString' => __DIR__ . '/../..' . '/core/lib/Drupal/Core/Template/AttributeString.php',
         'Drupal\\Core\\Template\\AttributeValueBase' => __DIR__ . '/../..' . '/core/lib/Drupal/Core/Template/AttributeValueBase.php',
         'Drupal\\Core\\Template\\Loader\\FilesystemLoader' => __DIR__ . '/../..' . '/core/lib/Drupal/Core/Template/Loader/FilesystemLoader.php',

@@ -2172,6 +2172,7 @@ return array(
     'Drupal\\Core\\Template\\Attribute' => $baseDir . '/core/lib/Drupal/Core/Template/Attribute.php',
     'Drupal\\Core\\Template\\AttributeArray' => $baseDir . '/core/lib/Drupal/Core/Template/AttributeArray.php',
     'Drupal\\Core\\Template\\AttributeBoolean' => $baseDir . '/core/lib/Drupal/Core/Template/AttributeBoolean.php',
+    'Drupal\\Core\\Template\\AttributeHelper' => $baseDir . '/core/lib/Drupal/Core/Template/AttributeHelper.php',
     'Drupal\\Core\\Template\\AttributeString' => $baseDir . '/core/lib/Drupal/Core/Template/AttributeString.php',
     'Drupal\\Core\\Template\\AttributeValueBase' => $baseDir . '/core/lib/Drupal/Core/Template/AttributeValueBase.php',
     'Drupal\\Core\\Template\\Loader\\FilesystemLoader' => $baseDir . '/core/lib/Drupal/Core/Template/Loader/FilesystemLoader.php',
