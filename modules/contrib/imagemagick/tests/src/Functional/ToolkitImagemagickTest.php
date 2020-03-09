@@ -4,6 +4,7 @@ namespace Drupal\Tests\imagemagick\Functional;
 
 use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\Image\ImageInterface;
+use Drupal\imagemagick\EventSubscriber\ImagemagickEventSubscriber;
 use Drupal\Tests\BrowserTestBase;
 use Drupal\Tests\imagemagick\Kernel\ToolkitSetupTrait;
 
@@ -59,6 +60,39 @@ class ToolkitImagemagickTest extends BrowserTestBase {
       'administer site configuration',
     ]);
     $this->drupalLogin($admin_user);
+  }
+
+  /**
+   * Test removal of temporary files created during operations on remote files.
+   *
+   * @param string $toolkit_id
+   *   The id of the toolkit to set up.
+   * @param string $toolkit_config
+   *   The config object of the toolkit to set up.
+   * @param array $toolkit_settings
+   *   The settings of the toolkit to set up.
+   *
+   * @dataProvider providerToolkitConfiguration
+   */
+  public function testTemporaryRemoteCopiesDeletion($toolkit_id, $toolkit_config, array $toolkit_settings) {
+    $this->setUpToolkit($toolkit_id, $toolkit_config, $toolkit_settings);
+    $this->prepareImageFileHandling();
+
+    // Get metadata from a remote file.
+    $image = $this->imageFactory->get('dummy-remote://image-test.png');
+    $image->getToolkit()->getExifOrientation();
+    $this->assertCount(1, $this->fileSystem->scanDirectory('temporary://', '/ima.*/'), 'A temporary file has been created for getting metadata from a remote file.');
+
+    // Simulate Drupal shutdown.
+    $callbacks = drupal_register_shutdown_function();
+    foreach ($callbacks as $callback) {
+      if ($callback['callback'] === [ImagemagickEventSubscriber::class, 'removeTemporaryRemoteCopy']) {
+        call_user_func_array($callback['callback'], $callback['arguments']);
+      }
+    }
+
+    // Ensure we have no leftovers in the temporary directory.
+    $this->assertCount(0, $this->fileSystem->scanDirectory('temporary://', '/ima.*/'), 'No files left in the temporary directory after the Drupal shutdown.');
   }
 
   /**
