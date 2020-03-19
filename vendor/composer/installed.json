@@ -3639,21 +3639,27 @@
     },
     {
         "name": "drupal/filefield_paths",
-        "version": "1.0.0-beta1",
-        "version_normalized": "1.0.0.0-beta1",
+        "version": "1.0.0-beta2",
+        "version_normalized": "1.0.0.0-beta2",
         "source": {
             "type": "git",
             "url": "https://git.drupalcode.org/project/filefield_paths.git",
-            "reference": "8.x-1.0-beta1"
+            "reference": "8.x-1.0-beta2"
         },
         "dist": {
             "type": "zip",
-            "url": "https://ftp.drupal.org/files/projects/filefield_paths-8.x-1.0-beta1.zip",
-            "reference": "8.x-1.0-beta1",
-            "shasum": "3d74e96b1c8b7e02970be0b41643e8b3a617d008"
+            "url": "https://ftp.drupal.org/files/projects/filefield_paths-8.x-1.0-beta2.zip",
+            "reference": "8.x-1.0-beta2",
+            "shasum": "5235b41274fab8cdebd40396a199ebb024fb9d07"
         },
         "require": {
             "drupal/core": "*"
+        },
+        "require-dev": {
+            "drupal/ctools": "*",
+            "drupal/pathauto": "*",
+            "drupal/redirect": "*",
+            "drupal/token": "*"
         },
         "type": "drupal-module",
         "extra": {
@@ -3661,8 +3667,8 @@
                 "dev-1.x": "1.x-dev"
             },
             "drupal": {
-                "version": "8.x-1.0-beta1",
-                "datestamp": "1451020739",
+                "version": "8.x-1.0-beta2",
+                "datestamp": "1584455004",
                 "security-coverage": {
                     "status": "not-covered",
                     "message": "Beta releases are not covered by Drupal security advisories."
@@ -3678,6 +3684,10 @@
             {
                 "name": "Deciphered",
                 "homepage": "https://www.drupal.org/user/103796"
+            },
+            {
+                "name": "voleger",
+                "homepage": "https://www.drupal.org/user/3260314"
             }
         ],
         "description": "Adds improved Token based file sorting and renaming functionalities.",
@@ -5321,21 +5331,21 @@
     },
     {
         "name": "drupal/views_infinite_scroll",
-        "version": "1.6.0",
-        "version_normalized": "1.6.0.0",
+        "version": "1.7.0",
+        "version_normalized": "1.7.0.0",
         "source": {
             "type": "git",
             "url": "https://git.drupalcode.org/project/views_infinite_scroll.git",
-            "reference": "8.x-1.6"
+            "reference": "8.x-1.7"
         },
         "dist": {
             "type": "zip",
-            "url": "https://ftp.drupal.org/files/projects/views_infinite_scroll-8.x-1.6.zip",
-            "reference": "8.x-1.6",
-            "shasum": "614a2b01d57e2a75255883294bfd6b9246c85efd"
+            "url": "https://ftp.drupal.org/files/projects/views_infinite_scroll-8.x-1.7.zip",
+            "reference": "8.x-1.7",
+            "shasum": "42ff1b7c835a2cb0755425999bb8251f19c62fac"
         },
         "require": {
-            "drupal/core": "*"
+            "drupal/core": "^8.8 || ^9"
         },
         "type": "drupal-module",
         "extra": {
@@ -5343,8 +5353,8 @@
                 "dev-1.x": "1.x-dev"
             },
             "drupal": {
-                "version": "8.x-1.6",
-                "datestamp": "1561996386",
+                "version": "8.x-1.7",
+                "datestamp": "1584489857",
                 "security-coverage": {
                     "status": "covered",
                     "message": "Covered by Drupal's security advisory policy"

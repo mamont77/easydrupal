@@ -1,13 +1,7 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\filefield_paths\Tests\FileFieldPathsGeneralTest.
- */
+namespace Drupal\Tests\filefield_paths\Functional;
 
-namespace Drupal\filefield_paths\Tests;
-
-use Drupal\Component\Utility\Unicode;
 use Drupal\Core\Field\FieldStorageDefinitionInterface;
 use Drupal\node\Entity\Node;
 
@@ -17,26 +11,30 @@ use Drupal\node\Entity\Node;
  * @group File (Field) Paths
  */
 class FileFieldPathsGeneralTest extends FileFieldPathsTestBase {
+
   /**
    * Test that the File (Field) Paths UI works as expected.
    */
   public function testAddField() {
+    $session = $this->assertSession();
     // Create a File field.
-    $field_name = Unicode::strtolower($this->randomMachineName());
+    $field_name = mb_strtolower($this->randomMachineName());
     $field_settings = ['file_directory' => "fields/{$field_name}"];
     $this->createFileField($field_name, 'node', $this->contentType, [], $field_settings);
 
     // Ensure File (Field) Paths settings are present.
     $this->drupalGet("admin/structure/types/manage/{$this->contentType}/fields/node.{$this->contentType}.{$field_name}");
-    $this->assertText('Enable File (Field) Paths?', $this->t('File (Field) Path settings are present.'));
+    // File (Field) Path settings are present.
+    $session->responseContains('Enable File (Field) Paths?');
 
     // Ensure that 'Enable File (Field) Paths?' is a direct sibling of
     // 'File (Field) Path settings'.
-    $element = $this->xpath('//div[contains(@class, :class)]/following-sibling::*[1]/@id', [':class' => 'form-item-third-party-settings-filefield-paths-enabled']);
-    $this->assert(isset($element[0]) && 'edit-third-party-settings-filefield-paths--2' == (string) $element[0], t('Enable checkbox is next to settings fieldset.'));
+    /* @var \Behat\Mink\Element\NodeElement[] $element */
+    $element = $this->xpath('//div[contains(@class, :class)]/following-sibling::*[1][@id=\'edit-third-party-settings-filefield-paths--2\']', [':class' => 'form-item-third-party-settings-filefield-paths-enabled']);
+    $this->assertNotEmpty($element, t('Enable checkbox is next to settings fieldset.'));
 
     // Ensure that the File path used the File directory as it's default value.
-    $this->assertFieldByName('third_party_settings[filefield_paths][file_path][value]', "fields/{$field_name}");
+    $session->fieldValueEquals('third_party_settings[filefield_paths][file_path][value]', "fields/{$field_name}");
   }
 
   /**
@@ -47,7 +45,7 @@ class FileFieldPathsGeneralTest extends FileFieldPathsTestBase {
    */
   public function testNoFile() {
     // Create a File field.
-    $field_name = Unicode::strtolower($this->randomMachineName());
+    $field_name = mb_strtolower($this->randomMachineName());
     $third_party_settings['filefield_paths']['file_path']['value'] = 'node/[node:nid]';
     $third_party_settings['filefield_paths']['file_name']['value'] = '[node:nid].[file:ffp-extension-original]';
     $this->createFileField($field_name, 'node', $this->contentType, [], [], $third_party_settings);
@@ -55,18 +53,19 @@ class FileFieldPathsGeneralTest extends FileFieldPathsTestBase {
     // Create a node without a file attached.
     $this->drupalPostForm("node/add/{$this->contentType}", [
       'title[0][value]' => $this->randomMachineName(8),
-    ], $this->t('Save and publish'));
+    ], $this->t('Save'));
   }
 
   /**
    * Test a basic file upload with File (Field) Paths.
    */
   public function testUploadFile() {
+    $session = $this->assertSession();
     $file_system = \Drupal::service('file_system');
 
     // Create a File field with 'node/[node:nid]' as the File path and
     // '[node:nid].[file:ffp-extension-original]' as the File name.
-    $field_name = Unicode::strtolower($this->randomMachineName());
+    $field_name = mb_strtolower($this->randomMachineName());
     $third_party_settings['filefield_paths']['file_path']['value'] = 'node/[node:nid]';
     $third_party_settings['filefield_paths']['file_name']['value'] = '[node:nid].[file:ffp-extension-original]';
     $this->createFileField($field_name, 'node', $this->contentType, [], [], $third_party_settings);
@@ -80,11 +79,11 @@ class FileFieldPathsGeneralTest extends FileFieldPathsTestBase {
     $this->drupalPostForm(NULL, $edit, t('Upload'));
 
     // Ensure that the file was put into the Temporary file location.
-    $config = \Drupal::config('filefield_paths.settings');
-    $this->assertRaw(file_create_url("{$config->get('temp_location')}/{$test_file->getFilename()}"), $this->t('File has been uploaded to the temporary file location.'));
+    $config = $this->config('filefield_paths.settings');
+    $session->responseContains(file_create_url("{$config->get('temp_location')}/{$test_file->getFilename()}"), $this->t('File has been uploaded to the temporary file location.'));
 
     // Save the node.
-    $this->drupalPostForm(NULL, [], t('Save and publish'));
+    $this->drupalPostForm(NULL, [], t('Save'));
 
     // Get created Node ID.
     $matches = [];
@@ -92,7 +91,7 @@ class FileFieldPathsGeneralTest extends FileFieldPathsTestBase {
     $nid = $matches[1];
 
     // Ensure that the File path has been processed correctly.
-    $this->assertRaw("{$this->publicFilesDirectory}/node/{$nid}/{$nid}.txt", $this->t('The File path has been processed correctly.'));
+    $session->responseContains("{$this->publicFilesDirectory}/node/{$nid}/{$nid}.txt", $this->t('The File path has been processed correctly.'));
   }
 
   /**
@@ -103,7 +102,7 @@ class FileFieldPathsGeneralTest extends FileFieldPathsTestBase {
 
     // Create a multivalue File field with 'node/[node:nid]' as the File path
     // and '[file:fid].txt' as the File name.
-    $field_name = Unicode::strtolower($this->randomMachineName());
+    $field_name = mb_strtolower($this->randomMachineName());
     $storage_settings['cardinality'] = FieldStorageDefinitionInterface::CARDINALITY_UNLIMITED;
     $third_party_settings['filefield_paths']['file_path']['value'] = 'node/[node:nid]';
     $third_party_settings['filefield_paths']['file_name']['value'] = '[file:fid].txt';
@@ -118,17 +117,18 @@ class FileFieldPathsGeneralTest extends FileFieldPathsTestBase {
       'title[0][value]'          => $this->randomMachineName(),
       "files[{$field_name}_2][]" => $file_system->realpath($text_files[1]->uri),
     ];
-    $this->drupalPostForm(NULL, $edit, t('Save and publish'));
+    $this->drupalPostForm(NULL, $edit, t('Save'));
 
     // Get created Node ID.
     $matches = [];
     preg_match('/node\/([0-9]+)/', $this->getUrl(), $matches);
     $nid = $matches[1];
 
+    $session = $this->assertSession();
     // Ensure that the File path has been processed correctly.
-    $this->assertRaw("{$this->publicFilesDirectory}/node/{$nid}/1.txt", $this->t('The first File path has been processed correctly.'));
-    $this->assertRaw("{$this->publicFilesDirectory}/node/{$nid}/2.txt", $this->t('The second File path has been processed correctly.'));
-    $this->assertRaw("{$this->publicFilesDirectory}/node/{$nid}/3.txt", $this->t('The third File path has been processed correctly.'));
+    $session->responseContains("{$this->publicFilesDirectory}/node/{$nid}/1.txt", $this->t('The first File path has been processed correctly.'));
+    $session->responseContains("{$this->publicFilesDirectory}/node/{$nid}/2.txt", $this->t('The second File path has been processed correctly.'));
+    $session->responseContains("{$this->publicFilesDirectory}/node/{$nid}/3.txt", $this->t('The third File path has been processed correctly.'));
   }
 
   /**
@@ -136,7 +136,7 @@ class FileFieldPathsGeneralTest extends FileFieldPathsTestBase {
    */
   public function testLongPath() {
     // Create a File field with 'node/[random:hash:sha256]' as the File path.
-    $field_name = Unicode::strtolower($this->randomMachineName());
+    $field_name = mb_strtolower($this->randomMachineName());
     $third_party_settings['filefield_paths']['file_path']['value'] = 'node/[random:hash:sha512]/[random:hash:sha512]';
     $this->createFileField($field_name, 'node', $this->contentType, [], [], $third_party_settings);
 
@@ -147,7 +147,7 @@ class FileFieldPathsGeneralTest extends FileFieldPathsTestBase {
 
     // Ensure file path is no more than 255 characters.
     $node = Node::load($nid);
-    $this->assert(Unicode::strlen($node->{$field_name}[0]['uri']) <= 255, $this->t('File path is no more than 255 characters'));
+    $this->assertTrue(mb_strlen($node->{$field_name}[0]['uri']) <= 255, $this->t('File path is no more than 255 characters'));
   }
 
   /**
@@ -156,7 +156,7 @@ class FileFieldPathsGeneralTest extends FileFieldPathsTestBase {
   public function testProgrammaticAttach() {
     // Create a File field with 'node/[node:nid]' as the File path and
     // '[node:nid].[file:ffp-extension-original]' as the File name.
-    $field_name = Unicode::strtolower($this->randomMachineName());
+    $field_name = mb_strtolower($this->randomMachineName());
     $third_party_settings['filefield_paths']['file_path']['value'] = 'node/[node:nid]';
     $third_party_settings['filefield_paths']['file_name']['value'] = '[node:nid].[file:ffp-extension-original]';
     $this->createFileField($field_name, 'node', $this->contentType, [], [], $third_party_settings);
@@ -179,7 +179,7 @@ class FileFieldPathsGeneralTest extends FileFieldPathsTestBase {
 
     // Ensure that the File path has been processed correctly.
     $node = Node::load($node->id());
-    $this->assertEqual("public://node/{$node->id()}/{$node->id()}.txt", $node->{$field_name}[0]->entity->getFileUri(), $this->t('The File path has been processed correctly.'));
+    $this->assertEquals("public://node/{$node->id()}/{$node->id()}.txt", $node->{$field_name}[0]->entity->getFileUri(), $this->t('The File path has been processed correctly.'));
   }
 
   /**
@@ -190,7 +190,7 @@ class FileFieldPathsGeneralTest extends FileFieldPathsTestBase {
 
     // Create a File field with 'node/[node:title]' as the File path and
     // '[node:title].[file:ffp-extension-original]' as the File name.
-    $field_name = Unicode::strtolower($this->randomMachineName());
+    $field_name = mb_strtolower($this->randomMachineName());
     $third_party_settings['filefield_paths']['file_path']['value'] = 'node/[node:title]';
     $third_party_settings['filefield_paths']['file_name']['value'] = '[node:title].[file:ffp-extension-original]';
     $this->createFileField($field_name, 'node', $this->contentType, [], [], $third_party_settings);
@@ -203,7 +203,7 @@ class FileFieldPathsGeneralTest extends FileFieldPathsTestBase {
     $edit['title[0][value]'] = $title;
     $edit["body[0][value]"] = '';
     $edit["files[{$field_name}_0]"] = $file_system->realpath($test_file->getFileUri());
-    $this->drupalPostForm("node/add/{$this->contentType}", $edit, $this->t('Save and publish'));
+    $this->drupalPostForm("node/add/{$this->contentType}", $edit, $this->t('Save'));
 
     // Get created Node ID.
     $matches = [];
@@ -212,7 +212,7 @@ class FileFieldPathsGeneralTest extends FileFieldPathsTestBase {
 
     // Ensure slashes are present in file path and name.
     $node = Node::load($nid);
-    $this->assertEqual("public://node/{$title}/{$title}.txt", $node->{$field_name}[0]->entity->getFileUri());
+    $this->assertEquals("public://node/{$title}/{$title}.txt", $node->{$field_name}[0]->entity->getFileUri());
 
     // Remove slashes.
     $edit = [
@@ -229,7 +229,7 @@ class FileFieldPathsGeneralTest extends FileFieldPathsTestBase {
     // Ensure slashes are not present in file path and name.
     $node = Node::load($nid);
     $title = str_replace('/', '', $title);
-    $this->assertEqual("public://node/{$title}/{$title}.txt", $node->{$field_name}[0]->entity->getFileUri());
+    $this->assertEquals("public://node/{$title}/{$title}.txt", $node->{$field_name}[0]->entity->getFileUri());
   }
 
   /**
@@ -238,10 +238,11 @@ class FileFieldPathsGeneralTest extends FileFieldPathsTestBase {
   public function testFileUsage() {
     /** @var \Drupal\node\NodeStorage $node_storage */
     $node_storage = $this->container->get('entity.manager')->getStorage('node');
-    $file_usage = \Drupal::service('file.usage');
+    /** @var \Drupal\file\FileUsage\FileUsageInterface $file_usage */
+    $file_usage = $this->container->get('file.usage');
 
     // Create a File field with 'node/[node:nid]' as the File path.
-    $field_name = Unicode::strtolower($this->randomMachineName());
+    $field_name = mb_strtolower($this->randomMachineName());
     $third_party_settings['filefield_paths']['file_path']['value'] = 'node/[node:nid]';
     $this->createFileField($field_name, 'node', $this->contentType, [], [], $third_party_settings);
 
@@ -257,21 +258,21 @@ class FileFieldPathsGeneralTest extends FileFieldPathsTestBase {
     $usage = $file_usage->listUsage($file);
 
     // Ensure file usage count for new node is correct.
-    $this->assert(isset($usage['file']['node'][$nid]) && $usage['file']['node'][$nid] == 1, t('File usage count for new node is correct.'));
+    $this->assertTrue(isset($usage['file']['node'][$nid]) && (int) $usage['file']['node'][$nid] === 1, t('File usage count for new node is correct.'));
 
     // Update node.
-    $this->drupalPostForm("node/{$nid}/edit", [], t('Save and keep published'));
+    $this->drupalPostForm("node/{$nid}/edit", ['revision' => FALSE], t('Save'));
     $usage = $file_usage->listUsage($file);
 
     // Ensure file usage count for updated node is correct.
-    $this->assert(isset($usage['file']['node'][$nid]) && $usage['file']['node'][$nid] == 1, t('File usage count for updated node is correct.'));
+    $this->assertTrue(isset($usage['file']['node'][$nid]) && (int) $usage['file']['node'][$nid] === 1, t('File usage count for updated node is correct.'));
 
     // Update node with revision.
-    $this->drupalPostForm("node/{$nid}/edit", ['revision' => TRUE], t('Save and keep published'));
+    $this->drupalPostForm("node/{$nid}/edit", ['revision' => TRUE], t('Save'));
     $usage = $file_usage->listUsage($file);
 
     // Ensure file usage count for updated node with revision is correct.
-    $this->assert(isset($usage['file']['node'][$nid]) && $usage['file']['node'][$nid] == 2, t('File usage count for updated node with revision is correct.'));
+    $this->assertTrue(isset($usage['file']['node'][$nid]) && (int) $usage['file']['node'][$nid] === 2, t('File usage count for updated node with revision is correct.'));
   }
 
   /**
@@ -279,7 +280,7 @@ class FileFieldPathsGeneralTest extends FileFieldPathsTestBase {
    */
   public function testReadOnly() {
     // Create a File field.
-    $field_name = Unicode::strtolower($this->randomMachineName());
+    $field_name = mb_strtolower($this->randomMachineName());
     $field_settings = ['uri_scheme' => 'ffp-dummy-readonly'];
     $instance_settings = ['file_directory' => "fields/{$field_name}"];
     $this->createFileField($field_name, 'node', $this->contentType, $field_settings, $instance_settings);
@@ -300,7 +301,7 @@ class FileFieldPathsGeneralTest extends FileFieldPathsTestBase {
     $node = $this->drupalCreateNode($node);
 
     // Ensure file has been attached to a node.
-    $this->assert(isset($node->{$field_name}[0]) && !empty($node->{$field_name}[0]), $this->t('Read-only file is correctly attached to a node.'));
+    $this->assertTrue(isset($node->{$field_name}[0]) && !empty($node->{$field_name}[0]), $this->t('Read-only file is correctly attached to a node.'));
 
     $edit['third_party_settings[filefield_paths][retroactive_update]'] = TRUE;
     $edit['third_party_settings[filefield_paths][file_path][value]'] = 'node/[node:nid]';
@@ -308,7 +309,7 @@ class FileFieldPathsGeneralTest extends FileFieldPathsTestBase {
 
     // Ensure file is still in original location.
     $this->drupalGet("node/{$node->id()}");
-    $this->assertRaw("{$this->publicFilesDirectory}/{$file->getFilename()}", $this->t('Read-only file not affected by Retroactive updates.'));
+    $this->assertSession()->responseContains("{$this->publicFilesDirectory}/{$file->getFilename()}", $this->t('Read-only file not affected by Retroactive updates.'));
   }
 
 }

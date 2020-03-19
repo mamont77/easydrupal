@@ -1,11 +1,6 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\filefield_paths\Tests\FileFieldPathsTransliterationTest.
- */
-
-namespace Drupal\filefield_paths\Tests;
+namespace Drupal\Tests\filefield_paths\Functional;
 
 use Drupal\Component\Utility\Unicode;
 use Drupal\node\Entity\Node;
@@ -16,6 +11,7 @@ use Drupal\node\Entity\Node;
  * @group File (Field) Paths
  */
 class FileFieldPathsTransliterationTest extends FileFieldPathsTestBase {
+
   /**
    * Test File (Field) Paths Transliteration UI.
    */
@@ -56,7 +52,7 @@ class FileFieldPathsTransliterationTest extends FileFieldPathsTestBase {
 
     $edit['files[' . $field_name . '_0]'] = \Drupal::service('file_system')
       ->realpath($test_file->getFileUri());
-    $this->drupalPostForm("node/add/{$this->contentType}", $edit, $this->t('Save and publish'));
+    $this->drupalPostForm("node/add/{$this->contentType}", $edit, $this->t('Save'));
 
     // Get created Node ID.
     $matches = [];

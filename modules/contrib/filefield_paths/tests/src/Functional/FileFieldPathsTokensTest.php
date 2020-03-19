@@ -1,11 +1,6 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\filefield_paths\Tests\FileFieldPathsUpdateTest.
- */
-
-namespace Drupal\filefield_paths\Tests;
+namespace Drupal\Tests\filefield_paths\Functional;
 
 /**
  * Test token functionality.

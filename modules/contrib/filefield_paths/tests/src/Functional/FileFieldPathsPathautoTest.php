@@ -1,11 +1,6 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\filefield_paths\Tests\FileFieldPathsPathautoTest.
- */
-
-namespace Drupal\filefield_paths\Tests;
+namespace Drupal\Tests\filefield_paths\Functional;
 
 use Drupal\Component\Utility\Unicode;
 use Drupal\node\Entity\Node;
@@ -68,7 +63,7 @@ class FileFieldPathsPathautoTest extends FileFieldPathsTestBase {
 
     $edit['files[' . $field_name . '_0]'] = \Drupal::service('file_system')
       ->realpath($test_file->getFileUri());
-    $this->drupalPostForm("node/add/{$this->contentType}", $edit, $this->t('Save and publish'));
+    $this->drupalPostForm("node/add/{$this->contentType}", $edit, $this->t('Save'));
 
     // Ensure that file path/name have been processed correctly by Pathauto.
     /** @var \Drupal\node\Entity\Node $node */
