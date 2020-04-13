@@ -1,13 +1,7 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\country\CountryManager.
- */
-
 namespace Drupal\country;
 
-use Drupal;
 use Drupal\Core\Field\FieldDefinitionInterface;
 
 /**

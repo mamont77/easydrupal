@@ -3,8 +3,8 @@
 namespace Drupal\country\Plugin\views\filter;
 
 use Drupal\views\Plugin\views\display\DisplayPluginBase;
+use Drupal\views\Plugin\views\filter\ManyToOne;
 use Drupal\views\ViewExecutable;
-use Drupal\views\Plugin\views\filter\InOperator;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Entity\EntityFieldManagerInterface;
 use Drupal\Core\Entity\EntityTypeBundleInfoInterface;
@@ -17,7 +17,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *
  * @ViewsFilter("country_item")
  */
-class CountryItem extends InOperator {
+class CountryItem extends ManyToOne {
 
   /**
    * The entity field manager.
@@ -80,6 +80,7 @@ class CountryItem extends InOperator {
   protected function defineOptions() {
     $options = parent::defineOptions();
     $options['country_target_bundle'] = ['default' => 'global'];
+    $options['type'] = ['default' => 'select'];
 
     return $options;
   }
@@ -102,13 +103,76 @@ class CountryItem extends InOperator {
   }
 
   /**
+   * {@inheritdoc}
+   */
+  public function hasExtraOptions() {
+    return TRUE;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function buildExtraOptionsForm(&$form, FormStateInterface $form_state) {
+    $form['type'] = [
+      '#type' => 'radios',
+      '#title' => $this->t('Selection type'),
+      '#options' => [
+        'select' => $this->t('Dropdown'),
+        'textfield' => $this->t('Autocomplete'),
+      ],
+      '#default_value' => $this->options['type'],
+    ];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function valueForm(&$form, FormStateInterface $form_state) {
+    parent::valueForm($form, $form_state);
+    // Take special care when the type is textfield (autocomplete).
+    if ($this->options['type'] == 'textfield') {
+      $form['value'] = [
+        '#title' => $this->t('Some title'),
+        '#type' => 'textfield',
+        '#autocomplete_route_name' => 'country.autocomplete',
+        '#autocomplete_route_parameters' => [
+          'entity_type' => $this->definition['entity_type'],
+          'bundle' => $this->options['country_target_bundle'],
+          'field_name' => $this->definition['field_name'],
+        ],
+        '#tags' => TRUE,
+        '#process_default_value' => FALSE,
+      ];
+    }
+  }
+
+  /**
+   * Build query.
+   *
    * Override the query so that no filtering takes place if the user doesn't
-   * select any options.
+   * select any options and to process the value in case the widget is an
+   * autocomplete.
    */
   public function query() {
     if (!empty($this->value)) {
-      parent::query();
+      // Autocomplete.
+      if ($this->options['type'] == 'textfield') {
+        $values = [];
+        foreach ((array) $this->value as $raw_value) {
+          $raw_value = array_map('trim', explode(',', $raw_value));
+          foreach ($raw_value as $raw_sub_value) {
+            $iso2 = array_search($raw_sub_value, $this->getValueOptions());
+
+            // If country code wasn't found then this is not a valid country
+            // name and has to be kept for the query for making query fails.
+            $values[] = $iso2 ?: $raw_sub_value;
+          }
+        }
+        $this->value = $values;
+      }
     }
+
+    parent::query();
   }
 
   /**
@@ -142,7 +206,8 @@ class CountryItem extends InOperator {
   }
 
   /**
-   * Gets the field of the used field.
+   * Gets the field of the used
+   * field.$options['type'] = ['default' => 'select'].
    *
    * @return \Drupal\Core\Field\FieldDefinitionInterface
    */
@@ -171,7 +236,8 @@ class CountryItem extends InOperator {
 
     $countries = $this->options['country_target_bundle'] == 'global'
       ? \Drupal::service('country_manager')->getList()
-      : \Drupal::service('country.field.manager')->getSelectableCountries($this->getFieldDefinition());
+      : \Drupal::service('country.field.manager')
+        ->getSelectableCountries($this->getFieldDefinition());
     $this->valueOptions = $countries;
 
     return $this->valueOptions;

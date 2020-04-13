@@ -1,16 +1,14 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\country\Plugin\Field\FieldType\CountryItem.
- */
-
 namespace Drupal\country\Plugin\Field\FieldType;
 
 use Drupal\Core\Field\FieldItemBase;
-use Drupal\Core\TypedData\DataDefinition;
 use Drupal\Core\Field\FieldStorageDefinitionInterface;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Field\FieldDefinitionInterface;
+use Drupal\Core\Session\AccountInterface;
+use Drupal\Core\TypedData\DataDefinition;
+use Drupal\Core\TypedData\OptionsProviderInterface;
 
 /**
  * Plugin implementation of the 'country' field type.
@@ -23,8 +21,7 @@ use Drupal\Core\Form\FormStateInterface;
  *   default_formatter = "country_default"
  * )
  */
-
-class CountryItem extends FieldItemBase {
+class CountryItem extends FieldItemBase implements OptionsProviderInterface {
 
   const COUNTRY_ISO_MAXLENGTH = 2;
 
@@ -42,18 +39,18 @@ class CountryItem extends FieldItemBase {
    * {@inheritdoc}
    */
   public static function schema(FieldStorageDefinitionInterface $field_definition) {
-    return array(
-      'columns' => array(
-        'value' => array(
+    return [
+      'columns' => [
+        'value' => [
           'type' => 'char',
           'length' => static::COUNTRY_ISO_MAXLENGTH,
           'not null' => FALSE,
-        ),
-      ),
-      'indexes' => array(
-        'value' => array('value'),
-      ),
-    );
+        ],
+      ],
+      'indexes' => [
+        'value' => ['value'],
+      ],
+    ];
   }
 
   /**
@@ -68,17 +65,22 @@ class CountryItem extends FieldItemBase {
    * {@inheritdoc}
    */
   public function getConstraints() {
-    $constraint_manager = \Drupal::typedDataManager()->getValidationConstraintManager();
+    $constraint_manager = \Drupal::typedDataManager()
+      ->getValidationConstraintManager();
     $constraints = parent::getConstraints();
 
-    $constraints[] = $constraint_manager->create('ComplexData', array(
-      'value' => array(
-        'Length' => array(
+    $constraints[] = $constraint_manager->create('ComplexData', [
+      'value' => [
+        'Length' => [
           'max' => static::COUNTRY_ISO_MAXLENGTH,
-          'maxMessage' => t('%name: the country iso-2 code may not be longer than @max characters.', array('%name' => $this->getFieldDefinition()->getLabel(), '@max' => static::COUNTRY_ISO_MAXLENGTH)),
-        )
-      ),
-    ));
+          'maxMessage' => t('%name: the country iso-2 code may not be longer than @max characters.', [
+            '%name' => $this->getFieldDefinition()
+              ->getLabel(),
+            '@max' => static::COUNTRY_ISO_MAXLENGTH,
+          ]),
+        ],
+      ],
+    ]);
 
     return $constraints;
   }
@@ -87,42 +89,31 @@ class CountryItem extends FieldItemBase {
    * {@inheritdoc}
    */
   public static function defaultStorageSettings() {
-    return array(
-      'selectable_countries' => array(),
-    ) + parent::defaultStorageSettings();
+    return [
+        'selectable_countries' => [],
+      ] + parent::defaultStorageSettings();
   }
 
   /**
    * {@inheritdoc}
    */
   public static function defaultFieldSettings() {
-    return array(
-        'selectable_countries' => array(),
-      ) + parent::defaultFieldSettings();
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function fieldSettingsForm(array $form, FormStateInterface $form_state) {
-    $element = array();
-    $settings = $this->getSettings();
-    // Add selectable_countries element.
-    static::defaultCountriesForm($element, $settings);
-    $element['selectable_countries']['#description'] = t("If no countries are selected, all of them will be available for this field and will override the field's default selectable countries.");
-
-    return $element;
+    return [
+        'selectable_countries' => [],
+      ] + parent::defaultFieldSettings();
   }
 
   /**
    * {@inheritdoc}
    */
   public function storageSettingsForm(array &$form, FormStateInterface $form_state, $has_data) {
-    $element = array();
-    // We need the field-level 'selectable_countries' setting, and $this->getSettings()
-    // will only provide the instance-level one, so we need to explicitly fetch
-    // the field.
-    $settings = $this->getFieldDefinition()->getFieldStorageDefinition()->getSettings();
+    $element = [];
+    // We need the field-level 'selectable_countries' setting, and
+    // $this->getSettings() will only provide the instance-level one, so we
+    // need to explicitly fetch the field.
+    $settings = $this->getFieldDefinition()
+      ->getFieldStorageDefinition()
+      ->getSettings();
     static::defaultCountriesForm($element, $settings);
     $element['selectable_countries']['#description'] = t('If no countries are selected, all of them will be available for this field.');
 
@@ -138,14 +129,74 @@ class CountryItem extends FieldItemBase {
    *   The field settings array.
    */
   protected function defaultCountriesForm(array &$element, array $settings) {
-    $element['selectable_countries'] = array(
+    $element['selectable_countries'] = [
       '#type' => 'select',
       '#title' => t('Selectable countries'),
       '#default_value' => $settings['selectable_countries'],
-      '#options' => \Drupal::service('country_manager')->getList(),
+      '#options' => $this->getPossibleOptions(),
       '#description' => t('Select all countries you want to make available for this field.'),
       '#multiple' => TRUE,
       '#size' => 10,
-    );
+    ];
   }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function generateSampleValue(FieldDefinitionInterface $field_definition) {
+    $countries = array_keys(\Drupal::service('country.field.manager')
+      ->getSelectableCountries($field_definition));
+
+    return [
+      'value' => $countries[array_rand($countries)],
+    ];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getPossibleOptions(AccountInterface $account = NULL) {
+    $select_options = \Drupal::service('country_manager')->getList();
+    asort($select_options);
+    return $select_options;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getPossibleValues(AccountInterface $account = NULL) {
+    $options = $this->getPossibleOptions($account);
+    return array_keys($options);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getSettableOptions(AccountInterface $account = NULL) {
+    $settings = $this->getFieldDefinition()
+      ->getFieldStorageDefinition()
+      ->getSettings();
+    $selectable = array_keys($settings['selectable_countries']);
+    $countries = \Drupal::service('country_manager')->getList();
+
+    if (!empty($selectable)) {
+      $countries = array_filter($countries,
+        function ($key) use ($selectable) {
+          return in_array($key, $selectable);
+        },
+        ARRAY_FILTER_USE_KEY
+      );
+    }
+
+    return $countries;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getSettableValues(AccountInterface $account = NULL) {
+    $options = $this->getSettableOptions($account);
+    return array_keys($options);
+  }
+
 }

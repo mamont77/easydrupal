@@ -16,6 +16,9 @@ function country_field_views_data_alter(array &$data, FieldStorageConfigInterfac
         if (isset($field_data['filter']) && $field_name != 'delta') {
           $data[$table_name][$field_name]['filter']['id'] = 'country_item';
         }
+        if (isset($field_data['sort']) && $field_name != 'delta') {
+          $data[$table_name][$field_name]['sort']['id'] = 'country_item';
+        }
       }
     }
   }
