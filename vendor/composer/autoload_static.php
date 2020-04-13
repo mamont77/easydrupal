@@ -2867,6 +2867,7 @@ class ComposerStaticInitf58dd9d2e64a825de7df7497c1354a33
         'Drupal\\Core\\TypedData\\Validation\\RecursiveValidator' => __DIR__ . '/../..' . '/core/lib/Drupal/Core/TypedData/Validation/RecursiveValidator.php',
         'Drupal\\Core\\TypedData\\Validation\\TypedDataAwareValidatorTrait' => __DIR__ . '/../..' . '/core/lib/Drupal/Core/TypedData/Validation/TypedDataAwareValidatorTrait.php',
         'Drupal\\Core\\TypedData\\Validation\\TypedDataMetadata' => __DIR__ . '/../..' . '/core/lib/Drupal/Core/TypedData/Validation/TypedDataMetadata.php',
+        'Drupal\\Core\\Update\\RemovedPostUpdateNameException' => __DIR__ . '/../..' . '/core/lib/Drupal/Core/Update/RemovedPostUpdateNameException.php',
         'Drupal\\Core\\Update\\UpdateBackend' => __DIR__ . '/../..' . '/core/lib/Drupal/Core/Update/UpdateBackend.php',
         'Drupal\\Core\\Update\\UpdateCacheBackendFactory' => __DIR__ . '/../..' . '/core/lib/Drupal/Core/Update/UpdateCacheBackendFactory.php',
         'Drupal\\Core\\Update\\UpdateCompilerPass' => __DIR__ . '/../..' . '/core/lib/Drupal/Core/Update/UpdateCompilerPass.php',
