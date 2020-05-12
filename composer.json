@@ -36,7 +36,7 @@
         "drupal/core-recommended": "^8.8",
         "drupal/core-vendor-hardening": "^8.8",
         "drupal/country": "^1.0@beta",
-        "drupal/crop": "^1.5",
+        "drupal/crop": "^2.1",
         "drupal/ctools": "^3.4",
         "drupal/disqus": "^1.0@RC",
         "drupal/ds": "^3.6",
