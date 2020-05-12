@@ -20,3 +20,4 @@ permissions:
   - 'use text format basic_html'
   - 'use text format restricted_html'
   - 'view disqus comments'
+  - 'view media'

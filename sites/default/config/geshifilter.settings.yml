@@ -2,7 +2,7 @@ use_format_specific_options: false
 default_highlighting: GESHIFILTER_DEFAULT_DONOTHING
 default_line_numbering: 0
 use_highlight_string_for_php: false
-enable_keyword_urls: true
+enable_keyword_urls: false
 decode_entities: false
 css_mode: 3
 code_container: '2'
@@ -12,6 +12,7 @@ tag_styles:
   2: 0
   4: 0
   8: 0
+  16: 0
 language:
   php:
     enabled: true
@@ -49,3 +50,4 @@ language:
     tags: twig
 _core:
   default_config_hash: rFxYA6H7ZH3mYsXr2lgP8oCdXvPXiCTr0Hjaxgu5Mts
+tab_width: null

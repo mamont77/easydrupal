@@ -1,0 +1,31 @@
+uuid: 307d25fd-0a7f-4712-8f26-90b56b9e33a8
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - system
+  theme:
+    - seven
+_core:
+  default_config_hash: wDR9JKEATSWldBjw8du8s3G2zjEYeQf88nlld11hMLo
+id: seven_breadcrumbs
+theme: seven
+region: breadcrumb
+weight: -5
+provider: null
+plugin: system_breadcrumb_block
+settings:
+  id: system_breadcrumb_block
+  label: Breadcrumbs
+  provider: system
+  label_display: '0'
+visibility:
+  node_type:
+    id: node_type
+    bundles:
+      article: article
+      project: project
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'

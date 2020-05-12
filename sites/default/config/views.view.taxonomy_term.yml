@@ -280,15 +280,15 @@ display:
       style:
         type: rss
         options:
-          description: ''
-          grouping: {  }
           uses_fields: false
+          description: 'A list of ways to make Drupal easier for a few of my target audiences: the non-technical admins and editors that run the day-to-day operations of a website. My list is getting huge, but the following ideas are always reliable.'
       row:
         type: node_rss
         options:
           relationship: none
           view_mode: default
-      display_extenders: {  }
+      display_extenders:
+        metatag_display_extender: {  }
     cache_metadata:
       contexts:
         - 'languages:language_interface'

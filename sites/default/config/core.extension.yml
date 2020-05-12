@@ -1,12 +1,12 @@
 module:
   addtoany: 0
   admin_toolbar: 0
+  admin_toolbar_search: 0
   admin_toolbar_tools: 0
   advagg: 0
   advagg_cdn: 0
   advagg_css_minify: 0
   advagg_js_minify: 0
-  advagg_mod: 0
   advupdate: 0
   automated_cron: 0
   backup_migrate: 0
@@ -58,6 +58,7 @@ module:
   libraries: 0
   link: 0
   linkit: 0
+  media: 0
   menu_trail_by_path: 0
   menu_ui: 0
   metatag: 0
@@ -93,6 +94,7 @@ module:
   simple_sitemap: 0
   slick: 0
   slick_ui: 0
+  sophron: 0
   sticky_sharrre_bar: 0
   system: 0
   taxonomy: 0
@@ -120,6 +122,7 @@ theme:
   classy: 0
   bootstrap: 0
   easydrupal: 0
+  seven: 0
   claro: 0
 _core:
   default_config_hash: m2GVq11UAOVuNgj8x0t5fMOPujpvQQ_zxLoaly1BMEU

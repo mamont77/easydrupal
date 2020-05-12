@@ -6,16 +6,38 @@ id: darly_db_backup
 label: 'Darly DB backup'
 config:
   namer:
-    filename: backup
+    filename: makedrupaleasy-backup
     timestamp: 1
     timestamp_format: Y-m-d\TH-i-s
+  compressor:
+    compression: gzip
   utils:
     site_offline: 0
   metadata:
     description: ''
   db_exclude:
     exclude_tables: {  }
-    nodata_tables: {  }
+    nodata_tables:
+      _pantheon_heartbeat: _pantheon_heartbeat
+      cache_advagg: cache_advagg
+      cache_advagg_minify: cache_advagg_minify
+      cache_bootstrap: cache_bootstrap
+      cache_config: cache_config
+      cache_container: cache_container
+      cache_data: cache_data
+      cache_default: cache_default
+      cache_discovery: cache_discovery
+      cache_dynamic_page_cache: cache_dynamic_page_cache
+      cache_entity: cache_entity
+      cache_file_mdm: cache_file_mdm
+      cache_library: cache_library
+      cache_menu: cache_menu
+      cache_page: cache_page
+      cache_render: cache_render
+      cache_rest: cache_rest
+      cache_toolbar: cache_toolbar
+      captcha_sessions: captcha_sessions
+      watchdog: watchdog
   private_files_exclude:
     exclude_filepaths:
       - backup_migrate

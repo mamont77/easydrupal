@@ -26,11 +26,11 @@ third_party_settings:
   ds:
     layout:
       id: ds_reset
-      path: modules/ds
-      library: ''
+      library: null
       disable_css: false
-      entity_classes: all_classes
+      entity_classes: no_classes
       settings:
+        label: ''
         wrappers:
           ds_content: div
         outer_wrapper: div
@@ -39,6 +39,7 @@ third_party_settings:
         link_custom: ''
         classes:
           layout_class: {  }
+          ds_content: {  }
     regions:
       ds_content:
         - field_image

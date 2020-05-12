@@ -342,17 +342,26 @@ display:
     display_title: Feed
     position: 2
     display_options:
-      display_extenders: {  }
+      display_extenders:
+        metatag_display_extender: {  }
       row:
         type: node_rss
       pager:
         type: some
       style:
         type: rss
+        options:
+          uses_fields: false
+          description: 'A list of ways to make Drupal easier for a few of my target audiences: the non-technical admins and editors that run the day-to-day operations of a website. My list is getting huge, but the following ideas are always reliable.'
       path: articles.xml
       displays:
         default: default
         page_1: page_1
+      title: 'Articles Feed'
+      defaults:
+        title: false
+        sitename_title: false
+      sitename_title: true
     cache_metadata:
       max-age: -1
       contexts:

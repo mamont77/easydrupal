@@ -12,8 +12,10 @@ dependencies:
     - field.field.node.project.field_project_images
     - field.field.node.project.field_project_url
     - field.field.node.project.field_skills
+    - image.style.project_slider_default
     - node.type.project
     - responsive_image.styles.project_logo
+    - responsive_image.styles.project_slider
   module:
     - datetime
     - ds
@@ -27,18 +29,18 @@ third_party_settings:
   ds:
     layout:
       id: bs_2col_stacked
-      path: modules/bootstrap_layouts
-      library: ''
+      library: null
       disable_css: false
       entity_classes: no_classes
       settings:
+        label: ''
         layout:
           wrapper: div
           classes:
             clearfix: clearfix
             row: row
-          attributes: ''
           add_layout_class: 1
+          attributes: ''
         regions:
           top:
             wrapper: div
@@ -76,6 +78,8 @@ third_party_settings:
         - field_project_url
       bottom:
         - field_project_images
+      top:
+        - field_meta_tags
 id: node.project.default
 targetEntityType: node
 bundle: project
@@ -126,7 +130,7 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: metatag_empty_formatter
-    region: content
+    region: top
   field_project_images:
     weight: 6
     label: hidden
@@ -137,11 +141,11 @@ content:
       skin: default
       skin_thumbnail: ''
       image_style: project_slider_default
-      thumbnail_style: ''
       responsive_image_style: project_slider
       thumbnail_effect: ''
       thumbnail_position: ''
       media_switch: ''
+      thumbnail_style: ''
       ratio: ''
       grid: null
       grid_medium: null
@@ -153,31 +157,8 @@ content:
         alt: alt
         title: '0'
       cache: 0
-      sizes: ''
-      breakpoints:
-        xs:
-          image_style: ''
-          width: ''
-          breakpoint: ''
-        sm:
-          image_style: ''
-          width: ''
-          breakpoint: ''
-        md:
-          image_style: ''
-          width: ''
-          breakpoint: ''
-        lg:
-          image_style: ''
-          width: ''
-          breakpoint: ''
-        xl:
-          image_style: ''
-          width: ''
-          breakpoint: ''
       current_view_mode: default
       background: false
-      grid_header: ''
       preserve_keys: false
       override: false
       overridables:
@@ -191,13 +172,17 @@ content:
         variableWidth: '0'
       skin_arrows: ''
       skin_dots: ''
-      iframe_lazy: true
+      fx: ''
       icon: ''
       view_mode: ''
       box_caption: ''
       box_caption_custom: ''
-      box_style: ''
       box_media_style: ''
+      box_style: ''
+      _uri: ''
+      breakpoints: {  }
+      sizes: ''
+      grid_header: ''
     third_party_settings:
       ds:
         ds_limit: ''

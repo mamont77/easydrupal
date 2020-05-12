@@ -17,4 +17,5 @@ permissions:
   - 'search content'
   - 'use text format restricted_html'
   - 'view disqus comments'
+  - 'view media'
   - 'vote on node:article:field_vote'
