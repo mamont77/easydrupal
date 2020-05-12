@@ -18,10 +18,7 @@ class BlazyViews {
       $plugin_id = $view->getStyle()->getPluginId();
       $settings = $blazy->mergedViewsSettings();
       $load = $blazy->blazyManager()->attach($settings);
-
-      // Enforce Blazy to work with hidden element such as with EB selection.
-      $load['drupalSettings']['blazy']['loadInvisible'] = TRUE;
-      $view->element['#attached'] = isset($view->element['#attached']) ? NestedArray::mergeDeep($view->element['#attached'], $load) : $load;
+      $view->element['#attached'] = empty($view->element['#attached']) ? $load : NestedArray::mergeDeep($view->element['#attached'], $load);
 
       $grid = $plugin_id == 'blazy';
       if ($options = $view->getStyle()->options) {
@@ -30,12 +27,8 @@ class BlazyViews {
 
       // Prevents dup [data-LIGHTBOX-gallery] if the Views style supports Grid.
       if (!$grid) {
-        $view->element['#attributes']['class'][] = 'blazy';
-        $view->element['#attributes']['data-blazy'] = TRUE;
-        if (!empty($settings['media_switch'])) {
-          $switch = str_replace('_', '-', $settings['media_switch']);
-          $view->element['#attributes']['data-' . $switch . '-gallery'] = TRUE;
-        }
+        $view->element['#attributes'] = empty($view->element['#attributes']) ? [] : $view->element['#attributes'];
+        Blazy::containerAttributes($view->element['#attributes'], $settings);
       }
     }
   }
@@ -50,6 +43,22 @@ class BlazyViews {
       }
     }
     return FALSE;
+  }
+
+  /**
+   * Implements hook_preprocess_views_view().
+   */
+  public static function preprocessViewsView(array &$variables, $lightboxes) {
+    preg_match('~blazy--(.*?)-gallery~', $variables['css_class'], $matches);
+    $lightbox = $matches[1] ? str_replace('-', '_', $matches[1]) : FALSE;
+
+    // Given blazy--photoswipe-gallery, adds the [data-photoswipe-gallery], etc.
+    if ($lightbox && in_array($lightbox, $lightboxes)) {
+      $settings['namespace'] = 'blazy';
+      $settings['media_switch'] = $matches[1];
+      $variables['attributes'] = empty($variables['attributes']) ? [] : $variables['attributes'];
+      Blazy::containerAttributes($variables['attributes'], $settings);
+    }
   }
 
 }

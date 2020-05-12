@@ -2030,43 +2030,37 @@
     },
     {
         "name": "drupal/blazy",
-        "version": "1.0.0-rc5",
-        "version_normalized": "1.0.0.0-RC5",
+        "version": "2.1.0",
+        "version_normalized": "2.1.0.0",
         "source": {
             "type": "git",
             "url": "https://git.drupalcode.org/project/blazy.git",
-            "reference": "8.x-1.0-rc5"
+            "reference": "8.x-2.1"
         },
         "dist": {
             "type": "zip",
-            "url": "https://ftp.drupal.org/files/projects/blazy-8.x-1.0-rc5.zip",
-            "reference": "8.x-1.0-rc5",
-            "shasum": "ed08f3050b394b95d4febba521949e582e3d7a12"
+            "url": "https://ftp.drupal.org/files/projects/blazy-8.x-2.1.zip",
+            "reference": "8.x-2.1",
+            "shasum": "bbdc3d9b5a49dca8e59373fd80739db84f8fa64a"
         },
         "require": {
-            "drupal/core": "*"
-        },
-        "require-dev": {
-            "drupal/video_embed_media": "*"
+            "drupal/core": "^8.8 || ^9"
         },
         "type": "drupal-module",
         "extra": {
-            "branch-alias": {
-                "dev-1.x": "1.x-dev"
-            },
             "drupal": {
-                "version": "8.x-1.0-rc5",
-                "datestamp": "1577785387",
+                "version": "8.x-2.1",
+                "datestamp": "1589112982",
                 "security-coverage": {
-                    "status": "not-covered",
-                    "message": "RC releases are not covered by Drupal security advisories."
+                    "status": "covered",
+                    "message": "Covered by Drupal's security advisory policy"
                 }
             }
         },
         "installation-source": "dist",
         "notification-url": "https://packages.drupal.org/8/downloads",
         "license": [
-            "GPL-2.0+"
+            "GPL-2.0-or-later"
         ],
         "authors": [
             {
@@ -2078,6 +2072,10 @@
                 "name": "Contributors",
                 "homepage": "https://www.drupal.org/node/2663268/committers",
                 "role": "Contributor"
+            },
+            {
+                "name": "geek-merlin",
+                "homepage": "https://www.drupal.org/user/229048"
             },
             {
                 "name": "sun",
@@ -2092,7 +2090,7 @@
             "lazyload"
         ],
         "support": {
-            "source": "http://cgit.drupalcode.org/blazy",
+            "source": "https://git.drupalcode.org/project/blazy",
             "issues": "https://drupal.org/project/issues/blazy"
         }
     },
@@ -4949,34 +4947,28 @@
     },
     {
         "name": "drupal/slick",
-        "version": "1.2.0",
-        "version_normalized": "1.2.0.0",
+        "version": "2.2.0",
+        "version_normalized": "2.2.0.0",
         "source": {
             "type": "git",
             "url": "https://git.drupalcode.org/project/slick.git",
-            "reference": "8.x-1.2"
+            "reference": "8.x-2.2"
         },
         "dist": {
             "type": "zip",
-            "url": "https://ftp.drupal.org/files/projects/slick-8.x-1.2.zip",
-            "reference": "8.x-1.2",
-            "shasum": "55b18efce0d4f828cf476bab4b9b2654b9bda86f"
+            "url": "https://ftp.drupal.org/files/projects/slick-8.x-2.2.zip",
+            "reference": "8.x-2.2",
+            "shasum": "789395b52697b6cee27648e478c4e579eee9540b"
         },
         "require": {
-            "drupal/blazy": "~1.0",
-            "drupal/core": "~8.0"
-        },
-        "require-dev": {
-            "drupal/video_embed_media": "*"
+            "drupal/blazy": "~2.0",
+            "drupal/core": "^8.8 || ^9"
         },
         "type": "drupal-module",
         "extra": {
-            "branch-alias": {
-                "dev-1.x": "1.x-dev"
-            },
             "drupal": {
-                "version": "8.x-1.2",
-                "datestamp": "1577872687",
+                "version": "8.x-2.2",
+                "datestamp": "1588861104",
                 "security-coverage": {
                     "status": "covered",
                     "message": "Covered by Drupal's security advisory policy"
@@ -4986,12 +4978,13 @@
         "installation-source": "dist",
         "notification-url": "https://packages.drupal.org/8/downloads",
         "license": [
-            "GPL-2.0+"
+            "GPL-2.0-or-later"
         ],
         "authors": [
             {
-                "name": "arshadcn",
-                "homepage": "https://www.drupal.org/user/571032"
+                "name": "Contributors",
+                "homepage": "https://www.drupal.org/node/2232779/committers",
+                "role": "Contributors"
             },
             {
                 "name": "gausarts",
@@ -5010,7 +5003,7 @@
             "slideshow"
         ],
         "support": {
-            "source": "http://cgit.drupalcode.org/slick",
+            "source": "https://git.drupalcode.org/project/slick",
             "issues": "https://drupal.org/project/issues/slick"
         }
     },

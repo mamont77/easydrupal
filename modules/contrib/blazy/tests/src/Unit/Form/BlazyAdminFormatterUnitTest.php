@@ -36,9 +36,9 @@ class BlazyAdminFormatterUnitTest extends UnitTestCase {
     $this->setUpUnitServices();
     $this->setUpUnitContainer();
 
-    $this->stringTranslation = $this->getMock('Drupal\Core\StringTranslation\TranslationInterface');
-    $this->entityDisplayRepository = $this->getMock('Drupal\Core\Entity\EntityDisplayRepositoryInterface');
-    $this->typedConfig = $this->getMock('Drupal\Core\Config\TypedConfigManagerInterface');
+    $this->stringTranslation = $this->createMock('Drupal\Core\StringTranslation\TranslationInterface');
+    $this->entityDisplayRepository = $this->createMock('Drupal\Core\Entity\EntityDisplayRepositoryInterface');
+    $this->typedConfig = $this->createMock('Drupal\Core\Config\TypedConfigManagerInterface');
     $this->dateFormatter = $this->getMockBuilder('Drupal\Core\Datetime\DateFormatter')
       ->disableOriginalConstructor()
       ->getMock();
@@ -48,12 +48,14 @@ class BlazyAdminFormatterUnitTest extends UnitTestCase {
     $container->set('config.typed', $this->typedConfig);
     $container->set('string_translation', $this->getStringTranslationStub());
     $container->set('date.formatter', $this->dateFormatter);
+    $container->set('blazy.manager', $this->blazyManager);
 
     \Drupal::setContainer($container);
 
     $this->blazyAdminFormatter = new BlazyAdminFormatter(
       $this->entityDisplayRepository,
       $this->typedConfig,
+      $this->dateFormatter,
       $this->blazyManager
     );
   }
@@ -64,7 +66,6 @@ class BlazyAdminFormatterUnitTest extends UnitTestCase {
    * @covers ::imageStyleForm
    * @covers ::mediaSwitchForm
    * @covers ::gridForm
-   * @covers ::breakpointsForm
    * @covers ::closingForm
    * @covers ::finalizeForm
    */
@@ -107,7 +108,6 @@ class BlazyAdminFormatterUnitTest extends UnitTestCase {
     $settings['overridables']           = ['foo' => 'foo', 'bar' => '0'];
     $settings['responsive_image_style'] = $responsive_image_style;
     $settings['caption']                = ['alt' => 'alt', 'title' => 'title'];
-    $settings['breakpoints']            = $this->getDataBreakpoints(TRUE);
 
     $definition['settings'] = $use_settings ? $settings : [];
 
