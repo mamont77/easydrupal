@@ -3592,23 +3592,23 @@
     },
     {
         "name": "drupal/file_mdm",
-        "version": "2.0.0",
-        "version_normalized": "2.0.0.0",
+        "version": "2.1.0",
+        "version_normalized": "2.1.0.0",
         "source": {
             "type": "git",
             "url": "https://git.drupalcode.org/project/file_mdm.git",
-            "reference": "8.x-2.0"
+            "reference": "8.x-2.1"
         },
         "dist": {
             "type": "zip",
-            "url": "https://ftp.drupal.org/files/projects/file_mdm-8.x-2.0.zip",
-            "reference": "8.x-2.0",
-            "shasum": "3dba101346aa1fa6fb1078ce32d12a4827a3e737"
+            "url": "https://ftp.drupal.org/files/projects/file_mdm-8.x-2.1.zip",
+            "reference": "8.x-2.1",
+            "shasum": "5c3d75622299ebddc0e8456bb08bb371da8771bd"
         },
         "require": {
             "drupal/core": "^8.8 || ^9",
-            "lsolesen/pel": "^0.9.7",
-            "phenx/php-font-lib": "^0.5.1",
+            "lsolesen/pel": "^0.9.8",
+            "phenx/php-font-lib": "^0.5.2",
             "php": ">=7"
         },
         "require-dev": {
@@ -3616,12 +3616,9 @@
         },
         "type": "drupal-module",
         "extra": {
-            "branch-alias": {
-                "dev-2.x": "2.x-dev"
-            },
             "drupal": {
-                "version": "8.x-2.0",
-                "datestamp": "1576506188",
+                "version": "8.x-2.1",
+                "datestamp": "1586801064",
                 "security-coverage": {
                     "status": "covered",
                     "message": "Covered by Drupal's security advisory policy"
@@ -6574,17 +6571,17 @@
     },
     {
         "name": "lsolesen/pel",
-        "version": "0.9.7",
-        "version_normalized": "0.9.7.0",
+        "version": "0.9.8",
+        "version_normalized": "0.9.8.0",
         "source": {
             "type": "git",
             "url": "https://github.com/pel/pel.git",
-            "reference": "0e7b8717ea681fc682749c4b73226c4c6fcc7362"
+            "reference": "92da891eaeeabbb00bcd09e0cea53796cf9ca967"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/pel/pel/zipball/0e7b8717ea681fc682749c4b73226c4c6fcc7362",
-            "reference": "0e7b8717ea681fc682749c4b73226c4c6fcc7362",
+            "url": "https://api.github.com/repos/pel/pel/zipball/92da891eaeeabbb00bcd09e0cea53796cf9ca967",
+            "reference": "92da891eaeeabbb00bcd09e0cea53796cf9ca967",
             "shasum": ""
         },
         "require": {
@@ -6596,7 +6593,7 @@
             "satooshi/php-coveralls": "1.0.*",
             "squizlabs/php_codesniffer": "^3.0.0"
         },
-        "time": "2019-12-03T15:35:01+00:00",
+        "time": "2020-02-11T12:05:42+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -7116,23 +7113,23 @@
     },
     {
         "name": "phenx/php-font-lib",
-        "version": "0.5.1",
-        "version_normalized": "0.5.1.0",
+        "version": "0.5.2",
+        "version_normalized": "0.5.2.0",
         "source": {
             "type": "git",
             "url": "https://github.com/PhenX/php-font-lib.git",
-            "reference": "760148820110a1ae0936e5cc35851e25a938bc97"
+            "reference": "ca6ad461f032145fff5971b5985e5af9e7fa88d8"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/PhenX/php-font-lib/zipball/760148820110a1ae0936e5cc35851e25a938bc97",
-            "reference": "760148820110a1ae0936e5cc35851e25a938bc97",
+            "url": "https://api.github.com/repos/PhenX/php-font-lib/zipball/ca6ad461f032145fff5971b5985e5af9e7fa88d8",
+            "reference": "ca6ad461f032145fff5971b5985e5af9e7fa88d8",
             "shasum": ""
         },
         "require-dev": {
-            "phpunit/phpunit": "^4.8"
+            "phpunit/phpunit": "^4.8.35 || ^5 || ^6 || ^7"
         },
-        "time": "2017-09-13T16:14:37+00:00",
+        "time": "2020-03-08T15:31:32+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
