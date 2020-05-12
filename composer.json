@@ -142,6 +142,9 @@
         "patches": {
             "drupal/captcha": {
                 "Captcha Session ID broken with cacheable captcha backends": "https://www.drupal.org/files/issues/2019-12-11/3089263-24.captcha.Captcha-Session-ID-broken-with-cacheable-captcha-backends.patch"
+            },
+            "drupal/blazy": {
+                "The service \"blazy.oembed\" has a dependency on a non-existent service \"media.oembed.resource_fetcher\"": "https://www.drupal.org/files/issues/2020-05-05/3046291-27.patch"
             }
         }
     }

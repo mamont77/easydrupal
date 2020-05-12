@@ -2055,6 +2055,9 @@
                     "status": "covered",
                     "message": "Covered by Drupal's security advisory policy"
                 }
+            },
+            "patches_applied": {
+                "The service \"blazy.oembed\" has a dependency on a non-existent service \"media.oembed.resource_fetcher\"": "https://www.drupal.org/files/issues/2020-05-05/3046291-27.patch"
             }
         },
         "installation-source": "dist",
