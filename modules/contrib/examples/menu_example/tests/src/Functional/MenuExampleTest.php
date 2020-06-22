@@ -16,6 +16,11 @@ use Drupal\Core\Url;
 class MenuExampleTest extends BrowserTestBase {
 
   /**
+   * {@inheritdoc}
+   */
+  protected $defaultTheme = 'stark';
+
+  /**
    * Modules to enable.
    *
    * @var array

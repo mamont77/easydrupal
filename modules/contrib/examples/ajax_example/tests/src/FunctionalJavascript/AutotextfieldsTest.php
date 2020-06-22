@@ -15,6 +15,11 @@ class AutotextfieldsTest extends WebDriverTestBase {
   /**
    * {@inheritdoc}
    */
+  protected $defaultTheme = 'stark';
+
+  /**
+   * {@inheritdoc}
+   */
   public static $modules = ['ajax_example'];
 
   /**
@@ -49,7 +54,7 @@ class AutotextfieldsTest extends WebDriverTestBase {
     // use drupalPostForm(), because when we post the form, it will be rebuilt.
     // We are testing the form state after AJAX has modified it, so we must
     // preserve that.
-    $page->findField('first_name')->setValue('Dries');
+    $page->fillField('first_name', 'Dries');
     $page->pressButton('Click Me');
     $assert->pageTextContains('Submit handler: First name: Dries Last name: n/a');
 
@@ -61,8 +66,8 @@ class AutotextfieldsTest extends WebDriverTestBase {
     $assert->assertWaitOnAjaxRequest();
     $assert->fieldExists('last_name');
     // Submit the form.
-    $page->findField('first_name')->setValue('Dries');
-    $page->findField('last_name')->setValue('Buytaert');
+    $page->fillField('first_name', 'Dries');
+    $page->fillField('last_name', 'Buytaert');
     $page->pressButton('Click Me');
     $assert->pageTextContains('Submit handler: First name: Dries Last name: Buytaert');
 
@@ -72,7 +77,7 @@ class AutotextfieldsTest extends WebDriverTestBase {
     $assert->fieldNotExists('first_name');
     $assert->fieldExists('last_name');
     // Submit the form.
-    $page->findField('last_name')->setValue('Buytaert');
+    $page->fillField('last_name', 'Buytaert');
     $page->pressButton('Click Me');
     $assert->pageTextContains('Submit handler: First name: n/a Last name: Buytaert');
   }

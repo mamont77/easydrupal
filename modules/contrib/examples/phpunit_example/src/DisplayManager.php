@@ -17,6 +17,11 @@ namespace Drupal\phpunit_example;
  */
 class DisplayManager {
 
+  /**
+   * DisplayInfoInterface items.
+   *
+   * @var array
+   */
   protected $items;
 
   /**

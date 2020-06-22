@@ -14,7 +14,13 @@ use Drupal\Tests\examples\Functional\ExamplesBrowserTestBase;
  * @group examples
  */
 class EmailExampleTest extends ExamplesBrowserTestBase {
+
   use AssertMailTrait;
+
+  /**
+   * {@inheritdoc}
+   */
+  protected $defaultTheme = 'stark';
 
   /**
    * Modules to enable.

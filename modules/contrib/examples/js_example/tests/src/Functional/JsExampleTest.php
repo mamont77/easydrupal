@@ -15,6 +15,11 @@ use Drupal\Tests\examples\Functional\ExamplesBrowserTestBase;
 class JsExampleTest extends ExamplesBrowserTestBase {
 
   /**
+   * {@inheritdoc}
+   */
+  protected $defaultTheme = 'stark';
+
+  /**
    * Modules to install.
    *
    * @var array

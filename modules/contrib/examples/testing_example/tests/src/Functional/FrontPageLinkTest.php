@@ -7,13 +7,23 @@ use Drupal\Tests\BrowserTestBase;
 /**
  * Tests for the existence of links on the front page.
  *
+ * This test declares that the 'standard' profile should be used when installing
+ * Drupal. Because the standard profile also specifies which theme to install,
+ * Bartik, we don't need to specify a $defaultTheme like we do in other
+ * functional tests.
+ *
  * This test is meant to support a Drupalize.me tutorial.
  *
  * @group testing_example
  *
- * @see Drupal\Tests\testing_example\Functional\FrontPageLinkDependenciesTest
+ * @see \Drupal\Tests\testing_example\Functional\FrontPageLinkDependenciesTest
  */
 class FrontPageLinkTest extends BrowserTestBase {
+
+  /**
+   * {@inheritdoc}
+   */
+  protected $defaultTheme = 'stark';
 
   /**
    * {@inheritdoc}

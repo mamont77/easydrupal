@@ -369,9 +369,9 @@ class FileExampleReadWriteForm extends FormBase {
    * The key functions used here are:
    * - file_save_data(), which takes a buffer and saves it to a named file and
    *   also creates a tracking record in the database and returns a file object.
-   *   In this function we use FILE_EXISTS_RENAME (the default) as the argument,
-   *   which means that if there's an existing file, create a new non-colliding
-   *   filename and use it.
+   *   In this function we use FileSystemInterface::EXISTS_RENAME (the default)
+   *   as the argument, which means that if there's an existing file, create a
+   *   new non-colliding filename and use it.
    * - file_create_url(), which converts a URI in the form public://junk.txt or
    *   private://something/test.txt into a URL like
    *   http://example.com/sites/default/files/junk.txt.
@@ -389,7 +389,7 @@ class FileExampleReadWriteForm extends FormBase {
     $uri = !empty($form_values['destination']) ? $form_values['destination'] : NULL;
 
     // Managed operations work with a file object.
-    $file_object = \file_save_data($data, $uri, FILE_EXISTS_RENAME);
+    $file_object = \file_save_data($data, $uri, FileSystemInterface::EXISTS_RENAME);
     if (!empty($file_object)) {
       $url = $this->getExternalUrl($file_object);
       $this->setDefaultFile($file_object->getFileUri());
@@ -429,9 +429,9 @@ class FileExampleReadWriteForm extends FormBase {
    * The key functions used here are:
    * - FileSystemInterface::saveData(), which takes a buffer and saves it to a
    *   named file, but does not create any kind of tracking record in the
-   *   database. This example uses FILE_EXISTS_REPLACE for the third argument,
-   *   meaning that if there's an existing file at this location, it should be
-   *   replaced.
+   *   database. This example uses FileSystemInterface::EXISTS_REPLACE for the
+   *   third argument, meaning that if there's an existing file at this
+   *   location, it should be replaced.
    * - file_create_url(), which converts a URI in the form public://junk.txt or
    *   private://something/test.txt into a URL like
    *   http://example.com/sites/default/files/junk.txt.
@@ -449,7 +449,7 @@ class FileExampleReadWriteForm extends FormBase {
     $destination = !empty($form_values['destination']) ? $form_values['destination'] : NULL;
 
     // With the unmanaged file we just get a filename back.
-    $filename = $this->fileSystem->saveData($data, $destination, FILE_EXISTS_REPLACE);
+    $filename = $this->fileSystem->saveData($data, $destination, FileSystemInterface::EXISTS_REPLACE);
     if ($filename) {
       $url = $this->getExternalUrl($filename);
       $this->setDefaultFile($filename);
@@ -687,17 +687,21 @@ class FileExampleReadWriteForm extends FormBase {
     $directory = $form_values['directory_name'];
 
     // The options passed to FileSystemInterface::prepareDirectory() are a
-    // bitmask, so we can specify either FILE_MODIFY_PERMISSIONS (set
-    // permissions on the directory), FILE_CREATE_DIRECTORY, or both together:
-    // FILE_MODIFY_PERMISSIONS | FILE_CREATE_DIRECTORY.
-    // FILE_MODIFY_PERMISSIONS will set the permissions of the directory by
-    // by default to 0755, or to the value of the variable
+    // bitmask, so we can specify
+    // either FileSystemInterface::MODIFY_PERMISSIONS
+    // (set permissions on the directory),
+    // FileSystemInterface::CREATE_DIRECTORY,
+    // or both together:
+    // FileSystemInterface::MODIFY_PERMISSIONS |
+    // FileSystemInterface::CREATE_DIRECTORY.
+    // FileSystemInterface::MODIFY_PERMISSIONS
+    // will set the permissions of the directory by default to 0755,
+    // or to the value of the variable
     // 'file_chmod_directory'.
-    if (!$this->fileSystem->prepareDirectory($directory, FILE_MODIFY_PERMISSIONS | FILE_CREATE_DIRECTORY)) {
+    if (!$this->fileSystem->prepareDirectory($directory, FileSystemInterface::MODIFY_PERMISSIONS | FileSystemInterface::CREATE_DIRECTORY)) {
       $this->messenger()->addMessage($this->t('Failed to create %directory.', ['%directory' => $directory]), 'error');
     }
     else {
-      $result = is_dir($directory);
       $this->messenger()->addMessage($this->t('Directory %directory is ready for use.', ['%directory' => $directory]));
       $this->setDefaultDirectory($directory);
     }
@@ -706,7 +710,7 @@ class FileExampleReadWriteForm extends FormBase {
   /**
    * Submit handler for directory deletion.
    *
-   * @see Drupal\Core\File\FileSystemInterface::deleteRecursive()
+   * @see \Drupal\Core\File\FileSystemInterface::deleteRecursive()
    */
   public function handleDirectoryDelete(array &$form, FormStateInterface $form_state) {
     $form_values = $form_state->getValues();
@@ -801,7 +805,7 @@ class FileExampleReadWriteForm extends FormBase {
    * Reset our stored data.
    */
   protected function clearStoredData() {
-    return $this->sessionHelper->cleanUpStore();
+    $this->sessionHelper->cleanUpStore();
   }
 
 }

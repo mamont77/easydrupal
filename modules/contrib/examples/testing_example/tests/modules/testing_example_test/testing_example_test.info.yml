@@ -5,4 +5,4 @@ description: "Mock module for the Testing Example module."
 package: Example modules
 core: 8.x
 dependencies:
-  - testing_example
+  - examples:testing_example

@@ -13,6 +13,11 @@ use Drupal\Core\Url;
 class StateDemoTest extends WebDriverTestBase {
 
   /**
+   * {@inheritdoc}
+   */
+  protected $defaultTheme = 'stark';
+
+  /**
    * Our module dependencies.
    *
    * @var string[]

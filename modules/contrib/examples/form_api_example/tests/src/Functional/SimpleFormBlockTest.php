@@ -12,6 +12,14 @@ use Drupal\Tests\BrowserTestBase;
  */
 class SimpleFormBlockTest extends BrowserTestBase {
 
+  /**
+   * {@inheritdoc}
+   */
+  protected $defaultTheme = 'stark';
+
+  /**
+   * {@inheritdoc}
+   */
   public static $modules = ['block', 'form_api_example'];
 
   /**

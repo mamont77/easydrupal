@@ -15,6 +15,11 @@ use Drupal\Tests\BrowserTestBase;
 class BlockExampleTest extends BrowserTestBase {
 
   /**
+   * {@inheritdoc}
+   */
+  protected $defaultTheme = 'stark';
+
+  /**
    * Modules to enable.
    *
    * @var array

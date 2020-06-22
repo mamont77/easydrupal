@@ -4,8 +4,8 @@ namespace Drupal\stream_wrapper_example\StreamWrapper;
 
 use Drupal\Component\Utility\Html;
 use Drupal\Core\StreamWrapper\StreamWrapperInterface;
+use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\Url;
-use Drupal\stream_wrapper_example\SessionHelper;
 
 /**
  * Example stream wrapper class to handle session:// streams.
@@ -75,6 +75,9 @@ use Drupal\stream_wrapper_example\SessionHelper;
  * @ingroup stream_wrapper_example
  */
 class SessionStreamWrapper implements StreamWrapperInterface {
+
+  use StringTranslationTrait;
+
   /**
    * The session helper service.
    *
@@ -147,17 +150,15 @@ class SessionStreamWrapper implements StreamWrapperInterface {
    * Note this cannot take any arguments; PHP's stream wrapper users
    * do not know how to supply them.
    *
-   * @param \Drupal\stream_wrapper_example\SessionHelper $sessionHelper
-   *   The session helper service.
-   *
    * @todo Refactor helper injection after https://www.drupal.org/node/3048126
    */
-  public function __construct(SessionHelper $sessionHelper) {
+  public function __construct() {
     // Dependency injection will not work here, since PHP doesn't give us a
     // chance to perform the injection. PHP creates the stream wrapper objects
     // automatically when certain file functions are called. Therefore we'll use
     // the \Drupal service locator.
-    $this->sessionHelper = $sessionHelper;
+    // phpcs:ignore
+    $this->sessionHelper = \Drupal::service('stream_wrapper_example.session_helper');
     $this->sessionHelper->setPath('.isadir.txt', TRUE);
     $this->streamMode = FALSE;
   }
@@ -169,14 +170,14 @@ class SessionStreamWrapper implements StreamWrapperInterface {
    *   The stream wrapper name.
    */
   public function getName() {
-    return t('Session stream wrapper example files');
+    return $this->t('Session stream wrapper example files');
   }
 
   /**
    * {@inheritdoc}
    */
   public function getDescription() {
-    return t('Simulated file system using your session storage. Not for real use!');
+    return $this->t('Simulated file system using your session storage. Not for real use!');
   }
 
   /**
@@ -634,7 +635,7 @@ class SessionStreamWrapper implements StreamWrapperInterface {
     $from_key = $this->sessionHelper->getPath($from_path);
     $path_info = $this->sessionHelper->getParentPath($to_path);
     $parent_path = $path_info['dirname'];
-    $new_file = $path_info['basename'];
+
     // We will only allow writing to a non-existent file
     // in an existing directory.
     if ($this->sessionHelper->checkPath($parent_path) && !$this->sessionHelper->checkPath($to_path)) {
@@ -657,7 +658,7 @@ class SessionStreamWrapper implements StreamWrapperInterface {
    * @see drupal_dirname()
    */
   public function dirname($uri = NULL) {
-    list($scheme, $target) = explode('://', $uri, 2);
+    list($scheme,) = explode('://', $uri, 2);
     $target = $this->getLocalPath($uri);
     if (strpos($target, '/')) {
       $dirname = preg_replace('@/[^/]*$@', '', $target);
@@ -748,9 +749,8 @@ class SessionStreamWrapper implements StreamWrapperInterface {
     $return = FALSE;
     $mode = 0;
 
-    $path_info = $this->sessionHelper->getParentPath($path);
     $key = $this->sessionHelper->getPath($path);
-    $key_name = $path_info['basename'];
+
     // We will call an array a directory and the root is always an array.
     if (is_array($key)) {
       // S_IFDIR means it's a directory.

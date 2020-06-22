@@ -14,6 +14,11 @@ use Drupal\Tests\examples\Functional\ExamplesBrowserTestBase;
 abstract class FieldExampleBrowserTestBase extends ExamplesBrowserTestBase {
 
   /**
+   * {@inheritdoc}
+   */
+  protected $defaultTheme = 'classy';
+
+  /**
    * The content type name.
    *
    * @var string

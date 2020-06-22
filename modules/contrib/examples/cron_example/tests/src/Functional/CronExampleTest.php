@@ -16,6 +16,11 @@ use Drupal\Tests\examples\Functional\ExamplesBrowserTestBase;
 class CronExampleTest extends ExamplesBrowserTestBase {
 
   /**
+   * {@inheritdoc}
+   */
+  protected $defaultTheme = 'stark';
+
+  /**
    * Modules to install.
    *
    * @var array

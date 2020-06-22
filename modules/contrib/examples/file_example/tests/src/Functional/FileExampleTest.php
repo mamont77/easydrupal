@@ -16,6 +16,11 @@ use Drupal\Tests\examples\Functional\ExamplesBrowserTestBase;
 class FileExampleTest extends ExamplesBrowserTestBase {
 
   /**
+   * {@inheritdoc}
+   */
+  protected $defaultTheme = 'classy';
+
+  /**
    * Modules to enable.
    *
    * @var array

@@ -18,6 +18,11 @@ class AjaxExampleMenuTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
+  protected $defaultTheme = 'stark';
+
+  /**
+   * {@inheritdoc}
+   */
   public static $modules = ['ajax_example'];
 
   /**
@@ -67,7 +72,7 @@ class AjaxExampleMenuTest extends BrowserTestBase {
     $routes = array_merge($routes_with_menu_links, $routes);
     foreach ($routes as $route => $buttons) {
       $url = Url::fromRoute($route);
-      if ($route == 'ajax_example.ajax_link_callback') {
+      if ($route === 'ajax_example.ajax_link_callback') {
         $url = Url::fromRoute($route, ['nojs' => 'nojs']);
       }
       $this->drupalGet($url);

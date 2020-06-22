@@ -17,7 +17,7 @@ js_example.weights:
 js_example.accordion:
   path: '/examples/js-example/accordion'
   defaults:
-    _title: 'JS Example: jQuery UI accordion'
+    _title: 'JS Example: JavaScript Accordion'
     _controller: '\Drupal\js_example\Controller\JsExampleController::getJsAccordionImplementation'
   requirements:
     _permission: 'access content'

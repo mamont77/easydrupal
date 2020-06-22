@@ -15,6 +15,14 @@ use Drupal\Core\Url;
  */
 class StreamWrapperExampleTest extends ExamplesBrowserTestBase {
 
+  /**
+   * {@inheritdoc}
+   */
+  protected $defaultTheme = 'stark';
+
+  /**
+   * {@inheritdoc}
+   */
   public static $modules = ['stream_wrapper_example'];
 
   /**

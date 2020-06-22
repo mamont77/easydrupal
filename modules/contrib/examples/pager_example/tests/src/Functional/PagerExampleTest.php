@@ -15,6 +15,11 @@ class PagerExampleTest extends ExamplesBrowserTestBase {
   /**
    * {@inheritdoc}
    */
+  protected $defaultTheme = 'stark';
+
+  /**
+   * {@inheritdoc}
+   */
   public static $modules = ['pager_example', 'node'];
 
   /**

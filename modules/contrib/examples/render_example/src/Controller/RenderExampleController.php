@@ -3,6 +3,8 @@
 namespace Drupal\render_example\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\Core\Render\Markup;
+use Drupal\Core\Security\TrustedCallbackInterface;
 use Drupal\examples\Utility\DescriptionTemplateTrait;
 use Drupal\Core\Link;
 use Drupal\Core\Render\Element;
@@ -19,7 +21,7 @@ use Drupal\Core\Session\AccountInterface;
  *
  * @ingroup render_example
  */
-class RenderExampleController extends ControllerBase {
+class RenderExampleController extends ControllerBase implements TrustedCallbackInterface {
 
   use DescriptionTemplateTrait;
 
@@ -274,7 +276,7 @@ class RenderExampleController extends ControllerBase {
 
     // Some properties define callbacks, which are callable functions or methods
     // that are triggered at specific points during the rendering pipeline.
-    $build['pre_render and post_render'] = [
+    $build['pre_render_and_post_render'] = [
       '#description' => $this->t('Example of using #pre_render and #post_render'),
       '#markup' => '<div style="color:green">' . $this->t('markup for pre_render and post_render example') . '</div>',
       // #pre_render callbacks are triggered early in the rendering process,
@@ -282,11 +284,11 @@ class RenderExampleController extends ControllerBase {
       // named, and all of its children. They can be used to do things like
       // conditionally alter the value of a property prior to the array being
       // rendered to HTML.
-      '#pre_render' => ['render_example_add_suffix'],
+      '#pre_render' => [static::class . '::preRenderAddSuffix'],
       // #post_render callbacks are triggered after the array has been rendered
       // and can operate on the rendered HTML. They also have access to the
       // original array for context.
-      '#post_render' => ['render_example_add_prefix'],
+      '#post_render' => [static::class . '::postRenderAddPrefix'],
     ];
 
     // Properties that contain callbacks can also reference methods on a class
@@ -397,7 +399,7 @@ class RenderExampleController extends ControllerBase {
           '#theme' => 'render_array',
           'description' => [
             '#type' => 'markup',
-            '#markup' => isset($build[$key]['#description']) ? $build[$key]['#description'] : '',
+            '#markup' => $build[$key]['#description'] ?? '',
           ],
           'rendered' => $build[$key],
           'unrendered' => [
@@ -493,6 +495,65 @@ class RenderExampleController extends ControllerBase {
     ];
 
     return $build;
+  }
+
+  /**
+   * Example '#post_render' callback function.
+   *
+   * Post render callbacks are triggered after an element has been rendered to
+   * HTML and can act upon the final rendered string.
+   *
+   * This function is used as a post render callback in
+   * Drupal\render_example\Controller\RenderExampleController::arrays().
+   *
+   * @param string $markup
+   *   The rendered element.
+   * @param array $element
+   *   The element which was rendered (for reference)
+   *
+   * @return string
+   *   Markup altered as necessary. In this case we add a little postscript.
+   *
+   * @see \Drupal\render_example\Controller\RenderExampleController::arrays()
+   */
+  public static function postRenderAddPrefix($markup, array $element) {
+    $markup .= '<div style="color:blue">This markup was added after rendering by a #post_render callback.</div>';
+    return $markup;
+  }
+
+  /**
+   * Example '#pre_render' function.
+   *
+   * Pre render callbacks are triggered prior to rendering an element to HTML
+   * and are given the chance to manipulate the renderable array. Any changes
+   * they make will be reflected in the final rendered HTML.
+   *
+   * We need to wrap suffix in a Markup object.
+   * Otherwise, style attribute will be removed by Xss
+   * @see \Drupal\Component\Utility\Xss::filter()
+   *
+   * This function is used as a post render callback in
+   * \Drupal\render_example\Controller\RenderExampleController::arrays().
+   *
+   * @param array $element
+   *   The element which will be rendered.
+   *
+   * @return array
+   *   The altered element. In this case we add a #prefix to it.
+   *
+   * @see \Drupal\render_example\Controller\RenderExampleController::arrays()
+   */
+  public static function preRenderAddSuffix(array $element) {
+    $element['#suffix'] = Markup::create('<div style="color:red">'
+      . t('This #suffix was added by a #pre_render callback.') . '</div>');
+    return $element;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public static function trustedCallbacks() {
+    return ['postRenderAddPrefix', 'preRenderAddSuffix', 'lazyBuilder'];
   }
 
 }

@@ -21,6 +21,11 @@ class EventsExampleTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
+  protected $defaultTheme = 'stark';
+
+  /**
+   * {@inheritdoc}
+   */
   public static $modules = ['events_example'];
 
   /**

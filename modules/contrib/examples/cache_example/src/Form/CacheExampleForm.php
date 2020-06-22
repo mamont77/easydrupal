@@ -2,15 +2,11 @@
 
 namespace Drupal\cache_example\Form;
 
-use Drupal\Core\Datetime\DateFormatterInterface;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Cache\Cache;
 use Drupal\Core\Cache\CacheBackendInterface;
-use Drupal\Core\Session\AccountProxyInterface;
-use Drupal\Core\StringTranslation\TranslationInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * Form with examples on how to use cache.
@@ -39,30 +35,11 @@ class CacheExampleForm extends FormBase {
   protected $dateFormatter;
 
   /**
-   * Dependency injection through the constructor.
+   * The file system service.
    *
-   * @param \Symfony\Component\HttpFoundation\RequestStack $request_stack
-   *   The request stack service.
-   * @param \Drupal\Core\StringTranslation\TranslationInterface $translation
-   *   The string translation service.
-   * @param \Drupal\Core\Session\AccountProxyInterface $current_user
-   *   The current active user service.
-   * @param \Drupal\Core\Cache\CacheBackendInterface $cache_backend
-   *   The cache object associated with the default bin.
+   * @var \Drupal\Core\File\FileSystemInterface
    */
-  public function __construct(
-    RequestStack $request_stack,
-    TranslationInterface $translation,
-    AccountProxyInterface $current_user,
-    CacheBackendInterface $cache_backend,
-    DateFormatterInterface $date_formatter
-  ) {
-    $this->setRequestStack($request_stack);
-    $this->setStringTranslation($translation);
-    $this->currentUser = $current_user;
-    $this->cacheBackend = $cache_backend;
-    $this->dateFormatter = $date_formatter;
-  }
+  protected $fileSystem;
 
   /**
    * {@inheritdoc}
@@ -73,14 +50,14 @@ class CacheExampleForm extends FormBase {
     // @link https://www.drupal.org/node/2203931.
     // Those services are passed in the $container through the static create
     // method.
-    $form = new static(
-      $container->get('request_stack'),
-      $container->get('string_translation'),
-      $container->get('current_user'),
-      $container->get('cache.default'),
-      $container->get('date.formatter')
-    );
-    $form->setMessenger($container->get('messenger'));
+    $form = new static();
+    $form->setRequestStack($container->get('request_stack'))
+      ->setStringTranslation($container->get('string_translation'))
+      ->setMessenger($container->get('messenger'));
+    $form->currentUser = $container->get('current_user');
+    $form->cacheBackend = $container->get('cache.default');
+    $form->dateFormatter = $container->get('date.formatter');
+    $form->fileSystem = $container->get('file_system');
     return $form;
   }
 
@@ -114,7 +91,7 @@ class CacheExampleForm extends FormBase {
     else {
       // If there was no cached data available we have to search filesystem.
       // Recursively get all .PHP files from Drupal's core folder.
-      $files_count = count(file_scan_directory('core', '/.php/'));
+      $files_count = count($this->fileSystem->scanDirectory('core', '/.php/'));
 
       // Since we have recalculated, we now need to store the new data into
       // cache. Complex data types will be automatically serialized before
@@ -163,7 +140,7 @@ class CacheExampleForm extends FormBase {
     ];
     $form['file_search']['remove_file_count'] = [
       '#type' => 'submit',
-      '#submit' => [[$this, 'expireFiles']],
+      '#submit' => ['::expireFiles'],
       '#value' => $this->t('Explicitly remove cached file count'),
     ];
 
@@ -205,7 +182,7 @@ class CacheExampleForm extends FormBase {
     $form['expiration_demo']['create_cache_item'] = [
       '#type' => 'submit',
       '#value' => $this->t('Create a cache item with this expiration'),
-      '#submit' => [[$this, 'createExpiringItem']],
+      '#submit' => ['::createExpiringItem'],
     ];
 
     $form['cache_clearing'] = [
@@ -227,7 +204,7 @@ class CacheExampleForm extends FormBase {
     $form['cache_clearing']['clear_expired'] = [
       '#type' => 'submit',
       '#value' => $this->t('Clear or expire cache'),
-      '#submit' => [[$this, 'cacheClearing']],
+      '#submit' => ['::cacheClearing'],
       '#access' => $this->currentUser->hasPermission('administer site configuration'),
     ];
 

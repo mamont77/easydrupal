@@ -16,6 +16,11 @@ class BatchExampleWebTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
+  protected $defaultTheme = 'stark';
+
+  /**
+   * {@inheritdoc}
+   */
   public static $modules = ['node', 'batch_example'];
 
   /**

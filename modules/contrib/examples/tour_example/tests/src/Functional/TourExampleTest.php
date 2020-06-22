@@ -18,6 +18,11 @@ use Drupal\Tests\tour\Functional\TourTestBasic;
 class TourExampleTest extends TourTestBasic {
 
   /**
+   * {@inheritdoc}
+   */
+  protected $defaultTheme = 'stark';
+
+  /**
    * Modules to enable.
    *
    * @var array

@@ -40,18 +40,24 @@ function examples_toolbar() {
   // Build a list of links for the menu.
   $links = [];
   foreach ($examples as $module => $route) {
-    // Get the module info (title, description) from Drupal.
-    $info = \Drupal::service('extension.list.module')->getExtensionInfo($module);
 
-    // If there's no info, the example isn't enabled, so don't display it.
-    if (!empty($info)) {
-      $links[$module] = [
-        'title' => Html::escape($info['name']),
-        'url' => Url::fromRoute($route),
-        'attributes' => [
-          'title' => Html::escape($info['description']),
-        ],
-      ];
+    // Check if module is installed or not.
+    if (\Drupal::moduleHandler()->moduleExists($module)) {
+
+      // Get the module info (title, description) from Drupal.
+      $info = \Drupal::service('extension.list.module')->getExtensionInfo($module);
+
+      // If there's no info, the example isn't enabled, so don't display it.
+      if (!empty($info)) {
+        $links[$module] = [
+          'title' => Html::escape($info['name']),
+          'url' => Url::fromRoute($route),
+          'attributes' => [
+            'class' => [Html::getClass($module)],
+            'title' => Html::escape($info['description']),
+          ],
+        ];
+      }
     }
   }
 

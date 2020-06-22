@@ -22,6 +22,11 @@ class ExampleFunctionalTest extends ExamplesBrowserTestBase {
   /**
    * {@inheritdoc}
    */
+  protected $defaultTheme = 'stable';
+
+  /**
+   * {@inheritdoc}
+   */
   public static $modules = ['node', 'user'];
 
   /**
@@ -113,7 +118,7 @@ class ExampleFunctionalTest extends ExamplesBrowserTestBase {
     // Find the title of the node itself.
     $nodeTitleElement = $this->getSession()
       ->getPage()
-      ->find('css', 'h1 span.field--name-title');
+      ->find('css', 'h1 span');
     $this->assertEquals($nodeTitleElement->getText(), $nodeTitle);
   }
 
@@ -156,7 +161,7 @@ class ExampleFunctionalTest extends ExamplesBrowserTestBase {
     // Find the title of the node itself.
     $nodeTitleElement = $this->getSession()
       ->getPage()
-      ->find('css', 'h1 span.field--name-title');
+      ->find('css', 'h1 span');
     $this->assertEquals($nodeTitleElement->getText(), $nodeTitle);
   }
 

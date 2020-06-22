@@ -17,6 +17,11 @@ use Drupal\Tests\BrowserTestBase;
 class RobotReferenceTest extends BrowserTestBase {
 
   /**
+   * {@inheritdoc}
+   */
+  protected $defaultTheme = 'stark';
+
+  /**
    * Modules to enable.
    *
    * @var array

@@ -5,6 +5,8 @@
  * Examples demonstrating the Drupal File API.
  */
 
+use Drupal\Core\StreamWrapper\StreamWrapperManager;
+
 /**
  * @defgroup file_example Example: Files
  * @ingroup examples
@@ -79,7 +81,8 @@
  * @see \Drupal\system\FileDownloadController::download()
  */
 function file_example_file_download($uri) {
-  $scheme = \Drupal::service('file_system')->uriScheme($uri);
+  $scheme = StreamWrapperManager::getScheme($uri);
+
   if (in_array($scheme, ['private', 'temporary', 'session'])) {
     $permission = "read $scheme files";
     $current_user = \Drupal::currentUser();

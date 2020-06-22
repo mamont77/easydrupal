@@ -18,9 +18,14 @@ use Drupal\Tests\BrowserTestBase;
  *
  * @group testing_example
  *
- * @see Drupal\Tests\testing_example\Functional\FrontPageLinkTest
+ * @see \Drupal\Tests\testing_example\Functional\FrontPageLinkTest
  */
 class FrontPageLinkDependenciesTest extends BrowserTestBase {
+
+  /**
+   * {@inheritdoc}
+   */
+  protected $defaultTheme = 'stark';
 
   /**
    * {@inheritdoc}

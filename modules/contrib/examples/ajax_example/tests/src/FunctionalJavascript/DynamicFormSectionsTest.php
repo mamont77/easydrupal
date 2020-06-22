@@ -10,9 +10,14 @@ use Drupal\FunctionalJavascriptTests\WebDriverTestBase;
  *
  * @group ajax_example
  *
- * @see Drupal\Tests\ajax_example\Functional\DynamicFormSectionsTest
+ * @see \Drupal\Tests\ajax_example\Functional\DynamicFormSectionsTest
  */
 class DynamicFormSectionsTest extends WebDriverTestBase {
+
+  /**
+   * {@inheritdoc}
+   */
+  protected $defaultTheme = 'classy';
 
   /**
    * {@inheritdoc}

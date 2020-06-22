@@ -21,6 +21,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class RobotFormBase extends EntityForm {
 
   /**
+   * An entity query factory for the robot entity type.
+   *
    * @var \Drupal\Core\Entity\EntityStorageInterface
    */
   protected $entityStorage;

@@ -16,6 +16,11 @@ use Drupal\Tests\examples\Functional\ExamplesBrowserTestBase;
 class FapiExampleTest extends ExamplesBrowserTestBase {
 
   /**
+   * {@inheritdoc}
+   */
+  protected $defaultTheme = 'stark';
+
+  /**
    * Our module dependencies.
    *
    * @var string[]
@@ -280,7 +285,7 @@ class FapiExampleTest extends ExamplesBrowserTestBase {
     $this->drupalGet($ajax_addmore_url);
     $this->assertResponse(200);
     // Verify that there is no remove button.
-    $this->assertFalse($this->xpath($button_xpath));
+    $this->assertEmpty($this->xpath($button_xpath));
 
     $name_one = 'John';
     $name_two = 'Smith';
@@ -294,9 +299,9 @@ class FapiExampleTest extends ExamplesBrowserTestBase {
     // Verify field-2 gets added.
     // and value of field-1 should retained.
     $this->assertFieldsByValue($this->xpath('//input[@id = "edit-names-fieldset-name-0"]'), $name_one);
-    $this->assertTrue($this->xpath('//input[@id = "edit-names-fieldset-name-1"]'));
+    $this->assertNotEmpty($this->xpath('//input[@id = "edit-names-fieldset-name-1"]'));
     // Verify that the remove button was added.
-    $this->assertTrue($this->xpath($button_xpath));
+    $this->assertNotEmpty($this->xpath($button_xpath));
 
     // Enter the value in field-2
     // and click on 'Add one more' button.
@@ -307,14 +312,14 @@ class FapiExampleTest extends ExamplesBrowserTestBase {
     // and value of field-1 and field-2 are retained.
     $this->assertFieldsByValue($this->xpath('//input[@id = "edit-names-fieldset-name-0"]'), $name_one);
     $this->assertFieldsByValue($this->xpath('//input[@id = "edit-names-fieldset-name-1"]'), $name_two);
-    $this->assertTrue($this->xpath('//input[@id = "edit-names-fieldset-name-2"]'));
+    $this->assertNotEmpty($this->xpath('//input[@id = "edit-names-fieldset-name-2"]'));
 
     // Click on "Remove one" button to test remove button works.
     // and value of field-1 and field-2 are retained.
     $this->drupalPostForm(NULL, NULL, 'Remove one');
     $this->assertFieldsByValue($this->xpath('//input[@id = "edit-names-fieldset-name-0"]'), $name_one);
     $this->assertFieldsByValue($this->xpath('//input[@id = "edit-names-fieldset-name-1"]'), $name_two);
-    $this->assertFalse($this->xpath('//input[@id = "edit-names-fieldset-name-2"]'));
+    $this->assertEmpty($this->xpath('//input[@id = "edit-names-fieldset-name-2"]'));
 
     // Submit the form and verify the results.
     $this->drupalPostForm(NULL, NULL, 'Submit');

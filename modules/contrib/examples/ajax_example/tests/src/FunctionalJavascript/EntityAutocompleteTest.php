@@ -15,6 +15,11 @@ class EntityAutocompleteTest extends WebDriverTestBase {
   /**
    * {@inheritdoc}
    */
+  protected $defaultTheme = 'stark';
+
+  /**
+   * {@inheritdoc}
+   */
   public static $modules = ['ajax_example'];
 
   /**
@@ -52,6 +57,7 @@ class EntityAutocompleteTest extends WebDriverTestBase {
     // We can cause the autocomplete to happen by setting the value in the
     // element.
     $autocomplete_field->setValue('b');
+    $this->getSession()->getDriver()->keyDown($autocomplete_field->getXpath(), ' ');
 
     // Wait for the autocomplete request to complete. Our code is much quicker
     // than the request time.

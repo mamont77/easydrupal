@@ -58,7 +58,9 @@ class DbtngExampleController extends ControllerBase {
       $this->t('Age'),
     ];
 
-    foreach ($entries = $this->repository->load() as $entry) {
+    $entries = $this->repository->load();
+
+    foreach ($entries as $entry) {
       // Sanitize each entry.
       $rows[] = array_map('Drupal\Component\Utility\Html::escape', (array) $entry);
     }
@@ -93,7 +95,10 @@ class DbtngExampleController extends ControllerBase {
     ];
 
     $rows = [];
-    foreach ($entries = $this->repository->advancedLoad() as $entry) {
+
+    $entries = $this->repository->advancedLoad();
+
+    foreach ($entries as $entry) {
       // Sanitize each entry.
       $rows[] = array_map('Drupal\Component\Utility\Html::escape', $entry);
     }

@@ -2,6 +2,7 @@
 
 namespace Drupal\Tests\examples\Functional;
 
+use Drupal\Component\Utility\Html;
 use Drupal\Core\Url;
 
 /**
@@ -12,6 +13,11 @@ use Drupal\Core\Url;
  * @ingroup examples
  */
 class ExamplesTest extends ExamplesBrowserTestBase {
+
+  /**
+   * {@inheritdoc}
+   */
+  protected $defaultTheme = 'stark';
 
   /**
    * Modules to install.
@@ -50,8 +56,8 @@ class ExamplesTest extends ExamplesBrowserTestBase {
     // toolbar.
     foreach (_examples_toolbar_routes() as $module => $route) {
       // Convert the module name to the HTML class.
-      $class = str_replace('_', '-', $module);
-      $xpath = "//li[@class=\"$class\"]";
+      $class = Html::getClass($module);
+      $xpath = "//li/a[@class=\"$class\"]";
 
       // Assert that the toolbar link item isn't present.
       $this->assertEmpty($this->xpath($xpath), 'Found li with this class: ' . $class);

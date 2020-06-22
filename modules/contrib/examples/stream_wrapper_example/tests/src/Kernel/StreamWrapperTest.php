@@ -46,7 +46,9 @@ class StreamWrapperTest extends KernelTestBase {
    * Test if the session scheme was actually registered.
    */
   public function testSchemeRegistered() {
-    $have_session_scheme = $this->container->get('file_system')->validScheme('session');
+    $have_session_scheme = $this->container
+      ->get('stream_wrapper_manager')
+      ->isValidScheme('session');
     $this->assertTrue($have_session_scheme, "System knows about our stream wrapper");
   }
 
@@ -55,15 +57,13 @@ class StreamWrapperTest extends KernelTestBase {
    */
   public function testReadWrite() {
     $this->resetStore();
-    $store = $this->getCurrentStore();
 
     $uri = 'session://drupal.txt';
 
-    $this->assertFalse(file_exists($uri), "File $uri should not exist yet.");
+    $this->assertFileNotExists($uri, "File $uri should not exist yet.");
     $handle = fopen($uri, 'wb');
     $this->assertNotEmpty($handle, "Handle for $uri should be non-empty.");
     $buffer = "Ain't seen nothin' yet!\n";
-    $len = strlen($buffer);
 
     // Original session class gets an error here,
     // "...stream_write wrote 10 bytes more data than requested".
@@ -73,12 +73,11 @@ class StreamWrapperTest extends KernelTestBase {
     error_reporting($old);
     $this->assertNotFalse($bytes_written, "Write to $uri succeeded.");
 
-    $rslt = fclose($handle);
-    $this->assertNotFalse($rslt, "Closed $uri.");
-    $this->assertTrue(file_exists($uri), "File $uri should now exist.");
-    $this->assertFalse(is_dir($uri), "$uri is not a directory.");
+    $result = fclose($handle);
+    $this->assertNotFalse($result, "Closed $uri.");
+    $this->assertFileExists($uri, "File $uri should now exist.");
+    $this->assertDirectoryNotExists($uri, "$uri is not a directory.");
     $this->assertTrue(is_file($uri), "$uri is a file.");
-    $size = filesize($uri);
 
     $contents = file_get_contents($uri);
     // The example implementation calls HTML::escape() on output. We reverse it
@@ -95,34 +94,34 @@ class StreamWrapperTest extends KernelTestBase {
     $dir_uri = 'session://directory1/directory2';
     $sample_file = 'file.txt';
     $content = "Wrote this as a file?\n";
-    $dir2 = basename($dir_uri);
-    $dir1 = dirname($dir_uri);
 
-    $this->assertFalse(file_exists($dir1), "The outer dir $dir1 should not exist yet.");
+    $dir = dirname($dir_uri);
+
+    $this->assertFileNotExists($dir, "The outer dir $dir should not exist yet.");
     // We don't care about mode, since we don't support it.
-    $worked = mkdir($dir1);
-    $this->assertTrue(is_dir($dir1), "Directory $dir1 was created.");
-    $first_file_content = "This one is in the first directory.";
-    $uri = $dir1 . "/" . $sample_file;
+    $worked = mkdir($dir);
+    $this->assertDirectoryExists($dir, "Directory $dir was created.");
+    $first_file_content = 'This one is in the first directory.';
+    $uri = $dir . "/" . $sample_file;
     $bytes = file_put_contents($uri, $first_file_content);
     $this->assertNotFalse($bytes, "Wrote to $uri.\n");
-    $this->assertTrue(file_exists($uri), "File $uri actually exists.");
+    $this->assertFileExists($uri, "File $uri actually exists.");
     $got_back = file_get_contents($uri);
     $got_back = Html::decodeEntities($got_back);
-    $this->assertSame($first_file_content, $got_back, "Data in subdir made round trip.");
+    $this->assertSame($first_file_content, $got_back, 'Data in subdir made round trip.');
 
     // Now try down down nested.
-    $rslt = mkdir($dir_uri);
-    $this->assertTrue($rslt, "Nested dir got created.");
+    $result = mkdir($dir_uri);
+    $this->assertTrue($result, 'Nested dir got created.');
     $file_in_sub = $dir_uri . "/" . $sample_file;
     $bytes = file_put_contents($file_in_sub, $content);
-    $this->assertNotFalse($bytes, "File in nested dirs got written to.");
+    $this->assertNotFalse($bytes, 'File in nested dirs got written to.');
     $got_back = file_get_contents($file_in_sub);
     $got_back = Html::decodeEntities($got_back);
-    $this->assertSame($content, $got_back, "Data in subdir made round trip.");
+    $this->assertSame($content, $got_back, 'Data in subdir made round trip.');
     $worked = unlink($file_in_sub);
-    $this->assertTrue($worked, "Deleted file in subdir.");
-    $this->assertFalse(file_exists($file_in_sub), "File in subdir should not exist.");
+    $this->assertTrue($worked, 'Deleted file in subdir.');
+    $this->assertFileNotExists($file_in_sub, 'File in subdir should not exist.');
   }
 
   /**

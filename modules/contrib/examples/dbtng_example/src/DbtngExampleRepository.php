@@ -77,7 +77,7 @@ class DbtngExampleRepository {
         ->execute();
     }
     catch (\Exception $e) {
-      $this->messenger()->addMessage(t('Insert failed. Message = %message', [
+      $this->messenger()->addMessage($this->t('Insert failed. Message = %message', [
         '%message' => $e->getMessage(),
       ]), 'error');
     }
@@ -102,7 +102,7 @@ class DbtngExampleRepository {
         ->execute();
     }
     catch (\Exception $e) {
-      $this->messenger()->addMessage(t('Update failed. Message = %message, query= %query', [
+      $this->messenger()->addMessage($this->t('Update failed. Message = %message, query= %query', [
         '%message' => $e->getMessage(),
         '%query' => $e->query_string,
       ]

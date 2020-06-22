@@ -82,7 +82,7 @@ class AddClassTest extends UnitTestCase {
    *
    * @dataProvider addDataProvider
    *
-   * @see AddClassTest::addDataProvider()
+   * @see self::addDataProvider()
    */
   public function testAddWithDataProvider($expected, $a, $b) {
     $sut = new AddClass();
@@ -107,11 +107,11 @@ class AddClassTest extends UnitTestCase {
    *
    * @dataProvider addBadDataProvider
    *
-   * @see AddClassTest::addBadDataProvider()
+   * @see self::addBadDataProvider()
    */
   public function testAddWithBadDataProvider($a, $b) {
     $sut = new AddClass();
-    $this->setExpectedException(\InvalidArgumentException::class);
+    $this->expectException(\InvalidArgumentException::class);
     $sut->add($a, $b);
   }
 
@@ -133,7 +133,7 @@ class AddClassTest extends UnitTestCase {
    *   - $b
    *   - $expected
    *
-   * @see AddClassTest::testAddWithDataProvider()
+   * @see self::testAddWithDataProvider()
    */
   public function addDataProvider() {
     return [
@@ -152,7 +152,7 @@ class AddClassTest extends UnitTestCase {
    * not numeric, and we will generate some test data to prove that
    * this is what it actually does.
    *
-   * @see AddClassTest::testAddWithBadDataProvider()
+   * @see self::testAddWithBadDataProvider()
    */
   public function addBadDataProvider() {
     $bad_data = [];

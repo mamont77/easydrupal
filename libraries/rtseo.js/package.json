@@ -9,7 +9,7 @@
     "build": "browserify lib/index.js -o dist/rtseo.js"
   },
   "dependencies": {
-    "yoastseo": "1.40.0"
+    "yoastseo": "1.29.0"
   },
   "devDependencies": {
     "autoprefixer": "^6.4.0",

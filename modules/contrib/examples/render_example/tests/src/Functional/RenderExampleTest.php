@@ -18,6 +18,11 @@ class RenderExampleTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
+  protected $defaultTheme = 'bartik';
+
+  /**
+   * {@inheritdoc}
+   */
   public static $modules = ['render_example'];
 
   /**

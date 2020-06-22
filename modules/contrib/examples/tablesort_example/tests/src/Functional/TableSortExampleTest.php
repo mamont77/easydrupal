@@ -18,6 +18,11 @@ class TableSortExampleTest extends ExamplesBrowserTestBase {
   /**
    * {@inheritdoc}
    */
+  protected $defaultTheme = 'stark';
+
+  /**
+   * {@inheritdoc}
+   */
   public static $modules = ['tablesort_example', 'toolbar'];
 
   /**

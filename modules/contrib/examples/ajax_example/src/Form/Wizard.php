@@ -82,7 +82,7 @@ class Wizard extends FormBase {
         ];
         $form['step2'] = [
           '#type' => 'fieldset',
-          '#title' => t('Step 2: Street address info'),
+          '#title' => $this->t('Step 2: Street address info'),
         ];
         $form['step2']['address'] = [
           '#type' => 'textfield',

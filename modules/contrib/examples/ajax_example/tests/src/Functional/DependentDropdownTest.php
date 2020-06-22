@@ -20,6 +20,11 @@ class DependentDropdownTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
+  protected $defaultTheme = 'stark';
+
+  /**
+   * {@inheritdoc}
+   */
   public static $modules = ['ajax_example'];
 
   /**

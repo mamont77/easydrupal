@@ -13,6 +13,11 @@ use Drupal\Core\Url;
 class ModalFormTest extends WebDriverTestBase {
 
   /**
+   * {@inheritdoc}
+   */
+  protected $defaultTheme = 'classy';
+
+  /**
    * Our module dependencies.
    *
    * @var string[]

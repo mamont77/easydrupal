@@ -6,6 +6,8 @@ use Drupal\Tests\UnitTestCase;
 use Drupal\testing_example\Controller\ContrivedController;
 
 /**
+ * The class to test ContrivedController.
+ *
  * @group testing_example
  */
 class ContrivedControllerTest extends UnitTestCase {
@@ -20,6 +22,8 @@ class ContrivedControllerTest extends UnitTestCase {
   }
 
   /**
+   * Test add.
+   *
    * @dataProvider provideTestAdd
    */
   public function testAdd($expected, $first, $second) {
@@ -46,6 +50,8 @@ class ContrivedControllerTest extends UnitTestCase {
   }
 
   /**
+   * Test hand count.
+   *
    * @dataProvider provideTestHandCount
    */
   public function testHandCount($expected, $first, $second) {
@@ -88,6 +94,8 @@ class ContrivedControllerTest extends UnitTestCase {
   }
 
   /**
+   * Test hand count isolated.
+   *
    * @dataProvider providerTestHandCountIsolated
    */
   public function testHandCountIsolated($expected, $sum) {

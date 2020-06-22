@@ -15,6 +15,14 @@ use Drupal\Tests\BrowserTestBase;
  */
 class SessionExampleTest extends BrowserTestBase {
 
+  /**
+   * {@inheritdoc}
+   */
+  protected $defaultTheme = 'stark';
+
+  /**
+   * {@inheritdoc}
+   */
   public static $modules = ['session_example', 'block'];
 
   /**

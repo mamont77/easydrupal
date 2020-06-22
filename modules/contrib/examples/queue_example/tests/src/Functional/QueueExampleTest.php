@@ -14,6 +14,14 @@ use Drupal\Tests\BrowserTestBase;
  */
 class QueueExampleTest extends BrowserTestBase {
 
+  /**
+   * {@inheritdoc}
+   */
+  protected $defaultTheme = 'stark';
+
+  /**
+   * {@inheritdoc}
+   */
   public static $modules = ['queue_example'];
 
   /**

@@ -118,7 +118,7 @@ class QueueExampleForm extends FormBase {
     $form['queue_show'] = [
       '#type' => 'submit',
       '#value' => $this->t('Show queue'),
-      '#submit' => [[$this, 'submitShowQueue']],
+      '#submit' => ['::submitShowQueue'],
     ];
 
     $form['status_fieldset'] = [
@@ -160,7 +160,7 @@ class QueueExampleForm extends FormBase {
     $form['insert_fieldset']['add_item'] = [
       '#type' => 'submit',
       '#value' => $this->t('Insert into queue'),
-      '#submit' => [[$this, 'submitAddQueueItem']],
+      '#submit' => ['::submitAddQueueItem'],
     ];
 
     $form['claim_fieldset'] = [
@@ -184,25 +184,25 @@ class QueueExampleForm extends FormBase {
     $form['claim_fieldset']['claim_item'] = [
       '#type' => 'submit',
       '#value' => $this->t('Claim the next item from the queue'),
-      '#submit' => [[$this, 'submitClaimItem']],
+      '#submit' => ['::submitClaimItem'],
     ];
 
     $form['claim_fieldset']['claim_and_delete_item'] = [
       '#type' => 'submit',
       '#value' => $this->t('Claim the next item and delete it'),
-      '#submit' => [[$this, 'submitClaimDeleteItem']],
+      '#submit' => ['::submitClaimDeleteItem'],
     ];
 
     $form['claim_fieldset']['run_cron'] = [
       '#type' => 'submit',
       '#value' => $this->t('Run cron manually to expire claims'),
-      '#submit' => [[$this, 'submitRunCron']],
+      '#submit' => ['::submitRunCron'],
     ];
 
     $form['delete_queue'] = [
       '#type' => 'submit',
       '#value' => $this->t('Delete the queue and items in it'),
-      '#submit' => [[$this, 'submitDeleteQueue']],
+      '#submit' => ['::submitDeleteQueue'],
     ];
 
     return $form;

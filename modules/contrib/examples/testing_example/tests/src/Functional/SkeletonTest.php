@@ -55,6 +55,21 @@ use Drupal\Tests\BrowserTestBase;
 class SkeletonTest extends BrowserTestBase {
 
   /**
+   * The theme to install as the default for testing.
+   *
+   * When using the default testing install profile we need to specify
+   * which theme to use when running functional tests.
+   *
+   * For tests that do not rely on any specific markup, or at least not Drupal
+   * core markup, use 'stark'. For tests that rely on core markup use 'stable'.
+   *
+   * @link https://www.drupal.org/node/3083055
+   *
+   * @var string
+   */
+  protected $defaultTheme = 'stark';
+
+  /**
    * Modules to install.
    *
    * This array of modules will be enabled when the fixture Drupal site is

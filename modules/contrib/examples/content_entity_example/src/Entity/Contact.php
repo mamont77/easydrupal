@@ -269,6 +269,7 @@ class Contact extends ContentEntityBase implements ContactInterface {
         'type' => 'entity_reference_autocomplete',
         'settings' => [
           'match_operator' => 'CONTAINS',
+          'match_limit' => 10,
           'size' => 60,
           'placeholder' => '',
         ],

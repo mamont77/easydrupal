@@ -3,6 +3,7 @@
 namespace Drupal\Tests\content_entity_example\Functional;
 
 use Drupal\content_entity_example\Entity\Contact;
+use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Tests\examples\Functional\ExamplesBrowserTestBase;
 use Drupal\Core\Url;
 
@@ -16,6 +17,16 @@ use Drupal\Core\Url;
  */
 class ContentEntityExampleTest extends ExamplesBrowserTestBase {
 
+  use StringTranslationTrait;
+
+  /**
+   * {@inheritdoc}
+   */
+  protected $defaultTheme = 'stark';
+
+  /**
+   * {@inheritdoc}
+   */
   public static $modules = ['content_entity_example', 'block', 'field_ui'];
 
   /**
@@ -48,7 +59,7 @@ class ContentEntityExampleTest extends ExamplesBrowserTestBase {
     // WebUser can add entity content.
     $assert->linkExists('Add contact');
 
-    $this->clickLink(t('Add contact'));
+    $this->clickLink($this->t('Add contact'));
 
     $assert->fieldValueEquals('name[0][value]', '');
     $assert->fieldValueEquals('name[0][value]', '');

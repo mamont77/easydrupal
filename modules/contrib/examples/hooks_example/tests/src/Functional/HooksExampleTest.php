@@ -17,6 +17,11 @@ class HooksExampleTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
+  protected $defaultTheme = 'stark';
+
+  /**
+   * {@inheritdoc}
+   */
   public static $modules = ['help', 'hooks_example'];
 
   /**

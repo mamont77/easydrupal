@@ -35,6 +35,7 @@ class ProtectedPrivates {
     return $adder->add($a, $b);
   }
 
+  // phpcs:disable
   /**
    * A simple addition method with validity checking.
    *
@@ -53,5 +54,6 @@ class ProtectedPrivates {
     $adder = new AddClass();
     return $adder->add($a, $b);
   }
+  // phpcs:enable
 
 }

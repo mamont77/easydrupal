@@ -143,7 +143,8 @@ class SessionHelper {
    *   The path portion of a URI (i.e., without the SCHEME://).
    */
   public function clearPath($path) {
-    $store = $this->getStore();
+
+    $this->getStore();
     if ($this->checkPath($path)) {
       $path_info = $this->getParentPath($path);
       $store_info = $this->processPath($path_info['dirname']);
@@ -210,6 +211,9 @@ class SessionHelper {
    *
    * @param string $path
    *   Path into the store.
+   *
+   * @return bool
+   *   Existed or not.
    */
   public function checkPath($path) {
     $path_info = $this->getParentPath($path);

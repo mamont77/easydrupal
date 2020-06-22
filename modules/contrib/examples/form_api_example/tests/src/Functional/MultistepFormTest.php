@@ -13,6 +13,14 @@ use Drupal\Tests\BrowserTestBase;
  */
 class MultistepFormTest extends BrowserTestBase {
 
+  /**
+   * {@inheritdoc}
+   */
+  protected $defaultTheme = 'classy';
+
+  /**
+   * {@inheritdoc}
+   */
   public static $modules = ['form_api_example'];
 
   /**

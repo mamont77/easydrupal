@@ -15,6 +15,14 @@ use Drupal\KernelTests\KernelTestBase;
  */
 class ContactTest extends KernelTestBase {
 
+  /**
+   * {@inheritdoc}
+   */
+  protected $defaultTheme = 'stark';
+
+  /**
+   * {@inheritdoc}
+   */
   protected static $modules = ['content_entity_example', 'options', 'user'];
 
   /**

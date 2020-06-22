@@ -67,7 +67,7 @@ class Autotextfields extends FormBase {
     $form['textfields_container']['textfields'] = [
       '#type' => 'fieldset',
       '#title' => $this->t("Generated text fields for first and last name"),
-      '#description' => t('This is where we put automatically generated textfields'),
+      '#description' => $this->t('This is where we put automatically generated textfields'),
     ];
 
     // This form is rebuilt on all requests, so whether or not the request comes

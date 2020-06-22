@@ -18,6 +18,11 @@ use Drupal\Tests\BrowserTestBase;
 class TestingExampleMenuTest extends BrowserTestBase {
 
   /**
+   * {@inheritdoc}
+   */
+  protected $defaultTheme = 'stark';
+
+  /**
    * Modules to enable.
    *
    * @var array
