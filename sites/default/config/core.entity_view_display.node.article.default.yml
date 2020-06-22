@@ -12,7 +12,6 @@ dependencies:
     - field.field.node.article.field_sourse_code
     - field.field.node.article.field_tags
     - field.field.node.article.field_version
-    - field.field.node.article.field_vote
     - field.field.node.article.field_yoast_seo
     - node.type.article
     - responsive_image.styles.article
@@ -25,7 +24,6 @@ dependencies:
     - responsive_image
     - text
     - user
-    - votingapi_widgets
     - yoast_seo
 third_party_settings:
   ds:
@@ -164,25 +162,6 @@ content:
       link: false
     third_party_settings: {  }
     type: field_collection_items
-    region: ds_content
-  field_vote:
-    weight: 10
-    label: above
-    settings:
-      style: default
-      readonly: 0
-      show_results: 0
-      show_own_vote: 0
-      values: {  }
-    third_party_settings:
-      ds:
-        ft:
-          id: minimal
-          settings:
-            lb: ''
-            lb-col: false
-            classes: {  }
-    type: voting_api_formatter
     region: ds_content
   field_yoast_seo:
     weight: 9
