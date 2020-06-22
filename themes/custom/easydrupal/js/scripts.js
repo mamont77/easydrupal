@@ -144,7 +144,6 @@
     $root_element_prefix.find('blockquote').css('height', '');
   };
 
-
   /**
    * Open navnar by hover.
    *
@@ -196,9 +195,7 @@
   Drupal.behaviors.articlePageTweeks = {
     attach: function (context, settings) {
 
-      $('.page-header', context).prepend($('.page-node-type-article .date', context))
-        .append($('.page-node-type-article .field-name-field-vote', context)
-          .css('display', 'inline-block'));
+      $('.page-header', context).prepend($('.page-node-type-article .date', context));
 
       var $region_sidebar_second = $('aside.col-sm-3', context),
         $region_sidebar_second_content = $('.region-sidebar-second', context),
