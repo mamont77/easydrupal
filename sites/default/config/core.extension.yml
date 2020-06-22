@@ -33,7 +33,6 @@ module:
   ds_switch_view_mode: 0
   dynamic_page_cache: 0
   easydrupal_breadcrumb: 0
-  easydrupal_common: 0
   editor: 0
   editor_advanced_link: 0
   fast404: 0
@@ -108,8 +107,6 @@ module:
   views_bootstrap: 0
   views_infinite_scroll: 0
   views_ui: 0
-  votingapi: 0
-  votingapi_widgets: 0
   yoast_seo: 0
   ds: 1
   extlink: 1
