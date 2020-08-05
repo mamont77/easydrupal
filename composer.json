@@ -100,9 +100,21 @@
     },
     "extra": {
         "drupal-scaffold": {
+            "initial": {
+                ".editorconfig": ".editorconfig",
+                ".gitattributes": ".gitattributes"
+            },
             "locations": {
                 "web-root": "./"
-            }
+            },
+            "file-mapping": {
+                "[web-root]/.htaccess": {
+                    "mode": "skip"
+                },
+                "[web-root]/robots.txt": {
+                    "mode": "skip"
+                }
+            },
         },
         "installer-types": ["component", "bower-asset", "npm-asset"],
         "installer-paths": {
