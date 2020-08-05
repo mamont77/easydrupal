@@ -8,6 +8,6 @@ test_dependencies:
   - imce:imce
 
 # Information added by Drupal.org packaging script on 2020-06-12
-version: '8.x-5.0-beta11'
+version: '6.0.0-beta1'
 project: 'linkit'
-datestamp: 1591971694
+datestamp: 1591971463

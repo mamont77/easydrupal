@@ -25,7 +25,7 @@
         "drupal/addtoany": "^1.12",
         "drupal/admin_toolbar": "^2.2",
         "drupal/advagg": "^4.0",
-        "drupal/advupdate": "^1.0",
+        "drupal/advupdate": "^1.1",
         "drupal/backup_migrate": "^4.0",
         "drupal/blazy": "^2.1",
         "drupal/bootstrap": "^3.21",
@@ -39,7 +39,7 @@
         "drupal/crop": "^2.1",
         "drupal/ctools": "^3.4",
         "drupal/disqus": "^1.0@RC",
-        "drupal/ds": "^3.6",
+        "drupal/ds": "^3.8",
         "drupal/editor_advanced_link": "^1.8",
         "drupal/extlink": "^1.3",
         "drupal/fast_404": "^2.0@alpha",
@@ -53,7 +53,7 @@
         "drupal/image_widget_crop": "^2.3",
         "drupal/imagemagick": "^3.1",
         "drupal/libraries": "^3.0@alpha",
-        "drupal/linkit": "^5.0@beta",
+        "drupal/linkit": "~6.0",
         "drupal/menu_trail_by_path": "^1.3",
         "drupal/metatag": "^1.13",
         "drupal/pathauto": "^1.8",
@@ -63,12 +63,14 @@
         "drupal/readme": "^1.0@beta",
         "drupal/recaptcha": "^3.0",
         "drupal/redirect": "^1.2",
-        "drupal/schema_metatag": "^1.2",
+        "drupal/schema_metatag": "^1.7",
         "drupal/seckit": "^1.1",
         "drupal/simple_sitemap": "^3.6",
         "drupal/slick": "^2.2",
         "drupal/sticky_sharrre_bar": "1.x-dev",
         "drupal/token": "^1.7",
+        "drupal/upgrade_rector": "^1.0@alpha",
+        "drupal/upgrade_status": "^2.9",
         "drupal/varnish": "1.x-dev",
         "drupal/views_bootstrap": "~3",
         "drupal/views_infinite_scroll": "^1.7",
@@ -114,7 +116,7 @@
                 "[web-root]/robots.txt": {
                     "mode": "skip"
                 }
-            },
+            }
         },
         "installer-types": ["component", "bower-asset", "npm-asset"],
         "installer-paths": {

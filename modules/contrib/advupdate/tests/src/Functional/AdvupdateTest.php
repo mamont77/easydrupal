@@ -5,8 +5,7 @@ namespace Drupal\Tests\advupdate\Functional;
 use Drupal\Tests\update\Functional\UpdateTestBase;
 
 /**
- * Tests the Update Manager Advanced module
- * through a series of functional tests.
+ * Tests the Update Manager Advanced module through a series of tests.
  *
  * @group update
  */
@@ -26,9 +25,10 @@ class AdvupdateTest extends UpdateTestBase {
    */
   public function testAdvupdateSettings() {
     $config = $this->config('advupdate.settings');
-    $this->assertIdentical(TRUE, $config->get('notification.extend_email_report'));
+    self::assertSame(TRUE, $config->get('notification.extend_email_report'));
 
     $this->drupalGet('admin/reports/updates/settings');
-    $this->assertNoText(t('Expand the report using "Update Manager Advanced" module'));
+    $this->assertSession()->responseNotContains(t('Expand the report using "Update Manager Advanced" module'));
   }
+
 }

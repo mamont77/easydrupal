@@ -1,12 +1,17 @@
 # Update Manager Advanced
 
+## INTRODUCTION
+
 Module modifies the Drupal "Available updates" email report to include
 the information normally shown at /admin/reports/updates/update, 
 with links to the module updates and their release notes.
 
 The module very similar to 
-"[Update Status Detailed Email](https://www.drupal.org/project/update_detailed_email)",
+"[Update Status Detailed Email]
+(https://www.drupal.org/project/update_detailed_email)",
 however, implemented in another way.
+
+## REQUIREMENTS
 
 This module does not require any dependency. But if you want to receive emails
 with the design of your theme, you can additionally install and configure
@@ -15,10 +20,11 @@ the module, for example,
 or any another which you prefer, globally for the site for all emails.
 
  
-## Installing
+## INSTALLATION
 
 You can install the module by Composer (look more 
-[using Composer to manage Drupal site dependencies](https://www.drupal.org/node/2718229)).
+[using Composer to manage Drupal site dependencies]
+(https://www.drupal.org/node/2718229)).
 Once you have setup building your code base using composer, 
 require the module via:
 
@@ -26,7 +32,7 @@ require the module via:
 
 then enable the module as usual OR install manually as usual.
 
-## Configuration
+## CONFIGURATION
 
 By default nothing to do. However if you wish to disable the
 functionality of this module 
