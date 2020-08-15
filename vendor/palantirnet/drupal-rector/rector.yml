@@ -13,10 +13,10 @@ imports:
 
 parameters:
   autoload_paths:
-    - 'web/core'
-    - 'web/core/modules'
-    - 'web/modules'
-    - 'web/profiles'
+    - 'core'
+    - 'core/modules'
+    - 'modules'
+    - 'profiles'
 
   exclude_paths:
     # This path is used by the upgrade_status module.
