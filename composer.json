@@ -64,7 +64,7 @@
         "drupal/recaptcha": "^3.0",
         "drupal/redirect": "^1.2",
         "drupal/schema_metatag": "^2.1",
-        "drupal/seckit": "^1.1",
+        "drupal/seckit": "^2.0",
         "drupal/simple_sitemap": "^3.6",
         "drupal/slick": "^2.2",
         "drupal/sticky_sharrre_bar": "1.x-dev",
