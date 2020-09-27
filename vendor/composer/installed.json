@@ -2608,17 +2608,17 @@
     },
     {
         "name": "drupal/core-composer-scaffold",
-        "version": "8.9.3",
-        "version_normalized": "8.9.3.0",
+        "version": "8.9.6",
+        "version_normalized": "8.9.6.0",
         "source": {
             "type": "git",
             "url": "https://github.com/drupal/core-composer-scaffold.git",
-            "reference": "07cdfe2799789fc0c2d0e3e1ba64cb5e2a973ece"
+            "reference": "c902d07cb49ef73777e2b33a39e54c2861a8c81d"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/drupal/core-composer-scaffold/zipball/07cdfe2799789fc0c2d0e3e1ba64cb5e2a973ece",
-            "reference": "07cdfe2799789fc0c2d0e3e1ba64cb5e2a973ece",
+            "url": "https://api.github.com/repos/drupal/core-composer-scaffold/zipball/c902d07cb49ef73777e2b33a39e54c2861a8c81d",
+            "reference": "c902d07cb49ef73777e2b33a39e54c2861a8c81d",
             "shasum": ""
         },
         "require": {
@@ -2631,7 +2631,7 @@
         "require-dev": {
             "composer/composer": "^1.8@stable"
         },
-        "time": "2020-05-29T11:36:27+00:00",
+        "time": "2020-08-07T22:30:30+00:00",
         "type": "composer-plugin",
         "extra": {
             "class": "Drupal\\Composer\\Plugin\\Scaffold\\Plugin",
@@ -2740,8 +2740,8 @@
     },
     {
         "name": "drupal/core-vendor-hardening",
-        "version": "8.9.3",
-        "version_normalized": "8.9.3.0",
+        "version": "8.9.6",
+        "version_normalized": "8.9.6.0",
         "source": {
             "type": "git",
             "url": "https://github.com/drupal/core-vendor-hardening.git",
