@@ -102,6 +102,8 @@ module:
   toolbar: 0
   tour: 0
   update: 0
+  upgrade_rector: 0
+  upgrade_status: 0
   user: 0
   varnish: 0
   views_bootstrap: 0
