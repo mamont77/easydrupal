@@ -78,7 +78,7 @@
         "drupal/votingapi_widgets": "^1.0@alpha",
         "drupal/xmlsitemap": "^1.0@alpha",
         "drupal/yoast_seo": "2.0.0-alpha3",
-        "drush/drush": "^10.1",
+        "drush/drush": "^10.3",
         "grasmash/drupal-security-warning": "^1.1",
         "oomphinc/composer-installers-extender": "^1.1",
         "topfloor/composer-cleanup-vcs-dirs": "^1.0",
