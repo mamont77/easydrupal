@@ -6,17 +6,21 @@ dependencies:
     - field.storage.node.field_tags
     - node.type.article
     - taxonomy.vocabulary.tags
+  content:
+    - 'taxonomy_term:tags:fcba2ee9-ecd4-4599-9506-6a8f95277ef0'
 _core:
   default_config_hash: QdUgf_beeoaPiyKorFv0q1fcJpWH_uZTqe_xoVJacrw
 id: node.article.field_tags
 field_name: field_tags
 entity_type: node
 bundle: article
-label: Теги
-description: 'Введите список, разделенный запятой. Например: Амстердам, Мехико, "Кливленд, Огайо"'
+label: Tags
+description: 'Введите список, разделенный запятой. Например: Амстердам, Мехико, "Кливленд, Огайо".'
 required: false
 translatable: false
-default_value: {  }
+default_value:
+  -
+    target_uuid: fcba2ee9-ecd4-4599-9506-6a8f95277ef0
 default_value_callback: ''
 settings:
   handler: 'default:taxonomy_term'
