@@ -4851,18 +4851,18 @@
     },
     {
         "name": "drupal/simple_sitemap",
-        "version": "3.7.0",
-        "version_normalized": "3.7.0.0",
+        "version": "3.8.0",
+        "version_normalized": "3.8.0.0",
         "source": {
             "type": "git",
             "url": "https://git.drupalcode.org/project/simple_sitemap.git",
-            "reference": "8.x-3.7"
+            "reference": "8.x-3.8"
         },
         "dist": {
             "type": "zip",
-            "url": "https://ftp.drupal.org/files/projects/simple_sitemap-8.x-3.7.zip",
-            "reference": "8.x-3.7",
-            "shasum": "7b23930cc71d37f332c1e836bc18c29ed2ae8cde"
+            "url": "https://ftp.drupal.org/files/projects/simple_sitemap-8.x-3.8.zip",
+            "reference": "8.x-3.8",
+            "shasum": "55252af261fbd7b18c230ab429eb7d8b92f4c66a"
         },
         "require": {
             "drupal/core": "^8 || ^9",
@@ -4871,8 +4871,8 @@
         "type": "drupal-module",
         "extra": {
             "drupal": {
-                "version": "8.x-3.7",
-                "datestamp": "1592298918",
+                "version": "8.x-3.8",
+                "datestamp": "1605141357",
                 "security-coverage": {
                     "status": "covered",
                     "message": "Covered by Drupal's security advisory policy"
@@ -4895,6 +4895,10 @@
                 "homepage": "https://www.drupal.org/u/gbyte.co",
                 "email": "contact@gbyte.co",
                 "role": "Maintainer"
+            },
+            {
+                "name": "gbyte",
+                "homepage": "https://www.drupal.org/user/2381352"
             }
         ],
         "description": "Creates a standard conform hreflang XML sitemap of the site content and provides a framework for developing other sitemap types.",
@@ -5196,18 +5200,18 @@
     },
     {
         "name": "drupal/upgrade_status",
-        "version": "2.11.0",
-        "version_normalized": "2.11.0.0",
+        "version": "3.0.0",
+        "version_normalized": "3.0.0.0",
         "source": {
             "type": "git",
             "url": "https://git.drupalcode.org/project/upgrade_status.git",
-            "reference": "8.x-2.11"
+            "reference": "8.x-3.0"
         },
         "dist": {
             "type": "zip",
-            "url": "https://ftp.drupal.org/files/projects/upgrade_status-8.x-2.11.zip",
-            "reference": "8.x-2.11",
-            "shasum": "d05dffe400b6a9bf01ca36305e7e788ba4026745"
+            "url": "https://ftp.drupal.org/files/projects/upgrade_status-8.x-3.0.zip",
+            "reference": "8.x-3.0",
+            "shasum": "ad59ab409fd5ad7fb38e1aff425419f292fe1df7"
         },
         "require": {
             "drupal/core": "^8",
@@ -5223,8 +5227,8 @@
         "type": "drupal-module",
         "extra": {
             "drupal": {
-                "version": "8.x-2.11",
-                "datestamp": "1602256220",
+                "version": "8.x-3.0",
+                "datestamp": "1604508427",
                 "security-coverage": {
                     "status": "covered",
                     "message": "Covered by Drupal's security advisory policy"
