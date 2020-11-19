@@ -118,6 +118,13 @@
                 }
             }
         },
+        "merge-plugin": {
+            "include": [
+                "modules/contrib/*/composer.libraries.json",
+                "modules/custom/*/composer.json",
+                "themes/custom/*/composer.json"
+            ]
+        },
         "installer-types": ["component", "bower-asset", "npm-asset"],
         "installer-paths": {
             "core": ["type:drupal-core"],
