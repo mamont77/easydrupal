@@ -67,6 +67,7 @@
         "drupal/seckit": "^2.0",
         "drupal/simple_sitemap": "^3.8",
         "drupal/slick": "^2.2",
+        "drupal/sophron": "^1.1",
         "drupal/sticky_sharrre_bar": "1.x-dev",
         "drupal/token": "^1.7",
         "drupal/upgrade_rector": "^1.0@alpha",

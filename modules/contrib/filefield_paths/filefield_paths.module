@@ -5,7 +5,6 @@
  * Contains core functions for the File (Field) Paths module.
  */
 
-use Drupal\Component\Utility\Unicode;
 use Drupal\Core\Config\Entity\ThirdPartySettingsInterface;
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Entity\EntityInterface;
@@ -387,33 +386,16 @@ function filefield_paths_file_presave($file) {
  *   The source file URL.
  * @param string $path
  *   The moved file URL.
- * @param Language $language
+ * @param \Drupal\Core\Language\Language $language
  *   The language of the source file.
+ *
+ * @deprecated in filefield_paths:1.0.0 and will be removed before
+ *   filefield_paths:2.0.0. Use
+ *   \Drupal\filefield_paths\RedirectInterface::createRedirect() instead.
  */
 function _filefield_paths_create_redirect($source, $path, Language $language) {
-  \Drupal::logger('filefield_paths')
-    ->debug(t('Creating redirect from @source to @path', [
-      '@source' => $source,
-      '@path'   => $path,
-    ]));
-
-  /** @var \Drupal\redirect\Entity\Redirect $redirect */
-  $redirect = \Drupal::entityTypeManager()->getStorage('redirect')->create([]);
-
-  $parsed_source = parse_url(file_create_url($source), PHP_URL_PATH);
-  $parsed_path = parse_url(file_create_url($path), PHP_URL_PATH);
-
-  $redirect->setSource($parsed_source);
-  $redirect->setRedirect($parsed_path);
-
-  // Check if the redirect exists before saving.
-  $hash = $redirect->generateHash($parsed_path, [], $language->getId());
-  $redirects = \Drupal::entityTypeManager()
-    ->getStorage('redirect')
-    ->loadByProperties(['hash' => $hash]);
-  if (empty($redirects)) {
-    $redirect->save();
-  }
+  @trigger_error('_filefield_paths_create_redirect() is deprecated in filefield_paths:1.0.0 and will be removed before filefield_paths:2.0.0. Use \\Drupal\filefield_paths\RedirectInterface::createRedirect() instead.', E_USER_DEPRECATED);
+  \Drupal::service('filefield_paths.redirect')->createRedirect($source, $path, $language);
 }
 
 /**
@@ -454,7 +436,7 @@ function filefield_paths_process_string($value, $data, array $settings = []) {
         $pathinfo = pathinfo($path);
         $basename = \Drupal::service('file_system')->basename($path);
         $extension = preg_match('/\.[^.]+$/', $basename, $matches) ? $matches[0] : NULL;
-        $pathinfo['filename'] = !is_null($extension) ? Unicode::substr($basename, 0, Unicode::strlen($basename) - Unicode::strlen($extension)) : $basename;
+        $pathinfo['filename'] = !is_null($extension) ? mb_substr($basename, 0, mb_strlen($basename) - mb_strlen($extension)) : $basename;
 
         if ($remove_slashes) {
           $path = '';

@@ -3,7 +3,6 @@
 namespace Drupal\Tests\filefield_paths\Functional;
 
 use Drupal\Component\Utility\Unicode;
-use Drupal\node\Entity\Node;
 
 /**
  * Test transliteration functionality.
@@ -17,17 +16,18 @@ class FileFieldPathsTransliterationTest extends FileFieldPathsTestBase {
    */
   public function testUi() {
     // Create a File field.
-    $field_name = Unicode::strtolower($this->randomMachineName());
+    $field_name = mb_strtolower($this->randomMachineName());
     $this->createFileField($field_name, 'node', $this->contentType);
 
     // Ensure File (Field) Paths Transliteration settings are present and
     // available.
     $this->drupalGet("admin/structure/types/manage/{$this->contentType}/fields/node.{$this->contentType}.{$field_name}");
     foreach (['path', 'name'] as $field) {
-      $this->assertField("third_party_settings[filefield_paths][file_{$field}][options][transliterate]", $this->t('Transliteration checkbox is present in File @field settings.', ['@field' => Unicode::ucfirst($field)]));
+      // Transliteration checkbox is present in File settings.
+      $this->assertField("third_party_settings[filefield_paths][file_{$field}][options][transliterate]");
 
       $element = $this->xpath('//input[@name=:name]/@disabled', [':name' => "third_party_settings[filefield_paths][file_{$field}][options][transliterate]"]);
-      $this->assert(empty($element), $this->t('Transliteration checkbox is not disabled in File @field settings.', ['@field' => Unicode::ucfirst($field)]));
+      $this->assertEmpty($element, 'Transliteration checkbox is not disabled in File ' . Unicode::ucfirst($field) . ' settings.');
     }
   }
 
@@ -36,7 +36,7 @@ class FileFieldPathsTransliterationTest extends FileFieldPathsTestBase {
    */
   public function testTransliteration() {
     // Create a File field.
-    $field_name = Unicode::strtolower($this->randomMachineName());
+    $field_name = mb_strtolower($this->randomMachineName());
 
     $third_party_settings['filefield_paths']['file_path']['value'] = 'node/[node:title]';
     $third_party_settings['filefield_paths']['file_path']['options']['transliterate'] = TRUE;
@@ -52,7 +52,8 @@ class FileFieldPathsTransliterationTest extends FileFieldPathsTestBase {
 
     $edit['files[' . $field_name . '_0]'] = \Drupal::service('file_system')
       ->realpath($test_file->getFileUri());
-    $this->drupalPostForm("node/add/{$this->contentType}", $edit, $this->t('Save'));
+    $this->drupalGet("node/add/{$this->contentType}");
+    $this->submitForm($edit, 'Save');
 
     // Get created Node ID.
     $matches = [];
@@ -61,8 +62,8 @@ class FileFieldPathsTransliterationTest extends FileFieldPathsTestBase {
 
     // Ensure that file path/name have been processed correctly by
     // Transliteration.
-    $node = Node::load($nid);
-    $this->assertEqual($node->{$field_name}[0]->entity->getFileUri(), "public://node/test/test.txt", $this->t('File path/name has been processed correctly by Transliteration'));
+    $node = \Drupal::entitytypeManager()->getStorage('node')->load($nid);
+    $this->assertEqual($node->{$field_name}[0]->entity->getFileUri(), "public://node/test/test.txt", 'File path/name has been processed correctly by Transliteration');
   }
 
 }

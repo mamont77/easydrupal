@@ -8,6 +8,7 @@ namespace Drupal\Tests\filefield_paths\Functional;
  * @group File (Field) Paths
  */
 class FileFieldPathsTokensTest extends FileFieldPathsTestBase {
+
   /**
    * Assert that the provided token matches the provided value.
    *
@@ -17,17 +18,11 @@ class FileFieldPathsTokensTest extends FileFieldPathsTestBase {
    *   The value to check against the token.
    * @param array $data
    *   The data to process the token with.
-   *
-   * @return bool
-   *   TRUE if the assertion succeeded, FALSE otherwise.
    */
-  public function assertToken($token, $value, $data) {
+  public function assertToken($token, $value, array $data) {
     $result = \Drupal::token()->replace($token, $data);
 
-    return $this->assertEqual($result, $value, $this->t('Token @token equals @value', [
-      '@token' => $token,
-      '@value' => $value,
-    ]));
+    $this->assertEquals($value, $result, "Token {$token} equals {$value}");
   }
 
   /**
@@ -72,8 +67,10 @@ class FileFieldPathsTokensTest extends FileFieldPathsTestBase {
     // Prepare a test text file.
     /** @var \Drupal\file\Entity\File $text_file */
     $text_file = $this->getTestFile('text');
-    file_unmanaged_copy($text_file->getFileUri(), 'public://text.multiext.txt');
-    $files = file_scan_directory('public://', '/text\.multiext\.txt/');
+    /** @var \Drupal\Core\File\FileSystemInterface $file_system */
+    $file_system = \Drupal::service('file_system');
+    $file_system->copy($text_file->getFileUri(), 'public://text.multiext.txt');
+    $files = $file_system->scanDirectory('public://', '/text\.multiext\.txt/');
     $multiext_file = current($files);
     /** @var \Drupal\file\Entity\File $multiext_file */
     $multiext_file = \Drupal::entityTypeManager()
@@ -97,8 +94,10 @@ class FileFieldPathsTokensTest extends FileFieldPathsTestBase {
     // Prepare a test text file.
     /** @var \Drupal\file\Entity\File $text_file */
     $text_file = $this->getTestFile('text');
-    file_unmanaged_copy($text_file->getFileUri(), 'public://тест.txt');
-    $files = file_scan_directory('public://', '/тест\.txt/');
+    /** @var \Drupal\Core\File\FileSystemInterface $file_system */
+    $file_system = \Drupal::service('file_system');
+    $file_system->copy($text_file->getFileUri(), 'public://тест.txt');
+    $files = $file_system->scanDirectory('public://', '/тест\.txt/');
     $utf_file = current($files);
     /** @var \Drupal\file\Entity\File $utf_file */
     $utf_file = \Drupal::entityTypeManager()
