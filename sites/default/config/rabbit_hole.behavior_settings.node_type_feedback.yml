@@ -1,9 +1,14 @@
 uuid: db60d9ba-e539-413e-a034-d2d3a08be6fd
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  config:
+    - node.type.feedback
 id: node_type_feedback
+entity_type_id: node_type
+entity_id: feedback
 action: page_redirect
 allow_override: 0
 redirect: feedback
 redirect_code: 301
+redirect_fallback_action: access_denied

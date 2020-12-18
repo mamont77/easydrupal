@@ -1,9 +1,14 @@
 uuid: 4e724dc0-3e6e-4a19-90bd-798078750112
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  config:
+    - taxonomy.vocabulary.versions
 id: taxonomy_vocabulary_versions
+entity_type_id: taxonomy_vocabulary
+entity_id: versions
 action: display_page
 allow_override: 0
 redirect: ''
 redirect_code: 301
+redirect_fallback_action: access_denied

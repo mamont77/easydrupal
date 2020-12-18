@@ -7,3 +7,4 @@ action: access_denied
 allow_override: 0
 redirect: ''
 redirect_code: 301
+redirect_fallback_action: access_denied

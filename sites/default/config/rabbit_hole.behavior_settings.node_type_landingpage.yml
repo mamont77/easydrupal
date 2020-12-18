@@ -1,9 +1,14 @@
 uuid: 971e7020-d875-410e-9780-a7f04055c8c2
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  config:
+    - node.type.landingpage
 id: node_type_landingpage
+entity_type_id: node_type
+entity_id: landingpage
 action: display_page
 allow_override: 0
 redirect: ''
 redirect_code: 301
+redirect_fallback_action: access_denied
