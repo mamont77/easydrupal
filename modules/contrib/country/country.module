@@ -61,3 +61,14 @@ function country_field_widget_info_alter(array &$info) {
   // Allow boxes/radio buttons widget to be used for country field.
   $info['options_buttons']['field_types'][] = 'country';
 }
+
+/**
+ * Implements hook_module_implements_alter().
+ */
+function country_module_implements_alter(&$implementations, $hook) {
+  if ($hook == 'tokens') {
+    $group = $implementations['country'];
+    unset($implementations['country']);
+    $implementations['country'] = $group;
+  }
+}

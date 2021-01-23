@@ -2,18 +2,10 @@
 
 namespace Drupal\yoast_seo;
 
-use Drupal\Core\Config\Entity\ConfigEntityBase;
-use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\Core\Form\FormState;
 use Drupal\Core\Render\RendererInterface;
 use Drupal\metatag\MetatagManagerInterface;
-use Drupal\user\Entity\User;
-use Drupal\user\EntityOwnerInterface;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\RouterInterface;
 
 /**
@@ -23,9 +15,32 @@ use Symfony\Component\Routing\RouterInterface;
  */
 class EntityAnalyser {
 
+  /**
+   * De Drupal entity type manager.
+   *
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+   */
   protected $entityTypeManager;
+
+  /**
+   * The Drupal content renderer.
+   *
+   * @var \Drupal\Core\Render\RendererInterface
+   */
   protected $renderer;
+
+  /**
+   * The metatag manager.
+   *
+   * @var \Drupal\metatag\MetatagManagerInterface
+   */
   protected $metatagManager;
+
+  /**
+   * The Drupal router.
+   *
+   * @var \Symfony\Component\Routing\RouterInterface
+   */
   protected $router;
 
   /**
@@ -101,14 +116,10 @@ class EntityAnalyser {
       }
     }
 
-    // Add some other fields.
+    // Add fields that our widget displays.
     $data['title'] = $entity->label();
-    $data['url'] = '';
-
     // An entity must be saved before it has a URL.
-    if (!$entity->isNew()) {
-      $data['url'] = $entity->toUrl()->toString();
-    }
+    $data['url'] = !$entity->isNew() ? $entity->toUrl()->toString() : '';
 
     // Add our HTML as analyzable text (Yoast will sanitize).
     $data['text'] = $html->__toString();
@@ -128,7 +139,7 @@ class EntityAnalyser {
   public function renderEntity(EntityInterface $entity) {
     $type = $entity->getEntityTypeId();
     $view_builder = $this->entityTypeManager->getViewBuilder($type);
-    // TODO: Make the view mode configurable in Yoast SEO settings.
+    // @todo Make the view mode configurable in Yoast SEO settings.
     $render_array = $view_builder->view($entity, 'full');
     return $this->renderer->renderRoot($render_array);
   }
@@ -143,11 +154,15 @@ class EntityAnalyser {
    * @param array $metatags
    *   The metatags array that contains the tokens.
    * @param \Drupal\Core\Entity\EntityInterface $entity
-   *   The entity to use as context
+   *   The entity to use as context.
    */
   protected function replaceContextAwareTokens(array &$metatags, EntityInterface $entity) {
     foreach ($metatags as $tag => $value) {
       $metatags[$tag] = str_replace('[current-page:title]', $entity->getTitle(), $value);
+      // URL metatags cause issues for new nodes as they don't have a URL yet.
+      if ($entity->isNew() && (substr($tag, -4) === '_url')) {
+        $metatags[$tag] = '';
+      }
     }
   }
 
