@@ -13,3 +13,4 @@ enabled_entity_types:
 _core:
   default_config_hash: vFARRSP9-YgEArfDNYmRSg0cNFOgZPxqziffIalgLbU
 default_variant: default
+entities_per_queue_item: 50
