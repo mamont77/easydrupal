@@ -30,7 +30,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '398a3a973b21c9fd0ddf54cde1e0158aac7158a8',
+    'reference' => '3f290e5ebe3f2537934e825434524911bbd9c1bc',
     'name' => 'drupal/legacy-project',
   ),
   'versions' => 
@@ -1070,7 +1070,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '398a3a973b21c9fd0ddf54cde1e0158aac7158a8',
+      'reference' => '3f290e5ebe3f2537934e825434524911bbd9c1bc',
     ),
     'drupal/libraries' => 
     array (
@@ -1636,12 +1636,12 @@ private static $installed = array (
     ),
     'drush/drush' => 
     array (
-      'pretty_version' => '10.3.5',
-      'version' => '10.3.5.0',
+      'pretty_version' => '10.4.3',
+      'version' => '10.4.3.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'ce1352c816d8852e64226142eeddc68f823646f1',
+      'reference' => '472ce3e0ac48b418f8168a053b3bcb4c8582bf99',
     ),
     'easyrdf/easyrdf' => 
     array (
@@ -1660,6 +1660,15 @@ private static $installed = array (
       array (
       ),
       'reference' => 'ade6887fd9bd74177769645ab5c474824f8a418a',
+    ),
+    'enlightn/security-checker' => 
+    array (
+      'pretty_version' => 'v1.7.0',
+      'version' => '1.7.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '1ac108ba278ba0c2e71d2ce2ac4fac07ed6e8a29',
     ),
     'fileeye/mimemap' => 
     array (

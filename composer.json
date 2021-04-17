@@ -80,7 +80,7 @@
         "drupal/votingapi_widgets": "^1.0@alpha",
         "drupal/xmlsitemap": "^1.0@alpha",
         "drupal/yoast_seo": "^2.0-alpha6",
-        "drush/drush": "^10.3",
+        "drush/drush": "^10.4",
         "grasmash/drupal-security-warning": "dev-master",
         "oomphinc/composer-installers-extender": "^2.0",
         "topfloor/composer-cleanup-vcs-dirs": "dev-composer-2"
