@@ -30,7 +30,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '68bb6e994038daaf63216318530b984fd95b6fbe',
+    'reference' => '398a3a973b21c9fd0ddf54cde1e0158aac7158a8',
     'name' => 'drupal/legacy-project',
   ),
   'versions' => 
@@ -290,12 +290,12 @@ private static $installed = array (
     ),
     'drupal/addtoany' => 
     array (
-      'pretty_version' => '1.14.0',
-      'version' => '1.14.0.0',
+      'pretty_version' => '1.15.0',
+      'version' => '1.15.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '8.x-1.14',
+      'reference' => '8.x-1.15',
     ),
     'drupal/admin_toolbar' => 
     array (
@@ -756,12 +756,12 @@ private static $installed = array (
     ),
     'drupal/ctools' => 
     array (
-      'pretty_version' => '3.4.0',
-      'version' => '3.4.0.0',
+      'pretty_version' => '3.5.0',
+      'version' => '3.5.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '8.x-3.4',
+      'reference' => '8.x-3.5',
     ),
     'drupal/datetime' => 
     array (
@@ -795,12 +795,12 @@ private static $installed = array (
     ),
     'drupal/ds' => 
     array (
-      'pretty_version' => '3.9.0',
-      'version' => '3.9.0.0',
+      'pretty_version' => '3.12.0',
+      'version' => '3.12.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '8.x-3.9',
+      'reference' => '8.x-3.12',
     ),
     'drupal/dynamic_page_cache' => 
     array (
@@ -840,16 +840,16 @@ private static $installed = array (
       array (
         0 => '1.x-dev',
       ),
-      'reference' => '6abf6f2681327846a021a4dd00461c0fb714c44f',
+      'reference' => 'ed36fdb74f28393d863ce3138de6631606e45ec9',
     ),
     'drupal/extlink' => 
     array (
-      'pretty_version' => '1.5.0',
-      'version' => '1.5.0.0',
+      'pretty_version' => '1.6.0',
+      'version' => '1.6.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '8.x-1.5',
+      'reference' => '8.x-1.6',
     ),
     'drupal/fast_404' => 
     array (
@@ -985,6 +985,15 @@ private static $installed = array (
         0 => '8.9.13',
       ),
     ),
+    'drupal/honeypot' => 
+    array (
+      'pretty_version' => '2.0.1',
+      'version' => '2.0.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '2.0.1',
+    ),
     'drupal/hsts' => 
     array (
       'pretty_version' => '1.0.0',
@@ -1061,7 +1070,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '68bb6e994038daaf63216318530b984fd95b6fbe',
+      'reference' => '398a3a973b21c9fd0ddf54cde1e0158aac7158a8',
     ),
     'drupal/libraries' => 
     array (
@@ -1134,12 +1143,12 @@ private static $installed = array (
     ),
     'drupal/metatag' => 
     array (
-      'pretty_version' => '1.15.0',
-      'version' => '1.15.0.0',
+      'pretty_version' => '1.16.0',
+      'version' => '1.16.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '8.x-1.15',
+      'reference' => '8.x-1.16',
     ),
     'drupal/migrate' => 
     array (
@@ -1366,12 +1375,12 @@ private static $installed = array (
     ),
     'drupal/simple_sitemap' => 
     array (
-      'pretty_version' => '3.8.0',
-      'version' => '3.8.0.0',
+      'pretty_version' => '3.10.0',
+      'version' => '3.10.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '8.x-3.8',
+      'reference' => '8.x-3.10',
     ),
     'drupal/simpletest' => 
     array (
@@ -1512,12 +1521,12 @@ private static $installed = array (
     ),
     'drupal/upgrade_status' => 
     array (
-      'pretty_version' => '3.1.0',
-      'version' => '3.1.0.0',
+      'pretty_version' => '3.4.0',
+      'version' => '3.4.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '8.x-3.1',
+      'reference' => '8.x-3.4',
     ),
     'drupal/user' => 
     array (
@@ -1545,21 +1554,21 @@ private static $installed = array (
     ),
     'drupal/views_bootstrap' => 
     array (
-      'pretty_version' => '3.5.0',
-      'version' => '3.5.0.0',
+      'pretty_version' => '3.6.0',
+      'version' => '3.6.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '8.x-3.5',
+      'reference' => '8.x-3.6',
     ),
     'drupal/views_infinite_scroll' => 
     array (
-      'pretty_version' => '1.7.0',
-      'version' => '1.7.0.0',
+      'pretty_version' => '1.8.0',
+      'version' => '1.8.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '8.x-1.7',
+      'reference' => '8.x-1.8',
     ),
     'drupal/views_ui' => 
     array (
@@ -1611,12 +1620,12 @@ private static $installed = array (
     ),
     'drupal/yoast_seo' => 
     array (
-      'pretty_version' => '2.0.0-alpha5',
-      'version' => '2.0.0.0-alpha5',
+      'pretty_version' => '2.0.0-alpha6',
+      'version' => '2.0.0.0-alpha6',
       'aliases' => 
       array (
       ),
-      'reference' => '8.x-2.0-alpha5',
+      'reference' => '8.x-2.0-alpha6',
     ),
     'drupal8-rector/drupal8-rector' => 
     array (

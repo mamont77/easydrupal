@@ -17,7 +17,7 @@ test_dependencies:
   - drupal:node
   - paragraphs:paragraphs
 
-# Information added by Drupal.org packaging script on 2020-12-22
-version: '8.x-2.0-alpha5'
+# Information added by Drupal.org packaging script on 2021-02-14
+version: '8.x-2.0-alpha6'
 project: 'yoast_seo'
-datestamp: 1608672378
+datestamp: 1613318376
