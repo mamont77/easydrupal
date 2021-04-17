@@ -20,7 +20,7 @@
     ],
     "require": {
         "bower-asset/blazy": "^1.8",
-        "composer/installers": "^1.9",
+        "composer/installers": "^1.10",
         "cweagans/composer-patches": "^1.7",
         "drupal/addtoany": "^1.12",
         "drupal/admin_toolbar": "^2.4",
@@ -80,10 +80,9 @@
         "drupal/xmlsitemap": "^1.0@alpha",
         "drupal/yoast_seo": "~2",
         "drush/drush": "^10.3",
-        "grasmash/drupal-security-warning": "^1.1",
-        "oomphinc/composer-installers-extender": "^1.1",
-        "topfloor/composer-cleanup-vcs-dirs": "^1.0",
-        "zaporylie/composer-drupal-optimizations": "^1.2"
+        "grasmash/drupal-security-warning": "dev-master",
+        "oomphinc/composer-installers-extender": "^2.0",
+        "topfloor/composer-cleanup-vcs-dirs": "dev-composer-2"
     },
     "require-dev": {
         "drupal/examples": "1.x-dev"

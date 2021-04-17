@@ -43,10 +43,6 @@ class ComposerStaticInit7bb062997fc4f0d3cdcb37d377b9bb20
     );
 
     public static $prefixLengthsPsr4 = array (
-        'z' => 
-        array (
-            'zaporylie\\ComposerDrupalOptimizations\\' => 38,
-        ),
         'l' => 
         array (
             'lsolesen\\pel\\' => 13,
@@ -201,10 +197,6 @@ class ComposerStaticInit7bb062997fc4f0d3cdcb37d377b9bb20
     );
 
     public static $prefixDirsPsr4 = array (
-        'zaporylie\\ComposerDrupalOptimizations\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/zaporylie/composer-drupal-optimizations/src',
-        ),
         'lsolesen\\pel\\' => 
         array (
             0 => __DIR__ . '/..' . '/lsolesen/pel/src',
@@ -638,6 +630,7 @@ class ComposerStaticInit7bb062997fc4f0d3cdcb37d377b9bb20
         'Asm89\\Stack\\Cors' => __DIR__ . '/..' . '/asm89/stack-cors/src/Asm89/Stack/Cors.php',
         'Asm89\\Stack\\CorsService' => __DIR__ . '/..' . '/asm89/stack-cors/src/Asm89/Stack/CorsService.php',
         'AssertionError' => __DIR__ . '/..' . '/symfony/polyfill-php70/Resources/stubs/AssertionError.php',
+        'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'Composer\\Installers\\AglInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/AglInstaller.php',
         'Composer\\Installers\\AimeosInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/AimeosInstaller.php',
         'Composer\\Installers\\AnnotateCmsInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/AnnotateCmsInstaller.php',
@@ -706,6 +699,7 @@ class ComposerStaticInit7bb062997fc4f0d3cdcb37d377b9bb20
         'Composer\\Installers\\Plugin' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/Plugin.php',
         'Composer\\Installers\\PortoInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/PortoInstaller.php',
         'Composer\\Installers\\PrestashopInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/PrestashopInstaller.php',
+        'Composer\\Installers\\ProcessWireInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/ProcessWireInstaller.php',
         'Composer\\Installers\\PuppetInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/PuppetInstaller.php',
         'Composer\\Installers\\PxcmsInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/PxcmsInstaller.php',
         'Composer\\Installers\\RadPHPInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/RadPHPInstaller.php',
@@ -717,6 +711,7 @@ class ComposerStaticInit7bb062997fc4f0d3cdcb37d377b9bb20
         'Composer\\Installers\\ShopwareInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/ShopwareInstaller.php',
         'Composer\\Installers\\SilverStripeInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/SilverStripeInstaller.php',
         'Composer\\Installers\\SiteDirectInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/SiteDirectInstaller.php',
+        'Composer\\Installers\\StarbugInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/StarbugInstaller.php',
         'Composer\\Installers\\SyDESInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/SyDESInstaller.php',
         'Composer\\Installers\\SyliusInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/SyliusInstaller.php',
         'Composer\\Installers\\Symfony1Installer' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/Symfony1Installer.php',
@@ -3228,7 +3223,6 @@ class ComposerStaticInit7bb062997fc4f0d3cdcb37d377b9bb20
         'EasyRdf_Parser_Arc' => __DIR__ . '/..' . '/easyrdf/easyrdf/lib/EasyRdf/Parser/Arc.php',
         'EasyRdf_Parser_Exception' => __DIR__ . '/..' . '/easyrdf/easyrdf/lib/EasyRdf/Parser/Exception.php',
         'EasyRdf_Parser_Json' => __DIR__ . '/..' . '/easyrdf/easyrdf/lib/EasyRdf/Parser/Json.php',
-        'EasyRdf_Parser_JsonLd' => __DIR__ . '/..' . '/easyrdf/easyrdf/lib/EasyRdf/Parser/JsonLdImplementation.php',
         'EasyRdf_Parser_Ntriples' => __DIR__ . '/..' . '/easyrdf/easyrdf/lib/EasyRdf/Parser/Ntriples.php',
         'EasyRdf_Parser_Rapper' => __DIR__ . '/..' . '/easyrdf/easyrdf/lib/EasyRdf/Parser/Rapper.php',
         'EasyRdf_Parser_RdfPhp' => __DIR__ . '/..' . '/easyrdf/easyrdf/lib/EasyRdf/Parser/RdfPhp.php',
@@ -3241,7 +3235,6 @@ class ComposerStaticInit7bb062997fc4f0d3cdcb37d377b9bb20
         'EasyRdf_Serialiser_Arc' => __DIR__ . '/..' . '/easyrdf/easyrdf/lib/EasyRdf/Serialiser/Arc.php',
         'EasyRdf_Serialiser_GraphViz' => __DIR__ . '/..' . '/easyrdf/easyrdf/lib/EasyRdf/Serialiser/GraphViz.php',
         'EasyRdf_Serialiser_Json' => __DIR__ . '/..' . '/easyrdf/easyrdf/lib/EasyRdf/Serialiser/Json.php',
-        'EasyRdf_Serialiser_JsonLd' => __DIR__ . '/..' . '/easyrdf/easyrdf/lib/EasyRdf/Serialiser/JsonLd_real.php',
         'EasyRdf_Serialiser_Ntriples' => __DIR__ . '/..' . '/easyrdf/easyrdf/lib/EasyRdf/Serialiser/Ntriples.php',
         'EasyRdf_Serialiser_Rapper' => __DIR__ . '/..' . '/easyrdf/easyrdf/lib/EasyRdf/Serialiser/Rapper.php',
         'EasyRdf_Serialiser_RdfPhp' => __DIR__ . '/..' . '/easyrdf/easyrdf/lib/EasyRdf/Serialiser/RdfPhp.php',
@@ -3807,11 +3800,10 @@ class ComposerStaticInit7bb062997fc4f0d3cdcb37d377b9bb20
         'Nette\\Utils\\UnknownImageFileException' => __DIR__ . '/..' . '/nette/utils/src/Utils/exceptions.php',
         'Nette\\Utils\\Validators' => __DIR__ . '/..' . '/nette/utils/src/Utils/Validators.php',
         'OS_Guess' => __DIR__ . '/..' . '/pear/pear-core-minimal/src/OS/Guess.php',
-        'OomphInc\\ComposerInstallersExtender\\Installer' => __DIR__ . '/..' . '/oomphinc/composer-installers-extender/src/Installer.php',
-        'OomphInc\\ComposerInstallersExtender\\InstallerHelper' => __DIR__ . '/..' . '/oomphinc/composer-installers-extender/src/InstallerHelper.php',
+        'OomphInc\\ComposerInstallersExtender\\Installers\\CustomInstaller' => __DIR__ . '/..' . '/oomphinc/composer-installers-extender/src/Installers/CustomInstaller.php',
+        'OomphInc\\ComposerInstallersExtender\\Installers\\Installer' => __DIR__ . '/..' . '/oomphinc/composer-installers-extender/src/Installers/Installer.php',
         'OomphInc\\ComposerInstallersExtender\\Plugin' => __DIR__ . '/..' . '/oomphinc/composer-installers-extender/src/Plugin.php',
         'PEAR' => __DIR__ . '/..' . '/pear/pear-core-minimal/src/PEAR.php',
-        'PEAR_Error' => __DIR__ . '/..' . '/pear/pear-core-minimal/src/PEAR.php',
         'PEAR_ErrorStack' => __DIR__ . '/..' . '/pear/pear-core-minimal/src/PEAR/ErrorStack.php',
         'PEAR_Exception' => __DIR__ . '/..' . '/pear/pear_exception/PEAR/Exception.php',
         'PHPStan\\Drupal\\DrupalAutoloader' => __DIR__ . '/..' . '/mglaman/phpstan-drupal/src/Drupal/DrupalAutoloader.php',
@@ -4606,8 +4598,6 @@ class ComposerStaticInit7bb062997fc4f0d3cdcb37d377b9bb20
         'Symfony\\Component\\DependencyInjection\\Compiler\\FactoryReturnTypePass' => __DIR__ . '/..' . '/symfony/dependency-injection/Compiler/FactoryReturnTypePass.php',
         'Symfony\\Component\\DependencyInjection\\Compiler\\InlineServiceDefinitionsPass' => __DIR__ . '/..' . '/symfony/dependency-injection/Compiler/InlineServiceDefinitionsPass.php',
         'Symfony\\Component\\DependencyInjection\\Compiler\\LoggingFormatter' => __DIR__ . '/..' . '/symfony/dependency-injection/Compiler/LoggingFormatter.php',
-        'Symfony\\Component\\DependencyInjection\\Compiler\\MergeExtensionConfigurationContainerBuilder' => __DIR__ . '/..' . '/symfony/dependency-injection/Compiler/MergeExtensionConfigurationPass.php',
-        'Symfony\\Component\\DependencyInjection\\Compiler\\MergeExtensionConfigurationParameterBag' => __DIR__ . '/..' . '/symfony/dependency-injection/Compiler/MergeExtensionConfigurationPass.php',
         'Symfony\\Component\\DependencyInjection\\Compiler\\MergeExtensionConfigurationPass' => __DIR__ . '/..' . '/symfony/dependency-injection/Compiler/MergeExtensionConfigurationPass.php',
         'Symfony\\Component\\DependencyInjection\\Compiler\\PassConfig' => __DIR__ . '/..' . '/symfony/dependency-injection/Compiler/PassConfig.php',
         'Symfony\\Component\\DependencyInjection\\Compiler\\PriorityTaggedServiceTrait' => __DIR__ . '/..' . '/symfony/dependency-injection/Compiler/PriorityTaggedServiceTrait.php',
@@ -4717,7 +4707,6 @@ class ComposerStaticInit7bb062997fc4f0d3cdcb37d377b9bb20
         'Symfony\\Component\\DependencyInjection\\Loader\\GlobFileLoader' => __DIR__ . '/..' . '/symfony/dependency-injection/Loader/GlobFileLoader.php',
         'Symfony\\Component\\DependencyInjection\\Loader\\IniFileLoader' => __DIR__ . '/..' . '/symfony/dependency-injection/Loader/IniFileLoader.php',
         'Symfony\\Component\\DependencyInjection\\Loader\\PhpFileLoader' => __DIR__ . '/..' . '/symfony/dependency-injection/Loader/PhpFileLoader.php',
-        'Symfony\\Component\\DependencyInjection\\Loader\\ProtectedPhpFileLoader' => __DIR__ . '/..' . '/symfony/dependency-injection/Loader/PhpFileLoader.php',
         'Symfony\\Component\\DependencyInjection\\Loader\\XmlFileLoader' => __DIR__ . '/..' . '/symfony/dependency-injection/Loader/XmlFileLoader.php',
         'Symfony\\Component\\DependencyInjection\\Loader\\YamlFileLoader' => __DIR__ . '/..' . '/symfony/dependency-injection/Loader/YamlFileLoader.php',
         'Symfony\\Component\\DependencyInjection\\Parameter' => __DIR__ . '/..' . '/symfony/dependency-injection/Parameter.php',
@@ -4736,7 +4725,6 @@ class ComposerStaticInit7bb062997fc4f0d3cdcb37d377b9bb20
         'Symfony\\Component\\EventDispatcher\\Debug\\TraceableEventDispatcher' => __DIR__ . '/..' . '/symfony/event-dispatcher/Debug/TraceableEventDispatcher.php',
         'Symfony\\Component\\EventDispatcher\\Debug\\TraceableEventDispatcherInterface' => __DIR__ . '/..' . '/symfony/event-dispatcher/Debug/TraceableEventDispatcherInterface.php',
         'Symfony\\Component\\EventDispatcher\\Debug\\WrappedListener' => __DIR__ . '/..' . '/symfony/event-dispatcher/Debug/WrappedListener.php',
-        'Symfony\\Component\\EventDispatcher\\DependencyInjection\\ExtractingEventDispatcher' => __DIR__ . '/..' . '/symfony/event-dispatcher/DependencyInjection/RegisterListenersPass.php',
         'Symfony\\Component\\EventDispatcher\\DependencyInjection\\RegisterListenersPass' => __DIR__ . '/..' . '/symfony/event-dispatcher/DependencyInjection/RegisterListenersPass.php',
         'Symfony\\Component\\EventDispatcher\\Event' => __DIR__ . '/..' . '/symfony/event-dispatcher/Event.php',
         'Symfony\\Component\\EventDispatcher\\EventDispatcher' => __DIR__ . '/..' . '/symfony/event-dispatcher/EventDispatcher.php',
@@ -5022,7 +5010,6 @@ class ComposerStaticInit7bb062997fc4f0d3cdcb37d377b9bb20
         'Symfony\\Component\\Routing\\Loader\\GlobFileLoader' => __DIR__ . '/..' . '/symfony/routing/Loader/GlobFileLoader.php',
         'Symfony\\Component\\Routing\\Loader\\ObjectRouteLoader' => __DIR__ . '/..' . '/symfony/routing/Loader/ObjectRouteLoader.php',
         'Symfony\\Component\\Routing\\Loader\\PhpFileLoader' => __DIR__ . '/..' . '/symfony/routing/Loader/PhpFileLoader.php',
-        'Symfony\\Component\\Routing\\Loader\\ProtectedPhpFileLoader' => __DIR__ . '/..' . '/symfony/routing/Loader/PhpFileLoader.php',
         'Symfony\\Component\\Routing\\Loader\\XmlFileLoader' => __DIR__ . '/..' . '/symfony/routing/Loader/XmlFileLoader.php',
         'Symfony\\Component\\Routing\\Loader\\YamlFileLoader' => __DIR__ . '/..' . '/symfony/routing/Loader/YamlFileLoader.php',
         'Symfony\\Component\\Routing\\Matcher\\Dumper\\DumperCollection' => __DIR__ . '/..' . '/symfony/routing/Matcher/Dumper/DumperCollection.php',
@@ -5342,7 +5329,6 @@ class ComposerStaticInit7bb062997fc4f0d3cdcb37d377b9bb20
         'Symfony\\Component\\Validator\\Mapping\\TraversalStrategy' => __DIR__ . '/..' . '/symfony/validator/Mapping/TraversalStrategy.php',
         'Symfony\\Component\\Validator\\ObjectInitializerInterface' => __DIR__ . '/..' . '/symfony/validator/ObjectInitializerInterface.php',
         'Symfony\\Component\\Validator\\Test\\ConstraintValidatorTestCase' => __DIR__ . '/..' . '/symfony/validator/Test/ConstraintValidatorTestCase.php',
-        'Symfony\\Component\\Validator\\Test\\ConstraintViolationAssertion' => __DIR__ . '/..' . '/symfony/validator/Test/ConstraintValidatorTestCase.php',
         'Symfony\\Component\\Validator\\Test\\ForwardCompatTestTrait' => __DIR__ . '/..' . '/symfony/validator/Test/ForwardCompatTestTrait.php',
         'Symfony\\Component\\Validator\\Util\\PropertyPath' => __DIR__ . '/..' . '/symfony/validator/Util/PropertyPath.php',
         'Symfony\\Component\\Validator\\Validation' => __DIR__ . '/..' . '/symfony/validator/Validation.php',
@@ -5901,9 +5887,6 @@ class ComposerStaticInit7bb062997fc4f0d3cdcb37d377b9bb20
         'lsolesen\\pel\\PelTiff' => __DIR__ . '/..' . '/lsolesen/pel/src/PelTiff.php',
         'lsolesen\\pel\\PelUnexpectedFormatException' => __DIR__ . '/..' . '/lsolesen/pel/src/PelUnexpectedFormatException.php',
         'lsolesen\\pel\\PelWrongComponentCountException' => __DIR__ . '/..' . '/lsolesen/pel/src/PelWrongComponentCountException.php',
-        'zaporylie\\ComposerDrupalOptimizations\\Cache' => __DIR__ . '/..' . '/zaporylie/composer-drupal-optimizations/src/Cache.php',
-        'zaporylie\\ComposerDrupalOptimizations\\Plugin' => __DIR__ . '/..' . '/zaporylie/composer-drupal-optimizations/src/Plugin.php',
-        'zaporylie\\ComposerDrupalOptimizations\\TruncatedComposerRepository' => __DIR__ . '/..' . '/zaporylie/composer-drupal-optimizations/src/TruncatedComposerRepository.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
