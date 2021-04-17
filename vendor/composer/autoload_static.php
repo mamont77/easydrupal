@@ -38,8 +38,8 @@ class ComposerStaticInit7bb062997fc4f0d3cdcb37d377b9bb20
         '751a5a3f463e4be759be31748b61737c' => __DIR__ . '/..' . '/laminas/laminas-diactoros/src/functions/parse_cookie_header.legacy.php',
         'def43f6c87e4f8dfd0c9e1b1bab14fe8' => __DIR__ . '/..' . '/symfony/polyfill-iconv/bootstrap.php',
         '9b38cf48e83f5d8f60375221cd213eee' => __DIR__ . '/..' . '/phpstan/phpstan/bootstrap.php',
-        '801c31d8ed748cfa537fa45402288c95' => __DIR__ . '/..' . '/psy/psysh/src/functions.php',
         '952683d815ff0a7bf322b93c0be7e4e4' => __DIR__ . '/..' . '/chi-teck/drupal-code-generator/src/bootstrap.php',
+        '801c31d8ed748cfa537fa45402288c95' => __DIR__ . '/..' . '/psy/psysh/src/functions.php',
         '2d0bd6b7e257b7230c706e6559d6a87b' => __DIR__ . '/..' . '/mglaman/phpstan-drupal/drupal-phpunit-hack.php',
     );
 
@@ -369,8 +369,8 @@ class ComposerStaticInit7bb062997fc4f0d3cdcb37d377b9bb20
         ),
         'PHPStan\\' => 
         array (
-            0 => __DIR__ . '/..' . '/phpstan/phpstan-deprecation-rules/src',
-            1 => __DIR__ . '/..' . '/mglaman/phpstan-drupal/src',
+            0 => __DIR__ . '/..' . '/mglaman/phpstan-drupal/src',
+            1 => __DIR__ . '/..' . '/phpstan/phpstan-deprecation-rules/src',
         ),
         'OomphInc\\ComposerInstallersExtender\\' => 
         array (

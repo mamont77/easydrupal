@@ -49,7 +49,7 @@ return array(
     'Psr\\Http\\Message\\' => array($vendorDir . '/psr/http-message/src'),
     'Psr\\Container\\' => array($vendorDir . '/psr/container/src'),
     'PhpParser\\' => array($vendorDir . '/nikic/php-parser/lib/PhpParser'),
-    'PHPStan\\' => array($vendorDir . '/phpstan/phpstan-deprecation-rules/src', $vendorDir . '/mglaman/phpstan-drupal/src'),
+    'PHPStan\\' => array($vendorDir . '/mglaman/phpstan-drupal/src', $vendorDir . '/phpstan/phpstan-deprecation-rules/src'),
     'OomphInc\\ComposerInstallersExtender\\' => array($vendorDir . '/oomphinc/composer-installers-extender/src'),
     'MathieuViossat\\Util\\' => array($vendorDir . '/mathieuviossat/arraytotexttable/src'),
     'Masterminds\\' => array($vendorDir . '/masterminds/html5/src'),

@@ -30,7 +30,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => 'cbe75e733a8ddda05f9abef1b75a3c19ae8ac136',
+    'reference' => '84512da8f5a0bff4b2ef7cb7dc9d493b38842795',
     'name' => 'drupal/legacy-project',
   ),
   'versions' => 
@@ -290,12 +290,12 @@ private static $installed = array (
     ),
     'drupal/admin_toolbar' => 
     array (
-      'pretty_version' => '2.4.0',
-      'version' => '2.4.0.0',
+      'pretty_version' => '3.0.0',
+      'version' => '3.0.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '8.x-2.4',
+      'reference' => '3.0.0',
     ),
     'drupal/advagg' => 
     array (
@@ -1061,7 +1061,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => 'cbe75e733a8ddda05f9abef1b75a3c19ae8ac136',
+      'reference' => '84512da8f5a0bff4b2ef7cb7dc9d493b38842795',
     ),
     'drupal/libraries' => 
     array (
@@ -2036,8 +2036,8 @@ private static $installed = array (
     array (
       'provided' => 
       array (
-        0 => '1.0',
-        1 => '^1.0',
+        0 => '^1.0',
+        1 => '1.0',
       ),
     ),
     'psr/http-message' => 
