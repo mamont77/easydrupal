@@ -30,7 +30,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '84512da8f5a0bff4b2ef7cb7dc9d493b38842795',
+    'reference' => '762c31620ca7838bde5806fe157d79dae6a3f58f',
     'name' => 'drupal/legacy-project',
   ),
   'versions' => 
@@ -368,12 +368,12 @@ private static $installed = array (
     ),
     'drupal/blazy' => 
     array (
-      'pretty_version' => '2.1.0',
-      'version' => '2.1.0.0',
+      'pretty_version' => '2.2.0',
+      'version' => '2.2.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '8.x-2.1',
+      'reference' => '8.x-2.2',
     ),
     'drupal/block' => 
     array (
@@ -1061,7 +1061,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '84512da8f5a0bff4b2ef7cb7dc9d493b38842795',
+      'reference' => '762c31620ca7838bde5806fe157d79dae6a3f58f',
     ),
     'drupal/libraries' => 
     array (
@@ -1382,12 +1382,12 @@ private static $installed = array (
     ),
     'drupal/slick' => 
     array (
-      'pretty_version' => '2.2.0',
-      'version' => '2.2.0.0',
+      'pretty_version' => '2.3.0',
+      'version' => '2.3.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '8.x-2.2',
+      'reference' => '8.x-2.3',
     ),
     'drupal/sophron' => 
     array (
