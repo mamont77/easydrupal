@@ -89,13 +89,3 @@ function blazy_update_8206() {
     return t('Blazy has installed core "Media" module.');
   }
 }
-
-/**
- * Install core Media module if not already enabled.
- */
-function blazy_update_8206() {
-  if (!\Drupal::moduleHandler()->moduleExists('media')) {
-    \Drupal::service('module_installer')->install(['media']);
-    return t('Blazy has installed core "Media" module.');
-  }
-}
