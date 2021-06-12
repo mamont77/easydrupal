@@ -48,7 +48,7 @@ class DisqusFormatter extends FormatterBase implements ContainerFactoryPluginInt
    *   The current user.
    */
   public function __construct($plugin_id, $plugin_definition, FieldDefinitionInterface $field_definition, array $settings, $label, $view_mode, AccountInterface $current_user) {
-    parent::__construct($plugin_id, $plugin_definition, $field_definition, $settings, $label, $view_mode, array());
+    parent::__construct($plugin_id, $plugin_definition, $field_definition, $settings, $label, $view_mode, []);
     $this->currentUser = $current_user;
   }
 
@@ -77,7 +77,10 @@ class DisqusFormatter extends FormatterBase implements ContainerFactoryPluginInt
     // entities, we'll apply the default value for existing entities.
     if ($items->count() == 0) {
       $field_default_value = $items->getFieldDefinition()->getDefaultValue($items->getEntity());
-      $items->status = $field_default_value[0]['status'];
+      if (!empty($field_default_value)) {
+        $items->status = $field_default_value[0]['status'];
+      }
+
     }
 
     if ($items->status == 1 && $this->currentUser->hasPermission('view disqus comments')) {

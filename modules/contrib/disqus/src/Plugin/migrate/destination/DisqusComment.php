@@ -3,7 +3,7 @@
 namespace Drupal\disqus\Plugin\migrate\destination;
 
 use Drupal\migrate\Plugin\migrate\destination\DestinationBase;
-use Drupal\migrate\Entity\MigrationInterface;
+use Drupal\migrate\Plugin\MigrationInterface;
 use Drupal\migrate\Row;
 use Psr\Log\LoggerInterface;
 use Drupal\Core\Config\ConfigFactoryInterface;
@@ -41,7 +41,7 @@ class DisqusComment extends DestinationBase {
    *   The plugin_id for the plugin instance.
    * @param mixed $plugin_definition
    *   The plugin implemetation definition.
-   * @param \Drupal\migrate\Entity\MigrationInterface $migration
+   * @param \Drupal\migrate\Plugin\MigrationInterface $migration
    *   The migration.
    * @param \Psr\Log\LoggerInterface $logger
    *   A logger instance.

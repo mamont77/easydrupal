@@ -81,7 +81,7 @@ function disqus_node_links_alter(array &$node_links, NodeInterface $node, array 
           // Display the Disqus link.
           $links['disqus_comments_num'] = array(
             'title' => t('Comments'),
-            'url' => $node->urlInfo(),
+            'url' => $node->toUrl(),
             'fragment' => 'disqus_thread',
             'attributes' => array(
               // Identify the node for Disqus with the unique identifier:
@@ -121,6 +121,7 @@ function disqus_entity_delete(EntityInterface $entity) {
   if (!$entity->hasField(key($field))) {
     return;
   }
+  $messenger = \Drupal::messenger();
 
   $config = \Drupal::config('disqus.settings');
   // Close/remove the thread on disqus if required.
@@ -139,7 +140,7 @@ function disqus_entity_delete(EntityInterface $entity) {
         ));
       }
       catch (Exception $exception) {
-        drupal_set_message(t('There was an error loading the thread details from Disqus.'), 'error');
+        $messenger->addError(t('There was an error loading the thread details from Disqus.'));
         \Drupal::logger('disqus')
           ->error('Error loading thread details for entity : @identifier. Check your API keys.', array('@identifier' => "{$entity->getEntityTypeId()}/{$entity->id()}"));
       }
@@ -153,7 +154,7 @@ function disqus_entity_delete(EntityInterface $entity) {
             ));
           }
           catch (Exception $exception) {
-            drupal_set_message(t('There was an error closing the thread on Disqus.'), 'error');
+            $messenger->addError(t('There was an error closing the thread on Disqus.'));
             \Drupal::logger('disqus')
               ->error('Error closing thread for entity : @identifier. Check your user access token.', array('@identifier' => "{$entity->getEntityTypeId()}/{$entity->id()}"));
           }
@@ -167,7 +168,7 @@ function disqus_entity_delete(EntityInterface $entity) {
             ));
           }
           catch (Exception $exception) {
-            drupal_set_message(t('There was an error removing the thread on Disqus.'), 'error');
+            $messenger->addError(t('There was an error removing the thread on Disqus.'));
             \Drupal::logger('disqus')
               ->error('Error closing thread for entity : @identifier. Check your user access token.', array('@identifier' => "{$entity->getEntityTypeId()}/{$entity->id()}"));
           }
@@ -192,9 +193,11 @@ function disqus_entity_update(EntityInterface $entity) {
     return;
   }
 
+  $messenger = \Drupal::messenger();
+
   $config = \Drupal::config('disqus.settings');
   // Update the thread information on disqus if required.
-  if ($config->get('advanced.api.disqus_api_update') && ($entity->label() != $entity->original->label() || $entity->url() != $entity->original->url())) {
+  if ($config->get('advanced.api.disqus_api_update') && ($entity->label() != $entity->original->label() || $entity->toUrl() != $entity->original->url())) {
     $disqus = disqus_api();
     if ($disqus) {
       try {
@@ -208,7 +211,7 @@ function disqus_entity_update(EntityInterface $entity) {
         ));
       }
       catch (Exception $exception) {
-        drupal_set_message(t('There was an error loading the thread details from Disqus.'), 'error');
+        $messenger->addError(t('There was an error loading the thread details from Disqus.'));
         \Drupal::logger('disqus')
           ->error('Error loading thread details for entity : @identifier. Check your API keys.', array('@identifier' => "{$entity->getEntityTypeId()}/{$entity->id()}"));
       }
@@ -219,11 +222,11 @@ function disqus_entity_update(EntityInterface $entity) {
             'thread' => $thread->id,
             'forum' => $config->get('disqus_domain'),
             'title' => $entity->label(),
-            'url' => $entity->url('canonical', array('absolute' => TRUE)),
+            'url' => $entity->toUrl('canonical', array('absolute' => TRUE)),
           ));
         }
         catch (Exception $exception) {
-          drupal_set_message(t('There was an error updating the thread details on Disqus.'), 'error');
+          $messenger->addError(t('There was an error updating the thread details on Disqus.'));
           \Drupal::logger('disqus')
             ->error('Error updating thread details for entity : @identifier. Check your user access token.', array('@identifier' => "{$entity->getEntityTypeId()}/{$entity->id()}"));
         }
@@ -275,7 +278,7 @@ function disqus_api() {
       ->get('advanced.disqus_secretkey'));
   }
   catch (Exception $exception) {
-    drupal_set_message(t('There was an error loading the Disqus PHP API. Please check your API keys and try again.'), 'error');
+    \Drupal::messenger()->addError(t('There was an error loading the Disqus PHP API. Please check your API keys and try again.'));
     \Drupal::logger('disqus')
       ->error('Error loading the Disqus PHP API. Check your API keys.', array());
     return FALSE;

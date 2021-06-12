@@ -2,10 +2,11 @@
 
 namespace Drupal\disqus\Plugin\migrate\source;
 
+use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\migrate\Plugin\migrate\source\SourcePluginBase;
 use Drupal\migrate\Row;
-use Drupal\migrate\Entity\MigrationInterface;
+use Drupal\migrate\Plugin\MigrationInterface;
 use Psr\Log\LoggerInterface;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Entity\Query\QueryFactory;
@@ -57,7 +58,7 @@ class DisqusComment extends SourcePluginBase implements ContainerFactoryPluginIn
    *   The plugin_id for the plugin instance.
    * @param mixed $plugin_definition
    *   The plugin implemetation definition.
-   * @param \Drupal\migrate\Entity\MigrationInterface $migration
+   * @param \Drupal\migrate\Plugin\MigrationInterface $migration
    *   The migration.
    * @param \Psr\Log\LoggerInterface $logger
    *   A logger instance.
@@ -107,7 +108,7 @@ class DisqusComment extends SourcePluginBase implements ContainerFactoryPluginIn
       'name' => $this->t("The comment author's name."),
       'user_id' => $this->t('The disqus user-id of the author who commented.'),
       'email' => $this->t("The comment author's email address."),
-      'url' => $this->t("The author's home page address	."),
+      'url' => $this->t("The author's home page address."),
       'ipAddress' => $this->t("The author's IP address."),
       'isAnonymous' => $this->t('If true, this comments has been posted by an anonymous user.'),
       'isApproved' => $this->t('If the comment is approved or not.'),
@@ -141,17 +142,21 @@ class DisqusComment extends SourcePluginBase implements ContainerFactoryPluginIn
    * {@inheritdoc}
    */
   public function initializeIterator() {
+    $items = array();
+    
     if ($disqus = disqus_api()) {
       try {
         $posts = $disqus->forums->listPosts(array('forum' => $this->config->get('disqus_domain')));
       }
       catch (\Exception $exception) {
-        drupal_set_message(t('There was an error loading the forum details. Please check you API keys and try again.', 'error'));
+        $this->messenger()->addMessage(
+          t('There was an error loading the forum details. Please check you API keys and try again.'),
+          MessengerInterface::TYPE_ERROR
+        );
         $this->logger->error('Error loading the Disqus PHP API. Check your forum name.', array());
-        return FALSE;
+        return new \ArrayIterator($items);
       }
 
-      $items = array();
       foreach ($posts as $post) {
         $id = $post['id'];
         $items[$id]['id'] = $id;
@@ -169,6 +174,7 @@ class DisqusComment extends SourcePluginBase implements ContainerFactoryPluginIn
         $items[$id]['isEdited'] = $post['isEdited'];
       }
     }
+
     return new \ArrayIterator($items);
   }
 

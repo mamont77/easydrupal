@@ -7,6 +7,8 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Url;
+use Drupal\file\Entity\File;
+use Drupal\user\Entity\User;
 
 /**
  * It contains common functions to manage disqus_comment fields.
@@ -108,7 +110,7 @@ class DisqusCommentManager implements DisqusCommentManagerInterface {
     $managed_logo = \Drupal::config('disqus.settings')->get('advanced.sso.disqus_logo');
     $use_site_logo = \Drupal::config('disqus.settings')->get('advanced.sso.disqus_use_site_logo');
     if (!$use_site_logo && !empty($managed_logo)) {
-      $disqus['sso']['button'] = file_load($managed_logo)->url();
+      $disqus['sso']['button'] = File::load($managed_logo)->url();
     }
     elseif ($logo = theme_get_setting('logo')) {
       $disqus['sso']['button'] = $logo['url'];
@@ -163,12 +165,12 @@ class DisqusCommentManager implements DisqusCommentManagerInterface {
       // Load the user's avatar.
       $user_picture_default = \Drupal::config('field.instance.user.user.user_picture')->get('settings.default_image');
 
-      $user = user_load($account->id());
-      if (isset($user->user_picture->target_id) && !empty($user->user_picture->target_id) && $file = file_load($user->user_picture->target_id)) {
+      $user = User::load($account->id());
+      if (isset($user->user_picture->target_id) && !empty($user->user_picture->isEmpty()) && $file = File::load($user->user_picture->entity->getFileUri())) {
         $file_uri = $file->getFileUri();
         $data['avatar'] = !empty($file_uri) ? $file_uri : NULL;
       }
-      elseif (!empty($user_picture_default['fid']) && $file = file_load($user_picture_default['fid'])) {
+      elseif (!empty($user_picture_default['fid']) && $file = File::load($user_picture_default['fid'])) {
         $file_uri = $file->getFileUri();
         $data['avatar'] = !empty($file_uri) ? $file_uri : NULL;
       }

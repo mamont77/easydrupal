@@ -16,7 +16,7 @@ class CaptchaCacheTest extends CaptchaWebTestBase {
    *
    * @var array
    */
-  public static $modules = [
+  protected static $modules = [
     'block',
     'image_captcha',
     'captcha_test',
@@ -25,7 +25,7 @@ class CaptchaCacheTest extends CaptchaWebTestBase {
   /**
    * {@inheritdoc}
    */
-  public function setUp() {
+  public function setUp(): void {
     parent::setUp();
 
     $this->drupalPlaceBlock('user_login_block', ['id' => 'login']);
@@ -38,41 +38,41 @@ class CaptchaCacheTest extends CaptchaWebTestBase {
     global $base_path;
     // Check caching without captcha as anonymous user.
     $this->drupalGet('');
-    $this->assertEqual($this->drupalGetHeader('x-drupal-cache'), 'MISS');
+    $this->assertEquals($this->getSession()->getResponseHeader('x-drupal-cache'), 'MISS');
     $this->drupalGet('');
-    $this->assertEqual($this->drupalGetHeader('x-drupal-cache'), 'HIT');
+    $this->assertEquals($this->getSession()->getResponseHeader('x-drupal-cache'), 'HIT');
 
     // Enable captcha on login block and test caching.
     captcha_set_form_id_setting('user_login_form', 'captcha/Math');
     $this->drupalGet('');
     $sid = $this->getCaptchaSidFromForm();
-    $this->assertNull($this->drupalGetHeader('x-drupal-cache'), 'Cache is disabled');
+    $this->assertNull($this->getSession()->getResponseHeader('x-drupal-cache'), 'Cache is disabled');
     $this->drupalGet('');
-    $this->assertNotEqual($sid, $this->getCaptchaSidFromForm());
+    $this->assertNotEquals($sid, $this->getCaptchaSidFromForm());
 
     // Switch challenge to captcha/Test, check the captcha isn't cached.
     captcha_set_form_id_setting('user_login_form', 'captcha/Test');
     $this->drupalGet('');
     $sid = $this->getCaptchaSidFromForm();
-    $this->assertNull($this->drupalGetHeader('x-drupal-cache'), 'Cache is disabled');
+    $this->assertNull($this->getSession()->getResponseHeader('x-drupal-cache'), 'Cache is disabled');
     $this->drupalGet('');
-    $this->assertNotEqual($sid, $this->getCaptchaSidFromForm());
+    $this->assertNotEquals($sid, $this->getCaptchaSidFromForm());
 
     // Switch challenge to image_captcha/Image, check the captcha isn't cached.
     captcha_set_form_id_setting('user_login_form', 'image_captcha/Image');
     $this->drupalGet('');
     $image_path = $this->getSession()->getPage()->find('css', '.captcha img')->getAttribute('src');
-    $this->assertNull($this->drupalGetHeader('x-drupal-cache'), 'Cache disabled');
+    $this->assertNull($this->getSession()->getResponseHeader('x-drupal-cache'), 'Cache disabled');
     // Check that we get a new image when vising the page again.
     $this->drupalGet('');
-    $this->assertNotEqual($image_path, $this->getSession()->getPage()->find('css', '.captcha img')->getAttribute('src'));
+    $this->assertNotEquals($image_path, $this->getSession()->getPage()->find('css', '.captcha img')->getAttribute('src'));
     // Check image caching, remove the base path since drupalGet() expects the
     // internal path.
     $this->drupalGet(substr($image_path, strlen($base_path)));
-    $this->assertResponse(200);
+    $this->assertSession()->statusCodeEquals(200);
     // Request image twice to make sure no errors happen (due to page caching).
     $this->drupalGet(substr($image_path, strlen($base_path)));
-    $this->assertResponse(200);
+    $this->assertSession()->statusCodeEquals(200);
   }
 
   /**
@@ -84,15 +84,19 @@ class CaptchaCacheTest extends CaptchaWebTestBase {
     // Enable captcha on login block with a cacheable captcha.
     captcha_set_form_id_setting('user_login_form', 'captcha_test/TestCacheable');
 
+    // Warm up the caches.
     $this->drupalGet('');
-    $this->assertTrue($this->drupalGetHeader('x-drupal-cache'), 'Cache enabled');
+
+    // Let's check if the page is cached.
+    $this->drupalGet('');
+    static::assertSame('HIT', $this->drupalGetHeader('X-Drupal-Cache'), 'Cache enabled');
 
     $edit = [
       'name' => $this->normalUser->getDisplayName(),
       'pass' => $this->normalUser->pass_raw,
       'captcha_response' => 'Test 123',
     ];
-    $this->drupalPostForm(NULL, $edit, t('Log in'));
+    $this->submitForm($edit, 'Log in');
     $web_assert->addressEquals('user/' . $this->normalUser->id());
 
     // Simulate a cron run that deletes the {captcha_session} data.
@@ -104,14 +108,14 @@ class CaptchaCacheTest extends CaptchaWebTestBase {
     // previously.
     $this->drupalLogout();
     $this->drupalGet('');
-    $this->assertTrue($this->drupalGetHeader('x-drupal-cache'), 'Cache enabled');
+    static::assertSame('HIT', $this->drupalGetHeader('X-Drupal-Cache'), 'Cache enabled');
 
     $edit = [
       'name' => $this->normalUser->getDisplayName(),
       'pass' => $this->normalUser->pass_raw,
       'captcha_response' => 'Test 123',
     ];
-    $this->drupalPostForm(NULL, $edit, t('Log in'));
+    $this->submitForm($edit, 'Log in');
     $web_assert->addressEquals('user/' . $this->normalUser->id());
   }
 

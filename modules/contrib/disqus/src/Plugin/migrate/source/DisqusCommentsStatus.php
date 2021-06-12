@@ -59,7 +59,7 @@ class DisqusCommentsStatus extends DrupalSqlBase {
   /**
    * {@inheritdoc}
    */
-  public function count() {
+  public function count($refresh = FALSE) {
     return $this->getDatabase()
       ->select('node', 'n')
       ->condition('n.type', $this->getEnabledTypes(), 'IN')
