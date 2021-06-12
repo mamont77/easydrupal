@@ -37,7 +37,7 @@
         "drupal/core-vendor-hardening": "^8.9",
         "drupal/country": "^1.0@RC",
         "drupal/crop": "^2.1",
-        "drupal/ctools": "^3.5",
+        "drupal/ctools": "^3.6",
         "drupal/disqus": "^1.0@RC",
         "drupal/ds": "^3.12",
         "drupal/editor_advanced_link": "^1.8",

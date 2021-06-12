@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '094d2ac00b35a5a8079a02676d147c2257c53dc1',
+        'reference' => '17631a596c871ebc85c20e3bfad82a294fd112ec',
         'name' => 'drupal/legacy-project',
         'dev' => true,
     ),
@@ -671,12 +671,12 @@
             'dev_requirement' => false,
         ),
         'drupal/ctools' => array(
-            'pretty_version' => '3.5.0',
-            'version' => '3.5.0.0',
+            'pretty_version' => '3.6.0',
+            'version' => '3.6.0.0',
             'type' => 'drupal-module',
             'install_path' => __DIR__ . '/../../modules/contrib/ctools',
             'aliases' => array(),
-            'reference' => '8.x-3.5',
+            'reference' => '8.x-3.6',
             'dev_requirement' => false,
         ),
         'drupal/datetime' => array(
@@ -965,7 +965,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '094d2ac00b35a5a8079a02676d147c2257c53dc1',
+            'reference' => '17631a596c871ebc85c20e3bfad82a294fd112ec',
             'dev_requirement' => false,
         ),
         'drupal/libraries' => array(
