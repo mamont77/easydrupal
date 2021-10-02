@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'b82f0b63228aeed370fb92127d033c75d2ce9fae',
+        'reference' => 'c7215dc3dd1a7127d403314d0d3187f0d16ba025',
         'name' => 'drupal/legacy-project',
         'dev' => true,
     ),
@@ -260,12 +260,12 @@
             'dev_requirement' => false,
         ),
         'drupal/admin_toolbar' => array(
-            'pretty_version' => '3.0.2',
-            'version' => '3.0.2.0',
+            'pretty_version' => '3.0.3',
+            'version' => '3.0.3.0',
             'type' => 'drupal-module',
             'install_path' => __DIR__ . '/../../modules/contrib/admin_toolbar',
             'aliases' => array(),
-            'reference' => '3.0.2',
+            'reference' => '3.0.3',
             'dev_requirement' => false,
         ),
         'drupal/advagg' => array(
@@ -965,7 +965,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'b82f0b63228aeed370fb92127d033c75d2ce9fae',
+            'reference' => 'c7215dc3dd1a7127d403314d0d3187f0d16ba025',
             'dev_requirement' => false,
         ),
         'drupal/libraries' => array(
@@ -984,12 +984,12 @@
             ),
         ),
         'drupal/linkit' => array(
-            'pretty_version' => '6.0.0-beta2',
-            'version' => '6.0.0.0-beta2',
+            'pretty_version' => '6.0.0-beta3',
+            'version' => '6.0.0.0-beta3',
             'type' => 'drupal-module',
             'install_path' => __DIR__ . '/../../modules/contrib/linkit',
             'aliases' => array(),
-            'reference' => '6.0.0-beta2',
+            'reference' => '6.0.0-beta3',
             'dev_requirement' => false,
         ),
         'drupal/locale' => array(
@@ -1110,12 +1110,12 @@
             'dev_requirement' => false,
         ),
         'drupal/purge' => array(
-            'pretty_version' => '3.0.0',
-            'version' => '3.0.0.0',
+            'pretty_version' => '3.1.0',
+            'version' => '3.1.0.0',
             'type' => 'drupal-module',
             'install_path' => __DIR__ . '/../../modules/contrib/purge',
             'aliases' => array(),
-            'reference' => '8.x-3.0',
+            'reference' => '8.x-3.1',
             'dev_requirement' => false,
         ),
         'drupal/purge_purger_http' => array(
@@ -1369,22 +1369,13 @@
                 0 => '8.9.19',
             ),
         ),
-        'drupal/upgrade_rector' => array(
-            'pretty_version' => '1.0.0-alpha7',
-            'version' => '1.0.0.0-alpha7',
-            'type' => 'drupal-module',
-            'install_path' => __DIR__ . '/../../modules/contrib/upgrade_rector',
-            'aliases' => array(),
-            'reference' => '8.x-1.0-alpha7',
-            'dev_requirement' => false,
-        ),
         'drupal/upgrade_status' => array(
-            'pretty_version' => '3.10.0',
-            'version' => '3.10.0.0',
+            'pretty_version' => '3.11.0',
+            'version' => '3.11.0.0',
             'type' => 'drupal-module',
             'install_path' => __DIR__ . '/../../modules/contrib/upgrade_status',
             'aliases' => array(),
-            'reference' => '8.x-3.10',
+            'reference' => '8.x-3.11',
             'dev_requirement' => false,
         ),
         'drupal/user' => array(
@@ -1411,21 +1402,21 @@
             ),
         ),
         'drupal/views_bootstrap' => array(
-            'pretty_version' => '3.7.0',
-            'version' => '3.7.0.0',
+            'pretty_version' => '3.8.0',
+            'version' => '3.8.0.0',
             'type' => 'drupal-module',
             'install_path' => __DIR__ . '/../../modules/contrib/views_bootstrap',
             'aliases' => array(),
-            'reference' => '8.x-3.7',
+            'reference' => '8.x-3.8',
             'dev_requirement' => false,
         ),
         'drupal/views_infinite_scroll' => array(
-            'pretty_version' => '1.8.0',
-            'version' => '1.8.0.0',
+            'pretty_version' => '1.9.0',
+            'version' => '1.9.0.0',
             'type' => 'drupal-module',
             'install_path' => __DIR__ . '/../../modules/contrib/views_infinite_scroll',
             'aliases' => array(),
-            'reference' => '8.x-1.8',
+            'reference' => '8.x-1.9',
             'dev_requirement' => false,
         ),
         'drupal/views_ui' => array(
@@ -1481,12 +1472,6 @@
             'aliases' => array(),
             'reference' => '8.x-2.0-alpha6',
             'dev_requirement' => false,
-        ),
-        'drupal8-rector/drupal8-rector' => array(
-            'dev_requirement' => false,
-            'replaced' => array(
-                0 => '*',
-            ),
         ),
         'drush/drush' => array(
             'pretty_version' => '10.5.0',
@@ -1627,15 +1612,6 @@
             'replaced' => array(
                 0 => '*',
             ),
-        ),
-        'jawira/case-converter' => array(
-            'pretty_version' => 'v1.2.0',
-            'version' => '1.2.0.0',
-            'type' => 'library',
-            'install_path' => __DIR__ . '/../jawira/case-converter',
-            'aliases' => array(),
-            'reference' => '79716629a298e44507a8eed9b997968f39367abc',
-            'dev_requirement' => false,
         ),
         'laminas/laminas-diactoros' => array(
             'pretty_version' => '1.8.7p2',
@@ -1796,21 +1772,6 @@
                 0 => '~2.0',
             ),
         ),
-        'palantirnet/drupal-rector' => array(
-            'pretty_version' => '0.5.6',
-            'version' => '0.5.6.0',
-            'type' => 'library',
-            'install_path' => __DIR__ . '/../palantirnet/drupal-rector',
-            'aliases' => array(),
-            'reference' => 'ceb55d69909a5b709f58fe3ad53db5eda82ef06b',
-            'dev_requirement' => false,
-        ),
-        'palantirnet/drupal8-rector' => array(
-            'dev_requirement' => false,
-            'replaced' => array(
-                0 => '*',
-            ),
-        ),
         'paragonie/random_compat' => array(
             'pretty_version' => 'v9.99.99',
             'version' => '9.99.99.0',
@@ -1945,21 +1906,6 @@
             'install_path' => __DIR__ . '/../ralouphie/getallheaders',
             'aliases' => array(),
             'reference' => '120b605dfeb996808c31b6477290a714d356e822',
-            'dev_requirement' => false,
-        ),
-        'rector/rector' => array(
-            'dev_requirement' => false,
-            'replaced' => array(
-                0 => 'v0.7.29',
-            ),
-        ),
-        'rector/rector-prefixed' => array(
-            'pretty_version' => 'v0.7.29',
-            'version' => '0.7.29.0',
-            'type' => 'library',
-            'install_path' => __DIR__ . '/../rector/rector-prefixed',
-            'aliases' => array(),
-            'reference' => '0b8e28a1f5985a4ac10312b4867ec5558a32087d',
             'dev_requirement' => false,
         ),
         'roundcube/plugin-installer' => array(
