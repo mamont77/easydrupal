@@ -4521,6 +4521,9 @@
                 },
                 "branch-alias": {
                     "dev-8.x-3.x": "3.x-dev"
+                },
+                "patches_applied": {
+                    "3240337: Purge 3.2 Release": "https://git.drupalcode.org/project/purge/-/merge_requests/6.diff"
                 }
             },
             "installation-source": "dist",

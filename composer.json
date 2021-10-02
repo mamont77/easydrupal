@@ -162,6 +162,9 @@
             "drupal/core": "-p2"
         },
         "patches": {
+            "drupal/purge": {
+                "3240337: Purge 3.2 Release": "https://git.drupalcode.org/project/purge/-/merge_requests/6.diff"
+            }
         }
     }
 }
