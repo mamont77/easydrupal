@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '9f8e144aae20653c68ea3747ddea687ce6c8492a',
+        'reference' => 'b39ac6677bae3ccfb003e6c96047a9826fab755f',
         'name' => 'drupal/legacy-project',
         'dev' => true,
     ),
@@ -697,6 +697,15 @@
                 0 => '8.9.19',
             ),
         ),
+        'drupal/devel' => array(
+            'pretty_version' => '4.1.1',
+            'version' => '4.1.1.0',
+            'type' => 'drupal-module',
+            'install_path' => __DIR__ . '/../../modules/contrib/devel',
+            'aliases' => array(),
+            'reference' => '4.1.1',
+            'dev_requirement' => false,
+        ),
         'drupal/disqus' => array(
             'pretty_version' => '1.0.0',
             'version' => '1.0.0.0',
@@ -741,6 +750,15 @@
             'replaced' => array(
                 0 => '8.9.19',
             ),
+        ),
+        'drupal/entity_reference_revisions' => array(
+            'pretty_version' => '1.9.0',
+            'version' => '1.9.0.0',
+            'type' => 'drupal-module',
+            'install_path' => __DIR__ . '/../../modules/contrib/entity_reference_revisions',
+            'aliases' => array(),
+            'reference' => '8.x-1.9',
+            'dev_requirement' => false,
         ),
         'drupal/examples' => array(
             'pretty_version' => 'dev-1.x',
@@ -965,7 +983,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '9f8e144aae20653c68ea3747ddea687ce6c8492a',
+            'reference' => 'b39ac6677bae3ccfb003e6c96047a9826fab755f',
             'dev_requirement' => false,
         ),
         'drupal/libraries' => array(
@@ -1088,6 +1106,15 @@
                 0 => '8.9.19',
             ),
         ),
+        'drupal/paragraphs' => array(
+            'pretty_version' => '1.12.0',
+            'version' => '1.12.0.0',
+            'type' => 'drupal-module',
+            'install_path' => __DIR__ . '/../../modules/contrib/paragraphs',
+            'aliases' => array(),
+            'reference' => '8.x-1.12',
+            'dev_requirement' => false,
+        ),
         'drupal/path' => array(
             'dev_requirement' => false,
             'replaced' => array(
@@ -1110,12 +1137,12 @@
             'dev_requirement' => false,
         ),
         'drupal/purge' => array(
-            'pretty_version' => '3.1.0',
-            'version' => '3.1.0.0',
+            'pretty_version' => '3.2.0',
+            'version' => '3.2.0.0',
             'type' => 'drupal-module',
             'install_path' => __DIR__ . '/../../modules/contrib/purge',
             'aliases' => array(),
-            'reference' => '8.x-3.1',
+            'reference' => '8.x-3.2',
             'dev_requirement' => false,
         ),
         'drupal/purge_purger_http' => array(
@@ -1454,15 +1481,6 @@
             'replaced' => array(
                 0 => '8.9.19',
             ),
-        ),
-        'drupal/xmlsitemap' => array(
-            'pretty_version' => '1.0.0',
-            'version' => '1.0.0.0',
-            'type' => 'drupal-module',
-            'install_path' => __DIR__ . '/../../modules/contrib/xmlsitemap',
-            'aliases' => array(),
-            'reference' => '8.x-1.0',
-            'dev_requirement' => false,
         ),
         'drupal/yoast_seo' => array(
             'pretty_version' => '2.0.0-alpha6',

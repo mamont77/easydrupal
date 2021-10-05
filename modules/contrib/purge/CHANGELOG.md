@@ -11,6 +11,14 @@ and this project adheres to
 
 ### Changed
 
+## [8.x-3.2] - 2021-10-04
+
+### Fixed
+- **#3240230:** Don't hard depend on dunamic_page_cache module anymore.
+- **#3240238:** Revert FilterResponseEvent::isMainRequest() deprecation fix.
+- **#2976480:** rewrite of CacheableResponseSubscriberTest by japerry which now passes.
+- Revert: `Tests: deprecation warning in src/Functional/DashboardPurgersTest.php`
+
 ## [8.x-3.1] - 2021-10-01
 
 ### Changed

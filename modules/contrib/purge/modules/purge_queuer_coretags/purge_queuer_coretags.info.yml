@@ -6,7 +6,7 @@ dependencies:
   - purge:purge
 core_version_requirement: '^8.9 || ^9'
 
-# Information added by Drupal.org packaging script on 2021-09-30
-version: '8.x-3.1'
+# Information added by Drupal.org packaging script on 2021-10-05
+version: '8.x-3.2'
 project: 'purge'
-datestamp: 1633041579
+datestamp: 1633428283
