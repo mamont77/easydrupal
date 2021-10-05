@@ -1,0 +1,21 @@
+uuid: b8ffc6a7-970a-433b-a9b9-a1e768a6627d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_code
+    - paragraphs.paragraphs_type.sourse_code
+  module:
+    - geshifield
+id: paragraph.sourse_code.field_code
+field_name: field_code
+entity_type: paragraph
+bundle: sourse_code
+label: Code
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: geshifield

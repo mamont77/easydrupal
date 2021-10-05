@@ -1,0 +1,19 @@
+uuid: da410f4e-37fa-4481-b0cd-acf41dbc6810
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_file_path
+    - paragraphs.paragraphs_type.sourse_code
+id: paragraph.sourse_code.field_file_path
+field_name: field_file_path
+entity_type: paragraph
+bundle: sourse_code
+label: 'File Path'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,31 @@
+uuid: f7911fe1-a6d4-46f8-867e-497d980632d3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_sourse_code_paragraph
+    - node.type.article
+    - paragraphs.paragraphs_type.sourse_code
+  module:
+    - entity_reference_revisions
+id: node.article.field_sourse_code_paragraph
+field_name: field_sourse_code_paragraph
+entity_type: node
+bundle: article
+label: 'Sourse Code'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      sourse_code: sourse_code
+    target_bundles_drag_drop:
+      sourse_code:
+        enabled: true
+        weight: 2
+field_type: entity_reference_revisions

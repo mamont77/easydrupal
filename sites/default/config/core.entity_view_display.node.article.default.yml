@@ -10,6 +10,7 @@ dependencies:
     - field.field.node.article.field_image
     - field.field.node.article.field_meta_tags
     - field.field.node.article.field_sourse_code
+    - field.field.node.article.field_sourse_code_paragraph
     - field.field.node.article.field_tags
     - field.field.node.article.field_version
     - field.field.node.article.field_yoast_seo
@@ -18,6 +19,7 @@ dependencies:
   module:
     - disqus
     - ds
+    - entity_reference_revisions
     - field_collection
     - file
     - metatag
@@ -33,6 +35,7 @@ third_party_settings:
       disable_css: false
       entity_classes: all_classes
       settings:
+        label: ''
         wrappers:
           ds_content: div
         outer_wrapper: div
@@ -47,6 +50,7 @@ third_party_settings:
         - node_post_date
         - field_image
         - body
+        - field_sourse_code_paragraph
         - field_sourse_code
         - field_conclusions
         - field_attachment
@@ -54,7 +58,6 @@ third_party_settings:
         - field_comments
         - field_meta_tags
         - field_yoast_seo
-        - field_vote
     fields:
       node_post_date:
         plugin_id: node_post_date
@@ -82,7 +85,7 @@ content:
     label: hidden
     region: ds_content
   field_attachment:
-    weight: 5
+    weight: 6
     label: above
     settings:
       use_description_as_link_text: true
@@ -90,14 +93,14 @@ content:
     type: file_default
     region: ds_content
   field_comments:
-    weight: 7
+    weight: 8
     label: above
     settings: {  }
     third_party_settings: {  }
     type: disqus_comment
     region: ds_content
   field_conclusions:
-    weight: 4
+    weight: 5
     label: above
     settings: {  }
     third_party_settings:
@@ -148,14 +151,14 @@ content:
     label: hidden
     region: ds_content
   field_meta_tags:
-    weight: 8
+    weight: 9
     label: above
     settings: {  }
     third_party_settings: {  }
     type: metatag_empty_formatter
     region: ds_content
   field_sourse_code:
-    weight: 3
+    weight: 4
     label: hidden
     settings:
       view_mode: default
@@ -163,15 +166,24 @@ content:
     third_party_settings: {  }
     type: field_collection_items
     region: ds_content
+  field_sourse_code_paragraph:
+    type: entity_reference_revisions_entity_view
+    weight: 3
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: ds_content
   field_yoast_seo:
-    weight: 9
+    weight: 10
     label: above
     settings: {  }
     third_party_settings: {  }
     type: yoastseo_formatter
     region: ds_content
   links:
-    weight: 6
+    weight: 7
     region: ds_content
     settings: {  }
     third_party_settings: {  }

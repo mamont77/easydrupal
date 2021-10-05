@@ -1,0 +1,21 @@
+uuid: 96bfa123-a2c8-4cd1-9e55-3c11e086632f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_top_description
+    - paragraphs.paragraphs_type.sourse_code
+  module:
+    - text
+id: paragraph.sourse_code.field_top_description
+field_name: field_top_description
+entity_type: paragraph
+bundle: sourse_code
+label: 'Top Description'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

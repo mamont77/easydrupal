@@ -1,0 +1,56 @@
+uuid: 2a05e2b5-1aca-4182-af54-83cb805513e5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.sourse_code.field_code
+    - field.field.paragraph.sourse_code.field_description
+    - field.field.paragraph.sourse_code.field_file_path
+    - field.field.paragraph.sourse_code.field_top_description
+    - paragraphs.paragraphs_type.sourse_code
+  module:
+    - ds
+    - geshifield
+    - text
+id: paragraph.sourse_code.default
+targetEntityType: paragraph
+bundle: sourse_code
+mode: default
+content:
+  field_code:
+    weight: 2
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: geshifield_default
+    region: content
+  field_description:
+    weight: 3
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_file_path:
+    weight: 1
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings:
+      ds:
+        ft:
+          id: minimal
+          settings:
+            lb: File
+            lb-col: false
+            classes: {  }
+    type: string
+    region: content
+  field_top_description:
+    weight: 0
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+hidden: {  }

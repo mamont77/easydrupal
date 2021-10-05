@@ -28,6 +28,7 @@ module:
   ctools_views: 0
   datetime: 0
   dblog: 0
+  devel: 0
   disqus: 0
   ds_extras: 0
   ds_switch_view_mode: 0
@@ -35,6 +36,7 @@ module:
   easydrupal_breadcrumb: 0
   editor: 0
   editor_advanced_link: 0
+  entity_reference_revisions: 0
   fast404: 0
   field: 0
   field_collection: 0
@@ -70,6 +72,7 @@ module:
   node: 0
   options: 0
   page_cache: 0
+  paragraphs_type_permissions: 0
   path: 0
   path_alias: 0
   purge: 0
@@ -115,6 +118,7 @@ module:
   menu_link_content: 1
   pathauto: 1
   views: 10
+  paragraphs: 11
   standard: 1000
 theme:
   stable: 0

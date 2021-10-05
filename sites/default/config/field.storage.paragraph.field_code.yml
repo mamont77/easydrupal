@@ -1,0 +1,19 @@
+uuid: dceff7ca-8a44-4f91-9dac-e319d9e7c11a
+langcode: en
+status: true
+dependencies:
+  module:
+    - geshifield
+    - paragraphs
+id: paragraph.field_code
+field_name: field_code
+entity_type: paragraph
+type: geshifield
+settings: {  }
+module: geshifield
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

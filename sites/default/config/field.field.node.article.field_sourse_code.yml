@@ -12,7 +12,7 @@ id: node.article.field_sourse_code
 field_name: field_sourse_code
 entity_type: node
 bundle: article
-label: 'Sourse Code'
+label: 'Sourse Code [DEPRECATED]'
 description: ''
 required: false
 translatable: false
