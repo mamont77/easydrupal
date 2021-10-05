@@ -20,9 +20,9 @@ dependencies:
   module:
     - disqus
     - ds
+    - entity_reference_revisions
     - field_collection
     - file
-    - paragraphs
     - responsive_image
     - text
     - user
@@ -157,11 +157,13 @@ content:
     third_party_settings: {  }
     region: ds_content
   field_sourse_code_paragraph:
-    type: paragraph_summary
+    type: entity_reference_revisions_entity_view
     weight: 3
     region: ds_content
     label: hidden
-    settings: {  }
+    settings:
+      view_mode: default
+      link: ''
     third_party_settings: {  }
   links:
     weight: 7
