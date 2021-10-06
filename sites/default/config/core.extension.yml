@@ -29,6 +29,7 @@ module:
   datetime: 0
   dblog: 0
   devel: 0
+  devel_php: 0
   disqus: 0
   ds_extras: 0
   ds_switch_view_mode: 0
@@ -39,7 +40,6 @@ module:
   entity_reference_revisions: 0
   fast404: 0
   field: 0
-  field_collection: 0
   field_group: 0
   field_ui: 0
   file: 0
@@ -72,7 +72,6 @@ module:
   node: 0
   options: 0
   page_cache: 0
-  paragraphs_type_permissions: 0
   path: 0
   path_alias: 0
   purge: 0

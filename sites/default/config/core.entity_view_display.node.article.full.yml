@@ -10,7 +10,6 @@ dependencies:
     - field.field.node.article.field_conclusions
     - field.field.node.article.field_image
     - field.field.node.article.field_meta_tags
-    - field.field.node.article.field_sourse_code
     - field.field.node.article.field_sourse_code_paragraph
     - field.field.node.article.field_tags
     - field.field.node.article.field_version
@@ -21,7 +20,6 @@ dependencies:
     - disqus
     - ds
     - entity_reference_revisions
-    - field_collection
     - file
     - responsive_image
     - text
@@ -146,15 +144,6 @@ content:
             lb-col: false
             classes: {  }
     label: hidden
-    region: ds_content
-  field_sourse_code:
-    type: field_collection_items
-    weight: 4
-    label: hidden
-    settings:
-      view_mode: default
-      link: false
-    third_party_settings: {  }
     region: ds_content
   field_sourse_code_paragraph:
     type: entity_reference_revisions_entity_view

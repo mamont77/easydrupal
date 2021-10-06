@@ -9,7 +9,7 @@ id: paragraph.sourse_code.field_file_path
 field_name: field_file_path
 entity_type: paragraph
 bundle: sourse_code
-label: 'File Path'
+label: File
 description: ''
 required: false
 translatable: false

@@ -10,7 +10,6 @@ dependencies:
     - field.field.node.article.field_conclusions
     - field.field.node.article.field_image
     - field.field.node.article.field_meta_tags
-    - field.field.node.article.field_sourse_code
     - field.field.node.article.field_sourse_code_paragraph
     - field.field.node.article.field_tags
     - field.field.node.article.field_version
@@ -104,7 +103,6 @@ hidden:
   field_comments: true
   field_conclusions: true
   field_meta_tags: true
-  field_sourse_code: true
   field_sourse_code_paragraph: true
   field_tags: true
   field_version: true
