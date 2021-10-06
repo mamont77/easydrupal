@@ -84,7 +84,7 @@
         "drush/drush": "^10.5",
         "grasmash/drupal-security-warning": "dev-master",
         "oomphinc/composer-installers-extender": "^2.0",
-        "topfloor/composer-cleanup-vcs-dirs": "dev-composer-2"
+        "topfloor/composer-cleanup-vcs-dirs": "^1.1"
     },
     "require-dev": {
         "drupal/examples": "1.x-dev"

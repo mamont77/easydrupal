@@ -10965,17 +10965,17 @@
         },
         {
             "name": "topfloor/composer-cleanup-vcs-dirs",
-            "version": "dev-composer-2",
-            "version_normalized": "dev-composer-2",
+            "version": "1.1.0",
+            "version_normalized": "1.1.0.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/TopFloorTech/composer-cleanup-vcs-dirs.git",
-                "reference": "3b5af7e47b20f6946d1fc53c36da54c701dcd99d"
+                "url": "https://github.com/VolantisDev/composer-cleanup-vcs-dirs.git",
+                "reference": "dfa7c8c0fe22e048310d00f133f7df14f0b2f57a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/TopFloorTech/composer-cleanup-vcs-dirs/zipball/3b5af7e47b20f6946d1fc53c36da54c701dcd99d",
-                "reference": "3b5af7e47b20f6946d1fc53c36da54c701dcd99d",
+                "url": "https://api.github.com/repos/VolantisDev/composer-cleanup-vcs-dirs/zipball/dfa7c8c0fe22e048310d00f133f7df14f0b2f57a",
+                "reference": "dfa7c8c0fe22e048310d00f133f7df14f0b2f57a",
                 "shasum": ""
             },
             "require": {
@@ -10986,7 +10986,7 @@
             "require-dev": {
                 "composer/composer": "dev-master"
             },
-            "time": "2020-11-11T23:25:46+00:00",
+            "time": "2021-07-09T16:11:23+00:00",
             "type": "composer-plugin",
             "extra": {
                 "class": "TopFloor\\ComposerCleanupVcsDirs\\Plugin"
@@ -11003,7 +11003,8 @@
             ],
             "description": "Automatically deletes .git directories in newly installed or updated dependencies.",
             "support": {
-                "source": "https://github.com/TopFloorTech/composer-cleanup-vcs-dirs/tree/composer-2"
+                "issues": "https://github.com/VolantisDev/composer-cleanup-vcs-dirs/issues",
+                "source": "https://github.com/VolantisDev/composer-cleanup-vcs-dirs/tree/1.1.0"
             },
             "install-path": "../topfloor/composer-cleanup-vcs-dirs"
         },

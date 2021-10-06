@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'ab20b2e4618c886b853a4bbddb0f515a839e3405',
+        'reference' => '2b2aa155124387cdc807d60f5ffef2b77d7eb960',
         'name' => 'drupal/legacy-project',
         'dev' => true,
     ),
@@ -981,7 +981,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'ab20b2e4618c886b853a4bbddb0f515a839e3405',
+            'reference' => '2b2aa155124387cdc807d60f5ffef2b77d7eb960',
             'dev_requirement' => false,
         ),
         'drupal/libraries' => array(
@@ -2195,12 +2195,12 @@
             'dev_requirement' => false,
         ),
         'topfloor/composer-cleanup-vcs-dirs' => array(
-            'pretty_version' => 'dev-composer-2',
-            'version' => 'dev-composer-2',
+            'pretty_version' => '1.1.0',
+            'version' => '1.1.0.0',
             'type' => 'composer-plugin',
             'install_path' => __DIR__ . '/../topfloor/composer-cleanup-vcs-dirs',
             'aliases' => array(),
-            'reference' => '3b5af7e47b20f6946d1fc53c36da54c701dcd99d',
+            'reference' => 'dfa7c8c0fe22e048310d00f133f7df14f0b2f57a',
             'dev_requirement' => false,
         ),
         'twig/twig' => array(
