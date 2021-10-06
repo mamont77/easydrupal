@@ -105,12 +105,6 @@
   width: 50%;
 }
 
-@media screen and (max-width: 1024px) {
-  .page-node-type-landingpage .about .container {
-    width: 60%;
-  }
-}
-
 .page-node-type-landingpage .about h2 {
   color: #eee;
 }
@@ -133,16 +127,6 @@
   border: 8px solid #eee;
   margin: 0 30px 15px 0;
   max-width: 216px;
-}
-
-@media (max-width: 768px) {
-  .page-node-type-landingpage .about .field--name-body img {
-    float: none;
-    display: block;
-    width: 50%;
-    height: auto;
-    margin: 0 auto 15px auto;
-  }
 }
 
 .page-node-type-landingpage .about .read-more a {
@@ -169,18 +153,6 @@
 
 .page-node-type-landingpage .projects .field-name-field-landing-page-background {
   border: 1px solid #81a5bf;
-}
-
-@media screen and (min-width: 1140px) {
-  .page-node-type-landingpage .projects .field-name-field-landing-page-background {
-    background-image: url(../images/devices/cs-imac-frame-small.png);
-    background-repeat: no-repeat;
-    background-position: center top;
-    height: 440px;
-    width: 555px;
-    padding: 19px 31px 0 31px;
-    border: none;
-  }
 }
 
 .page-node-type-landingpage .projects img {
@@ -413,6 +385,8 @@
   font-size: 24px;
   padding: 20px 30px;
   text-transform: uppercase;
+  -webkit-transition: all 0.2s ease-out;
+  -o-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
   opacity: .7;
 }
@@ -425,12 +399,6 @@
   background-color: #ddd;
 }
 
-@media screen and (max-width: 1024px) {
-  .page-node-type-landingpage .section .title-wrapper {
-    max-width: 50%;
-  }
-}
-
 @media screen and (min-width: 993px) {
   .page-node-type-landingpage .main-container.container {
     padding: 79px 0 0 0;
@@ -441,6 +409,37 @@
   }
   .page-node-type-landingpage .main-section {
     padding: 0;
+  }
+}
+
+@media screen and (min-width: 1140px) {
+  .page-node-type-landingpage .projects .field-name-field-landing-page-background {
+    background-image: url(../images/devices/cs-imac-frame-small.png);
+    background-repeat: no-repeat;
+    background-position: center top;
+    height: 440px;
+    width: 555px;
+    padding: 19px 31px 0 31px;
+    border: none;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .page-node-type-landingpage .about .container {
+    width: 60%;
+  }
+  .page-node-type-landingpage .section .title-wrapper {
+    max-width: 50%;
+  }
+}
+
+@media (max-width: 768px) {
+  .page-node-type-landingpage .about .field--name-body img {
+    float: none;
+    display: block;
+    width: 50%;
+    height: auto;
+    margin: 0 auto 15px auto;
   }
 }
 

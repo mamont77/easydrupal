@@ -18,8 +18,8 @@ $lupe-desktop-width: 55px;
 $lupe-desktop-height: 55px;
 $lupe-desktop-total-width: 79px;
 $lupe-desktop-total-height: 55px;
-$lupe-desktop-image: 'sprite.png';
-$lupe-desktop: (0px, 0px, 0px, 0px, 55px, 55px, 79px, 55px, 'sprite.png', 'lupe-desktop', );
+$lupe-desktop-image: '../images/sprite.png';
+$lupe-desktop: (0px, 0px, 0px, 0px, 55px, 55px, 79px, 55px, '../images/sprite.png', 'lupe-desktop', );
 $lupe-mobile-name: 'lupe-mobile';
 $lupe-mobile-x: 57px;
 $lupe-mobile-y: 0px;
@@ -29,13 +29,13 @@ $lupe-mobile-width: 22px;
 $lupe-mobile-height: 23px;
 $lupe-mobile-total-width: 79px;
 $lupe-mobile-total-height: 55px;
-$lupe-mobile-image: 'sprite.png';
-$lupe-mobile: (57px, 0px, -57px, 0px, 22px, 23px, 79px, 55px, 'sprite.png', 'lupe-mobile', );
+$lupe-mobile-image: '../images/sprite.png';
+$lupe-mobile: (57px, 0px, -57px, 0px, 22px, 23px, 79px, 55px, '../images/sprite.png', 'lupe-mobile', );
 $spritesheet-width: 79px;
 $spritesheet-height: 55px;
-$spritesheet-image: 'sprite.png';
+$spritesheet-image: '../images/sprite.png';
 $spritesheet-sprites: ($lupe-desktop, $lupe-mobile, );
-$spritesheet: (79px, 55px, 'sprite.png', $spritesheet-sprites, );
+$spritesheet: (79px, 55px, '../images/sprite.png', $spritesheet-sprites, );
 
 // The provided mixins are intended to be used with the array-like variables
 //

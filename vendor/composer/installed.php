@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'b39ac6677bae3ccfb003e6c96047a9826fab755f',
+        'reference' => 'ab20b2e4618c886b853a4bbddb0f515a839e3405',
         'name' => 'drupal/legacy-project',
         'dev' => true,
     ),
@@ -706,6 +706,15 @@
             'reference' => '4.1.1',
             'dev_requirement' => false,
         ),
+        'drupal/devel_php' => array(
+            'pretty_version' => '1.3.0',
+            'version' => '1.3.0.0',
+            'type' => 'drupal-module',
+            'install_path' => __DIR__ . '/../../modules/contrib/devel_php',
+            'aliases' => array(),
+            'reference' => '8.x-1.3',
+            'dev_requirement' => false,
+        ),
         'drupal/disqus' => array(
             'pretty_version' => '1.0.0',
             'version' => '1.0.0.0',
@@ -794,17 +803,6 @@
             'replaced' => array(
                 0 => '8.9.19',
             ),
-        ),
-        'drupal/field_collection' => array(
-            'pretty_version' => 'dev-3.x',
-            'version' => 'dev-3.x',
-            'type' => 'drupal-module',
-            'install_path' => __DIR__ . '/../../modules/contrib/field_collection',
-            'aliases' => array(
-                0 => '3.x-dev',
-            ),
-            'reference' => '3a75aa582983b9657bc27d9467999d3a9609fec4',
-            'dev_requirement' => false,
         ),
         'drupal/field_group' => array(
             'pretty_version' => '3.2.0',
@@ -983,7 +981,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'b39ac6677bae3ccfb003e6c96047a9826fab755f',
+            'reference' => 'ab20b2e4618c886b853a4bbddb0f515a839e3405',
             'dev_requirement' => false,
         ),
         'drupal/libraries' => array(

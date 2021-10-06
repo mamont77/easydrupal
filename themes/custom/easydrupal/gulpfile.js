@@ -1,16 +1,18 @@
 'use strict';
 
-var gulp = require('gulp');
-var imagemin = require('gulp-imagemin');
-var spritesmith = require('gulp.spritesmith');
-var sass = require('gulp-sass');
-var sourcemaps = require('gulp-sourcemaps');
-var postcss = require('gulp-postcss');
-var autoprefixer = require('autoprefixer');
+var gulp = require('gulp'),
+  imagemin = require('gulp-imagemin'),
+  spritesmith = require('gulp.spritesmith'),
+  sass = require('gulp-sass'),
+  sourcemaps = require('gulp-sourcemaps'),
+  postcss = require('gulp-postcss'),
+  autoprefixer = require('autoprefixer'),
+  mqpacker = require('css-mqpacker');
 
 gulp.task('sprite', function () {
   var spriteData = gulp.src('images/sprite-src/*.png').pipe(spritesmith({
     imgName: 'sprite.png',
+    imgPath: '../images/sprite.png',
     cssName: '_sprite.scss',
     padding: 2
   }));
@@ -25,30 +27,27 @@ gulp.task('imagemin', function () {
 });
 
 gulp.task('sass', function () {
-  return gulp.src('./scss/*')
+  gulp.src('./scss/*')
     .pipe(sourcemaps.init())
     .pipe(sass({
       outputStyle: 'expanded',
       precision: 10
     }).on('error', sass.logError))
+    .pipe(postcss([
+      mqpacker({
+        sort: true
+      }),
+      autoprefixer({
+        overrideBrowserslist: ['last 3 versions']
+      })]))
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest('./css'));
 });
 
-gulp.task('postcss', function () {
-  return gulp.src('./*.css')
-    .pipe(sourcemaps.init())
-    .pipe(postcss([autoprefixer({
-      browsers: ['last 3 versions']
-    })]))
-    .pipe(sourcemaps.write('./'))
-    .pipe(gulp.dest('./'));
-});
-
-
 gulp.task('imagemin', function () {
   gulp.watch(['images/**'], ['imagemin']);
 });
+
 gulp.task('watch', function () {
-  gulp.watch(['images/sprite-src/*.png', './scss/**/*.scss'], ['sprite', 'sass', 'postcss']);
+  gulp.watch(['images/sprite-src/*.png', './scss/**/*.scss'], ['sprite', 'sass']);
 });

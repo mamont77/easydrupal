@@ -42,3 +42,12 @@ landing_page:
   dependencies:
   - core/jquery
 
+paragraph-common:
+  css:
+    theme:
+      css/paragraph-common.css: {}
+
+paragraph-sourse-code:
+  css:
+    theme:
+      css/paragraph-sourse-code.css: {}

@@ -1,23 +1,19 @@
 {
-  "name": "EasyDrupal",
-  "version": "1.0.0",
-  "author": "Ruslan P",
+  "name": "easydrupal",
+  "version": "1.0.2",
+  "author": "Ruslan Piskarov",
+  "homepage": "https://makedrupaleasy.com",
   "private": true,
   "devDependencies": {
-    "autoprefixer": "^7.1.6",
-    "grunt": "^1.0.1",
-    "grunt-contrib-imagemin": "^1.0.1",
-    "grunt-contrib-sass": "^1.0.0",
-    "grunt-contrib-watch": "^1.0.0",
-    "grunt-notify": "^0.4.5",
-    "grunt-postcss": "^0.9.0",
-    "grunt-spritesmith": "^6.3.1",
+    "autoprefixer": "^9.7.4",
+    "css-mqpacker": "^7.0.0",
     "gulp": "^3.9.1",
-    "gulp-imagemin": "^3.4.0",
-    "gulp-postcss": "^7.0.0",
-    "gulp-sass": "^3.1.0",
-    "gulp.spritesmith": "^6.7.0",
-    "jit-grunt": "^0.10.0",
-    "time-grunt": "^1.4.0"
-  }
+    "gulp-imagemin": "^4.1.0",
+    "gulp-postcss": "^7.0.1",
+    "gulp-sass": "^4.0.1",
+    "gulp-sourcemaps": "^2.6.5",
+    "gulp.spritesmith": "^6.12.1"
+  },
+  "main": "gulpfile.js",
+  "dependencies": {}
 }
