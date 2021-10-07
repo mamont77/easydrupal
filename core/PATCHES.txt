@@ -5,3 +5,7 @@ Patches applied to this directory:
 Source: https://www.drupal.org/files/issues/2019-12-14/default-theme-favicon-for-administration-theme-2981434-7.patch
 
 
+Own: Hide version of Drupal
+Source: patches/drupal-core-hide-version.patch
+
+

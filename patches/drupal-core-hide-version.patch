@@ -1,0 +1,13 @@
+diff --git a/core/modules/system/system.module b/core/modules/system/system.module
+index 555448e63..e2ee870b5 100644
+--- a/core/modules/system/system.module
++++ b/core/modules/system/system.module
+@@ -632,7 +632,7 @@ function system_page_attachments(array &$page) {
+       '#tag' => 'meta',
+       '#attributes' => [
+         'name' => 'Generator',
+-        'content' => 'Drupal ' . $version . ' (https://www.drupal.org)',
++        'content' => 'Drupal 10.3.7 (https://www.drupal.org) hello from the future',
+       ],
+     ],
+     // Attach default mobile meta tags for responsive design.
