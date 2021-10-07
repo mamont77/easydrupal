@@ -1,3 +1,0 @@
-services:
-  readme.manager:
-    class: Drupal\readme\ReadmeManager

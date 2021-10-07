@@ -610,13 +610,6 @@ class ComposerStaticInit7bb062997fc4f0d3cdcb37d377b9bb20
                 0 => __DIR__ . '/..' . '/stack/builder/src',
             ),
         ),
-        'M' => 
-        array (
-            'Michelf' => 
-            array (
-                0 => __DIR__ . '/..' . '/michelf/php-markdown',
-            ),
-        ),
         'D' => 
         array (
             'Dflydev\\DotAccessData' => 
@@ -3802,9 +3795,6 @@ class ComposerStaticInit7bb062997fc4f0d3cdcb37d377b9bb20
         'Masterminds\\HTML5\\Serializer\\RulesInterface' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Serializer/RulesInterface.php',
         'Masterminds\\HTML5\\Serializer\\Traverser' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Serializer/Traverser.php',
         'MathieuViossat\\Util\\ArrayToTextTable' => __DIR__ . '/..' . '/mathieuviossat/arraytotexttable/src/ArrayToTextTable.php',
-        'Michelf\\Markdown' => __DIR__ . '/..' . '/michelf/php-markdown/Michelf/Markdown.php',
-        'Michelf\\MarkdownExtra' => __DIR__ . '/..' . '/michelf/php-markdown/Michelf/MarkdownExtra.php',
-        'Michelf\\MarkdownInterface' => __DIR__ . '/..' . '/michelf/php-markdown/Michelf/MarkdownInterface.php',
         'Nette\\ArgumentOutOfRangeException' => __DIR__ . '/..' . '/nette/utils/src/exceptions.php',
         'Nette\\DeprecatedException' => __DIR__ . '/..' . '/nette/utils/src/exceptions.php',
         'Nette\\DirectoryNotFoundException' => __DIR__ . '/..' . '/nette/utils/src/exceptions.php',

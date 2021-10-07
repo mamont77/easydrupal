@@ -151,6 +151,7 @@ $input-font-style-placeholder: italic;
         border: 8px solid #eee;
         margin: 0 30px 15px 0;
         max-width: 216px;
+        height: auto;
         @media (max-width: 768px) {
           float: none;
           display: block;

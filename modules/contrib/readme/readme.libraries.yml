@@ -1,5 +1,0 @@
-readme:
-  version: VERSION
-  css:
-    theme:
-      css/readme.admin.css: {}

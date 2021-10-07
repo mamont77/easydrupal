@@ -127,6 +127,7 @@
   border: 8px solid #eee;
   margin: 0 30px 15px 0;
   max-width: 216px;
+  height: auto;
 }
 
 .page-node-type-landingpage .about .read-more a {

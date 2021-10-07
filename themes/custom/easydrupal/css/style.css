@@ -5219,6 +5219,7 @@ blockquote {
   border: 8px solid #eee;
   margin: 0 15px 15px 0;
   max-width: 216px;
+  height: auto;
 }
 
 .file > span {
