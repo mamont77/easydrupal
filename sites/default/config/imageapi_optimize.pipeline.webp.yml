@@ -1,0 +1,15 @@
+uuid: aae08b1b-a351-4f41-a0fb-65405610291a
+langcode: en
+status: true
+dependencies:
+  module:
+    - webp
+name: webp
+label: webp
+processors:
+  6634234a-1a3d-4579-9911-8b8b75731d69:
+    uuid: 6634234a-1a3d-4579-9911-8b8b75731d69
+    id: webp_webp
+    weight: 1
+    data:
+      quality: '75'
