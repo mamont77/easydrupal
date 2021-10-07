@@ -13,8 +13,6 @@ use Drupal\Core\Form\FormStateInterface;
  */
 function easydrupal_preprocess_page(&$variables) {
   if (\Drupal::service('path.matcher')->isFrontPage()) {
-    // $variables['#attached']['library'][] = 'easydrupal/wow';
-    // $variables['#attached']['library'][] = 'easydrupal/easing';
     $variables['#attached']['library'][] = 'easydrupal/landing-page';
   }
 }

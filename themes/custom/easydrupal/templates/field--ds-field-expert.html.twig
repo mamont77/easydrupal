@@ -51,7 +51,7 @@
 {% macro field(items, settings, label, content_attributes, field_item_wrapper_attributes, field_wrapper_attributes, label_attributes, label_hidden, element, current_label) %}
   {% if not label_hidden %}
     {% if current_label == 'about' or current_label == 'projects' or current_label == 'my clients' or current_label == 'articles' or current_label == 'upwork\'s feedback' or current_label == 'contact me' %}
-      <div class="title-wrapper fadeInDown wow" data-wow-delay=".1s">
+      <div class="title-wrapper">
       {% set title_classes = [
       'field-label-' ~ element['#label_display']|clean_class,
       ] %}
@@ -87,7 +87,7 @@
     {{ _self.content(items, settings, field_item_wrapper_attributes, content_attributes) }}
     {% if current_label == 'about' %}
       {% set title = 'Read more >' %}
-      <div class="read-more fadeInRight wow"><a href="/about-me">{{ title }}</a></div>
+      <div class="read-more"><a href="/about-me">{{ title }}</a></div>
     {% endif %}
     {% if current_label == 'projects' or current_label == 'articles' %}
       {% set title = 'Look other @name >'|t({'@name': current_label}) %}
@@ -102,7 +102,7 @@
     {{ _self.content(items, settings, field_item_wrapper_attributes) }}
     {% if current_label == 'about' %}
       {% set title = 'Read more >' %}
-      <div class="read-more fadeInRight wow"><a href="/about-me">{{ title }}</a></div>
+      <div class="read-more"><a href="/about-me">{{ title }}</a></div>
     {% endif %}
     {% if current_label == 'projects' or current_label == 'articles' %}
       {% set title = 'Look other @name >'|t({'@name': current_label}) %}

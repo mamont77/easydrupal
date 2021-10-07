@@ -5161,6 +5161,10 @@ blockquote {
   border-left-color: #666;
 }
 
+.tabs--primary {
+  margin-bottom: 2rem;
+}
+
 .addtoany_list {
   background-color: #fff;
   border-radius: 6px;

@@ -14,6 +14,8 @@
    */
   Drupal.behaviors.landingPageTweeks = {
     attach: function (context, settings) {
+      var $context = $(context);
+
       if ($('.path-frontpage', context).length === 0) {
         return;
       }
@@ -44,35 +46,19 @@
         }
       });
 
-      var $projects = $('.section.projects .col-sm-6', context),
-        $articles = $('.section.articles .item', context),
-        $feedback = $('.section.feedback .item', context),
-        $contact = $('.section.contact .contact-form', context);
+      $context.find('.section.projects .field-name-field-landing-page-background img').once('projectSectionBehavior').each(function () {
+        $(this).attr({
+          'width': '493',
+          'height': '299'
+        });
+      });
 
-      $projects.eq(0).addClass('fadeInLeft wow').attr('data-wow-delay', ".1s");
-      $projects.eq(1).addClass('fadeInRight wow').attr('data-wow-delay', ".3s");
-
-      $articles.eq(0).addClass('fadeInDown wow').attr('data-wow-delay', ".1s");
-      $articles.eq(1).addClass('fadeInDown wow').attr('data-wow-delay', ".3s");
-
-      $feedback.eq(0).addClass('fadeInLeft wow').attr('data-wow-delay', ".1s");
-      $feedback.eq(1).addClass('fadeInDown wow').attr('data-wow-delay', ".3s");
-      $feedback.eq(2).addClass('fadeInRight wow').attr('data-wow-delay', ".5s");
-
-      $contact.addClass('fadeInUp wow').attr('data-wow-delay', ".1s");
-
-      /* ==============================================
-       WOW plugin triggers animate.css on scroll.
-       =============================================== */
-      var wow = new WOW(
-        {
-          animateClass: 'animated',
-          offset: 50,
-          mobile: true
-        }
-      );
-      wow.init();
-
+      $context.find('.section.articles .field-name-field-image img').once('projectSectionBehavior').each(function () {
+        $(this).attr({
+          'width': '200',
+          'height': '133'
+        });
+      });
     }
   };
 

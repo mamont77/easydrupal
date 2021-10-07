@@ -189,6 +189,8 @@
 
 .page-node-type-landingpage .clients .field-name-field-image img {
   margin: 0 auto;
+  width: auto;
+  height: auto;
 }
 
 .page-node-type-landingpage .articles {

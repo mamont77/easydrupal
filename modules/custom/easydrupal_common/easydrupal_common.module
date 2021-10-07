@@ -12,11 +12,30 @@ use Drupal\Core\Routing\RouteMatchInterface;
 function easydrupal_common_help($route_name, RouteMatchInterface $route_match) {
   switch ($route_name) {
     case 'help.page.easydrupal_common':
-      $output = '';
-      $output .= '<h3>' . t('About') . '</h3>';
+      $output = '<h3>' . t('About') . '</h3>';
       $output .= '<p>' . t('Setting the common functionality of the site.') . '</p>';
       return $output;
 
     default:
+  }
+}
+
+/**
+ * Implements hook_page_attachments_alter().
+ */
+function easydrupal_common_page_attachments_alter(array &$attachments) {
+  if (\Drupal::service('path.matcher')->isFrontPage()
+    && \Drupal::currentUser()->isAnonymous()) {
+    $remove_libraries = [
+      'addtoany/addtoany',
+      'extlink/drupal.extlink',
+    ];
+    // Conditionally remove an asset.
+    foreach ($remove_libraries as $library) {
+      if (in_array($library, $attachments['#attached']['library'])) {
+        $index = array_search($library, $attachments['#attached']['library']);
+        unset($attachments['#attached']['library'][$index]);
+      }
+    }
   }
 }

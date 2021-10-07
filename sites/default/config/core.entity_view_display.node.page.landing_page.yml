@@ -15,11 +15,11 @@ third_party_settings:
   ds:
     layout:
       id: ds_reset
-      path: modules/ds
-      library: ''
+      library: null
       disable_css: false
       entity_classes: no_classes
       settings:
+        label: ''
         wrappers:
           ds_content: div
         outer_wrapper: div
@@ -63,8 +63,8 @@ content:
             fis-at: ''
             fi: true
             fi-el: div
-            fi-cl: 'field--name-body fadeInDown wow'
-            fi-at: 'data-wow-delay=".2s"'
+            fi-cl: field--name-body
+            fi-at: ''
             suffix: ''
             lbw: false
             lb-col: false

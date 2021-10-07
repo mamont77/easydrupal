@@ -1,21 +1,7 @@
-wow:
-  css:
-    theme:
-      /libraries/wow/css/libs/animate.css: {}
-  js:
-    /libraries/wow/dist/wow.min.js: {}
-
-easing:
-  js:
-    /libraries/easing/jquery.easing.min.js: {}
-  dependencies:
-    - core/jquery
-
 framework:
   css:
     theme:
       css/style.css: {}
-      css/geshifilter.generate_css.css: {}
   js:
 #    bootstrap/assets/javascripts/bootstrap/affix.js: {}
 #    bootstrap/assets/javascripts/bootstrap/alert.js: {}
@@ -32,6 +18,11 @@ framework:
     js/scripts.js: {}
   dependencies:
   - core/jquery
+
+geshifilter:
+  css:
+    theme:
+      css/geshifilter.generate_css.css: {}
 
 landing-page:
   css:
