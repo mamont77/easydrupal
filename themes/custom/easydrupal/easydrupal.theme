@@ -13,35 +13,9 @@ use Drupal\Core\Form\FormStateInterface;
  */
 function easydrupal_preprocess_page(&$variables) {
   if (\Drupal::service('path.matcher')->isFrontPage()) {
-    $variables['#attached']['library'][] = 'easydrupal/wow';
-    $variables['#attached']['library'][] = 'easydrupal/easing';
-    $variables['#attached']['library'][] = 'easydrupal/landing_page';
-  }
-}
-
-/**
- * Implements hook_theme_suggestions_page_alter() to set 40x template suggestions.
- *
- * @param array $suggestions
- * @param array $variables
- */
-function easydrupal_theme_suggestions_page_alter(array &$suggestions, array $variables) {
-  // Add content type suggestions.
-  if ($node = \Drupal::request()->attributes->get('node')) {
-    array_splice($suggestions, 1, 0, 'page__node__' . $node->getType());
-  }
-
-  $path_args = explode('/', trim(\Drupal::service('path.current')->getPath(), '/'));
-  $suggestions = theme_get_suggestions($path_args, 'page');
-  $http_error_suggestions = [
-    'system.401' => 'page__system__401',
-    'system.403' => 'page__system__403',
-    'system.404' => 'page__system__404',
-  ];
-
-  $route_name = \Drupal::routeMatch()->getRouteName();
-  if (isset($http_error_suggestions[$route_name])) {
-    $suggestions[] = $http_error_suggestions[$route_name];
+    // $variables['#attached']['library'][] = 'easydrupal/wow';
+    // $variables['#attached']['library'][] = 'easydrupal/easing';
+    $variables['#attached']['library'][] = 'easydrupal/landing-page';
   }
 }
 
@@ -65,7 +39,7 @@ function easydrupal_theme($existing, $type, $theme, $path) {
  */
 function easydrupal_form_contact_message_feedback_contact_form_form_alter(&$form, FormStateInterface $form_state, $form_id) {
 
-  // Checking field type because it is markup for logged user and we wan't any placeholder.
+  // Checking field type because it is markup for logged user, and we want a placeholder.
   if (isset($form['name']) && $form['name']['#type'] == 'textfield') {
     $form['name']['#attributes']['placeholder'][] = $form['name']['#title'] . ' *';
     unset($form['name']['#title']);

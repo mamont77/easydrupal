@@ -33,12 +33,12 @@ framework:
   dependencies:
   - core/jquery
 
-landing_page:
+landing-page:
   css:
     theme:
       css/landing-page.css: {}
   js:
-    js/landing_page.js: {}
+    js/landing-page.js: {}
   dependencies:
   - core/jquery
 
