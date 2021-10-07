@@ -5,7 +5,7 @@ namespace Drupal\geshifilter;
 use Drupal\Core\Url;
 
 /**
- * Contains constantas and some helper functions.
+ * Contains constants and some helper functions.
  */
 class GeshiFilter {
   /**
@@ -86,7 +86,7 @@ class GeshiFilter {
   const BRACKETS_DOUBLESQUARE = 4;
 
   /**
-   * Parse code with tags inside <?php ?>, example, <?php echo('hi'); ?>.
+   * Parse code with tags inside , example, <?php echo('hi'); ?>.
    */
   const BRACKETS_PHPBLOCK = 8;
 
@@ -170,7 +170,7 @@ class GeshiFilter {
           drupal_get_path('module', 'geshifilter') . '/geshi-extra',
         ];
         foreach ($dirs as $dir) {
-          foreach (file_scan_directory($dir, '/.[pP][hH][pP]$/i') as $filename => $fileinfo) {
+          foreach (\Drupal::service('file_system')->scanDirectory($dir, '/.[pP][hH][pP]$/i') as $filename => $fileinfo) {
             // Short name.
             $name = $fileinfo->name;
             // Get full name.
@@ -242,8 +242,8 @@ class GeshiFilter {
       $library['loaded'] = FALSE;
       $library['library path'] = '';
       $library['error message'] = t('The GeSHi filter requires the GeSHi library (which needs to be @downloaded and installed seperately). Please review the install instruction at @readme.', [
-        '@downloaded' => \Drupal::l(t('downloaded'), Url::fromUri('http://qbnz.com/highlighter/')),
-        '@readme' => \Drupal::l(t('README.TXT'), Url::fromUri('http://cgit.drupalcode.org/geshifilter/tree/README.txt?h=8.x-1.x')),
+        '@downloaded' => \Drupal::service('link_generator')->generate(t('downloaded'), Url::fromUri('http://qbnz.com/highlighter/')),
+        '@readme' => \Drupal::service('link_generator')->generate(t('README.TXT'), Url::fromUri('http://cgit.drupalcode.org/geshifilter/tree/README.txt?h=8.x-1.x')),
       ]);
     }
     return $library;

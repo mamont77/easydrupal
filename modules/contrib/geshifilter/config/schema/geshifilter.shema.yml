@@ -27,8 +27,6 @@ geshifilter.settings:
       type: string
     geshi_dir:
       type: string
-    tags:
-      type: string
     tag_styles:
       type: sequence
       sequence:

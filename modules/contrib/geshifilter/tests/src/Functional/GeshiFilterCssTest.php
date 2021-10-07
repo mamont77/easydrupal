@@ -5,6 +5,9 @@ namespace Drupal\Tests\geshifilter\Functional;
 // Use of base class for the tests.
 use Drupal\Tests\BrowserTestBase;
 
+// For autenticated user id.
+use Drupal\Core\Session\AccountInterface;
+
 /**
  * Test for css generation and use in GeshiFilter.
  *
@@ -41,6 +44,13 @@ class GeshiFilterCssTest extends BrowserTestBase {
    * @var \Drupal\Core\Config\Config
    */
   protected $config;
+
+  /**
+   * Theme used in test.
+   *
+   * @var string
+   */
+  protected $defaultTheme = 'stark';
 
   /**
    * Set up the tests and create the users.
@@ -195,7 +205,7 @@ class GeshiFilterCssTest extends BrowserTestBase {
     $edit = [];
     $edit['format'] = $format_name;
     $edit['name'] = $this->randomMachineName();
-    $edit['roles[' . DRUPAL_AUTHENTICATED_RID . ']'] = 1;
+    $edit['roles[' . AccountInterface::AUTHENTICATED_ROLE . ']'] = 1;
     foreach ($filters as $filter) {
       $edit['filters[' . $filter . '][status]'] = TRUE;
     }

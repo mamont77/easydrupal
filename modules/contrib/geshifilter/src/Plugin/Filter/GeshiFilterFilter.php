@@ -5,9 +5,6 @@ namespace Drupal\geshifilter\Plugin\Filter;
 // Base class for filters.
 use Drupal\filter\Plugin\FilterBase;
 
-// Necessary for SafeMarkup::checkPlain().
-use Drupal\Component\Utility\SafeMarkup;
-
 // Necessary for passing HTML into t().
 use Drupal\Core\Render\Markup;
 
@@ -122,7 +119,7 @@ class GeshiFilterFilter extends FilterBase {
     }
     catch (\Exception $e) {
       watchdog_exception('geshifilter', $e);
-      drupal_set_message($geshi_library['error message'], 'error');
+      $this->messenger()->addError($geshi_library['error message']);
     }
 
     return $result;
@@ -193,36 +190,36 @@ class GeshiFilterFilter extends FilterBase {
     $bracket_close = NULL;
     if (in_array(GeshiFilter::BRACKETS_ANGLE, $tag_styles)) {
       if (!$bracket_open) {
-        $bracket_open = SafeMarkup::checkPlain('<');
-        $bracket_close = SafeMarkup::checkPlain('>');
+        $bracket_open = Html::escape('<');
+        $bracket_close = Html::escape('>');
       }
-      $tag_style_examples[] = '<code>' . SafeMarkup::checkPlain('<foo>') . '</code>';
+      $tag_style_examples[] = '<code>' . Html::escape('<foo>') . '</code>';
     }
     if (in_array(GeshiFilter::BRACKETS_SQUARE, $tag_styles)) {
       if (!$bracket_open) {
-        $bracket_open = SafeMarkup::checkPlain('[');
-        $bracket_close = SafeMarkup::checkPlain(']');
+        $bracket_open = Html::escape('[');
+        $bracket_close = Html::escape(']');
       }
-      $tag_style_examples[] = '<code>' . SafeMarkup::checkPlain('[foo]') . '</code>';
+      $tag_style_examples[] = '<code>' . Html::escape('[foo]') . '</code>';
     }
     if (in_array(GeshiFilter::BRACKETS_DOUBLESQUARE, $tag_styles)) {
       if (!$bracket_open) {
-        $bracket_open = SafeMarkup::checkPlain('[[');
-        $bracket_close = SafeMarkup::checkPlain(']]');
+        $bracket_open = Html::escape('[[');
+        $bracket_close = Html::escape(']]');
       }
-      $tag_style_examples[] = '<code>' . SafeMarkup::checkPlain('[[foo]]') . '</code>';
+      $tag_style_examples[] = '<code>' . Html::escape('[[foo]]') . '</code>';
     }
     if (in_array(GeshiFilter::BRACKETS_MARKDOWNBLOCK, $tag_styles)) {
       if (!$bracket_open) {
-        $bracket_open = SafeMarkup::checkPlain('```');
-        $bracket_close = SafeMarkup::checkPlain('```');
+        $bracket_open = Html::escape('```');
+        $bracket_close = Html::escape('```');
       }
-      $tag_style_examples[] = '<code>' . SafeMarkup::checkPlain('```foo ```') . '</code>';
+      $tag_style_examples[] = '<code>' . Html::escape('```foo ```') . '</code>';
     }
     if (!$bracket_open) {
-      drupal_set_message($this->t('Could not determine a valid tag style for GeSHi filtering.'), 'error');
-      $bracket_open = SafeMarkup::checkPlain('<');
-      $bracket_close = SafeMarkup::checkPlain('>');
+      $this->messenger()->addError($this->t('Could not determine a valid tag style for GeSHi filtering.'));
+      $bracket_open = Html::escape('<');
+      $bracket_close = Html::escape('>');
     }
 
     if ($long) {
@@ -371,10 +368,10 @@ class GeshiFilterFilter extends FilterBase {
       list($generic_code_tags, $language_tags, $tag_to_lang) = $this->getTags();
       $tags = [];
       foreach ($generic_code_tags as $tag) {
-        $tags[] = '<code>' . $bracket_open . SafeMarkup::checkPlain($tag) . $bracket_close . '</code>';
+        $tags[] = '<code>' . $bracket_open . Html::escape($tag) . $bracket_close . '</code>';
       }
       foreach ($language_tags as $tag) {
-        $tags[] = '<code>' . $bracket_open . SafeMarkup::checkPlain($tag) . $bracket_close . '</code>';
+        $tags[] = '<code>' . $bracket_open . Html::escape($tag) . $bracket_close . '</code>';
       }
       $output = $this->t('You can enable syntax highlighting of source code with the following tags: @tags.', ['@tags' => Markup::create(implode(', ', $tags))]);
       // Tag style options.
@@ -814,8 +811,9 @@ class GeshiFilterFilter extends FilterBase {
         if (array_key_exists($att_value, $enabled_languages)) {
           $lang = $att_value;
         }
-        // class_to_lang hotfix: language never filled cause ckeditor plugin uses classes instead of tags.
-        elseif($att_name == 'class' && array_key_exists($class_to_lang, $enabled_languages)) {
+        /* class_to_lang hotfix: language never filled cause ckeditor plugin
+        uses classes instead of tags. */
+        elseif ($att_name == 'class' && array_key_exists($class_to_lang, $enabled_languages)) {
           $lang = $class_to_lang;
         }
       }
@@ -931,7 +929,7 @@ class GeshiFilterFilter extends FilterBase {
     }
     // Return escaped code block.
     return '[geshifilter-' . $tag_name . $tag_attributes . ']'
-      . str_replace(["\r", "\n"], ['', '&#10;'], SafeMarkup::checkPlain($content))
+      . str_replace(["\r", "\n"], ['', '&#10;'], Html::escape($content))
       . '[/geshifilter-' . $tag_name . ']';
   }
 
@@ -946,7 +944,7 @@ class GeshiFilterFilter extends FilterBase {
       $match[2] = $this->unencode($match[2]);
     }
     return '[geshifilter-questionmarkphp]'
-    . str_replace(["\r", "\n"], ['', '&#10;'], SafeMarkup::checkPlain($match[2]))
+    . str_replace(["\r", "\n"], ['', '&#10;'], Html::escape($match[2]))
     . '[/geshifilter-questionmarkphp]';
   }
 
@@ -996,7 +994,7 @@ class GeshiFilterFilter extends FilterBase {
     }
     // Return escaped code block.
     return '[geshifilter-' . $tag_name . $tag_attributes . ']'
-      . str_replace(["\r", "\n"], ['', '&#10;'], SafeMarkup::checkPlain($content))
+      . str_replace(["\r", "\n"], ['', '&#10;'], Html::escape($content))
       . '[/geshifilter-' . $tag_name . ']';
   }
 

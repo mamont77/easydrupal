@@ -2,12 +2,13 @@ name: 'GeSHi field'
 description: 'Provides a field for source code with GeSHI syntax highlighting.'
 type: module
 package: Filters
-core: 8.x
+core_version_requirement: ^8.8 || ^9
+php: 7.3
 dependencies:
   - field
   - geshifilter
 
-# Information added by Drupal.org packaging script on 2020-05-02
-version: '8.x-1.3'
+# Information added by Drupal.org packaging script on 2020-06-04
+version: '8.x-2.0-beta1'
 project: 'geshifilter'
-datestamp: 1588380675
+datestamp: 1591291903

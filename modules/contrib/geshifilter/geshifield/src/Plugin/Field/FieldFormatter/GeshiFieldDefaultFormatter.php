@@ -29,7 +29,7 @@ class GeshiFieldDefaultFormatter extends FormatterBase {
         '#language' => $item->language,
         '#sourcecode' => $item->sourcecode,
       ];
-      $elements[$delta] = ['#markup' => drupal_render($source)];
+      $elements[$delta] = ['#markup' => \Drupal::service('renderer')->render($source)];
     }
 
     return $elements;

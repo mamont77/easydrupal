@@ -7,6 +7,8 @@ use Drupal\geshifilter\GeshiFilter;
 // Use of base class for the tests.
 use Drupal\Tests\BrowserTestBase;
 
+use Drupal\user\RoleInterface;
+
 /**
  * Tests for GeshiField in node content.
  *
@@ -30,6 +32,13 @@ class GeshiFieldTest extends BrowserTestBase {
    * @var \Drupal\Core\Config\Config
    */
   protected $config;
+
+  /**
+   * Theme used in test.
+   *
+   * @var string
+   */
+  protected $defaultTheme = 'stark';
 
   /**
    * List of modules to enable.
@@ -97,7 +106,7 @@ class GeshiFieldTest extends BrowserTestBase {
     $edit = [];
     $edit['format'] = $format_name;
     $edit['name'] = $this->randomMachineName();
-    $edit['roles[' . DRUPAL_AUTHENTICATED_RID . ']'] = 1;
+    $edit['roles[' . RoleInterface::AUTHENTICATED_ID . ']'] = 1;
     foreach ($filters as $filter) {
       $edit['filters[' . $filter . '][status]'] = TRUE;
     }

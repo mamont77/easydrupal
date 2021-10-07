@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '2c75e8dca026d0f30e7607e7e32b1377d848e61b',
+        'reference' => '562abd3bf0c897fe5d19361ba385f2c20042aded',
         'name' => 'drupal/legacy-project',
         'dev' => true,
     ),
@@ -944,12 +944,12 @@
             ),
         ),
         'drupal/geshifilter' => array(
-            'pretty_version' => '1.3.0',
-            'version' => '1.3.0.0',
+            'pretty_version' => '2.0.0-beta1',
+            'version' => '2.0.0.0-beta1',
             'type' => 'drupal-module',
             'install_path' => __DIR__ . '/../../modules/contrib/geshifilter',
             'aliases' => array(),
-            'reference' => '8.x-1.3',
+            'reference' => '8.x-2.0-beta1',
             'dev_requirement' => false,
         ),
         'drupal/google_analytics' => array(
@@ -1073,7 +1073,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '2c75e8dca026d0f30e7607e7e32b1377d848e61b',
+            'reference' => '562abd3bf0c897fe5d19361ba385f2c20042aded',
             'dev_requirement' => false,
         ),
         'drupal/libraries' => array(

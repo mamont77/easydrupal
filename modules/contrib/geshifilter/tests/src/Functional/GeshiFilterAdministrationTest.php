@@ -7,6 +7,8 @@ use Drupal\Tests\BrowserTestBase;
 
 use Drupal\geshifilter\GeshiFilter;
 
+use Drupal\Core\Session\AccountInterface;
+
 /**
  * Test for administrative interface of GeshiFilter.
  *
@@ -41,6 +43,13 @@ class GeshiFilterAdministrationTest extends BrowserTestBase {
    * @var \Drupal\Core\Config\Config
    */
   protected $config;
+
+  /**
+   * Theme used in test.
+   *
+   * @var string
+   */
+  protected $defaultTheme = 'stark';
 
   /**
    * Set up the tests and create the users.
@@ -109,7 +118,7 @@ class GeshiFilterAdministrationTest extends BrowserTestBase {
     // $this->config->set('use_format_specific_options', TRUE);
     // $this->drupalPostForm
     // ('admin/config/content/formats/manage/geshifilter_text_format', array(),
-    // t('Save configuration'));
+    // t('Save configuration'));.
     /*$this->config->set('tags_' . $this->input_format_id,
     'code blockcode generictag');
     // A language tag should differ from the generic tags.
@@ -150,7 +159,7 @@ class GeshiFilterAdministrationTest extends BrowserTestBase {
     $edit = [];
     $edit['format'] = $format_name;
     $edit['name'] = $this->randomMachineName();
-    $edit['roles[' . DRUPAL_AUTHENTICATED_RID . ']'] = 1;
+    $edit['roles[' . AccountInterface::AUTHENTICATED_ROLE . ']'] = 1;
     foreach ($filters as $filter) {
       $edit['filters[' . $filter . '][status]'] = TRUE;
     }

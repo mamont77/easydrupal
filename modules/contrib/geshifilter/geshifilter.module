@@ -23,7 +23,7 @@ function geshifilter_help($route_name, RouteMatchInterface $route_match) {
         highlighting of inline source code or blocks of source code based on the
         PHP library <a href=":GeSHi">GeSHi (Generic Syntax Highlighter)</a>.</p>',
           [
-            ':GeSHi' => URL::fromUri('http://qbnz.com/highlighter/')->toString(),
+            ':GeSHi' => Url::fromUri('http://qbnz.com/highlighter/')->toString(),
           ]);
       if ($route_name == 'help.page.geshifilter') {
         $output .= '<p>' . t('The GeSHi filter module for Drupal requires the
@@ -33,15 +33,15 @@ function geshifilter_help($route_name, RouteMatchInterface $route_match) {
           however, the GeSHi library is not included in the GeSHi filter
           package, so you should <a href=":geshi">download</a> and install the
           GeSHi library separately.', [
-            ':repositorypolicies' => URL::fromUri('http://drupal.org/node/66113')->toString(),
-            ':geshi' => URL::fromUri('http://qbnz.com/highlighter/')->toString(),
+            ':repositorypolicies' => Url::fromUri('http://drupal.org/node/66113')->toString(),
+            ':geshi' => Url::fromUri('http://qbnz.com/highlighter/')->toString(),
           ])
           . '</p>';
         $output .= t('<p>Quick overview of how to set up and use the GeSHi filter:</p><ul><li>Install the GeSHi library and specify its path on the <a href=":geshifilter_settings">GeSHi filter administration page</a>.</li><li>Configure the <a href=":geshifilter_settings">general GeSHi filter settings</a>.</li><li><a href=":geshifilter_languages">Enable the relevant languages</a> for your site and set their language tags if needed.</li><li>Enable the GeSHi filter in the desired <a href=":inputformats">text formats</a>.</li><li>Use the text format during content submission as described in the <a href=":filtertips">filter tips</a>.</li></ul>', [
-          ':geshifilter_settings' => URL::fromRoute('geshifilter.settings')->toString(),
-          ':geshifilter_languages' => URL::fromRoute('geshifilter.settings_languages_all')->toString(),
-          ':inputformats' => URL::fromRoute('filter.admin_overview')->toString(),
-          ':filtertips' => URL::fromRoute('filter.tips_all')->toString(),
+          ':geshifilter_settings' => Url::fromRoute('geshifilter.settings')->toString(),
+          ':geshifilter_languages' => Url::fromRoute('geshifilter.settings_languages_all')->toString(),
+          ':inputformats' => Url::fromRoute('filter.admin_overview')->toString(),
+          ':filtertips' => Url::fromRoute('filter.tips_all')->toString(),
         ]);
       }
       return $output;
@@ -54,7 +54,7 @@ function geshifilter_help($route_name, RouteMatchInterface $route_match) {
         site not only to avoid unnecessary cluttering of the GeSHi filter
         configuration pages and the <a href=":filtertips">filter tips</a>, but also to make the GeSHi
         filter processing lighter.', [
-          ':filtertips' => URL::fromRoute('filter.tips_all')->toString(),
+          ':filtertips' => Url::fromRoute('filter.tips_all')->toString(),
         ])
         . '</p>';
       if (!$config->get('use_format_specific_options', FALSE)) {

@@ -9,6 +9,8 @@ use Drupal\geshifilter\GeshiFilter;
 
 use Drupal\geshifilter\GeshiFilterProcess;
 
+use Drupal\Core\Session\AccountInterface;
+
 /**
  * Tests for GeshiFilter in node content.
  *
@@ -53,6 +55,13 @@ class GeshiFilterTest extends BrowserTestBase {
    * @var int
    */
   protected $node;
+
+  /**
+   * Theme used in test.
+   *
+   * @var string
+   */
+  protected $defaultTheme = 'stark';
 
   /**
    * Code run before each and every test method.
@@ -119,7 +128,7 @@ class GeshiFilterTest extends BrowserTestBase {
     $edit = [];
     $edit['format'] = $format_name;
     $edit['name'] = $this->randomMachineName();
-    $edit['roles[' . DRUPAL_AUTHENTICATED_RID . ']'] = 1;
+    $edit['roles[' . AccountInterface::AUTHENTICATED_ROLE . ']'] = 1;
     foreach ($filters as $filter) {
       $edit['filters[' . $filter . '][status]'] = TRUE;
     }

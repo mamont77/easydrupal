@@ -2,6 +2,7 @@
 
 namespace Drupal\geshifilter;
 
+use Drupal\Core\File\FileSystemInterface;
 // Necessary for return response of generateCss().
 use Symfony\Component\HttpFoundation\Response;
 
@@ -37,7 +38,7 @@ class GeshiFilterCss {
    */
   public static function managedExternalStylesheetPossible() {
     $directory = self::languageCssPath(TRUE);
-    return file_prepare_directory($directory, FILE_CREATE_DIRECTORY | FILE_MODIFY_PERMISSIONS);
+    return \Drupal::service('file_system')->prepareDirectory($directory, FileSystemInterface::CREATE_DIRECTORY | FileSystemInterface::MODIFY_PERMISSIONS);
   }
 
   /**
@@ -50,7 +51,7 @@ class GeshiFilterCss {
    *   Full path to css file.
    */
   public static function languageCssPath($dironly = FALSE) {
-    $directory = file_default_scheme() . '://geshi';
+    $directory = \Drupal::config('system.file')->get('default_scheme') . '://geshi';
     if (!$dironly) {
       $directory .= '/geshifilter-languages.css';
     }
@@ -79,7 +80,7 @@ class GeshiFilterCss {
       }
     }
     else {
-      drupal_set_message($this->t('Error while generating CSS rules: could not load GeSHi library.'), 'error');
+      \Drupal::messenger()->addError(t('Error while generating CSS rules: could not load GeSHi library.'));
     }
     return $output;
   }
@@ -102,15 +103,15 @@ class GeshiFilterCss {
       // Save stylesheet.
       $stylesheet_filename = self::languageCssPath();
 
-      $ret = file_save_data($stylesheet, $stylesheet_filename, FILE_EXISTS_REPLACE);
+      $ret = file_save_data($stylesheet, $stylesheet_filename, FileSystemInterface::EXISTS_REPLACE);
       if ($ret) {
-        drupal_set_message(t('(Re)generated external CSS style sheet %file.', ['%file' => $ret->getFilename()]));
+        \Drupal::messenger()->addStatus(t('(Re)generated external CSS style sheet %file.', ['%file' => $ret->getFilename()]));
       }
       else {
-        drupal_set_message(t('Could not generate external CSS file. Check the settings of your <a href="!filesystem">file system</a>.',
+        \Drupal::messenger()->addError(t('Could not generate external CSS file. Check the settings of your <a href="!filesystem">file system</a>.',
           [
             '!filesystem' => Url::fromRoute('system.file_system_settings')->toString(),
-          ]), 'error');
+          ]));
       }
       // Remember for which list of languages the CSS file was generated.
       \Drupal::state()->set('cssfile_languages', $languages_hash);

@@ -2,8 +2,7 @@
 
 namespace Drupal\geshifilter;
 
-// Necessary for SafeMarkup::checkPlain().
-use Drupal\Component\Utility\SafeMarkup;
+use Drupal\Component\Utility\Html;
 
 /**
  * Helpers functions related to processing the source code with geshi.
@@ -66,7 +65,7 @@ class GeshiFilterProcess {
     // Load GeSHi library (if not already).
     $geshi_library = GeshiFilter::loadGeshi();
     if (!$geshi_library['loaded']) {
-      drupal_set_message($geshi_library['error message'], 'error');
+      \Drupal::messenger()->addError($geshi_library['error message']);
       return $source_code;
     }
 
@@ -94,7 +93,7 @@ class GeshiFilterProcess {
       $overall_class = 'geshifilter-' . $lang;
       $code_class = "{$lang} {$overall_class}";
       $source_code = '<span class="geshifilter"'
-        . (isset($title) ? ' title="' . SafeMarkup::checkPlain($title) . '"' : '')
+        . (isset($title) ? ' title="' . Html::escape($title) . '"' : '')
         . '><code class="' . $code_class . '">' . $geshi->parse_code() . '</code></span>';
     }
     else {
@@ -113,7 +112,7 @@ class GeshiFilterProcess {
         $geshi->start_line_numbers_at($linenumbers_start);
       }
       if (isset($title)) {
-        $source_code = '<div class="geshifilter-title">' . SafeMarkup::checkPlain($title) . '</div>';
+        $source_code = '<div class="geshifilter-title">' . Html::escape($title) . '</div>';
       }
       else {
         $source_code = '';

@@ -55,7 +55,7 @@ class GeshiFilterLanguagesForm extends ConfigFormBase {
     // Check if GeSHi library is available.
     $geshi_library = GeshiFilter::loadGeshi();
     if (!$geshi_library['loaded']) {
-      drupal_set_message($geshi_library['error message'], 'error');
+      $this->messenger()->addError($geshi_library['error message']);
       return [];
     }
     $add_checkbox = TRUE;
