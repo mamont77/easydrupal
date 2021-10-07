@@ -2922,6 +2922,9 @@
                         "[web-root]/profiles/README.txt": "assets/scaffold/files/profiles.README.txt",
                         "[web-root]/themes/README.txt": "assets/scaffold/files/themes.README.txt"
                     }
+                },
+                "patches_applied": {
+                    "2981434: Default theme favicon for administration theme": "https://www.drupal.org/files/issues/2019-12-14/default-theme-favicon-for-administration-theme-2981434-7.patch"
                 }
             },
             "installation-source": "dist",

@@ -594,8 +594,15 @@ function system_page_attachments(array &$page) {
 
   // Attach favicon.
   if (theme_get_setting('features.favicon')) {
-    $favicon = theme_get_setting('favicon.url');
-    $type = theme_get_setting('favicon.mimetype');
+    $config = \Drupal::config('system.theme');
+    if ($config->get('admin') && $config->get('favicon')) {
+      $favicon_theme = $config->get('default');
+    }
+    else {
+      $favicon_theme = NULL;
+    }
+    $favicon = theme_get_setting('favicon.url', $favicon_theme);
+    $type = theme_get_setting('favicon.mimetype', $favicon_theme);
     $page['#attached']['html_head_link'][][] = [
       'rel' => 'shortcut icon',
       'href' => UrlHelper::stripDangerousProtocols($favicon),

@@ -214,6 +214,9 @@ system.theme:
     default:
       type: string
       label: 'Default theme'
+    favicon:
+      type: boolean
+      label: 'Use default theme favicon'
 
 system.menu.*:
   type: config_entity
