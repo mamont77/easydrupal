@@ -51,7 +51,6 @@ module:
   google_analytics: 0
   help: 0
   honeypot: 0
-  hsts: 0
   image: 0
   image_widget_crop: 0
   imagemagick: 0
@@ -81,7 +80,6 @@ module:
   purge_ui: 0
   rabbit_hole: 0
   rdf: 0
-  readme: 0
   recaptcha: 0
   redirect: 0
   responsive_image: 0
@@ -103,11 +101,9 @@ module:
   text: 0
   token: 0
   toolbar: 0
-  tour: 0
   update: 0
   upgrade_status: 0
   user: 0
-  varnish: 0
   views_bootstrap: 0
   views_infinite_scroll: 0
   views_ui: 0
@@ -120,8 +116,6 @@ module:
   paragraphs: 11
   standard: 1000
 theme:
-  stable: 0
-  classy: 0
   bootstrap: 0
   easydrupal: 0
   seven: 0
