@@ -4,7 +4,6 @@ module:
   admin_toolbar_search: 0
   admin_toolbar_tools: 0
   advagg: 0
-  advagg_cdn: 0
   advagg_css_minify: 0
   advagg_js_minify: 0
   advupdate: 0
