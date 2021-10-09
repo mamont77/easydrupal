@@ -33,6 +33,31 @@ landing-page:
   dependencies:
   - core/jquery
 
+view-about-author:
+  css:
+    theme:
+      css/view-about-author.css: {}
+
+view-portfolio:
+  css:
+    theme:
+      css/view-portfolio.css: {}
+
+view-articles:
+  css:
+    theme:
+      css/view-articles.css: {}
+
+view-feedback:
+  css:
+    theme:
+      css/view-feedback.css: {}
+
+view-tags:
+  css:
+    theme:
+      css/view-tags.css: {}
+
 node-type-article:
   css:
     theme:

@@ -1,0 +1,65 @@
+/**
+ * Default Variables.
+ *
+ * Modify this file to provide default Bootstrap Framework variables. The
+ * Bootstrap Framework will not override any variables defined here because it
+ * uses the `!default` flag which will only set their default if not already
+ * defined here.
+ *
+ * You can copy existing variables directly from the following file:
+ * ./THEMENAME/bootstrap/assets/stylesheets/bootstrap/_variables.scss
+ */
+/** COLORS **/
+.view .views-row {
+  margin-bottom: 15px;
+}
+
+.view-about-author {
+  border: 1px solid #ddd;
+  padding: 20px 15px;
+  line-height: 22px;
+}
+
+.view-about-author .views-row {
+  margin-bottom: 0;
+}
+
+.view-about-author .views-field {
+  margin-bottom: 5px;
+}
+
+.view-about-author .views-field-field-last-name {
+  font-family: "Roboto", Verdana, Arial, Helvetica, sans-serif;
+  font-size: 22px;
+  font-weight: bold;
+  text-align: center;
+  color: #414a51;
+}
+
+.view-about-author .views-field-user-picture img {
+  margin: 0 auto;
+  border-radius: 50%;
+  border: 8px solid #eee;
+  opacity: .8;
+}
+
+.view-about-author .views-field-user-picture img:hover {
+  opacity: 1;
+}
+
+.view-about-author .views-field-field-country .field-content::before {
+  font-family: 'Glyphicons Halflings';
+  content: "\e062";
+  padding-right: 5px;
+}
+
+.view-about-author .views-field-field-date-birth {
+  color: #81a5bf;
+}
+
+.view-about-author .views-field-field-about {
+  font-size: 16px;
+  line-height: 18px;
+}
+
+/*# sourceMappingURL=view-about-author.css.map */

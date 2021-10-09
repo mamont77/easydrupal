@@ -1,0 +1,24 @@
+@charset "UTF-8";
+
+@import "default-variables";
+@import "tags";
+
+.view {
+  .views-row {
+    margin-bottom: 15px;
+  }
+}
+
+.view-tags {
+  .views-row {
+    display: inline;
+  }
+
+  .views-field {
+    display: inline;
+
+    a {
+      @extend %tags;
+    }
+  }
+}

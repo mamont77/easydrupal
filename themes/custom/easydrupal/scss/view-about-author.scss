@@ -1,0 +1,64 @@
+@charset "UTF-8";
+
+@import "default-variables";
+
+.view {
+  .views-row {
+    margin-bottom: 15px;
+  }
+}
+
+.view-about-author {
+  border: 1px solid $globalBorderColor;
+  padding: 20px 15px;
+  line-height: 22px;
+
+  .views-row {
+    margin-bottom: 0;
+  }
+
+  .views-field {
+    margin-bottom: 5px;
+  }
+
+  .views-field-field-last-name {
+    font-family: "Roboto", Verdana, Arial, Helvetica, sans-serif;
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+    color: $aboutAuthorNameColor;
+  }
+
+  .views-field-user-picture {
+    img {
+      margin: 0 auto;
+      border-radius: 50%;
+      border: 8px solid $imageBorderColor;
+      opacity: .8;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+
+  .views-field-field-country {
+    .field-content {
+      &::before {
+        font-family: 'Glyphicons Halflings';
+        content: "\e062";
+        padding-right: 5px;
+      }
+    }
+
+  }
+
+  .views-field-field-date-birth {
+    color: $dateColor;
+  }
+
+  .views-field-field-about {
+    font-size: 16px;
+    line-height: 18px;
+  }
+}

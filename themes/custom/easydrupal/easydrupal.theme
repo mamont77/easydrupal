@@ -25,6 +25,7 @@ function easydrupal_preprocess_page(&$variables) {
       case 'article':
         $variables['#attached']['library'][] = 'easydrupal/node-type-article';
         $variables['#attached']['library'][] = 'easydrupal/geshifilter';
+        $variables['#attached']['library'][] = 'easydrupal/view-about-author';
 
         break;
 
