@@ -33,6 +33,21 @@ landing-page:
   dependencies:
   - core/jquery
 
+node-type-article:
+  css:
+    theme:
+      css/node-type-article.css: {}
+
+node-type-page:
+  css:
+    theme:
+      css/node-type-page.css: {}
+
+node-type-project:
+  css:
+    theme:
+      css/node-type-project.css: {}
+
 paragraph-common:
   css:
     theme:

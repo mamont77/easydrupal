@@ -1,0 +1,62 @@
+@charset "UTF-8";
+
+@import "default-variables";
+@import "tags";
+
+.page-node-type-project {
+  .field-name-field-image {
+    img {
+      width: 100%;
+    }
+  }
+
+  .field--name-field-skills {
+    .skills {
+      display: inline;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+
+      .skill {
+        @extend %tags;
+      }
+    }
+  }
+
+  .field-name-field-project-images {
+    a {
+      display: block;
+      text-decoration: none;
+      outline: none;
+      //width: 50%;
+    }
+  }
+
+  .field-name-field-project-url {
+    a {
+      margin-top: 12px;
+      display: inline-block;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      font-weight: 500;
+      background-color: $blockHireMeButtonBg;
+      padding: 15px 20px;
+      color: $blockHireMeButtonText;
+      text-decoration: none;
+
+      &:after {
+        font-family: 'Glyphicons Halflings';
+        content: " \e092";
+      }
+
+      &:hover, &:active {
+        background-color: $blockHireMeButtonBgHover;
+      }
+
+      @media screen and (max-width: 768px) {
+        display: block;
+        text-align: center;
+      }
+    }
+  }
+}

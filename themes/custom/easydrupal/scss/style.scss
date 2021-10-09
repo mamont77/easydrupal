@@ -11,9 +11,10 @@
 @import '../bootstrap/assets/stylesheets/bootstrap';
 // Base-theme overrides.
 @import 'overrides';
+@import "tags";
 @import "site";
 @import "sprite";
-@import "nodes_types";
+@import "nodes-types";
 @import "views";
 @import "blocks";
 @import "slick";

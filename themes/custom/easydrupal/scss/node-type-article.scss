@@ -1,0 +1,79 @@
+@charset "UTF-8";
+
+@import "default-variables";
+@import "tags";
+
+.page-node-type-article {
+  .date {
+    display: none;
+  }
+
+  .page-header {
+    .date {
+      display: block;
+    }
+  }
+
+  .field-name-field-image {
+    img {
+      width: 100%;
+      margin: 0 auto;
+      border: 1px solid $imageBorderColor;
+    }
+  }
+
+  code {
+    background-color: #ddd;
+    color: #212121;
+  }
+
+  @media (min-width: 768px) {
+    .field-name-field-image {
+      float: left;
+      margin: 0 15px 15px 0;
+    }
+  }
+  @media (max-width: 768px) {
+    .region-sidebar-second {
+      margin-top: 15px;
+      margin-bottom: 15px;
+      border-top: 4px solid $globalBorderColor;
+      padding-top: 15px;
+
+      section {
+        &.block-views-blockabout-author-block-1 {
+          text-align: center;
+        }
+
+        &.block-views-blocktags-tags,
+        &.block-views-blocktags-versions {
+          width: 49%;
+          display: inline-block;
+          float: left;
+        }
+      }
+    }
+  }
+}
+
+.field--name-field-comments {
+  margin-top: 15px;
+  clear: both;
+
+  .field--label {
+    font-size: 23px;
+    text-transform: uppercase;
+    color: $h2Color;
+    text-align: center;
+    border-top: 4px solid $globalBorderColor;
+    border-bottom: 4px solid $globalBorderColor;
+    padding: 15px 0;
+  }
+}
+
+.conclusion {
+  border: 1px solid $globalBorderColor;
+  background-color: #eee;
+  padding: 15px;
+}
+

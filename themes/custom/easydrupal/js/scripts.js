@@ -1,9 +1,7 @@
-"use strict";
 /**
  * @file
  * easyDrupal functionality.
  */
-
 (function ($, Drupal, drupalSettings) {
 
   'use strict';

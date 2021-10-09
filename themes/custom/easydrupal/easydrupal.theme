@@ -15,6 +15,30 @@ function easydrupal_preprocess_page(&$variables) {
   if (\Drupal::service('path.matcher')->isFrontPage()) {
     $variables['#attached']['library'][] = 'easydrupal/landing-page';
   }
+
+  if (isset($variables['node'])) {
+    /** @var \Drupal\node\NodeInterface $node */
+    $node = $variables['node'];
+
+    // Check content type.
+    switch ($node->getType()) {
+      case 'article':
+        $variables['#attached']['library'][] = 'easydrupal/node-type-article';
+        $variables['#attached']['library'][] = 'easydrupal/geshifilter';
+
+        break;
+
+      case 'page':
+        $variables['#attached']['library'][] = 'easydrupal/node-type-page';
+
+        break;
+
+      case 'project':
+        $variables['#attached']['library'][] = 'easydrupal/node-type-project';
+
+        break;
+    }
+  }
 }
 
 /**

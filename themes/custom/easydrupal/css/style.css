@@ -4806,6 +4806,53 @@ p:last-child,
   font-size: 14px;
 }
 
+.view-tags .views-field a {
+  top: -3px;
+  display: inline-block;
+  background: #ddd;
+  color: #222;
+  font-size: 12px;
+  height: 23px;
+  line-height: 22px;
+  padding: 0 14px 0 16px;
+  position: relative;
+  margin: 0 10px 0 0;
+  text-decoration: none;
+}
+
+.view-tags .views-field a::before {
+  background: #fff;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px rgba(0, 0, 0, 0.25);
+          box-shadow: inset 0 1px rgba(0, 0, 0, 0.25);
+  content: '';
+  height: 4px;
+  left: 6px;
+  position: absolute;
+  width: 4px;
+  top: 9px;
+}
+
+.view-tags .views-field a::after {
+  background: #fff;
+  border-bottom: 11px solid transparent;
+  border-left: 6px solid #ddd;
+  border-top: 12px solid transparent;
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.view-tags .views-field a:hover {
+  background-color: #666;
+  color: #fff;
+}
+
+.view-tags .views-field a:hover::after {
+  border-left-color: #666;
+}
+
 .navbar-btn {
   margin-top: 8px;
   margin-bottom: 8px;
@@ -5114,53 +5161,6 @@ blockquote {
   color: #293749;
 }
 
-.page-node-type-project .field--name-field-skills .skills .skill, .view-tags .views-field a {
-  top: -3px;
-  display: inline-block;
-  background: #ddd;
-  color: #222;
-  font-size: 12px;
-  height: 23px;
-  line-height: 22px;
-  padding: 0 14px 0 16px;
-  position: relative;
-  margin: 0 10px 0 0;
-  text-decoration: none;
-}
-
-.page-node-type-project .field--name-field-skills .skills .skill::before, .view-tags .views-field a::before {
-  background: #fff;
-  border-radius: 4px;
-  -webkit-box-shadow: inset 0 1px rgba(0, 0, 0, 0.25);
-          box-shadow: inset 0 1px rgba(0, 0, 0, 0.25);
-  content: '';
-  height: 4px;
-  left: 6px;
-  position: absolute;
-  width: 4px;
-  top: 9px;
-}
-
-.page-node-type-project .field--name-field-skills .skills .skill::after, .view-tags .views-field a::after {
-  background: #fff;
-  border-bottom: 11px solid transparent;
-  border-left: 6px solid #ddd;
-  border-top: 12px solid transparent;
-  content: '';
-  position: absolute;
-  right: 0;
-  top: 0;
-}
-
-.page-node-type-project .field--name-field-skills .skills .skill:hover, .view-tags .views-field a:hover {
-  background-color: #666;
-  color: #fff;
-}
-
-.page-node-type-project .field--name-field-skills .skills .skill:hover::after, .view-tags .views-field a:hover::after {
-  border-left-color: #666;
-}
-
 .tabs--primary {
   margin-bottom: 2rem;
 }
@@ -5195,33 +5195,6 @@ blockquote {
   margin-bottom: 15px;
 }
 
-.page-node-type-article .date {
-  display: none;
-}
-
-.page-node-type-article .page-header .date {
-  display: block;
-}
-
-.page-node-type-article .field-name-field-image img {
-  width: 100%;
-  margin: 0 auto;
-  border: 1px solid #eee;
-}
-
-.page-node-type-article code {
-  background-color: #ddd;
-  color: #212121;
-}
-
-.page-node-type-page article[about="/about-me"] .field--name-body img {
-  border-radius: 50%;
-  border: 8px solid #eee;
-  margin: 0 15px 15px 0;
-  max-width: 216px;
-  height: auto;
-}
-
 .file > span {
   background: #fff;
   color: #81a5bf;
@@ -5239,59 +5212,6 @@ blockquote {
 
 .text-primary {
   color: #575756;
-}
-
-.page-node-type-project .field-name-field-image img {
-  width: 100%;
-}
-
-.page-node-type-project .field--name-field-skills .skills {
-  display: inline;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.page-node-type-project .field-name-field-project-images a {
-  display: block;
-  text-decoration: none;
-  outline: none;
-}
-
-.page-node-type-project .field-name-field-project-url a {
-  margin-top: 12px;
-  display: inline-block;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-  font-weight: 500;
-  background-color: #81a5bf;
-  padding: 15px 20px;
-  color: #fff;
-  text-decoration: none;
-}
-
-.page-node-type-project .field-name-field-project-url a:after {
-  font-family: 'Glyphicons Halflings';
-  content: " \e092";
-}
-
-.page-node-type-project .field-name-field-project-url a:hover, .page-node-type-project .field-name-field-project-url a:active {
-  background-color: #5f8dae;
-}
-
-.field--name-field-comments {
-  margin-top: 15px;
-  clear: both;
-}
-
-.field--name-field-comments .field--label {
-  font-size: 23px;
-  text-transform: uppercase;
-  color: #293749;
-  text-align: center;
-  border-top: 4px solid #ddd;
-  border-bottom: 4px solid #ddd;
-  padding: 15px 0;
 }
 
 body.path-contact .contact-form input,
@@ -5320,29 +5240,6 @@ body.path-contact .contact-form .btn-primary {
   font-size: 14px;
   text-align: center;
   padding: 3px 5px;
-}
-
-.conclusion {
-  border: 1px solid #ddd;
-  background-color: #eee;
-  padding: 15px;
-}
-
-.field-name-field-vote {
-  display: none;
-}
-
-.field-name-field-vote .select-wrapper::after {
-  content: '';
-  display: none;
-}
-
-.field-name-field-vote .form-group {
-  margin-bottom: 0;
-}
-
-.field-name-field-vote .br-widget {
-  height: 20px;
 }
 
 .view .views-row {
@@ -6196,10 +6093,6 @@ body.path-contact .contact-form .btn-primary {
   .navbar-default ul li:last-child {
     border: none;
   }
-  .page-node-type-article .field-name-field-image {
-    float: left;
-    margin: 0 15px 15px 0;
-  }
   .view-articles .field-name-field-image,
   .view-taxonomy-term .field-name-field-image {
     max-width: 200px;
@@ -6896,27 +6789,6 @@ body.path-contact .contact-form .btn-primary {
   .logo {
     margin-left: 15px;
   }
-  .page-node-type-article .region-sidebar-second {
-    margin-top: 15px;
-    margin-bottom: 15px;
-    border-top: 4px solid #ddd;
-    padding-top: 15px;
-  }
-  .page-node-type-article .region-sidebar-second section.block-views-blockabout-author-block-1 {
-    text-align: center;
-  }
-  .page-node-type-article .region-sidebar-second section.block-views-blocktags-tags, .page-node-type-article .region-sidebar-second section.block-views-blocktags-versions {
-    width: 49%;
-    display: inline-block;
-    float: left;
-  }
-  .page-node-type-page article[about="/about-me"] .field--name-body img {
-    float: none;
-    display: block;
-    width: 50%;
-    height: auto;
-    margin: 0 auto 15px auto;
-  }
   #block-otherprofiles {
     float: none;
   }
@@ -6926,10 +6798,6 @@ body.path-contact .contact-form .btn-primary {
 }
 
 @media screen and (max-width: 768px) {
-  .page-node-type-project .field-name-field-project-url a {
-    display: block;
-    text-align: center;
-  }
   .field--type-text-with-summary figure {
     margin: 0 0 15px 0 !important;
     float: none;

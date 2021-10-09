@@ -2,7 +2,6 @@
  * @file
  * easyDrupal landing page functionality.
  */
-
 (function ($, Drupal, drupalSettings) {
 
   'use strict';
