@@ -29,6 +29,7 @@ function easydrupal_common_page_attachments_alter(array &$attachments) {
     $remove_libraries = [
       'addtoany/addtoany',
       'extlink/drupal.extlink',
+      'easydrupal/geshifilter'
     ];
     // Conditionally remove an asset.
     foreach ($remove_libraries as $library) {
@@ -37,5 +38,6 @@ function easydrupal_common_page_attachments_alter(array &$attachments) {
         unset($attachments['#attached']['library'][$index]);
       }
     }
+    unset($attachments['#attached']['drupalSettings']['data']['extlink']);
   }
 }
