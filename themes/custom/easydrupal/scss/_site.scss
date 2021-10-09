@@ -189,9 +189,9 @@
       text-indent: -.7em;
 
       &:before {
-        content: "\e013";
+        content: "\f00c";
         color: $listPointsColor;
-        font-family: 'Glyphicons Halflings';
+        font-family: 'FontAwesome';
         font-size: 15px;
         margin-left: -13px;
         margin-right: 8px;
@@ -238,9 +238,9 @@
   }
 
   &:after {
-    content: "\e253";
+    content: "\f077";
     color: #fff;
-    font-family: 'Glyphicons Halflings';
+    font-family: 'FontAwesome';
   }
 }
 

@@ -82,3 +82,11 @@ paragraph-sourse-code:
   css:
     theme:
       css/paragraph-sourse-code.css: {}
+
+font-awesome:
+  js:
+    'https://kit.fontawesome.com/91500d63a4.js':
+      type: external
+      minified: true
+      attributes:
+        crossorigin: anonymous

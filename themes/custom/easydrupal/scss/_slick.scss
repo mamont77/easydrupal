@@ -65,10 +65,9 @@
     left: 0;
 
     &:before {
-      font-family: 'Glyphicons Halflings', sans-serif;
-      content: "\e079";
+      font-family: 'FontAwesome';
+      content: "\f053";
       margin-right: 5px;
-      top: 3px;
       position: relative;
     }
   }
@@ -77,10 +76,9 @@
     right: 0;
 
     &:after {
-      font-family: 'Glyphicons Halflings', sans-serif;
-      content: "\e080";
+      font-family: 'FontAwesome';
+      content: "\f054";
       margin-left: 5px;
-      top: 3px;
       position: relative;
     }
   }

@@ -56,14 +56,6 @@
     top: 50%;
     z-index: 10;
 
-    // Use a more stylish icon if the theme uses glyphicons.
-    .has-glyphicons & {
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      content: '\e114'; // .glyphicon-chevron-down
-      display: inline-block;
-      font-family: 'Glyphicons Halflings';
-    }
     .has-error & {
       color: $state-danger-text;
     }

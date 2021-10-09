@@ -87,8 +87,8 @@
 }
 
 .page-node-type-project .field-name-field-project-url a:after {
-  font-family: 'Glyphicons Halflings';
-  content: " \e092";
+  font-family: 'FontAwesome';
+  content: "\f35d";
 }
 
 .page-node-type-project .field-name-field-project-url a:hover, .page-node-type-project .field-name-field-project-url a:active {

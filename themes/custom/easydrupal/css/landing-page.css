@@ -42,6 +42,27 @@
   padding-top: 50px;
   padding-bottom: 50px;
   /* Style for our header texts */
+  /*
+    ul {
+      list-style: none;
+      padding: 0 0 0 30px;
+      margin: 25px 0 30px;
+
+      li {
+        padding-left: 1em;
+        text-indent: -.7em;
+
+        &:before {
+          content: "\e013"; // FIXME.
+          color: #eee;
+          font-family: 'FontAwesome';
+          font-size: 15px;
+          margin-left: -13px;
+          margin-right: 8px;
+        }
+      }
+    }
+     */
 }
 
 .page-node-type-landingpage .section .title-wrapper {
@@ -73,26 +94,6 @@
 
 .page-node-type-landingpage .section .read-more a {
   color: #293749;
-}
-
-.page-node-type-landingpage .section ul {
-  list-style: none;
-  padding: 0 0 0 30px;
-  margin: 25px 0 30px;
-}
-
-.page-node-type-landingpage .section ul li {
-  padding-left: 1em;
-  text-indent: -.7em;
-}
-
-.page-node-type-landingpage .section ul li:before {
-  content: "\e013";
-  color: #eee;
-  font-family: 'Glyphicons Halflings';
-  font-size: 15px;
-  margin-left: -13px;
-  margin-right: 8px;
 }
 
 .page-node-type-landingpage .about {

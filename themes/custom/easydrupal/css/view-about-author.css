@@ -48,8 +48,8 @@
 }
 
 .view-about-author .views-field-field-country .field-content::before {
-  font-family: 'Glyphicons Halflings';
-  content: "\e062";
+  font-family: 'FontAwesome';
+  content: "\f3c5";
   padding-right: 5px;
 }
 
