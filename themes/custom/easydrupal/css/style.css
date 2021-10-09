@@ -4151,6 +4151,7 @@ body.path-contact .contact-form .btn-primary {
 #block-hireme .group-right a:after {
   font-family: 'FontAwesome';
   content: " \f1d8";
+  margin-left: .5rem;
 }
 
 #block-hireme .group-right a:hover, #block-hireme .group-right a:active {
