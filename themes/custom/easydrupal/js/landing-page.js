@@ -24,10 +24,6 @@
         $('.contact .title-wrapper', context).after($alert);
       }
 
-      /* ==============================================
-       Smooth Scroll To Anchor.
-       =============================================== */
-      // jQuery for page scrolling feature - requires jQuery Easing plugin.
       $('.navbar-nav a').bind('click', function (event) {
         var $anchor = $(this),
           header_offset = 78;
@@ -35,9 +31,9 @@
           if ($('.toolbar-lining').length > 0) {
             header_offset += 39; // Add the height of toolbar.
           }
-          $('html, body').stop().animate({
+          $('html, body', context).stop().animate({
             scrollTop: $($anchor.attr('href')).offset().top - header_offset
-          }, 1500, 'easeInOutExpo');
+          }, 1500);
           if ($('.navbar-toggle', context).not('.collapsed').length > 0) {
             $('.navbar-toggle', context).click();
           }
