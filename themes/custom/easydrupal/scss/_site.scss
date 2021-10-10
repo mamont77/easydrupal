@@ -326,7 +326,7 @@ blockquote {
       outline: 0;
     }
 
-    @include placeholder ($formFieldTextAlternativeColor, italic);
+    @include placeholder($formFieldTextAlternativeColor, italic);
   }
 
   .form-textarea {

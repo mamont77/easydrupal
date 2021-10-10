@@ -75,7 +75,7 @@
   text-align: justify;
   margin: 0;
   font-size: inherit;
-  font-family: "Roboto", "Helvetica Neue", helvetica, arial, sans-serif;
+  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 .view-feedback blockquote:before, .view-feedback blockquote:after {
