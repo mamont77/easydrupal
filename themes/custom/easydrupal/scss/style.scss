@@ -4,6 +4,13 @@
  * are compiled using the SASS CSS pre-processor.
  */
 
+@font-face {
+  font-family: 'Helvetica';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
 @import url(//fonts.googleapis.com/css?family=Roboto+Condensed:700|Roboto:400,400i,700);
 // Default variables.
 @import "default-variables";
@@ -16,4 +23,3 @@
 @import "sprite";
 @import "nodes-types";
 @import "blocks";
-@import "slick";

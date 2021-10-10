@@ -90,3 +90,8 @@ font-awesome:
       minified: true
       attributes:
         crossorigin: anonymous
+
+slick:
+  css:
+    theme:
+      css/slick.css: { }

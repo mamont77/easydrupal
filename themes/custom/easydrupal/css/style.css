@@ -4,6 +4,13 @@
  * are compiled using the SASS CSS pre-processor.
  */
 @import url(//fonts.googleapis.com/css?family=Roboto+Condensed:700|Roboto:400,400i,700);
+@font-face {
+  font-family: 'Helvetica';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
 /**
  * Default Variables.
  *
@@ -3698,87 +3705,6 @@ body.path-contact .contact-form .btn-primary {
   margin: 0 auto;
 }
 
-.slick--skin--default {
-  background-image: url(../images/devices/cs-imac-frame.png);
-  background-repeat: no-repeat;
-  background-position: center top;
-  height: 611px;
-  width: 846px;
-  margin: 30px auto;
-  padding: 27px 82px 197px 83px;
-  overflow: hidden;
-}
-
-.slick--skin--default .slide__caption {
-  position: relative;
-  padding: 5px 0;
-  opacity: .8;
-  top: -50px;
-  text-align: center;
-  margin: 0 auto;
-  width: 40%;
-  background: #fff;
-}
-
-.slick--skin--default .lazy {
-  height: 385px !important;
-}
-
-.slick__arrow button {
-  outline: 0;
-}
-
-.slick-arrow {
-  padding: 0;
-  background: transparent;
-  border: 0;
-  color: #414a51;
-  top: 38%;
-  position: absolute;
-  width: 110px;
-  height: 36px;
-  fill: currentColor;
-  font-size: 20px;
-  font-weight: 100;
-  overflow: hidden;
-  text-align: center;
-}
-
-.slick-arrow.slick-prev {
-  left: 0;
-}
-
-.slick-arrow.slick-prev:before {
-  font-family: 'FontAwesome';
-  content: "\f053";
-  margin-right: 5px;
-  position: relative;
-}
-
-.slick-arrow.slick-next {
-  right: 0;
-}
-
-.slick-arrow.slick-next:after {
-  font-family: 'FontAwesome';
-  content: "\f054";
-  margin-left: 5px;
-  position: relative;
-}
-
-@media screen and (min-width: 768px) {
-  body {
-    margin-top: 15px;
-  }
-  .navbar.container {
-    max-width: 720px;
-  }
-  .navbar .logo {
-    margin-right: 0;
-    padding-left: 0;
-  }
-}
-
 @media (min-width: 768px) and (max-width: 991px) {
   .visible-sm {
     display: block !important;
@@ -4086,6 +4012,47 @@ body.path-contact .contact-form .btn-primary {
   }
 }
 
+@media screen and (min-width: 768px) {
+  body {
+    margin-top: 15px;
+  }
+  .navbar.container {
+    max-width: 720px;
+  }
+  .navbar .logo {
+    margin-right: 0;
+    padding-left: 0;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .visible-md {
+    display: block !important;
+  }
+  table.visible-md {
+    display: table !important;
+  }
+  tr.visible-md {
+    display: table-row !important;
+  }
+  th.visible-md,
+  td.visible-md {
+    display: table-cell !important;
+  }
+  .visible-md-block {
+    display: block !important;
+  }
+  .visible-md-inline {
+    display: inline !important;
+  }
+  .visible-md-inline-block {
+    display: inline-block !important;
+  }
+  .hidden-md {
+    display: none !important;
+  }
+}
+
 @media (min-width: 992px) {
   .container {
     width: 970px;
@@ -4245,34 +4212,6 @@ body.path-contact .contact-form .btn-primary {
   }
   .col-md-offset-12 {
     margin-left: 100%;
-  }
-}
-
-@media (min-width: 992px) and (max-width: 1199px) {
-  .visible-md {
-    display: block !important;
-  }
-  table.visible-md {
-    display: table !important;
-  }
-  tr.visible-md {
-    display: table-row !important;
-  }
-  th.visible-md,
-  td.visible-md {
-    display: table-cell !important;
-  }
-  .visible-md-block {
-    display: block !important;
-  }
-  .visible-md-inline {
-    display: inline !important;
-  }
-  .visible-md-inline-block {
-    display: inline-block !important;
-  }
-  .hidden-md {
-    display: none !important;
   }
 }
 
@@ -4675,25 +4614,6 @@ body.path-contact .contact-form .btn-primary {
   .field--type-text-with-summary figure img {
     width: 100%;
     height: auto;
-  }
-}
-
-@media (max-width: 992px) {
-  .slick--skin--default {
-    background: none transparent;
-    padding: 0;
-    width: 100%;
-    height: auto;
-    margin: 15px auto 5px auto;
-  }
-  .slick--skin--default img {
-    width: 100%;
-    height: auto;
-  }
-  .slick-arrow {
-    top: 31%;
-    background: #ddd;
-    opacity: .8;
   }
 }
 
