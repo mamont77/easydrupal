@@ -1,87 +1,87 @@
 framework:
   css:
     theme:
-      css/style.css: {}
+      css/style.css: { }
   js:
-#    bootstrap/assets/javascripts/bootstrap/affix.js: {}
-#    bootstrap/assets/javascripts/bootstrap/alert.js: {}
-#    bootstrap/assets/javascripts/bootstrap/button.js: {}
-#    bootstrap/assets/javascripts/bootstrap/carousel.js: {}
-    bootstrap/assets/javascripts/bootstrap/collapse.js: {}
-#    bootstrap/assets/javascripts/bootstrap/dropdown.js: {}
-#    bootstrap/assets/javascripts/bootstrap/modal.js: {}
-#    bootstrap/assets/javascripts/bootstrap/tooltip.js: {}
-#    bootstrap/assets/javascripts/bootstrap/popover.js: {}
-#    bootstrap/assets/javascripts/bootstrap/scrollspy.js: {}
-#    bootstrap/assets/javascripts/bootstrap/tab.js: {}
-    bootstrap/assets/javascripts/bootstrap/transition.js: {}
-    js/scripts.js: {}
+    bootstrap/assets/javascripts/bootstrap/affix.js: {}
+    bootstrap/assets/javascripts/bootstrap/alert.js: {}
+    bootstrap/assets/javascripts/bootstrap/button.js: {}
+    bootstrap/assets/javascripts/bootstrap/carousel.js: { }
+    bootstrap/assets/javascripts/bootstrap/collapse.js: { }
+    bootstrap/assets/javascripts/bootstrap/dropdown.js: {}
+    bootstrap/assets/javascripts/bootstrap/modal.js: {}
+    bootstrap/assets/javascripts/bootstrap/tooltip.js: {}
+    bootstrap/assets/javascripts/bootstrap/popover.js: {}
+    bootstrap/assets/javascripts/bootstrap/scrollspy.js: {}
+    bootstrap/assets/javascripts/bootstrap/tab.js: {}
+    bootstrap/assets/javascripts/bootstrap/transition.js: { }
+    js/scripts.js: { }
   dependencies:
-  - core/jquery
+    - core/jquery
 
 geshifilter:
   css:
     theme:
-      css/geshifilter.generate_css.css: {}
+      css/geshifilter.generate_css.css: { }
 
 landing-page:
   css:
     theme:
-      css/landing-page.css: {}
+      css/landing-page.css: { }
   js:
-    js/landing-page.js: {}
+    js/landing-page.js: { }
   dependencies:
-  - core/jquery
+    - core/jquery
 
 view-about-author:
   css:
     theme:
-      css/view-about-author.css: {}
+      css/view-about-author.css: { }
 
 view-portfolio:
   css:
     theme:
-      css/view-portfolio.css: {}
+      css/view-portfolio.css: { }
 
 view-articles:
   css:
     theme:
-      css/view-articles.css: {}
+      css/view-articles.css: { }
 
 view-feedback:
   css:
     theme:
-      css/view-feedback.css: {}
+      css/view-feedback.css: { }
 
 view-tags:
   css:
     theme:
-      css/view-tags.css: {}
+      css/view-tags.css: { }
 
 node-type-article:
   css:
     theme:
-      css/node-type-article.css: {}
+      css/node-type-article.css: { }
 
 node-type-page:
   css:
     theme:
-      css/node-type-page.css: {}
+      css/node-type-page.css: { }
 
 node-type-project:
   css:
     theme:
-      css/node-type-project.css: {}
+      css/node-type-project.css: { }
 
 paragraph-common:
   css:
     theme:
-      css/paragraph-common.css: {}
+      css/paragraph-common.css: { }
 
 paragraph-sourse-code:
   css:
     theme:
-      css/paragraph-sourse-code.css: {}
+      css/paragraph-sourse-code.css: { }
 
 font-awesome:
   js:
