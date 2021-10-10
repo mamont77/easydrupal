@@ -3,14 +3,7 @@
  * This file will be overwritten when the Bootstrap Framework source files
  * are compiled using the SASS CSS pre-processor.
  */
-@import url(//fonts.googleapis.com/css?family=Roboto+Condensed:700|Roboto:400,400i,700);
-@font-face {
-  font-family: 'Helvetica';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-}
-
+@import url(//fonts.googleapis.com/css?family=Roboto+Condensed:700|Roboto:400,400i,700&display=swap);
 /**
  * Default Variables.
  *
