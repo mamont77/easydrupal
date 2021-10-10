@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '285a4a0cbc0c38ea0bfad2590964fe68fa69bad0',
+        'reference' => '2d85480e78c0300683542d88cf6790c7fa027c81',
         'name' => 'drupal/legacy-project',
         'dev' => true,
     ),
@@ -736,6 +736,15 @@
             'reference' => '4.1.1',
             'dev_requirement' => false,
         ),
+        'drupal/devel_entity_updates' => array(
+            'pretty_version' => '3.0.1',
+            'version' => '3.0.1.0',
+            'type' => 'drupal-module',
+            'install_path' => __DIR__ . '/../../modules/contrib/devel_entity_updates',
+            'aliases' => array(),
+            'reference' => '3.0.1',
+            'dev_requirement' => false,
+        ),
         'drupal/devel_php' => array(
             'pretty_version' => '1.3.0',
             'version' => '1.3.0.0',
@@ -1011,7 +1020,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '285a4a0cbc0c38ea0bfad2590964fe68fa69bad0',
+            'reference' => '2d85480e78c0300683542d88cf6790c7fa027c81',
             'dev_requirement' => false,
         ),
         'drupal/libraries' => array(
