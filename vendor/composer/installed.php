@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'ad3724abd2acadb9a05ad842d4fb51d402acd283',
+        'reference' => '285a4a0cbc0c38ea0bfad2590964fe68fa69bad0',
         'name' => 'drupal/legacy-project',
         'dev' => true,
     ),
@@ -477,15 +477,6 @@
             'replaced' => array(
                 0 => '9.2.7',
             ),
-        ),
-        'drupal/contact_storage' => array(
-            'pretty_version' => '1.1.0',
-            'version' => '1.1.0.0',
-            'type' => 'drupal-module',
-            'install_path' => __DIR__ . '/../../modules/contrib/contact_storage',
-            'aliases' => array(),
-            'reference' => '8.x-1.1',
-            'dev_requirement' => false,
         ),
         'drupal/content_moderation' => array(
             'dev_requirement' => false,
@@ -1020,7 +1011,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'ad3724abd2acadb9a05ad842d4fb51d402acd283',
+            'reference' => '285a4a0cbc0c38ea0bfad2590964fe68fa69bad0',
             'dev_requirement' => false,
         ),
         'drupal/libraries' => array(
