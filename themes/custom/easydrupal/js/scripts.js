@@ -252,10 +252,12 @@
 
       $(window).scroll(function () {
         if ($(this).scrollTop() > 100) {
-          $upper.fadeIn();
+          // $upper.fadeIn();
+          $upper.show(50);
         }
         else {
-          $upper.fadeOut();
+          // $upper.fadeOut();
+          $upper.hide(50);
         }
       });
     }
