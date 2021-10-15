@@ -3,9 +3,9 @@
 {% if page.navigation or page.navigation_collapsible %}
   {% block navbar %}
     {% set navbar_classes = [
-    'navbar',
-    theme.settings.navbar_inverse ? 'navbar-inverse' : 'navbar-default',
-    theme.settings.navbar_position ? 'navbar-' ~ theme.settings.navbar_position|clean_class : container,
+      'navbar',
+      theme.settings.navbar_inverse ? 'navbar-inverse' : 'navbar-default',
+      theme.settings.navbar_position ? 'navbar-' ~ theme.settings.navbar_position|clean_class : container,
     ] %}
     <header{{ navbar_attributes.addClass(navbar_classes) }} id="navbar" role="banner">
       {% if not navbar_attributes.hasClass('container') %}
@@ -54,10 +54,10 @@
 
       {# Content #}
       {% set content_classes = [
-      page.sidebar_first and page.sidebar_second ? 'col-sm-6',
-      page.sidebar_first and page.sidebar_second is empty ? 'col-sm-9',
-      page.sidebar_second and page.sidebar_first is empty ? 'col-sm-9',
-      page.sidebar_first is empty and page.sidebar_second is empty ? 'col-sm-12 main-section'
+        page.sidebar_first and page.sidebar_second ? 'col-sm-6',
+        page.sidebar_first and page.sidebar_second is empty ? 'col-sm-9',
+        page.sidebar_second and page.sidebar_first is empty ? 'col-sm-9',
+        page.sidebar_first is empty and page.sidebar_second is empty ? 'col-sm-12 main-section'
       ] %}
       <section{{ content_attributes.addClass(content_classes) }}>
 
@@ -103,4 +103,4 @@
     </footer>
   {% endblock %}
 {% endif %}
-<a class="upper" href="#main-content" title="{{ 'Back to top'|t }}" style="display: block;"></a>
+<a class="upper" href="#main-content" title="{{ 'Back to top'|t }}" style="display: block;" tabindex="-1"></a>

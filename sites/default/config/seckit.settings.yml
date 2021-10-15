@@ -1,6 +1,6 @@
 seckit_xss:
   csp:
-    checkbox: false
+    checkbox: true
     report-only: false
     default-src: ''
     script-src: ''
@@ -14,6 +14,11 @@ seckit_xss:
     report-uri: report-csp-violation
     policy-uri: ''
     style-src: ''
+    vendor-prefix:
+      x: false
+      webkit: false
+    upgrade-req: false
+    frame-ancestors: ''
   x_xss:
     seckit_x_xss_option_disable: Disabled
     seckit_x_xss_option_0: '0'
@@ -37,5 +42,15 @@ seckit_various:
   from_origin: false
   from_origin_destination: same
   disable_autocomplete: false
+  referrer_policy: false
+  referrer_policy_policy: ''
 _core:
   default_config_hash: 1QSPl6Lx4K-hAcSOsRUFyntOnghLfpsDzjY6tbhnAVY
+seckit_ct:
+  expect_ct: false
+  max_age: null
+  report_uri: ''
+  enforce: false
+seckit_fp:
+  feature_policy: false
+  feature_policy_policy: ''
