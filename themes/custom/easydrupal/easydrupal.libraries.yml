@@ -15,7 +15,7 @@ framework:
     #    bootstrap/assets/javascripts/bootstrap/scrollspy.js: {}
     #    bootstrap/assets/javascripts/bootstrap/tab.js: {}
     bootstrap/assets/javascripts/bootstrap/transition.js: { }
-    js/scripts.js: { }
+    js/global-scripts.js: { }
   dependencies:
     - core/jquery
     - core/jquery.once
@@ -48,11 +48,21 @@ view-articles:
   css:
     theme:
       css/view-articles.css: { }
+  js:
+    js/node-type-article.js: { }
+  dependencies:
+    - core/jquery
+    - core/jquery.once
 
 view-feedback:
   css:
     theme:
       css/view-feedback.css: { }
+  js:
+    js/view-feedback..js: { }
+  dependencies:
+    - core/jquery
+    - core/jquery.once
 
 view-tags:
   css:
