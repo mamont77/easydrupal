@@ -5,7 +5,8 @@ visibility:
   request_path_mode: 0
   request_path_pages: "/admin\r\n/admin/*\r\n/batch\r\n/node/add*\r\n/node/*/*\r\n/user/*/*"
   user_role_mode: 0
-  user_role_roles: {  }
+  user_role_roles:
+    anonymous: anonymous
   user_account_mode: 0
 track:
   outbound: true
@@ -23,7 +24,8 @@ track:
   tel: true
 privacy:
   anonymizeip: false
-custom: {  }
+custom:
+  parameters: {  }
 codesnippet:
   create: {  }
   before: ''
@@ -34,3 +36,4 @@ debug: false
 _core:
   default_config_hash: 5YkLBJiAXgH9BDLkDIb1ozqfCXWwvZggf4XfcXgfjzc
 premium: false
+ua_legacy: null
