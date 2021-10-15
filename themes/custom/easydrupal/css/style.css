@@ -3352,16 +3352,14 @@ p:last-child,
   width: 42px;
   height: 37px;
   padding: 5px 10px;
-  background-color: rgba(74, 74, 74, 0.6);
+  background-color: #4A4A4A;
   border: 1px solid #fff;
   color: #fff;
   bottom: 17px;
   right: 17px;
   cursor: pointer;
   z-index: 10;
-  -webkit-transition: all 0.2s ease-out;
-  -o-transition: all 0.2s ease-out;
-  transition: all 0.2s ease-out;
+  opacity: 0.7;
 }
 
 .upper:hover, .upper:focus, .upper:active {
