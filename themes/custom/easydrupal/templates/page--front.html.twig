@@ -77,7 +77,7 @@
 
         {# Content #}
         {% block content %}
-          <a id="main-content"></a>
+          <span id="main-content" tabindex="-1"></span>
           {{ page.content }}
         {% endblock %}
       </section>
@@ -103,4 +103,4 @@
     </footer>
   {% endblock %}
 {% endif %}
-<a class="upper" href="#main-content" title="{{ 'Back to top'|t }}" style="display: block;" tabindex="-1"></a>
+<a class="upper" href="#main-content" title="{{ 'Back to top'|t }}" style="display: block;"></a>
