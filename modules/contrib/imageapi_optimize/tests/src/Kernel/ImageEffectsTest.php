@@ -1,8 +1,8 @@
 <?php
 
-namespace Drupal\Tests\imageapi_optimize\Functional;
+namespace Drupal\Tests\imageapi_optimize\Kernel;
 
-use Drupal\Tests\image\Functional\ImageEffectsTest as OriginalImageEffectsTest;
+use Drupal\Tests\image\Kernel\ImageEffectsTest as OriginalImageEffectsTest;
 
 /**
  * Tests that the image effects pass parameters to the toolkit correctly.
