@@ -216,6 +216,7 @@
 }
 
 .upper {
+  display: none; // Will be visible by CSS.
   position: fixed;
   text-align: center;
   font-size: 20px;

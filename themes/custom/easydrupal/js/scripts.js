@@ -251,13 +251,13 @@
       });
 
       $(window).scroll(function () {
-        if ($(this).scrollTop() > 100) {
-          // $upper.fadeIn();
-          $upper.show(50);
+        if ($(this).scrollTop() > 300) {
+          $upper.fadeIn();
+          // $upper.show(50);
         }
         else {
-          // $upper.fadeOut();
-          $upper.hide(50);
+          $upper.fadeOut();
+          // $upper.hide(50);
         }
       });
     }
