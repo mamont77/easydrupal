@@ -32,7 +32,7 @@ landing-page:
   js:
     js/landing-page.js: { }
   dependencies:
-    - core/jquery
+    - easydrupal/framework
 
 view-about-author:
   css:
@@ -48,11 +48,6 @@ view-articles:
   css:
     theme:
       css/view-articles.css: { }
-  js:
-    js/node-type-article.js: { }
-  dependencies:
-    - core/jquery
-    - core/jquery.once
 
 view-feedback:
   css:
@@ -61,8 +56,7 @@ view-feedback:
   js:
     js/view-feedback..js: { }
   dependencies:
-    - core/jquery
-    - core/jquery.once
+    - easydrupal/framework
 
 view-tags:
   css:
@@ -73,6 +67,10 @@ node-type-article:
   css:
     theme:
       css/node-type-article.css: { }
+  js:
+    js/node-type-article.js: { }
+  dependencies:
+    - easydrupal/framework
 
 node-type-page:
   css:

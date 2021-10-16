@@ -8,12 +8,12 @@
 
   /**
    *
-   * @type {{attach: Drupal.behaviors.articlePageTweeks.attach}}
+   * @type {{attach: Drupal.behaviors.articlePageTweaks.attach}}
    */
-  Drupal.behaviors.articlePageTweeks = {
+  Drupal.behaviors.articlePageTweaks = {
     attach: function (context, settings) {
 
-      $('.page-header', context).prepend($('.page-node-type-article .date', context));
+      $('.page-header', context).prepend($('.page-node-type-article .date', context).show());
 
       var $region_sidebar_second = $('aside.col-sm-3', context),
         $region_sidebar_second_content = $('.region-sidebar-second', context),

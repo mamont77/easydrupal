@@ -57,21 +57,11 @@
   border-left-color: #666;
 }
 
-.page-node-type-project .field-name-field-image img {
-  width: 100%;
-}
-
 .page-node-type-project .field--name-field-skills .skills {
   display: inline;
   list-style: none;
   padding: 0;
   margin: 0;
-}
-
-.page-node-type-project .field-name-field-project-images a {
-  display: block;
-  text-decoration: none;
-  outline: none;
 }
 
 .page-node-type-project .field-name-field-project-url a {

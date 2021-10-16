@@ -10,26 +10,6 @@
   /** Contact **/
 }
 
-.page-node-type-landingpage .tabs,
-.page-node-type-landingpage .breadcrumb,
-.page-node-type-landingpage .page-header {
-  display: none;
-}
-
-.page-node-type-landingpage .alert {
-  margin: 20px;
-  border: 1px solid #81a5bf;
-  color: #575756;
-}
-
-.page-node-type-landingpage .alert.alert-danger {
-  background-color: #eee;
-}
-
-.page-node-type-landingpage .alert.alert-success {
-  background-color: #eee;
-}
-
 .page-node-type-landingpage .navbar-default {
   position: fixed;
   display: block;
@@ -326,83 +306,6 @@
   color: #293749;
 }
 
-.page-node-type-landingpage .contact {
-  background-color: #eee;
-}
-
-.page-node-type-landingpage .contact h2 {
-  color: #6686A2;
-}
-
-.page-node-type-landingpage .contact .line {
-  background-color: #81a5bf;
-}
-
-.page-node-type-landingpage .contact-form {
-  text-align: left;
-  margin: 0 auto;
-  width: 50%;
-  color: #575756;
-}
-
-.page-node-type-landingpage .contact-form input,
-.page-node-type-landingpage .contact-form textarea {
-  border-radius: 0;
-  border: 1px solid #81a5bf;
-  resize: none;
-  color: #575756;
-  background-color: #f5f5f5;
-  opacity: .8;
-}
-
-.page-node-type-landingpage .contact-form input:-moz-placeholder,
-.page-node-type-landingpage .contact-form textarea:-moz-placeholder {
-  color: #575756;
-  font-style: italic;
-  opacity: 1;
-}
-
-.page-node-type-landingpage .contact-form input::-moz-placeholder,
-.page-node-type-landingpage .contact-form textarea::-moz-placeholder {
-  color: #575756;
-  font-style: italic;
-  opacity: 1;
-}
-
-.page-node-type-landingpage .contact-form input:-ms-input-placeholder,
-.page-node-type-landingpage .contact-form textarea:-ms-input-placeholder {
-  color: #575756;
-  font-style: italic;
-}
-
-.page-node-type-landingpage .contact-form input::-webkit-input-placeholder,
-.page-node-type-landingpage .contact-form textarea::-webkit-input-placeholder {
-  color: #575756;
-  font-style: italic;
-}
-
-.page-node-type-landingpage .contact-form .btn-primary {
-  background-color: #f5f5f5;
-  border-width: 2px;
-  color: #6686A2;
-  border-color: #81a5bf;
-  font-size: 24px;
-  padding: 20px 30px;
-  text-transform: uppercase;
-  -webkit-transition: all 0.2s ease-out;
-  -o-transition: all 0.2s ease-out;
-  transition: all 0.2s ease-out;
-  opacity: .7;
-}
-
-.page-node-type-landingpage .contact-form .btn-primary:focus, .page-node-type-landingpage .contact-form .btn-primary:hover {
-  background-color: #ddd;
-}
-
-.page-node-type-landingpage .contact-form .btn-primary:active {
-  background-color: #ddd;
-}
-
 @media screen and (min-width: 993px) {
   .page-node-type-landingpage .main-container.container {
     padding: 79px 0 0 0;
@@ -477,9 +380,6 @@
     max-height: initial;
     padding-right: 0;
   }
-  .page-node-type-landingpage .contact-form {
-    width: 75%;
-  }
 }
 
 @media screen and (max-width: 768px) {
@@ -505,9 +405,6 @@
   }
   .page-node-type-landingpage .projects img {
     max-height: initial;
-  }
-  .page-node-type-landingpage .contact-form {
-    width: 100%;
   }
 }
 
