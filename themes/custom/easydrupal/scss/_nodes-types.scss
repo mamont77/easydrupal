@@ -1,24 +1,8 @@
 @charset "UTF-8";
 
 .region-content {
-  .field,
-  .field-collection-item {
+  .field {
     margin-bottom: 15px;
-  }
-}
-
-.file > span {
-  background: #fff;
-  color: $attachmentsLinkColor;
-  border-bottom: 1px solid $attachmentsBorderColor;
-  border-top: 1px solid $attachmentsBorderColor;
-
-  &:first-child {
-    border-left: 4px solid $attachmentsBorderColor;
-  }
-
-  &:last-child {
-    border-right: 1px solid $attachmentsBorderColor;
   }
 }
 

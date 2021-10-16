@@ -44,6 +44,21 @@
   padding: 15px 0;
 }
 
+.file > span {
+  background: #fff;
+  color: #81a5bf;
+  border-bottom: 1px solid #5f8dae;
+  border-top: 1px solid #5f8dae;
+}
+
+.file > span:first-child {
+  border-left: 4px solid #5f8dae;
+}
+
+.file > span:last-child {
+  border-right: 1px solid #5f8dae;
+}
+
 .conclusion {
   border: 1px solid #ddd;
   background-color: #eee;

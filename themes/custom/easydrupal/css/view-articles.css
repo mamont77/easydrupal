@@ -32,6 +32,13 @@
   margin: 0 auto;
 }
 
+.view-articles .field-name-body p:first-child:first-letter,
+.view-taxonomy-term .field-name-body p:first-child:first-letter {
+  font-family: "Times New Roman", Times, serif;
+  font-size: 200%;
+  color: #293749;
+}
+
 @media (min-width: 768px) {
   .view-articles .field-name-field-image,
   .view-taxonomy-term .field-name-field-image {
