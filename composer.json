@@ -70,7 +70,7 @@
         "drupal/redirect": "^1.2",
         "drupal/schema_metatag": "^2.2",
         "drupal/seckit": "^2.0",
-        "drupal/simple_sitemap": "^3.10",
+        "drupal/simple_sitemap": "^3.11",
         "drupal/slick": "^2.4",
         "drupal/sophron": "^1.1",
         "drupal/sticky_sharrre_bar": "1.x-dev",
