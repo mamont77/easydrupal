@@ -143,17 +143,17 @@ label {
   // HTML5 says that controls under a fieldset > legend:first-child won't be
   // disabled if the fieldset is disabled. Due to implementation difficulty, we
   // don't honor that edge case; we style them as disabled anyway.
-  &[disabled],
-  &[readonly],
-  fieldset[disabled] & {
-    background-color: $input-bg-disabled;
-    opacity: 1; // iOS fix for unreadable disabled content; see https://github.com/twbs/bootstrap/issues/11655
-  }
-
-  &[disabled],
-  fieldset[disabled] & {
-    cursor: $cursor-disabled;
-  }
+  //&[disabled],
+  //&[readonly],
+  //fieldset[disabled] & {
+  //  background-color: $input-bg-disabled;
+  //  opacity: 1; // iOS fix for unreadable disabled content; see https://github.com/twbs/bootstrap/issues/11655
+  //}
+  //
+  //&[disabled],
+  //fieldset[disabled] & {
+  //  cursor: $cursor-disabled;
+  //}
 
   // [converter] extracted textarea& to textarea.form-control
 }
@@ -328,7 +328,7 @@ textarea.form-control {
 // The `.form-group-* form-control` variations are sadly duplicated to avoid the
 // issue documented in https://github.com/twbs/bootstrap/issues/15074.
 
-@include input-size('.input-sm', $input-height-small, $padding-small-vertical, $padding-small-horizontal, $font-size-small, $line-height-small, $input-border-radius-small);
+//@include input-size('.input-sm', $input-height-small, $padding-small-vertical, $padding-small-horizontal, $font-size-small, $line-height-small, $input-border-radius-small);
 //.form-group-sm {
 //  .form-control {
 //    height: $input-height-small;
@@ -489,25 +489,25 @@ textarea.form-control {
     }
 
     // Make static controls behave like regular ones
-    .form-control-static {
-      display: inline-block;
-    }
+    //.form-control-static {
+    //  display: inline-block;
+    //}
 
-    .input-group {
-      display: inline-table;
-      vertical-align: middle;
-
-      .input-group-addon,
-      .input-group-btn,
-      .form-control {
-        width: auto;
-      }
-    }
-
-    // Input groups need that 100% width though
-    .input-group > .form-control {
-      width: 100%;
-    }
+    //.input-group {
+    //  display: inline-table;
+    //  vertical-align: middle;
+    //
+    //  //.input-group-addon,
+    //  //.input-group-btn,
+    //  .form-control {
+    //    width: auto;
+    //  }
+    //}
+    //
+    //// Input groups need that 100% width though
+    //.input-group > .form-control {
+    //  width: 100%;
+    //}
 
     .control-label {
       margin-bottom: 0;
@@ -516,27 +516,27 @@ textarea.form-control {
 
     // Remove default margin on radios/checkboxes that were used for stacking, and
     // then undo the floating of radios and checkboxes to match.
-    .radio,
-    .checkbox {
-      display: inline-block;
-      margin-top: 0;
-      margin-bottom: 0;
-      vertical-align: middle;
-
-      label {
-        padding-left: 0;
-      }
-    }
-    .radio input[type="radio"],
-    .checkbox input[type="checkbox"] {
-      position: relative;
-      margin-left: 0;
-    }
-
-    // Re-override the feedback icon.
-    .has-feedback .form-control-feedback {
-      top: 0;
-    }
+    //.radio,
+    //.checkbox {
+    //  display: inline-block;
+    //  margin-top: 0;
+    //  margin-bottom: 0;
+    //  vertical-align: middle;
+    //
+    //  label {
+    //    padding-left: 0;
+    //  }
+    //}
+    //.radio input[type="radio"],
+    //.checkbox input[type="checkbox"] {
+    //  position: relative;
+    //  margin-left: 0;
+    //}
+    //
+    //// Re-override the feedback icon.
+    //.has-feedback .form-control-feedback {
+    //  top: 0;
+    //}
   }
 }
 // [converter] extracted as `@mixin form-inline` for libsass compatibility

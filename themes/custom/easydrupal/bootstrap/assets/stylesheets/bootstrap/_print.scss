@@ -24,9 +24,9 @@
         content: " (" attr(href) ")";
     }
 
-    abbr[title]:after {
-        content: " (" attr(title) ")";
-    }
+    //abbr[title]:after {
+    //    content: " (" attr(title) ")";
+    //}
 
     // Don't show links that are fragment identifiers,
     // or use the `javascript:` pseudo protocol
@@ -41,11 +41,11 @@
         page-break-inside: avoid;
     }
 
-    thead {
-        display: table-header-group; // h5bp.com/t
-    }
-
-    tr,
+    //thead {
+    //    display: table-header-group; // h5bp.com/t
+    //}
+    //
+    //tr,
     img {
         page-break-inside: avoid;
     }
@@ -73,29 +73,29 @@
         display: none;
     }
     .btn,
-    .dropup > .btn {
-        > .caret {
-            border-top-color: #000 !important;
-        }
-    }
+    //.dropup > .btn {
+    //    > .caret {
+    //        border-top-color: #000 !important;
+    //    }
+    //}
     .label {
         border: 1px solid #000;
     }
 
-    .table {
-        border-collapse: collapse !important;
-
-        td,
-        th {
-            background-color: #fff !important;
-        }
-    }
-    .table-bordered {
-        th,
-        td {
-            border: 1px solid #ddd !important;
-        }
-    }
+    //.table {
+    //    border-collapse: collapse !important;
+    //
+    //    td,
+    //    th {
+    //        background-color: #fff !important;
+    //    }
+    //}
+    //.table-bordered {
+    //    th,
+    //    td {
+    //        border: 1px solid #ddd !important;
+    //    }
+    //}
 
     // Bootstrap specific changes end
 }

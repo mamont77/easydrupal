@@ -27,9 +27,9 @@
 // Utilizes the mixin meant for fixed width containers, but without any defined
 // width for fluid, full width layouts.
 
-.container-fluid {
-  @include container-fixed;
-}
+//.container-fluid {
+//  @include container-fixed;
+//}
 
 
 // Row
