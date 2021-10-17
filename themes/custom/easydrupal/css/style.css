@@ -2879,6 +2879,17 @@ p:last-child,
   background-color: #fff;
 }
 
+/* uncss:ignore start */
+.navbar-collapse.in {
+  overflow-y: auto;
+}
+
+.collapse.in {
+  display: block;
+}
+
+/* uncss:ignore end */
+
 .dropdown-menu {
   padding: 0;
   background-color: #fff;
