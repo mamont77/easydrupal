@@ -2,55 +2,99 @@
 
 @import "default-variables";
 @import "tags";
+@import "date";
 
-.page-node-type-article {
-  .date {
-    display: none;
-  }
-
-  .page-header {
-    .date {
+/* uncss:ignore start */
+.addtoany_list {
+  background-color: $body-bg;
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+  @media (min-width: 1200px) {
+    display: block;
+    position: fixed;
+    z-index: 9999995;
+    right: 3px;
+    top: 30%;
+    bottom: auto;
+    .a2a_counter {
+      .a2a_svg {
+        display: block;
+        margin: 0 auto 2px auto;
+      }
+    }
+    .a2a_count {
+      display: block;
+      margin: 0 auto;
+    }
+    > a {
+      text-align: center;
       display: block;
     }
   }
 
+  > a {
+    overflow: hidden;
+    padding: 4px;
+    text-decoration: none;
+  }
+}
+
+/* uncss:ignore end */
+
+/* uncss:ignore start */
+.a2a_svg,
+.a2a_count,
+.a2a_menu,
+.a2a_menu_find_container {
+  border-radius: 0 !important;
+}
+
+/* uncss:ignore end */
+
+.date {
+  display: none;
+}
+
+.page-header {
+  .date {
+    display: block;
+  }
+}
+
+.field-name-field-image {
+  img {
+    width: 100%;
+    margin: 0 auto;
+    border: 1px solid $imageBorderColor;
+  }
+}
+
+@media (min-width: 768px) {
   .field-name-field-image {
-    img {
-      width: 100%;
-      margin: 0 auto;
-      border: 1px solid $imageBorderColor;
-    }
+    float: left;
+    margin: 0 15px 15px 0;
   }
+}
 
-  code {
-    background-color: #ddd;
-    color: #212121;
-  }
+@media (max-width: 768px) {
+  .region-sidebar-second {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    border-top: 4px solid $globalBorderColor;
+    padding-top: 15px;
 
-  @media (min-width: 768px) {
-    .field-name-field-image {
-      float: left;
-      margin: 0 15px 15px 0;
-    }
-  }
-  @media (max-width: 768px) {
-    .region-sidebar-second {
-      margin-top: 15px;
-      margin-bottom: 15px;
-      border-top: 4px solid $globalBorderColor;
-      padding-top: 15px;
+    section {
+      &.block-views-blockabout-author-block-1 {
+        text-align: center;
+      }
 
-      section {
-        &.block-views-blockabout-author-block-1 {
-          text-align: center;
-        }
-
-        &.block-views-blocktags-tags,
-        &.block-views-blocktags-versions {
-          width: 49%;
-          display: inline-block;
-          float: left;
-        }
+      &.block-views-blocktags-tags,
+      &.block-views-blocktags-versions {
+        width: 49%;
+        display: inline-block;
+        float: left;
       }
     }
   }

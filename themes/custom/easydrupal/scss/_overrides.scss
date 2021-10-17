@@ -15,7 +15,7 @@
 @import "component/tabs";
 @import "component/toolbar";
 // jQuery UI style overrides.
-@import "jquery-ui/autocomplete";
+// @import "jquery-ui/autocomplete";
 
 // Placeholder text
 $input-color-placeholder: #ccc;
@@ -78,9 +78,9 @@ h3 {
 ol, ul {
   padding-left: 1.5em;
 
-  .popover &:last-child {
-    margin-bottom: 0;
-  }
+  //.popover &:last-child {
+  //  margin-bottom: 0;
+  //}
 }
 
 // Page header.
@@ -125,26 +125,26 @@ p:last-child,
 
 // Help region.
 .region-help {
-  > .glyphicon {
-    font-size: $font-size-large;
-    float: left;
-    margin: -0.05em 0.5em 0 0;
-  }
-
-  .block {
-    overflow: hidden;
-  }
+  //> .glyphicon {
+  //  font-size: $font-size-large;
+  //  float: left;
+  //  margin: -0.05em 0.5em 0 0;
+  //}
+  //
+  //.block {
+  //  overflow: hidden;
+  //}
 }
 
 .help-block, .control-group .help-inline {
-  color: $gray-light;
-  font-size: 12px;
-  margin: 5px 0 10px;
-  padding: 0;
-
-  &:first-child {
-    margin-top: 0;
-  }
+  //color: $gray-light;
+  //font-size: 12px;
+  //margin: 5px 0 10px;
+  //padding: 0;
+  //
+  //&:first-child {
+  //  margin-top: 0;
+  //}
 }
 
 .pager {

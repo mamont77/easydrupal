@@ -10,7 +10,7 @@
  * ./THEMENAME/bootstrap/assets/stylesheets/bootstrap/_variables.scss
  */
 /** COLORS **/
-.page-node-type-project .field--name-field-skills .skills .skill {
+.field--name-field-skills .skills .skill {
   top: -3px;
   display: inline-block;
   background: #ddd;
@@ -24,7 +24,7 @@
   text-decoration: none;
 }
 
-.page-node-type-project .field--name-field-skills .skills .skill::before {
+.field--name-field-skills .skills .skill::before {
   background: #fff;
   border-radius: 4px;
   -webkit-box-shadow: inset 0 1px rgba(0, 0, 0, 0.25);
@@ -37,7 +37,7 @@
   top: 9px;
 }
 
-.page-node-type-project .field--name-field-skills .skills .skill::after {
+.field--name-field-skills .skills .skill::after {
   background: #fff;
   border-bottom: 11px solid transparent;
   border-left: 6px solid #ddd;
@@ -48,23 +48,23 @@
   top: 0;
 }
 
-.page-node-type-project .field--name-field-skills .skills .skill:hover {
+.field--name-field-skills .skills .skill:hover {
   background-color: #666;
   color: #fff;
 }
 
-.page-node-type-project .field--name-field-skills .skills .skill:hover::after {
+.field--name-field-skills .skills .skill:hover::after {
   border-left-color: #666;
 }
 
-.page-node-type-project .field--name-field-skills .skills {
+.field--name-field-skills .skills {
   display: inline;
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-.page-node-type-project .field-name-field-project-url a {
+.field-name-field-project-url a {
   margin-top: 12px;
   display: inline-block;
   letter-spacing: 0.03em;
@@ -76,18 +76,18 @@
   text-decoration: none;
 }
 
-.page-node-type-project .field-name-field-project-url a:after {
+.field-name-field-project-url a:after {
   font-family: 'FontAwesome';
   content: "\f35d";
   margin-left: .5rem;
 }
 
-.page-node-type-project .field-name-field-project-url a:hover, .page-node-type-project .field-name-field-project-url a:active {
+.field-name-field-project-url a:hover, .field-name-field-project-url a:active {
   background-color: #5f8dae;
 }
 
 @media screen and (max-width: 768px) {
-  .page-node-type-project .field-name-field-project-url a {
+  .field-name-field-project-url a {
     display: block;
     text-align: center;
   }

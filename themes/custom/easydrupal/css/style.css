@@ -744,8 +744,8 @@ samp {
 code {
   padding: 2px 4px;
   font-size: 90%;
-  color: #c7254e;
-  background-color: #f9f2f4;
+  background-color: #ddd;
+  color: #212121;
   border-radius: 4px;
 }
 
@@ -3062,55 +3062,6 @@ body.toolbar-loading.toolbar {
   margin-bottom: 15px;
 }
 
-/**
- * jQuery UI autocomplete widget style overrides.
- *
- * $todo Remove once jQuery UI is no longer used?
- */
-.ui-autocomplete {
-  background: #fff;
-  background-clip: padding-box;
-  border: 1px solid #ccc;
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  border-radius: 4px;
-  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
-          box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
-  color: inherit;
-  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 18px;
-  list-style: none;
-  min-width: 160px;
-  padding: 5px 0;
-  text-align: left;
-  z-index: 1000;
-}
-
-.ui-autocomplete .ui-menu-item {
-  border: 0;
-  border-radius: 0;
-  clear: both;
-  color: #333333;
-  cursor: pointer;
-  display: block;
-  font-weight: normal;
-  line-height: 1.7;
-  margin: 0;
-  outline: 0;
-  padding: 3px 20px;
-  text-decoration: none;
-  white-space: nowrap;
-}
-
-.ui-autocomplete .ui-menu-item.ui-state-hover {
-  background: #f5f5f5;
-  color: #262626;
-}
-
-.ui-autocomplete .ui-menu-item.ui-state-active, .ui-autocomplete .ui-menu-item.ui-state-focus {
-  background: #337ab7;
-  color: #fff;
-}
-
 html {
   position: relative;
   min-height: 100%;
@@ -3139,10 +3090,6 @@ h3 {
 
 ol, ul {
   padding-left: 1.5em;
-}
-
-.popover ol:last-child, .popover ul:last-child {
-  margin-bottom: 0;
 }
 
 .page-header {
@@ -3179,27 +3126,6 @@ p:last-child,
 .form-group:last-child,
 .panel:last-child {
   margin-bottom: 0;
-}
-
-.region-help > .glyphicon {
-  font-size: 23px;
-  float: left;
-  margin: -0.05em 0.5em 0 0;
-}
-
-.region-help .block {
-  overflow: hidden;
-}
-
-.help-block, .control-group .help-inline {
-  color: #777777;
-  font-size: 12px;
-  margin: 5px 0 10px;
-  padding: 0;
-}
-
-.help-block:first-child, .control-group .help-inline:first-child {
-  margin-top: 0;
 }
 
 .pager li > a,
@@ -3401,45 +3327,6 @@ blockquote {
   color: #212121;
 }
 
-.date {
-  position: relative;
-  background-color: #81a5bf;
-  font-family: Arial, Helvetica, sans-serif;
-  color: #fff;
-  margin-right: 16px;
-  padding: 5px;
-  text-align: center;
-  text-transform: uppercase;
-  float: left;
-}
-
-.date span.day {
-  display: block;
-  font-size: 18px;
-  line-height: 18px;
-  font-weight: bold;
-}
-
-.date span.year {
-  display: block;
-  font-size: 10px;
-  line-height: 10px;
-}
-
-.date:after {
-  left: 100%;
-  top: 50%;
-  border: solid transparent;
-  content: " ";
-  height: 0;
-  width: 0;
-  position: absolute;
-  pointer-events: none;
-  border-left-color: #81a5bf;
-  border-width: 8px;
-  margin-top: -8px;
-}
-
 .contact-message-form .form-control {
   border: solid 1px #ddd;
   background-color: #fff;
@@ -3495,7 +3382,7 @@ blockquote {
   margin: 0 auto;
 }
 
-/* uncss:ignore */
+/* uncss:ignore start */
 .user-login-page h1 {
   display: none;
 }
@@ -3505,7 +3392,8 @@ blockquote {
   margin: 0 auto;
 }
 
-/* uncss:ignore */
+/* uncss:ignore end */
+/* uncss:ignore start */
 .user-login-form {
   max-width: 330px;
   padding: 15px;
@@ -3521,6 +3409,7 @@ blockquote {
   margin-right: 0;
 }
 
+/* uncss:ignore end */
 .field--label {
   color: #293749;
 }
@@ -3528,33 +3417,6 @@ blockquote {
 /* uncss:ignore */
 .tabs--primary {
   margin-bottom: 2rem;
-}
-
-/* uncss:ignore */
-.addtoany_list {
-  background-color: #fff;
-  border-radius: 6px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  margin-bottom: 15px;
-}
-
-.addtoany_list > a {
-  overflow: hidden;
-  padding: 4px;
-  text-decoration: none;
-}
-
-/* uncss:ignore */
-.a2a_svg,
-.a2a_count,
-.a2a_menu,
-.a2a_menu_find_container {
-  border-radius: 0 !important;
 }
 
 .region-content .field {
@@ -4386,26 +4248,6 @@ body.path-contact .contact-form .btn-primary {
   }
   .hidden-lg {
     display: none !important;
-  }
-  .addtoany_list {
-    display: block;
-    position: fixed;
-    z-index: 9999995;
-    right: 3px;
-    top: 30%;
-    bottom: auto;
-  }
-  .addtoany_list .a2a_counter .a2a_svg {
-    display: block;
-    margin: 0 auto 2px auto;
-  }
-  .addtoany_list .a2a_count {
-    display: block;
-    margin: 0 auto;
-  }
-  .addtoany_list > a {
-    text-align: center;
-    display: block;
   }
 }
 

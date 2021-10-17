@@ -10,7 +10,7 @@
  * ./THEMENAME/bootstrap/assets/stylesheets/bootstrap/_variables.scss
  */
 /** COLORS **/
-.page-node-type-page article[about="/about-me"] .field--name-body img {
+article[about="/about-me"] .field--name-body img {
   border-radius: 50%;
   border: 8px solid #eee;
   margin: 0 15px 15px 0;
@@ -18,7 +18,7 @@
   height: auto;
 }
 @media (max-width: 768px) {
-  .page-node-type-page article[about="/about-me"] .field--name-body img {
+  article[about="/about-me"] .field--name-body img {
     float: none;
     display: block;
     width: 50%;

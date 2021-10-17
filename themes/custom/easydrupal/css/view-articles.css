@@ -10,6 +10,45 @@
  * ./THEMENAME/bootstrap/assets/stylesheets/bootstrap/_variables.scss
  */
 /** COLORS **/
+.date {
+  position: relative;
+  background-color: #81a5bf;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #fff;
+  margin-right: 16px;
+  padding: 5px;
+  text-align: center;
+  text-transform: uppercase;
+  float: left;
+}
+
+.date span.day {
+  display: block;
+  font-size: 18px;
+  line-height: 18px;
+  font-weight: bold;
+}
+
+.date span.year {
+  display: block;
+  font-size: 10px;
+  line-height: 10px;
+}
+
+.date:after {
+  left: 100%;
+  top: 50%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  border-left-color: #81a5bf;
+  border-width: 8px;
+  margin-top: -8px;
+}
+
 .view .views-row {
   margin-bottom: 15px;
 }

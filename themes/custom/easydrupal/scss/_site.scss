@@ -274,45 +274,6 @@ blockquote {
   color: $blockquoteTextColor;
 }
 
-.date {
-  position: relative;
-  background-color: $dateArticleBgColor;
-  font-family: Arial, Helvetica, sans-serif;
-  color: $dateArticleTextColor;
-  margin-right: 16px;
-  padding: 5px;
-  text-align: center;
-  text-transform: uppercase;
-  float: left;
-
-  span.day {
-    display: block;
-    font-size: 18px;
-    line-height: 18px;
-    font-weight: bold;
-  }
-
-  span.year {
-    display: block;
-    font-size: 10px;
-    line-height: 10px;
-  }
-
-  &:after {
-    left: 100%;
-    top: 50%;
-    border: solid transparent;
-    content: " ";
-    height: 0;
-    width: 0;
-    position: absolute;
-    pointer-events: none;
-    border-left-color: $dateArticleBgColor;
-    border-width: 8px;
-    margin-top: -8px;
-  }
-}
-
 .contact-message-form {
   .form-control {
     border: solid 1px $formFieldBorderColor;
@@ -350,7 +311,7 @@ blockquote {
   }
 }
 
-/* uncss:ignore */
+/* uncss:ignore start */
 .user-login-page {
   h1 {
     display: none;
@@ -361,8 +322,9 @@ blockquote {
     margin: 0 auto;
   }
 }
+/* uncss:ignore end */
 
-/* uncss:ignore */
+/* uncss:ignore start */
 .user-login-form {
   max-width: 330px;
   padding: 15px;
@@ -377,6 +339,7 @@ blockquote {
     margin-right: 0;
   }
 }
+/* uncss:ignore end */
 
 .field--label {
   color: $labelColor;
@@ -385,49 +348,4 @@ blockquote {
 /* uncss:ignore */
 .tabs--primary {
   margin-bottom: 2rem;
-}
-
-/* uncss:ignore */
-.addtoany_list {
-  background-color: $body-bg;
-  border-radius: 6px;
-  display: flex;
-  justify-content: center;
-  margin-bottom: 15px;
-  @media (min-width: 1200px) {
-    display: block;
-    position: fixed;
-    z-index: 9999995;
-    right: 3px;
-    top: 30%;
-    bottom: auto;
-    .a2a_counter {
-      .a2a_svg {
-        display: block;
-        margin: 0 auto 2px auto;
-      }
-    }
-    .a2a_count {
-      display: block;
-      margin: 0 auto;
-    }
-    > a {
-      text-align: center;
-      display: block;
-    }
-  }
-
-  > a {
-    overflow: hidden;
-    padding: 4px;
-    text-decoration: none;
-  }
-}
-
-/* uncss:ignore */
-.a2a_svg,
-.a2a_count,
-.a2a_menu,
-.a2a_menu_find_container {
-  border-radius: 0 !important;
 }
