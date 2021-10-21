@@ -1,0 +1,37 @@
+# This migration links the newly created media entities with entity reference field on the target bundle.
+
+id: med_article_files_step2
+label: Article Files Mapping
+migration_group: media
+source:
+  plugin: content_entity:node
+  bundle: article
+  include_translations: false
+
+destination:
+  plugin: entity:node
+
+process:
+  nid: nid
+
+  type:
+    plugin: default_value
+    default_value: article
+    
+  field_attachment_media:
+    plugin: file_id_lookup
+    source: field_attachment
+    migration: med_article_files_step1
+    no_stub: true
+
+
+migration_dependencies:
+  optional:
+  - med_article_files_step1
+
+dependencies:
+  module:
+    - med
+  enforced:
+    module:
+      - med
