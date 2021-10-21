@@ -1,0 +1,14 @@
+uuid: e9e8578d-36cc-40b1-8b92-206a069dd403
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.media_categories
+id: taxonomy_vocabulary_media_categories
+entity_type_id: taxonomy_vocabulary
+entity_id: media_categories
+action: page_not_found
+allow_override: 0
+redirect: ''
+redirect_code: 301
+redirect_fallback_action: access_denied

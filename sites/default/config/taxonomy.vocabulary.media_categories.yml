@@ -1,0 +1,8 @@
+uuid: 6012cdf5-780e-4704-9688-aa5793247847
+langcode: en
+status: true
+dependencies: {  }
+name: 'Media Categories'
+vid: media_categories
+description: ''
+weight: 0

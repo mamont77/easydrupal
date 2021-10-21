@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.media.image.field_media_categories
     - field.field.media.image.field_media_image
     - image.style.large
     - media.type.image
@@ -22,10 +23,11 @@ content:
       image_link: ''
     third_party_settings: {  }
     type: image
-    weight: 1
+    weight: 0
     region: content
 hidden:
   created: true
+  field_media_categories: true
   name: true
   thumbnail: true
   uid: true
