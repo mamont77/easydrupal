@@ -79,6 +79,7 @@ return array(
     'Drush\\Internal\\' => array($vendorDir . '/drush/drush/src/internal-forks'),
     'Drush\\' => array($vendorDir . '/drush/drush/src'),
     'Drupal\\sophron\\' => array($baseDir . '/modules/contrib/sophron/src'),
+    'Drupal\\redis\\' => array($baseDir . '/modules/contrib/redis/src'),
     'Drupal\\Driver\\' => array($baseDir . '/drivers/lib/Drupal/Driver'),
     'Drupal\\Core\\' => array($baseDir . '/core/lib/Drupal/Core'),
     'Drupal\\Composer\\Plugin\\Scaffold\\' => array($vendorDir . '/drupal/core-composer-scaffold'),

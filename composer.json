@@ -68,6 +68,7 @@
         "drupal/rabbit_hole": "^1.0@beta",
         "drupal/recaptcha": "^3.0",
         "drupal/redirect": "^1.2",
+        "drupal/redis": "^1.5",
         "drupal/schema_metatag": "^2.2",
         "drupal/seckit": "^2.0",
         "drupal/simple_sitemap": "^3.11",

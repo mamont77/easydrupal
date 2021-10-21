@@ -2,8 +2,8 @@
 
 namespace FileEye\MimeMap\Test;
 
-// PHPUnit compatibility trait for PHPUnit 5.
-trait Phpunit5CompatibilityTrait
+// PHPUnit compatibility trait for PHPUnit 4.
+trait Phpunit4CompatibilityTrait
 {
     /**
      * Checks if the trait is used in a class that has a method.
