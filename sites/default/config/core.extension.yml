@@ -60,7 +60,9 @@ module:
   libraries: 0
   link: 0
   linkit: 0
+  med: 0
   media: 0
+  media_library: 0
   menu_trail_by_path: 0
   menu_ui: 0
   metatag: 0
@@ -69,6 +71,11 @@ module:
   metatag_twitter_cards: 0
   metatag_verification: 0
   metatag_views: 0
+  migrate: 0
+  migrate_drupal: 0
+  migrate_file_to_media: 0
+  migrate_plus: 0
+  migrate_tools: 0
   node: 0
   options: 0
   page_cache: 0

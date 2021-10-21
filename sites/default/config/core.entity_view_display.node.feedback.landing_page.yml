@@ -8,6 +8,7 @@ dependencies:
     - field.field.node.feedback.field_country_v2
     - field.field.node.feedback.field_date
     - field.field.node.feedback.field_image
+    - field.field.node.feedback.field_image_media
     - field.field.node.feedback.field_meta_tags
     - field.field.node.feedback.field_name
     - field.field.node.feedback.field_position
@@ -297,5 +298,6 @@ content:
     type: entity_reference_label
     region: ds_content
 hidden:
+  field_image_media: true
   field_meta_tags: true
   links: true

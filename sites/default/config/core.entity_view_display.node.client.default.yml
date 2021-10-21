@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.client.field_image
+    - field.field.node.client.field_image_media
     - field.field.node.client.field_meta_tags
     - node.type.client
     - responsive_image.styles.project_logo
@@ -47,3 +48,4 @@ content:
     third_party_settings: {  }
 hidden:
   addtoany: true
+  field_image_media: true

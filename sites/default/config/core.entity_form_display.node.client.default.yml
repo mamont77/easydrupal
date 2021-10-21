@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.client.field_image
+    - field.field.node.client.field_image_media
     - field.field.node.client.field_meta_tags
     - image.style.thumbnail
     - node.type.client
@@ -29,6 +30,16 @@ content:
       preview_image_style: thumbnail
     third_party_settings: {  }
     type: image_image
+    region: content
+  field_image_media:
+    type: entity_reference_autocomplete
+    weight: 51
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
     region: content
   field_meta_tags:
     weight: 26
