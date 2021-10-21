@@ -1,0 +1,10 @@
+uuid: bd64ead4-084f-4284-ad7d-64d4e98a7484
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+id: media.ckeditor_don_t_resize
+label: 'CKEditor - Don''t Resize'
+targetEntityType: media
+cache: true

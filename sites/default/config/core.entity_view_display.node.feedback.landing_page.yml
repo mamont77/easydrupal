@@ -27,11 +27,11 @@ third_party_settings:
   ds:
     layout:
       id: ds_reset
-      path: modules/ds
-      library: ''
+      library: null
       disable_css: false
       entity_classes: no_classes
       settings:
+        label: ''
         wrappers:
           ds_content: div
         outer_wrapper: div
@@ -44,19 +44,20 @@ third_party_settings:
     regions:
       ds_content:
         - field_image
+        - field_image_media
         - node_title
-        - group_about_client
         - field_name
+        - group_about_client
         - field_position
-        - group_project_info
         - field_date
+        - group_project_info
+        - body
         - field_project_title
         - field_country_v2
-        - body
     fields:
       node_title:
         plugin_id: node_title
-        weight: 0
+        weight: 2
         label: hidden
         formatter: default
         settings:
@@ -76,11 +77,10 @@ third_party_settings:
         - field_position
         - field_country_v2
       parent_name: ''
-      weight: 1
+      weight: 3
       label: 'About Client'
       format_type: html_element
       format_settings:
-        label: 'About Client'
         element: div
         show_label: false
         label_element: h3
@@ -89,17 +89,16 @@ third_party_settings:
         speed: fast
         id: ''
         classes: about-person
-      region: content
+      region: ds_content
     group_project_info:
       children:
         - field_date
         - field_project_title
       parent_name: ''
-      weight: 3
+      weight: 4
       label: 'Project Info'
       format_type: html_element
       format_settings:
-        label: 'Project Info'
         id: ''
         classes: project-info
         element: div
@@ -108,7 +107,7 @@ third_party_settings:
         attributes: ''
         effect: none
         speed: fast
-      region: content
+      region: ds_content
 id: node.feedback.landing_page
 targetEntityType: node
 bundle: feedback
@@ -116,7 +115,7 @@ mode: landing_page
 content:
   body:
     type: text_default
-    weight: 6
+    weight: 5
     label: hidden
     settings: {  }
     third_party_settings:
@@ -209,6 +208,15 @@ content:
             lb-col: false
             classes: {  }
     region: ds_content
+  field_image_media:
+    type: entity_reference_entity_view
+    weight: 1
+    region: ds_content
+    label: hidden
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
   field_name:
     weight: 2
     label: hidden
@@ -298,6 +306,5 @@ content:
     type: entity_reference_label
     region: ds_content
 hidden:
-  field_image_media: true
   field_meta_tags: true
   links: true

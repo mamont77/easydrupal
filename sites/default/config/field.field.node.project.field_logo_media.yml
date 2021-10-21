@@ -1,0 +1,24 @@
+uuid: bbe19b09-1b65-46c2-ac46-0e1e5ff2a727
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_logo_media
+    - media.type.image
+    - node.type.project
+id: node.project.field_logo_media
+field_name: field_logo_media
+entity_type: node
+bundle: project
+label: 'Logo Media'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+field_type: entity_reference

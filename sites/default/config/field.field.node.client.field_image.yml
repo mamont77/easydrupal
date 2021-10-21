@@ -30,7 +30,7 @@ id: node.client.field_image
 field_name: field_image
 entity_type: node
 bundle: client
-label: Logo
+label: 'Logo [DEPRECATED]'
 description: ''
 required: true
 translatable: true

@@ -1,0 +1,10 @@
+uuid: b7918711-9665-437b-9f35-00359b9bf16e
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+id: media.ckeditor_third_width
+label: 'CKEditor - Third Width'
+targetEntityType: media
+cache: true

@@ -39,7 +39,7 @@ content:
     region: content
   field_image:
     type: responsive_image
-    weight: 1
+    weight: 0
     label: hidden
     settings:
       responsive_image_style: project_summary
@@ -53,9 +53,17 @@ content:
             lb-col: false
             classes: {  }
     region: content
+  field_image_media:
+    type: entity_reference_entity_view
+    weight: 1
+    region: content
+    label: hidden
+    settings:
+      link: true
+      view_mode: default
+    third_party_settings: {  }
 hidden:
   field_date: true
-  field_image_media: true
   field_landing_page_backgro_media: true
   field_landing_page_background: true
   field_logo: true

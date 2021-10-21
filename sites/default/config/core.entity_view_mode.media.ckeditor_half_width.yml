@@ -1,0 +1,10 @@
+uuid: 78646169-d85c-4ca6-bd6b-26e9557c1b97
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+id: media.ckeditor_half_width
+label: 'CKEditor - Half Width'
+targetEntityType: media
+cache: true

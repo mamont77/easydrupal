@@ -73,8 +73,11 @@ third_party_settings:
             add_region_classes: 1
             attributes: ''
     regions:
+      top:
+        - field_meta_tags
       left:
         - field_logo
+        - field_logo_media
       right:
         - field_date
         - body
@@ -82,8 +85,7 @@ third_party_settings:
         - field_project_url
       bottom:
         - field_project_images
-      top:
-        - field_meta_tags
+        - field_project_images_media
 id: node.project.default
 targetEntityType: node
 bundle: project
@@ -92,7 +94,7 @@ content:
   body:
     label: hidden
     type: text_default
-    weight: 3
+    weight: 4
     settings: {  }
     third_party_settings:
       ds:
@@ -104,7 +106,7 @@ content:
             classes: {  }
     region: right
   field_date:
-    weight: 2
+    weight: 3
     label: hidden
     settings:
       timezone_override: ''
@@ -113,7 +115,7 @@ content:
     type: datetime_default
     region: right
   field_logo:
-    weight: 0
+    weight: 1
     label: hidden
     settings:
       responsive_image_style: project_logo
@@ -128,15 +130,24 @@ content:
             classes: {  }
     type: responsive_image
     region: left
+  field_logo_media:
+    type: entity_reference_entity_view
+    weight: 2
+    region: left
+    label: hidden
+    settings:
+      view_mode: ''
+      link: false
+    third_party_settings: {  }
   field_meta_tags:
-    weight: 7
+    weight: 0
     label: above
     settings: {  }
     third_party_settings: {  }
     type: metatag_empty_formatter
     region: top
   field_project_images:
-    weight: 6
+    weight: 7
     label: hidden
     settings:
       style: ''
@@ -187,6 +198,7 @@ content:
       breakpoints: {  }
       sizes: ''
       grid_header: ''
+      use_theme_field: false
     third_party_settings:
       ds:
         ds_limit: ''
@@ -198,8 +210,81 @@ content:
             classes: {  }
     type: slick_image
     region: bottom
+  field_project_images_media:
+    type: slick_media
+    weight: 8
+    region: bottom
+    label: hidden
+    settings:
+      style: ''
+      optionset: default
+      optionset_thumbnail: ''
+      skin: ''
+      skin_thumbnail: ''
+      image_style: project_slider_default
+      responsive_image_style: project_slider
+      thumbnail_effect: ''
+      thumbnail_position: ''
+      media_switch: ''
+      thumbnail_style: ''
+      ratio: ''
+      view_mode: default
+      grid: ''
+      grid_medium: ''
+      grid_small: ''
+      visible_items: null
+      image: ''
+      title: ''
+      link: ''
+      layout: ''
+      class: ''
+      cache: 0
+      current_view_mode: default
+      vanilla: false
+      background: false
+      caption:
+        field_media_categories: '0'
+        title: '0'
+        alt: '0'
+      preserve_keys: false
+      use_theme_field: false
+      override: false
+      overridables:
+        arrows: '0'
+        autoplay: '0'
+        dots: '0'
+        draggable: '0'
+        infinite: '0'
+        mouseWheel: '0'
+        randomize: '0'
+        variableWidth: '0'
+      thumbnail: ''
+      thumbnail_caption: ''
+      skin_arrows: ''
+      skin_dots: ''
+      fx: ''
+      icon: ''
+      box_caption: ''
+      box_caption_custom: ''
+      box_media_style: ''
+      box_style: ''
+      _uri: ''
+      breakpoints: {  }
+      sizes: ''
+      grid_header: ''
+      id: ''
+      overlay: ''
+    third_party_settings:
+      ds:
+        ds_limit: ''
+        ft:
+          id: minimal
+          settings:
+            lb: ''
+            lb-col: false
+            classes: {  }
   field_project_url:
-    weight: 5
+    weight: 6
     label: hidden
     settings:
       trim_length: 80
@@ -218,7 +303,7 @@ content:
     type: link
     region: right
   field_skills:
-    weight: 4
+    weight: 5
     label: inline
     settings:
       link_to_entity: false
@@ -260,6 +345,4 @@ hidden:
   field_image_media: true
   field_landing_page_backgro_media: true
   field_landing_page_background: true
-  field_logo_media: true
-  field_project_images_media: true
   links: true

@@ -1,0 +1,10 @@
+uuid: 2748274b-8351-43b4-9e4e-a46fc57f7693
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+id: media.ck
+label: 'CKEditor - Full Width'
+targetEntityType: media
+cache: true

@@ -18,7 +18,7 @@ third_party_settings:
         pathauto: false
         transliterate: false
     redirect: false
-    retroactive_update: true
+    retroactive_update: false
     active_updating: false
     file_name:
       value: '[file:ffp-name-only-original].[file:ffp-extension-original]'
@@ -30,7 +30,7 @@ id: node.feedback.field_image
 field_name: field_image
 entity_type: node
 bundle: feedback
-label: Portrait
+label: 'Portrait [DEPRECATED]'
 description: ''
 required: false
 translatable: false

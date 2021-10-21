@@ -18,7 +18,7 @@ third_party_settings:
         pathauto: false
         transliterate: false
     redirect: false
-    retroactive_update: true
+    retroactive_update: false
     active_updating: false
     file_name:
       value: '[file:ffp-name-only-original].[file:ffp-extension-original]'
@@ -30,7 +30,7 @@ id: node.article.field_attachment
 field_name: field_attachment
 entity_type: node
 bundle: article
-label: Attachments
+label: 'Attachments [DEPRECATED]'
 description: ''
 required: false
 translatable: false

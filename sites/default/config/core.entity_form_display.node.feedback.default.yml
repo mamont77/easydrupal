@@ -18,6 +18,7 @@ dependencies:
     - country
     - datetime
     - image_widget_crop
+    - media_library
     - metatag
     - path
     - text
@@ -38,12 +39,12 @@ content:
     region: content
   created:
     type: datetime_timestamp
-    weight: 11
+    weight: 10
     settings: {  }
     third_party_settings: {  }
     region: content
   field_country_v2:
-    weight: 5
+    weight: 4
     settings:
       size: '60'
       autocomplete_route_name: country.autocomplete
@@ -58,7 +59,7 @@ content:
     type: datetime_default
     region: content
   field_image:
-    weight: 6
+    weight: 5
     settings:
       show_default_crop: true
       warn_multiple_usages: true
@@ -68,22 +69,21 @@ content:
         - feedback_portrait
       progress_indicator: throbber
       show_crop_area: false
+      crop_types_required: {  }
     third_party_settings: {  }
     type: image_widget_crop
     region: content
   field_image_media:
-    type: entity_reference_autocomplete
-    weight: 123
+    type: media_library_widget
+    weight: 6
     settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+      media_types: {  }
     third_party_settings: {  }
     region: content
   field_meta_tags:
-    weight: 122
-    settings: {  }
+    weight: 16
+    settings:
+      sidebar: true
     third_party_settings: {  }
     type: metatag_firehose
     region: content
@@ -115,7 +115,7 @@ content:
     region: content
   path:
     type: path
-    weight: 14
+    weight: 13
     settings: {  }
     third_party_settings: {  }
     region: content
@@ -123,21 +123,21 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 12
+    weight: 11
     third_party_settings: {  }
     region: content
   status:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 121
+    weight: 15
     third_party_settings: {  }
     region: content
   sticky:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 13
+    weight: 12
     third_party_settings: {  }
     region: content
   title:
@@ -150,7 +150,7 @@ content:
     region: content
   uid:
     type: entity_reference_autocomplete
-    weight: 10
+    weight: 9
     settings:
       match_operator: CONTAINS
       size: 60
@@ -159,8 +159,8 @@ content:
     third_party_settings: {  }
     region: content
   url_redirects:
-    weight: 50
+    weight: 14
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
 hidden: {  }

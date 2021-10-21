@@ -33,18 +33,18 @@ third_party_settings:
   ds:
     layout:
       id: bs_2col_stacked
-      path: modules/bootstrap_layouts
-      library: ''
+      library: null
       disable_css: false
       entity_classes: no_classes
       settings:
+        label: ''
         layout:
           wrapper: div
           classes:
             clearfix: clearfix
             row: row
-          attributes: ''
           add_layout_class: 1
+          attributes: ''
         regions:
           top:
             wrapper: div
@@ -75,6 +75,7 @@ third_party_settings:
     regions:
       left:
         - field_logo
+        - field_logo_media
       right:
         - field_date
         - body
@@ -82,6 +83,7 @@ third_party_settings:
         - field_project_url
       bottom:
         - field_project_images
+        - field_project_images_media
 id: node.project.project_full_content
 targetEntityType: node
 bundle: project
@@ -126,8 +128,17 @@ content:
             lb-col: false
             classes: {  }
     region: left
+  field_logo_media:
+    type: entity_reference_entity_view
+    weight: 1
+    region: left
+    label: hidden
+    settings:
+      view_mode: ''
+      link: false
+    third_party_settings: {  }
   field_project_images:
-    weight: 8
+    weight: 6
     label: hidden
     settings:
       style: ''
@@ -190,13 +201,15 @@ content:
         variableWidth: '0'
       skin_arrows: ''
       skin_dots: ''
-      iframe_lazy: true
       icon: ''
       view_mode: ''
       box_caption: ''
       box_caption_custom: ''
       box_style: ''
       box_media_style: ''
+      use_theme_field: false
+      fx: ''
+      _uri: ''
     third_party_settings:
       ds:
         ds_limit: ''
@@ -208,6 +221,79 @@ content:
             classes: {  }
     type: slick_image
     region: bottom
+  field_project_images_media:
+    type: slick_media
+    weight: 7
+    region: bottom
+    label: hidden
+    settings:
+      style: ''
+      optionset: default
+      optionset_thumbnail: ''
+      skin: ''
+      skin_thumbnail: ''
+      image_style: project_slider_default
+      responsive_image_style: project_slider
+      thumbnail_effect: ''
+      thumbnail_position: ''
+      media_switch: ''
+      thumbnail_style: ''
+      ratio: ''
+      view_mode: default
+      grid: ''
+      grid_medium: ''
+      grid_small: ''
+      visible_items: null
+      image: ''
+      title: ''
+      link: ''
+      layout: ''
+      class: ''
+      cache: 0
+      current_view_mode: project_full_content
+      vanilla: false
+      background: false
+      caption:
+        field_media_categories: '0'
+        title: '0'
+        alt: '0'
+      preserve_keys: false
+      use_theme_field: false
+      override: false
+      overridables:
+        arrows: '0'
+        autoplay: '0'
+        dots: '0'
+        draggable: '0'
+        infinite: '0'
+        mouseWheel: '0'
+        randomize: '0'
+        variableWidth: '0'
+      thumbnail: ''
+      thumbnail_caption: ''
+      skin_arrows: ''
+      skin_dots: ''
+      fx: ''
+      icon: ''
+      box_caption: ''
+      box_caption_custom: ''
+      box_media_style: ''
+      box_style: ''
+      _uri: ''
+      breakpoints: {  }
+      sizes: ''
+      grid_header: ''
+      id: ''
+      overlay: ''
+    third_party_settings:
+      ds:
+        ds_limit: ''
+        ft:
+          id: minimal
+          settings:
+            lb: ''
+            lb-col: false
+            classes: {  }
   field_project_url:
     weight: 5
     label: hidden
@@ -269,7 +355,5 @@ hidden:
   field_image_media: true
   field_landing_page_backgro_media: true
   field_landing_page_background: true
-  field_logo_media: true
   field_meta_tags: true
-  field_project_images_media: true
   links: true
