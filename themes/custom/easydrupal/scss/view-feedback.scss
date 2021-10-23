@@ -47,6 +47,8 @@
 
   .field-name-field-image-media {
     img {
+      width: 150px;
+      height: 150px;
       border-radius: 50%;
       border: 8px solid $imageBorderColor;
       margin: 0 auto 15px auto;

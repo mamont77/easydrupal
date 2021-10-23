@@ -13,14 +13,12 @@ dependencies:
     - field.field.node.feedback.field_name
     - field.field.node.feedback.field_position
     - field.field.node.feedback.field_project_title
-    - image.style.feedback_portrait
     - node.type.feedback
   module:
     - country
     - datetime
     - ds
     - field_group
-    - image
     - text
     - user
 third_party_settings:
@@ -43,21 +41,20 @@ third_party_settings:
           ds_content: {  }
     regions:
       ds_content:
-        - field_image
         - field_image_media
         - field_name
         - node_title
-        - field_position
         - group_about_client
-        - field_country_v2
+        - field_position
         - group_project_info
-        - field_date
         - body
+        - field_country_v2
+        - field_date
         - field_project_title
     fields:
       node_title:
         plugin_id: node_title
-        weight: 2
+        weight: 1
         label: hidden
         formatter: default
         settings:
@@ -77,7 +74,7 @@ third_party_settings:
         - field_position
         - field_country_v2
       parent_name: ''
-      weight: 3
+      weight: 2
       label: 'About Client'
       format_type: html_element
       format_settings:
@@ -95,7 +92,7 @@ third_party_settings:
         - field_date
         - field_project_title
       parent_name: ''
-      weight: 4
+      weight: 3
       label: 'Project Info'
       format_type: html_element
       format_settings:
@@ -115,7 +112,7 @@ mode: teaser
 content:
   body:
     type: text_default
-    weight: 5
+    weight: 4
     label: hidden
     settings: {  }
     third_party_settings:
@@ -199,13 +196,14 @@ content:
             lb-col: false
             classes: {  }
     region: ds_content
-  field_image:
-    type: image
+  field_image_media:
+    type: entity_reference_entity_view
     weight: 0
+    region: ds_content
     label: hidden
     settings:
-      image_style: feedback_portrait
-      image_link: ''
+      view_mode: feedback_portrait
+      link: false
     third_party_settings:
       ds:
         ft:
@@ -214,16 +212,6 @@ content:
             lb: ''
             lb-col: false
             classes: {  }
-    region: ds_content
-  field_image_media:
-    type: entity_reference_entity_view
-    weight: 1
-    region: ds_content
-    label: hidden
-    settings:
-      view_mode: default
-      link: false
-    third_party_settings: {  }
   field_name:
     type: string
     weight: 1
@@ -313,5 +301,6 @@ content:
             classes: {  }
     region: ds_content
 hidden:
+  field_image: true
   field_meta_tags: true
   links: true

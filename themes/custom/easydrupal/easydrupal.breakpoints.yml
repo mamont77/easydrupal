@@ -1,3 +1,9 @@
+easydrupal.min-width-1px:
+  label: screen-sm-min
+  mediaQuery: 'all and (min-width: 1px)'
+  weight: 1
+  multipliers:
+    - 1x
 easydrupal.screen-xs-max:
   label: screen-xs-max
   mediaQuery: 'all and (max-width: 767px)'

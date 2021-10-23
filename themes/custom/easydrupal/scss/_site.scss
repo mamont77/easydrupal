@@ -354,7 +354,19 @@ blockquote {
   color: $labelColor;
 }
 
-/* uncss:ignore */
+/* uncss:ignore start */
 .tabs--primary {
   margin-bottom: 2rem;
 }
+/* uncss:ignore end */
+
+/* uncss:ignore start */
+.media--loading,
+.is-b-loading {
+  &:not([data-animation]) {
+    &:before {
+      background: $btn-primary-bg !important;
+    }
+  }
+}
+/* uncss:ignore end */

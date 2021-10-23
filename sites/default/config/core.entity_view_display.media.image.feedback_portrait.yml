@@ -1,43 +1,47 @@
-uuid: cb1cc502-c738-4bcb-b9ba-cac7c89c0e97
+uuid: 5c4a3014-5814-47f5-9ce1-bb1b81e39306
 langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_view_mode.media.feedback_portrait
     - field.field.media.image.field_media_categories
     - field.field.media.image.field_media_image
-    - image.style.large
     - media.type.image
+    - responsive_image.styles.feedback_portrait
   module:
     - blazy
+    - ds
 _core:
   default_config_hash: B1a2aBHmUulUZN6HrxITEH1tSResuVjXMBEv1lUBtOo
-id: media.image.default
+id: media.image.feedback_portrait
 targetEntityType: media
 bundle: image
-mode: default
+mode: feedback_portrait
 content:
   field_media_image:
     label: visually_hidden
     settings:
-      image_style: large
+      image_style: ''
+      responsive_image_style: feedback_portrait
+      media_switch: ''
+      thumbnail_style: ''
+      ratio: ''
+      current_view_mode: feedback_portrait
+      background: false
+      caption:
+        title: '0'
+        alt: '0'
       icon: ''
       layout: ''
       view_mode: ''
       cache: 0
-      current_view_mode: ''
       skin: ''
       fx: ''
       style: ''
-      background: false
       box_caption: ''
       box_caption_custom: ''
       box_media_style: ''
-      caption: {  }
-      responsive_image_style: ''
       box_style: ''
-      media_switch: ''
-      ratio: ''
-      thumbnail_style: ''
       _uri: ''
       breakpoints: {  }
       sizes: ''
@@ -45,7 +49,14 @@ content:
       grid: ''
       grid_medium: ''
       grid_small: ''
-    third_party_settings: {  }
+    third_party_settings:
+      ds:
+        ft:
+          id: minimal
+          settings:
+            lb: ''
+            lb-col: false
+            classes: {  }
     type: blazy
     weight: 0
     region: content

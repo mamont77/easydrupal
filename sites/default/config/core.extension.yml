@@ -11,6 +11,7 @@ module:
   backup_migrate: 0
   big_pipe: 0
   blazy: 0
+  blazy_ui: 0
   block: 0
   block_content: 0
   bootstrap_layouts: 0

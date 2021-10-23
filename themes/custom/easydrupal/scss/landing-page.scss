@@ -329,6 +329,8 @@ $input-font-style-placeholder: italic;
 
     .field-name-field-image-media {
       img {
+        width: 150px;
+        height: 150px;
         margin: 0 auto 15px auto;
         border-radius: 50%;
         border: 8px solid #eee;

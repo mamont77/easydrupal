@@ -1,9 +1,22 @@
 admin_css: true
-responsive_image: false
+responsive_image: true
 one_pixel: true
 blazy:
-  loadInvisible: false
+  loadInvisible: true
   offset: 100
   saveViewportOffsetDelay: 50
+  validateDelay: 25
+  container: ''
 _core:
   default_config_hash: qSffC70ODbv0BehNMS_7K1sO34OogvBsnphKkBeV5W8
+decode: true
+fx: ''
+noscript: false
+placeholder: /themes/custom/easydrupal/images/blank.svg
+unstyled_extensions: ''
+io:
+  enabled: true
+  unblazy: false
+  rootMargin: 0px
+  threshold: '0'
+  disconnect: false

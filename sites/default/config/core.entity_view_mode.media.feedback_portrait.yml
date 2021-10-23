@@ -1,0 +1,10 @@
+uuid: d4f93bbc-9223-4e7c-9bf6-84c7ef562e44
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+id: media.feedback_portrait
+label: 'FeedBack Portrait'
+targetEntityType: media
+cache: true

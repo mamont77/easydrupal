@@ -10,11 +10,12 @@ dependencies:
     - field.storage.user.field_last_name
     - field.storage.user.user_picture
     - image.style.max_150x150
+    - responsive_image.styles.feedback_portrait
     - user.role.anonymous
     - user.role.authenticated
   module:
+    - blazy
     - datetime
-    - image
     - text
     - user
 id: about_author
@@ -248,10 +249,18 @@ display:
           empty_zero: false
           hide_alter_empty: true
           click_sort_column: target_id
-          type: image
+          type: blazy
           settings:
+            background: false
+            caption:
+              title: '0'
+              alt: '0'
             image_style: max_150x150
-            image_link: ''
+            thumbnail_style: ''
+            responsive_image_style: feedback_portrait
+            media_switch: ''
+            ratio: ''
+            current_view_mode: _custom
           group_column: ''
           group_columns: {  }
           group_rows: true

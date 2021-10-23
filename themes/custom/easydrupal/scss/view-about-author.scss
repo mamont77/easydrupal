@@ -31,6 +31,8 @@
 
   .views-field-user-picture {
     img {
+      width: 150px;
+      height: 150px;
       margin: 0 auto;
       border-radius: 50%;
       border: 8px solid $imageBorderColor;
