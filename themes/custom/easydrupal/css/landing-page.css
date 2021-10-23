@@ -168,6 +168,10 @@
   background-color: #81a5bf;
 }
 
+.page-node-type-landingpage .clients .field-name-field-image-media {
+  text-align: center;
+}
+
 .page-node-type-landingpage .clients .field-name-field-image-media img {
   margin: 0 auto;
   width: auto;

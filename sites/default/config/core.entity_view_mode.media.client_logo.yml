@@ -1,0 +1,10 @@
+uuid: 85873a8d-d6a9-4bb4-b8be-d23b71422073
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+id: media.client_logo
+label: 'Client Logo'
+targetEntityType: media
+cache: true

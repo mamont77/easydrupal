@@ -1,0 +1,16 @@
+uuid: b1e4939e-649c-4f7a-9047-4e9468958040
+langcode: en
+status: true
+dependencies: {  }
+name: max_160x160
+label: 'Max 160x160'
+effects:
+  4eab1f6e-c31b-4475-91de-c34861358bdb:
+    uuid: 4eab1f6e-c31b-4475-91de-c34861358bdb
+    id: image_scale
+    weight: 1
+    data:
+      width: 160
+      height: 160
+      upscale: false
+pipeline: ''

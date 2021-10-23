@@ -1,0 +1,25 @@
+uuid: 66edf170-9485-4ac7-9e90-0e3d6cbd21fc
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.client
+    - image.style.max_160x160
+    - image.style.max_200x200
+  theme:
+    - easydrupal
+id: client_logo
+label: 'Client Logo'
+image_style_mappings:
+  -
+    breakpoint_id: easydrupal.screen-sm-min
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: client
+  -
+    breakpoint_id: easydrupal.min-width-1px
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: max_200x200
+breakpoint_group: easydrupal
+fallback_image_style: max_160x160

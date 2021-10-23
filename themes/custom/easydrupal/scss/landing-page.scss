@@ -240,6 +240,11 @@ $input-font-style-placeholder: italic;
     }
 
     .field-name-field-image-media {
+      text-align: center;
+      @media (min-width: 768px) {
+        //text-align: initial;
+      }
+
       img {
         margin: 0 auto;
         width: auto;
