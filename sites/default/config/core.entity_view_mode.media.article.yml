@@ -1,0 +1,10 @@
+uuid: ba2f1695-cb2b-4783-9158-10e40a012da9
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+id: media.article
+label: Article
+targetEntityType: media
+cache: true

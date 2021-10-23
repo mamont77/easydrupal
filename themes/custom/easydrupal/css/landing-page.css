@@ -133,7 +133,7 @@
   color: #293749;
 }
 
-.page-node-type-landingpage .projects .field-name-field-landing-page-background {
+.page-node-type-landingpage .projects .field-name-field-landing-page-backgro-media {
   border: 1px solid #81a5bf;
 }
 
@@ -320,7 +320,7 @@
 }
 
 @media screen and (min-width: 1140px) {
-  .page-node-type-landingpage .projects .field-name-field-landing-page-background {
+  .page-node-type-landingpage .projects .field-name-field-landing-page-backgro-media {
     background-image: url(../images/devices/cs-imac-frame-small.png);
     background-repeat: no-repeat;
     background-position: center top;

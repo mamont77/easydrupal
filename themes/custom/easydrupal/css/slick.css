@@ -1,4 +1,4 @@
-.slick--skin--default {
+.slick--field-project-images-media {
   background-image: url(../images/devices/cs-imac-frame.png);
   background-repeat: no-repeat;
   background-position: center top;
@@ -9,7 +9,7 @@
   overflow: hidden;
 }
 
-.slick--skin--default .slide__caption {
+.slick--field-project-images-media .slide__caption {
   position: relative;
   padding: 5px 0;
   opacity: .8;
@@ -63,14 +63,14 @@
 }
 
 @media (max-width: 992px) {
-  .slick--skin--default {
+  .slick--field-project-images-media {
     background: none transparent;
     padding: 0;
     width: 100%;
     height: auto;
     margin: 15px auto 5px auto;
   }
-  .slick--skin--default img {
+  .slick--field-project-images-media img {
     width: 100%;
     height: auto;
   }

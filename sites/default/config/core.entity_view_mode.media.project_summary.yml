@@ -1,0 +1,10 @@
+uuid: 45b466e8-fd73-4265-9520-7a6b7ff74c83
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+id: media.project_summary
+label: 'Project Summary'
+targetEntityType: media
+cache: true

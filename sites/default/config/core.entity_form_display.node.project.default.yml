@@ -16,11 +16,9 @@ dependencies:
     - field.field.node.project.field_project_images_media
     - field.field.node.project.field_project_url
     - field.field.node.project.field_skills
-    - image.style.project_slider_default
     - node.type.project
   module:
     - datetime
-    - image
     - link
     - media_library
     - metatag
@@ -33,7 +31,7 @@ mode: default
 content:
   body:
     type: text_textarea_with_summary
-    weight: 9
+    weight: 6
     settings:
       rows: 9
       summary_rows: 3
@@ -43,7 +41,7 @@ content:
     region: content
   created:
     type: datetime_timestamp
-    weight: 14
+    weight: 10
     settings: {  }
     third_party_settings: {  }
     region: content
@@ -53,69 +51,37 @@ content:
     third_party_settings: {  }
     type: datetime_default
     region: content
-  field_image:
-    weight: 5
-    settings:
-      preview_image_style: project_summary_default
-      progress_indicator: throbber
-    third_party_settings: {  }
-    type: image_image
-    region: content
   field_image_media:
-    type: media_library_widget
-    weight: 6
-    settings:
-      media_types: {  }
-    third_party_settings: {  }
-    region: content
-  field_landing_page_backgro_media:
-    type: media_library_widget
-    weight: 8
-    settings:
-      media_types: {  }
-    third_party_settings: {  }
-    region: content
-  field_landing_page_background:
-    weight: 7
-    settings:
-      preview_image_style: project_landing_page_default
-      progress_indicator: throbber
-    third_party_settings: {  }
-    type: image_image
-    region: content
-  field_logo:
-    weight: 3
-    settings:
-      preview_image_style: max_360x360
-      progress_indicator: throbber
-    third_party_settings: {  }
-    type: image_image
-    region: content
-  field_logo_media:
     type: media_library_widget
     weight: 4
     settings:
       media_types: {  }
     third_party_settings: {  }
     region: content
+  field_landing_page_backgro_media:
+    type: media_library_widget
+    weight: 5
+    settings:
+      media_types: {  }
+    third_party_settings: {  }
+    region: content
+  field_logo_media:
+    type: media_library_widget
+    weight: 3
+    settings:
+      media_types: {  }
+    third_party_settings: {  }
+    region: content
   field_meta_tags:
-    weight: 20
+    weight: 16
     settings:
       sidebar: true
     third_party_settings: {  }
     type: metatag_firehose
     region: content
-  field_project_images:
-    weight: 11
-    settings:
-      preview_image_style: project_slider_default
-      progress_indicator: throbber
-    third_party_settings: {  }
-    type: image_image
-    region: content
   field_project_images_media:
     type: media_library_widget
-    weight: 12
+    weight: 8
     settings:
       media_types: {  }
     third_party_settings: {  }
@@ -129,7 +95,7 @@ content:
     type: link_default
     region: content
   field_skills:
-    weight: 10
+    weight: 7
     settings:
       size: 60
       placeholder: ''
@@ -138,7 +104,7 @@ content:
     region: content
   path:
     type: path
-    weight: 17
+    weight: 13
     settings: {  }
     third_party_settings: {  }
     region: content
@@ -146,21 +112,21 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 15
+    weight: 11
     third_party_settings: {  }
     region: content
   status:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 19
+    weight: 15
     third_party_settings: {  }
     region: content
   sticky:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 16
+    weight: 12
     third_party_settings: {  }
     region: content
   title:
@@ -173,7 +139,7 @@ content:
     region: content
   uid:
     type: entity_reference_autocomplete
-    weight: 13
+    weight: 9
     settings:
       match_operator: CONTAINS
       size: 60
@@ -182,8 +148,12 @@ content:
     third_party_settings: {  }
     region: content
   url_redirects:
-    weight: 18
+    weight: 14
     region: content
     settings: {  }
     third_party_settings: {  }
-hidden: {  }
+hidden:
+  field_image: true
+  field_landing_page_background: true
+  field_logo: true
+  field_project_images: true

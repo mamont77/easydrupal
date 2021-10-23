@@ -1,0 +1,10 @@
+uuid: cabab2f8-93b2-4488-9e14-43b46c7a4c45
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+id: media.project_landing_page
+label: 'Project Landing Page'
+targetEntityType: media
+cache: true

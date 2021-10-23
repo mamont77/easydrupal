@@ -1,0 +1,10 @@
+uuid: fbbaefda-ec0f-4a0f-9219-87e9df1a5796
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+id: media.project_logo
+label: 'Project Logo'
+targetEntityType: media
+cache: true

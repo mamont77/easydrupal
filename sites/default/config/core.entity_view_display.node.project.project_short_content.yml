@@ -78,7 +78,6 @@ third_party_settings:
         - field_skills
         - field_project_url
       bottom:
-        - field_project_images
         - field_project_images_media
 id: node.project.project_short_content
 targetEntityType: node
@@ -108,93 +107,9 @@ content:
     third_party_settings: {  }
     type: datetime_default
     region: right
-  field_project_images:
-    weight: 4
-    label: hidden
-    settings:
-      style: ''
-      optionset: default
-      optionset_thumbnail: ''
-      skin: default
-      skin_thumbnail: ''
-      image_style: project_slider_default
-      thumbnail_style: ''
-      responsive_image_style: project_slider
-      thumbnail_effect: ''
-      thumbnail_position: ''
-      media_switch: ''
-      ratio: ''
-      grid: null
-      grid_medium: null
-      grid_small: null
-      visible_items: null
-      layout: ''
-      thumbnail_caption: ''
-      caption:
-        alt: alt
-        title: '0'
-      cache: 0
-      sizes: ''
-      breakpoints:
-        xs:
-          image_style: ''
-          width: ''
-          breakpoint: ''
-        sm:
-          image_style: ''
-          width: ''
-          breakpoint: ''
-        md:
-          image_style: ''
-          width: ''
-          breakpoint: ''
-        lg:
-          image_style: ''
-          width: ''
-          breakpoint: ''
-        xl:
-          image_style: ''
-          width: ''
-          breakpoint: ''
-      current_view_mode: project_short_content
-      background: false
-      grid_header: ''
-      preserve_keys: false
-      override: false
-      overridables:
-        arrows: '0'
-        autoplay: '0'
-        dots: '0'
-        draggable: '0'
-        infinite: '0'
-        mouseWheel: '0'
-        randomize: '0'
-        variableWidth: '0'
-      skin_arrows: ''
-      skin_dots: ''
-      icon: ''
-      view_mode: ''
-      box_caption: ''
-      box_caption_custom: ''
-      box_style: ''
-      box_media_style: ''
-      use_theme_field: false
-      fx: ''
-      _uri: ''
-    third_party_settings:
-      ds:
-        ds_limit: ''
-        ft:
-          id: minimal
-          settings:
-            lb: ''
-            lb-col: false
-            classes: {  }
-    type: slick_image
-    region: bottom
   field_project_images_media:
     type: slick_media
-    weight: 5
+    weight: 4
     region: bottom
     label: hidden
     settings:
@@ -220,14 +135,14 @@ content:
       link: ''
       layout: ''
       class: ''
+      caption:
+        alt: alt
+        field_media_categories: '0'
+        title: '0'
       cache: 0
       current_view_mode: project_short_content
       vanilla: false
       background: false
-      caption:
-        field_media_categories: '0'
-        title: '0'
-        alt: '0'
       preserve_keys: false
       use_theme_field: false
       override: false
@@ -329,4 +244,5 @@ hidden:
   field_logo: true
   field_logo_media: true
   field_meta_tags: true
+  field_project_images: true
   links: true

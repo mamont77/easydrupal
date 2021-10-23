@@ -19,13 +19,11 @@ dependencies:
     - field.field.node.project.field_skills
     - image.style.project_slider_default
     - node.type.project
-    - responsive_image.styles.project_logo
     - responsive_image.styles.project_slider
   module:
     - datetime
     - ds
     - link
-    - responsive_image
     - slick
     - text
     - user
@@ -74,7 +72,6 @@ third_party_settings:
             attributes: ''
     regions:
       left:
-        - field_logo
         - field_logo_media
       right:
         - field_date
@@ -82,7 +79,6 @@ third_party_settings:
         - field_skills
         - field_project_url
       bottom:
-        - field_project_images
         - field_project_images_media
 id: node.project.project_full_content
 targetEntityType: node
@@ -92,7 +88,7 @@ content:
   body:
     label: hidden
     type: text_default
-    weight: 3
+    weight: 2
     settings: {  }
     third_party_settings:
       ds:
@@ -104,7 +100,7 @@ content:
             classes: {  }
     region: right
   field_date:
-    weight: 2
+    weight: 1
     label: hidden
     settings:
       timezone_override: ''
@@ -112,104 +108,14 @@ content:
     third_party_settings: {  }
     type: datetime_default
     region: right
-  field_logo:
-    type: responsive_image
-    weight: 0
-    label: hidden
-    settings:
-      responsive_image_style: project_logo
-      image_link: ''
-    third_party_settings:
-      ds:
-        ft:
-          id: minimal
-          settings:
-            lb: ''
-            lb-col: false
-            classes: {  }
-    region: left
   field_logo_media:
     type: entity_reference_entity_view
-    weight: 1
+    weight: 0
     region: left
     label: hidden
     settings:
-      view_mode: ''
+      view_mode: project_logo
       link: false
-    third_party_settings: {  }
-  field_project_images:
-    weight: 6
-    label: hidden
-    settings:
-      style: ''
-      optionset: default
-      optionset_thumbnail: ''
-      skin: default
-      skin_thumbnail: ''
-      image_style: project_slider_default
-      thumbnail_style: ''
-      responsive_image_style: project_slider
-      thumbnail_effect: ''
-      thumbnail_position: ''
-      media_switch: ''
-      ratio: ''
-      grid: null
-      grid_medium: null
-      grid_small: null
-      visible_items: null
-      layout: ''
-      thumbnail_caption: ''
-      caption:
-        alt: alt
-        title: '0'
-      cache: 0
-      sizes: ''
-      breakpoints:
-        xs:
-          image_style: ''
-          width: ''
-          breakpoint: ''
-        sm:
-          image_style: ''
-          width: ''
-          breakpoint: ''
-        md:
-          image_style: ''
-          width: ''
-          breakpoint: ''
-        lg:
-          image_style: ''
-          width: ''
-          breakpoint: ''
-        xl:
-          image_style: ''
-          width: ''
-          breakpoint: ''
-      current_view_mode: project_full_content
-      background: false
-      grid_header: ''
-      preserve_keys: false
-      override: false
-      overridables:
-        arrows: '0'
-        autoplay: '0'
-        dots: '0'
-        draggable: '0'
-        infinite: '0'
-        mouseWheel: '0'
-        randomize: '0'
-        variableWidth: '0'
-      skin_arrows: ''
-      skin_dots: ''
-      icon: ''
-      view_mode: ''
-      box_caption: ''
-      box_caption_custom: ''
-      box_style: ''
-      box_media_style: ''
-      use_theme_field: false
-      fx: ''
-      _uri: ''
     third_party_settings:
       ds:
         ds_limit: ''
@@ -219,11 +125,9 @@ content:
             lb: ''
             lb-col: false
             classes: {  }
-    type: slick_image
-    region: bottom
   field_project_images_media:
     type: slick_media
-    weight: 7
+    weight: 5
     region: bottom
     label: hidden
     settings:
@@ -249,14 +153,14 @@ content:
       link: ''
       layout: ''
       class: ''
+      caption:
+        alt: alt
+        field_media_categories: '0'
+        title: '0'
       cache: 0
       current_view_mode: project_full_content
       vanilla: false
       background: false
-      caption:
-        field_media_categories: '0'
-        title: '0'
-        alt: '0'
       preserve_keys: false
       use_theme_field: false
       override: false
@@ -295,7 +199,7 @@ content:
             lb-col: false
             classes: {  }
   field_project_url:
-    weight: 5
+    weight: 4
     label: hidden
     settings:
       trim_length: 80
@@ -314,7 +218,7 @@ content:
     type: link
     region: right
   field_skills:
-    weight: 4
+    weight: 3
     label: inline
     settings:
       link_to_entity: false
@@ -355,5 +259,7 @@ hidden:
   field_image_media: true
   field_landing_page_backgro_media: true
   field_landing_page_background: true
+  field_logo: true
   field_meta_tags: true
+  field_project_images: true
   links: true
