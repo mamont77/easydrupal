@@ -10,7 +10,7 @@ id: node.article.field_attachment_media
 field_name: field_attachment_media
 entity_type: node
 bundle: article
-label: 'Attachments Media'
+label: Attachments
 description: ''
 required: false
 translatable: true
@@ -21,4 +21,9 @@ settings:
   handler_settings:
     target_bundles:
       document: document
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
 field_type: entity_reference

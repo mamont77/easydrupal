@@ -15,13 +15,10 @@ dependencies:
     - field.field.node.article.field_tags
     - field.field.node.article.field_version
     - field.field.node.article.field_yoast_seo
-    - image.style.thumbnail
     - node.type.article
   module:
     - disqus
     - field_group
-    - file
-    - image
     - media_library
     - metatag
     - paragraphs
@@ -35,7 +32,7 @@ third_party_settings:
         - field_tags
         - field_version
       parent_name: ''
-      weight: 8
+      weight: 6
       format_type: details_sidebar
       region: content
       format_settings:
@@ -56,7 +53,7 @@ mode: default
 content:
   body:
     type: text_textarea_with_summary
-    weight: 3
+    weight: 2
     settings:
       rows: 10
       placeholder: ''
@@ -66,55 +63,40 @@ content:
     region: content
   created:
     type: datetime_timestamp
-    weight: 10
+    weight: 8
     settings: {  }
     third_party_settings: {  }
     region: content
-  field_attachment:
-    weight: 6
-    settings:
-      progress_indicator: throbber
-    third_party_settings: {  }
-    type: file_generic
-    region: content
   field_attachment_media:
     type: media_library_widget
-    weight: 7
+    weight: 5
     settings:
       media_types: {  }
     third_party_settings: {  }
     region: content
   field_comments:
-    weight: 14
+    weight: 12
     settings: {  }
     third_party_settings: {  }
     type: disqus_comment
     region: content
   field_conclusions:
-    weight: 5
+    weight: 4
     settings:
       rows: 10
       placeholder: ''
     third_party_settings: {  }
     type: text_textarea
     region: content
-  field_image:
-    type: image_image
-    weight: 1
-    settings:
-      progress_indicator: throbber
-      preview_image_style: thumbnail
-    third_party_settings: {  }
-    region: content
   field_image_media:
     type: media_library_widget
-    weight: 2
+    weight: 1
     settings:
       media_types: {  }
     third_party_settings: {  }
     region: content
   field_meta_tags:
-    weight: 16
+    weight: 14
     settings:
       sidebar: true
     third_party_settings: {  }
@@ -122,7 +104,7 @@ content:
     region: content
   field_sourse_code_paragraph:
     type: entity_reference_paragraphs
-    weight: 4
+    weight: 3
     settings:
       title: Paragraph
       title_plural: Paragraphs
@@ -153,7 +135,7 @@ content:
     type: entity_reference_autocomplete_tags
     region: content
   field_yoast_seo:
-    weight: 17
+    weight: 15
     settings:
       edit_title: false
       edit_description: false
@@ -162,7 +144,7 @@ content:
     region: content
   path:
     type: path
-    weight: 13
+    weight: 11
     settings: {  }
     third_party_settings: {  }
     region: content
@@ -170,21 +152,21 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 11
+    weight: 9
     third_party_settings: {  }
     region: content
   status:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 15
+    weight: 13
     third_party_settings: {  }
     region: content
   sticky:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 12
+    weight: 10
     third_party_settings: {  }
     region: content
   title:
@@ -202,7 +184,7 @@ content:
     region: content
   uid:
     type: entity_reference_autocomplete
-    weight: 9
+    weight: 7
     settings:
       match_operator: CONTAINS
       size: 60
@@ -211,8 +193,10 @@ content:
     third_party_settings: {  }
     region: content
   url_redirects:
-    weight: 18
+    weight: 16
     region: content
     settings: {  }
     third_party_settings: {  }
-hidden: {  }
+hidden:
+  field_attachment: true
+  field_image: true

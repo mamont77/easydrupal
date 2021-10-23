@@ -63,7 +63,11 @@
   }
 }
 
-.field-name-field-image {
+.field-name-field-image-media {
+  @media (min-width: 768px) {
+      float: left;
+      margin: 0 15px 15px 0;
+  }
   img {
     width: 100%;
     margin: 0 auto;
@@ -71,12 +75,6 @@
   }
 }
 
-@media (min-width: 768px) {
-  .field-name-field-image {
-    float: left;
-    margin: 0 15px 15px 0;
-  }
-}
 
 @media (max-width: 768px) {
   .region-sidebar-second {
