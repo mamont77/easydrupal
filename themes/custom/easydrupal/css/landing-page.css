@@ -168,7 +168,7 @@
   background-color: #81a5bf;
 }
 
-.page-node-type-landingpage .clients .field-name-field-image img {
+.page-node-type-landingpage .clients .field-name-field-image-media img {
   margin: 0 auto;
   width: auto;
   height: auto;
@@ -195,12 +195,12 @@
   margin-bottom: 15px;
 }
 
-.page-node-type-landingpage .articles .field-name-field-image {
+.page-node-type-landingpage .articles .field-name-field-image-media {
   float: left;
   margin: 0 15px 15px 0;
 }
 
-.page-node-type-landingpage .articles .field-name-field-image img {
+.page-node-type-landingpage .articles .field-name-field-image-media img {
   border: 1px solid #81a5bf;
   width: 200px;
   height: 133px;
@@ -249,14 +249,14 @@
   color: #6686A2;
 }
 
-.page-node-type-landingpage .feedback .field-name-field-image img {
+.page-node-type-landingpage .feedback .field-name-field-image-media img {
   margin: 0 auto 15px auto;
   border-radius: 50%;
   border: 8px solid #eee;
   opacity: .8;
 }
 
-.page-node-type-landingpage .feedback .field-name-field-image img:hover {
+.page-node-type-landingpage .feedback .field-name-field-image-media img:hover {
   opacity: 1;
 }
 
@@ -360,11 +360,11 @@
     padding: 0;
     width: 100%;
   }
-  .page-node-type-landingpage .articles .field-name-field-image {
+  .page-node-type-landingpage .articles .field-name-field-image-media {
     float: none;
     margin-right: 0;
   }
-  .page-node-type-landingpage .articles .field-name-field-image img {
+  .page-node-type-landingpage .articles .field-name-field-image-media img {
     margin: auto;
     width: 100%;
     height: auto;

@@ -41,14 +41,14 @@
   color: #81a5bf;
 }
 
-.view-feedback .field-name-field-image img {
+.view-feedback .field-name-field-image-media img {
   border-radius: 50%;
   border: 8px solid #eee;
   margin: 0 auto 15px auto;
   opacity: .8;
 }
 
-.view-feedback .field-name-field-image img:hover {
+.view-feedback .field-name-field-image-media img:hover {
   opacity: 1;
 }
 

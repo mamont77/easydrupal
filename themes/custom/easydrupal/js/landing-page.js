@@ -41,19 +41,22 @@
         }
       });
 
-      $context.find('.section.projects .field-name-field-landing-page-background img').once('projectSectionBehavior').each(function () {
+      $context.find('.section.projects .field-name-field-landing-page-backgro-media img').once('projectSectionBehavior').each(function () {
         $(this).attr({
           'width': '493',
           'height': '299'
         });
       });
 
-      $context.find('.section.articles .field-name-field-image img').once('projectSectionBehavior').each(function () {
+      $context.find('.section.articles .field-name-field-image-media img').once('projectSectionBehavior').each(function () {
         $(this).attr({
           'width': '200',
           'height': '133'
         });
       });
+
+      // @todo: Client images 212x80.
+      // @todo: Feedback images 150x150.
     }
   };
 
