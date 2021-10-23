@@ -1382,11 +1382,19 @@ blockquote {
   color: #293749;
 }
 
-/* uncss:ignore */
+/* uncss:ignore start */
 .tabs--primary {
   margin-bottom: 2rem;
 }
 
+/* uncss:ignore end */
+/* uncss:ignore start */
+.media--loading:not([data-animation]):before,
+.is-b-loading:not([data-animation]):before {
+  background: #81a5bf !important;
+}
+
+/* uncss:ignore end */
 .region-content .field {
   margin-bottom: 15px;
 }
