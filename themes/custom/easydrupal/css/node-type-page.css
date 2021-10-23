@@ -10,14 +10,19 @@
  * ./THEMENAME/bootstrap/assets/stylesheets/bootstrap/_variables.scss
  */
 /** COLORS **/
+
 article[about="/about-me"] .field--name-body img {
   border-radius: 50%;
   border: 8px solid #eee;
   margin: 0 15px 15px 0;
-  max-width: 216px;
-  height: auto;
+  width: 216px;
+  height: 216px;
 }
+
 @media (max-width: 768px) {
+  article[about="/about-me"] .field--name-body .align-left {
+    float: none;
+  }
   article[about="/about-me"] .field--name-body img {
     float: none;
     display: block;

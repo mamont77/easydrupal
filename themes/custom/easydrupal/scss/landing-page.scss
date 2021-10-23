@@ -149,17 +149,23 @@ $input-font-style-placeholder: italic;
       font-size: 18px;
       line-height: 24px;
 
+      .align-left {
+        @media (max-width: 768px) {
+          float: none;
+        }
+      }
+
       img {
         border-radius: 50%;
         border: 8px solid #eee;
         margin: 0 30px 15px 0;
-        max-width: 216px;
-        height: auto;
+        width: 216px;
+        height: 216px;
         @media (max-width: 768px) {
           float: none;
           display: block;
-          width: 50%;
-          height: auto;
+          //width: 50%;
+          //height: auto;
           margin: 0 auto 15px auto;
         }
       }

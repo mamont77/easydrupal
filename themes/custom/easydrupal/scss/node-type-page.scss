@@ -8,12 +8,17 @@
 
 article[about="/about-me"] {
   .field--name-body {
+    .align-left {
+      @media (max-width: 768px) {
+        float: none;
+      }
+    }
     img {
       border-radius: 50%;
       border: 8px solid $imageBorderColor;
       margin: 0 15px 15px 0;
-      max-width: 216px;
-      height: auto;
+      width: 216px;
+      height: 216px;
       @media (max-width: 768px) {
         float: none;
         display: block;

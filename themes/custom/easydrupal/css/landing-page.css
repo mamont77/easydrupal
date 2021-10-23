@@ -107,8 +107,8 @@
   border-radius: 50%;
   border: 8px solid #eee;
   margin: 0 30px 15px 0;
-  max-width: 216px;
-  height: auto;
+  width: 216px;
+  height: 216px;
 }
 
 .page-node-type-landingpage .about .read-more a {
@@ -343,11 +343,12 @@
 }
 
 @media (max-width: 768px) {
+  .page-node-type-landingpage .about .field--name-body .align-left {
+    float: none;
+  }
   .page-node-type-landingpage .about .field--name-body img {
     float: none;
     display: block;
-    width: 50%;
-    height: auto;
     margin: 0 auto 15px auto;
   }
 }

@@ -1,0 +1,58 @@
+uuid: fac09d8e-34ca-4f32-8e71-00a42947611b
+langcode: en
+status: false
+dependencies:
+  config:
+    - core.entity_view_mode.media.ckeditor_half_width
+    - field.field.media.image.field_media_categories
+    - field.field.media.image.field_media_image
+    - image.style.large
+    - media.type.image
+  module:
+    - blazy
+_core:
+  default_config_hash: B1a2aBHmUulUZN6HrxITEH1tSResuVjXMBEv1lUBtOo
+id: media.image.ckeditor_half_width
+targetEntityType: media
+bundle: image
+mode: ckeditor_half_width
+content:
+  field_media_image:
+    label: visually_hidden
+    settings:
+      image_style: large
+      icon: ''
+      layout: ''
+      view_mode: ''
+      cache: 0
+      current_view_mode: ''
+      skin: ''
+      fx: ''
+      style: ''
+      background: false
+      box_caption: ''
+      box_caption_custom: ''
+      box_media_style: ''
+      caption: {  }
+      responsive_image_style: ''
+      box_style: ''
+      media_switch: ''
+      ratio: ''
+      thumbnail_style: ''
+      _uri: ''
+      breakpoints: {  }
+      sizes: ''
+      grid_header: ''
+      grid: ''
+      grid_medium: ''
+      grid_small: ''
+    third_party_settings: {  }
+    type: blazy
+    weight: 0
+    region: content
+hidden:
+  created: true
+  field_media_categories: true
+  name: true
+  thumbnail: true
+  uid: true
