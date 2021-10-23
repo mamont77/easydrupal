@@ -15,14 +15,14 @@
     attach: function (context, settings) {
       var $context = $(context);
 
-      if ($('.path-frontpage', context).length === 0) {
-        return;
-      }
+      // if ($('.path-frontpage', context).length === 0) {
+      //   return;
+      // }
 
-      var $alert = $('.alert', context);
-      if ($alert.length > 0) {
-        $('.contact .title-wrapper', context).after($alert);
-      }
+      // var $alert = $('.alert', context);
+      // if ($alert.length > 0) {
+      //   $('.contact .title-wrapper', context).after($alert);
+      // }
 
       $('.navbar-nav a').bind('click', function (event) {
         var $anchor = $(this),
