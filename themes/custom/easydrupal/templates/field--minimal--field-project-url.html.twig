@@ -12,22 +12,18 @@
  *   - content: The field item's content.
  */
 #}
-{%
-set classes = [
-'field',
-'field-name-' ~ element['#field_name']|clean_class,
-]
-%}
+{% set classes = [
+  'field',
+  'field-name-' ~ element['#field_name']|clean_class,
+] %}
 <div{{ attributes.addClass(classes) }}>
-    {% if not label_hidden %}
-        <div class="field-label-{{ element['#label_display']|clean_class }}">
-            {{- label }}{% if settings.lb-col %}:{% endif -%}
-        </div>
-    {% endif %}
+  {% if not label_hidden %}
+    <div class="field-label-{{ element['#label_display']|clean_class }}">
+      {{- label }}{% if settings.lb-col %}:{% endif -%}
+    </div>
+  {% endif %}
 
-    {% for item in items %}
-
-        {#{{ kint(item.content['#url']) }}#}
-        <a href="{{ item.content['#url'] }}" rel="nofollow" target="_blank">{{ 'Visit the website'|t }}</a>
-    {% endfor %}
+  {% for item in items %}
+    <a href="{{ item.content['#url'] }}" rel="nofollow" target="_blank">{{ 'Visit the website'|t }}</a>
+  {% endfor %}
 </div>

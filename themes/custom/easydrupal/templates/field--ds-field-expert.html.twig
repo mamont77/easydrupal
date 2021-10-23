@@ -13,17 +13,6 @@
  *   - content: The field item's content.
  */
 #}
-{#{{ settings.ow }}#}
-{#<br>#}
-{#{{ settings['ow-el'] }}#}
-{#<br>#}
-{#{{ wrapper_attributes }}#}
-{#777#}
-{#<br>#}
-{#{{- settings['prefix']|raw -}}#}
-
-{#{{ kint(settings) }}#}
-{#{{  kint(items) }}#}
 {{- settings['prefix']|raw|trans -}}
 
   {% if settings.ow %}
@@ -53,7 +42,7 @@
     {% if current_label == 'about' or current_label == 'projects' or current_label == 'my clients' or current_label == 'articles' or current_label == 'upwork\'s feedback' or current_label == 'contact me' %}
       <div class="title-wrapper">
       {% set title_classes = [
-      'field-label-' ~ element['#label_display']|clean_class,
+        'field-label-' ~ element['#label_display']|clean_class,
       ] %}
       {%- if settings['lbw-def-at'] -%}
         <{{ settings['lbw-el']|default('div') }} {{ label_attributes.addClass(title_classes).mergeAttributes(title_attributes) }}>
@@ -66,7 +55,7 @@
       </div>
     {% else %}
       {% set title_classes = [
-      'field-label-' ~ element['#label_display']|clean_class,
+        'field-label-' ~ element['#label_display']|clean_class,
       ] %}
       {%- if settings['lbw-def-at'] -%}
         <{{ settings['lbw-el']|default('div') }} {{ label_attributes.addClass(title_classes).mergeAttributes(title_attributes) }}>
