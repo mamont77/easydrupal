@@ -48,14 +48,20 @@
         });
       });
 
-      $context.find('.section.articles .field-name-field-image-media img').once('projectSectionBehavior').each(function () {
+      $context.find('.section.articles .field-name-field-image-media img').once('articleSectionBehavior').each(function () {
         $(this).attr({
           'width': '200',
           'height': '133'
         });
       });
 
-      // @todo: Client images 212x80.
+      $context.find('.section.clients .field-name-field-image-media img').once('clientSectionBehavior').each(function () {
+        $(this).attr({
+          'width': '212',
+          'height': '80'
+        });
+      });
+
       // @todo: Feedback images 150x150.
     }
   };
