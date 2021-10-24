@@ -9,13 +9,11 @@
     "css-mqpacker": "^7.0.0",
     "gulp": "^3.9.1",
     "gulp-imagemin": "^4.1.0",
-    "gulp-postcss": "^9.0.1",
+    "gulp-postcss": "^7.0.1",
     "gulp-sass": "^4.0.1",
     "gulp-sourcemaps": "^2.6.5",
-    "gulp.spritesmith": "^6.12.1",
-    "postcss": "^8.3.11",
-    "postcss-uncss": "^0.17.0",
-    "uncss": "^0.17.3"
+    "gulp-uncss": "^1.0.6",
+    "gulp.spritesmith": "^6.12.1"
   },
   "main": "gulpfile.js",
   "dependencies": {}

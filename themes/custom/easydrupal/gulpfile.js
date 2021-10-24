@@ -8,7 +8,7 @@ var gulp = require('gulp'),
   postcss = require('gulp-postcss'),
   autoprefixer = require('autoprefixer'),
   mqpacker = require('css-mqpacker'),
-  uncss = require('postcss-uncss');
+  uncss = require('gulp-uncss');
 
 gulp.task('sprite', function () {
   var spriteData = gulp.src('images/sprite-src/*.png').pipe(spritesmith({
@@ -34,39 +34,39 @@ gulp.task('sass', function () {
       outputStyle: 'expanded',
       precision: 10
     }).on('error', sass.logError))
+    // .pipe(uncss({ // Uncomment uncss from time to time and review diff.
+    //   html: [
+    //     'https://my-project-makedrupaleasy.devel/user/login',
+    //     'https://my-project-makedrupaleasy.devel/admin',
+    //     'https://my-project-makedrupaleasy.devel/404error',
+    //     'https://my-project-makedrupaleasy.devel/',
+    //     'https://my-project-makedrupaleasy.devel/about-me',
+    //     'https://my-project-makedrupaleasy.devel/projects',
+    //     'https://my-project-makedrupaleasy.devel/articles',
+    //     'https://my-project-makedrupaleasy.devel/category/make-drupal-easy',
+    //     'https://my-project-makedrupaleasy.devel/version/9x-xx',
+    //     'https://my-project-makedrupaleasy.devel/feedback',
+    //     'https://my-project-makedrupaleasy.devel/contact',
+    //     'https://my-project-makedrupaleasy.devel/projects/risk-lookup',
+    //     'https://my-project-makedrupaleasy.devel/projects/alpha-dog-training',
+    //     // 'https://my-project-makedrupaleasy.devel/articles/drupal-any-version-how-make-back-top-functionality-own-theme-five-minutes',
+    //     // 'https://my-project-makedrupaleasy.devel/articles/drupal-8-9-resolved-following-reasons-prevent-modules-being-uninstalled-fields-pending',
+    //     'https://my-project-makedrupaleasy.devel/articles/drupal-8-9-how-create-simple-custom-module-breadcrumbs-example-1',
+    //     // 'https://my-project-makedrupaleasy.devel/articles/drupal-7-custom-publishing-options-and-devel-generate-together-forever',
+    //     'https://my-project-makedrupaleasy.devel/articles/quickly-way-build-beautiful-chart-using-yahoo-finance-highstock',
+    //     // 'https://my-project-makedrupaleasy.devel/articles/drupal-8-9-creating-custom-layout-form-your-module-or-theme',
+    //     'https://my-project-makedrupaleasy.devel/articles/drupal-7-8-9-how-implement-isotope-and-infinitescroll-using-views-only',
+    //     'https://my-project-makedrupaleasy.devel/articles/drupal-8-9-getting-acquainted-drupal-console',
+    //     // 'https://my-project-makedrupaleasy.devel/articles/creating-share-buttons-just-urls',
+    //     // 'https://my-project-makedrupaleasy.devel/articles/managing-dependencies-custom-project-not-hosted-packagist-or-drupalorg',
+    //     'https://my-project-makedrupaleasy.devel/articles/67-amazing-facts-about-drupal'
+    //   ],
+    //   ignore: [
+    //     '.tabs--primary',
+    //     '.nav-tabs',
+    //     '.addtoany_list']
+    // }))
     .pipe(postcss([
-      uncss({
-        html: [
-          'https://my-project-makedrupaleasy.devel/user/login',
-          'https://my-project-makedrupaleasy.devel/admin',
-          'https://my-project-makedrupaleasy.devel/404error',
-          'https://my-project-makedrupaleasy.devel/',
-          'https://my-project-makedrupaleasy.devel/about-me',
-          'https://my-project-makedrupaleasy.devel/projects',
-          'https://my-project-makedrupaleasy.devel/articles',
-          'https://my-project-makedrupaleasy.devel/category/make-drupal-easy',
-          'https://my-project-makedrupaleasy.devel/version/9x-xx',
-          'https://my-project-makedrupaleasy.devel/feedback',
-          'https://my-project-makedrupaleasy.devel/contact',
-          'https://my-project-makedrupaleasy.devel/projects/risk-lookup',
-          'https://my-project-makedrupaleasy.devel/projects/alpha-dog-training',
-          // 'https://my-project-makedrupaleasy.devel/articles/drupal-any-version-how-make-back-top-functionality-own-theme-five-minutes',
-          // 'https://my-project-makedrupaleasy.devel/articles/drupal-8-9-resolved-following-reasons-prevent-modules-being-uninstalled-fields-pending',
-          'https://my-project-makedrupaleasy.devel/articles/drupal-8-9-how-create-simple-custom-module-breadcrumbs-example-1',
-          // 'https://my-project-makedrupaleasy.devel/articles/drupal-7-custom-publishing-options-and-devel-generate-together-forever',
-          'https://my-project-makedrupaleasy.devel/articles/quickly-way-build-beautiful-chart-using-yahoo-finance-highstock',
-          // 'https://my-project-makedrupaleasy.devel/articles/drupal-8-9-creating-custom-layout-form-your-module-or-theme',
-          'https://my-project-makedrupaleasy.devel/articles/drupal-7-8-9-how-implement-isotope-and-infinitescroll-using-views-only',
-          'https://my-project-makedrupaleasy.devel/articles/drupal-8-9-getting-acquainted-drupal-console',
-          // 'https://my-project-makedrupaleasy.devel/articles/creating-share-buttons-just-urls',
-          // 'https://my-project-makedrupaleasy.devel/articles/managing-dependencies-custom-project-not-hosted-packagist-or-drupalorg',
-          'https://my-project-makedrupaleasy.devel/articles/67-amazing-facts-about-drupal'
-        ],
-        ignore: [
-          '.tabs--primary',
-          '.nav-tabs',
-          '.addtoany_list']
-      }),
       mqpacker({
         sort: true
       }),
