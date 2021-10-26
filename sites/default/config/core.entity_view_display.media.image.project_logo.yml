@@ -9,8 +9,8 @@ dependencies:
     - media.type.image
     - responsive_image.styles.project_logo
   module:
-    - blazy
     - ds
+    - responsive_image
 _core:
   default_config_hash: B1a2aBHmUulUZN6HrxITEH1tSResuVjXMBEv1lUBtOo
 id: media.image.project_logo
@@ -22,31 +22,7 @@ content:
     label: visually_hidden
     settings:
       responsive_image_style: project_logo
-      icon: ''
-      layout: ''
-      view_mode: ''
-      cache: 0
-      current_view_mode: ''
-      skin: ''
-      fx: ''
-      style: ''
-      background: false
-      box_caption: ''
-      box_caption_custom: ''
-      box_media_style: ''
-      caption: {  }
-      box_style: ''
-      image_style: ''
-      media_switch: ''
-      ratio: ''
-      thumbnail_style: ''
-      _uri: ''
-      breakpoints: {  }
-      sizes: ''
-      grid_header: ''
-      grid: ''
-      grid_medium: ''
-      grid_small: ''
+      image_link: ''
     third_party_settings:
       ds:
         ft:
@@ -55,7 +31,7 @@ content:
             lb: ''
             lb-col: false
             classes: {  }
-    type: blazy
+    type: responsive_image
     weight: 0
     region: content
 hidden:
