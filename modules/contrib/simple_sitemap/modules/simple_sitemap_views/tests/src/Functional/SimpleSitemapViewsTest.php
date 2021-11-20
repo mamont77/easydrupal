@@ -2,8 +2,6 @@
 
 namespace Drupal\Tests\simple_sitemap_views\Functional;
 
-use Drupal\simple_sitemap\Entity\SimpleSitemapType;
-
 /**
  * Tests Simple XML Sitemap (Views) functional integration.
  *
@@ -94,13 +92,14 @@ class SimpleSitemapViewsTest extends SimpleSitemapViewsTestBase {
    * Tests the process of generating view display URLs.
    */
   public function testViewsUrlGenerator() {
-    $this->assertArrayHasKey('views', SimpleSitemapType::load('default_hreflang')->getUrlGenerators());
+    $sitemap_types = $this->generator->getSitemapManager()->getSitemapTypes();
+    $this->assertContains('views', $sitemap_types['default_hreflang']['urlGenerators']);
 
     $title = $this->node->getTitle();
     $this->sitemapViews->addArgumentsToIndex($this->testView, ['page']);
     $this->sitemapViews->addArgumentsToIndex($this->testView, ['page', $title]);
     $this->sitemapViews->addArgumentsToIndex($this->testView2, ['page', 1]);
-    $this->generator->generate('backend');
+    $this->generator->generateSitemap('backend');
 
     $url1 = $this->testView->getUrl()->toString();
     $url2 = $this->testView->getUrl(['page', NULL, NULL])->toString();
@@ -168,7 +167,7 @@ class SimpleSitemapViewsTest extends SimpleSitemapViewsTestBase {
     $this->assertIndexSize(2);
 
     // Records about pages with empty result must be removed during generation.
-    $this->generator->generate('backend');
+    $this->generator->generateSitemap('backend');
     $this->assertIndexSize(0);
   }
 
