@@ -4,37 +4,32 @@ namespace Drupal\simple_sitemap\Queue;
 
 use Drupal\Core\Database\Connection;
 use Drupal\Core\Queue\DatabaseQueue;
-use Drupal\Component\Datetime\TimeInterface;
+use Drupal\Component\Datetime\Time;
 
 /**
- * Defines a Simple XML Sitemap queue handler.
+ * Class SimplesitemapQueue
+ * @package Drupal\simple_sitemap\Queue
  */
-class SimpleSitemapQueue extends DatabaseQueue {
+class SimplesitemapQueue extends DatabaseQueue {
 
   /**
-   * The time service.
-   *
-   * @var \Drupal\Component\Datetime\TimeInterface
+   * @var \Drupal\Component\Datetime\Time
    */
   protected $time;
 
   /**
-   * SimpleSitemapQueue constructor.
-   *
-   * @param string $name
-   *   The name of the queue.
+   * SimplesitemapQueue constructor.
+   * @param $name
    * @param \Drupal\Core\Database\Connection $connection
-   *   The Connection object containing the key-value tables.
-   * @param \Drupal\Component\Datetime\TimeInterface $time
-   *   The time service.
+   * @param \Drupal\Component\Datetime\Time $time
    */
-  public function __construct($name, Connection $connection, TimeInterface $time) {
+  public function __construct($name, Connection $connection, Time $time) {
     parent::__construct($name, $connection);
     $this->time = $time;
   }
 
   /**
-   * {@inheritdoc}
+   * Overrides \Drupal\Core\Queue\DatabaseQueue::claimItem().
    *
    * Unlike \Drupal\Core\Queue\DatabaseQueue::claimItem(), this method provides
    * a default lease time of 0 (no expiration) instead of 30. This allows the
@@ -64,11 +59,9 @@ class SimpleSitemapQueue extends DatabaseQueue {
    *   - item_id: the unique ID returned from createItem().
    *   - created: timestamp when the item was put into the queue.
    *
-   * @throws \Exception
-   *
    * @see \Drupal\Core\Queue\QueueInterface::claimItem
    */
-  public function yieldItem(): \Generator {
+  public function yieldItem() {
     try {
       $query = $this->connection->query('SELECT data, item_id FROM {queue} q WHERE name = :name ORDER BY item_id ASC', [':name' => $this->name]);
       while ($item = $query->fetchObject()) {
@@ -81,16 +74,6 @@ class SimpleSitemapQueue extends DatabaseQueue {
     }
   }
 
-  /**
-   * Adds a queue items and store it directly to the queue.
-   *
-   * @param mixed $data_sets
-   *   Datasets to process.
-   *
-   * @return int|bool
-   *   A unique ID if the item was successfully created and was (best effort)
-   *   added to the queue, otherwise FALSE.
-   */
   public function createItems($data_sets) {
     $try_again = FALSE;
     try {
@@ -112,16 +95,6 @@ class SimpleSitemapQueue extends DatabaseQueue {
     return $id;
   }
 
-  /**
-   * Adds a queue items and store it directly to the queue.
-   *
-   * @param mixed $data_sets
-   *   Datasets to process.
-   *
-   * @return int|bool
-   *   A unique ID if the item was successfully created and was (best effort)
-   *   added to the queue, otherwise FALSE.
-   */
   protected function doCreateItems($data_sets) {
     $query = $this->connection->insert(static::TABLE_NAME)
       ->fields(['name', 'data', 'created']);
@@ -137,13 +110,7 @@ class SimpleSitemapQueue extends DatabaseQueue {
     return $query->execute();
   }
 
-  /**
-   * Deletes a finished items from the queue.
-   *
-   * @param mixed $item_ids
-   *   Item IDs to delete.
-   */
-  public function deleteItems($item_ids): void {
+  public function deleteItems($item_ids) {
     try {
       $this->connection->delete(static::TABLE_NAME)
         ->condition('item_id', $item_ids, 'IN')
