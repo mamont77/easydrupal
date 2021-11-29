@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '3602ac5ae8c7644fc568d6267aca9385a9e4565f',
+        'reference' => 'bc32ca4657b87f5f5053ed039321d9a2c7779e21',
         'name' => 'drupal/legacy-project',
         'dev' => true,
     ),
@@ -1020,7 +1020,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '3602ac5ae8c7644fc568d6267aca9385a9e4565f',
+            'reference' => 'bc32ca4657b87f5f5053ed039321d9a2c7779e21',
             'dev_requirement' => false,
         ),
         'drupal/libraries' => array(
@@ -1315,12 +1315,12 @@
             ),
         ),
         'drupal/simple_sitemap' => array(
-            'pretty_version' => '3.11.0',
-            'version' => '3.11.0.0',
+            'pretty_version' => '4.0.0',
+            'version' => '4.0.0.0',
             'type' => 'drupal-module',
             'install_path' => __DIR__ . '/../../modules/contrib/simple_sitemap',
             'aliases' => array(),
-            'reference' => '8.x-3.11',
+            'reference' => '4.0.0',
             'dev_requirement' => false,
         ),
         'drupal/slick' => array(
