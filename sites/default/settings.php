@@ -68,6 +68,7 @@
  *
  * One example of the simplest connection array is shown below. To use the
  * sample settings, copy and uncomment the code below between the @code and
+ *
  * @endcode lines and paste it after the $databases declaration. You will need
  * to replace the database username and password and possibly the host and port
  * with the appropriate credentials for your database system.
@@ -122,6 +123,7 @@ $databases = [];
  * traditionally referred to as master/slave in database server documentation).
  *
  * The general format for the $databases array is as follows:
+ *
  * @code
  * $databases['default']['default'] = $info_array;
  * $databases['default']['replica'][] = $info_array;
@@ -262,6 +264,7 @@ $databases = [];
  * stored with backups of your database.
  *
  * Example:
+ *
  * @code
  *   $settings['hash_salt'] = file_get_contents('/home/example/salt.txt');
  * @endcode
@@ -359,8 +362,10 @@ $settings['update_free_access'] = FALSE;
  * - \Symfony\Component\HttpFoundation\Request::HEADER_FORWARDED
  *
  * Note the default value of
+ *
  * @code
- * \Symfony\Component\HttpFoundation\Request::HEADER_X_FORWARDED_ALL | \Symfony\Component\HttpFoundation\Request::HEADER_FORWARDED
+ * \Symfony\Component\HttpFoundation\Request::HEADER_X_FORWARDED_ALL |
+ *   \Symfony\Component\HttpFoundation\Request::HEADER_FORWARDED
  * @endcode
  * is not secure by default. The value should be set to only the specific
  * headers the reverse proxy uses. For example:
@@ -647,8 +652,17 @@ if ($settings['hash_salt']) {
 # $config['system.performance']['fast_404']['paths'] = '/\.(?:txt|png|gif|jpe?g|css|js|ico|swf|flv|cgi|bat|pl|dll|exe|asp)$/i';
 # $config['system.performance']['fast_404']['html'] = '<!DOCTYPE html><html><head><title>404 Not Found</title></head><body><h1>Not Found</h1><p>The requested URL "@path" was not found on this server.</p></body></html>';
 
-//$settings['redis.connection']['interface'] = 'PhpRedis'; // Can be "Predis".
-//$settings['cache']['default'] = 'cache.backend.redis';
+// Configure Redis.
+// Include the Redis services.yml file. Adjust the path if you installed to a contrib or other subdirectory.
+$settings['container_yamls'][] = 'modules/composer/redis/example.services.yml';
+
+// Phpredis is built into the Pantheon application container.
+$settings['redis.connection']['interface'] = 'PhpRedis';
+$settings['redis_compress_length'] = 100;
+$settings['redis_compress_level'] = 1;
+$settings['cache']['default'] = 'cache.backend.redis'; // Use Redis as the default cache.
+$settings['cache_prefix']['default'] = 'pantheon-redis';
+$settings['cache']['bins']['form'] = 'cache.backend.database'; // Use the database for forms.
 
 /**
  * Load services definition file.
@@ -685,6 +699,7 @@ $settings['container_yamls'][] = $app_root . '/' . $site_path . '/services.yml';
  * like to allow.
  *
  * For example:
+ *
  * @code
  * $settings['trusted_host_patterns'] = [
  *   '^www\.example\.com$',
