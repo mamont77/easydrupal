@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5700bbd54b61fef9fb70b9918583bd27",
+    "content-hash": "4345a83f7036aa0865dec117d906d981",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -5422,26 +5422,29 @@
         },
         {
             "name": "drupal/sticky_sharrre_bar",
-            "version": "dev-1.x",
+            "version": "1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/sticky_sharrre_bar.git",
-                "reference": "55daa31c7841347a522cf95f6fc35c00616e9ed8"
+                "reference": "8.x-1.4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/sticky_sharrre_bar-8.x-1.4.zip",
+                "reference": "8.x-1.4",
+                "shasum": "3ceaca5170268c91f4e8c8be5c4ef83978d5c545"
             },
             "require": {
                 "drupal/core": "^8.7.7 || ^9"
             },
             "type": "drupal-module",
             "extra": {
-                "branch-alias": {
-                    "dev-1.x": "1.x-dev"
-                },
                 "drupal": {
-                    "version": "8.x-1.3+13-dev",
-                    "datestamp": "1614841905",
+                    "version": "8.x-1.4",
+                    "datestamp": "1638547315",
                     "security-coverage": {
-                        "status": "not-covered",
-                        "message": "Dev releases are not covered by Drupal security advisories."
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
                     }
                 },
                 "installer-types": [
@@ -11573,7 +11576,6 @@
         "drupal/linkit": 10,
         "drupal/purge_purger_http": 10,
         "drupal/rabbit_hole": 10,
-        "drupal/sticky_sharrre_bar": 20,
         "drupal/votingapi": 15,
         "drupal/webp": 10,
         "grasmash/drupal-security-warning": 20

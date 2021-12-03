@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '3602ac5ae8c7644fc568d6267aca9385a9e4565f',
+        'reference' => 'bbee3f8c659a087d6220cbca1ff0406828dd184b',
         'name' => 'drupal/legacy-project',
         'dev' => true,
     ),
@@ -1020,7 +1020,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '3602ac5ae8c7644fc568d6267aca9385a9e4565f',
+            'reference' => 'bbee3f8c659a087d6220cbca1ff0406828dd184b',
             'dev_requirement' => false,
         ),
         'drupal/libraries' => array(
@@ -1360,14 +1360,12 @@
             ),
         ),
         'drupal/sticky_sharrre_bar' => array(
-            'pretty_version' => 'dev-1.x',
-            'version' => 'dev-1.x',
+            'pretty_version' => '1.4.0',
+            'version' => '1.4.0.0',
             'type' => 'drupal-module',
             'install_path' => __DIR__ . '/../../modules/contrib/sticky_sharrre_bar',
-            'aliases' => array(
-                0 => '1.x-dev',
-            ),
-            'reference' => '55daa31c7841347a522cf95f6fc35c00616e9ed8',
+            'aliases' => array(),
+            'reference' => '8.x-1.4',
             'dev_requirement' => false,
         ),
         'drupal/syslog' => array(

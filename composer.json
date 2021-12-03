@@ -74,7 +74,7 @@
         "drupal/simple_sitemap": "^3.11",
         "drupal/slick": "^2.4",
         "drupal/sophron": "^1.2",
-        "drupal/sticky_sharrre_bar": "1.x-dev",
+        "drupal/sticky_sharrre_bar": "^1.4",
         "drupal/token": "^1.9",
         "drupal/upgrade_status": "^3.12",
         "drupal/views_bootstrap": "~3",
