@@ -29,16 +29,16 @@ third_party_settings:
       disable_css: false
       entity_classes: all_classes
       settings:
-        label: ''
+        classes:
+          layout_class: {  }
+          ds_content: {  }
         wrappers:
           ds_content: div
         outer_wrapper: div
         attributes: ''
         link_attribute: ''
         link_custom: ''
-        classes:
-          layout_class: {  }
-          ds_content: {  }
+        label: ''
     regions:
       ds_content:
         - node_title
@@ -69,7 +69,7 @@ mode: landing_page
 content:
   body:
     type: text_summary_or_trimmed
-    weight: 2
+    label: hidden
     settings:
       trim_length: 600
     third_party_settings:
@@ -80,12 +80,10 @@ content:
             lb: ''
             lb-col: false
             classes: {  }
-    label: hidden
+    weight: 2
     region: ds_content
   field_image_media:
     type: entity_reference_entity_view
-    weight: 1
-    region: ds_content
     label: hidden
     settings:
       view_mode: landing_page_article
@@ -98,6 +96,8 @@ content:
             lb: ''
             lb-col: false
             classes: {  }
+    weight: 1
+    region: ds_content
 hidden:
   field_attachment: true
   field_attachment_media: true

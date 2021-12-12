@@ -30,16 +30,16 @@ third_party_settings:
       disable_css: false
       entity_classes: all_classes
       settings:
-        label: ''
+        classes:
+          layout_class: {  }
+          ds_content: {  }
         wrappers:
           ds_content: div
         outer_wrapper: div
         attributes: ''
         link_attribute: ''
         link_custom: ''
-        classes:
-          layout_class: {  }
-          ds_content: {  }
+        label: ''
     regions:
       ds_content:
         - group_header
@@ -73,20 +73,20 @@ third_party_settings:
       children:
         - node_post_date
         - node_title
-      parent_name: ''
-      weight: 0
       label: Header
+      parent_name: ''
+      region: ds_content
+      weight: 0
       format_type: html_element
       format_settings:
+        classes: header
+        id: ''
         element: div
         show_label: false
         label_element: h3
         attributes: ''
         effect: none
         speed: fast
-        id: ''
-        classes: header
-      region: ds_content
 _core:
   default_config_hash: U8ghxJXn8JE2p6Q2wLpPWAxpz4r_8crL1LxtapSrHAE
 id: node.article.teaser
@@ -96,7 +96,7 @@ mode: teaser
 content:
   body:
     type: text_summary_or_trimmed
-    weight: 2
+    label: hidden
     settings:
       trim_length: 200
     third_party_settings:
@@ -107,12 +107,10 @@ content:
             lb: ''
             lb-col: false
             classes: {  }
-    label: hidden
+    weight: 2
     region: ds_content
   field_image_media:
     type: entity_reference_entity_view
-    weight: 1
-    region: ds_content
     label: hidden
     settings:
       view_mode: article
@@ -125,6 +123,8 @@ content:
             lb: ''
             lb-col: false
             classes: {  }
+    weight: 1
+    region: ds_content
 hidden:
   addtoany: true
   field_attachment: true

@@ -19,6 +19,7 @@ bundle: image
 mode: article
 content:
   field_media_image:
+    type: responsive_image
     label: visually_hidden
     settings:
       responsive_image_style: article
@@ -31,7 +32,6 @@ content:
             lb: ''
             lb-col: false
             classes: {  }
-    type: responsive_image
     weight: 0
     region: content
 hidden:

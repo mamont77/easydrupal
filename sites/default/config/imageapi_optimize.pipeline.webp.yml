@@ -8,8 +8,8 @@ name: webp
 label: webp
 processors:
   6634234a-1a3d-4579-9911-8b8b75731d69:
-    uuid: 6634234a-1a3d-4579-9911-8b8b75731d69
     id: webp_webp
-    weight: 1
     data:
       quality: '75'
+    weight: 1
+    uuid: 6634234a-1a3d-4579-9911-8b8b75731d69

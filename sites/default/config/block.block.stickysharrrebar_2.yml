@@ -15,8 +15,8 @@ plugin: sticky_sharrre_bar_block
 settings:
   id: sticky_sharrre_bar_block
   label: 'Sticky sharrre bar'
-  provider: sticky_sharrre_bar
   label_display: '0'
+  provider: sticky_sharrre_bar
   providers:
     googlePlus: googlePlus
     facebook: facebook

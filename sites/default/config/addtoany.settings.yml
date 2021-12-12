@@ -1,3 +1,5 @@
+_core:
+  default_config_hash: 8aJF-FDdnrk-N2gLGWFQcLZIpuJZA0BE9NtgXTVJfVk
 buttons_size: 32
 additional_html: "<a class=\"a2a_button_facebook a2a_counter\"></a>\r\n<a class=\"a2a_button_twitter\"></a>\r\n<a class=\"a2a_button_google_plus\"></a>\r\n<a class=\"a2a_button_linkedin a2a_counter\"></a>\r\n\r\n"
 additional_css: ''
@@ -6,5 +8,3 @@ universal_button: default
 custom_universal_button: ''
 universal_button_placement: after
 no_3p: false
-_core:
-  default_config_hash: 8aJF-FDdnrk-N2gLGWFQcLZIpuJZA0BE9NtgXTVJfVk

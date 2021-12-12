@@ -4,18 +4,18 @@ status: true
 dependencies:
   module:
     - node
-id: articles_links_collention
 label: 'Articles Links Collention'
+id: articles_links_collention
 description: ''
 matchers:
   8460b787-eb85-4a9e-9be1-9c8765a2c26d:
-    uuid: 8460b787-eb85-4a9e-9be1-9c8765a2c26d
     id: 'entity:node'
-    weight: 0
+    uuid: 8460b787-eb85-4a9e-9be1-9c8765a2c26d
     settings:
+      metadata: ''
       bundles:
         article: article
       group_by_bundle: false
-      include_unpublished: false
       substitution_type: canonical
-      metadata: ''
+      include_unpublished: false
+    weight: 0

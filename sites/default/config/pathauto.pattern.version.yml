@@ -12,12 +12,12 @@ pattern: 'version/[term:name]'
 selection_criteria:
   321a1a90-3712-4682-a10d-f1ad7e76e71f:
     id: 'entity_bundle:taxonomy_term'
-    bundles:
-      versions: versions
     negate: false
+    uuid: 321a1a90-3712-4682-a10d-f1ad7e76e71f
     context_mapping:
       taxonomy_term: taxonomy_term
-    uuid: 321a1a90-3712-4682-a10d-f1ad7e76e71f
+    bundles:
+      versions: versions
 selection_logic: and
 weight: -5
 relationships: {  }

@@ -23,15 +23,15 @@ third_party_settings:
       disable_css: false
       entity_classes: all_classes
       settings:
+        classes:
+          layout_class: {  }
+          ds_content: {  }
         wrappers:
           ds_content: div
         outer_wrapper: div
         attributes: ''
         link_attribute: ''
         link_custom: ''
-        classes:
-          layout_class: {  }
-          ds_content: {  }
     regions:
       ds_content:
         - field_about
@@ -46,7 +46,7 @@ bundle: landingpage
 mode: default
 content:
   field_about:
-    weight: 0
+    type: entity_reference_entity_view
     label: above
     settings:
       view_mode: landing_page
@@ -57,33 +57,33 @@ content:
           id: expert
           settings:
             lb: ''
-            prefix: ''
             lbw: true
             lbw-el: h2
             lbw-cl: section-title
             lbw-at: ''
+            lb-col: false
             ow: true
             ow-el: div
             ow-cl: 'section about'
             ow-at: 'id="about"'
-            fis-el: ''
-            fis-cl: ''
-            fis-at: ''
-            fi-el: ''
-            fi-cl: ''
-            fi-at: ''
-            suffix: ''
-            lb-col: false
             ow-def-at: false
             ow-def-cl: false
             fis: false
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
             fis-def-at: false
             fi: false
+            fi-el: ''
+            fi-cl: ''
+            fi-at: ''
             fi-def-at: false
-    type: entity_reference_entity_view
+            prefix: ''
+            suffix: ''
+    weight: 0
     region: ds_content
   field_articles:
-    weight: 3
+    type: entity_reference_entity_view
     label: above
     settings:
       view_mode: landing_page
@@ -95,33 +95,33 @@ content:
           id: expert
           settings:
             lb: ''
-            prefix: ''
             lbw: true
             lbw-el: h2
             lbw-cl: section-title
             lbw-at: ''
+            lb-col: false
             ow: true
             ow-el: div
             ow-cl: 'section articles'
             ow-at: 'id="articles"'
+            ow-def-at: false
+            ow-def-cl: false
             fis: true
             fis-el: div
             fis-cl: row
             fis-at: ''
+            fis-def-at: false
             fi: true
             fi-el: div
             fi-cl: 'item col-sm-12 col-md-6 col-lg-6'
             fi-at: ''
-            suffix: ''
-            lb-col: false
-            ow-def-at: false
-            ow-def-cl: false
-            fis-def-at: false
             fi-def-at: false
-    type: entity_reference_entity_view
+            prefix: ''
+            suffix: ''
+    weight: 3
     region: ds_content
   field_clients:
-    weight: 2
+    type: entity_reference_entity_view
     label: above
     settings:
       view_mode: default
@@ -133,33 +133,33 @@ content:
           id: expert
           settings:
             lb: ''
-            prefix: ''
             lbw: true
             lbw-el: h2
             lbw-cl: section-title
             lbw-at: ''
+            lb-col: false
             ow: true
             ow-el: div
             ow-cl: 'section projects'
             ow-at: 'id="clients"'
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
             fis-el: ''
             fis-cl: ''
             fis-at: ''
+            fis-def-at: false
             fi: true
             fi-el: div
             fi-cl: 'slide project'
             fi-at: ''
-            suffix: ''
-            lb-col: false
-            ow-def-at: false
-            ow-def-cl: false
-            fis: false
-            fis-def-at: false
             fi-def-at: false
-    type: entity_reference_entity_view
+            prefix: ''
+            suffix: ''
+    weight: 2
     region: ds_content
   field_contact_me:
-    weight: 5
+    type: entity_reference_entity_view
     label: above
     settings:
       view_mode: default
@@ -170,33 +170,33 @@ content:
           id: expert
           settings:
             lb: ''
-            prefix: ''
             lbw: true
             lbw-el: h2
             lbw-cl: section-title
             lbw-at: ''
+            lb-col: false
             ow: true
             ow-el: div
             ow-cl: 'section contact'
             ow-at: 'id="contact"'
-            fis-el: div
-            fis-cl: row
-            fis-at: ''
-            fi-el: div
-            fi-cl: '.col-sm-12 col-md-4 col-lg-4'
-            fi-at: ''
-            suffix: ''
-            lb-col: false
             ow-def-at: false
             ow-def-cl: false
             fis: false
+            fis-el: div
+            fis-cl: row
+            fis-at: ''
             fis-def-at: false
             fi: false
+            fi-el: div
+            fi-cl: '.col-sm-12 col-md-4 col-lg-4'
+            fi-at: ''
             fi-def-at: false
-    type: entity_reference_entity_view
+            prefix: ''
+            suffix: ''
+    weight: 5
     region: ds_content
   field_feedback:
-    weight: 4
+    type: entity_reference_entity_view
     label: above
     settings:
       view_mode: landing_page
@@ -208,40 +208,40 @@ content:
           id: expert
           settings:
             lb: ''
-            prefix: ''
             lbw: true
             lbw-el: h2
             lbw-cl: section-title
             lbw-at: ''
+            lb-col: false
             ow: true
             ow-el: div
             ow-cl: 'section feedback'
             ow-at: 'id="feedback"'
+            ow-def-at: false
+            ow-def-cl: false
             fis: true
             fis-el: div
             fis-cl: row
             fis-at: ''
+            fis-def-at: false
             fi: true
             fi-el: div
             fi-cl: 'item col-sm-12 col-md-4 col-lg-4'
             fi-at: ''
-            suffix: ''
-            lb-col: false
-            ow-def-at: false
-            ow-def-cl: false
-            fis-def-at: false
             fi-def-at: false
-    type: entity_reference_entity_view
+            prefix: ''
+            suffix: ''
+    weight: 4
     region: ds_content
   field_meta_tags:
-    weight: 6
+    type: metatag_empty_formatter
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: metatag_empty_formatter
+    weight: 6
     region: content
   field_projects:
-    weight: 1
+    type: entity_reference_entity_view
     label: above
     settings:
       view_mode: landing_page
@@ -252,30 +252,30 @@ content:
           id: expert
           settings:
             lb: ''
-            prefix: ''
             lbw: true
             lbw-el: h2
             lbw-cl: section-title
             lbw-at: ''
+            lb-col: false
             ow: true
             ow-el: div
             ow-cl: 'section projects'
             ow-at: 'id="projects"'
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
             fis-el: div
             fis-cl: content-wrapper
             fis-at: ''
+            fis-def-at: false
             fi: true
             fi-el: div
             fi-cl: 'slide project'
             fi-at: ''
-            suffix: ''
-            lb-col: false
-            ow-def-at: false
-            ow-def-cl: false
-            fis: false
-            fis-def-at: false
             fi-def-at: false
-    type: entity_reference_entity_view
+            prefix: ''
+            suffix: ''
+    weight: 1
     region: ds_content
 hidden:
   addtoany: true

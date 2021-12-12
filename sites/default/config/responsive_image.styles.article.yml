@@ -13,9 +13,9 @@ id: article
 label: Article
 image_style_mappings:
   -
-    breakpoint_id: easydrupal.screen-xs-max
-    multiplier: 1x
     image_mapping_type: image_style
     image_mapping: max_720x720
+    breakpoint_id: easydrupal.screen-xs-max
+    multiplier: 1x
 breakpoint_group: easydrupal
 fallback_image_style: max_200x200

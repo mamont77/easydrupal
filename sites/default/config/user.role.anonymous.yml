@@ -1,7 +1,16 @@
 uuid: f0cfbd88-d570-45a2-ae44-68d441292964
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  config:
+    - filter.format.restricted_html
+  module:
+    - contact
+    - disqus
+    - filter
+    - media
+    - sticky_sharrre_bar
+    - system
 _core:
   default_config_hash: j5zLMOdJBqC0bMvSdth5UebkprJB8g_2FXHqhfpJzow
 id: anonymous
@@ -9,13 +18,9 @@ label: 'Anonymous user'
 weight: 0
 is_admin: false
 permissions:
-  - 'access comments'
   - 'access content'
   - 'access site-wide contact form'
   - 'access sticky_sharrre_bar'
-  - 'access tour'
-  - 'search content'
   - 'use text format restricted_html'
   - 'view disqus comments'
   - 'view media'
-  - 'vote on node:article:field_vote'

@@ -16,11 +16,11 @@ plugin: addtoany_block
 settings:
   id: addtoany_block
   label: 'AddToAny buttons'
-  provider: addtoany
   label_display: '0'
+  provider: addtoany
 visibility:
   request_path:
     id: request_path
-    pages: "/articles\r\n/articles/*"
     negate: false
     context_mapping: {  }
+    pages: "/articles\r\n/articles/*"

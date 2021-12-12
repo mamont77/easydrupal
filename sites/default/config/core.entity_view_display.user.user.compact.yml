@@ -24,10 +24,10 @@ mode: compact
 content:
   user_picture:
     type: image
-    weight: 0
+    label: hidden
     settings:
-      image_style: max_150x150
       image_link: content
+      image_style: max_150x150
     third_party_settings:
       ds:
         ft:
@@ -36,7 +36,7 @@ content:
             lb: ''
             lb-col: false
             classes: {  }
-    label: hidden
+    weight: 0
     region: content
 hidden:
   field_about: true

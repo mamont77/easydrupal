@@ -3,6 +3,15 @@ favicon:
   path: ''
   url: 'https://makedrupaleasy.com/themes/custom/easydrupal/favicon.ico'
   use_default: true
+features:
+  comment_user_picture: true
+  comment_user_verification: true
+  favicon: true
+  node_user_picture: true
+logo:
+  path: ''
+  url: ''
+  use_default: true
 cdn_jsdelivr_version: 3.3.7
 breadcrumb_title: 0
 schemas:
@@ -16,13 +25,4 @@ button_size: btn-lg
 modal_enabled: 0
 popover_enabled: 0
 tooltip_enabled: 0
-features:
-  comment_user_picture: true
-  comment_user_verification: true
-  favicon: true
-  node_user_picture: true
-logo:
-  path: ''
-  url: ''
-  use_default: true
 cdn_provider: ''

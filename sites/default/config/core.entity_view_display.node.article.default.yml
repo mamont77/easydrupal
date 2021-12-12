@@ -32,16 +32,16 @@ third_party_settings:
       disable_css: false
       entity_classes: all_classes
       settings:
-        label: ''
+        classes:
+          layout_class: {  }
+          ds_content: {  }
         wrappers:
           ds_content: div
         outer_wrapper: div
         attributes: ''
         link_attribute: ''
         link_custom: ''
-        classes:
-          layout_class: {  }
-          ds_content: {  }
+        label: ''
     regions:
       ds_content:
         - node_post_date
@@ -75,29 +75,29 @@ mode: default
 content:
   body:
     type: text_default
-    weight: 2
+    label: hidden
     settings: {  }
     third_party_settings: {  }
-    label: hidden
+    weight: 2
     region: ds_content
   field_attachment_media:
     type: entity_reference_entity_view
-    weight: 5
-    region: ds_content
     label: above
     settings:
       view_mode: ''
       link: false
     third_party_settings: {  }
+    weight: 5
+    region: ds_content
   field_comments:
-    weight: 7
+    type: disqus_comment
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: disqus_comment
+    weight: 7
     region: ds_content
   field_conclusions:
-    weight: 4
+    type: text_default
     label: above
     settings: {  }
     third_party_settings:
@@ -106,35 +106,33 @@ content:
           id: expert
           settings:
             lb: ''
-            prefix: ''
             lbw: true
             lbw-el: h2
             lbw-cl: ''
             lbw-at: ''
+            lb-col: false
+            ow: false
             ow-el: ''
             ow-cl: ''
             ow-at: ''
-            fis-el: ''
-            fis-cl: ''
-            fis-at: ''
-            fi-el: ''
-            fi-cl: ''
-            fi-at: ''
-            suffix: ''
-            lb-col: false
-            ow: false
             ow-def-at: false
             ow-def-cl: false
             fis: false
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
             fis-def-at: false
             fi: false
+            fi-el: ''
+            fi-cl: ''
+            fi-at: ''
             fi-def-at: false
-    type: text_default
+            prefix: ''
+            suffix: ''
+    weight: 4
     region: ds_content
   field_image_media:
     type: entity_reference_entity_view
-    weight: 1
-    region: ds_content
     label: hidden
     settings:
       view_mode: article
@@ -147,34 +145,36 @@ content:
             lb: ''
             lb-col: false
             classes: {  }
+    weight: 1
+    region: ds_content
   field_meta_tags:
-    weight: 8
+    type: metatag_empty_formatter
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: metatag_empty_formatter
+    weight: 8
     region: ds_content
   field_sourse_code_paragraph:
     type: entity_reference_revisions_entity_view
-    weight: 3
     label: hidden
     settings:
       view_mode: default
       link: ''
     third_party_settings: {  }
+    weight: 3
     region: ds_content
   field_yoast_seo:
-    weight: 9
+    type: yoastseo_formatter
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: yoastseo_formatter
+    weight: 9
     region: ds_content
   links:
-    weight: 6
-    region: ds_content
     settings: {  }
     third_party_settings: {  }
+    weight: 6
+    region: ds_content
 hidden:
   addtoany: true
   field_attachment: true

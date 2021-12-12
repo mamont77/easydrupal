@@ -17,35 +17,35 @@ bundle: sourse_code
 mode: default
 content:
   field_code:
+    type: geshifield_default
     weight: 2
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: geshifield_default
-    region: content
   field_description:
+    type: text_textarea
     weight: 3
+    region: content
     settings:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
-    type: text_textarea
-    region: content
   field_file_path:
+    type: string_textfield
     weight: 1
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_top_description:
+    type: text_textarea
     weight: 0
+    region: content
     settings:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
-    type: text_textarea
-    region: content
 hidden:
   created: true
   status: true

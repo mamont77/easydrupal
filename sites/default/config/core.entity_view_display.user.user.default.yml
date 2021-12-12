@@ -24,31 +24,31 @@ bundle: user
 mode: default
 content:
   field_about:
-    weight: 5
+    type: text_default
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    type: text_default
+    weight: 5
     region: content
   field_country:
-    weight: 3
+    type: string
     label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 3
     region: content
   field_date_birth:
-    weight: 2
+    type: datetime_default
     label: hidden
     settings:
       timezone_override: ''
       format_type: html_date
     third_party_settings: {  }
-    type: datetime_default
+    weight: 2
     region: content
   field_first_name:
-    weight: 0
+    type: string
     label: hidden
     settings:
       link_to_entity: false
@@ -58,10 +58,10 @@ content:
           id: reset
           settings:
             lb: ''
-    type: string
+    weight: 0
     region: content
   field_last_name:
-    weight: 1
+    type: string
     label: hidden
     settings:
       link_to_entity: false
@@ -71,19 +71,19 @@ content:
           id: reset
           settings:
             lb: ''
-    type: string
+    weight: 1
     region: content
   member_for:
-    weight: 6
     settings: {  }
     third_party_settings: {  }
+    weight: 6
     region: content
   user_picture:
     type: image
-    weight: 4
+    label: hidden
     settings:
-      image_style: max_150x150
       image_link: content
+      image_style: max_150x150
     third_party_settings:
       ds:
         ft:
@@ -92,6 +92,6 @@ content:
             lb: ''
             lb-col: false
             classes: {  }
-    label: hidden
+    weight: 4
     region: content
 hidden: {  }

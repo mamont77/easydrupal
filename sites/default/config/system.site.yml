@@ -1,3 +1,6 @@
+_core:
+  default_config_hash: yXadRE77Va-G6dxhd2kPYapAvbnSvTF6hO4oXiOEynI
+langcode: en
 uuid: 372e4f10-29c3-45b9-ab06-6aac3b7a36f8
 name: 'Make Drupal Easy'
 mail: ruslan.piskarev@gmail.com
@@ -8,8 +11,5 @@ page:
   front: /node/37
 admin_compact_mode: false
 weight_select_max: 100
-langcode: en
 default_langcode: en
-_core:
-  default_config_hash: yXadRE77Va-G6dxhd2kPYapAvbnSvTF6hO4oXiOEynI
 mail_notification: ''

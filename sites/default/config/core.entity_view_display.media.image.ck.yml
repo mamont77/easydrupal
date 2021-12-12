@@ -19,15 +19,9 @@ bundle: image
 mode: ck
 content:
   field_media_image:
+    type: blazy
     label: visually_hidden
     settings:
-      image_style: ''
-      responsive_image_style: feedback_portrait
-      media_switch: ''
-      thumbnail_style: ''
-      ratio: ''
-      current_view_mode: ck
-      background: false
       caption:
         title: '0'
         alt: '0'
@@ -35,13 +29,20 @@ content:
       layout: ''
       view_mode: ''
       cache: 0
+      current_view_mode: ck
       skin: ''
       fx: ''
       style: ''
+      background: false
       box_caption: ''
       box_caption_custom: ''
       box_media_style: ''
+      responsive_image_style: feedback_portrait
       box_style: ''
+      image_style: ''
+      media_switch: ''
+      ratio: ''
+      thumbnail_style: ''
       _uri: ''
       breakpoints: {  }
       sizes: ''
@@ -57,7 +58,6 @@ content:
             lb: ''
             lb-col: false
             classes: {  }
-    type: blazy
     weight: 0
     region: content
 hidden:

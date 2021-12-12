@@ -13,19 +13,19 @@ id: project_summary
 label: 'Project Summary'
 image_style_mappings:
   -
-    breakpoint_id: easydrupal.screen-xs-max
-    multiplier: 1x
     image_mapping_type: image_style
     image_mapping: max_720x720
-  -
-    breakpoint_id: easydrupal.screen-sm-max
+    breakpoint_id: easydrupal.screen-xs-max
     multiplier: 1x
+  -
     image_mapping_type: image_style
     image_mapping: project_summary_max_width_991px_
-  -
-    breakpoint_id: easydrupal.screen-md-max
+    breakpoint_id: easydrupal.screen-sm-max
     multiplier: 1x
+  -
     image_mapping_type: image_style
     image_mapping: project_summary_max_width_1199px
+    breakpoint_id: easydrupal.screen-md-max
+    multiplier: 1x
 breakpoint_group: easydrupal
 fallback_image_style: project_summary_default

@@ -11,12 +11,12 @@ pattern: 'client/[node:title]'
 selection_criteria:
   9325f4c2-e210-4ba5-a4ca-75d4a8b19a24:
     id: node_type
-    bundles:
-      client: client
     negate: false
+    uuid: 9325f4c2-e210-4ba5-a4ca-75d4a8b19a24
     context_mapping:
       node: node
-    uuid: 9325f4c2-e210-4ba5-a4ca-75d4a8b19a24
+    bundles:
+      client: client
 selection_logic: and
 weight: -5
 relationships: {  }

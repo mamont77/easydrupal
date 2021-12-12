@@ -99,13 +99,13 @@ filters:
     status: false
     weight: -38
     settings:
-      filter_tags:
-        img: img
-        iframe: iframe
       media_switch: ''
       hybrid_style: ''
       box_style: ''
       box_caption: ''
+      filter_tags:
+        img: img
+        iframe: iframe
       use_data_uri: '0'
   media_embed:
     id: media_embed
@@ -114,12 +114,12 @@ filters:
     weight: -48
     settings:
       default_view_mode: ckeditor_don_t_resize
-      allowed_media_types: {  }
       allowed_view_modes:
         ck: ck
         ckeditor_don_t_resize: ckeditor_don_t_resize
         ckeditor_half_width: ckeditor_half_width
         ckeditor_third_width: ckeditor_third_width
+      allowed_media_types: {  }
   slick_filter:
     id: slick_filter
     provider: slick
@@ -127,20 +127,14 @@ filters:
     weight: -37
     settings:
       optionset: default
+      layout: ''
       skin: ''
       background: false
-      layout: ''
-      optionset_thumbnail: ''
-      skin_thumbnail: ''
-      thumbnail_position: ''
-      thumbnail_caption: ''
-      image_style: ''
-      thumbnail_style: ''
       responsive_image_style: ''
-      thumbnail_effect: ''
+      image_style: ''
       media_switch: ''
       ratio: ''
-      override: false
+      thumbnail_style: ''
       overridables:
         arrows: '0'
         autoplay: '0'
@@ -150,3 +144,9 @@ filters:
         mouseWheel: '0'
         randomize: '0'
         variableWidth: '0'
+      optionset_thumbnail: ''
+      skin_thumbnail: ''
+      thumbnail_caption: ''
+      thumbnail_effect: ''
+      thumbnail_position: ''
+      override: false

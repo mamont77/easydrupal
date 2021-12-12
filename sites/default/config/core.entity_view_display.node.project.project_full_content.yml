@@ -86,9 +86,8 @@ bundle: project
 mode: project_full_content
 content:
   body:
-    label: hidden
     type: text_default
-    weight: 2
+    label: hidden
     settings: {  }
     third_party_settings:
       ds:
@@ -98,20 +97,19 @@ content:
             lb: ''
             lb-col: false
             classes: {  }
+    weight: 2
     region: right
   field_date:
-    weight: 1
+    type: datetime_default
     label: hidden
     settings:
       timezone_override: ''
       format_type: month_year
     third_party_settings: {  }
-    type: datetime_default
+    weight: 1
     region: right
   field_logo_media:
     type: entity_reference_entity_view
-    weight: 0
-    region: left
     label: hidden
     settings:
       view_mode: project_logo
@@ -125,45 +123,49 @@ content:
             lb: ''
             lb-col: false
             classes: {  }
+    weight: 0
+    region: left
   field_project_images_media:
     type: slick_media
-    weight: 5
-    region: bottom
     label: hidden
     settings:
-      style: ''
-      optionset: default
-      optionset_thumbnail: ''
-      skin: ''
-      skin_thumbnail: ''
-      image_style: project_slider_default
-      responsive_image_style: project_slider
-      thumbnail_effect: ''
-      thumbnail_position: ''
-      media_switch: ''
-      thumbnail_style: ''
-      ratio: ''
-      view_mode: default
-      grid: ''
-      grid_medium: ''
-      grid_small: ''
-      visible_items: null
-      image: ''
-      title: ''
-      link: ''
-      layout: ''
-      class: ''
       caption:
         alt: alt
         field_media_categories: '0'
         title: '0'
+      optionset: default
+      class: ''
+      id: ''
+      image: ''
+      link: ''
+      overlay: ''
+      title: ''
+      vanilla: false
+      icon: ''
+      layout: ''
+      view_mode: default
       cache: 0
       current_view_mode: project_full_content
-      vanilla: false
+      skin: ''
+      fx: ''
+      style: ''
       background: false
-      preserve_keys: false
-      use_theme_field: false
-      override: false
+      box_caption: ''
+      box_caption_custom: ''
+      box_media_style: ''
+      responsive_image_style: project_slider
+      box_style: ''
+      image_style: project_slider_default
+      media_switch: ''
+      ratio: ''
+      thumbnail_style: ''
+      _uri: ''
+      breakpoints: {  }
+      sizes: ''
+      grid_header: ''
+      grid: ''
+      grid_medium: ''
+      grid_small: ''
       overridables:
         arrows: '0'
         autoplay: '0'
@@ -174,21 +176,17 @@ content:
         randomize: '0'
         variableWidth: '0'
       thumbnail: ''
+      optionset_thumbnail: ''
+      skin_thumbnail: ''
       thumbnail_caption: ''
+      thumbnail_effect: ''
+      thumbnail_position: ''
+      override: false
       skin_arrows: ''
       skin_dots: ''
-      fx: ''
-      icon: ''
-      box_caption: ''
-      box_caption_custom: ''
-      box_media_style: ''
-      box_style: ''
-      _uri: ''
-      breakpoints: {  }
-      sizes: ''
-      grid_header: ''
-      id: ''
-      overlay: ''
+      use_theme_field: false
+      preserve_keys: false
+      visible_items: null
     third_party_settings:
       ds:
         ds_limit: ''
@@ -198,15 +196,17 @@ content:
             lb: ''
             lb-col: false
             classes: {  }
+    weight: 5
+    region: bottom
   field_project_url:
-    weight: 4
+    type: link
     label: hidden
     settings:
       trim_length: 80
-      rel: nofollow
-      target: _blank
       url_only: false
       url_plain: false
+      rel: nofollow
+      target: _blank
     third_party_settings:
       ds:
         ft:
@@ -215,10 +215,10 @@ content:
             lb: WebSite
             lb-col: false
             classes: {  }
-    type: link
+    weight: 4
     region: right
   field_skills:
-    weight: 3
+    type: string
     label: inline
     settings:
       link_to_entity: false
@@ -229,30 +229,30 @@ content:
           id: expert
           settings:
             lb: ''
-            prefix: ''
             lbw: true
             lbw-el: div
             lbw-cl: field--label
             lbw-at: ''
+            lb-col: false
             ow: true
             ow-el: div
             ow-cl: 'field field--name-field-skills field--label-inline'
             ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
             fis: true
             fis-el: ol
             fis-cl: skills
             fis-at: ''
+            fis-def-at: false
             fi: true
             fi-el: li
             fi-cl: skill
             fi-at: ''
-            suffix: ''
-            lb-col: false
-            ow-def-at: false
-            ow-def-cl: false
-            fis-def-at: false
             fi-def-at: false
-    type: string
+            prefix: ''
+            suffix: ''
+    weight: 3
     region: right
 hidden:
   field_image: true

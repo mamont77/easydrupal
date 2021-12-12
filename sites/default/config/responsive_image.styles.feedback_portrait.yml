@@ -10,9 +10,9 @@ id: feedback_portrait
 label: 'FeedBack Portrait'
 image_style_mappings:
   -
-    breakpoint_id: easydrupal.min-width-1px
-    multiplier: 1x
     image_mapping_type: image_style
     image_mapping: feedback_portrait
+    breakpoint_id: easydrupal.min-width-1px
+    multiplier: 1x
 breakpoint_group: easydrupal
 fallback_image_style: feedback_portrait

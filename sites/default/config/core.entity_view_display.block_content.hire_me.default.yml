@@ -14,19 +14,10 @@ third_party_settings:
   ds:
     layout:
       id: ds_3col_equal_width
-      path: modules/ds
       library: layout_plugin/ds_3col_equal_width
       disable_css: true
       entity_classes: no_classes
       settings:
-        wrappers:
-          left: div
-          middle: div
-          right: div
-        outer_wrapper: div
-        attributes: ''
-        link_attribute: ''
-        link_custom: ''
         classes:
           layout_class:
             row: row
@@ -36,6 +27,15 @@ third_party_settings:
             col-sm-4: col-sm-4
           right:
             col-sm-4: col-sm-4
+        wrappers:
+          left: div
+          middle: div
+          right: div
+        outer_wrapper: div
+        attributes: ''
+        link_attribute: ''
+        link_custom: ''
+      path: modules/ds
     regions:
       left:
         - block_description
@@ -62,9 +62,8 @@ bundle: hire_me
 mode: default
 content:
   body:
-    label: hidden
     type: text_default
-    weight: 1
+    label: hidden
     settings: {  }
     third_party_settings:
       ds:
@@ -72,9 +71,10 @@ content:
           id: reset
           settings:
             lb: ''
+    weight: 1
     region: middle
   field_link:
-    weight: 2
+    type: link
     label: hidden
     settings:
       trim_length: 80
@@ -88,6 +88,6 @@ content:
           id: reset
           settings:
             lb: ''
-    type: link
+    weight: 2
     region: right
 hidden: {  }

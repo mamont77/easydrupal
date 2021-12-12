@@ -29,7 +29,6 @@ third_party_settings:
   ds:
     layout:
       id: bs_2col_stacked
-      path: modules/bootstrap_layouts
       library: ''
       disable_css: false
       entity_classes: no_classes
@@ -64,6 +63,7 @@ third_party_settings:
             classes:
               col-sm-12: col-sm-12
             attributes: ''
+      path: modules/bootstrap_layouts
     regions:
       right:
         - field_date
@@ -80,74 +80,72 @@ bundle: project
 mode: full
 content:
   body:
-    label: hidden
     type: text_default
-    weight: 3
+    label: hidden
     settings: {  }
     third_party_settings: {  }
+    weight: 3
     region: right
   field_date:
-    weight: 2
+    type: datetime_default
     label: hidden
     settings:
       timezone_override: ''
       format_type: month_year
     third_party_settings: {  }
-    type: datetime_default
+    weight: 2
     region: right
   field_project_images:
-    weight: 6
+    type: slick_image
     label: hidden
     settings:
-      style: ''
-      optionset: default
-      optionset_thumbnail: ''
-      skin: default
-      skin_thumbnail: ''
-      image_style: project_slider
-      thumbnail_style: ''
-      responsive_image_style: ''
-      thumbnail_effect: ''
-      thumbnail_position: over-top
-      media_switch: ''
-      ratio: ''
-      grid: null
-      grid_medium: null
-      grid_small: null
-      visible_items: null
-      layout: ''
-      thumbnail_caption: ''
       caption:
         alt: alt
         title: '0'
+      optionset: default
+      icon: ''
+      layout: ''
+      view_mode: ''
       cache: 0
-      sizes: ''
+      current_view_mode: full
+      skin: default
+      style: ''
+      background: false
+      box_caption: ''
+      box_caption_custom: ''
+      box_media_style: ''
+      responsive_image_style: ''
+      box_style: ''
+      image_style: project_slider
+      media_switch: ''
+      ratio: ''
+      thumbnail_style: ''
       breakpoints:
         xs:
-          image_style: ''
-          width: ''
           breakpoint: ''
+          width: ''
+          image_style: ''
         sm:
-          image_style: ''
-          width: ''
           breakpoint: ''
+          width: ''
+          image_style: ''
         md:
-          image_style: ''
-          width: ''
           breakpoint: ''
+          width: ''
+          image_style: ''
         lg:
-          image_style: ''
-          width: ''
           breakpoint: ''
+          width: ''
+          image_style: ''
         xl:
-          image_style: ''
-          width: ''
           breakpoint: ''
-      current_view_mode: full
-      background: false
+          width: ''
+          image_style: ''
+      sizes: ''
       grid_header: ''
-      preserve_keys: false
-      override: false
+      grid: null
+      grid_medium: null
+      grid_small: null
       overridables:
         arrows: '0'
         autoplay: '0'
@@ -157,15 +155,17 @@ content:
         mouseWheel: '0'
         randomize: '0'
         variableWidth: '0'
+      optionset_thumbnail: ''
+      skin_thumbnail: ''
+      thumbnail_caption: ''
+      thumbnail_effect: ''
+      thumbnail_position: over-top
+      override: false
       skin_arrows: ''
       skin_dots: ''
-      box_caption: ''
-      box_caption_custom: ''
-      box_style: ''
-      box_media_style: ''
+      preserve_keys: false
+      visible_items: null
       iframe_lazy: true
-      icon: ''
-      view_mode: ''
     third_party_settings:
       ds:
         ds_limit: ''
@@ -175,17 +175,17 @@ content:
             lb: ''
             lb-col: false
             classes: {  }
-    type: slick_image
+    weight: 6
     region: bottom
   field_project_url:
-    weight: 5
+    type: link
     label: inline
     settings:
       trim_length: 80
-      rel: nofollow
-      target: _blank
       url_only: false
       url_plain: false
+      rel: nofollow
+      target: _blank
     third_party_settings:
       ds:
         ft:
@@ -194,10 +194,10 @@ content:
             lb: Website
             lb-col: false
             classes: {  }
-    type: link
+    weight: 5
     region: right
   field_skills:
-    weight: 4
+    type: string
     label: inline
     settings:
       link_to_entity: false
@@ -208,30 +208,30 @@ content:
           id: expert
           settings:
             lb: ''
-            prefix: ''
             lbw: true
             lbw-el: div
             lbw-cl: field--label
             lbw-at: ''
+            lb-col: false
             ow: true
             ow-el: div
             ow-cl: 'field field--name-field-skills field--label-inline'
             ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
             fis: true
             fis-el: ul
             fis-cl: skills
             fis-at: ''
+            fis-def-at: false
             fi: true
             fi-el: li
             fi-cl: skill
             fi-at: ''
-            suffix: ''
-            lb-col: false
-            ow-def-at: false
-            ow-def-cl: false
-            fis-def-at: false
             fi-def-at: false
-    type: string
+            prefix: ''
+            suffix: ''
+    weight: 4
     region: right
 hidden:
   field_image: true

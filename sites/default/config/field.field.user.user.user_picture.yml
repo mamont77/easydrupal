@@ -17,15 +17,15 @@ third_party_settings:
         slashes: false
         pathauto: false
         transliterate: false
-    redirect: false
-    retroactive_update: true
-    active_updating: false
     file_name:
       value: '[file:ffp-name-only-original].[file:ffp-extension-original]'
       options:
         slashes: false
         pathauto: false
         transliterate: false
+    redirect: false
+    retroactive_update: true
+    active_updating: false
 _core:
   default_config_hash: cL7i1kgJvlJa6H00f0E_fZ2KdD1ag0ASpLts0K-KNII
 id: user.user.user_picture
@@ -39,6 +39,8 @@ translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:
+  handler: 'default:file'
+  handler_settings: {  }
   file_directory: 'pictures/[date:custom:Y]-[date:custom:m]'
   file_extensions: 'png gif jpg jpeg'
   max_filesize: '50 KB'
@@ -54,6 +56,4 @@ settings:
     title: ''
     width: null
     height: null
-  handler: 'default:file'
-  handler_settings: {  }
 field_type: image

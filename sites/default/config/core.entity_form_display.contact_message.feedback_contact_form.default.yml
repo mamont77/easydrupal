@@ -11,34 +11,34 @@ mode: default
 content:
   mail:
     weight: 1
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
   message:
     type: string_textarea
     weight: 3
+    region: content
     settings:
       rows: 6
       placeholder: 'Your message'
     third_party_settings: {  }
-    region: content
   name:
     weight: 0
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
   preview:
     weight: 4
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
   subject:
     type: string_textfield
     weight: 2
+    region: content
     settings:
       size: 30
       placeholder: 'Your subject'
     third_party_settings: {  }
-    region: content
 hidden:
   copy: true
