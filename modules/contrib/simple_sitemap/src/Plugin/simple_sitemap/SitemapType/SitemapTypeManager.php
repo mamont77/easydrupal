@@ -1,19 +1,19 @@
 <?php
 
-namespace Drupal\simple_sitemap\Plugin\simple_sitemap\UrlGenerator;
+namespace Drupal\simple_sitemap\Plugin\simple_sitemap\SitemapType;
 
 use Drupal\Core\Plugin\DefaultPluginManager;
 use Drupal\Core\Cache\CacheBackendInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 
 /**
- * Class UrlGeneratorManager
- * @package Drupal\simple_sitemap\Plugin\simple_sitemap\UrlGenerator
+ * Class SitemapTypeManager
+ * @package Drupal\simple_sitemap\Plugin\simple_sitemap\SitemapType
  */
-class UrlGeneratorManager extends DefaultPluginManager {
+class SitemapTypeManager extends DefaultPluginManager {
 
   /**
-   * UrlGeneratorManager constructor.
+   * SitemapTypeManager constructor.
    * @param \Traversable $namespaces
    * @param \Drupal\Core\Cache\CacheBackendInterface $cache_backend
    * @param \Drupal\Core\Extension\ModuleHandlerInterface $module_handler
@@ -24,14 +24,14 @@ class UrlGeneratorManager extends DefaultPluginManager {
     ModuleHandlerInterface $module_handler
   ) {
     parent::__construct(
-      'Plugin/simple_sitemap/UrlGenerator',
+      'Plugin/simple_sitemap/SitemapType',
       $namespaces,
       $module_handler,
-      'Drupal\simple_sitemap\Plugin\simple_sitemap\UrlGenerator\UrlGeneratorInterface',
-      'Drupal\simple_sitemap\Annotation\UrlGenerator'
+      'Drupal\simple_sitemap\Plugin\simple_sitemap\SitemapType\SitemapTypeInterface',
+      'Drupal\simple_sitemap\Annotation\SitemapType'
     );
 
-    $this->alterInfo('simple_sitemap_url_generators');
-    $this->setCacheBackend($cache_backend, 'simple_sitemap:url_generator');
+    $this->alterInfo('simple_sitemap_sitemap_types');
+    $this->setCacheBackend($cache_backend, 'simple_sitemap:sitemap_type');
   }
 }

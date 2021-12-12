@@ -29,7 +29,7 @@ use Drupal\Core\Config\Entity\ConfigEntityBase;
  *   }
  * )
  */
-class SimpleSitemapEngine extends ConfigEntityBase {
+class SearchEngine extends ConfigEntityBase {
 
   /**
    * The search engine ID.
@@ -56,7 +56,7 @@ class SimpleSitemapEngine extends ConfigEntityBase {
   public $url;
 
   /**
-   * List of sitemaps to be submitted to this search engine.
+   * List of sitemap variants to be submitted to this search engine.
    *
    * @var array
    */
@@ -69,7 +69,7 @@ class SimpleSitemapEngine extends ConfigEntityBase {
    *   The search engine label.
    */
   public function __toString() {
-    return (string) $this->label();
+    return $this->label();
   }
 
 }

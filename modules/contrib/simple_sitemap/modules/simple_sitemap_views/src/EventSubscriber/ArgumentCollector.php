@@ -101,14 +101,13 @@ class ArgumentCollector implements EventSubscriberInterface {
 
     $args = [];
     foreach ($map as $attribute => $parameter_name) {
-      $parameter_name = $parameter_name ?? $attribute;
+      $parameter_name = isset($parameter_name) ? $parameter_name : $attribute;
       $arg = $this->routeMatch->getRawParameter($parameter_name);
 
       if ($arg !== NULL) {
         $args[] = $arg;
       }
     }
-
     return $args;
   }
 

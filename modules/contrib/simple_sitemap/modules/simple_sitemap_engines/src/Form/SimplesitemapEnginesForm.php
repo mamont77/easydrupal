@@ -7,9 +7,8 @@ use Drupal\Core\Datetime\DateFormatter;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\simple_sitemap\Entity\SimpleSitemap;
 use Drupal\simple_sitemap\Form\FormHelper;
-use Drupal\simple_sitemap_engines\Entity\SimpleSitemapEngine;
+use Drupal\simple_sitemap\SimplesitemapManager;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -32,6 +31,13 @@ class SimplesitemapEnginesForm extends ConfigFormBase {
   protected $dateFormatter;
 
   /**
+   * The sitemap manager service.
+   *
+   * @var \Drupal\simple_sitemap\SimplesitemapManager
+   */
+  protected $sitemapManager;
+
+  /**
    * SimplesitemapEnginesForm constructor.
    *
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
@@ -40,11 +46,14 @@ class SimplesitemapEnginesForm extends ConfigFormBase {
    *   The entity type manager service.
    * @param \Drupal\Core\Datetime\DateFormatter $date_formatter
    *   The date formatter service.
+   * @param \Drupal\simple_sitemap\SimplesitemapManager $sitemap_manager
+   *   The sitemap manager service.
    */
-  public function __construct(ConfigFactoryInterface $config_factory, EntityTypeManagerInterface $entity_type_manager, DateFormatter $date_formatter) {
+  public function __construct(ConfigFactoryInterface $config_factory, EntityTypeManagerInterface $entity_type_manager, DateFormatter $date_formatter, SimplesitemapManager $sitemap_manager) {
     parent::__construct($config_factory);
     $this->entityTypeManager = $entity_type_manager;
     $this->dateFormatter = $date_formatter;
+    $this->sitemapManager = $sitemap_manager;
   }
 
   /**
@@ -54,7 +63,8 @@ class SimplesitemapEnginesForm extends ConfigFormBase {
     return new static(
       $container->get('config.factory'),
       $container->get('entity_type.manager'),
-      $container->get('date.formatter')
+      $container->get('date.formatter'),
+      $container->get('simple_sitemap.manager')
     );
   }
 
@@ -89,7 +99,7 @@ class SimplesitemapEnginesForm extends ConfigFormBase {
     $form['settings']['enabled'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Submit the sitemap to search engines'),
-      '#description' => $this->t("This enables/disables sitemap submitting; don't forget to choose sitemaps below."),
+      '#description' => $this->t('This enables/disables sitemap submitting; don\'t forget to choose variants below.'),
       '#default_value' => $config->get('enabled'),
     ];
 
@@ -105,11 +115,11 @@ class SimplesitemapEnginesForm extends ConfigFormBase {
 
     $form['engines'] = [
       '#type' => 'fieldset',
-      '#title' => $this->t('Sitemap specific settings'),
-      '#markup' => '<div class="description">' . $this->t('Choose which sitemaps are to be submitted to which search engines.<br>Sitemaps can be configured <a href="@url">here</a>.', ['@url' => $GLOBALS['base_url'] . '/admin/config/search/simplesitemap']) . '</div>',
+      '#title' => $this->t('Variant specific settings'),
+      '#markup' => '<div class="description">' . $this->t('Choose which sitemap variants are to be submitted to which search engines.<br>Variants can be configured <a href="@url">here</a>.', ['@url' => $GLOBALS['base_url'] . '/admin/config/search/simplesitemap/variants']) . '</div>',
     ];
 
-    $engines = SimpleSitemapEngine::loadMultiple();
+    $engines = $this->entityTypeManager->getStorage('simple_sitemap_engine')->loadMultiple();
     foreach ($engines as $engine_id => $engine) {
       $form['engines'][$engine_id] = [
         '#type' => 'details',
@@ -118,12 +128,10 @@ class SimplesitemapEnginesForm extends ConfigFormBase {
       ];
       $form['engines'][$engine_id]['variants'] = [
         '#type' => 'select',
-        '#title' => $this->t('Sitemaps'),
+        '#title' => $this->t('Sitemap variants'),
         '#options' => array_map(
-          function ($sitemap) {
-            return $sitemap->label();
-          },
-          SimpleSitemap::loadMultiple()
+          function ($variant) { return $this->t($variant['label']); },
+          $this->sitemapManager->getSitemapVariants(NULL, FALSE)
         ),
         '#default_value' => $engine->sitemap_variants,
         '#multiple' => TRUE,
@@ -137,12 +145,8 @@ class SimplesitemapEnginesForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    foreach (SimpleSitemapEngine::loadMultiple() as $engine_id => $engine) {
-      if (!empty($values = $form_state->getValue([
-        'engines',
-        $engine_id,
-        'variants',
-      ]))) {
+    foreach ($this->entityTypeManager->getStorage('simple_sitemap_engine')->loadMultiple() as $engine_id => $engine) {
+      if (!empty($values = $form_state->getValue(['engines', $engine_id, 'variants']))) {
         $submit = TRUE;
       }
       $engine->sitemap_variants = $values;
@@ -153,14 +157,11 @@ class SimplesitemapEnginesForm extends ConfigFormBase {
 
     $enabled = (bool) $form_state->getValue(['settings', 'enabled']);
     $config->set('enabled', $enabled);
-    $config->set('submission_interval', $form_state->getValue([
-      'settings',
-      'submission_interval',
-    ]));
+    $config->set('submission_interval', $form_state->getValue(['settings', 'submission_interval']));
     $config->save();
 
     if ($enabled && empty($submit)) {
-      $this->messenger()->addWarning($this->t('No sitemaps have been selected for submission.'));
+      $this->messenger()->addWarning($this->t('No sitemap variants have been selected for submission.'));
     }
 
     parent::submitForm($form, $form_state);
