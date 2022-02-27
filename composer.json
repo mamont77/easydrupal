@@ -98,6 +98,15 @@
         "optimize-autoloader": true,
         "platform": {
             "php": "7.3"
+        },
+        "allow-plugins": {
+            "composer/installers": true,
+            "cweagans/composer-patches": true,
+            "drupal/core-composer-scaffold": true,
+            "drupal/core-project-message": true,
+            "grasmash/drupal-security-warning": true,
+            "oomphinc/composer-installers-extender": true,
+            "topfloor/composer-cleanup-vcs-dirs": true
         }
     },
     "extra": {
