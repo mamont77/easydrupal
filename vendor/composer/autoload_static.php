@@ -6184,6 +6184,7 @@ class ComposerStaticInit7bb062997fc4f0d3cdcb37d377b9bb20
         'lsolesen\\pel\\PelFormat' => __DIR__ . '/..' . '/lsolesen/pel/src/PelFormat.php',
         'lsolesen\\pel\\PelIfd' => __DIR__ . '/..' . '/lsolesen/pel/src/PelIfd.php',
         'lsolesen\\pel\\PelIfdException' => __DIR__ . '/..' . '/lsolesen/pel/src/PelIfdException.php',
+        'lsolesen\\pel\\PelIllegalFormatException' => __DIR__ . '/..' . '/lsolesen/pel/src/PelIllegalFormatException.php',
         'lsolesen\\pel\\PelInvalidArgumentException' => __DIR__ . '/..' . '/lsolesen/pel/src/PelInvalidArgumentException.php',
         'lsolesen\\pel\\PelInvalidDataException' => __DIR__ . '/..' . '/lsolesen/pel/src/PelInvalidDataException.php',
         'lsolesen\\pel\\PelJpeg' => __DIR__ . '/..' . '/lsolesen/pel/src/PelJpeg.php',

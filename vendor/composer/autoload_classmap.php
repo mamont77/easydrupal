@@ -5539,6 +5539,7 @@ return array(
     'lsolesen\\pel\\PelFormat' => $vendorDir . '/lsolesen/pel/src/PelFormat.php',
     'lsolesen\\pel\\PelIfd' => $vendorDir . '/lsolesen/pel/src/PelIfd.php',
     'lsolesen\\pel\\PelIfdException' => $vendorDir . '/lsolesen/pel/src/PelIfdException.php',
+    'lsolesen\\pel\\PelIllegalFormatException' => $vendorDir . '/lsolesen/pel/src/PelIllegalFormatException.php',
     'lsolesen\\pel\\PelInvalidArgumentException' => $vendorDir . '/lsolesen/pel/src/PelInvalidArgumentException.php',
     'lsolesen\\pel\\PelInvalidDataException' => $vendorDir . '/lsolesen/pel/src/PelInvalidDataException.php',
     'lsolesen\\pel\\PelJpeg' => $vendorDir . '/lsolesen/pel/src/PelJpeg.php',
