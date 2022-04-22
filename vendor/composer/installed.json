@@ -2397,18 +2397,18 @@
         },
         {
             "name": "drupal/blazy",
-            "version": "2.7.0",
-            "version_normalized": "2.7.0.0",
+            "version": "2.10.0",
+            "version_normalized": "2.10.0.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/blazy.git",
-                "reference": "8.x-2.7"
+                "reference": "8.x-2.10"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/blazy-8.x-2.7.zip",
-                "reference": "8.x-2.7",
-                "shasum": "9ef7ef595a877dbdf2095d08a58f3dd4b56f9b17"
+                "url": "https://ftp.drupal.org/files/projects/blazy-8.x-2.10.zip",
+                "reference": "8.x-2.10",
+                "shasum": "5872004f1ff1eb097a1cee842adb84f2e2d0bac1"
             },
             "require": {
                 "drupal/core": "^8.8 || ^9 || ^10"
@@ -2419,8 +2419,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-2.7",
-                    "datestamp": "1645369518",
+                    "version": "8.x-2.10",
+                    "datestamp": "1650563727",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -2467,18 +2467,18 @@
         },
         {
             "name": "drupal/bootstrap",
-            "version": "3.23.0",
-            "version_normalized": "3.23.0.0",
+            "version": "3.24.0",
+            "version_normalized": "3.24.0.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/bootstrap.git",
-                "reference": "8.x-3.23"
+                "reference": "8.x-3.24"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/bootstrap-8.x-3.23.zip",
-                "reference": "8.x-3.23",
-                "shasum": "9849be667cc678a91ad29f77c2baea2cf16878bc"
+                "url": "https://ftp.drupal.org/files/projects/bootstrap-8.x-3.24.zip",
+                "reference": "8.x-3.24",
+                "shasum": "112e9925fd6d694f41b388a81748d1175c776969"
             },
             "require": {
                 "drupal/core": "^8 || ^9"
@@ -2486,8 +2486,8 @@
             "type": "drupal-theme",
             "extra": {
                 "drupal": {
-                    "version": "8.x-3.23",
-                    "datestamp": "1592175762",
+                    "version": "8.x-3.24",
+                    "datestamp": "1648749397",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -3449,28 +3449,28 @@
         },
         {
             "name": "drupal/devel_php",
-            "version": "1.3.0",
-            "version_normalized": "1.3.0.0",
+            "version": "1.5.0",
+            "version_normalized": "1.5.0.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/devel_php.git",
-                "reference": "8.x-1.3"
+                "reference": "8.x-1.5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/devel_php-8.x-1.3.zip",
-                "reference": "8.x-1.3",
-                "shasum": "73282d23331c36c0460bfb0c1efd124fe89549b4"
+                "url": "https://ftp.drupal.org/files/projects/devel_php-8.x-1.5.zip",
+                "reference": "8.x-1.5",
+                "shasum": "eca4f0fba9f89ffcc104478a1107de2e2f9fe926"
             },
             "require": {
-                "drupal/core": "^8.8 || ^9",
+                "drupal/core": "^9.2 || ^10",
                 "drupal/devel": ">=2.1"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-1.3",
-                    "datestamp": "1601974470",
+                    "version": "8.x-1.5",
+                    "datestamp": "1649422110",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Project has not opted into security advisory coverage!"
@@ -3484,21 +3484,18 @@
             ],
             "authors": [
                 {
-                    "name": "Luca Lusso (lussoluca)",
-                    "homepage": "https://www.drupal.org/user/138068",
-                    "role": "Maintainer"
+                    "name": "Grimreaper",
+                    "homepage": "https://www.drupal.org/user/2388214"
                 },
                 {
-                    "name": "Florent Torregrosa (Grimreaper)",
-                    "homepage": "https://www.drupal.org/user/2388214",
-                    "role": "Co-maintainer"
+                    "name": "lussoluca",
+                    "homepage": "https://www.drupal.org/user/138068"
                 }
             ],
             "description": "Re-add Execute PHP feature to Devel.",
-            "homepage": "https://drupal.org/project/devel_php",
+            "homepage": "https://www.drupal.org/project/devel_php",
             "support": {
-                "source": "https://git.drupalcode.org/project/devel_php",
-                "issues": "https://drupal.org/project/issues/devel_php"
+                "source": "https://git.drupalcode.org/project/devel_php"
             },
             "install-path": "../../modules/contrib/devel_php"
         },
@@ -4797,21 +4794,21 @@
         },
         {
             "name": "drupal/paragraphs",
-            "version": "1.13.0",
-            "version_normalized": "1.13.0.0",
+            "version": "1.14.0",
+            "version_normalized": "1.14.0.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/paragraphs.git",
-                "reference": "8.x-1.13"
+                "reference": "8.x-1.14"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/paragraphs-8.x-1.13.zip",
-                "reference": "8.x-1.13",
-                "shasum": "5e06df68411b17a5d8adaa292ddf70840d00876f"
+                "url": "https://ftp.drupal.org/files/projects/paragraphs-8.x-1.14.zip",
+                "reference": "8.x-1.14",
+                "shasum": "caa1a945dcfd058c4937c4907743eed970ce14cc"
             },
             "require": {
-                "drupal/core": "^8.8 || ^9",
+                "drupal/core": "^9.2",
                 "drupal/entity_reference_revisions": "~1.3"
             },
             "require-dev": {
@@ -4833,8 +4830,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-1.13",
-                    "datestamp": "1646121716",
+                    "version": "8.x-1.14",
+                    "datestamp": "1650520869",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"

@@ -6,17 +6,17 @@ namespace Drupal\devel_php\Plugin\Block;
 
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Block\BlockBase;
-use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Form\FormBuilderInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Drupal\Core\Session\AccountInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Provides a block for executing PHP code.
  *
  * @Block(
- *   id = "devel_execute_php",
- *   admin_label = @Translation("Execute PHP Code")
+ *     id = "devel_execute_php",
+ *     admin_label = @Translation("Execute PHP Code")
  * )
  */
 class DevelExecutePHP extends BlockBase implements ContainerFactoryPluginInterface {
@@ -53,8 +53,8 @@ class DevelExecutePHP extends BlockBase implements ContainerFactoryPluginInterfa
   /**
    * {@inheritdoc}
    */
-  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
-    return new static(
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): self {
+    return new self(
       $configuration,
       $plugin_id,
       $plugin_definition,
@@ -73,6 +73,7 @@ class DevelExecutePHP extends BlockBase implements ContainerFactoryPluginInterfa
    * {@inheritdoc}
    */
   public function build() {
+    // @phpstan-ignore-next-line
     return $this->formBuilder->getForm('Drupal\devel_php\Form\ExecutePHP', FALSE);
   }
 

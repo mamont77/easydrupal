@@ -1,11 +1,15 @@
 <?php
 
-namespace Drupal\blazy;
+namespace Drupal\blazy\Theme;
 
 use Drupal\Component\Utility\NestedArray;
 
 /**
  * Provides optional Views integration.
+ *
+ * @internal
+ *   This is an internal part of the Blazy system and should only be used by
+ *   blazy-related code in Blazy module.
  */
 class BlazyViews {
 
@@ -13,12 +17,20 @@ class BlazyViews {
    * Implements hook_views_pre_render().
    */
   public static function viewsPreRender($view): void {
+    $loads = [];
+
+    // At least, less aggressive than sitewide hook_library_info_alter().
+    // @todo remove when VIS alike added `Drupal.detachBehaviors()` to their JS.
+    if ($view->ajaxEnabled()) {
+      $loads['library'][] = 'blazy/bio.ajax';
+    }
+
     // Load Blazy library once, not per field, if any Blazy Views field found.
     if ($blazy = self::viewsField($view)) {
       $plugin_id = $view->getStyle()->getPluginId();
       $settings = $blazy->mergedViewsSettings();
       $load = $blazy->blazyManager()->attach($settings);
-      $view->element['#attached'] = empty($view->element['#attached']) ? $load : NestedArray::mergeDeep($view->element['#attached'], $load);
+      $loads = empty($loads) ? $load : NestedArray::mergeDeep($load, $loads);
 
       $grid = $plugin_id == 'blazy';
       if ($options = $view->getStyle()->options) {
@@ -27,9 +39,15 @@ class BlazyViews {
 
       // Prevents dup [data-LIGHTBOX-gallery] if the Views style supports Grid.
       if (!$grid) {
-        $view->element['#attributes'] = empty($view->element['#attributes']) ? [] : $view->element['#attributes'];
-        Blazy::containerAttributes($view->element['#attributes'], $settings);
+        $view->element['#attributes'] = empty($view->element['#attributes'])
+          ? [] : $view->element['#attributes'];
+        BlazyAttribute::container($view->element['#attributes'], $settings);
       }
+    }
+
+    if ($loads) {
+      $view->element['#attached'] = empty($view->element['#attached'])
+        ? $loads : NestedArray::mergeDeep($view->element['#attached'], $loads);
     }
   }
 
@@ -56,8 +74,10 @@ class BlazyViews {
     if ($lightbox && in_array($lightbox, $lightboxes)) {
       $settings['namespace'] = 'blazy';
       $settings['media_switch'] = $matches[1];
-      $variables['attributes'] = empty($variables['attributes']) ? [] : $variables['attributes'];
-      Blazy::containerAttributes($variables['attributes'], $settings);
+      $variables['attributes'] = empty($variables['attributes'])
+        ? [] : $variables['attributes'];
+
+      BlazyAttribute::container($variables['attributes'], $settings);
     }
   }
 

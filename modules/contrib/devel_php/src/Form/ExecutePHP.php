@@ -6,12 +6,19 @@ namespace Drupal\devel_php\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\devel\DevelDumperManagerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 /**
  * Defines a form that allows privileged users to execute arbitrary PHP code.
  */
 class ExecutePHP extends FormBase {
+
+  /**
+   * Number of rows for the textarea.
+   */
+  public const ROWS_NUMBER = 20;
 
   /**
    * The devel dumper manager service.
@@ -21,11 +28,19 @@ class ExecutePHP extends FormBase {
   protected $develDumper;
 
   /**
+   * The session service.
+   *
+   * @var \Symfony\Component\HttpFoundation\Session\SessionInterface
+   */
+  protected $session;
+
+  /**
    * {@inheritdoc}
    */
-  public static function create(ContainerInterface $container) {
+  public static function create(ContainerInterface $container): self {
     $instance = parent::create($container);
     $instance->develDumper = $container->get('devel.dumper');
+    $instance->session = $container->get('session');
     return $instance;
   }
 
@@ -39,9 +54,15 @@ class ExecutePHP extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state, $details_open = TRUE) {
+  public function buildForm(array $form, FormStateInterface $form_state): array {
+    $details_open = TRUE;
+    $build_info = $form_state->getBuildInfo();
+    if (isset($build_info['args'][0])) {
+      $details_open = $build_info['args'][0];
+    }
+
     $form['#redirect'] = FALSE;
-    $code = (isset($_SESSION['devel_execute_code']) ? $_SESSION['devel_execute_code'] : '');
+    $code = $this->session->get('devel_execute_code', '');
 
     $form['execute'] = [
       '#type' => 'details',
@@ -55,7 +76,7 @@ class ExecutePHP extends FormBase {
       '#title_display' => 'invisible',
       '#description' => $this->t('Enter some code. Do not use <code>&lt;?php ?&gt;</code> tags.'),
       '#default_value' => $code,
-      '#rows' => 20,
+      '#rows' => self::ROWS_NUMBER,
       '#attributes' => [
         'style' => 'font-family: monospace; font-size: 1.25em;',
       ],
@@ -65,8 +86,8 @@ class ExecutePHP extends FormBase {
       '#value' => $this->t('Execute'),
     ];
 
-    if (isset($_SESSION['devel_execute_code'])) {
-      unset($_SESSION['devel_execute_code']);
+    if ($this->session->has('devel_execute_code')) {
+      $this->session->remove('devel_execute_code');
     }
 
     return $form;
@@ -74,22 +95,24 @@ class ExecutePHP extends FormBase {
 
   /**
    * {@inheritdoc}
+   *
+   * @SuppressWarnings(PHPMD.EvalExpression)
    */
-  public function submitForm(array &$form, FormStateInterface $form_state) {
+  public function submitForm(array &$form, FormStateInterface $form_state): void {
     $code = $form_state->getValue('code');
 
     try {
-      ob_start();
-      // phpcs:disable Drupal.Functions.DiscouragedFunctions
+      \ob_start();
+      // phpcs:ignore
       print eval($code);
-      // phpcs:enable Drupal.Functions.DiscouragedFunctions
-      $this->develDumper->message(ob_get_clean());
+      // phpcs:enable
+      $this->develDumper->message(\ob_get_clean());
     }
     catch (\Throwable $error) {
       $this->messenger()->addError($error->getMessage());
     }
 
-    $_SESSION['devel_execute_code'] = $code;
+    $this->session->set('devel_execute_code', $code);
   }
 
 }

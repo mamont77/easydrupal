@@ -1,11 +1,13 @@
 <?php
 
-namespace Drupal\blazy;
+namespace Drupal\blazy\Theme;
 
 use Drupal\Component\Utility\Html;
-use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Template\Attribute;
-use Drupal\blazy\Media\BlazyFile;
+use Drupal\blazy\Blazy;
+use Drupal\blazy\BlazyDefault;
+use Drupal\blazy\Media\Placeholder;
+use Drupal\blazy\Utility\Path;
 
 /**
  * Provides theme-related alias methods to de-clutter Blazy.
@@ -67,41 +69,43 @@ class BlazyTheme {
     $attributes = &$variables['attributes'];
     $settings = &$variables['settings'];
     $settings += BlazyDefault::itemSettings();
-    $blazies = &$settings['blazies'];
+    $blazies = $settings['blazies'];
+    $item = $variables['item'];
+    $api = $blazies->is('api');
+
+    // Still provides a failsafe for direct call to theme_blazy().
+    if (!$api) {
+      Blazy::preSettings($settings);
+      Blazy::prepare($settings, $item, $settings['delta'] ?? 0);
+    }
 
     // Do not proceed if no URI is provided. URI is not Blazy theme property.
     // Blazy is a wrapper for theme_[(responsive_)image], etc. who wants URI.
-    if (empty($settings['uri'])) {
+    if (!$blazies->get('image.uri')) {
       return;
     }
 
     // URL and dimensions are built out at BlazyManager::preRenderBlazy().
     // Still provides a failsafe for direct call to theme_blazy().
-    if (!$blazies->get('_api')) {
-      // Prepares URI, extension, image styles, lightboxes.
-      BlazyFile::prepare($settings);
-      BlazyFile::urlAndDimensions($settings, $variables['item']);
-      BlazyFile::lazyOrNot($settings);
+    if (!$api) {
+      Blazy::prepared($attributes, $settings, $item);
     }
 
     // Allows rich Media entities stored within `content` to take over.
     // Rich media are things Blazy don't understand: Instagram, Facebook, etc.
     if (empty($variables['content'])) {
-      Blazy::buildMedia($variables);
+      BlazyAttribute::buildMedia($variables);
     }
 
     // Aspect ratio to fix layout reflow with lazyloaded images responsively.
     // This is outside 'lazy' to allow non-lazyloaded iframe/content use it too.
     // Prevents double padding hacks with AMP which also uses similar technique.
-    $settings['ratio'] = empty($settings['width']) || $blazies->get('is.amp') ? '' : $settings['ratio'];
-    if ($settings['ratio']) {
-      Blazy::aspectRatioAttributes($attributes, $settings);
-    }
+    BlazyAttribute::finalize($variables);
 
-    // Makes a little BEM order here due to Twig ignoring the preset priority.
-    $classes = (array) ($attributes['class'] ?? []);
-    $attributes['class'] = array_merge(['media', 'media--blazy'], $classes);
-    $variables['blazies'] = $settings['blazies'];
+    // Still provides a failsafe for direct call to theme_blazy().
+    if (!$api) {
+      Blazy::attach($variables, $settings);
+    }
   }
 
   /**
@@ -110,6 +114,7 @@ class BlazyTheme {
   public static function field(array &$variables): void {
     $element = &$variables['element'];
     $settings = empty($element['#blazy']) ? [] : $element['#blazy'];
+    $blazies = $settings['blazies'] ?? NULL;
 
     // 1. Hence Blazy is not the formatter, lacks of settings.
     if (!empty($element['#third_party_settings']['blazy']['blazy'])) {
@@ -117,8 +122,8 @@ class BlazyTheme {
     }
 
     // 2. Hence Blazy is the formatter, has its settings.
-    if (empty($settings['_grid'])) {
-      Blazy::containerAttributes($variables['attributes'], $settings);
+    if ($blazies && !$blazies->is('grid')) {
+      BlazyAttribute::container($variables['attributes'], $settings);
     }
   }
 
@@ -126,10 +131,13 @@ class BlazyTheme {
    * Overrides variables for file-video.html.twig templates.
    */
   public static function fileVideo(array &$variables): void {
+    $attributes = &$variables['attributes'];
     if ($files = $variables['files']) {
-      $use_dataset = empty($variables['attributes']['data-b-undata']);
+      $use_dataset = empty($attributes['data-b-undata']);
+
       if ($use_dataset) {
-        $variables['attributes']->addClass(['b-lazy']);
+        $attributes->addClass(['b-lazy']);
+
         foreach ($files as $file) {
           $source_attributes = &$file['source_attributes'];
           $source_attributes->setAttribute('data-src', $source_attributes['src']->value());
@@ -139,28 +147,27 @@ class BlazyTheme {
 
       // Adds a poster image if so configured.
       if ($blazy = ($files[0]['blazy'] ?? FALSE)) {
-        if ($blazy->get('image') && $blazy->get('uri')) {
+        if ($blazy->get('image.uri')) {
           $settings = $blazy->storage();
-          $settings['_dimensions'] = TRUE;
-          $blazies = &$settings['blazies'];
+          $blazies = $settings['blazies'];
 
-          BlazyFile::imageUrl($settings);
+          if ($url = $blazies->get('image.url')) {
+            if (!$blazies->get('use.loader') && $use_dataset) {
+              $blazies->set('use.loader', TRUE);
+            }
+            $blazies->set('is.dimensions', TRUE);
+            $attributes->setAttribute('poster', $url);
+          }
 
-          if (!$blazies->get('use.loader') && $use_dataset) {
-            $blazies->set('use.loader', TRUE);
-          }
-          if (!empty($settings['image_url'])) {
-            $variables['attributes']->setAttribute('poster', $settings['image_url']);
-          }
-          if ($blazies->get('lightbox') && !empty($settings['_richbox'])) {
-            $variables['attributes']->setAttribute('autoplay', TRUE);
+          if ($blazies->is('lightbox') && $blazies->is('richbox')) {
+            $attributes->setAttribute('autoplay', TRUE);
           }
         }
       }
 
       $attrs = ['data-b-lazy', 'data-b-undata'];
-      $variables['attributes']->addClass(['media__element']);
-      $variables['attributes']->removeAttribute($attrs);
+      $attributes->addClass(['media__element']);
+      $attributes->removeAttribute($attrs);
     }
   }
 
@@ -170,7 +177,7 @@ class BlazyTheme {
   public static function responsiveImage(array &$variables): void {
     $image = &$variables['img_element'];
     $attributes = &$variables['attributes'];
-    $placeholder = empty($attributes['data-placeholder']) ? BlazyInterface::PLACEHOLDER : $attributes['data-placeholder'];
+    $placeholder = $attributes['data-b-placeholder'] ?? Placeholder::DATA;
 
     // Bail out if a noscript is requested.
     // @todo figure out to not even enter this method, yet not break ratio, etc.
@@ -198,19 +205,24 @@ class BlazyTheme {
         $image['#attributes']['srcset'] = '';
       }
 
-      // The [data-b-lazy] is a flag indicating 1px placeholder.
-      // This prevents double-downloading the fallback image, if enabled.
-      if (!empty($attributes['data-b-lazy'])) {
+      // Prioritized custom Placeholder ('/blank.svg') to fix for Views rewrite
+      // results to override Responsive image `data:image` which causes 404.
+      if ($ui = $attributes['data-b-ui'] ?? NULL) {
+        $image['#uri'] = $ui;
+      }
+      // Prevents double-downloading the fallback image, enforced since 2.10, to
+      // allow having non `data:image` as fallback image.
+      else {
         $image['#uri'] = $placeholder;
       }
 
-      // More shared-with-image attributes are set at self::imageAttributes().
+      // More shared-with-image attributes are set at BlazyAttribute::image().
       $image['#attributes']['class'][] = 'b-responsive';
     }
 
     // Cleans up the no-longer needed flags:
-    foreach (['placeholder', 'b-lazy', 'b-noscript'] as $key) {
-      unset($attributes['data-' . $key], $image['#attributes']['data-' . $key]);
+    foreach (['lazy', 'noscript', 'placeholder', 'ui'] as $key) {
+      unset($attributes['data-b-' . $key], $image['#attributes']['data-b-' . $key]);
     }
   }
 
@@ -218,7 +230,7 @@ class BlazyTheme {
    * Overrides variables for media-oembed-iframe.html.twig templates.
    */
   public static function mediaOembedIframe(array &$variables): void {
-    $request = Blazy::requestStack()->getCurrentRequest();
+    $request = Path::request();
     // Without internet, this may be empty, bail out.
     if (empty($variables['media']) || !$request) {
       return;
@@ -235,24 +247,28 @@ class BlazyTheme {
       if ($url && $is_blazy == 1) {
         // Load iframe string as a DOMDocument as alternative to regex.
         $dom = Html::load($variables['media']);
-        $iframe = $dom->getElementsByTagName('iframe');
+        $iframes = $dom->getElementsByTagName('iframe');
 
         // Replace old oEmbed url with autoplay support, and save the DOM.
-        if ($iframe->length > 0) {
-          // Fetches autoplay_url.
-          $embed_url = $iframe->item(0)->getAttribute('src');
-          $settings = self::getAutoPlayUrl($embed_url);
+        if ($iframes->length > 0 && $iframe = $iframes->item(0)) {
+          // Autoplay url suitable for lightboxes, or custom video trigger.
+          $embed_url = $iframe->getAttribute('src');
 
           // Only replace if autoplay == 1 for Image to iframe, or lightboxes.
-          if ($is_autoplay == 1 && !empty($settings['autoplay_url'])) {
-            $iframe->item(0)->setAttribute('src', $settings['autoplay_url']);
+          if ($is_autoplay == 1 && $embed_url) {
+            $autoplay_url = Blazy::autoplay($embed_url);
+            $iframe->setAttribute('src', $autoplay_url);
           }
 
           // Make responsive iframe with/ without autoplay.
           // The following ensures iframe does not shrink due to its attributes.
-          $iframe->item(0)->setAttribute('height', '100%');
-          $iframe->item(0)->setAttribute('width', '100%');
-          $dom->getElementsByTagName('body')->item(0)->setAttribute('class', 'is-b-oembed');
+          $iframe->setAttribute('height', '100%');
+          $iframe->setAttribute('width', '100%');
+
+          $dom->getElementsByTagName('body')
+            ->item(0)
+            ->setAttribute('class', 'is-b-oembed');
+
           $variables['media'] = $dom->saveHTML();
         }
       }
@@ -264,61 +280,41 @@ class BlazyTheme {
   }
 
   /**
-   * Provides the autoplay url suitable for lightboxes, or custom video trigger.
-   *
-   * As per 21/12/31, coder doesn't recognize nullable typehints, and err.
-   * https://www.php.net/manual/en/migration71.new-features.php.
-   *
-   * @param string $url
-   *   The embed URL, not input URL.
-   *
-   * @return array
-   *   The settings array containing autoplay and oembed URL.
-   */
-  public static function getAutoPlayUrl(?string $url): array {
-    $data = [];
-    if (!empty($url)) {
-      $data['oembed_url'] = $url;
-      // Adds autoplay for media URL on lightboxes, saving another click.
-      if (strpos($url, 'autoplay') === FALSE || strpos($url, 'autoplay=0') !== FALSE) {
-        $data['autoplay_url'] = strpos($url, '?') === FALSE ? $url . '?autoplay=1' : $url . '&autoplay=1';
-      }
-    }
-    return $data;
-  }
-
-  /**
    * Overrides variables for field.html.twig templates.
    */
   private static function thirdPartyField(array &$variables): void {
     $element = $variables['element'];
     $settings = $element['#blazy'] ?? [];
 
-    if (!isset($settings['blazies'])) {
-      $settings += BlazyDefault::htmlSettings();
-    }
-
-    $settings['third_party'] = $element['#third_party_settings'];
-    $blazies = &$settings['blazies'];
+    Blazy::verify($settings);
+    $blazies = $settings['blazies'];
     // @todo re-check at CKEditor.
-    $is_undata = $blazies->get('is.undata');
+    $is_undata = $blazies->is('undata');
+
+    // @todo remove.
+    $third_party = $element['#third_party_settings'] ?? [];
+    $blazies->set('field.third_party', $third_party, TRUE);
 
     foreach ($variables['items'] as &$item) {
       if (empty($item['content'])) {
         continue;
       }
 
-      $item_attributes = &$item['content'][isset($item['content']['#attributes']) ? '#attributes' : '#item_attributes'];
-      $item_attributes['data-b-lazy'] = TRUE;
+      $key = isset($item['content']['#attributes'])
+        ? '#attributes' : '#item_attributes';
 
-      if ($is_undata) {
-        $item_attributes['data-b-undata'] = TRUE;
+      if (isset($item['content'][$key])) {
+        $item_attributes = &$item['content'][$key];
+        $item_attributes['data-b-lazy'] = TRUE;
+
+        if ($is_undata) {
+          $item_attributes['data-b-undata'] = TRUE;
+        }
       }
     }
 
     // Attaches Blazy libraries here since Blazy is not the formatter.
-    $attachments = \blazy()->attach($settings);
-    $variables['#attached'] = empty($variables['#attached']) ? $attachments : NestedArray::mergeDeep($variables['#attached'], $attachments);
+    Blazy::attach($variables, $settings);
   }
 
 }

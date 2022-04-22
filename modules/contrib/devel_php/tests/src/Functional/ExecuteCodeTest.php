@@ -14,7 +14,6 @@ use Drupal\Tests\BrowserTestBase;
  * @group devel_php
  */
 class ExecuteCodeTest extends BrowserTestBase {
-
   use StringTranslationTrait;
 
   /**
@@ -23,9 +22,7 @@ class ExecuteCodeTest extends BrowserTestBase {
   protected $defaultTheme = 'stark';
 
   /**
-   * Modules to enable.
-   *
-   * @var array
+   * {@inheritdoc}
    */
   public static $modules = [
     'devel',
@@ -35,7 +32,8 @@ class ExecuteCodeTest extends BrowserTestBase {
   /**
    * Tests handle errors.
    */
-  public function testHandleErrors() {
+  public function testHandleErrors(): void {
+    $edit = [];
     $url = Url::fromRoute('devel_php.execute_php');
 
     $user = $this->drupalCreateUser(['execute php code']);
@@ -58,7 +56,8 @@ class ExecuteCodeTest extends BrowserTestBase {
   /**
    * Tests output buffer.
    */
-  public function testOutputBuffer() {
+  public function testOutputBuffer(): void {
+    $edit = [];
     $url = Url::fromRoute('devel_php.execute_php');
 
     $user = $this->drupalCreateUser([

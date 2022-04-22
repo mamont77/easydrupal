@@ -20,9 +20,7 @@ class PermissionsTest extends BrowserTestBase {
   protected $defaultTheme = 'stark';
 
   /**
-   * Modules to enable.
-   *
-   * @var array
+   * {@inheritdoc}
    */
   public static $modules = [
     'devel',
@@ -32,7 +30,7 @@ class PermissionsTest extends BrowserTestBase {
   /**
    * Tests user permissions to execute code.
    */
-  public function testPermissionToExecuteCode() {
+  public function testPermissionToExecuteCode(): void {
     $url = Url::fromRoute('devel_php.execute_php');
 
     // Anonymous user.
