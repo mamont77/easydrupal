@@ -11,7 +11,7 @@ use Drupal\votingapi\Entity\Vote;
 class VoteStorage extends SqlContentEntityStorage implements VoteStorageInterface {
 
   /**
-   *
+   * {@inheritdoc}
    */
   public function getUserVotes($uid, $vote_type_id = NULL, $entity_type_id = NULL, $entity_id = NULL, $vote_source = NULL) {
     $query = \Drupal::entityQuery('vote')
@@ -32,12 +32,13 @@ class VoteStorage extends SqlContentEntityStorage implements VoteStorageInterfac
   }
 
   /**
-   *
+   * {@inheritdoc}
    */
   public function deleteUserVotes($uid, $vote_type_id = NULL, $entity_type_id = NULL, $entity_id = NULL, $vote_source = NULL) {
     $votes = $this->getUserVotes($uid, $vote_type_id, $entity_type_id, $entity_id, $vote_source);
     if (!empty($votes)) {
-      entity_delete_multiple('vote', $votes);
+      $entities = $this->loadMultiple($votes);
+      $this->delete($entities);
     }
   }
 
@@ -55,7 +56,7 @@ class VoteStorage extends SqlContentEntityStorage implements VoteStorageInterfac
   }
 
   /**
-   *
+   * {@inheritdoc}
    */
   public function getVotesSinceMoment() {
     $last_cron = \Drupal::state()->get('votingapi.last_cron', 0);
@@ -68,7 +69,7 @@ class VoteStorage extends SqlContentEntityStorage implements VoteStorageInterfac
   }
 
   /**
-   *
+   * {@inheritdoc}
    */
   public function deleteVotesForDeletedEntity($entity_type_id, $entity_id) {
     $votes = \Drupal::entityQuery('vote')
@@ -76,12 +77,16 @@ class VoteStorage extends SqlContentEntityStorage implements VoteStorageInterfac
       ->condition('entity_id', $entity_id)
       ->execute();
     if (!empty($votes)) {
-      entity_delete_multiple('vote', $votes);
+      $entities = $this->loadMultiple($votes);
+      $this->delete($entities);
     }
-    db_delete('votingapi_result')
+    $this->database->delete('votingapi_result')
       ->condition('entity_type', $entity_type_id)
       ->condition('entity_id', $entity_id)
       ->execute();
+    if ($entity_type_id == 'user' && \Drupal::config('votingapi.settings')->get('delete_everywhere')) {
+      $this->deleteUserVotes($entity_id);
+    }
   }
 
 }

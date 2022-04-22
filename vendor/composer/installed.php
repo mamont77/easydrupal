@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '4d9f0ad9491c58535bdcd7eacac1b10390f9e7ad',
+        'reference' => '7cb83799f8597657b95b514ee0aaae0875b6babc',
         'name' => 'drupal/legacy-project',
         'dev' => true,
     ),
@@ -170,12 +170,12 @@
             ),
         ),
         'cweagans/composer-patches' => array(
-            'pretty_version' => '1.7.1',
-            'version' => '1.7.1.0',
+            'pretty_version' => '1.7.2',
+            'version' => '1.7.2.0',
             'type' => 'composer-plugin',
             'install_path' => __DIR__ . '/../cweagans/composer-patches',
             'aliases' => array(),
-            'reference' => '9888dcc74993c030b75f3dd548bb5e20cdbd740c',
+            'reference' => 'e9969cfc0796e6dea9b4e52f77f18e1065212871',
             'dev_requirement' => false,
         ),
         'dflydev/dot-access-data' => array(
@@ -1026,7 +1026,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '4d9f0ad9491c58535bdcd7eacac1b10390f9e7ad',
+            'reference' => '7cb83799f8597657b95b514ee0aaae0875b6babc',
             'dev_requirement' => false,
         ),
         'drupal/libraries' => array(
@@ -1483,12 +1483,12 @@
             ),
         ),
         'drupal/votingapi' => array(
-            'pretty_version' => '3.0.0-beta2',
-            'version' => '3.0.0.0-beta2',
+            'pretty_version' => '3.0.0-beta3',
+            'version' => '3.0.0.0-beta3',
             'type' => 'drupal-module',
             'install_path' => __DIR__ . '/../../modules/contrib/votingapi',
             'aliases' => array(),
-            'reference' => '8.x-3.0-beta2',
+            'reference' => '8.x-3.0-beta3',
             'dev_requirement' => false,
         ),
         'drupal/webp' => array(
@@ -1522,12 +1522,12 @@
             'dev_requirement' => false,
         ),
         'drush/drush' => array(
-            'pretty_version' => '10.6.1',
-            'version' => '10.6.1.0',
+            'pretty_version' => '10.6.2',
+            'version' => '10.6.2.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../drush/drush',
             'aliases' => array(),
-            'reference' => 'd36bca3322555a6f94edc94439873afcde2bbe90',
+            'reference' => '0a570a16ec63259eb71195aba5feab532318b337',
             'dev_requirement' => false,
         ),
         'egulias/email-validator' => array(
@@ -1592,7 +1592,7 @@
             'aliases' => array(
                 0 => '1.x-dev',
             ),
-            'reference' => 'af4d50b6daae69dc2a7d61ae8815e8903a2865af',
+            'reference' => '848fd28335c984ca1ceb9454f7d636465db5c5f8',
             'dev_requirement' => false,
         ),
         'grasmash/expander' => array(

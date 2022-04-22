@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8bc52e5b0792d9789bd321eab0026d0d",
+    "content-hash": "83cab0ae46a45b9a078734737b769e20",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1025,16 +1025,16 @@
         },
         {
             "name": "cweagans/composer-patches",
-            "version": "1.7.1",
+            "version": "1.7.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cweagans/composer-patches.git",
-                "reference": "9888dcc74993c030b75f3dd548bb5e20cdbd740c"
+                "reference": "e9969cfc0796e6dea9b4e52f77f18e1065212871"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cweagans/composer-patches/zipball/9888dcc74993c030b75f3dd548bb5e20cdbd740c",
-                "reference": "9888dcc74993c030b75f3dd548bb5e20cdbd740c",
+                "url": "https://api.github.com/repos/cweagans/composer-patches/zipball/e9969cfc0796e6dea9b4e52f77f18e1065212871",
+                "reference": "e9969cfc0796e6dea9b4e52f77f18e1065212871",
                 "shasum": ""
             },
             "require": {
@@ -1067,9 +1067,9 @@
             "description": "Provides a way to patch Composer packages.",
             "support": {
                 "issues": "https://github.com/cweagans/composer-patches/issues",
-                "source": "https://github.com/cweagans/composer-patches/tree/1.7.1"
+                "source": "https://github.com/cweagans/composer-patches/tree/1.7.2"
             },
-            "time": "2021-06-08T15:12:46+00:00"
+            "time": "2022-01-25T19:21:20+00:00"
         },
         {
             "name": "dflydev/dot-access-data",
@@ -5761,40 +5761,49 @@
         },
         {
             "name": "drupal/votingapi",
-            "version": "3.0.0-beta2",
+            "version": "3.0.0-beta3",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/votingapi.git",
-                "reference": "8.x-3.0-beta2"
+                "reference": "8.x-3.0-beta3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/votingapi-8.x-3.0-beta2.zip",
-                "reference": "8.x-3.0-beta2",
-                "shasum": "1fe15da49cc1f2126f29ae39349a199eb1360a32"
+                "url": "https://ftp.drupal.org/files/projects/votingapi-8.x-3.0-beta3.zip",
+                "reference": "8.x-3.0-beta3",
+                "shasum": "6b5d05f36dc7937a4e2fc676153ccbcf267eda14"
             },
             "require": {
-                "drupal/core": "^8.7.7 || ^9"
+                "drupal/core": "^8.8.2 || ^9"
             },
             "require-dev": {
-                "drupal/token": "*"
+                "drupal/token": "^1.5"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-3.0-beta2",
-                    "datestamp": "1591656113",
+                    "version": "8.x-3.0-beta3",
+                    "datestamp": "1639528074",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Beta releases are not covered by Drupal security advisories."
+                    }
+                },
+                "drush": {
+                    "services": {
+                        "drush.services.yml": "^9 || ^10"
                     }
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
             "license": [
-                "GPL-2.0+"
+                "GPL-2.0-or-later"
             ],
             "authors": [
+                {
+                    "name": "TR",
+                    "homepage": "https://www.drupal.org/user/202830"
+                },
                 {
                     "name": "eaton",
                     "homepage": "https://www.drupal.org/user/16496"
@@ -5813,13 +5822,13 @@
                 }
             ],
             "description": "Voting API",
-            "homepage": "http://drupal.org/project/votingapi",
+            "homepage": "https://www.drupal.org/project/votingapi",
             "keywords": [
                 "Drupal"
             ],
             "support": {
                 "source": "https://git.drupalcode.org/project/votingapi",
-                "issues": "http://drupal.org/project/issues/votingapi"
+                "issues": "https://drupal.org/project/issues/votingapi"
             }
         },
         {
@@ -5948,16 +5957,16 @@
         },
         {
             "name": "drush/drush",
-            "version": "10.6.1",
+            "version": "10.6.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drush-ops/drush.git",
-                "reference": "d36bca3322555a6f94edc94439873afcde2bbe90"
+                "reference": "0a570a16ec63259eb71195aba5feab532318b337"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/drush-ops/drush/zipball/d36bca3322555a6f94edc94439873afcde2bbe90",
-                "reference": "d36bca3322555a6f94edc94439873afcde2bbe90",
+                "url": "https://api.github.com/repos/drush-ops/drush/zipball/0a570a16ec63259eb71195aba5feab532318b337",
+                "reference": "0a570a16ec63259eb71195aba5feab532318b337",
                 "shasum": ""
             },
             "require": {
@@ -5975,7 +5984,7 @@
                 "league/container": "^2.5 || ^3.4",
                 "php": ">=7.1.3",
                 "psr/log": "~1.0",
-                "psy/psysh": "~0.6",
+                "psy/psysh": ">=0.6 <0.11",
                 "symfony/event-dispatcher": "^3.4 || ^4.0",
                 "symfony/finder": "^3.4 || ^4.0 || ^5",
                 "symfony/var-dumper": "^3.4 || ^4.0 || ^5.0",
@@ -6081,7 +6090,7 @@
                 "irc": "irc://irc.freenode.org/drush",
                 "issues": "https://github.com/drush-ops/drush/issues",
                 "slack": "https://drupal.slack.com/messages/C62H9CWQM",
-                "source": "https://github.com/drush-ops/drush/tree/10.6.1"
+                "source": "https://github.com/drush-ops/drush/tree/10.6.2"
             },
             "funding": [
                 {
@@ -6089,7 +6098,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-10-05T11:14:14+00:00"
+            "time": "2021-12-15T17:09:54+00:00"
         },
         {
             "name": "egulias/email-validator",
@@ -6404,24 +6413,25 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/grasmash/drupal-security-warning.git",
-                "reference": "af4d50b6daae69dc2a7d61ae8815e8903a2865af"
+                "reference": "848fd28335c984ca1ceb9454f7d636465db5c5f8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/grasmash/drupal-security-warning/zipball/af4d50b6daae69dc2a7d61ae8815e8903a2865af",
-                "reference": "af4d50b6daae69dc2a7d61ae8815e8903a2865af",
+                "url": "https://api.github.com/repos/grasmash/drupal-security-warning/zipball/848fd28335c984ca1ceb9454f7d636465db5c5f8",
+                "reference": "848fd28335c984ca1ceb9454f7d636465db5c5f8",
                 "shasum": ""
             },
             "require": {
                 "composer-plugin-api": "^1.1.0 || ^2.0"
             },
             "require-dev": {
-                "composer/composer": "^1.0",
+                "composer/composer": "^1 || ^2@dev",
                 "phpunit/phpunit": "^5.7.0",
-                "squizlabs/php_codesniffer": "^2.7",
-                "symfony/filesystem": "^3.2.0",
-                "symfony/process": "^3.2.0"
+                "squizlabs/php_codesniffer": "^3",
+                "symfony/filesystem": "^3.4.38",
+                "symfony/process": "^3.4.38"
             },
+            "default-branch": true,
             "type": "composer-plugin",
             "extra": {
                 "class": "grasmash\\DrupalSecurityWarning\\Composer\\Plugin",
@@ -6448,7 +6458,11 @@
                 "drupal",
                 "security"
             ],
-            "time": "2020-10-14T21:12:26+00:00"
+            "support": {
+                "issues": "https://github.com/grasmash/drupal-security-warning/issues",
+                "source": "https://github.com/grasmash/drupal-security-warning/tree/master"
+            },
+            "time": "2021-12-24T15:17:23+00:00"
         },
         {
             "name": "grasmash/expander",
@@ -11664,7 +11678,7 @@
         "drupal/linkit": 10,
         "drupal/purge_purger_http": 10,
         "drupal/rabbit_hole": 10,
-        "drupal/votingapi": 15,
+        "drupal/votingapi": 10,
         "drupal/webp": 10,
         "grasmash/drupal-security-warning": 20
     },
