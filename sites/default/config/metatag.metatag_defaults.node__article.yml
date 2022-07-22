@@ -14,7 +14,6 @@ tags:
   canonical_url: '[node:url]'
   google_plus_name: '[Tips & Tricks] [node:title]'
   google_plus_description: '[node:summary]'
-  google_plus_author: 'https://plus.google.com/103203978263803110023'
   google_plus_image: '[node:field_image:max_750x750]'
   og_image: '[node:field_image:max_750x750]'
   article_published_time: '[node:created:html_datetime]'
@@ -50,3 +49,4 @@ tags:
   schema_web_site_publisher: 'a:4:{s:5:"@type";s:6:"Person";s:4:"name";s:60:"[node:author:field_first_name] [node:author:field_last_name]";s:3:"url";s:18:"[site:url]about-me";s:6:"sameAs";s:197:"https://www.facebook.com/ruslan.piskarev, https://plus.google.com/103203978263803110023, https://twitter.com/mamont77, https://www.drupal.org/u/ruslan-p, https://www.linkedin.com/in/ruslanpiskarev/";}'
   schema_web_site_type: WebSite
   schema_web_site_url: '[site:url]'
+  author: 'https://plus.google.com/103203978263803110023'
