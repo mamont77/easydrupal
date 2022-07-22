@@ -2580,18 +2580,18 @@
         },
         {
             "name": "drupal/captcha",
-            "version": "1.3.0",
-            "version_normalized": "1.3.0.0",
+            "version": "1.4.0",
+            "version_normalized": "1.4.0.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/captcha.git",
-                "reference": "8.x-1.3"
+                "reference": "8.x-1.4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/captcha-8.x-1.3.zip",
-                "reference": "8.x-1.3",
-                "shasum": "d059a8c052246d28f62735e8a3e6912c508cd19f"
+                "url": "https://ftp.drupal.org/files/projects/captcha-8.x-1.4.zip",
+                "reference": "8.x-1.4",
+                "shasum": "bd340d1c62e9960cebbf482ecc5ef24421542ec6"
             },
             "require": {
                 "drupal/core": ">=8.9 <11"
@@ -2599,8 +2599,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-1.3",
-                    "datestamp": "1655312421",
+                    "version": "8.x-1.4",
+                    "datestamp": "1658338565",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -2617,10 +2617,6 @@
             ],
             "authors": [
                 {
-                    "name": "RobLoach",
-                    "homepage": "https://www.drupal.org/user/61114"
-                },
-                {
                     "name": "elachlan",
                     "homepage": "https://www.drupal.org/user/1021502"
                 },
@@ -2635,6 +2631,10 @@
                 {
                     "name": "podarok",
                     "homepage": "https://www.drupal.org/user/116002"
+                },
+                {
+                    "name": "RobLoach",
+                    "homepage": "https://www.drupal.org/user/61114"
                 },
                 {
                     "name": "soxofaan",
@@ -4727,18 +4727,18 @@
         },
         {
             "name": "drupal/metatag",
-            "version": "1.19.0",
-            "version_normalized": "1.19.0.0",
+            "version": "1.21.0",
+            "version_normalized": "1.21.0.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/metatag.git",
-                "reference": "8.x-1.19"
+                "reference": "8.x-1.21"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/metatag-8.x-1.19.zip",
-                "reference": "8.x-1.19",
-                "shasum": "d70f59c034e971885ed4969a11bb392f6ab447ee"
+                "url": "https://ftp.drupal.org/files/projects/metatag-8.x-1.21.zip",
+                "reference": "8.x-1.21",
+                "shasum": "677ff7384b557390d4d1a36f335452e8172f741d"
             },
             "require": {
                 "drupal/core": "^9",
@@ -4757,8 +4757,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-1.19",
-                    "datestamp": "1641496014",
+                    "version": "8.x-1.21",
+                    "datestamp": "1657971667",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
