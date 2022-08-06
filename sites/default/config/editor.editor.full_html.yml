@@ -58,8 +58,6 @@ settings:
     drupallink:
       linkit_enabled: true
       linkit_profile: articles_links_collention
-    language:
-      language_list: un
     stylescombo:
       styles: "blockquote|blockquote\r\npre|pre\r\ncode|code\r\nimg.responsive|Img Responsive\r\np.text-left|Left aligned\r\np.text-center|Center aligned\r\np.text-right|Right aligned\r\np.text-justify|Justified\r\np.text-nowrap|No wrap\r\n"
 image_upload:

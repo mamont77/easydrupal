@@ -49,8 +49,6 @@ settings:
   plugins:
     stylescombo:
       styles: "blockquote|blockquote\r\npre|pre\r\ncode|code"
-    language:
-      language_list: un
 image_upload:
   status: true
   scheme: public
