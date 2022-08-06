@@ -5615,4 +5615,8 @@ return array(
     'mglaman\\PHPStanDrupal\\Type\\EntityStorage\\EntityStorageType' => $vendorDir . '/mglaman/phpstan-drupal/src/Type/EntityStorage/EntityStorageType.php',
     'mglaman\\PHPStanDrupal\\Type\\EntityTypeManagerGetStorageDynamicReturnTypeExtension' => $vendorDir . '/mglaman/phpstan-drupal/src/Type/EntityTypeManagerGetStorageDynamicReturnTypeExtension.php',
     'mglaman\\PHPStanDrupal\\Type\\UrlToStringDynamicReturnTypeExtension' => $vendorDir . '/mglaman/phpstan-drupal/src/Type/UrlToStringDynamicReturnTypeExtension.php',
+    'tubalmartin\\CssMin\\Colors' => $vendorDir . '/tubalmartin/cssmin/src/Colors.php',
+    'tubalmartin\\CssMin\\Command' => $vendorDir . '/tubalmartin/cssmin/src/Command.php',
+    'tubalmartin\\CssMin\\Minifier' => $vendorDir . '/tubalmartin/cssmin/src/Minifier.php',
+    'tubalmartin\\CssMin\\Utils' => $vendorDir . '/tubalmartin/cssmin/src/Utils.php',
 );
