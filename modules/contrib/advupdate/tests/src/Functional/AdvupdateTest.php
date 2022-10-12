@@ -16,9 +16,14 @@ class AdvupdateTest extends UpdateTestBase {
    *
    * @var array
    */
-  public static $modules = [
+  protected static $modules = [
     'advupdate',
   ];
+
+  /**
+   * {@inheritdoc}
+   */
+  protected $defaultTheme = 'stark';
 
   /**
    * Tests settings.

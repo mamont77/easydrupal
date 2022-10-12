@@ -44,7 +44,7 @@ abstract class DevelGenerateBase extends PluginBase implements DevelGenerateBase
     if (!array_key_exists($key, $this->settings)) {
       $this->settings = $this->getDefaultSettings();
     }
-    return isset($this->settings[$key]) ? $this->settings[$key] : NULL;
+    return $this->settings[$key] ?? NULL;
   }
 
   /**
@@ -109,15 +109,8 @@ abstract class DevelGenerateBase extends PluginBase implements DevelGenerateBase
       'bundle' => $entity->bundle(),
     ];
     $field_config_storage = \Drupal::entityTypeManager()->getStorage('field_config');
-    /* @var \Drupal\field\FieldConfigInterface[] $instances */
+    /** @var \Drupal\field\FieldConfigInterface[] $instances */
     $instances = $field_config_storage->loadByProperties($properties);
-
-    // @todo not implemented for Drush9+. Possibly remove.
-    if ($skips = @$_REQUEST['skip-fields']) {
-      foreach (explode(',', $skips) as $skip) {
-        unset($instances[$skip]);
-      }
-    }
 
     foreach ($instances as $instance) {
       $field_storage = $instance->getFieldStorageDefinition();

@@ -5,11 +5,11 @@
  * Contains advupdate.module.
  */
 
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Url;
-use Drupal\Core\Form\FormStateInterface;
-use Drupal\update\UpdateManagerInterface;
 use Drupal\update\UpdateFetcherInterface;
+use Drupal\update\UpdateManagerInterface;
 
 /**
  * Implements hook_help().
@@ -63,7 +63,7 @@ function advupdate_mail_alter(&$message) {
     if ($additional_data != '') {
       $message['body'][] = "\n" . $additional_data;
       $message['body'][] = "\n"
-        . t('This email also uses an additional information added by "Update Manager Advanced" module :url if the data available.', [
+        . t('This emails also may contain additional information added by the "Update Manager Advanced" module (:url).', [
           ':url' => Url::fromUri('https://www.drupal.org/project/advupdate', ['absolute' => TRUE])
             ->toString(),
         ]);
@@ -150,7 +150,7 @@ function _advupdate_mail_additional_data() {
     }
 
     // Create an entry for this project and use the project title
-    // and an additional information.
+    // and additional information.
     $entry['title'] = [
       'data' => [
         '#markup' => t("@project \n Installed: @version \n Recommended: @recommended \n Release notes: @link \n", [

@@ -122,7 +122,8 @@ class MediaDevelGenerate extends DevelGenerateBase implements ContainerFactoryPl
 
     $this->mediaStorage = $entity_type_manager->getStorage('media');
     $this->mediaTypeStorage = $entity_type_manager->getStorage('media_type');
-    $this->userStorage = $entity_type_manager->getStorage('user');;
+    $this->userStorage = $entity_type_manager->getStorage('user');
+    ;
     $this->languageManager = $language_manager;
     $this->urlGenerator = $url_generator;
     $this->dateFormatter = $date_formatter;
@@ -323,7 +324,7 @@ class MediaDevelGenerate extends DevelGenerateBase implements ContainerFactoryPl
       'title' => $this->t('Generating media items'),
       'operations' => $operations,
       'finished' => 'devel_generate_batch_finished',
-      'file' => drupal_get_path('module', 'devel_generate') . '/devel_generate.batch.inc',
+      'file' => \Drupal::service('extension.path.resolver')->getPath('module', 'devel_generate') . '/devel_generate.batch.inc',
     ];
     batch_set($batch);
 
@@ -353,7 +354,7 @@ class MediaDevelGenerate extends DevelGenerateBase implements ContainerFactoryPl
    *
    * @param array $vars
    *   The input values from the settings form.
-   * @param array $context
+   * @param iterable $context
    *   Batch job context.
    *
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
@@ -365,7 +366,7 @@ class MediaDevelGenerate extends DevelGenerateBase implements ContainerFactoryPl
    *
    * @see self::createMediaItem()
    */
-  public function batchCreateMediaItem(array $vars, &$context) {
+  public function batchCreateMediaItem(array $vars, iterable &$context) {
     if ($this->drushBatch) {
       $this->createMediaItem($vars);
     }
@@ -380,12 +381,12 @@ class MediaDevelGenerate extends DevelGenerateBase implements ContainerFactoryPl
    *
    * @param array $vars
    *   The input values from the settings form.
-   * @param array $context
+   * @param iterable $context
    *   Batch job context.
    *
    * @see self::mediaKill()
    */
-  public function batchMediaKill($vars, &$context) {
+  public function batchMediaKill(array $vars, iterable &$context) {
     if ($this->drushBatch) {
       $this->mediaKill($vars);
     }
@@ -411,7 +412,7 @@ class MediaDevelGenerate extends DevelGenerateBase implements ContainerFactoryPl
     $values['name_length'] = 6;
     $values['num'] = array_shift($args);
 
-    $all_media_types = array_values($this->mediaTypeStorage->getQuery()->execute());
+    $all_media_types = array_values($this->mediaTypeStorage->getQuery()->accessCheck(FALSE)->execute());
     $requested_media_types = StringUtils::csvToArray($options['media-types'] ?: $all_media_types);
 
     if (empty($requested_media_types)) {
@@ -444,6 +445,7 @@ class MediaDevelGenerate extends DevelGenerateBase implements ContainerFactoryPl
   protected function mediaKill(array $values) {
     $mids = $this->mediaStorage->getQuery()
       ->condition('bundle', $values['media_types'], 'IN')
+      ->accessCheck(FALSE)
       ->execute();
 
     if (!empty($mids)) {
@@ -466,6 +468,7 @@ class MediaDevelGenerate extends DevelGenerateBase implements ContainerFactoryPl
     // Get user id.
     $users = array_values($this->userStorage->getQuery()
       ->range(0, 50)
+      ->accessCheck(FALSE)
       ->execute());
     $users = array_merge($users, ['0']);
     $results['users'] = $users;
@@ -498,6 +501,7 @@ class MediaDevelGenerate extends DevelGenerateBase implements ContainerFactoryPl
       'uid' => $uid,
       'revision' => mt_rand(0, 1),
       'status' => TRUE,
+      'moderation_state' => 'published',
       'created' => $this->time->getRequestTime() - mt_rand(0, $results['time_range']),
       'langcode' => $this->getLangcode($results),
     ]);
