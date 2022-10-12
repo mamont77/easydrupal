@@ -657,12 +657,12 @@ if ($settings['hash_salt']) {
 $settings['container_yamls'][] = 'modules/composer/redis/example.services.yml';
 
 // Phpredis is built into the Pantheon application container.
-$settings['redis.connection']['interface'] = 'PhpRedis';
-$settings['redis_compress_length'] = 100;
-$settings['redis_compress_level'] = 1;
-$settings['cache']['default'] = 'cache.backend.redis'; // Use Redis as the default cache.
-$settings['cache_prefix']['default'] = 'pantheon-redis';
-$settings['cache']['bins']['form'] = 'cache.backend.database'; // Use the database for forms.
+//$settings['redis.connection']['interface'] = 'PhpRedis';
+//$settings['redis_compress_length'] = 100;
+//$settings['redis_compress_level'] = 1;
+//$settings['cache']['default'] = 'cache.backend.redis'; // Use Redis as the default cache.
+//$settings['cache_prefix']['default'] = 'pantheon-redis';
+//$settings['cache']['bins']['form'] = 'cache.backend.database'; // Use the database for forms.
 
 /**
  * Load services definition file.
