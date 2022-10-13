@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '7ca05a3271cd00ead281fa245c15eb6df1fb6537',
+        'reference' => 'a507e47a8b57f845154cd1c429f6ba6e543b4042',
         'name' => 'drupal/legacy-project',
         'dev' => true,
     ),
@@ -765,7 +765,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '7ca05a3271cd00ead281fa245c15eb6df1fb6537',
+            'reference' => 'a507e47a8b57f845154cd1c429f6ba6e543b4042',
             'dev_requirement' => false,
         ),
         'drupal/libraries' => array(
@@ -958,12 +958,12 @@
             'dev_requirement' => false,
         ),
         'drupal/views_bootstrap' => array(
-            'pretty_version' => '5.4.0',
-            'version' => '5.4.0.0',
+            'pretty_version' => '3.9.0',
+            'version' => '3.9.0.0',
             'type' => 'drupal-module',
             'install_path' => __DIR__ . '/../../modules/contrib/views_bootstrap',
             'aliases' => array(),
-            'reference' => '5.4.0',
+            'reference' => '8.x-3.9',
             'dev_requirement' => false,
         ),
         'drupal/views_infinite_scroll' => array(

@@ -77,7 +77,7 @@
         "drupal/sticky_sharrre_bar": "^1.4",
         "drupal/token": "^1.11",
         "drupal/upgrade_status": "^3.17",
-        "drupal/views_bootstrap": "^5.4",
+        "drupal/views_bootstrap": "3.9",
         "drupal/views_infinite_scroll": "^2.0",
         "drupal/votingapi": "^3.0@beta",
         "drupal/webp": "^1.0@beta",
