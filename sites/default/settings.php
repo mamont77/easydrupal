@@ -759,6 +759,9 @@ $settings['entity_update_batch_size'] = 50;
  */
 $settings['entity_update_backup'] = TRUE;
 
+// Simple XML Sitemap.
+$settings['simple_sitemap_engines.index_now.key'] = '5c9a7dfc-bbb7-4426-899d-a1611dc93426';
+
 /**
  * Load local development override configuration, if available.
  *
@@ -769,7 +772,6 @@ $settings['entity_update_backup'] = TRUE;
  *
  * Keep this code block at the end of this file to take full effect.
  */
-
 if (file_exists($app_root . '/' . $site_path . '/settings.local.php')) {
   include $app_root . '/' . $site_path . '/settings.local.php';
 }
