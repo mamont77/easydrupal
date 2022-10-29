@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - image.style.max_200x200
+    - image.style.max_200x133
     - image.style.max_455x455
     - image.style.max_720x720
   theme:
@@ -15,13 +15,13 @@ label: 'Landing Page Article'
 image_style_mappings:
   -
     image_mapping_type: image_style
-    image_mapping: max_720x720
-    breakpoint_id: easydrupal.screen-xs-max
-    multiplier: 1x
-  -
-    image_mapping_type: image_style
     image_mapping: max_455x455
     breakpoint_id: easydrupal.screen-sm-max
     multiplier: 1x
+  -
+    image_mapping_type: image_style
+    image_mapping: max_720x720
+    breakpoint_id: easydrupal.screen-xs-max
+    multiplier: 1x
 breakpoint_group: easydrupal
-fallback_image_style: max_200x200
+fallback_image_style: max_200x133

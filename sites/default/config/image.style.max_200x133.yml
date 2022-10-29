@@ -1,0 +1,16 @@
+uuid: 1802ad11-d4ff-4345-91e1-e3cd8db991de
+langcode: en
+status: true
+dependencies: {  }
+name: max_200x133
+label: 'Max 200x133'
+effects:
+  67f7e9bd-902a-46c1-97db-68b0eb91511a:
+    uuid: 67f7e9bd-902a-46c1-97db-68b0eb91511a
+    id: image_scale_and_crop
+    weight: 2
+    data:
+      width: 198
+      height: 131
+      anchor: center-center
+pipeline: ''
