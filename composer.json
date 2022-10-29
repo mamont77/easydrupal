@@ -178,6 +178,9 @@
             },
             "drupal/geshifilter": {
                 "3137937: Theme functions are deprecated in geshifield": "https://www.drupal.org/files/issues/2020-11-06/theme_function_deprecated--3137937-2.patch"
+            },
+            "drupal/advagg": {
+                "3258389: PHP 8.1 deprecations warnings: Passing null to parameter (stripos, rtrim)": "https://www.drupal.org/files/issues/2022-10-11/3258389-47.patch"
             }
         }
     }
