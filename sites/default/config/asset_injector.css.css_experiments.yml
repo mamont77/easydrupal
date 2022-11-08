@@ -1,0 +1,15 @@
+uuid: bb5fa056-61dc-461c-9ed3-5d8b64e83082
+langcode: en
+status: true
+dependencies: {  }
+id: css_experiments
+label: 'CSS experiments'
+code: |-
+  .navbar-default .navbar-nav > li > a {
+    color: #575756;
+  }
+media: all
+preprocess: true
+conditions: {  }
+contexts: {  }
+conditions_require_all: true
