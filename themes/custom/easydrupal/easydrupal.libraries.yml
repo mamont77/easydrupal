@@ -18,7 +18,9 @@ framework:
     bootstrap/assets/javascripts/bootstrap/transition.js: { }
     js/global-scripts.js: { }
   dependencies:
+    - core/drupal
     - core/jquery
+    - core/once
 
 geshifilter:
   css:
