@@ -37,7 +37,7 @@ if (!defined("PANTHEON_VERSION")) {
 $pantheon_services_file = __DIR__ . '/services.pantheon.preproduction.yml';
 if (
   isset($_ENV['PANTHEON_ENVIRONMENT']) &&
-  ( ($_ENV['PANTHEON_ENVIRONMENT'] == 'live') || ($_ENV['PANTHEON_ENVIRONMENT'] == 'test') )
+  (($_ENV['PANTHEON_ENVIRONMENT'] == 'live') || ($_ENV['PANTHEON_ENVIRONMENT'] == 'test'))
 ) {
   $pantheon_services_file = __DIR__ . '/services.pantheon.production.yml';
 }
@@ -58,8 +58,8 @@ $settings['file_private_path'] = 'sites/default/files/private';
 $is_installer_url = (strpos($_SERVER['SCRIPT_NAME'], '/core/install.php') === 0);
 
 /**
- * Add the Drupal 8 CMI Directory Information directly in settings.php to make sure
- * Drupal knows all about that.
+ * Add the Drupal 8 CMI Directory Information directly in settings.php to make
+ * sure Drupal knows all about that.
  *
  * Issue: https://github.com/pantheon-systems/drops-8/issues/2
  *
@@ -71,14 +71,10 @@ $is_installer_url = (strpos($_SERVER['SCRIPT_NAME'], '/core/install.php') === 0)
  *
  */
 if ($is_installer_url) {
-  $config_directories = array(
-    CONFIG_SYNC_DIRECTORY => 'sites/default/files',
-  );
+  $settings['config_sync_directory'] = 'sites/default/files';
 }
 else {
-  $config_directories = array(
-    CONFIG_SYNC_DIRECTORY => 'sites/default/config',
-  );
+  $settings['config_sync_directory'] = 'sites/default/config';
 }
 
 
@@ -114,7 +110,7 @@ if (isset($_SERVER['PRESSFLOW_SETTINGS'])) {
   foreach ($pressflow_settings as $key => $value) {
     // One level of depth should be enough for $conf and $database.
     if ($key == 'conf') {
-      foreach($value as $conf_key => $conf_value) {
+      foreach ($value as $conf_key => $conf_value) {
         $conf[$conf_key] = $conf_value;
       }
     }
@@ -123,7 +119,7 @@ if (isset($_SERVER['PRESSFLOW_SETTINGS'])) {
       // additional databases. Also, allows fun things with 'prefix' if they
       // want to try multisite.
       if (!isset($databases) || !is_array($databases)) {
-        $databases = array();
+        $databases = [];
       }
       $databases = array_replace_recursive($databases, $value);
     }
@@ -150,7 +146,7 @@ if (isset($_ENV['PANTHEON_ENVIRONMENT'])) {
  *
  */
 if (isset($_ENV['PANTHEON_ENVIRONMENT'])) {
-  $config['system.file']['path']['temporary'] = $_SERVER['HOME'] .'/tmp';
+  $config['system.file']['path']['temporary'] = $_SERVER['HOME'] . '/tmp';
 }
 
 /**
@@ -207,17 +203,17 @@ if (empty($settings['file_scan_ignore_directories'])) {
 }
 
 if (defined('PANTHEON_ENVIRONMENT')) {
-  if (in_array($_ENV['PANTHEON_ENVIRONMENT'], array('dev', 'test', 'live'))) {
+  if (in_array($_ENV['PANTHEON_ENVIRONMENT'], ['dev', 'test', 'live'])) {
     $settings['trusted_host_patterns'][] = "{$_ENV['PANTHEON_ENVIRONMENT']}-{$_ENV['PANTHEON_SITE_NAME']}.getpantheon.io";
     $settings['trusted_host_patterns'][] = "{$_ENV['PANTHEON_ENVIRONMENT']}-{$_ENV['PANTHEON_SITE_NAME']}.pantheon.io";
     $settings['trusted_host_patterns'][] = "{$_ENV['PANTHEON_ENVIRONMENT']}-{$_ENV['PANTHEON_SITE_NAME']}.pantheonsite.io";
     $settings['trusted_host_patterns'][] = "{$_ENV['PANTHEON_ENVIRONMENT']}-{$_ENV['PANTHEON_SITE_NAME']}.panth.io";
 
     # Replace value with custom domain(s) added in the site Dashboard
-//    $settings['trusted_host_patterns'][] = '^.+\.yoursite\.com$';
-//    $settings['trusted_host_patterns'][] = '^yoursite\.com$';
-//    $settings['trusted_host_patterns'][] = '^responsinator.com$';
-//    $settings['trusted_host_patterns'][] = '^www.responsinator.com';
+    //    $settings['trusted_host_patterns'][] = '^.+\.yoursite\.com$';
+    //    $settings['trusted_host_patterns'][] = '^yoursite\.com$';
+    //    $settings['trusted_host_patterns'][] = '^responsinator.com$';
+    //    $settings['trusted_host_patterns'][] = '^www.responsinator.com';
   }
   if ($_ENV['PANTHEON_ENVIRONMENT'] == 'dev') {
     // Disable Core CSS and JS aggregation.
