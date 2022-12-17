@@ -136,11 +136,10 @@ content:
     third_party_settings: {  }
   field_yoast_seo:
     type: yoast_seo_widget
-    weight: 15
+    weight: 131
     region: content
     settings:
-      edit_title: false
-      edit_description: false
+      body: body
     third_party_settings: {  }
   path:
     type: path
@@ -154,6 +153,16 @@ content:
     region: content
     settings:
       display_label: true
+    third_party_settings: {  }
+  simple_sitemap:
+    weight: 10
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  simple_sitemap_index_now:
+    weight: 130
+    region: content
+    settings: {  }
     third_party_settings: {  }
   status:
     type: boolean_checkbox

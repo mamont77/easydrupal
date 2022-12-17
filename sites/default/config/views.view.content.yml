@@ -305,6 +305,11 @@ display:
           empty_zero: false
           hide_alter_empty: true
           destination: true
+        field_yoast_seo:
+          id: field_yoast_seo
+          table: node__field_yoast_seo
+          field: field_yoast_seo
+          type: yoastseo_formatter
       pager:
         type: full
         options:
