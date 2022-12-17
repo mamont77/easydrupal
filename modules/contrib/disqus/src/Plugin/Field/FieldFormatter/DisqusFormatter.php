@@ -86,10 +86,13 @@ class DisqusFormatter extends FormatterBase implements ContainerFactoryPluginInt
     if ($items->status == 1 && $this->currentUser->hasPermission('view disqus comments')) {
       $element[] = [
         '#type' => 'disqus',
-        '#url' => $items->getEntity()->toUrl('canonical', ['absolute' => TRUE])->toString(),
         '#title' => (string) $items->getEntity()->label(),
-        '#identifier' => $items->identifier ?: "{$items->getEntity()->getEntityTypeId()}/{$items->getEntity()->id()}",
       ];
+      $node = $items->getEntity();
+      if (!$node->isNew() || !$node->in_preview) {
+        $element[0] += ['#url' => $node->toUrl('canonical', ['absolute' => TRUE])->toString()];
+        $element[0] += ['#identifier' => $items->identifier ?: "{$node->getEntityTypeId()}/{$node->id()}"];
+      }
     }
 
     return $element;

@@ -2,9 +2,8 @@ name: 'easyDrupal'
 description: 'Bootstrap Sub-Theme (CDN). Uses the Bootstrap framework Sass source files and must be compiled.'
 type: theme
 package: 'Custom'
-core: 8.x
 base theme: bootstrap
-core_version_requirement: '^8 || ^9'
+core_version_requirement: ^8 || ^9 || ^10
 
 regions:
   navigation: 'Navigation'

@@ -23,7 +23,7 @@ function easydrupal_common_help($route_name, RouteMatchInterface $route_match) {
 /**
  * Implements hook_page_attachments_alter().
  */
-function easydrupal_common_page_attachments_alter(array &$attachments) {
+function easydrupal_common_page_attachments_alter(array &$attachments): void {
   if (\Drupal::service('path.matcher')->isFrontPage()
     && \Drupal::currentUser()->isAnonymous()) {
     $remove_libraries = [

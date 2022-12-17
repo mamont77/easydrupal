@@ -11,7 +11,7 @@ use Drupal\Core\Form\FormStateInterface;
 /**
  * Implements template_preprocess_page().
  */
-function easydrupal_preprocess_page(&$variables) {
+function easydrupal_preprocess_page(&$variables): void {
   if (\Drupal::service('path.matcher')->isFrontPage()) {
     $variables['#attached']['library'][] = 'easydrupal/landing-page';
   }
@@ -46,7 +46,7 @@ function easydrupal_preprocess_page(&$variables) {
 /**
  * Implements hook_theme().
  */
-function easydrupal_theme($existing, $type, $theme, $path) {
+function easydrupal_theme($existing, $type, $theme, $path): array {
   return [
     'contact_message_feedback_contact_form_form' => [
       'render element' => 'form',
@@ -61,7 +61,7 @@ function easydrupal_theme($existing, $type, $theme, $path) {
  * @param \Drupal\Core\Form\FormStateInterface $form_state
  * @param $form_id
  */
-function easydrupal_form_contact_message_feedback_contact_form_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+function easydrupal_form_contact_message_feedback_contact_form_form_alter(&$form, FormStateInterface $form_state, $form_id): void {
 
   // Checking field type because it is markup for logged user, and we want a placeholder.
   if (isset($form['name']) && $form['name']['#type'] == 'textfield') {
@@ -94,7 +94,7 @@ function easydrupal_form_contact_message_feedback_contact_form_form_alter(&$form
  * @param \Drupal\Core\Form\FormStateInterface $form_state
  * @param $form_id
  */
-function easydrupal_form_user_login_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+function easydrupal_form_user_login_form_alter(&$form, FormStateInterface $form_state, $form_id): void {
   $form['name']['#attributes']['placeholder'][] = $form['name']['#title'] . ' *';
   unset($form['name']['#title'], $form['name']['#description']);
 

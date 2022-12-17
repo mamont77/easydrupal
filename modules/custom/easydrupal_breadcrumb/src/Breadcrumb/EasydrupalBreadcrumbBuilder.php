@@ -7,12 +7,15 @@ use Drupal\Core\Breadcrumb\BreadcrumbBuilderInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Link;
 
+/**
+ * EasydrupalBreadCrumbBuilder.
+ */
 class EasydrupalBreadCrumbBuilder implements BreadcrumbBuilderInterface {
   /**
    * {@inheritdoc}
    */
-  public function applies(RouteMatchInterface $attributes) {
-    $parameters = $attributes->getParameters()->all();
+  public function applies(RouteMatchInterface $route_match) {
+    $parameters = $route_match->getParameters()->all();
     // I need my breadcrumbs for a few node types ONLY,
     // so it should be applied on node page ONLY.
     if (isset($parameters['node']) && !empty($parameters['node'])) {
@@ -23,7 +26,7 @@ class EasydrupalBreadCrumbBuilder implements BreadcrumbBuilderInterface {
   /**
    * {@inheritdoc}
    */
-  public function build(RouteMatchInterface $route_match) {
+  public function build(RouteMatchInterface $route_match): Breadcrumb {
     $breadcrumb = new Breadcrumb();
     $breadcrumb->addLink(Link::createFromRoute('Home', '<front>'));
 

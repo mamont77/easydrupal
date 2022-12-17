@@ -19,7 +19,6 @@ framework:
     js/global-scripts.js: { }
   dependencies:
     - core/jquery
-    - core/jquery.once
 
 geshifilter:
   css:

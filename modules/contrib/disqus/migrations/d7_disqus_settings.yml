@@ -2,6 +2,7 @@ id: d7_disqus_settings
 label: Disqus settings
 migration_tags:
   - Drupal 7
+  - Configuration
 source:
   plugin: variable
   variables:
@@ -26,10 +27,9 @@ process:
   'advanced/disqus_publickey': disqus_publickey
   'advanced/disqus_secretkey': disqus_secretkey
   'advanced/api/disqus_api_update': disqus_api_update
-  'advanced/api/disqus_api_update': disqus_api_delete
   'advanced/sso/disqus_sso': disqus_sso
   'advanced/sso/disqus_use_site_logo': disqus_use_site_logo
-  'advanced/sso/disqus_logo':
+  'advanced/sso/disqus_logo': disqus_logo
 destination:
   plugin: config
   config_name: disqus.settings

@@ -8,7 +8,8 @@ use Drupal\migrate_drupal\Plugin\migrate\source\DrupalSqlBase;
  * Disqus enabled content types migration source.
  *
  * @MigrateSource(
- *   id = "disqus_enabled_content_types"
+ *   id = "disqus_enabled_content_types",
+ *   source_module = "disqus"
  * )
  */
 class DisqusEnabledNodeTypes extends DrupalSqlBase {

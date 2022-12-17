@@ -13,8 +13,7 @@ function easydrupal_breadcrumb_help($route_name, RouteMatchInterface $route_matc
   switch ($route_name) {
     // Main module help for the easydrupal_breadcrumb module.
     case 'help.page.easydrupal_breadcrumb':
-      $output = '';
-      $output .= '<h3>' . t('About') . '</h3>';
+      $output = '<h3>' . t('About') . '</h3>';
       $output .= '<p>' . t('Setting breadcrumbs for custom content types.') . '</p>';
       return $output;
 

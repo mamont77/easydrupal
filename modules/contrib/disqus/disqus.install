@@ -51,3 +51,15 @@ function disqus_update_8001() {
       ->set($target_entity_type->id() . '.field_schema_data.' . $field->getName(), $stored_schema);
   }
 }
+
+/**
+ * Set the default value of a new configuration property.
+ */
+function disqus_update_8101() {
+  $config = \Drupal::configFactory()->getEditable('disqus.settings');
+  if (!($config->isNew())) {
+    $config
+      ->set('behavior.disqus_notify_newcomment', FALSE)
+      ->save(TRUE);
+  }
+}

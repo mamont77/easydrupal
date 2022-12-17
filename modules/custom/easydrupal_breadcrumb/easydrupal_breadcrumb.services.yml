@@ -2,4 +2,4 @@ services:
   easydrupal_breadcrumb.breadcrumb:
     class: Drupal\easydrupal_breadcrumb\Breadcrumb\EasydrupalBreadcrumbBuilder
     tags:
-     - { name: breadcrumb_builder, priority: 100 }
+      - { name: breadcrumb_builder, priority: 100 }
