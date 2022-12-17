@@ -32,6 +32,7 @@ module:
   datetime: 0
   dblog: 0
   devel: 0
+  devel_entity_updates: 0
   devel_php: 0
   disqus: 0
   ds_extras: 0
@@ -87,7 +88,6 @@ module:
   purge_tokens: 0
   purge_ui: 0
   rabbit_hole: 0
-  rdf: 0
   recaptcha: 0
   redirect: 0
   redis: 0
@@ -129,6 +129,5 @@ module:
 theme:
   bootstrap: 0
   easydrupal: 0
-  seven: 0
   claro: 0
 profile: standard
