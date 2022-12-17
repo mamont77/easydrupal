@@ -78,17 +78,17 @@
         },
         {
             "name": "bower-asset/jquery",
-            "version": "3.6.0",
-            "version_normalized": "3.6.0.0",
+            "version": "3.6.2",
+            "version_normalized": "3.6.2.0",
             "source": {
                 "type": "git",
-                "url": "git@github.com:jquery/jquery-dist.git",
-                "reference": "e786e3d9707ffd9b0dd330ca135b66344dcef85a"
+                "url": "https://github.com/jquery/jquery-dist.git",
+                "reference": "17f2a6864677d6dca5c1a2f05c02420ad899045b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jquery/jquery-dist/zipball/e786e3d9707ffd9b0dd330ca135b66344dcef85a",
-                "reference": "e786e3d9707ffd9b0dd330ca135b66344dcef85a"
+                "url": "https://api.github.com/repos/jquery/jquery-dist/zipball/17f2a6864677d6dca5c1a2f05c02420ad899045b",
+                "reference": "17f2a6864677d6dca5c1a2f05c02420ad899045b"
             },
             "type": "bower-asset",
             "installation-source": "dist",
@@ -3010,21 +3010,21 @@
         },
         {
             "name": "drupal/devel_entity_updates",
-            "version": "4.0.0",
-            "version_normalized": "4.0.0.0",
+            "version": "4.1.0-rc1",
+            "version_normalized": "4.1.0.0-RC1",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/devel_entity_updates.git",
-                "reference": "4.0.0"
+                "reference": "4.1.0-rc1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/devel_entity_updates-4.0.0.zip",
-                "reference": "4.0.0",
-                "shasum": "c7c9f5d009d6a62e965ae0ac37f839e66d9acd36"
+                "url": "https://ftp.drupal.org/files/projects/devel_entity_updates-4.1.0-rc1.zip",
+                "reference": "4.1.0-rc1",
+                "shasum": "5685332e0b9de107bdc083c478f52bfa04ed00b3"
             },
             "require": {
-                "drupal/core": "^9.2",
+                "drupal/core": "^9.2 || ^10",
                 "drupal/devel": "*",
                 "drush/drush": "^11"
             },
@@ -3034,11 +3034,11 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "4.0.0",
-                    "datestamp": "1652693380",
+                    "version": "4.1.0-rc1",
+                    "datestamp": "1670235470",
                     "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
+                        "status": "not-covered",
+                        "message": "RC releases are not covered by Drupal security advisories."
                     }
                 },
                 "drush": {
@@ -4713,25 +4713,21 @@
         },
         {
             "name": "drupal/purge_tokens",
-            "version": "3.2.0",
-            "version_normalized": "3.2.0.0",
+            "version": "3.4.0",
+            "version_normalized": "3.4.0.0",
             "require": {
-                "drupal/core": "^8.7.7 || ^9",
-                "drupal/purge": "^3.0.0-beta9",
-                "php": ">=7.2"
+                "drupal/core": "^9.2 || ^10",
+                "drupal/purge": "*"
             },
             "type": "metapackage",
             "extra": {
                 "drupal": {
-                    "version": "8.x-3.2",
-                    "datestamp": "1633428281",
+                    "version": "8.x-3.4",
+                    "datestamp": "1663189449",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
                     }
-                },
-                "branch-alias": {
-                    "dev-8.x-3.x": "3.x-dev"
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
@@ -4740,16 +4736,20 @@
             ],
             "authors": [
                 {
-                    "name": "Niels van Mourik",
-                    "homepage": "http://www.nielsvm.org"
-                },
-                {
                     "name": "djbobbydrake",
                     "homepage": "https://www.drupal.org/user/336378"
                 },
                 {
+                    "name": "japerry",
+                    "homepage": "https://www.drupal.org/user/45640"
+                },
+                {
                     "name": "nielsvm",
                     "homepage": "https://www.drupal.org/user/163285"
+                },
+                {
+                    "name": "SqyD",
+                    "homepage": "https://www.drupal.org/user/106525"
                 }
             ],
             "description": "Adds tokens support for external cache invalidation.",
