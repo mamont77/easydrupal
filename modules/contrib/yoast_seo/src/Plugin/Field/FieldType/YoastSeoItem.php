@@ -15,7 +15,7 @@ use Drupal\Core\TypedData\DataDefinition;
  *   module = "yoast_seo",
  *   description = @Translation("The Real-time SEO status in points and the focused keywords."),
  *   default_widget = "yoast_seo_widget",
- *   default_formatter = "yoastseo_empty_formatter"
+ *   default_formatter = "string"
  * )
  */
 class YoastSeoItem extends FieldItemBase {
@@ -43,16 +43,6 @@ class YoastSeoItem extends FieldItemBase {
           'length' => 256,
           'not null' => FALSE,
         ],
-        'title' => [
-          'type' => 'varchar',
-          'length' => 1024,
-          'not null' => FALSE,
-        ],
-        'description' => [
-          'type' => 'varchar',
-          'length' => 1024,
-          'not null' => FALSE,
-        ],
       ],
     ];
   }
@@ -65,10 +55,6 @@ class YoastSeoItem extends FieldItemBase {
       ->setLabel(t('Status'));
     $properties['focus_keyword'] = DataDefinition::create('string')
       ->setLabel(t('Focus Keyword'));
-    $properties['title'] = DataDefinition::create('string')
-      ->setLabel(t('Edited title'));
-    $properties['description'] = DataDefinition::create('string')
-      ->setLabel(t('Edited description'));
 
     return $properties;
   }
