@@ -4,6 +4,7 @@ behavior:
   disqus_inherit_login: false
   disqus_disable_mobile: false
   disqus_track_newcomment_ga: true
+  disqus_notify_newcomment: false
 advanced:
   disqus_useraccesstoken: 53a804fb22f14356947208f4e35e59b8
   disqus_publickey: uf0Mbq1NoMdzMIbqsgDqoAV9pe910S93ngpPZV6MyQVyT51d8d6vFgDe8mE2muI8
