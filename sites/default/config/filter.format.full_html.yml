@@ -50,7 +50,7 @@ filters:
     status: false
     weight: -43
     settings:
-      allowed_html: '<a href hreflang data-entity-type data-entity-uuid data-entity-substitution> <em> <strong> <cite> <blockquote cite> <code> <ul type> <ol start type> <li> <dl> <dt> <dd> <h2 id> <h3 id> <h4 id> <h5 id> <h6 id> <s> <sup> <sub> <table> <caption> <tbody> <thead> <tfoot> <th> <td> <tr> <hr> <h1> <pre> <p class="text-left text-center text-right text-justify text-nowrap"> <img src alt data-entity-type data-entity-uuid data-entity-substitution data-align data-caption class="responsive"> <drupal-media data-entity-type data-entity-uuid data-view-mode data-align data-caption alt title>'
+      allowed_html: '<img class="responsive"> <p class="text-left text-center text-right text-justify text-nowrap">'
       filter_html_help: true
       filter_html_nofollow: false
   filter_geshifilter:
@@ -130,6 +130,8 @@ filters:
       layout: ''
       skin: ''
       background: false
+      loading: ''
+      preload: false
       responsive_image_style: ''
       image_style: ''
       media_switch: ''

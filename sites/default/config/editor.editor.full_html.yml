@@ -1,65 +1,87 @@
-uuid: 59665b39-5d98-4606-8a00-c5bf5ec7b89c
+uuid: 12f518ba-db77-46ff-898f-abda415e39bc
 langcode: en
 status: true
 dependencies:
   config:
     - filter.format.full_html
   module:
-    - ckeditor
-_core:
-  default_config_hash: 967ijj7p6i7rwrYl7r08WQFeCY_c23YAh0h8u-w_CXM
+    - ckeditor5
 format: full_html
-editor: ckeditor
+editor: ckeditor5
 settings:
   toolbar:
-    rows:
-      -
-        -
-          name: Formatting
-          items:
-            - Bold
-            - Italic
-            - Strike
-            - Superscript
-            - Subscript
-            - '-'
-            - RemoveFormat
-        -
-          name: Linking
-          items:
-            - DrupalLink
-            - DrupalUnlink
-        -
-          name: Lists
-          items:
-            - BulletedList
-            - NumberedList
-        -
-          name: Media
-          items:
-            - Blockquote
-            - DrupalMediaLibrary
-            - Table
-            - HorizontalRule
-        -
-          name: 'Block Formatting'
-          items:
-            - Format
-        -
-          name: Custom
-          items:
-            - Styles
-        -
-          name: Tools
-          items:
-            - ShowBlocks
-            - Source
+    items:
+      - bold
+      - italic
+      - underline
+      - strikethrough
+      - superscript
+      - subscript
+      - removeFormat
+      - '|'
+      - alignment
+      - bulletedList
+      - numberedList
+      - '|'
+      - link
+      - blockQuote
+      - drupalMedia
+      - insertTable
+      - horizontalLine
+      - codeBlock
+      - '-'
+      - code
+      - heading
+      - style
+      - '|'
+      - sourceEditing
   plugins:
-    drupallink:
-      linkit_enabled: true
-      linkit_profile: articles_links_collention
-    stylescombo:
-      styles: "blockquote|blockquote\r\npre|pre\r\ncode|code\r\nimg.responsive|Img Responsive\r\np.text-left|Left aligned\r\np.text-center|Center aligned\r\np.text-right|Right aligned\r\np.text-justify|Justified\r\np.text-nowrap|No wrap\r\n"
+    ckeditor5_heading:
+      enabled_headings:
+        - heading2
+        - heading3
+        - heading4
+        - heading5
+        - heading6
+    ckeditor5_style:
+      styles:
+        -
+          label: 'Img Responsive'
+          element: '<img class="responsive">'
+        -
+          label: 'Left aligned'
+          element: '<p class="text-left">'
+        -
+          label: 'Center aligned'
+          element: '<p class="text-center">'
+        -
+          label: 'Right aligned'
+          element: '<p class="text-right">'
+        -
+          label: Justified
+          element: '<p class="text-justify">'
+        -
+          label: 'No wrap'
+          element: '<p class="text-nowrap">'
+    ckeditor5_sourceEditing:
+      allowed_tags: {  }
+    ckeditor5_list:
+      reversed: true
+      startIndex: true
+    ckeditor5_alignment:
+      enabled_alignments:
+        - left
+        - center
+        - right
+        - justify
+    media_media:
+      allow_view_mode_override: false
+    editor_advanced_link_link:
+      enabled_attributes:
+        - class
+        - rel
+        - target
+        - title
 image_upload:
   status: true
   scheme: public
