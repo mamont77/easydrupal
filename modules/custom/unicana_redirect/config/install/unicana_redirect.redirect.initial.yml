@@ -1,6 +1,0 @@
-# The id of the config entity.
-id: initial
-# Our properties follow.
-label: 'makedrupaleasy.com'
-replacement_pattern: 'affiliate-partner=234234231'
-type_of_the_pattern: '1'

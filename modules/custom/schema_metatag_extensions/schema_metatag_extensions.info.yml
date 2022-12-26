@@ -1,8 +1,0 @@
-name: Schema.org Metatag Extensions
-type: module
-description: 'Allow to add an additional data to JSON provided by "Schema.org Metatag" module.'
-core_version_requirement: ^8 || ^9 || ^10
-package: SEO
-dependencies:
-  - schema_metatag:schema_metatag
-  - votingapi:votingapi

@@ -1,6 +1,0 @@
-name: EasyDrupal Media Migration
-type: module
-description: "Migrate files into media."
-core: 8.x
-core_version_requirement: '^8 || ^9'
-package: Custom

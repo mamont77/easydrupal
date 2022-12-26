@@ -1,7 +1,0 @@
-name: Unicana Redirect
-description: Detect links on the website and add tracking codes. For site different rules may apply. Some sites may just add an extension at the end of the url, others may use a redirection page.
-type: module
-package: custom
-core: 8.x
-core_version_requirement: '^8 || ^9'
-

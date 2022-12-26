@@ -1,4 +1,0 @@
-#Define the administer permission.
-'administer redirects':
-  title: 'Administer Redirects'
-  description: Create and edit unicana redirects.
