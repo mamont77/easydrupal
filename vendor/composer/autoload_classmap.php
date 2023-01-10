@@ -632,6 +632,7 @@ return array(
     'Drupal\\Component\\DependencyInjection\\Dumper\\OptimizedPhpArrayDumper' => $baseDir . '/core/lib/Drupal/Component/DependencyInjection/Dumper/OptimizedPhpArrayDumper.php',
     'Drupal\\Component\\DependencyInjection\\Dumper\\PhpArrayDumper' => $baseDir . '/core/lib/Drupal/Component/DependencyInjection/Dumper/PhpArrayDumper.php',
     'Drupal\\Component\\DependencyInjection\\PhpArrayContainer' => $baseDir . '/core/lib/Drupal/Component/DependencyInjection/PhpArrayContainer.php',
+    'Drupal\\Component\\DependencyInjection\\ReverseContainer' => $baseDir . '/core/lib/Drupal/Component/DependencyInjection/ReverseContainer.php',
     'Drupal\\Component\\DependencyInjection\\ServiceIdHashTrait' => $baseDir . '/core/lib/Drupal/Component/DependencyInjection/ServiceIdHashTrait.php',
     'Drupal\\Component\\Diff\\Diff' => $baseDir . '/core/lib/Drupal/Component/Diff/Diff.php',
     'Drupal\\Component\\Diff\\DiffFormatter' => $baseDir . '/core/lib/Drupal/Component/Diff/DiffFormatter.php',

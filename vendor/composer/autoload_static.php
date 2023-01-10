@@ -1236,6 +1236,7 @@ class ComposerStaticInit7bb062997fc4f0d3cdcb37d377b9bb20
         'Drupal\\Component\\DependencyInjection\\Dumper\\OptimizedPhpArrayDumper' => __DIR__ . '/../..' . '/core/lib/Drupal/Component/DependencyInjection/Dumper/OptimizedPhpArrayDumper.php',
         'Drupal\\Component\\DependencyInjection\\Dumper\\PhpArrayDumper' => __DIR__ . '/../..' . '/core/lib/Drupal/Component/DependencyInjection/Dumper/PhpArrayDumper.php',
         'Drupal\\Component\\DependencyInjection\\PhpArrayContainer' => __DIR__ . '/../..' . '/core/lib/Drupal/Component/DependencyInjection/PhpArrayContainer.php',
+        'Drupal\\Component\\DependencyInjection\\ReverseContainer' => __DIR__ . '/../..' . '/core/lib/Drupal/Component/DependencyInjection/ReverseContainer.php',
         'Drupal\\Component\\DependencyInjection\\ServiceIdHashTrait' => __DIR__ . '/../..' . '/core/lib/Drupal/Component/DependencyInjection/ServiceIdHashTrait.php',
         'Drupal\\Component\\Diff\\Diff' => __DIR__ . '/../..' . '/core/lib/Drupal/Component/Diff/Diff.php',
         'Drupal\\Component\\Diff\\DiffFormatter' => __DIR__ . '/../..' . '/core/lib/Drupal/Component/Diff/DiffFormatter.php',
