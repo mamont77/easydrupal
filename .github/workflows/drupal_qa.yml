@@ -1,0 +1,13 @@
+- name: DrupalQA
+  # You may pin to the exact commit or the version.
+  # uses: hussainweb/drupalqa-action@7334e1ffbdca550b48edb2c6676cff0e8834e46c
+  uses: hussainweb/drupalqa-action@v1.2.0
+  with:
+    # PHP version.
+    php-version: "8.1"
+    # Web root (document root). This is set to web by default. Do not include trailing slash.
+    web-root: "/" # optional, default is web
+    # Checks to run. This is a YAML formatted structure and must begin with a pipe character.
+    checks: # optional, default is
+    # Select which registry to use. Only DockerHub or GHCR is supported.
+    registry: # optional, default is ghcr
