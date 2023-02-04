@@ -1,0 +1,43 @@
+name: Drupal PHP code standards checker
+
+on: pull_request
+
+jobs:
+  phpcs-checker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Installing PHPCS
+        run: |
+          composer global config --no-plugins allow-plugins.dealerdirect/phpcodesniffer-composer-installer true
+          composer global require drupal/coder
+          composer install
+
+      - name: Installing reviewdog
+        uses: reviewdog/action-setup@v1
+        with:
+          reviewdog_version: latest
+
+      - name: Configuring diff file.
+        run: |
+          git config --global --add safe.directory .
+          git diff --name-only -r origin/$GITHUB_BASE_REF..$GITHUB_REF | grep -e modules/custom -e themes/custom | tr "\n" " " > /tmp/git_diff
+
+      - name: Checking php Drupal standards
+        env:
+          REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          ~/.composer/vendor/bin/phpcs -i
+          ~/.composer/vendor/bin/phpcs \
+            --extensions=css,inc,install,module,php,profile,test,theme \
+            --report=checkstyle \
+            --standard=Drupal,DrupalPractice \
+            modules/custom |\
+            reviewdog \
+            -f="checkstyle" \
+            -reporter="github-pr-review" \
+            -fail-on-error \
+            -filter-mode=nofilter -tee
+        timeout-minutes: 5
