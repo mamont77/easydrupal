@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ef73a81ca5708a8a293d93e0f9bb330d",
+    "content-hash": "6532219a5b7728b607960da2ec8e09f5",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1631,17 +1631,17 @@
         },
         {
             "name": "drupal/addtoany",
-            "version": "2.0.0",
+            "version": "2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/addtoany.git",
-                "reference": "2.0.0"
+                "reference": "2.0.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/addtoany-2.0.0.zip",
-                "reference": "2.0.0",
-                "shasum": "d3c6395797734615f054b9ec48d0181c6cb8d8d7"
+                "url": "https://ftp.drupal.org/files/projects/addtoany-2.0.1.zip",
+                "reference": "2.0.1",
+                "shasum": "536abb99ae21ca452348cee94428bfe188cad7a6"
             },
             "require": {
                 "drupal/core": "^9.4 || ^10.0"
@@ -1649,8 +1649,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "2.0.0",
-                    "datestamp": "1673704585",
+                    "version": "2.0.1",
+                    "datestamp": "1674468065",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -2146,26 +2146,26 @@
         },
         {
             "name": "drupal/bootstrap_layouts",
-            "version": "5.2.0",
+            "version": "5.3.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/bootstrap_layouts.git",
-                "reference": "8.x-5.2"
+                "reference": "8.x-5.3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/bootstrap_layouts-8.x-5.2.zip",
-                "reference": "8.x-5.2",
-                "shasum": "7abc903415adc5f459b362f9cfd619786a144afe"
+                "url": "https://ftp.drupal.org/files/projects/bootstrap_layouts-8.x-5.3.zip",
+                "reference": "8.x-5.3",
+                "shasum": "0ca3a76594a9483235920964c56effcf0fdfe06e"
             },
             "require": {
-                "drupal/core": "^8 || ^9"
+                "drupal/core": "^9.3 || ^10"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-5.2",
-                    "datestamp": "1591360017",
+                    "version": "8.x-5.3",
+                    "datestamp": "1675341751",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -2186,8 +2186,8 @@
                     "homepage": "https://www.drupal.org/user/112790"
                 },
                 {
-                    "name": "markcarver",
-                    "homepage": "https://www.drupal.org/user/501638"
+                    "name": "Rajab Natshah",
+                    "homepage": "https://www.drupal.org/user/1414312"
                 }
             ],
             "description": "This module is going to generate layouts with Bootstrap grid system.",
@@ -2626,26 +2626,26 @@
         },
         {
             "name": "drupal/country",
-            "version": "1.0.0",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/country.git",
-                "reference": "8.x-1.0"
+                "reference": "8.x-1.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/country-8.x-1.0.zip",
-                "reference": "8.x-1.0",
-                "shasum": "a18d1f2ccb7e90c9821fd403c71c72ae58937bdb"
+                "url": "https://ftp.drupal.org/files/projects/country-8.x-1.1.zip",
+                "reference": "8.x-1.1",
+                "shasum": "07f64573e29620d193e3fb4cfc0ae01f5b6a35ea"
             },
             "require": {
-                "drupal/core": "^8 || ^9"
+                "drupal/core": "^8 || ^9 || ^10"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-1.0",
-                    "datestamp": "1642668524",
+                    "version": "8.x-1.1",
+                    "datestamp": "1674487460",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
