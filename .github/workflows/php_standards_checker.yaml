@@ -1,6 +1,6 @@
 name: Drupal PHP code standards checker
 
-on: pull_request
+on: push
 
 jobs:
   phpcs-checker:

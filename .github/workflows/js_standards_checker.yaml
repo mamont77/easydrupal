@@ -1,6 +1,6 @@
 name: Drupal JS code standards checker
 
-on: pull_request
+on: push
 
 jobs:
   eslint-checker:
