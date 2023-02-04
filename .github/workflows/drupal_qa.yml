@@ -1,11 +1,20 @@
 name: DrupalQA
-uses: hussainweb/drupalqa-action@v1.2.0
+uses: hussainweb/drupalqa@v1
 with:
-  # PHP version.
-  php-version: "8.1"
-  # Web root (document root). This is set to web by default. Do not include trailing slash.
-  web-root: "/" # optional, default is web
-  # Checks to run. This is a YAML formatted structure and must begin with a pipe character.
-  checks: # optional, default is
-  # Select which registry to use. Only DockerHub or GHCR is supported.
-  registry: # optional, default is ghcr
+  php-version: 8.1
+  web-root: '/'
+  checks: |
+    phplint:
+      exclude: vendor,core,modules/contrib
+      extensions: php,module,theme,engine,inc,install
+      verbose: ''
+      path: ''
+    phpcs:
+      standard: Drupal,DrupalPractice
+      path: modules/custom,themes/custom
+    phpmd:
+      path: modules/custom
+      format: text
+      ruleset: codesize,naming,unusedcode
+      suffixes: php,module,theme,engine,inc
+      exclude: ''
