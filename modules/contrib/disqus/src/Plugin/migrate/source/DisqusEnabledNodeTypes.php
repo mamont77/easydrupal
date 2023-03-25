@@ -37,6 +37,12 @@ class DisqusEnabledNodeTypes extends DrupalSqlBase {
       $defaults = unserialize($result['disqus_nodetypes_default']);
       $defaults = array_filter($defaults);
       foreach ($enabled_types as $type) {
+        if (
+          isset($this->configuration['node_type']) &&
+          $this->configuration['node_type'] !== $type
+        ) {
+          continue;
+        }
         $values[] = [
           'type' => $type,
           'default' => !empty($defaults[$type]),

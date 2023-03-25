@@ -18,6 +18,7 @@ source:
     - disqus_sso
     - disqus_use_site_logo
     - disqus_logo
+  source_module: disqus
 process:
   'disqus_domain': disqus_domain
   'behavior/disqus_localization': disqus_localization
