@@ -30,7 +30,7 @@
         "drupal/asset_injector": "^2.16",
         "drupal/backup_migrate": "^5.0",
         "drupal/blazy": "^2.14",
-        "drupal/bootstrap": "^3.27",
+        "drupal/bootstrap": "^3.28",
         "drupal/bootstrap_layouts": "^5.3",
         "drupal/captcha": "^1.10",
         "drupal/core-composer-scaffold": "^9",
