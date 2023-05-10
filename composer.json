@@ -27,7 +27,7 @@
         "drupal/admin_toolbar": "^3.3",
         "drupal/advagg": "^5.0",
         "drupal/advupdate": "^1.2",
-        "drupal/asset_injector": "^2.16",
+        "drupal/asset_injector": "^2.17",
         "drupal/backup_migrate": "^5.0",
         "drupal/blazy": "^2.14",
         "drupal/bootstrap": "^3.28",
