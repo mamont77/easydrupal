@@ -11,6 +11,7 @@ use Drupal\Core\Link;
  * EasydrupalBreadCrumbBuilder.
  */
 class EasydrupalBreadCrumbBuilder implements BreadcrumbBuilderInterface {
+
   /**
    * {@inheritdoc}
    */
