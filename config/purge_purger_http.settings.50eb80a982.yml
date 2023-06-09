@@ -2,6 +2,7 @@ uuid: 72427731-4189-4090-a5f5-d77ca11b7fe4
 langcode: en
 status: true
 dependencies: {  }
+label: null
 id: 50eb80a982
 name: 'Varnish Purger'
 invalidationtype: tag
@@ -10,7 +11,7 @@ port: 80
 path: /
 request_method: BAN
 scheme: http
-verify: '1'
+verify: true
 headers:
   -
     field: Purge-Cache-Tags
