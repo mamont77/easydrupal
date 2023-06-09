@@ -534,10 +534,11 @@ abstract class HttpPurgerFormBase extends PurgerConfigFormBase {
    */
   public function submitFormSuccess(array &$form, FormStateInterface $form_state) {
     $settings = HttpPurgerSettings::load($this->getId($form_state));
+    $values = $form_state->getValues();
 
     // Empty 'body' when 'show_body_form' isn't checked.
     if ($form_state->getValue('show_body_form') === 0) {
-      $form_state->setValue('body', '');
+      $values['body'] = '';
     }
 
     // Rewrite 'headers' so that it contains the exact right format for CMI.
@@ -548,20 +549,20 @@ abstract class HttpPurgerFormBase extends PurgerConfigFormBase {
           $headers[] = $header;
         }
       }
-      $form_state->setValue('headers', $headers);
+      $values['headers'] = $headers;
     }
 
     // Rewrite 'scheme' and 'request_method' to have the right CMI values.
     if (!is_null($scheme = $form_state->getValue('scheme'))) {
-      $form_state->setValue('scheme', $this->schemes[$scheme]);
+      $values['scheme'] = $this->schemes[$scheme];
     }
     if (!is_null($method = $form_state->getValue('request_method'))) {
-      $form_state->setValue('request_method', $this->requestMethods[$method]);
+      $values['request_method'] = $this->requestMethods[$method];
     }
 
     // Iterate the config object and overwrite values found in the form state.
     foreach ($this->settingFields as $key) {
-      if (!is_null($value = $form_state->getValue($key))) {
+      if (!is_null($value = $values[$key])) {
         $settings->$key = $value;
       }
     }

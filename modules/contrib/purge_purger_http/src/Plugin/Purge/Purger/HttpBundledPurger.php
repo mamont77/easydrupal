@@ -53,8 +53,8 @@ class HttpBundledPurger extends HttpPurgerBase implements PurgerInterface {
             'msg' => $e->getMessage(),
             'uri' => $uri,
             'method' => $this->settings->request_method,
-            'guzzle_opt' => $opt,
-            'headers' => $headers,
+            'guzzle_opt' => print_r($opt, TRUE),
+            'headers' => print_r($headers, TRUE),
           ]
         )
       );

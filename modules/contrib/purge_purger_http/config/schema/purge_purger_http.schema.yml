@@ -37,7 +37,7 @@ purge_purger_http.settings.*:
       type: string
       translatable: false
     verify:
-      type: string
+      type: boolean
       translatable: false
 
     #

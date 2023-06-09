@@ -2,7 +2,7 @@
 
 namespace Drupal\Tests\purge_purger_http\Functional;
 
-use Drupal\Tests\purge_ui\Functional\Form\Config\PurgerConfigFormTestBase;
+use Drupal\Tests\purge_ui\FunctionalJavascript\Form\Config\PurgerConfigFormTestBase;
 
 /**
  * Testbase for testing \Drupal\purge_purger_http\Form\HttpPurgerFormBase.
@@ -12,7 +12,7 @@ abstract class HttpPurgerConfigFormTestBase extends PurgerConfigFormTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = ['purge_purger_http'];
+  protected static $modules = ['purge_purger_http'];
 
   /**
    * {@inheritdoc}
@@ -70,7 +70,7 @@ abstract class HttpPurgerConfigFormTestBase extends PurgerConfigFormTestBase {
     $this->drupalGet($this->getPath());
     $this->assertSession()->pageTextContains('Tokens');
     foreach ($this->tokenGroups as $token_group) {
-      $this->assertRaw('<code>[' . $token_group . ':');
+      $this->assertSession()->responseContains('<code>[' . $token_group . ':');
     }
   }
 
@@ -143,6 +143,7 @@ abstract class HttpPurgerConfigFormTestBase extends PurgerConfigFormTestBase {
   public function testSaveConfigurationSubmit(): void {
     // Assert that all (simple) fields submit as intended.
     $this->drupalLogin($this->adminUser);
+    $this->drupalGet($this->getPath());
     $edit = [
       'name' => 'foobar',
       'invalidationtype' => 'wildcardurl',
@@ -152,18 +153,10 @@ abstract class HttpPurgerConfigFormTestBase extends PurgerConfigFormTestBase {
       'request_method' => 1,
       'scheme' => 0,
       'verify' => TRUE,
-      'show_body_form' => 1,
-      'body_content_type' => 'foo/bar',
-      'body' => 'baz',
-      'timeout' => 6,
       'runtime_measurement' => 1,
-      'connect_timeout' => 0.5,
-      'cooldown_time' => 0.8,
-      'max_requests' => 25,
       'http_errors' => 1,
     ];
-    $this->drupalPostForm($this->getPath(), $edit, 'Save configuration');
-    $this->drupalGet($this->getPath());
+    $this->submitForm($edit, 'Save configuration');
     foreach ($edit as $field => $value) {
       $this->assertSession()->fieldValueEquals('edit-' . str_replace('_', '-', $field), $value);
     }

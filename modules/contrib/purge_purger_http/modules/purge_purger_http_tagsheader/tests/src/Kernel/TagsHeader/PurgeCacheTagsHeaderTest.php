@@ -15,7 +15,7 @@ class PurgeCacheTagsHeaderTest extends KernelTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = ['system', 'purge_purger_http_tagsheader'];
+  protected static $modules = ['system', 'purge_purger_http_tagsheader'];
 
   /**
    * {@inheritdoc}

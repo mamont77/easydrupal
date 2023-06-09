@@ -1,0 +1,28 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the purge_purger_http module.
+ */
+
+use Drupal\purge_purger_http\Entity\HttpPurgerSettings;
+
+/**
+ * Change the 'verify' config option to a boolean.
+ */
+function purge_purger_http_update_8002(): void {
+  $storage = \Drupal::entityTypeManager()
+    ->getStorage('httppurgersettings');
+  $purgers = $storage->loadMultiple($storage->getQuery()->execute());
+
+  foreach ($purgers as $purger) {
+    assert($purger instanceof HttpPurgerSettings);
+
+    if ($purger->verify === NULL) {
+      continue;
+    }
+
+    $purger->verify = (bool) $purger->verify;
+    $purger->save();
+  }
+}
