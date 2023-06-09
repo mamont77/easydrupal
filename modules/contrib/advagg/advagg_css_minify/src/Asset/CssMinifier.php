@@ -5,6 +5,8 @@ namespace Drupal\advagg_css_minify\Asset;
 use Drupal\Component\Utility\Unicode;
 use Drupal\advagg\Asset\SingleAssetOptimizerBase;
 use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Extension\ExtensionList;
+use Drupal\Core\File\FileUrlGeneratorInterface;
 use Psr\Log\LoggerInterface;
 use tubalmartin\CssMin\Minifier as CSSmin;
 
@@ -14,16 +16,28 @@ use tubalmartin\CssMin\Minifier as CSSmin;
 class CssMinifier extends SingleAssetOptimizerBase {
 
   /**
+   * The module extension list service.
+   *
+   * @var \Drupal\Core\Extension\ExtensionList
+   */
+  protected $moduleExtensionList;
+
+  /**
    * Construct the optimizer instance.
    *
    * @param \Psr\Log\LoggerInterface $logger
    *   The logger service.
+   * @param \Drupal\Core\File\FileUrlGeneratorInterface $file_url_generator
+   *   The file URL generator.
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
    *   A config factory for retrieving required config objects.
+   * @param ExtensionList $module_extension_list
+   *   The module extension list service.
    */
-  public function __construct(LoggerInterface $logger, ConfigFactoryInterface $config_factory) {
-    parent::__construct($logger);
+  public function __construct(LoggerInterface $logger, FileUrlGeneratorInterface $file_url_generator, ConfigFactoryInterface $config_factory, ExtensionList $module_extension_list) {
+    parent::__construct($logger, $file_url_generator);
     $this->config = $config_factory->get('advagg_css_minify.settings');
+    $this->moduleExtensionList = $module_extension_list;
   }
 
   /**

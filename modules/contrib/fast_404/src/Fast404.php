@@ -27,18 +27,25 @@ class Fast404 {
   public $respond404 = FALSE;
 
   /**
-   * The current request.
-   *
-   * @var \Symfony\Component\HttpFoundation\Request
-   */
-  public $request;
-
-  /**
    * Whether to load html or respond otherwise.
    *
    * @var bool
    */
   public $loadHtml = TRUE;
+
+  /**
+   * The current request.
+   *
+   * @var \Symfony\Component\HttpFoundation\Request
+   */
+  protected $request;
+
+  /**
+   * Language Negotiation Url Info.
+   *
+   * @var array
+   */
+  protected static $languageNegotiationUrlInfo;
 
   /**
    * Fast404 constructor.
@@ -141,6 +148,34 @@ class Fast404 {
       return;
     }
 
+    // Translation url code pages.
+    if (!empty(self::$languageNegotiationUrlInfo)) {
+      // Get the path from the request.
+      $path = $this->request->getPathInfo();
+      // Separate the language path prefix if it exists.
+      $pos = strpos($path, '/', 1);
+      if ($pos !== FALSE) {
+        $prefix = substr($path, 1, $pos - 1);
+      }
+      else {
+        $prefix = substr($path, 1);
+      }
+      // If this string is one of the configured language prefixes, ignore it.
+      if (in_array($prefix, self::$languageNegotiationUrlInfo['prefixes'])) {
+        if ($pos !== FALSE) {
+          $path = substr($path, $pos);
+          if (empty($path) || $path == '/') {
+            // This path is the front page for a language prefix.
+            return;
+          }
+        }
+        else {
+          // This path is the front page for a language prefix.
+          return;
+        }
+      }
+    }
+
     // If we have a database connection we can use it, otherwise we might be
     // initialising it. We remove '/' from the list of possible patterns as it
     // exists in the router by default. This means that the query would match
@@ -158,6 +193,27 @@ class Fast404 {
     $result = Database::getConnection()->query($sql, [':alias' => $path_noslash])->fetchField();
     if ($result) {
       return;
+    }
+
+    // Check for redirects if set to respect them.
+    if (Settings::get('fast404_respect_redirect', FALSE)) {
+      $path_noslash = trim(urldecode($path), '/');
+      // If the path equals the prefix, we are probaby on a language without a
+      // prefix.
+      $prefix = (isset($prefix) && $prefix !== $path_noslash) ? $prefix : '';
+      $sql = "SELECT rid FROM {redirect} WHERE redirect_source__path = :path";
+      $args = [
+        ':path' => $path_noslash,
+      ];
+      $language = array_search($prefix, self::$languageNegotiationUrlInfo['prefixes'] ?? [], TRUE);
+      if ($language) {
+        $sql .= " AND language = :language";
+        $args[':language'] = $language;
+      }
+      $result = Database::getConnection()->query($sql, $args)->fetchField();
+      if ($result) {
+        return;
+      }
     }
 
     // If we get to here it means nothing has matched the request so we assume
@@ -224,4 +280,15 @@ class Fast404 {
     return PHP_SAPI === 'cli';
   }
 
+  /**
+   * Set $languageNegotiationUrlInfo property.
+   *
+   * @param array $lang_negotiation_url_info
+   *   The lang url config.
+   */
+  public function setLanguageNegotiationUrlInfo(array $lang_negotiation_url_info) {
+    if (!isset(self::$languageNegotiationUrlInfo)) {
+      self::$languageNegotiationUrlInfo = $lang_negotiation_url_info;
+    }
+  }
 }

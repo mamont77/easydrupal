@@ -90,7 +90,10 @@ class ResponseSubscriber implements EventSubscriberInterface {
     }
     $content = $response->getContent();
     $pattern = '/(<script src="|url\("|rel="stylesheet" href=")(\/[a-zA-Z0-0].*")/';
-    $response->setContent(preg_replace_callback($pattern, [$this, 'forceAbsolutePathsCallback'], $content));
+    $response->setContent(preg_replace_callback($pattern, [
+      $this,
+      'forceAbsolutePathsCallback',
+    ], $content));
 
   }
 

@@ -32,7 +32,7 @@ class SettingsFormTest extends KernelTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
 
     $this->settingsForm = SettingsForm::create($this->container);

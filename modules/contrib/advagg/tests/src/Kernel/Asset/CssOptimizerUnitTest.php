@@ -35,7 +35,7 @@ class CssOptimizerUnitTest extends KernelTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
     $this->installConfig('advagg');
     $this->optimizer = \Drupal::service('advagg.optimizer.css');

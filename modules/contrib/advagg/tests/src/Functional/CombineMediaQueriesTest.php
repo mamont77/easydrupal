@@ -5,7 +5,7 @@ namespace Drupal\Tests\advagg\Functional;
 use Drupal\Core\Url;
 
 /**
- * Test combining css media queries.
+ * Test combining css media queries. Only relevant to Drupal 9.
  *
  * @ingroup advagg_tests
  *
@@ -24,7 +24,10 @@ class CombineMediaQueriesTest extends AdvaggFunctionalTestBase {
    * Tests path converting functions, and that saving a change to them works.
    */
   public function testCombineMedia() {
-    // Agreggrate files.
+    if ((int) \Drupal::VERSION >= 10) {
+      $this->markTestSkipped('Equivalent functionality in core as of 10.0.x.');
+    }
+    // Aggregate files.
     $this->config('system.performance')->set('css.preprocess', TRUE)->save();
 
     // Ensure that when combine media is disabled, that there is a media query.
