@@ -8,11 +8,19 @@ use Drupal\metatag\Plugin\metatag\Tag\MetaNameBase;
 use Drupal\schema_metatag\Plugin\schema_metatag\PropertyTypeManager;
 use Drupal\schema_metatag\SchemaMetatagManager;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\Core\Config\ConfigFactoryInterface;
 
 /**
  * All Schema.org tags should extend this class.
  */
 class SchemaNameBase extends MetaNameBase implements ContainerFactoryPluginInterface {
+
+  /**
+   * Config factory.
+   *
+   * @var Drupal\Core\Config\ConfigFactoryInterface
+   */
+  protected $configFactory;
 
   /**
    * The SchemaMetatagManager service.
@@ -37,9 +45,20 @@ class SchemaNameBase extends MetaNameBase implements ContainerFactoryPluginInter
       $plugin_id,
       $plugin_definition
     );
+    $instance->setConfigFactory($container->get('config.factory'));
     $instance->setSchemaMetatagManager($container->get('schema_metatag.schema_metatag_manager'));
     $instance->setPropertyTypeManager($container->get('plugin.manager.schema_property_type'));
     return $instance;
+  }
+
+  /**
+   * Sets ConfigFactoryInterface service.
+   *
+   * @param \Drupal\Core\Config\ConfigFactoryInterface $configFactory
+   *   The Config Factory service.
+   */
+  public function setConfigFactory(ConfigFactoryInterface $configFactory) {
+    $this->configFactory = $configFactory;
   }
 
   /**
@@ -103,8 +122,7 @@ class SchemaNameBase extends MetaNameBase implements ContainerFactoryPluginInter
    *
    * @see \Drupal\schema_metatag\Plugin\schema_metatag\PropertyTypeBase::form()
    */
-  public function form(array $element = []) {
-
+  public function form(array $element = []): array {
     $property_type = !empty($this->pluginDefinition['property_type']) ? $this->pluginDefinition['property_type'] : 'text';
     $tree_parent = !empty($this->pluginDefinition['tree_parent']) ? $this->pluginDefinition['tree_parent'] : '';
     $tree_depth = !empty($this->pluginDefinition['tree_depth']) ? $this->pluginDefinition['tree_depth'] : -1;
@@ -126,8 +144,7 @@ class SchemaNameBase extends MetaNameBase implements ContainerFactoryPluginInter
   /**
    * {@inheritdoc}
    */
-  public function output() {
-
+  public function output(): array {
     $value = $this->schemaMetatagManager()->unserialize($this->value());
 
     // If this is a complex array of values, process the array.
@@ -145,7 +162,7 @@ class SchemaNameBase extends MetaNameBase implements ContainerFactoryPluginInter
 
       // If the item is an array of values,
       // walk the array and process the values.
-      array_walk_recursive($value, 'static::processItem');
+      array_walk_recursive($value, [$this, 'processItem']);
 
       // Recursively pivot each branch of the array.
       $value = $this->pivotItem($value);
@@ -182,30 +199,18 @@ class SchemaNameBase extends MetaNameBase implements ContainerFactoryPluginInter
    *   Return the (possibly expanded) value which will be rendered in JSON-LD.
    */
   public function outputValue($input_value) {
-
     $property_type = !empty($this->pluginDefinition['property_type']) ? $this->pluginDefinition['property_type'] : 'text';
 
     return $this->propertyTypeManager()
       ->createInstance($property_type)
       ->outputValue($input_value);
-
-  }
-
-  /**
-   * The serialized value for the metatag.
-   *
-   * Metatag expects a string value, so use the serialized value
-   * without unserializing it. Manually unserialize it when needed.
-   */
-  public function value() {
-    return $this->value;
   }
 
   /**
    * Metatag expects a string value, so serialize any array of values.
    */
-  public function setValue($value) {
-    $this->value = $this->schemaMetatagManager()->serialize($value);
+  public function setValue($value): void {
+    $this->value = (string) $this->schemaMetatagManager()->serialize($value);
   }
 
   /**
@@ -230,9 +235,9 @@ class SchemaNameBase extends MetaNameBase implements ContainerFactoryPluginInter
   }
 
   /**
-   * {@inheritdoc}
+   * @todo Document this method.
    */
-  public function pivotItem($array) {
+  public function pivotItem(array $array) {
     // See if any nested items need to be pivoted.
     // If pivot is set to 0, it would have been removed as an empty value.
     if (array_key_exists('pivot', $array)) {
@@ -262,11 +267,18 @@ class SchemaNameBase extends MetaNameBase implements ContainerFactoryPluginInter
   }
 
   /**
-   * {@inheritdoc}
+   * @todo Document this method.
    */
   protected function processItem(&$value, $key = 0) {
-
-    $explode = $key === 0 ? $this->multiple() : !in_array($key, $this->neverExplode());
+    if ($key === 0) {
+      $explode = $this->multiple();
+    }
+    elseif ($this->schemaMetatagManager->hasSeparator()) {
+      $explode = TRUE;
+    }
+    else {
+      $explode = !in_array($key, $this->neverExplode());
+    }
 
     // Parse out the image URL, if needed.
     $value = $this->parseImageUrlValue($value, $explode);
@@ -282,7 +294,7 @@ class SchemaNameBase extends MetaNameBase implements ContainerFactoryPluginInter
       $value = str_replace('http://', 'https://', $value);
     }
     if ($explode) {
-      $value = $this->schemaMetatagManager()->explode($value);
+      $value = $this->schemaMetatagManager()->explode($value, $this->schemaMetatagManager->getSeparator());
       // Clean out any empty values that might have been added by explode().
       if (is_array($value)) {
         $value = array_filter($value);
@@ -297,9 +309,11 @@ class SchemaNameBase extends MetaNameBase implements ContainerFactoryPluginInter
    * in instead of assumed to be $this->value().
    */
   protected function parseImageUrlValue($value, $explode) {
-
     // If this contains embedded image tags, extract the image URLs.
     if ($this->type() === 'image') {
+      // Get configuration.
+      $separator = $this->schemaMetatagManager->getSeparator();
+
       // If image tag src is relative (starts with /), convert to an absolute
       // link.
       global $base_root;
@@ -309,7 +323,7 @@ class SchemaNameBase extends MetaNameBase implements ContainerFactoryPluginInter
 
       if (strip_tags($value) != $value) {
         if ($explode) {
-          $values = explode(',', $value);
+          $values = explode($separator, $value);
         }
         else {
           $values = [$value];
@@ -323,7 +337,7 @@ class SchemaNameBase extends MetaNameBase implements ContainerFactoryPluginInter
             $values[$key] = $matches[1];
           }
         }
-        $value = implode(',', $values);
+        $value = implode($separator, $values);
 
         // Remove any HTML tags that might remain.
         $value = strip_tags($value);
