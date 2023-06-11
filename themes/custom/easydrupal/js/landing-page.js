@@ -41,21 +41,22 @@
         }
       });
 
-      $context.find('.section.projects .field-name-field-landing-page-backgro-media img').once('projectSectionBehavior').each(function () {
+      $(once('projectSectionBehavior', '.section.projects .field-name-field-landing-page-backgro-media img', context)).each(function () {
         $(this).attr({
           'width': '493',
           'height': '299'
         });
       });
 
-      $context.find('.section.articles .field-name-field-image-media img').once('articleSectionBehavior').each(function () {
+      $(once('articleSectionBehavior', '.section.articles .field-name-field-image-media img', context)).each(function () {
         $(this).attr({
           'width': '200',
           'height': '133'
         });
       });
 
-      $context.find('.section.clients .field-name-field-image-media img').once('clientSectionBehavior').each(function () {
+
+      $(once('clientSectionBehavior', '.section.clients .field-name-field-image-media img', context)).each(function () {
         $(this).attr({
           'width': '212',
           'height': '80'

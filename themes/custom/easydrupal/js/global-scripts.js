@@ -123,10 +123,12 @@
     attach: function (context, settings) {
       var $upper = $('.upper', context);
 
-      $upper.once('upperBehavior').on('click', function (event) {
-        event.preventDefault();
-        $('html, body', context).animate({scrollTop: 0}, 1000);
-        return false;
+      $(once('upperBehavior', '.upper', context)).each(function () {
+        $(this).on('click', function() {
+          event.preventDefault();
+          $('html, body', context).animate({scrollTop: 0}, 1000);
+          return false;
+        });
       });
 
       $(window).scroll(function () {
