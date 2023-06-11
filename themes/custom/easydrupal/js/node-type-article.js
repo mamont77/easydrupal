@@ -15,15 +15,15 @@
 
       $('.page-header', context).prepend($('.page-node-type-article .date', context).show());
 
-      var $region_sidebar_second = $('aside.col-sm-3', context),
+      let $region_sidebar_second = $('aside.col-sm-3', context),
         $region_sidebar_second_content = $('.region-sidebar-second', context),
         $field_name_field_comments = $('.field--name-field-comments', context);
 
-      var makeMobileHTMLVersion = function () {
+      let makeMobileHTMLVersion = function () {
         $region_sidebar_second_content.insertBefore($field_name_field_comments);
       };
 
-      var revertMobileHTMLVersion = function () {
+      let revertMobileHTMLVersion = function () {
         $region_sidebar_second_content.appendTo($region_sidebar_second);
       };
 

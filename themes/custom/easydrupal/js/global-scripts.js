@@ -121,7 +121,7 @@
    */
   Drupal.behaviors.OtherTweaks = {
     attach: function (context, settings) {
-      var $upper = $('.upper', context);
+      let $upper = $('.upper', context);
 
       $(once('upperBehavior', '.upper', context)).each(function () {
         $(this).on('click', function() {

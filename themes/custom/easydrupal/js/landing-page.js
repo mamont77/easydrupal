@@ -13,19 +13,10 @@
    */
   Drupal.behaviors.landingPageTweeks = {
     attach: function (context, settings) {
-      var $context = $(context);
-
-      // if ($('.path-frontpage', context).length === 0) {
-      //   return;
-      // }
-
-      // var $alert = $('.alert', context);
-      // if ($alert.length > 0) {
-      //   $('.contact .title-wrapper', context).after($alert);
-      // }
+      let $context = $(context);
 
       $('.navbar-nav a').bind('click', function (event) {
-        var $anchor = $(this),
+        let $anchor = $(this),
           header_offset = 78;
         if ($anchor.attr('href') !== '') {
           if ($('.toolbar-lining').length > 0) {

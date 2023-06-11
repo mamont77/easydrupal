@@ -12,7 +12,7 @@
    * @param $root_element_prefix
    */
   $.makeFeedbackMoreBeautifulStep1 = function ($root_element_prefix) {
-    var $feedback_projects_urls = $root_element_prefix.find('.field-name-field-project-title');
+    let $feedback_projects_urls = $root_element_prefix.find('.field-name-field-project-title');
 
     // Add commas after each project in the feedback section.
     $feedback_projects_urls.find('a:not(:last-child)').after(', ');
@@ -25,7 +25,7 @@
    */
   $.makeFeedbackMoreBeautifulStep2 = function ($root_element_prefix) {
     $root_element_prefix.each(function () {
-      var $feedback_titles = $(this).find('.field-name-node-title'),
+      let $feedback_titles = $(this).find('.field-name-node-title'),
         $feedback_projects_about = $(this).find('.about'),
         $feedback_projects_wrapper = $(this).find('.project-info'),
         $feedback_projects_blockquotes = $(this).find('blockquote');
@@ -61,7 +61,7 @@
         return;
       }
 
-      var $feedback = $('.view-feedback .row, .section.feedback', context);
+      let $feedback = $('.view-feedback .row, .section.feedback', context);
 
       $.makeFeedbackMoreBeautifulStep1($feedback);
 
