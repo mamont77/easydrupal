@@ -52,7 +52,6 @@
         "drupal/field_group": "^3.4",
         "drupal/file_mdm": "^2.5",
         "drupal/filefield_paths": "^1.0@beta",
-        "drupal/geshifilter": "^2.0@beta",
         "drupal/google_analytics": "^4.0",
         "drupal/honeypot": "^2.1",
         "drupal/image_widget_crop": "^2.4",
@@ -84,6 +83,7 @@
         "drupal/webp": "^1.0@beta",
         "drupal/yoast_seo": "^1.8",
         "drush/drush": "^11.4",
+        "geshi/geshi": "v1.0.9.1",
         "grasmash/drupal-security-warning": "1.x-dev",
         "oomphinc/composer-installers-extender": "^2.0",
         "topfloor/composer-cleanup-vcs-dirs": "^1.1"
