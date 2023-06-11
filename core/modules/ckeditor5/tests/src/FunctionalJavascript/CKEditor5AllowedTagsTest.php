@@ -382,6 +382,7 @@ class CKEditor5AllowedTagsTest extends CKEditor5TestBase {
     $this->assertNotNull($assert_session->waitForElementVisible('css', '[data-drupal-selector=edit-filters-media-embed-settings]', 0));
 
     $page->clickLink('Embed media');
+    $assert_session->waitForField('filters[media_embed][settings][allowed_view_modes][view_mode_2]');
     $page->checkField('filters[media_embed][settings][allowed_view_modes][view_mode_1]');
     $page->checkField('filters[media_embed][settings][allowed_view_modes][view_mode_2]');
     $assert_session->assertWaitOnAjaxRequest();
@@ -421,21 +422,6 @@ class CKEditor5AllowedTagsTest extends CKEditor5TestBase {
 
     // Confirm allowed tags no longer has <drupal-media>.
     $this->assertHtmlEsqueFieldValueEquals('filters[filter_html][settings][allowed_html]', $this->allowedElements);
-  }
-
-  /**
-   * Tests the presence of the IE warning when CKEditor 5 is selected.
-   */
-  public function testInternetExplorerWarning() {
-    $page = $this->getSession()->getPage();
-    $assert_session = $this->assertSession();
-    $warning_text = 'CKEditor 5 is not compatible with Internet Explorer. Text fields using CKEditor 5 will fall back to plain HTML editing without CKEditor for users of Internet Explorer.';
-    $this->createNewTextFormat($page, $assert_session);
-    $assert_session->waitForText($warning_text);
-    $page->selectFieldOption('editor[editor]', 'None');
-    $this->getSession()->getDriver()->executeScript("document.querySelector('#drupal-live-announce').innerHTML = ''");
-    $assert_session->assertNoElementAfterWait('css', '.messages--warning');
-    $assert_session->pageTextNotContains($warning_text);
   }
 
   /**

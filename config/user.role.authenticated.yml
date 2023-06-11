@@ -7,6 +7,7 @@ dependencies:
   module:
     - contact
     - disqus
+    - file
     - filter
     - media
     - sticky_sharrre_bar
@@ -21,6 +22,7 @@ permissions:
   - 'access content'
   - 'access site-wide contact form'
   - 'access sticky_sharrre_bar'
+  - 'delete own files'
   - 'use text format restricted_html'
   - 'view disqus comments'
   - 'view media'

@@ -7,6 +7,6 @@ _core:
 id: front
 label: 'Front page'
 tags:
-  title: 'Make Drupal Easy: The best Drupal''s solutions in one place!'
-  description: 'The site provides short guides for how quick and easy to make the Drupal''s functionality more scalable and lightweight without tons of additional modules. All guides are described very briefly - take and use.'
+  title: "Make Drupal Easy: The best Drupal's solutions in one place!"
+  description: "The site provides short guides for how quick and easy to make the Drupal's functionality more scalable and lightweight without tons of additional modules. All guides are described very briefly - take and use."
   keywords: 'drupal, custom module, tweeks, guide'

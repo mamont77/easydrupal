@@ -10,7 +10,7 @@ id: node.landingpage.field_feedback
 field_name: field_feedback
 entity_type: node
 bundle: landingpage
-label: 'upwork''s Feedback'
+label: "upwork's Feedback"
 description: ''
 required: false
 translatable: false
