@@ -180,6 +180,9 @@
             },
             "drupal/geshifilter": {
                 "3137937: Theme functions are deprecated in geshifield": "https://www.drupal.org/files/issues/2020-11-06/theme_function_deprecated--3137937-2.patch"
+            },
+            "drupal/editor_advanced_link": {
+                "3350254: CKEditor 5 ^36 compatibility — necessary for Drupal 10.1.x": "https://git.drupalcode.org/project/editor_advanced_link/-/merge_requests/10.diff"
             }
         }
     },

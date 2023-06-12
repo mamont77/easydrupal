@@ -3377,6 +3377,9 @@
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
                     }
+                },
+                "patches_applied": {
+                    "3350254: CKEditor 5 ^36 compatibility — necessary for Drupal 10.1.x": "https://git.drupalcode.org/project/editor_advanced_link/-/merge_requests/10.diff"
                 }
             },
             "installation-source": "dist",
