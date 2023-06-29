@@ -3218,6 +3218,9 @@
                         "status": "not-covered",
                         "message": "Alpha releases are not covered by Drupal security advisories."
                     }
+                },
+                "patches_applied": {
+                    "3359581: Uncaught TypeError: $(...).once is not a function": "https://www.drupal.org/files/issues/2023-05-11/uncaught-typeerror-once-is-not-a-function-3359581.patch"
                 }
             },
             "installation-source": "dist",

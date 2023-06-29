@@ -180,6 +180,9 @@
             },
             "drupal/geshifilter": {
                 "3137937: Theme functions are deprecated in geshifield": "https://www.drupal.org/files/issues/2020-11-06/theme_function_deprecated--3137937-2.patch"
+            },
+            "drupal/disqus": {
+                "3359581: Uncaught TypeError: $(...).once is not a function": "https://www.drupal.org/files/issues/2023-05-11/uncaught-typeerror-once-is-not-a-function-3359581.patch"
             }
         }
     },

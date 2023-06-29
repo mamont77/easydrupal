@@ -27,7 +27,7 @@ Drupal.behaviors.disqus = {
     if (settings.disqus || false) {
 
       // Ensure that the Disqus comments are only loaded once.
-      $('body').once('disqus').each(function () {
+      $(once('disqus', 'body')).each(function () {
 
         // Setup the global JavaScript variables for Disqus.
         disqus_shortname = settings.disqus.domain;
