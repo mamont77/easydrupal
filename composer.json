@@ -32,7 +32,7 @@
         "drupal/blazy": "^2.16",
         "drupal/bootstrap": "^3.28",
         "drupal/bootstrap_layouts": "^5.3",
-        "drupal/captcha": "^2.0@beta",
+        "drupal/captcha": "^2.0",
         "drupal/coder": "^8.3",
         "drupal/core-composer-scaffold": "^10",
         "drupal/core-project-message": "^10",
@@ -45,7 +45,7 @@
         "drupal/devel_php": "^1.5",
         "drupal/disqus": "^2.0@alpha",
         "drupal/ds": "^3.15",
-        "drupal/editor_advanced_link": "^2.1",
+        "drupal/editor_advanced_link": "^2.2",
         "drupal/entity_reference_revisions": "^1.10",
         "drupal/extlink": "^1.7",
         "drupal/fast_404": "^3.0@RC",
@@ -61,7 +61,7 @@
         "drupal/libraries": "^4.0",
         "drupal/linkit": "^6.1@RC",
         "drupal/menu_trail_by_path": "^2.0",
-        "drupal/metatag": "^2.0@RC",
+        "drupal/metatag": "^2.0",
         "drupal/paragraphs": "^1.15",
         "drupal/pathauto": "^1.11",
         "drupal/purge": "^3.4",
@@ -180,9 +180,6 @@
             },
             "drupal/geshifilter": {
                 "3137937: Theme functions are deprecated in geshifield": "https://www.drupal.org/files/issues/2020-11-06/theme_function_deprecated--3137937-2.patch"
-            },
-            "drupal/editor_advanced_link": {
-                "3350254: CKEditor 5 ^36 compatibility — necessary for Drupal 10.1.x": "https://git.drupalcode.org/project/editor_advanced_link/-/merge_requests/10.diff"
             }
         }
     },

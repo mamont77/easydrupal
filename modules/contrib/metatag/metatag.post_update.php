@@ -5,10 +5,90 @@
  * Post update functions for Metatag.
  */
 
+use Drupal\Component\Plugin\Exception\PluginNotFoundException;
 use Drupal\Component\Serialization\Json;
 use Drupal\Core\Config\Entity\ConfigEntityUpdater;
 use Drupal\Core\Utility\UpdateException;
 use Drupal\metatag\Entity\MetatagDefaults;
+
+/**
+ * Get a list of all metatag field tables.
+ *
+ * @return array
+ *   A list of meta tag field tables with the table name as the key and the
+ *   field value column as the value, e.g.:
+ *   - node__field_meta_tags: field_meta_tags_value
+ *   - node_revision__field_meta_tags: field_meta_tags_value
+ */
+function _metatag_list_entity_field_tables(): array {
+  static $drupal_static_fast;
+  if (!isset($drupal_static_fast)) {
+    $drupal_static_fast[__FUNCTION__] = &drupal_static(__FUNCTION__);
+  }
+  $tables = &$drupal_static_fast[__FUNCTION__];
+
+  if (is_null($tables)) {
+    $tables = [];
+    $entity_type_manager = \Drupal::entityTypeManager();
+    $database = \Drupal::database();
+
+    // Get all of the field storage entities of type metatag.
+    /** @var \Drupal\field\FieldStorageConfigInterface[] $field_storage_configs */
+    $field_storage_configs = $entity_type_manager
+      ->getStorage('field_storage_config')
+      ->loadByProperties(['type' => 'metatag']);
+
+    foreach ($field_storage_configs as $field_storage) {
+      $field_name = $field_storage->getName();
+
+      // Get the individual fields (field instances) associated with bundles.
+      // This query can result in an exception if a field configuration is
+      // faulty.
+      // @see https://www.drupal.org/project/metatag/issues/3366933
+      try {
+        $fields = $entity_type_manager
+          ->getStorage('field_config')
+          ->loadByProperties([
+            'field_name' => $field_name,
+            'entity_type' => $field_storage->getTargetEntityTypeId(),
+          ]);
+      }
+      catch (PluginNotFoundException $e) {
+        throw new \Exception("There is a problem in the field configuration, see https://www.drupal.org/node/3366933 for discussion on how to resolve it.\nOriginal message: " . $e->getMessage());
+      }
+
+      $tables = [];
+      foreach ($fields as $field) {
+        $entity_type_id = $field->getTargetEntityTypeId();
+        $entity_type = $entity_type_manager->getDefinition($entity_type_id);
+
+        // Determine the table and "value" field names.
+        $table_mapping = $entity_type_manager->getStorage($entity_type_id)
+          ->getTableMapping();
+        $field_table = $table_mapping->getFieldTableName($field_name);
+        $field_value_field = $table_mapping->getFieldColumnName($field_storage, 'value');
+
+        $tables[$field_table] = $field_value_field;
+        if ($entity_type->isRevisionable() && $field_storage->isRevisionable()) {
+          if ($table_mapping->requiresDedicatedTableStorage($field_storage)) {
+            $revision_table = $table_mapping->getDedicatedRevisionTableName($field_storage);
+            if ($database->schema()->tableExists($revision_table)) {
+              $tables[$revision_table] = $field_value_field;
+            }
+          }
+          elseif ($table_mapping->allowsSharedTableStorage($field_storage)) {
+            $revision_table = $entity_type->getRevisionDataTable() ?: $entity_type->getRevisionTable();
+            if ($database->schema()->tableExists($revision_table)) {
+              $tables[$revision_table] = $field_value_field;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  return $tables;
+}
 
 /**
  * Convert mask-icon to array values.
@@ -64,84 +144,32 @@ function metatag_post_update_convert_author_data(&$sandbox) {
     // by number rather than name.
     $field_counter = 0;
 
-    // Get all of the field storage entities of type metatag.
-    /** @var \Drupal\field\FieldStorageConfigInterface[] $field_storage_configs */
-    $field_storage_configs = $entity_type_manager
-      ->getStorage('field_storage_config')
-      ->loadByProperties(['type' => 'metatag']);
+    // Look for the appropriate data in all metatag field tables.
+    foreach (_metatag_list_entity_field_tables() as $table => $field_value_field) {
+      $query = $database->select($table);
+      $query->addField($table, 'entity_id');
+      $query->addField($table, 'revision_id');
+      $query->addField($table, 'langcode');
+      $query->addField($table, $field_value_field);
+      $db_or = $query->orConditionGroup();
+      $db_or->condition($field_value_field, '%google_plus_author%', 'LIKE');
+      $query->condition($db_or);
+      $result = $query->execute();
+      $records = $result->fetchAll();
 
-    foreach ($field_storage_configs as $field_storage) {
-      $field_name = $field_storage->getName();
-
-      // Get the individual fields (field instances) associated with bundles.
-      $fields = $entity_type_manager
-        ->getStorage('field_config')
-        ->loadByProperties([
-          'field_name' => $field_name,
-          'entity_type' => $field_storage->getTargetEntityTypeId(),
-        ]);
-
-      foreach ($fields as $field) {
-        // Get the bundle this field is attached to.
-        $bundle = $field->getTargetBundle();
-        $entity_type_id = $field->getTargetEntityTypeId();
-        $entity_type = $entity_type_manager->getDefinition($entity_type_id);
-
-        // Determine the table and "value" field names.
-        // @todo The class path to getTableMapping() seems to be invalid?
-        $table_mapping = $entity_type_manager->getStorage($entity_type_id)
-          ->getTableMapping();
-        $field_table = $table_mapping->getFieldTableName($field_name);
-        $field_value_field = $table_mapping->getFieldColumnName($field_storage, 'value');
-
-        $tables = [];
-        $tables[] = $field_table;
-        if ($entity_type->isRevisionable() && $field_storage->isRevisionable()) {
-          if ($table_mapping->requiresDedicatedTableStorage($field_storage)) {
-            $revision_table = $table_mapping->getDedicatedRevisionTableName($field_storage);
-            if ($database->schema()->tableExists($revision_table)) {
-              $tables[] = $revision_table;
-            }
-          }
-          elseif ($table_mapping->allowsSharedTableStorage($field_storage)) {
-            $revision_table = $entity_type->getRevisionDataTable() ?: $entity_type->getRevisionTable();
-            if ($database->schema()->tableExists($revision_table)) {
-              $tables[] = $revision_table;
-            }
-          }
-        }
-
-        if ($tables) {
-          $tables = array_unique($tables);
-          foreach ($tables as $table) {
-            $query = $database->select($table);
-            $query->addField($table, 'entity_id');
-            $query->addField($table, 'revision_id');
-            $query->addField($table, 'langcode');
-            $query->addField($table, $field_value_field);
-            $query->condition('bundle', $bundle, '=');
-            $db_or = $query->orConditionGroup();
-            $db_or->condition($field_value_field, '%google_plus_author%', 'LIKE');
-            $query->condition($db_or);
-            $result = $query->execute();
-            $records = $result->fetchAll();
-
-            if (empty($records)) {
-              continue;
-            }
-
-            // Fill in all the sandbox information
-            // so we can batch the individual
-            // record comparing and updating.
-            $sandbox['fields'][$field_counter]['field_table'] = $table;
-            $sandbox['fields'][$field_counter]['field_value_field'] = $field_value_field;
-            $sandbox['fields'][$field_counter]['records'] = $records;
-
-            $sandbox['total_records'] += count($records);
-            $field_counter++;
-          }
-        }
+      if (empty($records)) {
+        continue;
       }
+
+      // Fill in all the sandbox information
+      // so we can batch the individual
+      // record comparing and updating.
+      $sandbox['fields'][$field_counter]['field_table'] = $table;
+      $sandbox['fields'][$field_counter]['field_value_field'] = $field_value_field;
+      $sandbox['fields'][$field_counter]['records'] = $records;
+
+      $sandbox['total_records'] += count($records);
+      $field_counter++;
     }
   }
 
@@ -151,7 +179,7 @@ function metatag_post_update_convert_author_data(&$sandbox) {
   }
   else {
     // Begin the batch processing of individual field records.
-    $max_per_batch = 10;
+    $max_per_batch = 100;
     $counter = 1;
 
     $current_field = $sandbox['current_field'];
@@ -191,16 +219,16 @@ function metatag_post_update_convert_author_data(&$sandbox) {
       $current_record = 0;
     }
 
+    $sandbox['records_processed'] += $counter - 1;
+
     // We have finished all the fields. All done.
     if (!isset($sandbox['fields'][$current_field])) {
-      $sandbox['records_processed'] += $counter - 1;
       $sandbox['#finished'] = 1;
     }
     // Update the sandbox values to prepare for the next round.
     else {
       $sandbox['current_field'] = $current_field;
       $sandbox['current_record'] = $current_record;
-      $sandbox['records_processed'] += $counter - 1;
       $sandbox['#finished'] = $sandbox['records_processed'] / $sandbox['total_records'];
     }
   }
@@ -233,82 +261,32 @@ function metatag_post_update_remove_robots_noydir_noodp(&$sandbox) {
     // by number rather than name.
     $field_counter = 0;
 
-    // Get all of the field storage entities of type metatag.
-    /** @var \Drupal\field\FieldStorageConfigInterface[] $field_storage_configs */
-    $field_storage_configs = $entity_type_manager
-      ->getStorage('field_storage_config')
-      ->loadByProperties(['type' => 'metatag']);
+    // Look for the appropriate data in all metatag field tables.
+    foreach (_metatag_list_entity_field_tables() as $table => $field_value_field) {
+      $query = $database->select($table);
+      $query->addField($table, 'entity_id');
+      $query->addField($table, 'revision_id');
+      $query->addField($table, 'langcode');
+      $query->addField($table, $field_value_field);
+      $db_or = $query->orConditionGroup();
+      $db_or->condition($field_value_field, '%noodp%', 'LIKE');
+      $db_or->condition($field_value_field, '%noydir%', 'LIKE');
+      $query->condition($db_or);
+      $result = $query->execute();
+      $records = $result->fetchAll();
 
-    foreach ($field_storage_configs as $field_storage) {
-      $field_name = $field_storage->getName();
-
-      // Get the individual fields (field instances) associated with bundles.
-      $fields = $entity_type_manager
-        ->getStorage('field_config')
-        ->loadByProperties([
-          'field_name' => $field_name,
-          'entity_type' => $field_storage->getTargetEntityTypeId(),
-        ]);
-
-      foreach ($fields as $field) {
-        // Get the bundle this field is attached to.
-        $bundle = $field->getTargetBundle();
-        $entity_type_id = $field->getTargetEntityTypeId();
-        $entity_type = $entity_type_manager->getDefinition($entity_type_id);
-
-        // Determine the table and "value" field names.
-        $table_mapping = $entity_type_manager->getStorage($entity_type_id)
-          ->getTableMapping();
-        $field_table = $table_mapping->getFieldTableName($field_name);
-        $field_value_field = $table_mapping->getFieldColumnName($field_storage, 'value');
-
-        $tables = [];
-        $tables[] = $field_table;
-        if ($entity_type->isRevisionable() && $field_storage->isRevisionable()) {
-          if ($table_mapping->requiresDedicatedTableStorage($field_storage)) {
-            $revision_table = $table_mapping->getDedicatedRevisionTableName($field_storage);
-            if ($database->schema()->tableExists($revision_table)) {
-              $tables[] = $revision_table;
-            }
-          }
-          elseif ($table_mapping->allowsSharedTableStorage($field_storage)) {
-            $revision_table = $entity_type->getRevisionDataTable() ?: $entity_type->getRevisionTable();
-            if ($database->schema()->tableExists($revision_table)) {
-              $tables[] = $revision_table;
-            }
-          }
-        }
-        if ($tables) {
-          $tables = array_unique($tables);
-          foreach ($tables as $table) {
-            $query = $database->select($table);
-            $query->addField($table, 'entity_id');
-            $query->addField($table, 'revision_id');
-            $query->addField($table, 'langcode');
-            $query->addField($table, $field_value_field);
-            $query->condition('bundle', $bundle, '=');
-            $db_or = $query->orConditionGroup();
-            $db_or->condition($field_value_field, '%noodp%', 'LIKE');
-            $db_or->condition($field_value_field, '%noydir%', 'LIKE');
-            $query->condition($db_or);
-            $result = $query->execute();
-            $records = $result->fetchAll();
-
-            if (empty($records)) {
-              continue;
-            }
-
-            // Fill in all the sandbox information so we can batch the
-            // individual record comparing and updating.
-            $sandbox['fields'][$field_counter]['field_table'] = $table;
-            $sandbox['fields'][$field_counter]['field_value_field'] = $field_value_field;
-            $sandbox['fields'][$field_counter]['records'] = $records;
-
-            $sandbox['total_records'] += count($records);
-            $field_counter++;
-          }
-        }
+      if (empty($records)) {
+        continue;
       }
+
+      // Fill in all the sandbox information so we can batch the
+      // individual record comparing and updating.
+      $sandbox['fields'][$field_counter]['field_table'] = $table;
+      $sandbox['fields'][$field_counter]['field_value_field'] = $field_value_field;
+      $sandbox['fields'][$field_counter]['records'] = $records;
+
+      $sandbox['total_records'] += count($records);
+      $field_counter++;
     }
   }
 
@@ -318,7 +296,7 @@ function metatag_post_update_remove_robots_noydir_noodp(&$sandbox) {
   }
   else {
     // Begin the batch processing of individual field records.
-    $max_per_batch = 10;
+    $max_per_batch = 100;
     $counter = 1;
 
     $current_field = $sandbox['current_field'];
@@ -370,16 +348,16 @@ function metatag_post_update_remove_robots_noydir_noodp(&$sandbox) {
       $current_record = 0;
     }
 
+    $sandbox['records_processed'] += $counter - 1;
+
     // We have finished all the fields. All done.
     if (!isset($sandbox['fields'][$current_field])) {
-      $sandbox['records_processed'] += $counter - 1;
       $sandbox['#finished'] = 1;
     }
     // Update the sandbox values to prepare for the next round.
     else {
       $sandbox['current_field'] = $current_field;
       $sandbox['current_record'] = $current_record;
-      $sandbox['records_processed'] += $counter - 1;
       $sandbox['#finished'] = $sandbox['records_processed'] / $sandbox['total_records'];
     }
   }
@@ -399,69 +377,36 @@ function metatag_post_update_remove_robots_noydir_noodp(&$sandbox) {
  * Convert all fields to use JSON storage.
  */
 function metatag_post_update_v2_01_change_fields_to_json(&$sandbox) {
+  $entity_type_manager = \Drupal::entityTypeManager();
+  $database = \Drupal::database();
+
   // This whole top section only needs to be done the first time.
   if (!isset($sandbox['records_processed'])) {
     $sandbox['records_processed'] = 0;
     $sandbox['total_records'] = 0;
     $sandbox['current_field'] = 0;
-    $sandbox['current_record'] = 0;
 
     // Counter to enumerate the fields so we can access them in the array
     // by number rather than name.
     $field_counter = 0;
 
-    // Get all of the field storage entities of type metatag.
-    /** @var \Drupal\field\FieldStorageConfigInterface[] $field_storage_configs */
-    $field_storage_configs = \Drupal::entityTypeManager()
-      ->getStorage('field_storage_config')
-      ->loadByProperties(['type' => 'metatag']);
+    // Look for the appropriate data in all metatag field tables.
+    foreach (_metatag_list_entity_field_tables() as $table => $field_value_field) {
+      // Get all records that were not converted yet.
+      $query = $database->select($table);
+      $query->addField($table, 'revision_id');
 
-    foreach ($field_storage_configs as $field_storage) {
-      $field_name = $field_storage->getName();
+      // Fields with serialized arrays.
+      $query->condition($field_value_field, "a:%", 'LIKE');
+      $result = $query->execute();
+      $records = $result->fetchCol();
 
-      // Get the individual fields (field instances) associated with bundles.
-      $fields = \Drupal::entityTypeManager()
-        ->getStorage('field_config')
-        ->loadByProperties([
-          'field_name' => $field_name,
-          'entity_type' => $field_storage->getTargetEntityTypeId(),
-        ]);
-
-      foreach ($fields as $field) {
-        // Get the bundle this field is attached to.
-        $bundle = $field->getTargetBundle();
-
-        // Determine the table and "value" field names.
-        // @todo The class path to getTableMapping() seems to be invalid?
-        $table_mapping = Drupal::entityTypeManager()
-          ->getStorage($field->getTargetEntityTypeId())
-          ->getTableMapping();
-        $field_table = $table_mapping->getFieldTableName($field_name);
-        $field_value_field = $table_mapping->getFieldColumnName($field_storage, 'value');
-
-        // Get all records that were not converted yet.
-        $query = \Drupal::database()->select($field_table);
-        $query->addField($field_table, 'entity_id');
-        $query->addField($field_table, 'revision_id');
-        $query->addField($field_table, 'langcode');
-        $query->addField($field_table, $field_value_field);
-        $query->condition('bundle', $bundle, '=');
-        // Fields with serialized arrays.
-        $query->condition($field_value_field, "a:%", 'LIKE');
-        $result = $query->execute();
-        $records = $result->fetchAll();
-
-        if (empty($records)) {
-          continue;
-        }
-
-        // Fill in all the sandbox information so we can batch the individual
-        // record comparing and updating.
-        $sandbox['fields'][$field_counter]['field_table'] = $field_table;
+      // Fill in all the sandbox information so we can batch the
+      // individual record comparing and updating.
+      if (!empty($records)) {
+        $sandbox['fields'][$field_counter]['field_table'] = $table;
         $sandbox['fields'][$field_counter]['field_value_field'] = $field_value_field;
-        $sandbox['fields'][$field_counter]['records'] = $records;
-
-        $sandbox['total_records'] += count($sandbox['fields'][$field_counter]['records']);
+        $sandbox['total_records'] += (int) count($records);
         $field_counter++;
       }
     }
@@ -473,22 +418,30 @@ function metatag_post_update_v2_01_change_fields_to_json(&$sandbox) {
   }
   else {
     // Begin the batch processing of individual field records.
-    $max_per_batch = 10;
-    $counter = 1;
+    $max_per_batch = 100;
+    $counter = 0;
 
     $current_field = $sandbox['current_field'];
-    $current_field_records = $sandbox['fields'][$current_field]['records'];
-    $current_record = $sandbox['current_record'];
 
     $field_table = $sandbox['fields'][$current_field]['field_table'];
     $field_value_field = $sandbox['fields'][$current_field]['field_value_field'];
 
-    // Loop through the field(s) and update the mask_icon values if necessary.
-    while ($counter <= $max_per_batch && isset($current_field_records[$current_record])) {
-      $record = $current_field_records[$current_record];
+    // Get a segment of the records for this table.
+    $query = $database->select($field_table);
+    $query->addField($field_table, 'entity_id');
+    $query->addField($field_table, 'revision_id');
+    $query->addField($field_table, 'langcode');
+    $query->addField($field_table, $field_value_field);
+    $query->range(0, $max_per_batch);
+    // Fields with serialized arrays.
+    $query->condition($field_value_field, "a:%", 'LIKE');
+    $results = $query->execute();
 
-      // Strip any empty tags or ones matching the field's defaults and leave
-      // only the overridden tags in $new_tags.
+    // Loop through the field(s) and update the serialized values.
+    foreach ($results as $record) {
+      // @todo Delete records that are empty.
+      // @todo Strip empty tags.
+      // @todo Remove tags matching the defaults and leave overridden values.
       if (substr($record->$field_value_field, 0, 2) === 'a:') {
         $tags = @unserialize($record->$field_value_field, ['allowed_classes' => FALSE]);
       }
@@ -496,10 +449,9 @@ function metatag_post_update_v2_01_change_fields_to_json(&$sandbox) {
         throw new UpdateException("It seems like there was a problem with the data. The update script should probably be improved to better handle these scenarios.");
       }
 
-      // @todo Delete records that are empty.
       if (is_array($tags)) {
         $tags_string = Json::encode($tags);
-        \Drupal::database()->update($field_table)
+        $database->update($field_table)
           ->fields([
             $field_value_field => $tags_string,
           ])
@@ -509,26 +461,19 @@ function metatag_post_update_v2_01_change_fields_to_json(&$sandbox) {
           ->execute();
       }
       $counter++;
-      $current_record++;
+    }
+    if (empty($counter)) {
+      $sandbox['current_field']++;
     }
 
-    // We ran out of records for the field so start the next batch out with the
-    // next field.
-    if (!isset($current_field_records[$current_record])) {
-      $current_field++;
-      $current_record = 0;
-    }
+    $sandbox['records_processed'] += $counter;
 
     // We have finished all the fields. All done.
-    if (!isset($sandbox['fields'][$current_field])) {
-      $sandbox['records_processed'] += $counter - 1;
+    if ($sandbox['records_processed'] >= $sandbox['total_records']) {
       $sandbox['#finished'] = 1;
     }
     // Update the sandbox values to prepare for the next round.
     else {
-      $sandbox['current_field'] = $current_field;
-      $sandbox['current_record'] = $current_record;
-      $sandbox['records_processed'] += $counter - 1;
       $sandbox['#finished'] = $sandbox['records_processed'] / $sandbox['total_records'];
     }
   }
@@ -548,6 +493,9 @@ function metatag_post_update_v2_01_change_fields_to_json(&$sandbox) {
  * Remove meta tags entity values that were removed in v2.
  */
 function metatag_post_update_v2_02_remove_entity_values(array &$sandbox) {
+  $entity_type_manager = \Drupal::entityTypeManager();
+  $database = \Drupal::database();
+
   $metatags_to_remove = [
     // For #3065441.
     'google_plus_author',
@@ -591,75 +539,40 @@ function metatag_post_update_v2_02_remove_entity_values(array &$sandbox) {
     $sandbox['records_processed'] = 0;
     $sandbox['total_records'] = 0;
     $sandbox['current_field'] = 0;
-    $sandbox['current_record'] = 0;
 
     // Counter to enumerate the fields so we can access them in the array
     // by number rather than name.
     $field_counter = 0;
 
-    // Get all of the field storage entities of type metatag.
-    /** @var \Drupal\field\FieldStorageConfigInterface[] $field_storage_configs */
-    $field_storage_configs = \Drupal::entityTypeManager()
-      ->getStorage('field_storage_config')
-      ->loadByProperties(['type' => 'metatag']);
+    // Look for the appropriate data in all metatag field tables.
+    foreach (_metatag_list_entity_field_tables() as $table => $field_value_field) {
+      // Get all records that were not converted yet.
+      $query = $database->select($table);
+      $query->addField($table, 'revision_id');
 
-    foreach ($field_storage_configs as $field_storage) {
-      $field_name = $field_storage->getName();
+      // Only look for Metatag field records that have the meta tags that
+      // are being removed.
+      $db_or = $query->orConditionGroup();
+      foreach ($metatags_to_remove as $tag_name) {
+        $db_or->condition($field_value_field, '%"' . $tag_name . '"%', 'LIKE');
+      }
 
-      // Get the individual fields (field instances) associated with bundles.
-      $fields = \Drupal::entityTypeManager()
-        ->getStorage('field_config')
-        ->loadByProperties([
-          'field_name' => $field_name,
-          'entity_type' => $field_storage->getTargetEntityTypeId(),
-        ]);
+      // Look for Twitter Card "type" values, those might need to be
+      // changed.
+      foreach ($twitter_type_changes as $type_from => $type_to) {
+        $db_or->condition($field_value_field, '%"twitter_cards_type":"' . $type_from . '"%', 'LIKE');
+      }
 
-      foreach ($fields as $field) {
-        // Get the bundle this field is attached to.
-        $bundle = $field->getTargetBundle();
+      $query->condition($db_or);
+      $result = $query->execute();
+      $records = $result->fetchCol();
 
-        // Determine the table and "value" field names.
-        // @todo The class path to getTableMapping() seems to be invalid?
-        $table_mapping = Drupal::entityTypeManager()
-          ->getStorage($field->getTargetEntityTypeId())
-          ->getTableMapping();
-        $field_table = $table_mapping->getFieldTableName($field_name);
-        $field_value_field = $table_mapping->getFieldColumnName($field_storage, 'value');
-
-        // Get all records where the field data does not match the default.
-        $query = \Drupal::database()->select($field_table);
-        $query->addField($field_table, 'entity_id');
-        $query->addField($field_table, 'revision_id');
-        $query->addField($field_table, 'langcode');
-        $query->addField($field_table, $field_value_field);
-        $query->condition('bundle', $bundle, '=');
-
-        // Only look for Metatag field records that have the meta tags that are
-        // being removed.
-        $db_or = $query->orConditionGroup();
-        foreach ($metatags_to_remove as $tag_name) {
-          $db_or->condition($field_value_field, '%"' . $tag_name . '"%', 'LIKE');
-        }
-
-        // Look for Twitter Card "type" values, those might need to be changed.
-        $db_or->condition($field_value_field, '%"twitter_cards_type"%', 'LIKE');
-
-        $query->condition($db_or);
-        $result = $query->execute();
-        $records = $result->fetchAll();
-
-        // If no matching records were found, skip this entity bundle.
-        if (empty($records)) {
-          continue;
-        }
-
-        // Fill in all the sandbox information so we can batch the individual
-        // record comparing and updating.
-        $sandbox['fields'][$field_counter]['field_table'] = $field_table;
+      // Fill in all the sandbox information so we can batch the
+      // individual record comparing and updating.
+      if (!empty($records)) {
+        $sandbox['fields'][$field_counter]['field_table'] = $table;
         $sandbox['fields'][$field_counter]['field_value_field'] = $field_value_field;
-        $sandbox['fields'][$field_counter]['records'] = $records;
-
-        $sandbox['total_records'] += count($sandbox['fields'][$field_counter]['records']);
+        $sandbox['total_records'] += (int) count($records);
         $field_counter++;
       }
     }
@@ -671,19 +584,39 @@ function metatag_post_update_v2_02_remove_entity_values(array &$sandbox) {
   }
   else {
     // Begin the batch processing of individual field records.
-    $max_per_batch = 10;
-    $counter = 1;
+    $max_per_batch = 100;
+    $counter = 0;
 
     $current_field = $sandbox['current_field'];
-    $current_field_records = $sandbox['fields'][$current_field]['records'];
-    $current_record = $sandbox['current_record'];
 
     $field_table = $sandbox['fields'][$current_field]['field_table'];
     $field_value_field = $sandbox['fields'][$current_field]['field_value_field'];
 
+    // Get a segment of the records for this table.
+    $query = $database->select($field_table);
+    $query->addField($field_table, 'entity_id');
+    $query->addField($field_table, 'revision_id');
+    $query->addField($field_table, 'langcode');
+    $query->addField($field_table, $field_value_field);
+    $query->range(0, $max_per_batch);
+
+    // Only look for Metatag field records that have the meta tags that
+    // are being removed.
+    $db_or = $query->orConditionGroup();
+    foreach ($metatags_to_remove as $tag_name) {
+      $db_or->condition($field_value_field, '%"' . $tag_name . '"%', 'LIKE');
+    }
+
+    // Look for Twitter Card "type" values, those might need to be changed.
+    foreach ($twitter_type_changes as $type_from => $type_to) {
+      $db_or->condition($field_value_field, '%"twitter_cards_type":"' . $type_from . '"%', 'LIKE');
+    }
+
+    $query->condition($db_or);
+    $results = $query->execute();
+
     // Loop through the field(s) and remove the two meta tags.
-    while ($counter <= $max_per_batch && isset($current_field_records[$current_record])) {
-      $record = $current_field_records[$current_record];
+    foreach ($results as $record) {
       $tags = metatag_data_decode($record->$field_value_field);
       $changed = FALSE;
 
@@ -708,7 +641,7 @@ function metatag_post_update_v2_02_remove_entity_values(array &$sandbox) {
 
       if ($changed) {
         $tags_string = Json::encode($tags);
-        \Drupal::database()->update($field_table)
+        $database->update($field_table)
           ->fields([
             $field_value_field => $tags_string,
           ])
@@ -718,26 +651,20 @@ function metatag_post_update_v2_02_remove_entity_values(array &$sandbox) {
           ->execute();
       }
       $counter++;
-      $current_record++;
     }
-
-    // We ran out of records for the field so start the next batch out with the
-    // next field.
-    if (!isset($current_field_records[$current_record])) {
-      $current_field++;
-      $current_record = 0;
+    if (empty($counter)) {
+      $sandbox['current_field']++;
+    }
+    else {
+      $sandbox['records_processed'] += $counter;
     }
 
     // We have finished all the fields. All done.
-    if (!isset($sandbox['fields'][$current_field])) {
-      $sandbox['records_processed'] += $counter - 1;
+    if ($sandbox['records_processed'] >= $sandbox['total_records']) {
       $sandbox['#finished'] = 1;
     }
     // Update the sandbox values to prepare for the next round.
     else {
-      $sandbox['current_field'] = $current_field;
-      $sandbox['current_record'] = $current_record;
-      $sandbox['records_processed'] += $counter - 1;
       $sandbox['#finished'] = $sandbox['records_processed'] / $sandbox['total_records'];
     }
   }

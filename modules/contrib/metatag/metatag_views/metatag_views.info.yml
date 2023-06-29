@@ -7,7 +7,7 @@ dependencies:
   - metatag:metatag
   - drupal:views
 
-# Information added by Drupal.org packaging script on 2023-05-30
-version: '2.0.0-rc2'
+# Information added by Drupal.org packaging script on 2023-06-27
+version: '2.0.0'
 project: 'metatag'
-datestamp: 1685470339
+datestamp: 1687856985

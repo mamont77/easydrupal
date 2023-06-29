@@ -155,7 +155,7 @@ class SchemaNameBase extends MetaNameBase implements ContainerFactoryPluginInter
     }
 
     if (empty($value)) {
-      return '';
+      return [];
     }
     // If this is a complex array of value, process the array.
     elseif (is_array($value)) {
@@ -260,6 +260,7 @@ class SchemaNameBase extends MetaNameBase implements ContainerFactoryPluginInter
    */
   protected function neverExplode() {
     return [
+      'name',      
       'streetAddress',
       'reviewBody',
       'recipeInstructions',
@@ -297,7 +298,7 @@ class SchemaNameBase extends MetaNameBase implements ContainerFactoryPluginInter
       $value = $this->schemaMetatagManager()->explode($value, $this->schemaMetatagManager->getSeparator());
       // Clean out any empty values that might have been added by explode().
       if (is_array($value)) {
-        $value = array_filter($value);
+        $value = array_values(array_filter($value));
       }
     }
   }
@@ -337,7 +338,7 @@ class SchemaNameBase extends MetaNameBase implements ContainerFactoryPluginInter
             $values[$key] = $matches[1];
           }
         }
-        $value = implode($separator, $values);
+        $value = implode(',', $values);
 
         // Remove any HTML tags that might remain.
         $value = strip_tags($value);

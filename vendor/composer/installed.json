@@ -2311,18 +2311,18 @@
         },
         {
             "name": "drupal/captcha",
-            "version": "2.0.0-beta3",
-            "version_normalized": "2.0.0.0-beta3",
+            "version": "2.0.0",
+            "version_normalized": "2.0.0.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/captcha.git",
-                "reference": "2.0.0-beta3"
+                "reference": "2.0.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/captcha-2.0.0-beta3.zip",
-                "reference": "2.0.0-beta3",
-                "shasum": "3b41c30e19e1f6d235104a814615b6bfd3dc551f"
+                "url": "https://ftp.drupal.org/files/projects/captcha-2.0.0.zip",
+                "reference": "2.0.0",
+                "shasum": "b2f45bea0693d14ec5b6eae6e01225636a4121ee"
             },
             "require": {
                 "drupal/core": "^10"
@@ -2330,11 +2330,11 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "2.0.0-beta3",
-                    "datestamp": "1686154736",
+                    "version": "2.0.0",
+                    "datestamp": "1686733577",
                     "security-coverage": {
-                        "status": "not-covered",
-                        "message": "Beta releases are not covered by Drupal security advisories."
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
                     }
                 },
                 "branch-alias": {
@@ -3349,37 +3349,35 @@
         },
         {
             "name": "drupal/editor_advanced_link",
-            "version": "2.1.1",
-            "version_normalized": "2.1.1.0",
+            "version": "2.2.4",
+            "version_normalized": "2.2.4.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/editor_advanced_link.git",
-                "reference": "2.1.1"
+                "reference": "2.2.4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/editor_advanced_link-2.1.1.zip",
-                "reference": "2.1.1",
-                "shasum": "ba8f12aee9ac6c4d7b60ee916e7bd69e98c99d4a"
+                "url": "https://ftp.drupal.org/files/projects/editor_advanced_link-2.2.4.zip",
+                "reference": "2.2.4",
+                "shasum": "cd0db397827f2e21ec8a68211e8a153463a6c89b"
             },
             "require": {
                 "drupal/core": "^9.2 || ^10"
             },
             "require-dev": {
-                "drupal/ckeditor": "*"
+                "drupal/ckeditor": "*",
+                "phpro/grumphp": "^2.0"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "2.1.1",
-                    "datestamp": "1667462197",
+                    "version": "2.2.4",
+                    "datestamp": "1688040059",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
                     }
-                },
-                "patches_applied": {
-                    "3350254: CKEditor 5 ^36 compatibility — necessary for Drupal 10.1.x": "https://git.drupalcode.org/project/editor_advanced_link/-/merge_requests/10.diff"
                 }
             },
             "installation-source": "dist",
@@ -3393,7 +3391,7 @@
                     "homepage": "https://www.drupal.org/user/931394"
                 }
             ],
-            "description": "Add title, target etc. attributes to Text Editor's link dialog if the text format allows them.",
+            "description": "Editor Advanced link",
             "homepage": "https://www.drupal.org/project/editor_advanced_link",
             "support": {
                 "source": "https://git.drupalcode.org/project/editor_advanced_link"
@@ -4212,27 +4210,27 @@
         },
         {
             "name": "drupal/libraries",
-            "version": "4.0.3",
-            "version_normalized": "4.0.3.0",
+            "version": "4.0.4",
+            "version_normalized": "4.0.4.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/libraries.git",
-                "reference": "4.0.3"
+                "reference": "4.0.4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/libraries-4.0.3.zip",
-                "reference": "4.0.3",
-                "shasum": "75af50de9a3d1b8dd65039e0b3603aac5e7ebe19"
+                "url": "https://ftp.drupal.org/files/projects/libraries-4.0.4.zip",
+                "reference": "4.0.4",
+                "shasum": "45848ac6ebdfb77755305ece4c6cae436ca1b0cc"
             },
             "require": {
-                "drupal/core": "^8.8 || ^9 || ^10"
+                "drupal/core": "^9.4 || ^10"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "4.0.3",
-                    "datestamp": "1684192643",
+                    "version": "4.0.4",
+                    "datestamp": "1687020889",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -4406,18 +4404,18 @@
         },
         {
             "name": "drupal/metatag",
-            "version": "2.0.0-rc2",
-            "version_normalized": "2.0.0.0-RC2",
+            "version": "2.0.0",
+            "version_normalized": "2.0.0.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/metatag.git",
-                "reference": "2.0.0-rc2"
+                "reference": "2.0.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/metatag-2.0.0-rc2.zip",
-                "reference": "2.0.0-rc2",
-                "shasum": "a7af9af95aa74d7964fb76afa6b3f379ed385171"
+                "url": "https://ftp.drupal.org/files/projects/metatag-2.0.0.zip",
+                "reference": "2.0.0",
+                "shasum": "2966c854d982b7069b1c0111519427990ebbad40"
             },
             "require": {
                 "drupal/core": "^9.4 || ^10",
@@ -4437,11 +4435,11 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "2.0.0-rc2",
-                    "datestamp": "1685470335",
+                    "version": "2.0.0",
+                    "datestamp": "1687857487",
                     "security-coverage": {
-                        "status": "not-covered",
-                        "message": "RC releases are not covered by Drupal security advisories."
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
                     }
                 }
             },
@@ -5081,18 +5079,18 @@
         },
         {
             "name": "drupal/schema_metatag",
-            "version": "3.0.0",
-            "version_normalized": "3.0.0.0",
+            "version": "3.0.1",
+            "version_normalized": "3.0.1.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/schema_metatag.git",
-                "reference": "3.0.0"
+                "reference": "3.0.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/schema_metatag-3.0.0.zip",
-                "reference": "3.0.0",
-                "shasum": "4162542d1b6bfa07ad749b6b2d58249063fe7146"
+                "url": "https://ftp.drupal.org/files/projects/schema_metatag-3.0.1.zip",
+                "reference": "3.0.1",
+                "shasum": "fde91ea332b6e07f9c628f94d1ab1d999ae8595b"
             },
             "require": {
                 "drupal/core": "^9.0 || ^10",
@@ -5109,8 +5107,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "3.0.0",
-                    "datestamp": "1686395007",
+                    "version": "3.0.1",
+                    "datestamp": "1687460147",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
