@@ -7,7 +7,7 @@ index 555448e63..e2ee870b5 100644
        '#attributes' => [
          'name' => 'Generator',
 -        'content' => 'Drupal ' . $version . ' (https://www.drupal.org)',
-+        'content' => 'Drupal 10.3.7 (https://www.drupal.org) hello from the future',
++        'content' => 'Drupal 21.12.21 (https://www.drupal.org) hello from the future',
        ],
      ],
      // Attach default mobile meta tags for responsive design.
