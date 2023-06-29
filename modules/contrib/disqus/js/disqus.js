@@ -27,7 +27,7 @@ Drupal.behaviors.disqus = {
     if (settings.disqus || false) {
 
       // Ensure that the Disqus comments are only loaded once.
-      $(once('disqus', 'body')).each(function () {
+      $(once('disqus', 'body', context)).each(function () {
 
         // Setup the global JavaScript variables for Disqus.
         disqus_shortname = settings.disqus.domain;
@@ -80,7 +80,7 @@ Drupal.behaviors.disqus = {
     // Load the comment numbers JavaScript.
     if (settings.disqusComments || false) {
       // Ensure that comment numbers JavaScript is only loaded once.
-      $('body').once('disqusComments').each(function () {
+      $(once('disqusComments', 'body', context)).each(function () {
         disqus_shortname = settings.disqusComments;
         // Make the AJAX call to get the number of comments.
         jQuery.ajax({
