@@ -11,7 +11,7 @@ return array(
     'phootwork\\lang\\' => array($vendorDir . '/phootwork/lang'),
     'phootwork\\collection\\' => array($vendorDir . '/phootwork/collection'),
     'mglaman\\PHPStanDrupal\\' => array($vendorDir . '/mglaman/phpstan-drupal/src'),
-    'lsolesen\\pel\\' => array($vendorDir . '/lsolesen/pel/src'),
+    'lsolesen\\pel\\' => array($vendorDir . '/fileeye/pel/src'),
     'grasmash\\DrupalSecurityWarning\\' => array($vendorDir . '/grasmash/drupal-security-warning/src'),
     'cweagans\\Composer\\' => array($vendorDir . '/cweagans/composer-patches/src'),
     'VariableAnalysis\\' => array($vendorDir . '/sirbrillig/phpcs-variable-analysis/VariableAnalysis'),

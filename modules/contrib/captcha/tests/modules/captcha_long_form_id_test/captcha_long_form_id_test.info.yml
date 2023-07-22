@@ -5,7 +5,7 @@ package: Testing
 core_version_requirement: '>=8.9 <11'
 hidden: true
 
-# Information added by Drupal.org packaging script on 2023-06-14
-version: '2.0.0'
+# Information added by Drupal.org packaging script on 2023-07-19
+version: '2.0.3'
 project: 'captcha'
-datestamp: 1686733579
+datestamp: 1689779297

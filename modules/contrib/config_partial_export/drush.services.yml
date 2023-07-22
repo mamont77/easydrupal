@@ -1,0 +1,10 @@
+services:
+  config_partial_export.commands:
+    class: Drupal\config_partial_export\Commands\ConfigPartialExportCommands
+    arguments:
+      - '@config.manager'
+      - '@config.storage'
+      - '@config.storage.sync'
+      - '@string_translation'
+    tags:
+      - { name: drush.command }

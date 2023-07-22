@@ -228,3 +228,42 @@ function captcha_update_8905() {
     $captchaConfig->set('title', 'CAPTCHA')->save(TRUE);
   }  
 }
+
+/**
+ * Ensure caches are cleared with new module folder locations.
+ */
+function captcha_update_8906() {
+  // Remove test modules if they're on the site. They won't rebuild.
+  $extension = \Drupal::configFactory()->getEditable('core.extension');
+  $modules = $extension->get('module');
+  unset($modules['captcha_long_form_id_test']);
+  unset($modules['captcha_test']);
+  $extension->set('module', $modules);
+  $extension->save();
+
+  // Need to flush all caches due to module paths changing.
+  drupal_flush_all_caches();
+}
+
+/**
+ * Fix invalid config added in captcha_update_8906 (2.0.1)
+ */
+function captcha_update_8907() {
+  // Remove test modules if they're on the site. They won't rebuild.
+  $extension = \Drupal::configFactory()->getEditable('core.extension');
+  
+  // Remove invalid config added in 8906 and do the actual removal.
+  if ($extension->get('modules') !== NULL) {
+    $extension->clear('modules');
+
+    $modules = $extension->get('module');
+    unset($modules['captcha_long_form_id_test']);
+    unset($modules['captcha_test']);
+    $extension->set('module', $modules);
+
+    $extension->save();
+
+    // Need to flush all caches due to module paths changing.
+    drupal_flush_all_caches();
+  }
+}
