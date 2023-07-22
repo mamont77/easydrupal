@@ -83,6 +83,7 @@ return array(
     'Drush\\' => array($vendorDir . '/drush/drush/src'),
     'Drupal\\sophron\\' => array($baseDir . '/modules/contrib/sophron/src'),
     'Drupal\\redis\\' => array($baseDir . '/modules/contrib/redis/src'),
+    'Drupal\\bootstrap\\' => array($baseDir . '/themes/contrib/bootstrap/src'),
     'Drupal\\Core\\' => array($baseDir . '/core/lib/Drupal/Core'),
     'Drupal\\Composer\\Plugin\\Scaffold\\' => array($vendorDir . '/drupal/core-composer-scaffold'),
     'Drupal\\Composer\\Plugin\\ProjectMessage\\' => array($vendorDir . '/drupal/core-project-message'),

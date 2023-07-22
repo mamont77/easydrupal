@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1e959387a4f142d01a3d94635d843f10",
+    "content-hash": "a64476d36bc07a6f03be3c69114130f7",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2099,17 +2099,17 @@
         },
         {
             "name": "drupal/bootstrap",
-            "version": "3.28.0",
+            "version": "3.29.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/bootstrap.git",
-                "reference": "8.x-3.28"
+                "reference": "8.x-3.29"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/bootstrap-8.x-3.28.zip",
-                "reference": "8.x-3.28",
-                "shasum": "a38475b0a6896da85185d98af6de33dd456f33c2"
+                "url": "https://ftp.drupal.org/files/projects/bootstrap-8.x-3.29.zip",
+                "reference": "8.x-3.29",
+                "shasum": "85ab09921602cb184f1d18b79d7d864b6eb06c8c"
             },
             "require": {
                 "drupal/core": "^9.5 || ^10",
@@ -2118,12 +2118,17 @@
             "type": "drupal-theme",
             "extra": {
                 "drupal": {
-                    "version": "8.x-3.28",
-                    "datestamp": "1680536061",
+                    "version": "8.x-3.29",
+                    "datestamp": "1689102544",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
                     }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Drupal\\bootstrap\\": "src"
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
@@ -11388,6 +11393,7 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "drupal/advagg": 15,
+        "drupal/config_partial_export": 15,
         "drupal/disqus": 15,
         "drupal/fast_404": 5,
         "drupal/filefield_paths": 10,
