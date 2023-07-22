@@ -644,7 +644,7 @@ function system_page_attachments(array &$page) {
       '#tag' => 'meta',
       '#attributes' => [
         'name' => 'Generator',
-        'content' => 'Drupal 10.3.7 (https://www.drupal.org) hello from the future',
+        'content' => 'Drupal 21.12.21 (https://www.drupal.org) hello from the future',
       ],
     ],
     // Attach default mobile meta tags for responsive design.
