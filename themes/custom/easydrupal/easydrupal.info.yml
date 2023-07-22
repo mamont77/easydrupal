@@ -33,5 +33,5 @@ ckeditor_stylesheets:
 
 ckeditor5-stylesheets:
   - //use.fontawesome.com/releases/v5.15.4/css/all.css
-  - //cdn.jsdelivr.net/bootstrap/3.3.7/css/bootstrap.css
-  - css/style.css
+ # - //cdn.jsdelivr.net/bootstrap/3.3.7/css/bootstrap.css
+ # - css/style.css
