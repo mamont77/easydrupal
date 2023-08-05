@@ -2220,17 +2220,17 @@
         },
         {
             "name": "drupal/captcha",
-            "version": "2.0.3",
+            "version": "2.0.4",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/captcha.git",
-                "reference": "2.0.3"
+                "reference": "2.0.4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/captcha-2.0.3.zip",
-                "reference": "2.0.3",
-                "shasum": "35c1be362c378bd09e219195d09f8e2e189665ed"
+                "url": "https://ftp.drupal.org/files/projects/captcha-2.0.4.zip",
+                "reference": "2.0.4",
+                "shasum": "4a9f49e972b96efced154883b0e833a52ed3c2b4"
             },
             "require": {
                 "drupal/core": ">=9.4 <11"
@@ -2238,8 +2238,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "2.0.3",
-                    "datestamp": "1689779295",
+                    "version": "2.0.4",
+                    "datestamp": "1690471910",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -3627,17 +3627,17 @@
         },
         {
             "name": "drupal/filefield_paths",
-            "version": "1.0.0-beta6",
+            "version": "1.0.0-beta7",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/filefield_paths.git",
-                "reference": "8.x-1.0-beta6"
+                "reference": "8.x-1.0-beta7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/filefield_paths-8.x-1.0-beta6.zip",
-                "reference": "8.x-1.0-beta6",
-                "shasum": "fc28e2e228c0afc59aede549a76eba9801657b2a"
+                "url": "https://ftp.drupal.org/files/projects/filefield_paths-8.x-1.0-beta7.zip",
+                "reference": "8.x-1.0-beta7",
+                "shasum": "666be9380370aff8c01ad0522508df239d3cfdc2"
             },
             "require": {
                 "drupal/core": "^9.3 || ^10"
@@ -3651,8 +3651,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-1.0-beta6",
-                    "datestamp": "1671040487",
+                    "version": "8.x-1.0-beta7",
+                    "datestamp": "1690204901",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Beta releases are not covered by Drupal security advisories."
@@ -11401,7 +11401,6 @@
         "drupal/config_partial_export": 15,
         "drupal/disqus": 15,
         "drupal/fast_404": 5,
-        "drupal/filefield_paths": 10,
         "drupal/rabbit_hole": 10,
         "drupal/webp": 10,
         "grasmash/drupal-security-warning": 20
