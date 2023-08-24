@@ -8,30 +8,8 @@ dependencies:
     - field.field.node.page.field_meta_tags
     - node.type.page
   module:
-    - ds
     - text
     - user
-third_party_settings:
-  ds:
-    layout:
-      id: ds_reset
-      library: null
-      disable_css: false
-      entity_classes: no_classes
-      settings:
-        classes:
-          layout_class: {  }
-          ds_content: {  }
-        wrappers:
-          ds_content: div
-        outer_wrapper: div
-        attributes: ''
-        link_attribute: ''
-        link_custom: ''
-        label: ''
-    regions:
-      ds_content:
-        - body
 _core:
   default_config_hash: oZ-7vpIJxjxL2up9B5KrJGD0lazQ9aN0P-fIPo6OrSU
 id: node.page.landing_page
@@ -44,35 +22,7 @@ content:
     label: hidden
     settings:
       trim_length: 600
-    third_party_settings:
-      ds:
-        ft:
-          id: expert
-          settings:
-            lb: ''
-            lbw: false
-            lbw-el: ''
-            lbw-cl: ''
-            lbw-at: ''
-            lb-col: false
-            ow: false
-            ow-el: div
-            ow-cl: 'animated fadeInDown wow text-muted'
-            ow-at: 'data-wow-delay=".2s"'
-            ow-def-at: false
-            ow-def-cl: false
-            fis: false
-            fis-el: ''
-            fis-cl: ''
-            fis-at: ''
-            fis-def-at: false
-            fi: true
-            fi-el: div
-            fi-cl: field--name-body
-            fi-at: ''
-            fi-def-at: false
-            prefix: ''
-            suffix: ''
+    third_party_settings: {  }
     weight: 0
     region: ds_content
 hidden:

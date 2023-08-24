@@ -18,56 +18,10 @@ dependencies:
     - field.field.node.article.field_yoast_seo
     - node.type.article
   module:
-    - ds
     - field_group
     - text
     - user
 third_party_settings:
-  ds:
-    layout:
-      id: ds_reset
-      library: null
-      disable_css: false
-      entity_classes: all_classes
-      settings:
-        classes:
-          layout_class: {  }
-          ds_content: {  }
-        wrappers:
-          ds_content: div
-        outer_wrapper: div
-        attributes: ''
-        link_attribute: ''
-        link_custom: ''
-        label: ''
-    regions:
-      ds_content:
-        - group_header
-        - node_post_date
-        - node_title
-        - field_image_media
-        - body
-    fields:
-      node_post_date:
-        plugin_id: node_post_date
-        weight: 0
-        label: hidden
-        formatter: ds_post_date_day_month_year
-      node_title:
-        plugin_id: node_title
-        weight: 1
-        label: hidden
-        formatter: default
-        settings:
-          link: true
-          wrapper: h2
-          class: ''
-        ft:
-          id: minimal
-          settings:
-            lb: ''
-            lb-col: false
-            classes: {  }
   field_group:
     group_header:
       children:
@@ -99,14 +53,7 @@ content:
     label: hidden
     settings:
       trim_length: 200
-    third_party_settings:
-      ds:
-        ft:
-          id: minimal
-          settings:
-            lb: ''
-            lb-col: false
-            classes: {  }
+    third_party_settings: {  }
     weight: 2
     region: ds_content
   field_image_media:
@@ -115,14 +62,7 @@ content:
     settings:
       view_mode: article
       link: false
-    third_party_settings:
-      ds:
-        ft:
-          id: minimal
-          settings:
-            lb: ''
-            lb-col: false
-            classes: {  }
+    third_party_settings: {  }
     weight: 1
     region: ds_content
 hidden:

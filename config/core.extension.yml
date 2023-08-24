@@ -18,7 +18,6 @@ module:
   blazy_ui: 0
   block: 0
   block_content: 0
-  bootstrap_layouts: 0
   breakpoint: 0
   captcha: 0
   ckeditor5: 0
@@ -36,8 +35,6 @@ module:
   devel_entity_updates: 0
   devel_php: 0
   disqus: 0
-  ds_extras: 0
-  ds_switch_view_mode: 0
   dynamic_page_cache: 0
   easydrupal_breadcrumb: 0
   easydrupal_common: 0
@@ -62,7 +59,6 @@ module:
   imageapi_optimize_webp: 0
   imagemagick: 0
   inline_form_errors: 0
-  layout_discovery: 0
   libraries: 0
   link: 0
   linkit: 0
@@ -119,7 +115,6 @@ module:
   views_ui: 0
   webp: 0
   yoast_seo: 0
-  ds: 1
   extlink: 1
   menu_link_content: 1
   pathauto: 1

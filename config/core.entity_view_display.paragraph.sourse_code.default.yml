@@ -9,7 +9,6 @@ dependencies:
     - field.field.paragraph.sourse_code.field_top_description
     - paragraphs.paragraphs_type.sourse_code
   module:
-    - ds
     - geshifield
     - text
 id: paragraph.sourse_code.default
@@ -36,14 +35,7 @@ content:
     label: inline
     settings:
       link_to_entity: false
-    third_party_settings:
-      ds:
-        ft:
-          id: minimal
-          settings:
-            lb: File
-            lb-col: false
-            classes: {  }
+    third_party_settings: {  }
     weight: 1
     region: content
   field_top_description:

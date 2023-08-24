@@ -19,7 +19,6 @@ dependencies:
     - field.field.node.project.field_skills
     - node.type.project
   module:
-    - ds
     - text
     - user
 id: node.project.teaser
@@ -41,14 +40,7 @@ content:
     settings:
       view_mode: project_summary
       link: false
-    third_party_settings:
-      ds:
-        ft:
-          id: minimal
-          settings:
-            lb: ''
-            lb-col: false
-            classes: {  }
+    third_party_settings: {  }
     weight: 0
     region: content
 hidden:

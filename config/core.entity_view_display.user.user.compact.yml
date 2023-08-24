@@ -12,7 +12,6 @@ dependencies:
     - field.field.user.user.user_picture
     - image.style.max_150x150
   module:
-    - ds
     - image
     - user
 _core:
@@ -30,14 +29,7 @@ content:
       image_style: max_150x150
       image_loading:
         attribute: lazy
-    third_party_settings:
-      ds:
-        ft:
-          id: minimal
-          settings:
-            lb: ''
-            lb-col: false
-            classes: {  }
+    third_party_settings: {  }
     weight: 0
     region: content
 hidden:

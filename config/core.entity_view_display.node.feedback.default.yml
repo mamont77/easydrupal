@@ -16,39 +16,9 @@ dependencies:
   module:
     - country
     - datetime
-    - ds
     - metatag
     - text
     - user
-third_party_settings:
-  ds:
-    layout:
-      id: ds_reset
-      library: null
-      disable_css: false
-      entity_classes: no_classes
-      settings:
-        classes:
-          layout_class: {  }
-          ds_content: {  }
-        wrappers:
-          ds_content: div
-        outer_wrapper: div
-        attributes: ''
-        link_attribute: ''
-        link_custom: ''
-        label: ''
-    regions:
-      ds_content:
-        - field_image_media
-        - field_name
-        - links
-        - field_position
-        - field_country_v2
-        - field_date
-        - field_project_title
-        - body
-        - field_meta_tags
 id: node.feedback.default
 targetEntityType: node
 bundle: feedback
@@ -83,14 +53,7 @@ content:
     settings:
       view_mode: feedback_portrait
       link: false
-    third_party_settings:
-      ds:
-        ft:
-          id: minimal
-          settings:
-            lb: ''
-            lb-col: false
-            classes: {  }
+    third_party_settings: {  }
     weight: 0
     region: ds_content
   field_meta_tags:
@@ -105,14 +68,7 @@ content:
     label: hidden
     settings:
       link_to_entity: false
-    third_party_settings:
-      ds:
-        ft:
-          id: minimal
-          settings:
-            lb: ''
-            lb-col: false
-            classes: {  }
+    third_party_settings: {  }
     weight: 1
     region: ds_content
   field_position:
@@ -128,13 +84,7 @@ content:
     label: hidden
     settings:
       link: false
-    third_party_settings:
-      ds:
-        ds_limit: ''
-        ft:
-          id: reset
-          settings:
-            lb: ''
+    third_party_settings: {  }
     weight: 6
     region: ds_content
   links:

@@ -9,29 +9,7 @@ dependencies:
     - field.field.node.client.field_meta_tags
     - node.type.client
   module:
-    - ds
     - user
-third_party_settings:
-  ds:
-    layout:
-      id: ds_reset
-      library: null
-      disable_css: false
-      entity_classes: no_classes
-      settings:
-        classes:
-          layout_class: {  }
-          ds_content: {  }
-        wrappers:
-          ds_content: div
-        outer_wrapper: div
-        attributes: ''
-        link_attribute: ''
-        link_custom: ''
-        label: ''
-    regions:
-      ds_content:
-        - field_image_media
 id: node.client.landing_page
 targetEntityType: node
 bundle: client
@@ -43,14 +21,7 @@ content:
     settings:
       view_mode: client_logo
       link: false
-    third_party_settings:
-      ds:
-        ft:
-          id: minimal
-          settings:
-            lb: ''
-            lb-col: false
-            classes: {  }
+    third_party_settings: {  }
     weight: 0
     region: ds_content
 hidden:

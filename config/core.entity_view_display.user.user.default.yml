@@ -12,7 +12,6 @@ dependencies:
     - image.style.max_150x150
   module:
     - datetime
-    - ds
     - image
     - text
     - user
@@ -52,12 +51,7 @@ content:
     label: hidden
     settings:
       link_to_entity: false
-    third_party_settings:
-      ds:
-        ft:
-          id: reset
-          settings:
-            lb: ''
+    third_party_settings: {  }
     weight: 0
     region: content
   field_last_name:
@@ -65,12 +59,7 @@ content:
     label: hidden
     settings:
       link_to_entity: false
-    third_party_settings:
-      ds:
-        ft:
-          id: reset
-          settings:
-            lb: ''
+    third_party_settings: {  }
     weight: 1
     region: content
   member_for:
@@ -86,14 +75,7 @@ content:
       image_style: max_150x150
       image_loading:
         attribute: lazy
-    third_party_settings:
-      ds:
-        ft:
-          id: minimal
-          settings:
-            lb: ''
-            lb-col: false
-            classes: {  }
+    third_party_settings: {  }
     weight: 4
     region: content
 hidden: {  }

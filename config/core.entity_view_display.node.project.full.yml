@@ -20,60 +20,10 @@ dependencies:
     - node.type.project
   module:
     - datetime
-    - ds
     - link
     - slick
     - text
     - user
-third_party_settings:
-  ds:
-    layout:
-      id: bs_2col_stacked
-      library: ''
-      disable_css: false
-      entity_classes: no_classes
-      settings:
-        layout:
-          wrapper: div
-          classes:
-            clearfix: clearfix
-            row: row
-          attributes: ''
-          add_layout_class: 1
-        regions:
-          top:
-            wrapper: div
-            classes:
-              col-sm-12: col-sm-12
-            attributes: ''
-          left:
-            wrapper: div
-            classes:
-              col-sm-6: col-sm-6
-              col-md-4: col-md-4
-            attributes: ''
-          right:
-            wrapper: div
-            classes:
-              col-sm-6: col-sm-6
-              col-md-8: col-md-8
-            attributes: ''
-          bottom:
-            wrapper: div
-            classes:
-              col-sm-12: col-sm-12
-            attributes: ''
-      path: modules/bootstrap_layouts
-    regions:
-      right:
-        - field_date
-        - body
-        - field_skills
-        - field_project_url
-      bottom:
-        - field_project_images
-      left:
-        - field_image
 id: node.project.full
 targetEntityType: node
 bundle: project
@@ -103,46 +53,25 @@ content:
         alt: alt
         title: '0'
       optionset: default
-      icon: ''
       layout: ''
       view_mode: ''
       cache: 0
-      current_view_mode: full
       skin: default
+      lazy: ''
       style: ''
       background: false
       box_caption: ''
       box_caption_custom: ''
       box_media_style: ''
+      loading: lazy
+      preload: false
       responsive_image_style: ''
+      use_theme_field: false
       box_style: ''
       image_style: project_slider
       media_switch: ''
       ratio: ''
       thumbnail_style: ''
-      breakpoints:
-        xs:
-          breakpoint: ''
-          width: ''
-          image_style: ''
-        sm:
-          breakpoint: ''
-          width: ''
-          image_style: ''
-        md:
-          breakpoint: ''
-          width: ''
-          image_style: ''
-        lg:
-          breakpoint: ''
-          width: ''
-          image_style: ''
-        xl:
-          breakpoint: ''
-          width: ''
-          image_style: ''
-      sizes: ''
-      grid_header: ''
       grid: null
       grid_medium: null
       grid_small: null
@@ -165,16 +94,7 @@ content:
       skin_dots: ''
       preserve_keys: false
       visible_items: null
-      iframe_lazy: true
-    third_party_settings:
-      ds:
-        ds_limit: ''
-        ft:
-          id: minimal
-          settings:
-            lb: ''
-            lb-col: false
-            classes: {  }
+    third_party_settings: {  }
     weight: 6
     region: bottom
   field_project_url:
@@ -186,14 +106,7 @@ content:
       url_plain: false
       rel: nofollow
       target: _blank
-    third_party_settings:
-      ds:
-        ft:
-          id: minimal
-          settings:
-            lb: Website
-            lb-col: false
-            classes: {  }
+    third_party_settings: {  }
     weight: 5
     region: right
   field_skills:
@@ -201,36 +114,7 @@ content:
     label: inline
     settings:
       link_to_entity: false
-    third_party_settings:
-      ds:
-        ds_limit: ''
-        ft:
-          id: expert
-          settings:
-            lb: ''
-            lbw: true
-            lbw-el: div
-            lbw-cl: field--label
-            lbw-at: ''
-            lb-col: false
-            ow: true
-            ow-el: div
-            ow-cl: 'field field--name-field-skills field--label-inline'
-            ow-at: ''
-            ow-def-at: false
-            ow-def-cl: false
-            fis: true
-            fis-el: ul
-            fis-cl: skills
-            fis-at: ''
-            fis-def-at: false
-            fi: true
-            fi-el: li
-            fi-cl: skill
-            fi-at: ''
-            fi-def-at: false
-            prefix: ''
-            suffix: ''
+    third_party_settings: {  }
     weight: 4
     region: right
 hidden:

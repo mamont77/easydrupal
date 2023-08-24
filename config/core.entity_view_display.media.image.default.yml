@@ -8,7 +8,6 @@ dependencies:
     - media.type.image
     - responsive_image.styles.narrow
   module:
-    - ds
     - responsive_image
 _core:
   default_config_hash: B1a2aBHmUulUZN6HrxITEH1tSResuVjXMBEv1lUBtOo
@@ -25,14 +24,7 @@ content:
       image_link: ''
       image_loading:
         attribute: eager
-    third_party_settings:
-      ds:
-        ft:
-          id: minimal
-          settings:
-            lb: ''
-            lb-col: false
-            classes: {  }
+    third_party_settings: {  }
     weight: 0
     region: content
 hidden:

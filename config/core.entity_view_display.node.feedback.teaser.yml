@@ -17,56 +17,10 @@ dependencies:
   module:
     - country
     - datetime
-    - ds
     - field_group
     - text
     - user
 third_party_settings:
-  ds:
-    layout:
-      id: ds_reset
-      library: null
-      disable_css: false
-      entity_classes: no_classes
-      settings:
-        classes:
-          layout_class: {  }
-          ds_content: {  }
-        wrappers:
-          ds_content: div
-        outer_wrapper: div
-        attributes: ''
-        link_attribute: ''
-        link_custom: ''
-        label: ''
-    regions:
-      ds_content:
-        - field_image_media
-        - field_name
-        - node_title
-        - group_about_client
-        - field_position
-        - group_project_info
-        - body
-        - field_country_v2
-        - field_date
-        - field_project_title
-    fields:
-      node_title:
-        plugin_id: node_title
-        weight: 1
-        label: hidden
-        formatter: default
-        settings:
-          link: false
-          wrapper: h3
-          class: ''
-        ft:
-          id: minimal
-          settings:
-            lb: ''
-            lb-col: false
-            classes: {  }
   field_group:
     group_about_client:
       children:
@@ -114,70 +68,14 @@ content:
     type: text_default
     label: hidden
     settings: {  }
-    third_party_settings:
-      ds:
-        ft:
-          id: expert
-          settings:
-            lb: ''
-            lbw: false
-            lbw-el: ''
-            lbw-cl: ''
-            lbw-at: ''
-            lb-col: false
-            ow: false
-            ow-el: ''
-            ow-cl: ''
-            ow-at: ''
-            ow-def-at: false
-            ow-def-cl: false
-            fis: false
-            fis-el: ''
-            fis-cl: ''
-            fis-at: ''
-            fis-def-at: false
-            fi: true
-            fi-el: blockquote
-            fi-cl: text
-            fi-at: ''
-            fi-def-at: false
-            prefix: ''
-            suffix: ''
+    third_party_settings: {  }
     weight: 4
     region: ds_content
   field_country_v2:
     type: country_default
     label: hidden
     settings: {  }
-    third_party_settings:
-      ds:
-        ft:
-          id: expert
-          settings:
-            lb: ''
-            lbw: false
-            lbw-el: ''
-            lbw-cl: ''
-            lbw-at: ''
-            lb-col: false
-            ow: false
-            ow-el: ''
-            ow-cl: ''
-            ow-at: ''
-            ow-def-at: false
-            ow-def-cl: false
-            fis: false
-            fis-el: ''
-            fis-cl: ''
-            fis-at: ''
-            fis-def-at: false
-            fi: true
-            fi-el: span
-            fi-cl: country
-            fi-at: ''
-            fi-def-at: false
-            prefix: ''
-            suffix: ''
+    third_party_settings: {  }
     weight: 4
     region: ds_content
   field_date:
@@ -186,14 +84,7 @@ content:
     settings:
       timezone_override: ''
       format_type: month_year
-    third_party_settings:
-      ds:
-        ft:
-          id: minimal
-          settings:
-            lb: ''
-            lb-col: false
-            classes: {  }
+    third_party_settings: {  }
     weight: 4
     region: ds_content
   field_image_media:
@@ -202,14 +93,7 @@ content:
     settings:
       view_mode: feedback_portrait
       link: false
-    third_party_settings:
-      ds:
-        ft:
-          id: minimal
-          settings:
-            lb: ''
-            lb-col: false
-            classes: {  }
+    third_party_settings: {  }
     weight: 0
     region: ds_content
   field_name:
@@ -217,35 +101,7 @@ content:
     label: hidden
     settings:
       link_to_entity: false
-    third_party_settings:
-      ds:
-        ft:
-          id: expert
-          settings:
-            lb: ''
-            lbw: false
-            lbw-el: ''
-            lbw-cl: ''
-            lbw-at: ''
-            lb-col: false
-            ow: false
-            ow-el: ''
-            ow-cl: ''
-            ow-at: ''
-            ow-def-at: false
-            ow-def-cl: false
-            fis: false
-            fis-el: ''
-            fis-cl: ''
-            fis-at: ''
-            fis-def-at: false
-            fi: true
-            fi-el: span
-            fi-cl: name
-            fi-at: ''
-            fi-def-at: false
-            prefix: ''
-            suffix: '|'
+    third_party_settings: {  }
     weight: 1
     region: ds_content
   field_position:
@@ -253,35 +109,7 @@ content:
     label: hidden
     settings:
       link_to_entity: false
-    third_party_settings:
-      ds:
-        ft:
-          id: expert
-          settings:
-            lb: ''
-            lbw: false
-            lbw-el: ''
-            lbw-cl: ''
-            lbw-at: ''
-            lb-col: false
-            ow: false
-            ow-el: ''
-            ow-cl: ''
-            ow-at: ''
-            ow-def-at: false
-            ow-def-cl: false
-            fis: false
-            fis-el: ''
-            fis-cl: ''
-            fis-at: ''
-            fis-def-at: false
-            fi: true
-            fi-el: span
-            fi-cl: position
-            fi-at: ''
-            fi-def-at: false
-            prefix: ''
-            suffix: '|'
+    third_party_settings: {  }
     weight: 2
     region: ds_content
   field_project_title:
@@ -289,15 +117,7 @@ content:
     label: hidden
     settings:
       link: true
-    third_party_settings:
-      ds:
-        ds_limit: ''
-        ft:
-          id: minimal
-          settings:
-            lb: ''
-            lb-col: false
-            classes: {  }
+    third_party_settings: {  }
     weight: 5
     region: ds_content
 hidden:

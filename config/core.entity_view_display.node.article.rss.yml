@@ -19,32 +19,9 @@ dependencies:
     - image.style.max_200x200
     - node.type.article
   module:
-    - ds
     - media
     - text
     - user
-third_party_settings:
-  ds:
-    layout:
-      id: ds_reset
-      library: null
-      disable_css: false
-      entity_classes: no_classes
-      settings:
-        classes:
-          layout_class: {  }
-          ds_content: {  }
-        wrappers:
-          ds_content: div
-        outer_wrapper: div
-        attributes: ''
-        link_attribute: ''
-        link_custom: ''
-        label: ''
-    regions:
-      ds_content:
-        - field_image_media
-        - body
 _core:
   default_config_hash: Q90X1FmFdOkTx8udckWPoAgleOstOerbgDnNpoP6PO4
 id: node.article.rss
@@ -57,14 +34,7 @@ content:
     label: hidden
     settings:
       trim_length: 600
-    third_party_settings:
-      ds:
-        ft:
-          id: minimal
-          settings:
-            lb: ''
-            lb-col: false
-            classes: {  }
+    third_party_settings: {  }
     weight: 1
     region: ds_content
   field_image_media:
@@ -73,14 +43,9 @@ content:
     settings:
       image_link: ''
       image_style: max_200x200
-    third_party_settings:
-      ds:
-        ft:
-          id: minimal
-          settings:
-            lb: ''
-            lb-col: false
-            classes: {  }
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
     weight: 0
     region: ds_content
 hidden:

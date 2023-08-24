@@ -10,7 +10,6 @@ dependencies:
     - responsive_image.styles.feedback_portrait
   module:
     - blazy
-    - ds
 _core:
   default_config_hash: B1a2aBHmUulUZN6HrxITEH1tSResuVjXMBEv1lUBtOo
 id: media.image.ck
@@ -25,39 +24,29 @@ content:
       caption:
         title: '0'
         alt: '0'
-      icon: ''
       layout: ''
       view_mode: ''
       cache: 0
-      current_view_mode: ck
       skin: ''
-      fx: ''
+      lazy: ''
       style: ''
       background: false
       box_caption: ''
       box_caption_custom: ''
       box_media_style: ''
+      loading: lazy
+      preload: false
       responsive_image_style: feedback_portrait
+      use_theme_field: false
       box_style: ''
       image_style: ''
       media_switch: ''
       ratio: ''
       thumbnail_style: ''
-      _uri: ''
-      breakpoints: {  }
-      sizes: ''
-      grid_header: ''
       grid: ''
       grid_medium: ''
       grid_small: ''
-    third_party_settings:
-      ds:
-        ft:
-          id: minimal
-          settings:
-            lb: ''
-            lb-col: false
-            classes: {  }
+    third_party_settings: {  }
     weight: 0
     region: content
 hidden:

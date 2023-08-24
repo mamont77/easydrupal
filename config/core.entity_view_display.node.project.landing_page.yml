@@ -19,60 +19,8 @@ dependencies:
     - field.field.node.project.field_skills
     - node.type.project
   module:
-    - ds
     - text
     - user
-third_party_settings:
-  ds:
-    layout:
-      id: bs_2col
-      library: null
-      disable_css: false
-      entity_classes: no_classes
-      settings:
-        label: ''
-        layout:
-          wrapper: div
-          classes:
-            clearfix: clearfix
-            row: row
-          add_layout_class: 1
-          attributes: ''
-        regions:
-          left:
-            wrapper: div
-            classes:
-              col-sm-6: col-sm-6
-            add_region_classes: 1
-            attributes: ''
-          right:
-            wrapper: div
-            classes:
-              col-sm-6: col-sm-6
-            add_region_classes: 1
-            attributes: ''
-    regions:
-      left:
-        - node_title
-        - body
-      right:
-        - field_landing_page_backgro_media
-    fields:
-      node_title:
-        plugin_id: node_title
-        weight: 0
-        label: hidden
-        formatter: default
-        settings:
-          link: true
-          wrapper: h3
-          class: ''
-        ft:
-          id: minimal
-          settings:
-            lb: ''
-            lb-col: false
-            classes: {  }
 id: node.project.landing_page
 targetEntityType: node
 bundle: project
@@ -83,14 +31,7 @@ content:
     label: hidden
     settings:
       trim_length: 600
-    third_party_settings:
-      ds:
-        ft:
-          id: minimal
-          settings:
-            lb: ''
-            lb-col: false
-            classes: {  }
+    third_party_settings: {  }
     weight: 1
     region: left
   field_landing_page_backgro_media:
@@ -99,14 +40,7 @@ content:
     settings:
       view_mode: project_landing_page
       link: false
-    third_party_settings:
-      ds:
-        ft:
-          id: minimal
-          settings:
-            lb: ''
-            lb-col: false
-            classes: {  }
+    third_party_settings: {  }
     weight: 2
     region: right
 hidden:
