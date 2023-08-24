@@ -50,6 +50,7 @@
         "drupal/entity_reference_revisions": "^1.10",
         "drupal/extlink": "^1.7",
         "drupal/fast_404": "^3.0@RC",
+        "drupal/fences": "^3.0",
         "drupal/field_group": "^3.4",
         "drupal/file_mdm": "^2.6",
         "drupal/filefield_paths": "^1.0@beta",

@@ -3,7 +3,7 @@
         'name' => 'drupal/legacy-project',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => '9478e40e4672aecfa5e80c35a8bd9dae8db0a20a',
+        'reference' => 'e651742ea785c7c2d169df8656bb525e8ceb8667',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -652,6 +652,15 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'drupal/fences' => array(
+            'pretty_version' => '3.0.0',
+            'version' => '3.0.0.0',
+            'reference' => '3.0.0',
+            'type' => 'drupal-module',
+            'install_path' => __DIR__ . '/../../modules/contrib/fences',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'drupal/field_group' => array(
             'pretty_version' => '3.4.0',
             'version' => '3.4.0.0',
@@ -736,7 +745,7 @@
         'drupal/legacy-project' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => '9478e40e4672aecfa5e80c35a8bd9dae8db0a20a',
+            'reference' => 'e651742ea785c7c2d169df8656bb525e8ceb8667',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

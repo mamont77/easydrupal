@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a64476d36bc07a6f03be3c69114130f7",
+    "content-hash": "74e6869b112889c1c1cff35cd8b44b0a",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -3512,6 +3512,73 @@
             "support": {
                 "source": "http://cgit.drupalcode.org/fast_404",
                 "issues": "https://www.drupal.org/project/issues/fast_404"
+            }
+        },
+        {
+            "name": "drupal/fences",
+            "version": "3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/fences.git",
+                "reference": "3.0.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/fences-3.0.0.zip",
+                "reference": "3.0.0",
+                "shasum": "cb48127661d1300b8cb269d97673dee02fdbcb31"
+            },
+            "require": {
+                "drupal/core": "^8.9 || ^9 || ^10"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "3.0.0",
+                    "datestamp": "1661764499",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "John Albin Wilkins (JohnAlbin)",
+                    "homepage": "https://www.drupal.org/u/johnalbin",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "Sam Becker (Sam152)",
+                    "homepage": "https://www.drupal.org/u/sam152",
+                    "role": "Co-maintainer"
+                },
+                {
+                    "name": "JohnAlbin",
+                    "homepage": "https://www.drupal.org/user/32095"
+                },
+                {
+                    "name": "Sam152",
+                    "homepage": "https://www.drupal.org/user/1485048"
+                },
+                {
+                    "name": "stevector",
+                    "homepage": "https://www.drupal.org/user/179805"
+                },
+                {
+                    "name": "thomas.frobieter",
+                    "homepage": "https://www.drupal.org/user/409335"
+                }
+            ],
+            "description": "Alter wrapping markup of fields.",
+            "homepage": "https://drupal.org/project/fences",
+            "support": {
+                "source": "https://git.drupalcode.org/project/fences",
+                "issues": "https://drupal.org/project/issues/fences"
             }
         },
         {
@@ -11401,6 +11468,7 @@
         "drupal/config_partial_export": 15,
         "drupal/disqus": 15,
         "drupal/fast_404": 5,
+        "drupal/filefield_paths": 10,
         "drupal/rabbit_hole": 10,
         "drupal/webp": 10,
         "grasmash/drupal-security-warning": 20

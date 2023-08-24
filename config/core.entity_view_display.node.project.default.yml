@@ -16,13 +16,10 @@ dependencies:
     - field.field.node.project.field_project_images_media
     - field.field.node.project.field_project_url
     - field.field.node.project.field_skills
-    - image.style.project_slider_default
     - node.type.project
-    - responsive_image.styles.project_slider
   module:
     - datetime
     - link
-    - metatag
     - slick
     - text
     - user
@@ -36,8 +33,8 @@ content:
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 3
-    region: right
+    weight: 2
+    region: content
   field_date:
     type: datetime_default
     label: hidden
@@ -45,8 +42,8 @@ content:
       timezone_override: ''
       format_type: month_year
     third_party_settings: {  }
-    weight: 2
-    region: right
+    weight: 1
+    region: content
   field_logo_media:
     type: entity_reference_entity_view
     label: hidden
@@ -54,15 +51,8 @@ content:
       view_mode: project_logo
       link: false
     third_party_settings: {  }
-    weight: 1
-    region: left
-  field_meta_tags:
-    type: metatag_empty_formatter
-    label: above
-    settings: {  }
-    third_party_settings: {  }
     weight: 0
-    region: top
+    region: content
   field_project_images_media:
     type: slick_media
     label: hidden
@@ -89,12 +79,12 @@ content:
       box_caption: ''
       box_caption_custom: ''
       box_media_style: ''
-      loading: lazy
+      loading: ''
       preload: false
-      responsive_image_style: project_slider
+      responsive_image_style: ''
       use_theme_field: false
       box_style: ''
-      image_style: project_slider_default
+      image_style: ''
       media_switch: ''
       ratio: ''
       thumbnail_style: ''
@@ -122,8 +112,8 @@ content:
       preserve_keys: false
       visible_items: null
     third_party_settings: {  }
-    weight: 6
-    region: bottom
+    weight: 5
+    region: content
   field_project_url:
     type: link
     label: hidden
@@ -131,19 +121,19 @@ content:
       trim_length: 80
       url_only: false
       url_plain: false
-      rel: nofollow
-      target: _blank
+      rel: ''
+      target: ''
     third_party_settings: {  }
-    weight: 5
-    region: right
+    weight: 4
+    region: content
   field_skills:
     type: string
     label: inline
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 4
-    region: right
+    weight: 3
+    region: content
 hidden:
   addtoany: true
   field_image: true
@@ -151,5 +141,6 @@ hidden:
   field_landing_page_backgro_media: true
   field_landing_page_background: true
   field_logo: true
+  field_meta_tags: true
   field_project_images: true
   links: true
