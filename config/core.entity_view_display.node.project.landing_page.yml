@@ -1,6 +1,6 @@
 uuid: ebb2cef4-a432-4ab2-abef-8a409015ab5f
 langcode: en
-status: false
+status: true
 dependencies:
   config:
     - core.entity_view_mode.node.landing_page
@@ -15,6 +15,7 @@ dependencies:
     - field.field.node.project.field_skills
     - node.type.project
   module:
+    - fences
     - text
     - user
 id: node.project.landing_page
@@ -27,18 +28,36 @@ content:
     label: hidden
     settings:
       trim_length: 600
-    third_party_settings: {  }
-    weight: 1
-    region: left
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_items_wrapper_tag: none
+        fences_field_items_wrapper_classes: ''
+        fences_field_item_tag: div
+        fences_field_item_classes: ''
+        fences_label_tag: div
+        fences_label_classes: ''
+    weight: 0
+    region: content
   field_landing_page_backgro_media:
     type: entity_reference_entity_view
     label: hidden
     settings:
       view_mode: project_landing_page
       link: false
-    third_party_settings: {  }
-    weight: 2
-    region: right
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_items_wrapper_tag: none
+        fences_field_items_wrapper_classes: ''
+        fences_field_item_tag: div
+        fences_field_item_classes: ''
+        fences_label_tag: div
+        fences_label_classes: ''
+    weight: 1
+    region: content
 hidden:
   field_date: true
   field_image_media: true

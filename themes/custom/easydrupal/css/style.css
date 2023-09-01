@@ -2912,7 +2912,7 @@ p:last-child,
 }
 
 .field--type-text-with-summary ul,
-.field-name-body ul,
+.field--name-body ul,
 .cke_editable ul {
   list-style: none;
   padding: 0 0 0 30px;
@@ -2921,14 +2921,14 @@ p:last-child,
 }
 
 .field--type-text-with-summary ul li,
-.field-name-body ul li,
+.field--name-body ul li,
 .cke_editable ul li {
   padding-left: 1em;
   text-indent: -.7em;
 }
 
 .field--type-text-with-summary ul li:before,
-.field-name-body ul li:before,
+.field--name-body ul li:before,
 .cke_editable ul li:before {
   content: "\f00c";
   color: #81a5bf;

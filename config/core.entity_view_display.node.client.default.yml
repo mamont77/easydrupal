@@ -7,7 +7,6 @@ dependencies:
     - field.field.node.client.field_meta_tags
     - node.type.client
   module:
-    - metatag
     - user
 id: node.client.default
 targetEntityType: node
@@ -23,17 +22,7 @@ content:
     third_party_settings: {  }
     weight: 0
     region: content
-  field_meta_tags:
-    type: metatag_empty_formatter
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    weight: 2
-    region: content
-  links:
-    settings: {  }
-    third_party_settings: {  }
-    weight: 1
-    region: content
 hidden:
   addtoany: true
+  field_meta_tags: true
+  links: true

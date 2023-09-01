@@ -12,6 +12,7 @@ dependencies:
     - field.field.node.landingpage.field_projects
     - node.type.landingpage
   module:
+    - fences
     - metatag
     - user
 id: node.landingpage.default
@@ -25,45 +26,79 @@ content:
     settings:
       view_mode: landing_page
       link: false
-    third_party_settings: {  }
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_items_wrapper_tag: none
+        fences_field_items_wrapper_classes: ''
+        fences_field_item_tag: div
+        fences_field_item_classes: ''
+        fences_label_tag: div
+        fences_label_classes: ''
     weight: 0
-    region: ds_content
+    region: content
   field_articles:
     type: entity_reference_entity_view
     label: above
     settings:
       view_mode: landing_page
       link: false
-    third_party_settings: {  }
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_items_wrapper_tag: none
+        fences_field_items_wrapper_classes: ''
+        fences_field_item_tag: div
+        fences_field_item_classes: ''
+        fences_label_tag: div
+        fences_label_classes: ''
     weight: 3
-    region: ds_content
+    region: content
   field_clients:
     type: entity_reference_entity_view
     label: above
     settings:
       view_mode: default
-      link: false
+      link: true
     third_party_settings: {  }
     weight: 2
-    region: ds_content
+    region: content
   field_contact_me:
-    type: entity_reference_entity_view
+    type: entity_reference_entity_id
     label: above
-    settings:
-      view_mode: default
-      link: false
-    third_party_settings: {  }
+    settings: {  }
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_items_wrapper_tag: none
+        fences_field_items_wrapper_classes: ''
+        fences_field_item_tag: div
+        fences_field_item_classes: ''
+        fences_label_tag: div
+        fences_label_classes: ''
     weight: 5
-    region: ds_content
+    region: content
   field_feedback:
     type: entity_reference_entity_view
     label: above
     settings:
       view_mode: landing_page
       link: false
-    third_party_settings: {  }
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_items_wrapper_tag: none
+        fences_field_items_wrapper_classes: ''
+        fences_field_item_tag: div
+        fences_field_item_classes: ''
+        fences_label_tag: div
+        fences_label_classes: ''
     weight: 4
-    region: ds_content
+    region: content
   field_meta_tags:
     type: metatag_empty_formatter
     label: above
@@ -77,9 +112,18 @@ content:
     settings:
       view_mode: landing_page
       link: false
-    third_party_settings: {  }
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_items_wrapper_tag: none
+        fences_field_items_wrapper_classes: ''
+        fences_field_item_tag: div
+        fences_field_item_classes: ''
+        fences_label_tag: div
+        fences_label_classes: ''
     weight: 1
-    region: ds_content
+    region: content
 hidden:
   addtoany: true
   links: true

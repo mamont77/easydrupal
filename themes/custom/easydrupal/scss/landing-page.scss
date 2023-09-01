@@ -190,11 +190,15 @@ $input-font-style-placeholder: italic;
       background-color: #81a5bf;
     }
 
-    h3 a {
-      color: #293749;
+    h3 {
+      margin-bottom: 15px;
+
+      a {
+        color: #293749;
+      }
     }
 
-    .field-name-field-landing-page-backgro-media {
+    .field--name-field-landing-page-backgro-media {
       border: 1px solid #81a5bf;
       @media screen and (min-width: 1140px) {
         background-image: url(../images/devices/cs-imac-frame-small.png);
@@ -213,7 +217,7 @@ $input-font-style-placeholder: italic;
       max-height: 299px;
     }
 
-    .field-name-body {
+    .field--name-body {
       font-size: 18px;
       line-height: 24px;
       text-align: justify;
@@ -239,7 +243,7 @@ $input-font-style-placeholder: italic;
       background-color: #81a5bf;
     }
 
-    .field-name-field-image-media {
+    .field--name-field-image-media {
       text-align: center;
       @media (min-width: 768px) {
         //text-align: initial;
@@ -270,11 +274,11 @@ $input-font-style-placeholder: italic;
       color: #293749;
     }
 
-    .field-name-node-title {
+    .field--name-node-title {
       margin-bottom: 15px;
     }
 
-    .field-name-field-image-media {
+    .field--name-field-image-media {
       float: left;
       margin: 0 15px 15px 0;
 
@@ -285,7 +289,7 @@ $input-font-style-placeholder: italic;
       }
     }
 
-    .field-name-body {
+    .field--name-body {
       text-align: left;
       max-height: 600px;
       padding-right: 15px;
@@ -297,7 +301,7 @@ $input-font-style-placeholder: italic;
   }
 
   /** Feedback **/
-  .feedback {
+  .section.feedback {
     background: url(../images/client-testimonials-background.jpg) bottom center;
     background-size: cover;
     background-color: #fff;
@@ -311,13 +315,10 @@ $input-font-style-placeholder: italic;
       background-color: #81a5bf;
     }
 
-    .field-name-node-title {
-      margin-bottom: 15px;
-
-      h3 {
-        font-size: 20px;
-        color: #293749;
-      }
+    h3.title {
+      font-size: 20px;
+      color: #293749;
+      margin: 0 0 15px 0;
     }
 
     .about-person {
@@ -326,6 +327,12 @@ $input-font-style-placeholder: italic;
 
       span {
         color: #6686A2;
+
+        &:not(:last-child) {
+          &:after {
+            content: "|";
+          }
+        }
       }
     }
 
@@ -338,7 +345,7 @@ $input-font-style-placeholder: italic;
     .country {
     }
 
-    .field-name-field-image-media {
+    .field--name-field-image-media {
       img {
         width: 150px;
         height: 150px;
@@ -357,10 +364,18 @@ $input-font-style-placeholder: italic;
       margin-bottom: 15px;
     }
 
-    .field-name-field-project-title {
+    .field--name-field-project-title {
       color: #293749;
 
       a {
+      }
+
+      .field__item {
+        &:not(:last-child) {
+          &:after {
+            content: ",";
+          }
+        }
       }
     }
 
@@ -497,7 +512,7 @@ $input-font-style-placeholder: italic;
     }
 
     .articles {
-      .field-name-field-image-media {
+      .field--name-field-image-media {
         float: none;
         margin-right: 0;
 
@@ -523,7 +538,7 @@ $input-font-style-placeholder: italic;
     }
 
     .articles {
-      .field-name-body {
+      .field--name-body {
         max-height: initial;
         padding-right: 0;
       }
@@ -540,7 +555,7 @@ $input-font-style-placeholder: italic;
     font-size: 14px !important;
     line-height: 16px !important;
 
-    .field-name-body, .field--name-body {
+    .field--name-body, .field--name-body {
       font-size: 14px !important;
       line-height: 16px !important;
     }

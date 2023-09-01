@@ -8,13 +8,8 @@
   'clearfix',
 ] %}
 <article{{ attributes.addClass(classes) }}>
-  {{ content.field_image_media }}
-  {{ title_prefix }}
-  {% if label and not page %}
-    <h3 {{ title_attributes.addClass('title') }}>{{ label }}</h3>
-  {% endif %}
-  {{ title_suffix }}
   <div{{ content_attributes.addClass('content') }}>
-    {{ content|without('field_image_media') }}
+    {{ content }}
+    <div class="read-more"><a href="/about-me">{{ "Read more"|t }} ></a></div>
   </div>
 </article>

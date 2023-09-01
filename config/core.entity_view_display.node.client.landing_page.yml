@@ -1,6 +1,6 @@
 uuid: f57e6ed3-2b48-4c55-b269-2e608659edea
 langcode: en
-status: true
+status: false
 dependencies:
   config:
     - core.entity_view_mode.node.landing_page
@@ -8,6 +8,7 @@ dependencies:
     - field.field.node.client.field_meta_tags
     - node.type.client
   module:
+    - fences
     - user
 id: node.client.landing_page
 targetEntityType: node
@@ -20,9 +21,18 @@ content:
     settings:
       view_mode: client_logo
       link: false
-    third_party_settings: {  }
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_items_wrapper_tag: none
+        fences_field_items_wrapper_classes: ''
+        fences_field_item_tag: div
+        fences_field_item_classes: ''
+        fences_label_tag: div
+        fences_label_classes: ''
     weight: 0
-    region: ds_content
+    region: content
 hidden:
   addtoany: true
   field_meta_tags: true

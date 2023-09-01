@@ -59,8 +59,8 @@
   border-bottom: 1px dashed #ddd;
 }
 
-.view-articles .field-name-node-title h2,
-.view-taxonomy-term .field-name-node-title h2 {
+.view-articles .field--name-node-title h2,
+.view-taxonomy-term .field--name-node-title h2 {
   margin-top: 0;
 }
 
