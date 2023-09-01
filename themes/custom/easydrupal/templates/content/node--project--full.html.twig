@@ -6,19 +6,23 @@
   not node.isPublished() ? 'is-unpublished',
   view_mode ? view_mode|clean_class,
   'clearfix',
-  'row'
 ] %}
 <article{{ attributes.addClass(classes) }}>
-  <div{{ content_attributes.addClass('content') }}>
+  <div{{ content_attributes.addClass('content').addClass('row') }}>
     {% if content.field_logo_media|field_value is not empty %}
-      <div class="col-sm-6 col-md-4 bs-region bs-region--left">
+      <div class="col-sm-6 col-md-4">
         {{ content.field_logo_media }}
       </div>
+      <div class="col-sm-6 col-md-8">
+        {{ content|without('field_logo_media', 'field_project_images_media') }}
+      </div>
+    {% else %}
+      <div class="col-sm-12">
+        {{ content|without('field_logo_media', 'field_project_images_media') }}
+      </div>
     {% endif %}
-    <div class="col-sm-6 col-md-8 bs-region bs-region--right">
-      {{ content|without('field_logo_media', 'field_project_images_media') }}
-    </div>
-    <div class="col-sm-12 bs-region bs-region--bottom">
+
+    <div class="col-sm-12">
       {{ content.field_project_images_media }}
     </div>
   </div>

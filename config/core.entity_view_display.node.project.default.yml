@@ -16,9 +16,12 @@ dependencies:
     - field.field.node.project.field_project_images_media
     - field.field.node.project.field_project_url
     - field.field.node.project.field_skills
+    - image.style.project_slider_default
     - node.type.project
+    - responsive_image.styles.project_slider
   module:
     - datetime
+    - fences
     - link
     - slick
     - text
@@ -81,10 +84,10 @@ content:
       box_media_style: ''
       loading: ''
       preload: false
-      responsive_image_style: ''
+      responsive_image_style: project_slider
       use_theme_field: false
       box_style: ''
-      image_style: ''
+      image_style: project_slider_default
       media_switch: ''
       ratio: ''
       thumbnail_style: ''
@@ -111,7 +114,16 @@ content:
       skin_dots: ''
       preserve_keys: false
       visible_items: null
-    third_party_settings: {  }
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_items_wrapper_tag: none
+        fences_field_items_wrapper_classes: ''
+        fences_field_item_tag: div
+        fences_field_item_classes: ''
+        fences_label_tag: div
+        fences_label_classes: ''
     weight: 5
     region: content
   field_project_url:

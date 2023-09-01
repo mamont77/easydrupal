@@ -18,7 +18,7 @@ plugin: 'block_content:1f1ad292-4551-4e34-a068-ee4f88f4ebb3'
 settings:
   id: 'block_content:1f1ad292-4551-4e34-a068-ee4f88f4ebb3'
   label: 'Hire Me!'
-  label_display: '0'
+  label_display: visible
   provider: block_content
   status: true
   info: ''
