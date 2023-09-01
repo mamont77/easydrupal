@@ -7,7 +7,7 @@
   'use strict';
 
   /**
-   * Makes Feedback more good.
+   * Makes Feedback better.
    *
    * @param $root_element_prefix
    */
@@ -19,13 +19,13 @@
   };
 
   /**
-   * Makes Feedback more good.
+   * Makes Feedback better.
    *
    * @param $root_element_prefix
    */
   $.makeFeedbackMoreBeautifulStep2 = function ($root_element_prefix) {
     $root_element_prefix.each(function () {
-      let $feedback_titles = $(this).find('.field-name-node-title'),
+      let $feedback_titles = $(this).find('.title'),
         $feedback_projects_about = $(this).find('.about'),
         $feedback_projects_wrapper = $(this).find('.project-info'),
         $feedback_projects_blockquotes = $(this).find('blockquote');
@@ -44,7 +44,7 @@
    * @param $root_element_prefix
    */
   $.revertFeedbackMoreBeautiful = function ($root_element_prefix) {
-    $root_element_prefix.find('.field-name-node-title').height('auto');
+    $root_element_prefix.find('.title').height('auto');
     $root_element_prefix.find('.about').height('auto');
     $root_element_prefix.find('.project-info').height('auto');
     $root_element_prefix.find('blockquote').css('height', '');

@@ -24,12 +24,8 @@
   margin-bottom: 30px;
 }
 
-.view-feedback .field-name-node-title {
-  margin-bottom: 15px;
-}
-
-.view-feedback .field-name-node-title h3 {
-  margin: 0;
+.view-feedback h3.title {
+  margin: 0 0 15px 0;
 }
 
 .view-feedback .about {
@@ -41,7 +37,11 @@
   color: #81a5bf;
 }
 
-.view-feedback .field-name-field-image-media img {
+.view-feedback .about span:not(:last-child):after {
+  content: "|";
+}
+
+.view-feedback .field--name-field-image-media img {
   width: 150px;
   height: 150px;
   border-radius: 50%;
@@ -50,7 +50,7 @@
   opacity: .8;
 }
 
-.view-feedback .field-name-field-image-media img:hover {
+.view-feedback .field--name-field-image-media img:hover {
   opacity: 1;
 }
 
@@ -64,8 +64,12 @@
   color: #81a5bf;
 }
 
-.view-feedback .field-name-field-project-title {
+.view-feedback .field--name-field-project-title {
   color: #293749;
+}
+
+.view-feedback .field--name-field-project-title > span:not(:last-child):after {
+  content: ",";
 }
 
 .view-feedback blockquote {

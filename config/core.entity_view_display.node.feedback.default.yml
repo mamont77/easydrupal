@@ -16,7 +16,7 @@ dependencies:
   module:
     - country
     - datetime
-    - metatag
+    - fences
     - text
     - user
 id: node.feedback.default
@@ -29,40 +29,51 @@ content:
     label: above
     settings: {  }
     third_party_settings: {  }
-    weight: 7
-    region: ds_content
+    weight: 6
+    region: content
   field_country_v2:
     type: country_default
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 4
-    region: ds_content
+    weight: 3
+    region: content
   field_date:
     type: datetime_default
     label: hidden
     settings:
       timezone_override: ''
       format_type: month_year
-    third_party_settings: {  }
-    weight: 5
-    region: ds_content
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_items_wrapper_tag: none
+        fences_field_items_wrapper_classes: ''
+        fences_field_item_tag: div
+        fences_field_item_classes: ''
+        fences_label_tag: div
+        fences_label_classes: ''
+    weight: 4
+    region: content
   field_image_media:
     type: entity_reference_entity_view
     label: hidden
     settings:
       view_mode: feedback_portrait
       link: false
-    third_party_settings: {  }
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_items_wrapper_tag: none
+        fences_field_items_wrapper_classes: ''
+        fences_field_item_tag: div
+        fences_field_item_classes: ''
+        fences_label_tag: div
+        fences_label_classes: ''
     weight: 0
-    region: ds_content
-  field_meta_tags:
-    type: metatag_empty_formatter
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    weight: 8
-    region: ds_content
+    region: content
   field_name:
     type: string
     label: hidden
@@ -70,28 +81,25 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     weight: 1
-    region: ds_content
+    region: content
   field_position:
     type: string
     label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 3
-    region: ds_content
+    weight: 2
+    region: content
   field_project_title:
     type: entity_reference_label
     label: hidden
     settings:
-      link: false
+      link: true
     third_party_settings: {  }
-    weight: 6
-    region: ds_content
-  links:
-    settings: {  }
-    third_party_settings: {  }
-    weight: 2
-    region: ds_content
+    weight: 5
+    region: content
 hidden:
   addtoany: true
   field_image: true
+  field_meta_tags: true
+  links: true

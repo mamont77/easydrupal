@@ -56,7 +56,7 @@ view-feedback:
     theme:
       css/view-feedback.css: { }
   js:
-    js/view-feedback..js: { }
+    js/view-feedback.js: { }
   dependencies:
     - easydrupal/framework
 
@@ -89,10 +89,10 @@ paragraph-common:
     theme:
       css/paragraph-common.css: { }
 
-paragraph-sourse-code:
+paragraph-source-code:
   css:
     theme:
-      css/paragraph-sourse-code.css: { }
+      css/paragraph-source-code.css: { }
 
 font-awesome:
   js:

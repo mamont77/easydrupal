@@ -19,12 +19,8 @@
     }
   }
 
-  .field-name-node-title {
-    margin-bottom: 15px;
-
-    h3 {
-      margin: 0;
-    }
+  h3.title {
+    margin: 0 0 15px 0;
   }
 
   .about {
@@ -33,6 +29,11 @@
 
     span {
       color: $testimonialsAboutTextColor;
+      &:not(:last-child) {
+        &:after {
+          content: "|";
+        }
+      }
     }
   }
 
@@ -45,7 +46,7 @@
   .country {
   }
 
-  .field-name-field-image-media {
+  .field--name-field-image-media {
     img {
       width: 150px;
       height: 150px;
@@ -71,10 +72,18 @@
     //font-weight: bold;
   }
 
-  .field-name-field-project-title {
+  .field--name-field-project-title {
     color: $globalLinkColor; //need for "comma".
     //font-weight: bold;
     a {
+    }
+
+    > span {
+      &:not(:last-child) {
+        &:after {
+          content: ",";
+        }
+      }
     }
   }
 
