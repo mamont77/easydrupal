@@ -9,7 +9,7 @@
 ] %}
 <article{{ attributes.addClass(classes) }}>
   <div{{ content_attributes.addClass('content').addClass('row') }}>
-    <div class="col-sm-6 bs-region bs-region--left">
+    <div class="col-sm-6">
       {{ title_prefix }}
       <h3{{ title_attributes }}>
         <a href="{{ url }}" rel="bookmark" hreflang="en">{{ label }}</a>
@@ -17,7 +17,7 @@
       {{ title_suffix }}
       {{ content|without('field_landing_page_backgro_media') }}
     </div>
-    <div class="col-sm-6 bs-region bs-region--right">
+    <div class="col-sm-6">
       {{ content.field_landing_page_backgro_media }}
     </div>
   </div>

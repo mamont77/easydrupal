@@ -64,7 +64,7 @@
   margin: 0;
 }
 
-.field--name-field-project-url a {
+.field-name-field-project-url a {
   margin-top: 12px;
   display: inline-block;
   letter-spacing: 0.03em;
@@ -76,18 +76,18 @@
   text-decoration: none;
 }
 
-.field--name-field-project-url a:after {
+.field-name-field-project-url a:after {
   font-family: 'FontAwesome';
   content: "\f35d";
   margin-left: .5rem;
 }
 
-.field--name-field-project-url a:hover, .field--name-field-project-url a:active {
+.field-name-field-project-url a:hover, .field-name-field-project-url a:active {
   background-color: #5f8dae;
 }
 
 @media screen and (max-width: 768px) {
-  .field--name-field-project-url a {
+  .field-name-field-project-url a {
     display: block;
     text-align: center;
   }
