@@ -80,7 +80,7 @@
         "drupal/sticky_sharrre_bar": "^1.5",
         "drupal/token": "^1.12",
         "drupal/twig_field_value": "^2.0",
-        "drupal/twigsuggest": "^2.0@RC",
+        "drupal/twigsuggest": "^1.0@RC",
         "drupal/upgrade_status": "^4.0",
         "drupal/views_bootstrap": "3.9",
         "drupal/views_infinite_scroll": "^2.0",
