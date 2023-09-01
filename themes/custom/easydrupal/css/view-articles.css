@@ -64,8 +64,8 @@
   margin-top: 0;
 }
 
-.view-articles .field-name-field-image-media img,
-.view-taxonomy-term .field-name-field-image-media img {
+.view-articles .field--name-field-image-media img,
+.view-taxonomy-term .field--name-field-image-media img {
   width: 100%;
   border: 1px solid #eee;
   margin: 0 auto;
@@ -79,8 +79,8 @@
 }
 
 @media (min-width: 768px) {
-  .view-articles .field-name-field-image-media,
-  .view-taxonomy-term .field-name-field-image-media {
+  .view-articles .field--name-field-image-media,
+  .view-taxonomy-term .field--name-field-image-media {
     max-width: 200px;
     float: left;
     margin: 0 15px 15px 0;

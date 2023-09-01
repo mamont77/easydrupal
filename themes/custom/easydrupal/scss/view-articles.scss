@@ -25,7 +25,7 @@
     }
   }
 
-  .field-name-field-image-media {
+  .field--name-field-image-media {
     img {
       width: 100%;
       border: 1px solid $imageBorderColor;
@@ -45,7 +45,7 @@
 @media (min-width: 768px) {
   .view-articles,
   .view-taxonomy-term {
-    .field-name-field-image-media {
+    .field--name-field-image-media {
       max-width: 200px;
       float: left;
       margin: 0 15px 15px 0;
