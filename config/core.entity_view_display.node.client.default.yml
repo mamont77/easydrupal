@@ -3,7 +3,6 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.client.field_image
     - field.field.node.client.field_image_media
     - field.field.node.client.field_meta_tags
     - node.type.client
@@ -38,4 +37,3 @@ content:
     region: content
 hidden:
   addtoany: true
-  field_image: true

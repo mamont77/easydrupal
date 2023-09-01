@@ -6,7 +6,6 @@ dependencies:
     - field.field.node.feedback.body
     - field.field.node.feedback.field_country_v2
     - field.field.node.feedback.field_date
-    - field.field.node.feedback.field_image
     - field.field.node.feedback.field_image_media
     - field.field.node.feedback.field_meta_tags
     - field.field.node.feedback.field_name
@@ -100,6 +99,5 @@ content:
     region: content
 hidden:
   addtoany: true
-  field_image: true
   field_meta_tags: true
   links: true

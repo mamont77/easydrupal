@@ -4,7 +4,6 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.landing_page
-    - field.field.node.client.field_image
     - field.field.node.client.field_image_media
     - field.field.node.client.field_meta_tags
     - node.type.client
@@ -26,6 +25,5 @@ content:
     region: ds_content
 hidden:
   addtoany: true
-  field_image: true
   field_meta_tags: true
   links: true
