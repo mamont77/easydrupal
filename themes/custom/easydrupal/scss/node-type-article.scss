@@ -63,7 +63,7 @@
   }
 }
 
-.field-name-field-image-media {
+.field--name-field-image-media {
   @media (min-width: 768px) {
       float: left;
       margin: 0 15px 15px 0;
@@ -102,7 +102,7 @@
   margin-top: 15px;
   clear: both;
 
-  .field--label {
+  .field__label {
     font-size: 23px;
     text-transform: uppercase;
     color: $h2Color;

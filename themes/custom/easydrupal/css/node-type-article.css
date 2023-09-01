@@ -86,7 +86,7 @@
   display: block;
 }
 
-.field-name-field-image-media img {
+.field--name-field-image-media img {
   width: 100%;
   margin: 0 auto;
   border: 1px solid #eee;
@@ -97,7 +97,7 @@
   clear: both;
 }
 
-.field--name-field-comments .field--label {
+.field--name-field-comments .field__label {
   font-size: 23px;
   text-transform: uppercase;
   color: #293749;
@@ -129,7 +129,7 @@
 }
 
 @media (min-width: 768px) {
-  .field-name-field-image-media {
+  .field--name-field-image-media {
     float: left;
     margin: 0 15px 15px 0;
   }

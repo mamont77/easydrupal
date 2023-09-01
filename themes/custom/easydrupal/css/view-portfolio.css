@@ -36,7 +36,6 @@
           align-items: center;
   background-color: transparent;
   -webkit-transition: 150ms ease background-color;
-  -o-transition: 150ms ease background-color;
   transition: 150ms ease background-color;
 }
 
@@ -47,10 +46,8 @@
 
 .view-portfolio img {
   -webkit-transform: scale(1);
-      -ms-transform: scale(1);
           transform: scale(1);
   -webkit-transition: 150ms ease transform;
-  -o-transition: 150ms ease transform;
   transition: 150ms ease transform;
   width: 100%;
 }
@@ -64,7 +61,6 @@
   opacity: 0;
   text-align: center;
   -webkit-transition: 150ms ease opacity;
-  -o-transition: 150ms ease opacity;
   transition: 150ms ease opacity;
 }
 
@@ -81,7 +77,6 @@
 
 .view-portfolio a:hover img {
   -webkit-transform: rotate(-2deg) scale(1.05);
-      -ms-transform: rotate(-2deg) scale(1.05);
           transform: rotate(-2deg) scale(1.05);
 }
 
