@@ -65,9 +65,10 @@
 
 .field--name-field-image-media {
   @media (min-width: 768px) {
-      float: left;
-      margin: 0 15px 15px 0;
+    float: left;
+    margin: 0 15px 15px 0;
   }
+
   img {
     width: 100%;
     margin: 0 auto;
