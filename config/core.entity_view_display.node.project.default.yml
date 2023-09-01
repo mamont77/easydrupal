@@ -131,7 +131,16 @@ content:
     label: inline
     settings:
       link_to_entity: false
-    third_party_settings: {  }
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_items_wrapper_tag: ul
+        fences_field_items_wrapper_classes: skills
+        fences_field_item_tag: li
+        fences_field_item_classes: skill
+        fences_label_tag: div
+        fences_label_classes: ''
     weight: 3
     region: content
 hidden:

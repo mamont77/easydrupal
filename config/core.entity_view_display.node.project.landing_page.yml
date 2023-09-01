@@ -1,6 +1,6 @@
 uuid: ebb2cef4-a432-4ab2-abef-8a409015ab5f
 langcode: en
-status: true
+status: false
 dependencies:
   config:
     - core.entity_view_mode.node.landing_page

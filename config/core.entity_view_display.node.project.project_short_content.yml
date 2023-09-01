@@ -1,6 +1,6 @@
 uuid: 6bb4b4bd-ad2e-45f6-9a52-1f951b7cd851
 langcode: en
-status: true
+status: false
 dependencies:
   config:
     - core.entity_view_mode.node.project_short_content
