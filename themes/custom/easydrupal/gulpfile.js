@@ -71,7 +71,7 @@ gulp.task('sass', function () {
         sort: true
       }),
       autoprefixer({
-        overrideBrowserslist: ['last 3 versions']
+        overrideBrowserslist: ['last 2 versions']
       })]))
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest('./css'));
