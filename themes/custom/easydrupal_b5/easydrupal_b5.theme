@@ -3,4 +3,102 @@
 /**
  * @file
  * easyDrupal B5 theme file.
+ *
+ * Place your custom PHP code in this file.
  */
+
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements template_preprocess_page().
+ */
+function easydrupal_b5_preprocess_page(&$variables): void {
+  if (\Drupal::service('path.matcher')->isFrontPage()) {
+    $variables['#attached']['library'][] = 'easydrupal_b5/landing-page';
+  }
+
+  if (isset($variables['node'])) {
+    /** @var \Drupal\node\NodeInterface $node */
+    $node = $variables['node'];
+
+    // Check content type.
+    switch ($node->getType()) {
+      case 'article':
+        $variables['#attached']['library'][] = 'easydrupal_b5/node-type-article';
+        $variables['#attached']['library'][] = 'easydrupal_b5/geshifilter';
+        $variables['#attached']['library'][] = 'easydrupal_b5/view-about-author';
+
+        break;
+
+      case 'page':
+        $variables['#attached']['library'][] = 'easydrupal_b5/node-type-page';
+
+        break;
+
+      case 'project':
+        $variables['#attached']['library'][] = 'easydrupal_b5/node-type-project';
+        $variables['#attached']['library'][] = 'easydrupal_b5/slick';
+
+        break;
+    }
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function easydrupal_b5_theme($existing, $type, $theme, $path): array {
+  return [
+    'contact_message_feedback_contact_form_form' => [
+      'render element' => 'form',
+    ],
+  ];
+}
+
+/**
+ * Implements hook_form_alter().
+ *
+ * @param $form
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ * @param $form_id
+ */
+function easydrupal_b5_form_contact_message_feedback_contact_form_form_alter(&$form, FormStateInterface $form_state, $form_id): void {
+
+  // Checking a field type because it is markup for logged user,
+  // and we want a placeholder.
+  if (isset($form['name']) && $form['name']['#type'] == 'textfield') {
+    $form['name']['#attributes']['placeholder'][] = $form['name']['#title'] . ' *';
+    unset($form['name']['#title']);
+  }
+
+  if (isset($form['mail']) && $form['mail']['#type'] == 'email') {
+    $form['mail']['#attributes']['placeholder'][] = t('Your email') . ' *';
+    unset($form['mail']['#title']);
+  }
+
+  if (isset($form['subject']['widget'])) {
+    $form['subject']['widget'][0]['value']['#attributes']['placeholder'][] = $form['subject']['widget'][0]['#title'] . ' *';
+    unset($form['subject']['widget'][0]['value']['#title']);
+  }
+
+  if (isset($form['message']['widget'])) {
+    $form['message']['widget'][0]['value']['#attributes']['placeholder'][] = t('Message') . ' *';
+    unset($form['message']['widget'][0]['value']['#title']);
+  }
+
+}
+
+/**
+ * Implements hook_form_alter().
+ *
+ * @param $form
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ * @param $form_id
+ */
+function easydrupal_b5_form_user_login_form_alter(&$form, FormStateInterface $form_state, $form_id): void {
+  $form['name']['#attributes']['placeholder'][] = $form['name']['#title'] . ' *';
+  unset($form['name']['#title'], $form['name']['#description']);
+
+  $form['pass']['#attributes']['placeholder'][] = $form['pass']['#title'] . ' *';
+  unset($form['pass']['#title'], $form['pass']['#description']);
+}

@@ -8777,10 +8777,6 @@ em.placeholder {
   max-width: 100% !important;
 }
 
-p {
-  border: 1px solid red;
-}
-
 @media (min-width: 576px) {
   .container, .container-sm {
     max-width: 540px;
