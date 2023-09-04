@@ -1,0 +1,30 @@
+uuid: d3a6df83-6ede-4799-8598-ef637e4e3e77
+langcode: en
+status: true
+dependencies:
+  module:
+    - addtoany
+    - system
+  theme:
+    - easydrupal_b5
+id: easydrupal_b5_addtoanysharebuttons
+theme: easydrupal_b5
+region: content
+weight: -7
+provider: null
+plugin: addtoany_block
+settings:
+  id: addtoany_block
+  label: 'AddToAny share buttons'
+  label_display: visible
+  provider: addtoany
+  context_mapping: {  }
+  link_url: ''
+  link_title: ''
+  buttons_size: ''
+  addtoany_html: ''
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: '/articles/*'

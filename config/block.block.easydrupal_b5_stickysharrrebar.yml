@@ -1,0 +1,37 @@
+uuid: 57519a28-a210-4cc3-bdf9-7a2d955c4b16
+langcode: en
+status: true
+dependencies:
+  module:
+    - sticky_sharrre_bar
+    - system
+  theme:
+    - easydrupal_b5
+id: easydrupal_b5_stickysharrrebar
+theme: easydrupal_b5
+region: navigation
+weight: -6
+provider: null
+plugin: sticky_sharrre_bar_block
+settings:
+  id: sticky_sharrre_bar_block
+  label: 'Sticky sharrre bar'
+  label_display: '0'
+  provider: sticky_sharrre_bar
+  providers:
+    googlePlus: googlePlus
+    facebook: facebook
+    twitter: twitter
+    linkedin: linkedin
+    digg: 0
+    delicious: 0
+    stumbleupon: 0
+    pinterest: 0
+  use_module_css: 1
+  use_custom_css_selector: '#navbar'
+  use_google_analytics_tracking: 1
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: /node/63

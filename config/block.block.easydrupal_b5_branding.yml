@@ -1,0 +1,25 @@
+uuid: e64861c3-81ba-410a-93af-b7adb529603e
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - easydrupal_b5
+_core:
+  default_config_hash: repSOtJJzEbjtv8EevqNa49N9kN8bkEEWG3joRMb1qY
+id: easydrupal_b5_branding
+theme: easydrupal_b5
+region: navigation
+weight: -5
+provider: null
+plugin: system_branding_block
+settings:
+  id: system_branding_block
+  label: 'Site branding'
+  label_display: '0'
+  provider: system
+  use_site_logo: true
+  use_site_name: true
+  use_site_slogan: false
+visibility: {  }

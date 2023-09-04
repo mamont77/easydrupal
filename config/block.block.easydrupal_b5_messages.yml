@@ -1,0 +1,20 @@
+uuid: 2eb3135a-dea3-441e-a658-2f0b59eacc38
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - easydrupal_b5
+id: easydrupal_b5_messages
+theme: easydrupal_b5
+region: header
+weight: -1
+provider: null
+plugin: system_messages_block
+settings:
+  id: system_messages_block
+  label: Messages
+  label_display: '0'
+  provider: system
+visibility: {  }

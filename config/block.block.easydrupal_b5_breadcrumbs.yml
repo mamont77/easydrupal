@@ -1,0 +1,29 @@
+uuid: 95e73931-dc46-496d-aa7e-a8bb80633290
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - system
+  theme:
+    - easydrupal_b5
+id: easydrupal_b5_breadcrumbs
+theme: easydrupal_b5
+region: header
+weight: -3
+provider: null
+plugin: system_breadcrumb_block
+settings:
+  id: system_breadcrumb_block
+  label: Breadcrumbs
+  label_display: '0'
+  provider: system
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      article: article
+      project: project

@@ -1,0 +1,20 @@
+uuid: 097ad78e-117a-4deb-a893-b689eaec22c2
+langcode: en
+status: true
+dependencies:
+  module:
+    - help
+  theme:
+    - easydrupal_b5
+id: easydrupal_b5_help
+theme: easydrupal_b5
+region: help
+weight: 0
+provider: null
+plugin: help_block
+settings:
+  id: help_block
+  label: Help
+  label_display: '0'
+  provider: help
+visibility: {  }

@@ -128,4 +128,7 @@ theme:
   bootstrap: 0
   easydrupal: 0
   claro: 0
+  stable9: 0
+  bootstrap5: 0
+  easydrupal_b5: 0
 profile: standard

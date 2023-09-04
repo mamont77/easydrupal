@@ -1,0 +1,29 @@
+uuid: 2cc7a0cc-45ae-4d5e-bd99-3a0ce796fef6
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.main
+  module:
+    - system
+  theme:
+    - easydrupal_b5
+id: easydrupal_b5_mainnavigation
+theme: easydrupal_b5
+region: navigation_collapsible
+weight: 0
+provider: null
+plugin: 'system_menu_block:main'
+settings:
+  id: 'system_menu_block:main'
+  label: 'Main navigation'
+  label_display: '0'
+  provider: system
+  level: 1
+  depth: 2
+  expand_all_items: false
+visibility:
+  request_path:
+    id: request_path
+    negate: true
+    pages: '<front>'
