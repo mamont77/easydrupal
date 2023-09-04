@@ -5,19 +5,23 @@ core_version_requirement: '^9.4 || ^10'
 'base theme': bootstrap5
 libraries:
   - easydrupal_b5/global-styling
+  - easydrupal_b5/font-awesome
 ckeditor_stylesheets:
-  - css/style.css
+  - dist/css/style.css
 ckeditor5-stylesheets:
-  - css/ck5style.css
+  - dist/css/ck5style.css
+  - //use.fontawesome.com/releases/v6.4.2/css/all.css
 regions:
-  header: Header
-  nav_branding: 'Navigation branding region'
-  nav_main: 'Main navigation region'
-  nav_additional: 'Additional navigation region (eg search form, social icons, etc)'
-  breadcrumb: Breadcrumbs
-  content: 'Main content'
-  sidebar_first: 'Sidebar first'
-  sidebar_second: 'Sidebar second'
-  footer: Footer
+  navigation: 'Navigation'
+  navigation_collapsible: 'Navigation (Collapsible)'
+  header: 'Top Bar'
+  highlighted: 'Highlighted'
+  help: 'Help'
+  content: 'Content'
+  sidebar_first: 'Primary'
+  sidebar_second: 'Secondary'
+  footer: 'Footer'
+  page_top: 'Page top'
+  page_bottom: 'Page bottom'
 libraries-override:
   bootstrap5/global-styling: false

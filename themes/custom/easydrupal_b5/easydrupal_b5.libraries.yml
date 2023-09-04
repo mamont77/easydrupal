@@ -2,3 +2,94 @@ global-styling:
   css:
     theme:
       dist/css/style.css: {}
+      '//fonts.googleapis.com/css?family=Roboto+Condensed:700|Roboto:400,400i,700&display=swap': { type: external }
+  js:
+    js/global-scripts.js: { }
+  dependencies:
+    - core/drupal
+    - core/jquery
+    - core/once
+geshifilter:
+  css:
+    theme:
+      css/geshifilter.generate_css.css: { }
+
+landing-page:
+  css:
+    theme:
+      css/landing-page.css: { }
+  js:
+    js/landing-page.js: { }
+  dependencies:
+    - easydrupal_b5/global-styling
+
+view-about-author:
+  css:
+    theme:
+      css/view-about-author.css: { }
+
+view-portfolio:
+  css:
+    theme:
+      css/view-portfolio.css: { }
+
+view-articles:
+  css:
+    theme:
+      css/view-articles.css: { }
+
+view-feedback:
+  css:
+    theme:
+      css/view-feedback.css: { }
+  js:
+    js/view-feedback.js: { }
+  dependencies:
+    - easydrupal_b5/global-styling
+
+view-tags:
+  css:
+    theme:
+      css/view-tags.css: { }
+
+node-type-article:
+  css:
+    theme:
+      css/node-type-article.css: { }
+  js:
+    js/node-type-article.js: { }
+  dependencies:
+    - easydrupal_b5/global-styling
+
+node-type-page:
+  css:
+    theme:
+      css/node-type-page.css: { }
+
+node-type-project:
+  css:
+    theme:
+      css/node-type-project.css: { }
+
+paragraph-common:
+  css:
+    theme:
+      css/paragraph-common.css: { }
+
+paragraph-source-code:
+  css:
+    theme:
+      css/paragraph-source-code.css: { }
+
+font-awesome:
+  js:
+    'https://kit.fontawesome.com/91500d63a4.js':
+      type: external
+      minified: true
+      attributes:
+        crossorigin: anonymous
+
+slick:
+  css:
+    theme:
+      css/slick.css: { }
