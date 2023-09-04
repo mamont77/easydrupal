@@ -1,0 +1,24 @@
+{{ attach_library('core/drupal.dialog.ajax') }}
+{% set classes = [
+  node.bundle|clean_class,
+  node.isPromoted() ? 'is-promoted',
+  node.isSticky() ? 'is-sticky',
+  not node.isPublished() ? 'is-unpublished',
+  view_mode ? view_mode|clean_class,
+  'clearfix',
+] %}
+<article{{ attributes.addClass(classes) }}>
+  <div{{ content_attributes.addClass('content').addClass('row') }}>
+    <div class="col-sm-6">
+      {{ title_prefix }}
+      <h3{{ title_attributes }}>
+        <a href="{{ url }}" rel="bookmark" hreflang="en">{{ label }}</a>
+      </h3>
+      {{ title_suffix }}
+      {{ content|without('field_landing_page_backgro_media') }}
+    </div>
+    <div class="col-sm-6">
+      {{ content.field_landing_page_backgro_media }}
+    </div>
+  </div>
+</article>

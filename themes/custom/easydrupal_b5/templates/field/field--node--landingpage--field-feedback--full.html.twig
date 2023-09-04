@@ -1,0 +1,16 @@
+<div class="section feedback" id="feedback">
+  <div class="container">
+    <div class="title-wrapper">
+      <h2 class="section-title animated field-label-above">{{ label }}</h2>
+      <div class="line"></div>
+    </div>
+    <div class="row">
+      {% for item in items %}
+        <div class="col-sm-4">
+          {{ item.content }}
+        </div>
+      {% endfor %}
+    </div>
+    <div class="read-more"><a href="/feedback">{{ "Look other feedback"|t }} ></a></div>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+{% set view_node = fields.view_node.content|render|striptags|trim %}
+
+<a href="{{ view_node }}" rel="bookmark">
+  <div class="wrapper">
+    <div class="image">
+      {{ fields.field_image_media.content }}
+    </div>
+    <div class="field-flex-wrap">
+      <div class="description">
+        {{ fields.body.content }}
+      </div>
+    </div>
+  </div>
+  <h3 class="title">{{ fields.title.content }}</h3>
+</a>

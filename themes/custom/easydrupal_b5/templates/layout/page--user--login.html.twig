@@ -1,0 +1,73 @@
+{% set container = theme.settings.fluid_container ? 'container-fluid' : 'container' %}
+{# Navbar #}
+{% if page.navigation or page.navigation_collapsible %}
+  {% block navbar %}
+    {% set navbar_classes = [
+      'navbar',
+      theme.settings.navbar_inverse ? 'navbar-inverse' : 'navbar-default',
+      theme.settings.navbar_position ? 'navbar-' ~ theme.settings.navbar_position|clean_class : container,
+    ] %}
+    <header{{ navbar_attributes.addClass(navbar_classes) }} id="navbar" role="banner">
+      {% if not navbar_attributes.hasClass('container') %}
+      <div class="{{ container }}">
+        {% endif %}
+        <div class="navbar-header">
+          {{ page.navigation }}
+        </div>
+        {% if not navbar_attributes.hasClass('container') %}
+      </div>
+      {% endif %}
+    </header>
+  {% endblock %}
+{% endif %}
+
+{# Main #}
+{% block main %}
+  <div role="main" class="main-container user-login-page {{ container }} js-quickedit-main-content">
+    <div class="row">
+
+      {# Header #}
+      {% if page.header %}
+        {% block header %}
+          <div class="col-sm-12" role="heading">
+            {{ page.header }}
+          </div>
+        {% endblock %}
+      {% endif %}
+
+      {# Content #}
+      {% set content_classes = [
+        page.sidebar_first and page.sidebar_second ? 'col-sm-6',
+        page.sidebar_first and page.sidebar_second is empty ? 'col-sm-9',
+        page.sidebar_second and page.sidebar_first is empty ? 'col-sm-9',
+        page.sidebar_first is empty and page.sidebar_second is empty ? 'col-sm-12'
+      ] %}
+      <section{{ content_attributes.addClass(content_classes) }}>
+
+        {# Highlighted #}
+        {% if page.highlighted %}
+          {% block highlighted %}
+            <div class="highlighted">{{ page.highlighted }}</div>
+          {% endblock %}
+        {% endif %}
+
+        {# Content #}
+        {% block content %}
+          <span id="main-content" tabindex="-1"></span>
+          {{ page.content }}
+        {% endblock %}
+      </section>
+
+    </div>
+  </div>
+{% endblock %}
+
+{% if page.footer %}
+  {% block footer %}
+    <footer class="footer" role="contentinfo">
+      <div class=" {{ container }}">
+        {{ page.footer }}
+      </div>
+    </footer>
+  {% endblock %}
+{% endif %}
