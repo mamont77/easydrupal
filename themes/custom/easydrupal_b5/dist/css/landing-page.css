@@ -1,6 +1,6 @@
 .page-node-type-landingpage {
-  font-size: 16px;
-  line-height: 22px;
+  font-size: 1.6rem;
+  line-height: 2.2rem;
   font-weight: 300;
   /** About **/
   /** Projects **/
@@ -19,8 +19,8 @@
 
 .page-node-type-landingpage .section {
   text-align: center;
-  padding-top: 50px;
-  padding-bottom: 50px;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
   /* Style for our header texts */
   /*
     ul {
@@ -47,28 +47,28 @@
 
 .page-node-type-landingpage .section .title-wrapper {
   max-width: 350px;
-  margin: 0 auto 15px auto;
+  margin: 0 auto 1.5rem auto;
 }
 
 .page-node-type-landingpage .section h2 {
-  font-size: 34px;
+  font-size: 3.4rem;
   padding: 0;
   text-transform: uppercase;
   color: #6686A2;
 }
 
 .page-node-type-landingpage .section h3 {
-  font-size: 26px;
+  font-size: 2.6rem;
 }
 
 .page-node-type-landingpage .section .line {
   width: 100%;
   height: 4px;
-  margin: 10px auto;
+  margin: 1rem auto;
 }
 
 .page-node-type-landingpage .section .read-more {
-  margin: 15px 0;
+  margin: 1.5rem 0;
   text-align: right;
 }
 
@@ -99,14 +99,14 @@
   text-align: left;
   margin: 0 auto;
   max-height: 600px;
-  font-size: 18px;
-  line-height: 24px;
+  font-size: 1.8rem;
+  line-height: 2.4rem;
 }
 
 .page-node-type-landingpage .about .field--name-body img {
   border-radius: 50%;
   border: 8px solid #eee;
-  margin: 0 30px 15px 0;
+  margin: 0 3rem 1.5rem 0;
   width: 216px;
   height: 216px;
 }
@@ -130,7 +130,7 @@
 }
 
 .page-node-type-landingpage .projects h3 {
-  margin-bottom: 15px;
+  margin-bottom: 1.5rem;
 }
 
 .page-node-type-landingpage .projects h3 a {
@@ -148,8 +148,8 @@
 }
 
 .page-node-type-landingpage .projects .field--name-body {
-  font-size: 18px;
-  line-height: 24px;
+  font-size: 1.8rem;
+  line-height: 2.4rem;
   text-align: justify;
 }
 
@@ -200,12 +200,12 @@
 }
 
 .page-node-type-landingpage .articles .field--name-node-title {
-  margin-bottom: 15px;
+  margin-bottom: 1.5rem;
 }
 
 .page-node-type-landingpage .articles .field--name-field-image-media {
   float: left;
-  margin: 0 15px 15px 0;
+  margin: 0 1.5rem 1.5rem 0;
 }
 
 .page-node-type-landingpage .articles .field--name-field-image-media img {
@@ -217,7 +217,7 @@
 .page-node-type-landingpage .articles .field--name-body {
   text-align: left;
   max-height: 600px;
-  padding-right: 15px;
+  padding-right: 1.5rem;
 }
 
 .page-node-type-landingpage .articles .read-more a {
@@ -240,13 +240,13 @@
 }
 
 .page-node-type-landingpage .section.feedback h3.title {
-  font-size: 20px;
+  font-size: 2rem;
   color: #293749;
-  margin: 0 0 15px 0;
+  margin: 0 0 1.5rem 0;
 }
 
 .page-node-type-landingpage .section.feedback .about-person {
-  margin-bottom: 15px;
+  margin-bottom: 1.5rem;
   color: #6686A2;
 }
 
@@ -261,9 +261,9 @@
 .page-node-type-landingpage .section.feedback .field--name-field-image-media img {
   width: 150px;
   height: 150px;
-  margin: 0 auto 15px auto;
+  margin: 0 auto 1.5rem auto;
   border-radius: 50%;
-  border: 8px solid #eee;
+  border: .8rem solid #eee;
   opacity: .8;
 }
 
@@ -272,7 +272,7 @@
 }
 
 .page-node-type-landingpage .section.feedback .project-info {
-  margin-bottom: 15px;
+  margin-bottom: 1.5rem;
 }
 
 .page-node-type-landingpage .section.feedback .field--name-field-project-title {
@@ -284,9 +284,9 @@
 }
 
 .page-node-type-landingpage .section.feedback blockquote {
-  border-left: 1px solid #bbb;
+  border-left: .1rem solid #bbb;
   font-style: italic;
-  padding: 0.5em 10px;
+  padding: 0.5em 1rem;
   text-align: justify;
   margin: 0;
   font-size: inherit;
@@ -323,7 +323,7 @@
 
 @media screen and (min-width: 993px) {
   .page-node-type-landingpage .main-container.container {
-    padding: 79px 0 0 0;
+    padding: 7.9rem 0 0 0;
     width: 100%;
     margin-left: -15px;
     margin-right: -15px;
@@ -341,7 +341,7 @@
     background-position: center top;
     height: 440px;
     width: 555px;
-    padding: 19px 31px 0 31px;
+    padding: 1.9rem 3.1rem 0 3.1rem;
     border: none;
   }
 }
@@ -362,13 +362,13 @@
   .page-node-type-landingpage .about .field--name-body img {
     float: none;
     display: block;
-    margin: 0 auto 15px auto;
+    margin: 0 auto 1.5rem auto;
   }
 }
 
 @media screen and (max-width: 992px) {
   .page-node-type-landingpage .main-container.container {
-    padding-top: 79px;
+    padding-top: 7.9rem;
     padding-bottom: 0;
     width: 100%;
   }
@@ -400,21 +400,21 @@
 
 @media screen and (max-width: 768px) {
   .page-node-type-landingpage {
-    font-size: 14px !important;
-    line-height: 16px !important;
+    font-size: 1.4rem !important;
+    line-height: 1.6rem !important;
   }
   .page-node-type-landingpage .field--name-body, .page-node-type-landingpage .field--name-body {
-    font-size: 14px !important;
-    line-height: 16px !important;
+    font-size: 1.4rem !important;
+    line-height: 1.6rem !important;
   }
   .page-node-type-landingpage .title-wrapper {
     max-width: 80%;
   }
   .page-node-type-landingpage .section h2 {
-    font-size: 28px !important;
+    font-size: 2.8rem !important;
   }
   .page-node-type-landingpage .section h3 {
-    font-size: 22px !important;
+    font-size: 2.2rem !important;
   }
   .page-node-type-landingpage .about .container {
     width: 100%;
