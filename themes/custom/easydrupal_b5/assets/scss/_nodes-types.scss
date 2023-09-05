@@ -1,0 +1,58 @@
+@charset "UTF-8";
+
+.region-content {
+  .field {
+    margin-bottom: 15px;
+  }
+}
+
+.text-primary {
+  color: $globalTextColor;
+}
+
+body.path-contact {
+  //background: transparent url(../images/bg-contacts.png);
+  //background-size: cover;
+  .contact-form {
+    input,
+    textarea,
+    .btn-primary {
+      //position: relative;
+      opacity: .8;
+    }
+  }
+}
+
+.field--type-text-with-summary {
+  figure {
+    border: 1px solid $globalBorderColor;
+    padding: 5px;
+    margin-bottom: 15px;
+
+    &.align-left {
+      margin-right: 15px;
+    }
+
+    &.align-right {
+      margin-left: 15px;
+    }
+
+    @media screen and (max-width: 768px) {
+      margin: 0 0 15px 0 !important;
+      float: none;
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
+
+    figcaption {
+      margin-top: 5px;
+      background-color: $globalBorderColor;
+      font-size: 14px;
+      text-align: center;
+      padding: 3px 5px;
+    }
+  }
+}
+

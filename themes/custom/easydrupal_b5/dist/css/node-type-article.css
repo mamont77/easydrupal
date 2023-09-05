@@ -1,0 +1,178 @@
+/**
+ * Default Variables.
+ *
+ * Modify this file to provide default Bootstrap Framework variables. The
+ * Bootstrap Framework will not override any variables defined here because it
+ * uses the `!default` flag which will only set their default if not already
+ * defined here.
+ *
+ * You can copy existing variables directly from the following file:
+ * ./THEMENAME/bootstrap/assets/stylesheets/bootstrap/_variables.scss
+ */
+/** COLORS **/
+.date {
+  position: relative;
+  background-color: #81a5bf;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #fff;
+  margin-right: 16px;
+  padding: 5px;
+  text-align: center;
+  text-transform: uppercase;
+  float: left;
+}
+
+.date span.day {
+  display: block;
+  font-size: 18px;
+  line-height: 18px;
+  font-weight: bold;
+}
+
+.date span.year {
+  display: block;
+  font-size: 10px;
+  line-height: 10px;
+}
+
+.date:after {
+  left: 100%;
+  top: 50%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  border-left-color: #81a5bf;
+  border-width: 8px;
+  margin-top: -8px;
+}
+
+/* uncss:ignore start */
+.addtoany_list {
+  background-color: #fff;
+  border-radius: 6px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-bottom: 15px;
+}
+
+.addtoany_list > a {
+  overflow: hidden;
+  padding: 4px;
+  text-decoration: none;
+}
+
+/* uncss:ignore end */
+/* uncss:ignore start */
+.a2a_svg,
+.a2a_count,
+.a2a_menu,
+.a2a_menu_find_container {
+  border-radius: 0 !important;
+}
+
+/* uncss:ignore end */
+.date {
+  display: none;
+}
+
+.page-header .date {
+  display: block;
+}
+
+.field--name-field-image-media img {
+  width: 100%;
+  margin: 0 auto;
+  border: 1px solid #eee;
+}
+
+.field--name-field-comments {
+  margin-top: 15px;
+  clear: both;
+}
+
+.field--name-field-comments .field__label {
+  font-size: 23px;
+  text-transform: uppercase;
+  color: #293749;
+  text-align: center;
+  border-top: 4px solid #ddd;
+  border-bottom: 4px solid #ddd;
+  padding: 15px 0;
+}
+
+.file > span {
+  background: #fff;
+  color: #81a5bf;
+  border-bottom: 1px solid #5f8dae;
+  border-top: 1px solid #5f8dae;
+}
+
+.file > span:first-child {
+  border-left: 4px solid #5f8dae;
+}
+
+.file > span:last-child {
+  border-right: 1px solid #5f8dae;
+}
+
+.field--name-field-conclusions {
+  border: 1px solid #ddd;
+  background-color: #eee;
+  padding: 15px;
+}
+
+@media (min-width: 768px) {
+  .field--name-field-image-media {
+    float: left;
+    margin: 0 15px 15px 0;
+  }
+}
+
+@media (min-width: 1200px) {
+  .addtoany_list {
+    display: block;
+    position: fixed;
+    z-index: 9999995;
+    right: 3px;
+    top: 30%;
+    bottom: auto;
+  }
+  .addtoany_list .a2a_counter .a2a_svg {
+    display: block;
+    margin: 0 auto 2px auto;
+  }
+  .addtoany_list .a2a_count {
+    display: block;
+    margin: 0 auto;
+  }
+  .addtoany_list > a {
+    text-align: center;
+    display: block;
+  }
+}
+
+@media (max-width: 768px) {
+  .region-sidebar-second {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    border-top: 4px solid #ddd;
+    padding-top: 15px;
+  }
+  .region-sidebar-second section.block-views-blockabout-author-block-1 {
+    text-align: center;
+  }
+  .region-sidebar-second section.block-views-blocktags-tags, .region-sidebar-second section.block-views-blocktags-versions {
+    width: 49%;
+    display: inline-block;
+    float: left;
+  }
+}
+
+/*# sourceMappingURL=../sourcemaps/node-type-article.css.map */

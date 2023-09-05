@@ -5,12 +5,9 @@
 // @see https://getbootstrap.com/docs/5.2/customize/sass/#variable-defaults.
 @import 'variables_bootstrap';
 
-//@function to-rgb($value) {
-//  @return red($value), green($value), blue($value);
-//}
+@import "default-variables";
 
 @import '../../../../../themes/contrib/bootstrap5/scss/mixins';
-
 
 // Include bootstrap.
 //@import '../../../../../themes/contrib/bootstrap5/scss/style';
@@ -65,5 +62,12 @@
 // Utilities
 @import "../../node_modules/bootstrap/scss/utilities/api";
 
-
 @import 'drupal';
+
+// Base-theme overrides.
+@import 'overrides';
+@import "tags";
+@import "site";
+@import "sprite";
+@import "nodes-types";
+@import "blocks";

@@ -1,0 +1,31 @@
+@charset "UTF-8";
+
+@import "default-variables";
+
+.page-node-type-page {
+
+}
+
+article[about="/about-me"] {
+  .field--name-body {
+    .align-left {
+      @media (max-width: 768px) {
+        float: none;
+      }
+    }
+    img {
+      border-radius: 50%;
+      border: 8px solid $imageBorderColor;
+      margin: 0 15px 15px 0;
+      width: 216px;
+      height: 216px;
+      @media (max-width: 768px) {
+        float: none;
+        display: block;
+        width: 50%;
+        height: auto;
+        margin: 0 auto 15px auto;
+      }
+    }
+  }
+}
