@@ -145,14 +145,12 @@ display:
           row_class: ''
           default_row_class: true
           uses_fields: false
-          alignment: horizontal
-          columns: '2'
-          col_xs: col-xs-12
+          col_xs: none
           col_sm: col-sm-6
           col_md: col-md-6
           col_lg: col-lg-6
-          col_class_default: 1
-          row_class_default: 1
+          col_xl: none
+          col_xxl: none
       row:
         type: 'entity:node'
         options:
@@ -185,7 +183,9 @@ display:
     position: 1
     display_options:
       display_extenders:
-        metatag_display_extender: {  }
+        metatag_display_extender:
+          metatags: {  }
+          tokenize: false
       path: feedback
       menu:
         type: normal

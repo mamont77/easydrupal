@@ -18,7 +18,7 @@ plugin: 'block_content:a4bd2375-c885-4ab7-ba12-cd7893a0ead9'
 settings:
   id: 'block_content:a4bd2375-c885-4ab7-ba12-cd7893a0ead9'
   label: 'Other profiles'
-  label_display: visible
+  label_display: '0'
   provider: block_content
   status: true
   info: ''

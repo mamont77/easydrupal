@@ -83,7 +83,7 @@
         "drupal/twig_field_value": "^2.0",
         "drupal/twigsuggest": "^1.0@RC",
         "drupal/upgrade_status": "^4.0",
-        "drupal/views_bootstrap": "3.9",
+        "drupal/views_bootstrap": "^5.5@alpha",
         "drupal/views_infinite_scroll": "^2.0",
         "drupal/webp": "^1.0@RC",
         "drupal/yoast_seo": "^1.8",
