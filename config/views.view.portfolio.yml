@@ -361,14 +361,12 @@ display:
           grouping: {  }
           row_class: ''
           default_row_class: true
-          alignment: horizontal
-          columns: '3'
-          col_xs: col-xs-12
+          col_xs: none
           col_sm: col-sm-4
           col_md: col-md-4
           col_lg: col-lg-4
-          col_class_default: 1
-          row_class_default: 1
+          col_xl: none
+          col_xxl: none
       row:
         type: fields
         options:
@@ -406,7 +404,10 @@ display:
     display_plugin: page
     position: 1
     display_options:
-      display_extenders: {  }
+      display_extenders:
+        metatag_display_extender:
+          metatags: {  }
+          tokenize: false
       path: projects
       menu:
         type: normal

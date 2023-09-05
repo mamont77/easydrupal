@@ -1,0 +1,93 @@
+@charset "UTF-8";
+
+.slick--field-project-images-media {
+  background-image: url(../images/devices/cs-imac-frame.png);
+  background-repeat: no-repeat;
+  background-position: center top;
+  height: 611px;
+  width: 846px;
+  margin: 30px auto;
+  padding: 27px 82px 197px 83px;
+  overflow: hidden;
+
+  .slide__caption {
+    position: relative;
+    padding: 5px 0;
+    opacity: .8;
+    top: -50px;
+    text-align: center;
+    margin: 0 auto;
+    width: 40%;
+    background: #fff;
+  }
+
+  @media (max-width: 992px) {
+    background: none transparent;
+    padding: 0;
+    width: 100%;
+    height: auto;
+    margin: 15px auto 5px auto;
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  //.lazy {
+  //  height: 385px !important;
+  //}
+}
+
+.slick__arrow {
+  button {
+    outline: 0;
+  }
+
+  //width: 100%;
+}
+
+.slick-arrow {
+  padding: 0;
+  background: transparent;
+  border: 0;
+  color: #414a51;
+  top: 38%;
+  position: absolute;
+  width: 110px;
+  height: 36px;
+  fill: currentColor;
+  font-size: 20px;
+  font-weight: 100;
+  overflow: hidden;
+  text-align: center;
+
+  &.slick-prev {
+    left: 0;
+
+    &:before {
+      font-family: 'FontAwesome';
+      content: "\f053";
+      margin-right: 5px;
+      position: relative;
+    }
+  }
+
+  &.slick-next {
+    right: 0;
+
+    &:after {
+      font-family: 'FontAwesome';
+      content: "\f054";
+      margin-left: 5px;
+      position: relative;
+    }
+  }
+
+  @media (max-width: 992px) {
+    //position: relative;
+    top: 31%;
+    //margin: 5px;
+    background: #ddd;
+    opacity: .8;
+  }
+}
