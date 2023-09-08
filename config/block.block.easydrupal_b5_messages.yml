@@ -8,8 +8,8 @@ dependencies:
     - easydrupal_b5
 id: easydrupal_b5_messages
 theme: easydrupal_b5
-region: header
-weight: -1
+region: content
+weight: -10
 provider: null
 plugin: system_messages_block
 settings:

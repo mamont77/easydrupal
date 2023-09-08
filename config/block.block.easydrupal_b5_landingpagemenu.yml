@@ -10,8 +10,8 @@ dependencies:
     - easydrupal_b5
 id: easydrupal_b5_landingpagemenu
 theme: easydrupal_b5
-region: navigation_collapsible
-weight: 0
+region: nav_main
+weight: -10
 provider: null
 plugin: 'system_menu_block:landing-page-menu'
 settings:

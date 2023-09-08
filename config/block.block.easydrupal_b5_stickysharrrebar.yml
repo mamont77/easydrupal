@@ -9,8 +9,8 @@ dependencies:
     - easydrupal_b5
 id: easydrupal_b5_stickysharrrebar
 theme: easydrupal_b5
-region: navigation
-weight: -6
+region: header
+weight: -11
 provider: null
 plugin: sticky_sharrre_bar_block
 settings:

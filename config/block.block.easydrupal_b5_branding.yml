@@ -10,8 +10,8 @@ _core:
   default_config_hash: repSOtJJzEbjtv8EevqNa49N9kN8bkEEWG3joRMb1qY
 id: easydrupal_b5_branding
 theme: easydrupal_b5
-region: navigation
-weight: -5
+region: nav_branding
+weight: -10
 provider: null
 plugin: system_branding_block
 settings:

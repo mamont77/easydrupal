@@ -12,7 +12,7 @@ dependencies:
 id: easydrupal_b5_nondisclosureagreementexplanation
 theme: easydrupal_b5
 region: content
-weight: -5
+weight: -3
 provider: null
 plugin: 'block_content:1a9c2b23-a3f5-43cc-8f82-09190fb83e8b'
 settings:

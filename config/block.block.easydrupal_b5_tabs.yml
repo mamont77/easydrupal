@@ -2,12 +2,14 @@ uuid: 20cd5103-dd6b-4a40-b7c9-564b004dbaa2
 langcode: en
 status: true
 dependencies:
+  module:
+    - system
   theme:
     - easydrupal_b5
 id: easydrupal_b5_tabs
 theme: easydrupal_b5
-region: header
-weight: 0
+region: content
+weight: -8
 provider: null
 plugin: local_tasks_block
 settings:
@@ -17,4 +19,8 @@ settings:
   provider: core
   primary: true
   secondary: true
-visibility: {  }
+visibility:
+  request_path:
+    id: request_path
+    negate: true
+    pages: '<front>'

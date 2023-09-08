@@ -6,8 +6,8 @@ dependencies:
     - easydrupal_b5
 id: easydrupal_b5_primaryadminactions
 theme: easydrupal_b5
-region: header
-weight: -2
+region: content
+weight: -6
 provider: null
 plugin: local_actions_block
 settings:

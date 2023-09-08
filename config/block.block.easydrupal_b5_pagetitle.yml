@@ -2,12 +2,14 @@ uuid: 4532e48f-d121-4413-a255-d4dcadf58c4c
 langcode: en
 status: true
 dependencies:
+  module:
+    - system
   theme:
     - easydrupal_b5
 id: easydrupal_b5_pagetitle
 theme: easydrupal_b5
-region: header
-weight: 1
+region: content
+weight: -9
 provider: null
 plugin: page_title_block
 settings:
@@ -15,4 +17,8 @@ settings:
   label: 'Page title'
   label_display: '0'
   provider: core
-visibility: {  }
+visibility:
+  request_path:
+    id: request_path
+    negate: true
+    pages: "<front>\r\n/user/login\r\n/user/password\r\n"

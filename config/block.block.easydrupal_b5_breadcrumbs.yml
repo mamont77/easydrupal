@@ -9,8 +9,8 @@ dependencies:
     - easydrupal_b5
 id: easydrupal_b5_breadcrumbs
 theme: easydrupal_b5
-region: header
-weight: -3
+region: breadcrumb
+weight: -10
 provider: null
 plugin: system_breadcrumb_block
 settings:

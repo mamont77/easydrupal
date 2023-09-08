@@ -1,8 +1,8 @@
 global-styling:
   css:
     theme:
-      dist/css/style.css: {}
       '//fonts.googleapis.com/css?family=Roboto+Condensed:700|Roboto:400,400i,700&display=swap': { type: external }
+      dist/css/style.css: {}
   js:
     dist/js/global-scripts.js: { }
   dependencies:

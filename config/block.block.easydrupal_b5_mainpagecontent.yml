@@ -9,7 +9,7 @@ dependencies:
 id: easydrupal_b5_mainpagecontent
 theme: easydrupal_b5
 region: content
-weight: -6
+weight: -4
 provider: null
 plugin: system_main_block
 settings:
