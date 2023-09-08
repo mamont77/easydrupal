@@ -65,9 +65,9 @@
 @import 'drupal';
 
 // Base-theme overrides.
-@import 'overrides';
-@import "tags";
-@import "site";
-@import "sprite";
+@import 'components/overrides';
+@import "components/tags";
+@import "components/site";
+@import "components/sprite";
 @import "nodes-types";
-@import "blocks";
+@import "components/blocks";
