@@ -1,16 +1,16 @@
 @charset "UTF-8";
 
-@import "default-variables";
+@import "variables_theme";
 
 .view {
   .views-row {
-    margin-bottom: 15px;
+    margin-bottom: 1.5rem;
   }
 }
 
 .view-portfolio {
   .row .col {
-    margin-bottom: 30px;
+    margin-bottom: 3rem;
   }
 
   .wrapper {
@@ -30,7 +30,7 @@
   }
 
   .image {
-    margin-bottom: 15px;
+    margin-bottom: 1.5rem;
     overflow: hidden;
   }
 
@@ -41,10 +41,10 @@
   }
 
   .description {
-    font-size: 14px;
-    line-height: 24px;
+    font-size: 1.4rem;
+    line-height: 2.4rem;
     margin: auto;
-    padding: 0 24px;
+    padding: 0 2.4rem;
     color: $portfolioHoverTextColor;
     opacity: 0;
     text-align: center;

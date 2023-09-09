@@ -11,7 +11,7 @@
  */
 /** COLORS **/
 .view .views-row {
-  margin-bottom: 15px;
+  margin-bottom: 1.5rem;
 }
 
 .view-feedback .row {
@@ -19,17 +19,17 @@
 }
 
 .view-feedback .row .col {
-  border-bottom: 1px dashed #ddd;
-  padding-bottom: 30px;
-  margin-bottom: 30px;
+  border-bottom: 0.1rem dashed #ddd;
+  padding-bottom: 3rem;
+  margin-bottom: 3rem;
 }
 
 .view-feedback h3.title {
-  margin: 0 0 15px 0;
+  margin: 0 0 1.5rem 0;
 }
 
 .view-feedback .about {
-  margin-bottom: 15px;
+  margin-bottom: 1.5rem;
   color: #81a5bf;
 }
 
@@ -45,8 +45,8 @@
   width: 150px;
   height: 150px;
   border-radius: 50%;
-  border: 8px solid #eee;
-  margin: 0 auto 15px auto;
+  border: 0.8rem solid #eee;
+  margin: 0 auto 1.5rem auto;
   opacity: .8;
 }
 
@@ -55,12 +55,12 @@
 }
 
 .view-feedback .project-info {
-  margin-bottom: 15px;
+  margin-bottom: 1.5rem;
 }
 
 .view-feedback .field--name-field-date {
-  font-size: 15px;
-  margin-bottom: 5px;
+  font-size: 1.5rem;
+  margin-bottom: .5rem;
   color: #81a5bf;
 }
 
@@ -75,9 +75,9 @@
 .view-feedback blockquote {
   color: #575756;
   background-color: transparent;
-  border-left: 1px solid #bbb;
+  border-left: 0.1rem solid #bbb;
   font-style: italic;
-  padding: 15px;
+  padding: 1.5rem;
   text-align: justify;
   margin: 0;
   font-size: inherit;

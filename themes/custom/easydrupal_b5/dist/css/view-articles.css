@@ -15,8 +15,8 @@
   background-color: #81a5bf;
   font-family: Arial, Helvetica, sans-serif;
   color: #fff;
-  margin-right: 16px;
-  padding: 5px;
+  margin-right: 1.6rem;
+  padding: .5rem;
   text-align: center;
   text-transform: uppercase;
   float: left;
@@ -24,15 +24,15 @@
 
 .date span.day {
   display: block;
-  font-size: 18px;
-  line-height: 18px;
+  font-size: 1.8rem;
+  line-height: 1.8rem;
   font-weight: bold;
 }
 
 .date span.year {
   display: block;
-  font-size: 10px;
-  line-height: 10px;
+  font-size: 1rem;
+  line-height: 1rem;
 }
 
 .date:after {
@@ -45,18 +45,18 @@
   position: absolute;
   pointer-events: none;
   border-left-color: #81a5bf;
-  border-width: 8px;
-  margin-top: -8px;
+  border-width: .8rem;
+  margin-top: -8rem;
 }
 
 .view .views-row {
-  margin-bottom: 15px;
+  margin-bottom: 1.5rem;
 }
 
 .view-articles .views-row,
 .view-taxonomy-term .views-row {
-  padding-bottom: 7px;
-  border-bottom: 1px dashed #ddd;
+  padding-bottom: .7rem;
+  border-bottom: 0.1rem dashed #ddd;
 }
 
 .view-articles .field--name-node-title h2,
@@ -67,7 +67,7 @@
 .view-articles .field--name-field-image-media img,
 .view-taxonomy-term .field--name-field-image-media img {
   width: 100%;
-  border: 1px solid #eee;
+  border: 0.1rem solid #eee;
   margin: 0 auto;
 }
 
@@ -83,7 +83,7 @@
   .view-taxonomy-term .field--name-field-image-media {
     max-width: 200px;
     float: left;
-    margin: 0 15px 15px 0;
+    margin: 0 1.5rem 1.5rem 0;
   }
 }
 

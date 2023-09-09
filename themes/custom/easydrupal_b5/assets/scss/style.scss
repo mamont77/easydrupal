@@ -1,3 +1,5 @@
+@charset "UTF-8";
+
 // Sub theme styling.
 @import 'variables_drupal';
 
@@ -5,7 +7,7 @@
 // @see https://getbootstrap.com/docs/5.2/customize/sass/#variable-defaults.
 @import 'variables_bootstrap';
 
-@import "default-variables";
+@import "variables_theme";
 
 @import '../../../../../themes/contrib/bootstrap5/scss/mixins';
 

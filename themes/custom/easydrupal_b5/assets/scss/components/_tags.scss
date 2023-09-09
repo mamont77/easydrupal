@@ -1,20 +1,22 @@
+@charset "UTF-8";
+
 %tags {
-  top: -3px;
+  top: -.3rem;
   display: inline-block;
   background: $tagBgColor;
   color: $tagTextColor;
-  font-size: 12px;
+  font-size: 1.2rem;
   height: 23px;
-  line-height: 22px;
-  padding: 0 14px 0 16px;
+  line-height: 2.2rem;
+  padding: 0 1.4rem 0 1.6rem;
   position: relative;
-  margin: 0 10px 0 0;
+  margin: 0 1rem 0 0;
   text-decoration: none;
 
   &::before {
     background: $body-bg;
-    border-radius: 4px;
-    box-shadow: inset 0 1px rgba(0, 0, 0, 0.25);
+    border-radius: .4rem;
+    box-shadow: inset 0 .1rem rgba(0, 0, 0, 0.25);
     content: '';
     height: 4px;
     left: 6px;
@@ -25,9 +27,9 @@
 
   &::after {
     background: $body-bg;
-    border-bottom: 11px solid transparent;
-    border-left: 6px solid $tagBgColor;
-    border-top: 12px solid transparent;
+    border-bottom: 1.1rem solid transparent;
+    border-left: .6rem solid $tagBgColor;
+    border-top: 1.2rem solid transparent;
     content: '';
     position: absolute;
     right: 0;

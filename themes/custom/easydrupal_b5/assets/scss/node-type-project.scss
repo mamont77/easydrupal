@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-@import "default-variables";
+@import "variables_theme";
 @import "components/tags";
 
 .page-node-type-project {
@@ -36,13 +36,13 @@
 
 .field-name-field-project-url {
   a {
-    margin-top: 12px;
+    margin-top: 1.2rem;
     display: inline-block;
     letter-spacing: 0.03em;
     text-transform: uppercase;
     font-weight: 500;
     background-color: $blockHireMeButtonBg;
-    padding: 15px 20px;
+    padding: 1.5rem 2rem;
     color: $blockHireMeButtonText;
     text-decoration: none;
 
@@ -56,9 +56,9 @@
       background-color: $blockHireMeButtonBgHover;
     }
 
-    @media screen and (max-width: 768px) {
-      display: block;
-      text-align: center;
-    }
+    //@media screen and (max-width: 768px) {
+    //  display: block;
+    //  text-align: center;
+    //}
   }
 }

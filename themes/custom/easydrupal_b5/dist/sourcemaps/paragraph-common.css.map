@@ -1,1 +1,1 @@
-{"version":3,"sources":["paragraph-common.scss","paragraph-common.css"],"names":[],"mappings":"AAAA;EACE,mBAAmB;ACCrB","file":"../scss/paragraph-common.css","sourcesContent":[".paragraph {\n  margin-bottom: 3rem;\n}\n",".paragraph {\n  margin-bottom: 3rem;\n}\n"]}
+{"version":3,"sources":["paragraph-common.scss","paragraph-common.css"],"names":[],"mappings":"AAEA;EACE,mBAAmB;ACDrB","file":"../scss/paragraph-common.css","sourcesContent":["@charset \"UTF-8\";\n\n.paragraph {\n  margin-bottom: 3rem;\n}\n",".paragraph {\n  margin-bottom: 3rem;\n}\n"]}

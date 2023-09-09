@@ -11,13 +11,13 @@
  */
 /** COLORS **/
 .view .views-row {
-  margin-bottom: 15px;
+  margin-bottom: 1.5rem;
 }
 
 .view-about-author {
-  border: 1px solid #ddd;
-  padding: 20px 15px;
-  line-height: 22px;
+  border: 0.1rem solid #ddd;
+  padding: 2rem 1.5rem;
+  line-height: 2.2rem;
 }
 
 .view-about-author .views-row {
@@ -25,12 +25,12 @@
 }
 
 .view-about-author .views-field {
-  margin-bottom: 5px;
+  margin-bottom: .5rem;
 }
 
 .view-about-author .views-field-field-last-name {
   font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 22px;
+  font-size: 2.2rem;
   font-weight: bold;
   text-align: center;
   color: #414a51;
@@ -41,7 +41,7 @@
   height: 150px;
   margin: 0 auto;
   border-radius: 50%;
-  border: 8px solid #eee;
+  border: 0.8rem solid #eee;
   opacity: .8;
 }
 
@@ -52,12 +52,12 @@
 .view-about-author .views-field-field-country .field-content::before {
   font-family: 'FontAwesome';
   content: "\f3c5";
-  padding-right: 5px;
+  padding-right: .5rem;
 }
 
 .view-about-author .views-field-field-about {
-  font-size: 16px;
-  line-height: 18px;
+  font-size: 1.6rem;
+  line-height: 1.8rem;
 }
 
 /*# sourceMappingURL=../sourcemaps/view-about-author.css.map */

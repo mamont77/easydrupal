@@ -1,10 +1,10 @@
 @charset "UTF-8";
 
-@import "default-variables";
+@import "variables_theme";
 
 .view {
   .views-row {
-    margin-bottom: 15px;
+    margin-bottom: 1.5rem;
   }
 }
 
@@ -13,18 +13,18 @@
     text-align: center;
 
     .col {
-      border-bottom: 1px dashed $globalBorderColor;
-      padding-bottom: 30px;
-      margin-bottom: 30px;
+      border-bottom: .1rem dashed $globalBorderColor;
+      padding-bottom: 3rem;
+      margin-bottom: 3rem;
     }
   }
 
   h3.title {
-    margin: 0 0 15px 0;
+    margin: 0 0 1.5rem 0;
   }
 
   .about {
-    margin-bottom: 15px;
+    margin-bottom: 1.5rem;
     color: $testimonialsAboutTextColor;
 
     span {
@@ -51,8 +51,8 @@
       width: 150px;
       height: 150px;
       border-radius: 50%;
-      border: 8px solid $imageBorderColor;
-      margin: 0 auto 15px auto;
+      border: .8rem solid $imageBorderColor;
+      margin: 0 auto 1.5rem auto;
       opacity: .8;
 
       &:hover {
@@ -62,12 +62,12 @@
   }
 
   .project-info {
-    margin-bottom: 15px;
+    margin-bottom: 1.5rem;
   }
 
   .field--name-field-date {
-    font-size: 15px;
-    margin-bottom: 5px;
+    font-size: 1.5rem;
+    margin-bottom: .5rem;
     color: $dateColor;
     //font-weight: bold;
   }
@@ -90,9 +90,9 @@
   blockquote {
     color: $testimonialsBlockquoteTextColor;
     background-color: $testimonialsBlockquoteBgColor;
-    border-left: 1px solid $testimonialsBlockquoteBorderColor;
+    border-left: .1rem solid $testimonialsBlockquoteBorderColor;
     font-style: italic;
-    padding: 15px;
+    padding: 1.5rem;
     text-align: justify;
     margin: 0;
     font-size: inherit;

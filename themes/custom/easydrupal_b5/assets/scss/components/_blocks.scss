@@ -1,29 +1,29 @@
 @charset "UTF-8";
 
 #block-hireme {
-  padding: 45px 0;
+  padding: 4.5rem 0;
   font-weight: 200;
   text-align: center;
 
   h2 {
-    font-size: 60px;
+    font-size: 6rem;
     line-height: initial;
     margin: 0;
   }
 
   p {
-    margin: 12px 0 0 0;
+    margin: 1.2rem 0 0 0;
   }
 
   .group-right {
     a {
-      margin-top: 12px;
+      margin-top: 1.2rem;
       display: inline-block;
       letter-spacing: 0.03em;
       text-transform: uppercase;
       font-weight: 500;
       background-color: $blockHireMeButtonBg;
-      padding: 15px 20px;
+      padding: 1.5rem 2rem;
       color: $blockHireMeButtonText;
       text-decoration: none;
 
@@ -47,7 +47,7 @@
 
 #block-ccopyright {
   p {
-    padding: 3px 0;
+    padding: .3rem 0;
   }
 }
 
@@ -68,7 +68,7 @@
   li {
     display: inline-block;
     text-indent: 0;
-    padding-left: 15px;
+    padding-left: 1.5rem;
 
     &::before {
       content: '';
@@ -83,22 +83,22 @@
     width: auto;
   }
 
-  @media (max-width: 768px) {
-    float: none;
-    li {
-      padding-bottom: 15px;
-    }
-  }
+  //@media (max-width: 768px) {
+  //  float: none;
+  //  li {
+  //    padding-bottom: 1.5rem;
+  //  }
+  //}
 }
 
 #block-otherprofilesrightsidebar {
-  border: 1px solid $globalBorderColor;
-  padding: 20px 15px;
+  border: .1rem solid $globalBorderColor;
+  padding: 2rem 1.5rem;
   text-align: center;
 
   .field--name-body {
     div {
-      margin-bottom: 15px;
+      margin-bottom: 1.5rem;
     }
 
     img {

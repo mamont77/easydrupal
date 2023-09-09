@@ -1,11 +1,11 @@
 @charset "UTF-8";
 
-@import "default-variables";
+@import "variables_theme";
 @import "components/tags";
 
 .view {
   .views-row {
-    margin-bottom: 15px;
+    margin-bottom: 1.5rem;
   }
 }
 

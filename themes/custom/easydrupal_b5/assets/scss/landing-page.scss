@@ -68,7 +68,7 @@ $input-font-style-placeholder: italic;
 
     .line {
       width: 100%;
-      height: 4px;
+      height: .4rem;
       margin: 1rem auto;
     }
 
@@ -95,7 +95,7 @@ $input-font-style-placeholder: italic;
           content: "\e013"; // FIXME.
           color: #eee;
           font-family: 'FontAwesome';
-          font-size: 15px;
+          font-size: 1.5rem;
           margin-left: -13px;
           margin-right: 8px;
         }
@@ -110,9 +110,9 @@ $input-font-style-placeholder: italic;
     .container {
       margin: 0 auto 0 auto;
       width: 50%;
-      @media screen and (max-width: 1024px) {
-        width: 60%;
-      }
+      //@media screen and (max-width: 1024px) {
+      //  width: 60%;
+      //}
     }
 
     background: url(../images/pattern-1.png);
@@ -135,24 +135,24 @@ $input-font-style-placeholder: italic;
       line-height: 2.4rem;
 
       .align-left {
-        @media (max-width: 768px) {
-          float: none;
-        }
+        //@media (max-width: 768px) {
+        //  float: none;
+        //}
       }
 
       img {
         border-radius: 50%;
-        border: 8px solid #eee;
+        border: .8rem solid #eee;
         margin: 0 3rem 1.5rem 0;
         width: 216px;
         height: 216px;
-        @media (max-width: 768px) {
-          float: none;
-          display: block;
-          //width: 50%;
-          //height: auto;
-          margin: 0 auto 1.5rem auto;
-        }
+        //@media (max-width: 768px) {
+        //  float: none;
+        //  display: block;
+        //  //width: 50%;
+        //  //height: auto;
+        //  margin: 0 auto 1.5rem auto;
+        //}
       }
     }
 
@@ -184,7 +184,7 @@ $input-font-style-placeholder: italic;
     }
 
     .field--name-field-landing-page-backgro-media {
-      border: 1px solid #81a5bf;
+      border: .1rem solid #81a5bf;
       @media screen and (min-width: 1140px) {
         background-image: url(../images/devices/cs-imac-frame-small.png);
         background-repeat: no-repeat;
@@ -268,7 +268,7 @@ $input-font-style-placeholder: italic;
       margin: 0 1.5rem 1.5rem 0;
 
       img {
-        border: 1px solid #81a5bf;
+        border: .1rem solid #81a5bf;
         width: 200px;
         height: 133px;
       }
@@ -425,7 +425,7 @@ $input-font-style-placeholder: italic;
   //  input,
   //  textarea {
   //    border-radius: 0;
-  //    border: 1px solid #81a5bf;
+  //    border: .1rem solid #81a5bf;
   //    resize: none;
   //    color: #575756;
   //    background-color: #f5f5f5;

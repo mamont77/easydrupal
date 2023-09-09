@@ -15,8 +15,8 @@
   background-color: #81a5bf;
   font-family: Arial, Helvetica, sans-serif;
   color: #fff;
-  margin-right: 16px;
-  padding: 5px;
+  margin-right: 1.6rem;
+  padding: .5rem;
   text-align: center;
   text-transform: uppercase;
   float: left;
@@ -24,15 +24,15 @@
 
 .date span.day {
   display: block;
-  font-size: 18px;
-  line-height: 18px;
+  font-size: 1.8rem;
+  line-height: 1.8rem;
   font-weight: bold;
 }
 
 .date span.year {
   display: block;
-  font-size: 10px;
-  line-height: 10px;
+  font-size: 1rem;
+  line-height: 1rem;
 }
 
 .date:after {
@@ -45,26 +45,26 @@
   position: absolute;
   pointer-events: none;
   border-left-color: #81a5bf;
-  border-width: 8px;
-  margin-top: -8px;
+  border-width: .8rem;
+  margin-top: -8rem;
 }
 
 /* uncss:ignore start */
 .addtoany_list {
   background-color: #fff;
-  border-radius: 6px;
+  border-radius: .6rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  margin-bottom: 15px;
+  margin-bottom: 1.5rem;
 }
 
 .addtoany_list > a {
   overflow: hidden;
-  padding: 4px;
+  padding: .4rem;
   text-decoration: none;
 }
 
@@ -89,49 +89,49 @@
 .field--name-field-image-media img {
   width: 100%;
   margin: 0 auto;
-  border: 1px solid #eee;
+  border: 0.1rem solid #eee;
 }
 
 .field--name-field-comments {
-  margin-top: 15px;
+  margin-top: 1.5rem;
   clear: both;
 }
 
 .field--name-field-comments .field__label {
-  font-size: 23px;
+  font-size: 2.3rem;
   text-transform: uppercase;
   color: #293749;
   text-align: center;
-  border-top: 4px solid #ddd;
-  border-bottom: 4px solid #ddd;
-  padding: 15px 0;
+  border-top: 0.4rem solid #ddd;
+  border-bottom: 0.4rem solid #ddd;
+  padding: 1.5rem 0;
 }
 
 .file > span {
   background: #fff;
   color: #81a5bf;
-  border-bottom: 1px solid #5f8dae;
-  border-top: 1px solid #5f8dae;
+  border-bottom: 0.1rem solid #5f8dae;
+  border-top: 0.1rem solid #5f8dae;
 }
 
 .file > span:first-child {
-  border-left: 4px solid #5f8dae;
+  border-left: 0.4rem solid #5f8dae;
 }
 
 .file > span:last-child {
-  border-right: 1px solid #5f8dae;
+  border-right: 0.1rem solid #5f8dae;
 }
 
 .field--name-field-conclusions {
-  border: 1px solid #ddd;
+  border: 0.1rem solid #ddd;
   background-color: #eee;
-  padding: 15px;
+  padding: 1.5rem;
 }
 
 @media (min-width: 768px) {
   .field--name-field-image-media {
     float: left;
-    margin: 0 15px 15px 0;
+    margin: 0 1.5rem 1.5rem 0;
   }
 }
 
@@ -140,13 +140,13 @@
     display: block;
     position: fixed;
     z-index: 9999995;
-    right: 3px;
+    right: .3rem;
     top: 30%;
     bottom: auto;
   }
   .addtoany_list .a2a_counter .a2a_svg {
     display: block;
-    margin: 0 auto 2px auto;
+    margin: 0 auto .2rem auto;
   }
   .addtoany_list .a2a_count {
     display: block;
@@ -155,23 +155,6 @@
   .addtoany_list > a {
     text-align: center;
     display: block;
-  }
-}
-
-@media (max-width: 768px) {
-  .region-sidebar-second {
-    margin-top: 15px;
-    margin-bottom: 15px;
-    border-top: 4px solid #ddd;
-    padding-top: 15px;
-  }
-  .region-sidebar-second section.block-views-blockabout-author-block-1 {
-    text-align: center;
-  }
-  .region-sidebar-second section.block-views-blocktags-tags, .region-sidebar-second section.block-views-blocktags-versions {
-    width: 49%;
-    display: inline-block;
-    float: left;
   }
 }
 
