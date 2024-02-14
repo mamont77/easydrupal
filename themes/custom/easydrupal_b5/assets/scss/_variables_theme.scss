@@ -1,0 +1,23 @@
+// Theme variables.
+
+$width-page: 1400px;
+
+// Site Colors.
+$color-body: #575756;
+$color-heading: #293749;
+$color-white: #FFFFFF;
+$color-off-white: #FEFDFA;
+$color-black-rgba-30: rgba(0, 0, 0, 0.30);
+
+// Bootstrap global overrides.
+$bs-breakpoint-xs: 0;
+$bs-breakpoint-sm: 576px;
+$bs-breakpoint-md: 768px;
+$bs-breakpoint-lg: 992px;
+$bs-breakpoint-xl: 1200px;
+$bs-breakpoint-xxl: 1400px;
+
+// Fonts.
+$font-main: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-heading: "Roboto Condensed", Verdana, Arial, Helvetica, sans-serif;;
+// $font-accent: var( --kwall-font-accent);

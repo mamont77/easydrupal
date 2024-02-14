@@ -5,5 +5,10 @@
 // @see https://getbootstrap.com/docs/5.2/customize/sass/#variable-defaults.
 @import 'variables_bootstrap';
 
+@import 'variables_theme';
+
 // Include bootstrap.
 @import '../../../themes/contrib/bootstrap5/scss/style';
+
+@import 'typography';
+@import 'wysiwyg';

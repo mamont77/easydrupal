@@ -1,0 +1,54 @@
+:root {
+  --bs-body-font-family: #{$font-main};
+  --bs-body-font-size: 1rem;
+  --bs-body-font-weight: 400;
+  --bs-body-color: #{$color-body};
+  --bs-body-line-height: 1.5rem;
+  --bs-body-bg: #{$color-white};
+  --bs-heading-color: #{$color-heading};
+}
+
+body {
+
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--kwall-font-heading);
+  font-style: normal;
+  font-weight: 700;
+
+  &.style-fancy {
+    &:after {
+      margin: 2rem 0;
+    }
+  }
+}
+
+h1 {
+  font-size: 2rem;
+  line-height: 2.375rem;
+  margin-bottom: 2rem;
+  @media (min-width: $bs-breakpoint-lg) {
+  }
+}
+
+h2 {
+  font-size: 1.438rem;
+  margin-bottom: 2rem;
+  @media (min-width: $bs-breakpoint-lg) {
+  }
+}
+
+h3 {
+
+}
+
+// Label.
+.label {
+
+}
+
+// Tags.
+.tags {
+
+}
