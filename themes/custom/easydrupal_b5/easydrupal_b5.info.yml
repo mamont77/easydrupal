@@ -5,7 +5,7 @@ core_version_requirement: '^9.4 || ^10'
 'base theme': bootstrap5
 libraries:
   - easydrupal_b5/global-styling
-  - easydrupal_b5/font-awesome
+  - easydrupal_b5/fontawesome
 ckeditor_stylesheets:
   - dist/css/style.css
 ckeditor5-stylesheets:

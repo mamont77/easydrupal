@@ -134,11 +134,9 @@
       $(window).scroll(function () {
         if ($(this).scrollTop() > 300) {
           $upper.fadeIn();
-          // $upper.show(50);
         }
         else {
           $upper.fadeOut();
-          // $upper.hide(50);
         }
       });
     }

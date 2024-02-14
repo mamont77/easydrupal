@@ -81,13 +81,27 @@ paragraph-source-code:
     theme:
       dist/css/paragraph-source-code.css: { }
 
-font-awesome:
+fontawesome:
+  version: VERSION
   js:
-    'https://kit.fontawesome.com/91500d63a4.js':
+    'https://kit.fontawesome.com/91500d63a4.js': # Ruslan's Kit (ruslan.piskarev@gmail.com).
       type: external
       minified: true
       attributes:
+        defer: true
         crossorigin: anonymous
+        data-search-pseudo-elements: true
+
+fontawesome-without-pseudo-elements:
+  version: VERSION
+  js:
+    'https://kit.fontawesome.com/91500d63a4.js': # Ruslan's Kit (ruslan.piskarev@gmail.com).
+      type: external
+      minified: true
+      attributes:
+        defer: true
+        crossorigin: anonymous
+        data-search-pseudo-elements: false
 
 slick:
   css:

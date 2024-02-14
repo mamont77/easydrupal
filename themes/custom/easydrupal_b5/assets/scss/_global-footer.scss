@@ -1,0 +1,99 @@
+footer.footer {
+  min-height: 87px;
+  background: #575756;
+  border-top-color: transparent;
+  color: #fff;
+  font-size: 14px;
+  padding: 24px 15px;
+
+  p {
+    margin: 0;
+  }
+
+  .region-footer {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 1rem;
+
+    #block-easydrupal-b5-ccopyright {
+      order: 2;
+    }
+
+    #block-easydrupal-b5-otherprofiles {
+      order: 1;
+    }
+
+    @media (min-width: $bs-breakpoint-md) {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+
+      #block-easydrupal-b5-ccopyright {
+        order: 1;
+      }
+      #block-easydrupal-b5-otherprofiles {
+        order: 2;
+      }
+    }
+  }
+}
+
+#block-easydrupal-b5-otherprofiles {
+  .field__item {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  label {
+    font-weight: 700;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 1rem;
+
+    li {
+      display: block;
+    }
+  }
+}
+
+.upper {
+  display: none;
+  position: fixed;
+  text-align: center;
+  font-size: 20px;
+  line-height: 22px;
+  width: 42px;
+  height: 37px;
+  padding: 5px 10px;
+  background-color: $color-neutral-1;
+  border: .1rem solid $color-white;
+  color: $color-white;
+  bottom: 17px;
+  right: 17px;
+  cursor: pointer;
+  z-index: 10;
+  opacity: .7;
+  text-decoration: none;
+  &::after {
+    //display: none;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    content: '\f077';
+    font: var(--fa-font-solid);
+  }
+
+  &:hover, &:focus, &:active {
+    text-decoration: none;
+    background-color: $color-neutral-2;
+  }
+}

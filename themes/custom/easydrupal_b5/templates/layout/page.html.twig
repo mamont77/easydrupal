@@ -122,9 +122,10 @@ set footer_classes = ' ' ~
 </main>
 
 {% if page.footer %}
-<footer class="mt-auto {{ footer_classes }}">
+<footer class="footer mt-auto {{ footer_classes }}">
   <div class="{{ b5_top_container }}">
     {{ page.footer }}
   </div>
 </footer>
 {% endif %}
+<a class="upper" href="#main-content" aria-label="{{ 'Back to top'|t }}" title="{{ 'Back to top'|t }}"></a>
