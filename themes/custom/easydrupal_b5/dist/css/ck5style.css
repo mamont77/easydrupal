@@ -11483,6 +11483,70 @@ a > .ck-content code {
     display: none !important;
   }
 }
+.ck-content .tabs-primary {
+  margin: 1rem 0;
+}
+.ck-content .tabs-secondary {
+  margin: 0 0 1rem 0;
+}
+@media (max-width: 767.98px) {
+  .ck-content .tabs-wrapper .tab-toggle {
+    color: var(--bs-emphasis-color);
+    padding: 0.5rem 1rem;
+  }
+  .ck-content .tabs-wrapper .nav-tabs {
+    border: var(--bs-border-width) solid var(--bs-border-color);
+    border-radius: var(--bs-border-radius);
+    overflow: hidden;
+  }
+  .ck-content .tabs-wrapper .nav-item {
+    padding: 0.25rem 0.5rem;
+  }
+  .ck-content .tabs-wrapper .nav-item.active {
+    background-color: #dee2e6;
+  }
+  .ck-content .tabs-wrapper .nav-item .nav-link {
+    border: 0;
+    border-radius: 0;
+    background-color: unset;
+    -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+            flex-grow: 1;
+  }
+  .ck-content .tabs-wrapper .nav-item .nav-link.active {
+    background-color: unset;
+  }
+  .ck-content .tabs-wrapper:not(.is-collapsible) .nav-item:not(:first-of-type) {
+    border-top: var(--bs-border-width) solid var(--bs-border-color);
+  }
+  .ck-content .tabs-wrapper.is-collapsible .nav-item.active {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-ordinal-group: 0;
+        -ms-flex-order: -1;
+            order: -1;
+  }
+  .ck-content .tabs-wrapper.is-collapsible .nav-item:not(.active) {
+    display: none;
+  }
+  .ck-content .tabs-wrapper.is-collapsible .is-open .nav-item {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+  .ck-content .tabs-wrapper.is-collapsible .is-open .nav-item.active {
+    border-radius: var(--bs-border-radius) var(--bs-border-radius) 0 0;
+  }
+  .ck-content .tabs-wrapper.is-collapsible .is-open .nav-item:not(.active) {
+    border-top: var(--bs-border-width) solid var(--bs-border-color);
+  }
+}
+@media (min-width: 768px) {
+  .ck-content .tabs-wrapper .tab-toggle {
+    display: none;
+  }
+}
 .ck-content :root {
   --bs-body-font-family: Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;
   --bs-body-font-size: 1rem;

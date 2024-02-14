@@ -61,7 +61,10 @@
 // scss-docs-end import-stack
 
 //@import '../../../themes/contrib/bootstrap5/scss/mixins';
+
 //@import '../../../themes/contrib/bootstrap5/scss/drupal';
+@import '../../../themes/contrib/bootstrap5/scss/drupal/local_tasks';
+
 //@import '../../../themes/contrib/bootstrap5/scss/bootstrap_fix';
 
 @import 'typography';
