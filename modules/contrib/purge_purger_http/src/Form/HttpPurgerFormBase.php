@@ -26,9 +26,8 @@ abstract class HttpPurgerFormBase extends PurgerConfigFormBase {
    *
    * @var array
    *
-   * @todo
-   *   Confirm if all relevant HTTP methods are covered.
-   *   http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html
+   * @todo Confirm if all relevant HTTP methods are covered.
+   * http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html
    */
   protected $requestMethods = [
     'BAN',
@@ -256,7 +255,7 @@ abstract class HttpPurgerFormBase extends PurgerConfigFormBase {
     ];
     for ($i = 0; $i < $form_state->get('headers_items_count'); $i++) {
       if (!isset($form['headers']['headers'][$i])) {
-        $header = isset($settings->headers[$i]) ? $settings->headers[$i] :
+        $header = $settings->headers[$i] ??
           ['field' => '', 'value' => ''];
         $form['headers']['headers'][$i]['field'] = [
           '#type' => 'textfield',
@@ -437,10 +436,7 @@ abstract class HttpPurgerFormBase extends PurgerConfigFormBase {
   /**
    * Build the 'tokens' section of the form.
    *
-   * @todo
-   *   This implementation depends on purge_tokens_token_info(), provided by the
-   *   purge_token submodule. I'm aware this isn't the cleanest pattern but the
-   *   most sensible way I can think of to get the supported token patterns.
+   * @todo This implementation depends on purge_tokens_token_info(), provided by the purge_token submodule. I'm aware this isn't the cleanest pattern but the most sensible way I can think of to get the supported token patterns.
    *
    * @param array $form
    *   An associative array containing the structure of the form.

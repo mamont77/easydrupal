@@ -35,7 +35,7 @@ class MenuTrailByPathActiveTrailHtmlClassTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  protected $defaultTheme = 'classy';
+  protected $defaultTheme = 'starterkit_theme';
 
   /**
    * Array key's should be the menu title's, if multi-level than separated by ' » '.

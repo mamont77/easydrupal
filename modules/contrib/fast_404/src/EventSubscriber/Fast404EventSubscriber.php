@@ -10,6 +10,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Drupal\Core\Site\Settings;
 use Drupal\fast404\Fast404FactoryInterface;
+use Drupal\fast404\Fast404;
 
 /**
  * Class Fast404EventSubscriber.

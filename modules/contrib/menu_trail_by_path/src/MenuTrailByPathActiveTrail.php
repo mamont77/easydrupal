@@ -180,7 +180,12 @@ class MenuTrailByPathActiveTrail extends MenuActiveTrail {
       return Url::fromRoute('<front>');
     }
 
-    $current_pathinfo_url = $this->pathValidator->getUrlIfValidWithoutAccessCheck($this->context->getPathInfo());
+    try {
+      $current_pathinfo_url = $this->pathValidator->getUrlIfValidWithoutAccessCheck($this->context->getPathInfo());
+    }
+    catch (\InvalidArgumentException $e) {
+      return NULL;
+    }
     if ($current_pathinfo_url && $current_pathinfo_url->isRouted()) {
       return $current_pathinfo_url;
     }
@@ -222,7 +227,12 @@ class MenuTrailByPathActiveTrail extends MenuActiveTrail {
 
     while (count($path_elements) > 1) {
       array_pop($path_elements);
-      $url = $this->pathValidator->getUrlIfValidWithoutAccessCheck('/' . implode('/', $path_elements));
+      try {
+        $url = $this->pathValidator->getUrlIfValidWithoutAccessCheck('/' . implode('/', $path_elements));
+      }
+      catch (\InvalidArgumentException $e) {
+        continue;
+      }
       if ($url && $url->isRouted()) {
         $urls[] = $url;
       }

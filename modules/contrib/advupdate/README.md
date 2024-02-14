@@ -1,9 +1,7 @@
 # Update Manager Advanced
 
-## INTRODUCTION
-
-Module modifies the Drupal "Available updates" email report to include
-the information normally shown at /admin/reports/updates/update, 
+Module modifies the Drupal "`Available updates`" email report to include
+the information normally shown at `/admin/reports/updates/update`, 
 with links to the module updates and their release notes.
 
 The module very similar to 
@@ -11,7 +9,14 @@ The module very similar to
 (https://www.drupal.org/project/update_detailed_email)",
 however, implemented in another way.
 
-## REQUIREMENTS
+For a full description of the module, visit the
+[project page](https://www.drupal.org/project/advupdate).
+
+Submit bug reports and feature suggestions, or track changes in the
+[issue queue](https://www.drupal.org/project/issues/advupdate).
+
+
+## Requirements
 
 This module does not require any dependency. But if you want to receive emails
 with the design of your theme, you can additionally install and configure
@@ -20,7 +25,7 @@ the module, for example,
 or any another which you prefer, globally for the site for all emails.
 
  
-## INSTALLATION
+## Installation
 
 You can install the module by Composer (look more 
 [using Composer to manage Drupal site dependencies]
@@ -32,19 +37,18 @@ require the module via:
 
 then enable the module as usual OR install manually as usual.
 
-## CONFIGURATION
 
-By default nothing to do. However if you wish to disable the
-functionality of this module 
-without un-installing the module, you can do the following:
+## Configuration
 
-Go to "Home > Administration > Reports > Available updates"
-and disable the checkbox at "Expand the report using 
-"Update Manager Advanced" module".
+1. By default nothing to do. However if you wish to disable the
+   functionality of this module 
+   without un-installing the module, you can do the following:
 
-  
-## More information
-- To issue any bug reports, feature or support requests, see the module issue
-  queue at <https://drupal.org/project/issues/2945528>.
+2. Go to "`Home > Administration > Reports > Available updates`"
+   and disable the checkbox at "`Expand the report using 
+   "`Update Manager Advanced`" module`".
 
-Author: Ruslan Piskarev <http://drupal.org/user/424444>.
+
+## Maintainers
+
+- Ruslan Piskarov - [Ruslan Piskarov](https://www.drupal.org/u/ruslan-piskarov)

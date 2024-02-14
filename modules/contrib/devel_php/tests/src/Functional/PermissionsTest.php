@@ -6,6 +6,7 @@ namespace Drupal\Tests\devel_php\Functional;
 
 use Drupal\Core\Url;
 use Drupal\Tests\BrowserTestBase;
+use Drupal\user\UserInterface;
 
 /**
  * Tests permissions.
@@ -22,7 +23,7 @@ class PermissionsTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = [
+  protected static $modules = [
     'devel',
     'devel_php',
   ];
@@ -39,11 +40,19 @@ class PermissionsTest extends BrowserTestBase {
 
     // User without permissions.
     $user = $this->drupalCreateUser();
+    if (!($user instanceof UserInterface)) {
+      $this->fail('Impossible to create the tests user.');
+    }
+
     $this->drupalLogin($user);
     $this->drupalGet($url);
     $this->assertSession()->statusCodeEquals(403);
 
     $user = $this->drupalCreateUser(['execute php code']);
+    if (!($user instanceof UserInterface)) {
+      $this->fail('Impossible to create the tests user.');
+    }
+
     $this->drupalLogin($user);
     $this->drupalGet($url);
     $this->assertSession()->statusCodeEquals(200);

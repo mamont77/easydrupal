@@ -53,8 +53,9 @@ class DevelExecutePHP extends BlockBase implements ContainerFactoryPluginInterfa
   /**
    * {@inheritdoc}
    */
-  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): self {
-    return new self(
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): static {
+    // @phpstan-ignore-next-line
+    return new static(
       $configuration,
       $plugin_id,
       $plugin_definition,

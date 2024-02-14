@@ -6,9 +6,7 @@ namespace Drupal\devel_php\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\devel\DevelDumperManagerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 /**
  * Defines a form that allows privileged users to execute arbitrary PHP code.
@@ -37,7 +35,7 @@ class ExecutePHP extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public static function create(ContainerInterface $container): self {
+  public static function create(ContainerInterface $container): static {
     $instance = parent::create($container);
     $instance->develDumper = $container->get('devel.dumper');
     $instance->session = $container->get('session');

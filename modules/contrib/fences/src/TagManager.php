@@ -20,12 +20,19 @@ class TagManager extends DefaultPluginManager implements TagManagerInterface, Pl
   use StringTranslationTrait;
 
   /**
+   * The theme handler object.
+   *
+   * @var \Drupal\Core\Extension\ThemeHandlerInterface
+   */
+  protected $themeHandler;
+
+  /**
    * {@inheritdoc}
    */
   protected $defaults = [
     'label' => '',
     'group' => '',
-    'descripton' => '',
+    'description' => '',
   ];
 
   /**

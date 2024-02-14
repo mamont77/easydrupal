@@ -5,7 +5,7 @@ package: Other
 core_version_requirement: ^8.8 || ^9 || ^10
 configure: menu_trail_by_path.settings
 
-# Information added by Drupal.org packaging script on 2022-11-05
-version: '2.0.0'
+# Information added by Drupal.org packaging script on 2023-11-29
+version: '2.0.1'
 project: 'menu_trail_by_path'
-datestamp: 1667652247
+datestamp: 1701298208

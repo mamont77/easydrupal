@@ -64,6 +64,8 @@ function fences_field_formatter_third_party_settings_form(FormatterInterface $pl
     '#type' => 'textfield',
     '#default_value' => $plugin->getThirdPartySetting('fences', 'fences_field_classes'),
     '#states' => $invisible_on_none('fences_field_tag'),
+    // Remove default maxlength of 128:
+    '#maxlength' => NULL,
   ];
   $settings['fences']['fences_field_items_wrapper_tag'] = [
     '#title' => t('Field Items Wrapper Tag'),
@@ -76,6 +78,8 @@ function fences_field_formatter_third_party_settings_form(FormatterInterface $pl
     '#type' => 'textfield',
     '#default_value' => $plugin->getThirdPartySetting('fences', 'fences_field_items_wrapper_classes'),
     '#states' => $invisible_on_none('fences_field_items_wrapper_tag'),
+    // Remove default maxlength of 128:
+    '#maxlength' => NULL,
   ];
   $settings['fences']['fences_field_item_tag'] = [
     '#title' => t('Field Item Tag'),
@@ -88,6 +92,8 @@ function fences_field_formatter_third_party_settings_form(FormatterInterface $pl
     '#type' => 'textfield',
     '#default_value' => $plugin->getThirdPartySetting('fences', 'fences_field_item_classes'),
     '#states' => $invisible_on_none('fences_field_item_tag'),
+    // Remove default maxlength of 128:
+    '#maxlength' => NULL,
   ];
   $settings['fences']['fences_label_tag'] = [
     '#title' => t('Label Tag'),
@@ -100,6 +106,8 @@ function fences_field_formatter_third_party_settings_form(FormatterInterface $pl
     '#type' => 'textfield',
     '#default_value' => $plugin->getThirdPartySetting('fences', 'fences_label_classes'),
     '#states' => $invisible_on_none('fences_label_tag'),
+    // Remove default maxlength of 128:
+    '#maxlength' => NULL,
   ];
   return $settings['fences'];
 }

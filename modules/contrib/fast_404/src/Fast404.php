@@ -2,10 +2,11 @@
 
 namespace Drupal\fast404;
 
-use Drupal\Core\Site\Settings;
-use Drupal\Core\Database\Database;
-use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Component\Render\FormattableMarkup;
+use Drupal\Core\Database\Database;
+use Drupal\Core\Site\Settings;
+use Drupal\Core\StreamWrapper\AssetsStream;
+use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\ServiceUnavailableHttpException;
@@ -94,6 +95,17 @@ class Fast404 {
       // We're allowing anyone to hit non-existing image derivative URLs
       // (default behavior).
       else {
+        return;
+      }
+    }
+
+    // Check if the URL is for an assets file because Drupal 10.1 changes how
+    // assets are handled. In 10.1, asset files are generated if they result in
+    // a 404, so we should not block these requests.
+    // lasdjkf
+    if (version_compare(\Drupal::VERSION, '10.1', '>=')) {
+      $assets_path = AssetsStream::basePath();
+      if (strstr($path, $assets_path . '/css') !== FALSE || strstr($path, $assets_path . '/js') !== FALSE) {
         return;
       }
     }
@@ -190,7 +202,7 @@ class Fast404 {
     // Remove any trailing slash found in the request path.
     $path_noslash = rtrim($path, '/');
     $sql = "SELECT id FROM {path_alias} WHERE alias = :alias";
-    $result = Database::getConnection()->query($sql, [':alias' => $path_noslash])->fetchField();
+    $result = Database::getConnection()->query($sql, [':alias' => urldecode($path_noslash)])->fetchField();
     if ($result) {
       return;
     }

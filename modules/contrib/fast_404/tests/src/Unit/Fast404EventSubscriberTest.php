@@ -61,9 +61,7 @@ class Fast404EventSubscriberTest extends UnitTestCase {
    */
   protected function getFast404EventSubscriber() {
     $requestStackStub = $this->createMock('\Symfony\Component\HttpFoundation\RequestStack');
-    $fast404FactoryStackStub = $this->getMockBuilder('\Drupal\fast404\Fast404Factory')
-      ->disableOriginalConstructor()
-      ->getMock();
+    $fast404FactoryStackStub = $this->createMock('\Drupal\fast404\Fast404Factory');
     $subscriber = $this->getMockBuilder('\Drupal\fast404\EventSubscriber\Fast404EventSubscriber')
       ->setConstructorArgs([$requestStackStub, $fast404FactoryStackStub])
       ->getMock();

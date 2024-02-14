@@ -46,7 +46,7 @@ class IntegrationTest extends WebDriverTestBase {
   /**
    * {@inheritdoc}
    */
-  protected $defaultTheme = 'stable';
+  protected $defaultTheme = 'stark';
 
   /**
    * {@inheritdoc}
@@ -88,6 +88,8 @@ class IntegrationTest extends WebDriverTestBase {
       'fields[body][label]' => 'above',
       'fields[body][settings_edit_form][third_party_settings][fences][fences_field_tag]' => 'article',
       'fields[body][settings_edit_form][third_party_settings][fences][fences_field_classes]' => 'my-field-class',
+      'fields[body][settings_edit_form][third_party_settings][fences][fences_field_items_wrapper_tag]' => 'div',
+      'fields[body][settings_edit_form][third_party_settings][fences][fences_field_items_wrapper_classes]' => 'my-field-items-class',
       'fields[body][settings_edit_form][third_party_settings][fences][fences_field_item_tag]' => 'code',
       'fields[body][settings_edit_form][third_party_settings][fences][fences_field_item_classes]' => 'my-field-item-class',
       'fields[body][settings_edit_form][third_party_settings][fences][fences_label_tag]' => 'h2',
@@ -101,7 +103,46 @@ class IntegrationTest extends WebDriverTestBase {
     $this->assertTrue($article->hasClass('my-field-class'), 'Custom field class is present.');
     $label = $session->elementExists('css', 'h2.my-label-class', $article);
     $this->assertSame($label->getText(), 'Body', 'Field label is found in expected HTML element.');
-    $body = $session->elementExists('css', 'code.my-field-item-class > p', $article);
+    $body = $session->elementExists('css', 'div.my-field-items-class > code.my-field-item-class > p', $article);
+    $this->assertSame($body->getText(), 'Body field value.', 'Field text is found in expected HTML element.');
+  }
+
+  /**
+   * Tests if the max length attribute isn't present in the settings inputs.
+   */
+  public function testMaxLengthRemoved() {
+    $session = $this->assertSession();
+    $page = $this->getSession()->getPage();
+    $this->drupalGet('/admin/structure/types/manage/article/display');
+    $page->pressButton('edit-fields-body-settings-edit');
+
+    $session->waitForElementVisible('css', 'div[id*="edit-fields-body-settings-edit-form"]');
+
+    $page->selectFieldOption('Field Items Wrapper Tag', 'div');
+    $session->elementAttributeNotExists('css', 'input[id*="edit-fields-body-settings-edit-form-third-party-settings-fences-fences-field-classes"]', 'maxlength');
+    $session->elementAttributeNotExists('css', 'input[id*="edit-fields-body-settings-edit-form-third-party-settings-fences-fences-field-items-wrapper-classes"]', 'maxlength');
+    $session->elementAttributeNotExists('css', 'input[id*="edit-fields-body-settings-edit-form-third-party-settings-fences-fences-field-item-classes"]', 'maxlength');
+    $session->elementAttributeNotExists('css', 'input[id*="edit-fields-body-settings-edit-form-third-party-settings-fences-fences-label-classes"]', 'maxlength');
+    $this->submitForm([
+      'fields[body][label]' => 'above',
+      'fields[body][settings_edit_form][third_party_settings][fences][fences_field_tag]' => 'article',
+      'fields[body][settings_edit_form][third_party_settings][fences][fences_field_classes]' => 'GBoSTDAZRWAxMHTSwzymJhCAvtUdiKaZYAdSreQdlDIhHjaItLGfzREtNUxcGsUnXqONSUrHaLpwXbdOshbZWhojazHApQYSFCDhPPKPAjJAxxEgIXdEFSejCdIwrWwMym',
+      'fields[body][settings_edit_form][third_party_settings][fences][fences_field_items_wrapper_tag]' => 'div',
+      'fields[body][settings_edit_form][third_party_settings][fences][fences_field_items_wrapper_classes]' => 'GBoSTDAZRWAxMHTSwzymJhCAvtUdiKaZYAdSreQdlDIhHjaItLGfzREtNUxcGsUnXqONSUrHaLpwXbdOshbZWhojazHApQYSFCDhPPKPAjJAxxEgIXdEFSejCdIwrWwMym',
+      'fields[body][settings_edit_form][third_party_settings][fences][fences_field_item_tag]' => 'code',
+      'fields[body][settings_edit_form][third_party_settings][fences][fences_field_item_classes]' => 'GBoSTDAZRWAxMHTSwzymJhCAvtUdiKaZYAdSreQdlDIhHjaItLGfzREtNUxcGsUnXqONSUrHaLpwXbdOshbZWhojazHApQYSFCDhPPKPAjJAxxEgIXdEFSejCdIwrWwMym',
+      'fields[body][settings_edit_form][third_party_settings][fences][fences_label_tag]' => 'h2',
+      'fields[body][settings_edit_form][third_party_settings][fences][fences_label_classes]' => 'GBoSTDAZRWAxMHTSwzymJhCAvtUdiKaZYAdSreQdlDIhHjaItLGfzREtNUxcGsUnXqONSUrHaLpwXbdOshbZWhojazHApQYSFCDhPPKPAjJAxxEgIXdEFSejCdIwrWwMym',
+    ], 'Update');
+    $session->waitForElementRemoved('css', 'div[id*="edit-fields-body-settings-edit-form"]');
+    $page->pressButton('edit-submit');
+
+    $page = $this->drupalGet('/node/' . $this->node->id());
+    $article = $session->elementExists('css', '.field--name-body');
+    $this->assertTrue($article->hasClass('GBoSTDAZRWAxMHTSwzymJhCAvtUdiKaZYAdSreQdlDIhHjaItLGfzREtNUxcGsUnXqONSUrHaLpwXbdOshbZWhojazHApQYSFCDhPPKPAjJAxxEgIXdEFSejCdIwrWwMym'), 'Custom field class is present.');
+    $label = $session->elementExists('css', 'h2.GBoSTDAZRWAxMHTSwzymJhCAvtUdiKaZYAdSreQdlDIhHjaItLGfzREtNUxcGsUnXqONSUrHaLpwXbdOshbZWhojazHApQYSFCDhPPKPAjJAxxEgIXdEFSejCdIwrWwMym', $article);
+    $this->assertSame($label->getText(), 'Body', 'Field label is found in expected HTML element.');
+    $body = $session->elementExists('css', 'div.GBoSTDAZRWAxMHTSwzymJhCAvtUdiKaZYAdSreQdlDIhHjaItLGfzREtNUxcGsUnXqONSUrHaLpwXbdOshbZWhojazHApQYSFCDhPPKPAjJAxxEgIXdEFSejCdIwrWwMym > code.GBoSTDAZRWAxMHTSwzymJhCAvtUdiKaZYAdSreQdlDIhHjaItLGfzREtNUxcGsUnXqONSUrHaLpwXbdOshbZWhojazHApQYSFCDhPPKPAjJAxxEgIXdEFSejCdIwrWwMym > p', $article);
     $this->assertSame($body->getText(), 'Body field value.', 'Field text is found in expected HTML element.');
   }
 
