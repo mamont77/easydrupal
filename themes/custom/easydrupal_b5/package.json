@@ -1,20 +1,19 @@
 {
-  "name": "easydrupal_b5",
-  "version": "1.0.2",
-  "author": "Ruslan Piskarov",
-  "homepage": "https://makedrupaleasy.com",
+  "name": "kwall",
+  "version": "1.0.3",
+  "author": "Kwall Team",
+  "homepage": "http://www.kwallcompany.com",
   "private": true,
   "devDependencies": {
-    "autoprefixer": "^10.4.5",
-    "css-mqpacker": "^7.0.0",
-    "postcss": "^8.4.12",
-    "bootstrap": "^5.3.1",
-    "gulp": "^3.9.1",
-    "gulp-imagemin": "^4.1.0",
+    "autoprefixer": "^10.4.13",
+    "postcss": "^8.4.33",
+    "bootstrap": "^5.3.2",
+    "gulp": "^4.0.2",
+    "gulp-imagemin": "^8.0.0",
     "gulp-postcss": "^9.0.1",
-    "gulp-sass": "^4.1.1",
+    "gulp-sass": "^5.1.0",
     "gulp-sourcemaps": "^3.0.0",
-    "gulp.spritesmith": "^6.12.1"
+    "sass": "^1.70.0"
   },
   "main": "gulpfile.js",
   "browserslist": [
@@ -22,8 +21,5 @@
     "> 1%",
     "maintained node versions",
     "not dead"
-  ],
-  "dependencies": {
-    "all": "0.0.0"
-  }
+  ]
 }
