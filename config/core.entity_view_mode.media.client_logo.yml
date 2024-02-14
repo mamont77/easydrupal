@@ -6,5 +6,6 @@ dependencies:
     - media
 id: media.client_logo
 label: 'Client Logo'
+description: ''
 targetEntityType: media
 cache: true

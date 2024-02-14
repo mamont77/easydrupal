@@ -6,5 +6,6 @@ dependencies:
     - node
 id: node.project_full_content
 label: 'Project Full content'
+description: ''
 targetEntityType: node
 cache: true
