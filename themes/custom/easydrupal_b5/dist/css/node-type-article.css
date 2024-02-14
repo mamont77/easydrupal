@@ -4,25 +4,22 @@
   font-family: Arial, Helvetica, sans-serif;
   color: #fff;
   margin-right: 1.6rem;
-  padding: .5rem;
+  padding: 0.5rem;
   text-align: center;
   text-transform: uppercase;
   float: left;
 }
-
 .date span.day {
   display: block;
   font-size: 1.8rem;
   line-height: 1.8rem;
   font-weight: bold;
 }
-
 .date span.year {
   display: block;
   font-size: 1rem;
   line-height: 1rem;
 }
-
 .date:after {
   left: 100%;
   top: 50%;
@@ -33,14 +30,14 @@
   position: absolute;
   pointer-events: none;
   border-left-color: #81a5bf;
-  border-width: .8rem;
+  border-width: 0.8rem;
   margin-top: -8rem;
 }
 
 /* uncss:ignore start */
 .addtoany_list {
   background-color: #fff;
-  border-radius: .6rem;
+  border-radius: 0.6rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -49,10 +46,31 @@
           justify-content: center;
   margin-bottom: 1.5rem;
 }
-
+@media (min-width: 1200px) {
+  .addtoany_list {
+    display: block;
+    position: fixed;
+    z-index: 9999995;
+    right: 0.3rem;
+    top: 30%;
+    bottom: auto;
+  }
+  .addtoany_list .a2a_counter .a2a_svg {
+    display: block;
+    margin: 0 auto 0.2rem auto;
+  }
+  .addtoany_list .a2a_count {
+    display: block;
+    margin: 0 auto;
+  }
+  .addtoany_list > a {
+    text-align: center;
+    display: block;
+  }
+}
 .addtoany_list > a {
   overflow: hidden;
-  padding: .4rem;
+  padding: 0.4rem;
   text-decoration: none;
 }
 
@@ -74,6 +92,12 @@
   display: block;
 }
 
+@media (min-width: 768px) {
+  .field--name-field-image-media {
+    float: left;
+    margin: 0 1.5rem 1.5rem 0;
+  }
+}
 .field--name-field-image-media img {
   width: 100%;
   margin: 0 auto;
@@ -84,7 +108,6 @@
   margin-top: 1.5rem;
   clear: both;
 }
-
 .field--name-field-comments .field__label {
   font-size: 2.3rem;
   text-transform: uppercase;
@@ -101,11 +124,9 @@
   border-bottom: 0.1rem solid #5f8dae;
   border-top: 0.1rem solid #5f8dae;
 }
-
 .file > span:first-child {
   border-left: 0.4rem solid #5f8dae;
 }
-
 .file > span:last-child {
   border-right: 0.1rem solid #5f8dae;
 }
@@ -115,35 +136,4 @@
   background-color: #eee;
   padding: 1.5rem;
 }
-
-@media (min-width: 768px) {
-  .field--name-field-image-media {
-    float: left;
-    margin: 0 1.5rem 1.5rem 0;
-  }
-}
-
-@media (min-width: 1200px) {
-  .addtoany_list {
-    display: block;
-    position: fixed;
-    z-index: 9999995;
-    right: .3rem;
-    top: 30%;
-    bottom: auto;
-  }
-  .addtoany_list .a2a_counter .a2a_svg {
-    display: block;
-    margin: 0 auto .2rem auto;
-  }
-  .addtoany_list .a2a_count {
-    display: block;
-    margin: 0 auto;
-  }
-  .addtoany_list > a {
-    text-align: center;
-    display: block;
-  }
-}
-
 /*# sourceMappingURL=../sourcemaps/node-type-article.css.map */

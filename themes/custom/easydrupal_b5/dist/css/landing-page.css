@@ -1,4 +1,8 @@
-.container-fluid,
+@charset "UTF-8";
+.container-fluid {
+  --bs-gutter-x: 0;
+}
+
 .region-content {
   padding: 0;
 }
@@ -12,86 +16,73 @@
   /** Projects **/
   /** Articles **/
   /** Feedback **/
-  /** Contact **/
 }
-
 .page-node-type-landingpage .section {
   text-align: center;
   padding-top: 5rem;
   padding-bottom: 5rem;
-  /* Style for our header texts */
+  /* Style for our header texts. */
   /*
-    ul {
-      list-style: none;
-      padding: 0 0 0 30px;
-      margin: 25px 0 30px;
+  ul {
+    list-style: none;
+    padding: 0 0 0 30px;
+    margin: 25px 0 30px;
 
-      li {
-        padding-left: 1em;
-        text-indent: -.7em;
+    li {
+      padding-left: 1em;
+      text-indent: -.7em;
 
-        &:before {
-          content: "\e013"; // FIXME.
-          color: #eee;
-          font-family: 'FontAwesome';
-          font-size: 1.5rem;
-          margin-left: -13px;
-          margin-right: 8px;
-        }
+      &:before {
+        content: "\e013"; // FIXME.
+        color: #eee;
+        font-family: 'FontAwesome';
+        font-size: 1.5rem;
+        margin-left: -13px;
+        margin-right: 8px;
       }
     }
-     */
+  }
+   */
 }
-
 .page-node-type-landingpage .section .title-wrapper {
   max-width: 350px;
   margin: 0 auto 1.5rem auto;
 }
-
 .page-node-type-landingpage .section h2 {
   font-size: 3.4rem;
   padding: 0;
   text-transform: uppercase;
   color: #6686A2;
 }
-
 .page-node-type-landingpage .section h3 {
   font-size: 2.6rem;
 }
-
 .page-node-type-landingpage .section .line {
   width: 100%;
-  height: .4rem;
+  height: 0.4rem;
   margin: 1rem auto;
 }
-
 .page-node-type-landingpage .section .read-more {
   margin: 1.5rem 0;
   text-align: right;
 }
-
 .page-node-type-landingpage .section .read-more a {
   color: #293749;
 }
-
 .page-node-type-landingpage .about {
   background: url(../images/pattern-1.png);
   background-color: #7ea2bb;
 }
-
 .page-node-type-landingpage .about .container {
   margin: 0 auto 0 auto;
   width: 50%;
 }
-
 .page-node-type-landingpage .about h2 {
   color: #eee;
 }
-
 .page-node-type-landingpage .about .line {
   background-color: #eee;
 }
-
 .page-node-type-landingpage .about .field--name-body {
   color: #eee;
   text-align: left;
@@ -100,225 +91,36 @@
   font-size: 1.8rem;
   line-height: 2.4rem;
 }
-
 .page-node-type-landingpage .about .field--name-body img {
   border-radius: 50%;
-  border: .8rem solid #eee;
+  border: 0.8rem solid #eee;
   margin: 0 3rem 1.5rem 0;
   width: 216px;
   height: 216px;
 }
-
 .page-node-type-landingpage .about .read-more a {
   color: #eee;
 }
-
 .page-node-type-landingpage .projects {
   background: url(../images/bg-page-section--light-dbffac9426e51e0fdcaaad8452d7561b.png);
   background-color: #fff;
   color: #575756;
 }
-
 .page-node-type-landingpage .projects h2 {
   color: #6686A2;
 }
-
 .page-node-type-landingpage .projects .line {
   background-color: #81a5bf;
 }
-
 .page-node-type-landingpage .projects h3 {
   margin-bottom: 1.5rem;
 }
-
 .page-node-type-landingpage .projects h3 a {
   color: #293749;
 }
-
 .page-node-type-landingpage .projects .field--name-field-landing-page-backgro-media {
-  border: .1rem solid #81a5bf;
+  border: 0.1rem solid #81a5bf;
 }
-
-.page-node-type-landingpage .projects img {
-  width: 100%;
-  height: auto;
-  max-height: 299px;
-}
-
-.page-node-type-landingpage .projects .field--name-body {
-  font-size: 1.8rem;
-  line-height: 2.4rem;
-  text-align: justify;
-}
-
-.page-node-type-landingpage .projects .read-more a {
-  color: #293749;
-}
-
-.page-node-type-landingpage .clients {
-  padding-top: 0;
-  background: url(../images/bg-page-section--light-dbffac9426e51e0fdcaaad8452d7561b.png);
-  background-color: #fff;
-  color: #575756;
-}
-
-.page-node-type-landingpage .clients h2 {
-  color: #6686A2;
-}
-
-.page-node-type-landingpage .clients .line {
-  background-color: #81a5bf;
-}
-
-.page-node-type-landingpage .clients .field--name-field-image-media {
-  text-align: center;
-}
-
-.page-node-type-landingpage .clients .field--name-field-image-media img {
-  margin: 0 auto;
-  width: auto;
-  height: auto;
-}
-
-.page-node-type-landingpage .articles {
-  background: #eaeaea;
-  color: #575756;
-}
-
-.page-node-type-landingpage .articles h2 {
-  color: #6686A2;
-}
-
-.page-node-type-landingpage .articles .line {
-  background-color: #6686A2;
-}
-
-.page-node-type-landingpage .articles h3 a {
-  color: #293749;
-}
-
-.page-node-type-landingpage .articles .field--name-node-title {
-  margin-bottom: 1.5rem;
-}
-
-.page-node-type-landingpage .articles .field--name-field-image-media {
-  float: left;
-  margin: 0 1.5rem 1.5rem 0;
-}
-
-.page-node-type-landingpage .articles .field--name-field-image-media img {
-  border: .1rem solid #81a5bf;
-  width: 200px;
-  height: 133px;
-}
-
-.page-node-type-landingpage .articles .field--name-body {
-  text-align: left;
-  max-height: 600px;
-  padding-right: 1.5rem;
-}
-
-.page-node-type-landingpage .articles .read-more a {
-  color: #293749;
-}
-
-.page-node-type-landingpage .section.feedback {
-  background: url(../images/client-testimonials-background.jpg) bottom center;
-  background-size: cover;
-  background-color: #fff;
-  color: #575756;
-}
-
-.page-node-type-landingpage .section.feedback h2 {
-  color: #6686A2;
-}
-
-.page-node-type-landingpage .section.feedback .line {
-  background-color: #81a5bf;
-}
-
-.page-node-type-landingpage .section.feedback h3.title {
-  font-size: 2rem;
-  color: #293749;
-  margin: 0 0 1.5rem 0;
-}
-
-.page-node-type-landingpage .section.feedback .about-person {
-  margin-bottom: 1.5rem;
-  color: #6686A2;
-}
-
-.page-node-type-landingpage .section.feedback .about-person span {
-  color: #6686A2;
-}
-
-.page-node-type-landingpage .section.feedback .about-person span:not(:last-child):after {
-  content: "|";
-}
-
-.page-node-type-landingpage .section.feedback .field--name-field-image-media img {
-  width: 150px;
-  height: 150px;
-  margin: 0 auto 1.5rem auto;
-  border-radius: 50%;
-  border: .8rem solid #eee;
-  opacity: .8;
-}
-
-.page-node-type-landingpage .section.feedback .field--name-field-image-media img:hover {
-  opacity: 1;
-}
-
-.page-node-type-landingpage .section.feedback .project-info {
-  margin-bottom: 1.5rem;
-}
-
-.page-node-type-landingpage .section.feedback .field--name-field-project-title {
-  color: #293749;
-}
-
-.page-node-type-landingpage .section.feedback .field--name-field-project-title .field__item:not(:last-child):after {
-  content: ",";
-}
-
-.page-node-type-landingpage .section.feedback blockquote {
-  border-left: .1rem solid #bbb;
-  font-style: italic;
-  padding: 0.5em 1rem;
-  text-align: justify;
-  margin: 0;
-  font-size: inherit;
-  color: #575756;
-}
-
-.page-node-type-landingpage .section.feedback blockquote:before, .page-node-type-landingpage .section.feedback blockquote:after {
-  font-family: helvetica, arial, sans-serif;
-  color: #6686A2;
-  font-size: 3em;
-  line-height: 0.1em;
-}
-
-.page-node-type-landingpage .section.feedback blockquote:before {
-  content: "\201c";
-  vertical-align: -.4em;
-  margin-left: 0;
-  margin-right: 0.2em;
-}
-
-.page-node-type-landingpage .section.feedback blockquote:after {
-  content: "\201d";
-  vertical-align: -.45em;
-  margin-left: 0.2em;
-}
-
-.page-node-type-landingpage .section.feedback blockquote > p:first-child {
-  display: inline;
-}
-
-.page-node-type-landingpage .section.feedback .read-more a {
-  color: #293749;
-}
-
 @media screen and (min-width: 1140px) {
   .page-node-type-landingpage .projects .field--name-field-landing-page-backgro-media {
     background-image: url(../images/devices/cs-imac-frame-small.png);
@@ -330,5 +132,149 @@
     border: none;
   }
 }
-
+.page-node-type-landingpage .projects img {
+  width: 100%;
+  height: auto;
+  max-height: 299px;
+}
+.page-node-type-landingpage .projects .field--name-body {
+  font-size: 1.8rem;
+  line-height: 2.4rem;
+  text-align: justify;
+}
+.page-node-type-landingpage .projects .read-more a {
+  color: #293749;
+}
+.page-node-type-landingpage .clients {
+  padding-top: 0;
+  background: url(../images/bg-page-section--light-dbffac9426e51e0fdcaaad8452d7561b.png);
+  background-color: #fff;
+  color: #575756;
+}
+.page-node-type-landingpage .clients h2 {
+  color: #6686A2;
+}
+.page-node-type-landingpage .clients .line {
+  background-color: #81a5bf;
+}
+.page-node-type-landingpage .clients .field--name-field-image-media {
+  text-align: center;
+}
+.page-node-type-landingpage .clients .field--name-field-image-media img {
+  margin: 0 auto;
+  width: auto;
+  height: auto;
+}
+.page-node-type-landingpage .articles {
+  background: #eaeaea;
+  color: #575756;
+}
+.page-node-type-landingpage .articles h2 {
+  color: #6686A2;
+}
+.page-node-type-landingpage .articles .line {
+  background-color: #6686A2;
+}
+.page-node-type-landingpage .articles h3 a {
+  color: #293749;
+}
+.page-node-type-landingpage .articles .field--name-node-title {
+  margin-bottom: 1.5rem;
+}
+.page-node-type-landingpage .articles .field--name-field-image-media {
+  float: left;
+  margin: 0 1.5rem 1.5rem 0;
+}
+.page-node-type-landingpage .articles .field--name-field-image-media img {
+  border: 0.1rem solid #81a5bf;
+  width: 200px;
+  height: 133px;
+}
+.page-node-type-landingpage .articles .field--name-body {
+  text-align: left;
+  max-height: 600px;
+  padding-right: 1.5rem;
+}
+.page-node-type-landingpage .articles .read-more a {
+  color: #293749;
+}
+.page-node-type-landingpage .section.feedback {
+  background: url(../images/client-testimonials-background.jpg) bottom center;
+  background-size: cover;
+  background-color: #fff;
+  color: #575756;
+}
+.page-node-type-landingpage .section.feedback h2 {
+  color: #6686A2;
+}
+.page-node-type-landingpage .section.feedback .line {
+  background-color: #81a5bf;
+}
+.page-node-type-landingpage .section.feedback h3.title {
+  font-size: 2rem;
+  color: #293749;
+  margin: 0 0 1.5rem 0;
+}
+.page-node-type-landingpage .section.feedback .about-person {
+  margin-bottom: 1.5rem;
+  color: #6686A2;
+}
+.page-node-type-landingpage .section.feedback .about-person span {
+  color: #6686A2;
+}
+.page-node-type-landingpage .section.feedback .about-person span:not(:last-child):after {
+  content: "|";
+}
+.page-node-type-landingpage .section.feedback .field--name-field-image-media img {
+  width: 150px;
+  height: 150px;
+  margin: 0 auto 1.5rem auto;
+  border-radius: 50%;
+  border: 0.8rem solid #eee;
+  opacity: 0.8;
+}
+.page-node-type-landingpage .section.feedback .field--name-field-image-media img:hover {
+  opacity: 1;
+}
+.page-node-type-landingpage .section.feedback .project-info {
+  margin-bottom: 1.5rem;
+}
+.page-node-type-landingpage .section.feedback .field--name-field-project-title {
+  color: #293749;
+}
+.page-node-type-landingpage .section.feedback .field--name-field-project-title .field__item:not(:last-child):after {
+  content: ",";
+}
+.page-node-type-landingpage .section.feedback blockquote {
+  border-left: 0.1rem solid #bbb;
+  font-style: italic;
+  padding: 0.5em 1rem;
+  text-align: justify;
+  margin: 0;
+  font-size: inherit;
+  color: #575756;
+}
+.page-node-type-landingpage .section.feedback blockquote:before, .page-node-type-landingpage .section.feedback blockquote:after {
+  font-family: helvetica, arial, sans-serif;
+  color: #6686A2;
+  font-size: 3em;
+  line-height: 0.1em;
+}
+.page-node-type-landingpage .section.feedback blockquote:before {
+  content: "“";
+  vertical-align: -0.4em;
+  margin-left: 0;
+  margin-right: 0.2em;
+}
+.page-node-type-landingpage .section.feedback blockquote:after {
+  content: "”";
+  vertical-align: -0.45em;
+  margin-left: 0.2em;
+}
+.page-node-type-landingpage .section.feedback blockquote > p:first-child {
+  display: inline;
+}
+.page-node-type-landingpage .section.feedback .read-more a {
+  color: #293749;
+}
 /*# sourceMappingURL=../sourcemaps/landing-page.css.map */

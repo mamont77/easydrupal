@@ -5,11 +5,9 @@
 .view-portfolio .row .col {
   margin-bottom: 3rem;
 }
-
 .view-portfolio .wrapper {
   position: relative;
 }
-
 .view-portfolio .field-flex-wrap {
   position: absolute;
   top: 0;
@@ -26,12 +24,10 @@
   -webkit-transition: 150ms ease background-color;
   transition: 150ms ease background-color;
 }
-
 .view-portfolio .image {
   margin-bottom: 1.5rem;
   overflow: hidden;
 }
-
 .view-portfolio img {
   -webkit-transform: scale(1);
           transform: scale(1);
@@ -39,7 +35,6 @@
   transition: 150ms ease transform;
   width: 100%;
 }
-
 .view-portfolio .description {
   font-size: 1.4rem;
   line-height: 2.4rem;
@@ -51,29 +46,23 @@
   -webkit-transition: 150ms ease opacity;
   transition: 150ms ease opacity;
 }
-
 .view-portfolio .title {
   margin-bottom: 0;
   color: #293749;
   font-weight: 300;
   text-align: center;
 }
-
 .view-portfolio a:hover {
   text-decoration: none;
 }
-
 .view-portfolio a:hover img {
   -webkit-transform: rotate(-2deg) scale(1.05);
           transform: rotate(-2deg) scale(1.05);
 }
-
 .view-portfolio a:hover .field-flex-wrap {
   background-color: rgba(24, 39, 46, 0.7);
 }
-
 .view-portfolio a:hover .description {
   opacity: 1;
 }
-
 /*# sourceMappingURL=../sourcemaps/view-portfolio.css.map */

@@ -8,11 +8,10 @@
   padding: 2.7rem 8.2rem 19.7rem 8.3rem;
   overflow: hidden;
 }
-
 .slick--field-project-images-media .slide__caption {
   position: relative;
-  padding: .5rem 0;
-  opacity: .8;
+  padding: 0.5rem 0;
+  opacity: 0.8;
   top: -50px;
   text-align: center;
   margin: 0 auto;
@@ -39,27 +38,22 @@
   overflow: hidden;
   text-align: center;
 }
-
 .slick-arrow.slick-prev {
   left: 0;
 }
-
 .slick-arrow.slick-prev:before {
-  font-family: 'FontAwesome';
+  font-family: "FontAwesome";
   content: "\f053";
-  margin-right: .5rem;
+  margin-right: 0.5rem;
   position: relative;
 }
-
 .slick-arrow.slick-next {
   right: 0;
 }
-
 .slick-arrow.slick-next:after {
-  font-family: 'FontAwesome';
+  font-family: "FontAwesome";
   content: "\f054";
-  margin-left: .5rem;
+  margin-left: 0.5rem;
   position: relative;
 }
-
 /*# sourceMappingURL=../sourcemaps/slick.css.map */

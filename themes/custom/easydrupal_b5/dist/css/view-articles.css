@@ -4,25 +4,22 @@
   font-family: Arial, Helvetica, sans-serif;
   color: #fff;
   margin-right: 1.6rem;
-  padding: .5rem;
+  padding: 0.5rem;
   text-align: center;
   text-transform: uppercase;
   float: left;
 }
-
 .date span.day {
   display: block;
   font-size: 1.8rem;
   line-height: 1.8rem;
   font-weight: bold;
 }
-
 .date span.year {
   display: block;
   font-size: 1rem;
   line-height: 1rem;
 }
-
 .date:after {
   left: 100%;
   top: 50%;
@@ -33,7 +30,7 @@
   position: absolute;
   pointer-events: none;
   border-left-color: #81a5bf;
-  border-width: .8rem;
+  border-width: 0.8rem;
   margin-top: -8rem;
 }
 
@@ -43,22 +40,19 @@
 
 .view-articles .views-row,
 .view-taxonomy-term .views-row {
-  padding-bottom: .7rem;
+  padding-bottom: 0.7rem;
   border-bottom: 0.1rem dashed #ddd;
 }
-
 .view-articles .field--name-node-title h2,
 .view-taxonomy-term .field--name-node-title h2 {
   margin-top: 0;
 }
-
 .view-articles .field--name-field-image-media img,
 .view-taxonomy-term .field--name-field-image-media img {
   width: 100%;
   border: 0.1rem solid #eee;
   margin: 0 auto;
 }
-
 .view-articles .field-name-body p:first-child:first-letter,
 .view-taxonomy-term .field-name-body p:first-child:first-letter {
   font-family: "Times New Roman", Times, serif;
@@ -74,5 +68,4 @@
     margin: 0 1.5rem 1.5rem 0;
   }
 }
-
 /*# sourceMappingURL=../sourcemaps/view-articles.css.map */
