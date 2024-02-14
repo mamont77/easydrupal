@@ -9,10 +9,60 @@
 
 // Include bootstrap.
 // @import '../../../themes/contrib/bootstrap5/scss/style';
-@import '../../../themes/contrib/bootstrap5/dist/bootstrap/5.3.2/scss/bootstrap';
-@import '../../../themes/contrib/bootstrap5/scss/mixins';
+//@import '../../../themes/contrib/bootstrap5/dist/bootstrap/5.3.2/scss/bootstrap';
+
+// scss-docs-start import-stack
+// Configuration
+@import "../../../themes/contrib/bootstrap5/dist/bootstrap/5.3.2/scss/functions";
+@import "../../../themes/contrib/bootstrap5/dist/bootstrap/5.3.2/scss/variables";
+@import "../../../themes/contrib/bootstrap5/dist/bootstrap/5.3.2/scss/variables-dark";
+@import "../../../themes/contrib/bootstrap5/dist/bootstrap/5.3.2/scss/maps";
+@import "../../../themes/contrib/bootstrap5/dist/bootstrap/5.3.2/scss/mixins";
+@import "../../../themes/contrib/bootstrap5/dist/bootstrap/5.3.2/scss/utilities";
+
+// Layout & components
+@import "../../../themes/contrib/bootstrap5/dist/bootstrap/5.3.2/scss/root";
+@import "../../../themes/contrib/bootstrap5/dist/bootstrap/5.3.2/scss/reboot";
+@import "../../../themes/contrib/bootstrap5/dist/bootstrap/5.3.2/scss/type";
+@import "../../../themes/contrib/bootstrap5/dist/bootstrap/5.3.2/scss/images";
+@import "../../../themes/contrib/bootstrap5/dist/bootstrap/5.3.2/scss/containers";
+@import "../../../themes/contrib/bootstrap5/dist/bootstrap/5.3.2/scss/grid";
+//@import "../../../themes/contrib/bootstrap5/dist/bootstrap/5.3.2/scss/tables";
+@import "../../../themes/contrib/bootstrap5/dist/bootstrap/5.3.2/scss/forms";
+@import "../../../themes/contrib/bootstrap5/dist/bootstrap/5.3.2/scss/buttons";
+@import "../../../themes/contrib/bootstrap5/dist/bootstrap/5.3.2/scss/transitions";
+@import "../../../themes/contrib/bootstrap5/dist/bootstrap/5.3.2/scss/dropdown";
+@import "../../../themes/contrib/bootstrap5/dist/bootstrap/5.3.2/scss/button-group";
+@import "../../../themes/contrib/bootstrap5/dist/bootstrap/5.3.2/scss/nav";
+@import "../../../themes/contrib/bootstrap5/dist/bootstrap/5.3.2/scss/navbar";
+@import "../../../themes/contrib/bootstrap5/dist/bootstrap/5.3.2/scss/card";
+//@import "../../../themes/contrib/bootstrap5/dist/bootstrap/5.3.2/scss/accordion";
+@import "../../../themes/contrib/bootstrap5/dist/bootstrap/5.3.2/scss/breadcrumb";
+@import "../../../themes/contrib/bootstrap5/dist/bootstrap/5.3.2/scss/pagination";
+//@import "../../../themes/contrib/bootstrap5/dist/bootstrap/5.3.2/scss/badge";
+@import "../../../themes/contrib/bootstrap5/dist/bootstrap/5.3.2/scss/alert";
+@import "../../../themes/contrib/bootstrap5/dist/bootstrap/5.3.2/scss/progress";
+@import "../../../themes/contrib/bootstrap5/dist/bootstrap/5.3.2/scss/list-group";
+@import "../../../themes/contrib/bootstrap5/dist/bootstrap/5.3.2/scss/close";
+@import "../../../themes/contrib/bootstrap5/dist/bootstrap/5.3.2/scss/toasts";
+//@import "../../../themes/contrib/bootstrap5/dist/bootstrap/5.3.2/scss/modal";
+@import "../../../themes/contrib/bootstrap5/dist/bootstrap/5.3.2/scss/tooltip";
+@import "../../../themes/contrib/bootstrap5/dist/bootstrap/5.3.2/scss/popover";
+//@import "../../../themes/contrib/bootstrap5/dist/bootstrap/5.3.2/scss/carousel";
+//@import "../../../themes/contrib/bootstrap5/dist/bootstrap/5.3.2/scss/spinners";
+@import "../../../themes/contrib/bootstrap5/dist/bootstrap/5.3.2/scss/offcanvas";
+@import "../../../themes/contrib/bootstrap5/dist/bootstrap/5.3.2/scss/placeholders";
+
+// Helpers
+@import "../../../themes/contrib/bootstrap5/dist/bootstrap/5.3.2/scss/helpers";
+
+// Utilities
+@import "../../../themes/contrib/bootstrap5/dist/bootstrap/5.3.2/scss/utilities/api";
+// scss-docs-end import-stack
+
+//@import '../../../themes/contrib/bootstrap5/scss/mixins';
 //@import '../../../themes/contrib/bootstrap5/scss/drupal';
-@import '../../../themes/contrib/bootstrap5/scss/bootstrap_fix';
+//@import '../../../themes/contrib/bootstrap5/scss/bootstrap_fix';
 
 @import 'typography';
 @import 'wysiwyg';
