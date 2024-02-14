@@ -8,7 +8,11 @@
 @import 'variables_theme';
 
 // Include bootstrap.
-@import '../../../themes/contrib/bootstrap5/scss/style';
+// @import '../../../themes/contrib/bootstrap5/scss/style';
+@import '../../../themes/contrib/bootstrap5/dist/bootstrap/5.3.2/scss/bootstrap';
+@import '../../../themes/contrib/bootstrap5/scss/mixins';
+//@import '../../../themes/contrib/bootstrap5/scss/drupal';
+@import '../../../themes/contrib/bootstrap5/scss/bootstrap_fix';
 
 @import 'typography';
 @import 'wysiwyg';
