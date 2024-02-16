@@ -31,43 +31,64 @@ header {
   }
 
   .menu--main {
-    ul {
-      li {
-        a {
+    .navbar-nav {
+      --bs-nav-link-padding-x: 0;
+      --bs-nav-link-padding-y: .75rem;
+      --bs-nav-link-font-weight: normal;
+      --bs-nav-link-color: #{$color-body};
+      --bs-nav-link-hover-color: #{$color-neutral-2};
+      @media (min-width: $bs-breakpoint-md) {
+        --bs-nav-link-padding-x: 0;
+        --bs-nav-link-padding-y: 1.8rem;
+      }
 
+      .nav-item {
+        &:not(:last-of-type) {
+          border-bottom: .1rem solid $color-neutral-3;
+          @media (min-width: $bs-breakpoint-md) {
+            border-bottom: none;
+            border-right: .1rem solid $color-neutral-3;
+          }
+        }
+
+        .nav-link {
           --bs-nav-link-font-size: 0.938rem;
-          --bs-nav-link-padding-y: 1.3rem;
-          --bs-nav-link-hover-color: $color-neutral-2;
+          --bs-nav-link-hover-color: #{$color-neutral-2};
           --bs-nav-link-font-weight: 700;
           --line-height: 1.25rem;
           --hover-border-bottom: .5rem;
-          font-style: normal;
-          font-weight: var(--bs-nav-link-font-weight);
-          line-height: var(--line-height);
+          --bs-navbar-active-color: #{$color-neutral-2};
+          --bs-navbar-nav-link-padding-x: 1rem;
           text-transform: uppercase;
-          color: $color-body;
+          padding-left: 1.5rem;
 
-          //
-          //
-          //--bs-navbar-nav-link-padding-x: 1rem;
-          //--hover-border-bottom: .5rem;
-          //color: $color-body;
-          //text-transform: uppercase;
-          //letter-spacing: 0;
-          //font-size: 0.938rem;
-          //transition: none;
-          //font-weight: 700;
-          //line-height: 1.25rem;
-        }
+          @media (min-width: $bs-breakpoint-md) {
+            padding-left: var(--bs-navbar-nav-link-padding-x);
+          }
 
-        &.menu-item--active-trail,
-        &:hover,
-        &:focus,
-        &:active {
-          a {
+          &.is-active,
+          &:hover,
+          &:focus,
+          &:active {
+            color: $color-neutral-2;
+            border-left: var(--hover-border-bottom) solid $color-neutral-2;
+            padding-left: calc(1.5rem - var(--hover-border-bottom));
 
-            border-bottom: var(--hover-border-bottom) solid $color-neutral-2;
-            padding-bottom: calc(var(--bs-nav-link-padding-y) - var(--hover-border-bottom));
+            @media (min-width: $bs-breakpoint-md) {
+              border-left: none;
+              border-bottom: var(--hover-border-bottom) solid $color-neutral-2;
+              padding-bottom: calc(var(--bs-nav-link-padding-y) - var(--hover-border-bottom));
+            }
+          }
+
+          &:hover,
+          &:focus,
+          &:active {
+            background-color: $color-neutral-3;
+
+            @media (min-width: $bs-breakpoint-md) {
+              background:  none;
+            }
           }
         }
       }

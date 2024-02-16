@@ -21,7 +21,7 @@ function easydrupal_b5_preprocess_page(&$variables): void {
     /** @var \Drupal\node\NodeInterface $node */
     $node = $variables['node'];
 
-    // Check content type.
+    // Check a content type.
     switch ($node->getType()) {
       case 'article':
         $variables['#attached']['library'][] = 'easydrupal_b5/node-type-article';
@@ -51,6 +51,7 @@ function easydrupal_b5_theme($existing, $type, $theme, $path): array {
   return [
     'contact_message_feedback_contact_form_form' => [
       'render element' => 'form',
+      'path' => '/themes/custom/easydrupal_b5/templates/form',
     ],
   ];
 }
