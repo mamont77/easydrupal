@@ -12457,20 +12457,20 @@ a {
   font-size: 1.4rem;
 }
 
-.field--type-text-with-summary ul,
-.field-name-body ul {
+.node .field--type-text-with-summary ul,
+.node .field-name-body ul {
   list-style: none;
   padding: 0 0 0 1.5rem;
   margin: 1.5rem 0 1.5rem;
   display: inline-block;
 }
-.field--type-text-with-summary ul li,
-.field-name-body ul li {
+.node .field--type-text-with-summary ul li,
+.node .field-name-body ul li {
   padding-left: 1em;
   text-indent: -0.7em;
 }
-.field--type-text-with-summary ul li:before,
-.field-name-body ul li:before {
+.node .field--type-text-with-summary ul li:before,
+.node .field-name-body ul li:before {
   color: #81a5bf;
   text-rendering: auto;
   -webkit-font-smoothing: antialiased;

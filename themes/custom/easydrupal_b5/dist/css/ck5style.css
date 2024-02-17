@@ -11610,20 +11610,20 @@ a > .ck-content code {
 .ck-content .region-sidebar-second h2, .ck-content .region-sidebar-second .h2 {
   font-size: 1.4rem;
 }
-.ck-content .field--type-text-with-summary ul,
-.ck-content .field-name-body ul {
+.ck-content .node .field--type-text-with-summary ul,
+.ck-content .node .field-name-body ul {
   list-style: none;
   padding: 0 0 0 1.5rem;
   margin: 1.5rem 0 1.5rem;
   display: inline-block;
 }
-.ck-content .field--type-text-with-summary ul li,
-.ck-content .field-name-body ul li {
+.ck-content .node .field--type-text-with-summary ul li,
+.ck-content .node .field-name-body ul li {
   padding-left: 1em;
   text-indent: -0.7em;
 }
-.ck-content .field--type-text-with-summary ul li:before,
-.ck-content .field-name-body ul li:before {
+.ck-content .node .field--type-text-with-summary ul li:before,
+.ck-content .node .field-name-body ul li:before {
   color: #81a5bf;
   text-rendering: auto;
   -webkit-font-smoothing: antialiased;
