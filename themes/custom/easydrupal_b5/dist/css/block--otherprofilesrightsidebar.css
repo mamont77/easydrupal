@@ -1,0 +1,28 @@
+#block-easydrupal-b5-otherprofilesrightsidebar {
+  border: 0.1rem solid #ddd;
+  padding: 2rem 1.5rem;
+  text-align: center;
+}
+#block-easydrupal-b5-otherprofilesrightsidebar .field--name-body > .field__item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 1.5rem;
+}
+#block-easydrupal-b5-otherprofilesrightsidebar .field--name-body a {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+#block-easydrupal-b5-otherprofilesrightsidebar .field--name-body img {
+  width: 60%;
+  height: auto;
+}
+/*# sourceMappingURL=../sourcemaps/block--otherprofilesrightsidebar.css.map */

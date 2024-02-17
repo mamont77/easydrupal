@@ -11,7 +11,7 @@ dependencies:
 id: easydrupal_b5_ccopyright
 theme: easydrupal_b5
 region: footer
-weight: 0
+weight: -10
 provider: null
 plugin: 'block_content:ae6fffb6-5b84-4597-bb04-e9f1a6fce258'
 settings:

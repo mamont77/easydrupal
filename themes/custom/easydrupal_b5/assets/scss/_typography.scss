@@ -17,13 +17,13 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
-  font-family: var(--kwall-font-heading);
+  font-family: $font-heading;
   font-style: normal;
   font-weight: 700;
 
   &.style-fancy {
     &:after {
-      margin: 2rem 0;
+      // margin: 2rem 0;
     }
   }
 }
@@ -31,7 +31,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 h1 {
   font-size: 1.75rem;
   line-height: 1.75rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   @media (min-width: $bs-breakpoint-lg) {
     font-size: 2rem;
     line-height: 2.5rem;
@@ -40,7 +40,7 @@ h1 {
 
 h2 {
   font-size: 1.5rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1.25rem;
   @media (min-width: $bs-breakpoint-lg) {
     font-size: 1.75rem;
     line-height: normal;

@@ -2,8 +2,7 @@ uuid: 7349ecc7-c4f7-421e-95ec-8c84556626d7
 langcode: en
 status: true
 dependencies:
-  module:
-    - slick
+  module: {  }
 _core:
   default_config_hash: NIKBt6kw_uPhNI0qtR2DnRf7mSOgAQdx7Q94SKMjXbQ
 name: 'Plain text'
@@ -29,11 +28,3 @@ filters:
     weight: 0
     settings:
       filter_url_length: 72
-  slick_filter:
-    id: slick_filter
-    provider: slick
-    status: false
-    weight: 4
-    settings:
-      optionset: default
-      media_switch: ''

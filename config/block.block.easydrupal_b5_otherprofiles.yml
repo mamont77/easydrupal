@@ -12,7 +12,7 @@ dependencies:
 id: easydrupal_b5_otherprofiles
 theme: easydrupal_b5
 region: footer
-weight: 0
+weight: -9
 provider: null
 plugin: 'block_content:a4bd2375-c885-4ab7-ba12-cd7893a0ead9'
 settings:

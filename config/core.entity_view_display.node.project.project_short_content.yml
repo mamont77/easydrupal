@@ -13,13 +13,10 @@ dependencies:
     - field.field.node.project.field_project_images_media
     - field.field.node.project.field_project_url
     - field.field.node.project.field_skills
-    - image.style.project_slider_default
     - node.type.project
-    - responsive_image.styles.project_slider
   module:
     - datetime
     - link
-    - slick
     - text
     - user
 id: node.project.project_short_content
@@ -44,66 +41,13 @@ content:
     weight: 1
     region: right
   field_project_images_media:
-    type: slick_media
-    label: hidden
+    type: entity_reference_label
+    label: above
     settings:
-      caption:
-        alt: alt
-        field_media_categories: '0'
-        title: '0'
-      optionset: default
-      class: ''
-      id: ''
-      image: ''
-      link: ''
-      overlay: ''
-      title: ''
-      vanilla: false
-      layout: ''
-      view_mode: default
-      cache: 0
-      skin: ''
-      lazy: ''
-      style: ''
-      background: false
-      box_caption: ''
-      box_caption_custom: ''
-      box_media_style: ''
-      loading: lazy
-      preload: false
-      responsive_image_style: project_slider
-      use_theme_field: false
-      box_style: ''
-      image_style: project_slider_default
-      media_switch: ''
-      ratio: ''
-      thumbnail_style: ''
-      grid: ''
-      grid_medium: ''
-      grid_small: ''
-      overridables:
-        arrows: '0'
-        autoplay: '0'
-        dots: '0'
-        draggable: '0'
-        infinite: '0'
-        mouseWheel: '0'
-        randomize: '0'
-        variableWidth: '0'
-      thumbnail: ''
-      optionset_thumbnail: ''
-      skin_thumbnail: ''
-      thumbnail_caption: ''
-      thumbnail_effect: ''
-      thumbnail_position: ''
-      override: false
-      skin_arrows: ''
-      skin_dots: ''
-      preserve_keys: false
-      visible_items: null
+      link: true
     third_party_settings: {  }
-    weight: 4
-    region: bottom
+    weight: 5
+    region: content
   field_project_url:
     type: link
     label: hidden

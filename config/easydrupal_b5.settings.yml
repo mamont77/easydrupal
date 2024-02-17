@@ -6,8 +6,8 @@ b5_navbar_schema: none
 b5_navbar_bg_schema: none
 b5_footer_schema: none
 b5_footer_bg_schema: none
-b5_top_container: container
-b5_top_container_config: ''
+b5_top_container: container-lg
+b5_top_container_config: "container-lg|Large Container\r\n"
 features:
   node_user_picture: 1
   comment_user_picture: true

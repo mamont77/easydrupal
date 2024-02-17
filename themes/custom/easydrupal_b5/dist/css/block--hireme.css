@@ -1,0 +1,31 @@
+#block-easydrupal-b5-hireme h2 {
+  font-size: 4rem;
+  margin: 0;
+}
+@media (min-width: 768px) {
+  #block-easydrupal-b5-hireme {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    gap: 1.5rem;
+  }
+  #block-easydrupal-b5-hireme .field--name-body {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    gap: 1.5rem;
+  }
+}
+/*# sourceMappingURL=../sourcemaps/block--hireme.css.map */

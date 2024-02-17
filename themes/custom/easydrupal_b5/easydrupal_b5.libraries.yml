@@ -81,6 +81,16 @@ paragraph-source-code:
     theme:
       dist/css/paragraph-source-code.css: { }
 
+block-otherprofilesrightsidebar:
+  css:
+    theme:
+      dist/css/block--otherprofilesrightsidebar.css: { }
+
+block-hireme:
+  css:
+    theme:
+      dist/css/block--hireme.css: { }
+
 fontawesome:
   version: VERSION
   js:

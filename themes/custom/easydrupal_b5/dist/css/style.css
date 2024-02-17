@@ -12397,18 +12397,14 @@ textarea.form-control-lg {
 }
 
 h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
-  font-family: var(--kwall-font-heading);
+  font-family: "Roboto Condensed", Verdana, Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: 700;
 }
-h1.style-fancy:after, h2.style-fancy:after, h3.style-fancy:after, h4.style-fancy:after, h5.style-fancy:after, h6.style-fancy:after, .h1.style-fancy:after, .h2.style-fancy:after, .h3.style-fancy:after, .h4.style-fancy:after, .h5.style-fancy:after, .h6.style-fancy:after {
-  margin: 2rem 0;
-}
-
 h1, .h1 {
   font-size: 1.75rem;
   line-height: 1.75rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 }
 @media (min-width: 992px) {
   h1, .h1 {
@@ -12419,7 +12415,7 @@ h1, .h1 {
 
 h2, .h2 {
   font-size: 1.5rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1.25rem;
 }
 @media (min-width: 992px) {
   h2, .h2 {
@@ -12441,6 +12437,55 @@ h3, .h3 {
 
 a {
   text-decoration: none;
+}
+
+.dialog-off-canvas-main-canvas > main {
+  margin-bottom: 1.5rem;
+}
+@media (min-width: 992px) {
+  .dialog-off-canvas-main-canvas > main {
+    margin-bottom: 3rem;
+  }
+}
+
+.block-page-title-block h1, .block-page-title-block .h1 {
+  padding-bottom: 0.5rem;
+  border-bottom: 0.1rem solid #ddd;
+}
+
+.region-sidebar-second h2, .region-sidebar-second .h2 {
+  font-size: 1.4rem;
+}
+
+.field--type-text-with-summary ul,
+.field-name-body ul {
+  list-style: none;
+  padding: 0 0 0 1.5rem;
+  margin: 1.5rem 0 1.5rem;
+  display: inline-block;
+}
+.field--type-text-with-summary ul li,
+.field-name-body ul li {
+  padding-left: 1em;
+  text-indent: -0.7em;
+}
+.field--type-text-with-summary ul li:before,
+.field-name-body ul li:before {
+  color: #81a5bf;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  content: "\f00c";
+  font: var(--fa-font-solid);
+  margin-right: 0.8rem;
+}
+
+.media.align-left {
+  margin-right: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.media.align-right {
+  margin-left: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
 header .navbar {
@@ -12534,12 +12579,11 @@ header .menu--main .navbar-nav .nav-item .nav-link:hover, header .menu--main .na
 }
 
 footer.footer {
-  min-height: 87px;
   background: #575756;
   border-top-color: transparent;
-  color: #fff;
-  font-size: 14px;
-  padding: 24px 15px;
+  color: #FFFFFF;
+  font-size: 1rem;
+  padding: 1.75rem 1.5rem;
 }
 footer.footer p {
   margin: 0;

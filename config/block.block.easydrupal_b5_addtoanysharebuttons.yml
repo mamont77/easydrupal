@@ -19,10 +19,10 @@ settings:
   label_display: visible
   provider: addtoany
   context_mapping: {  }
+  buttons_size: null
+  addtoany_html: ''
   link_url: ''
   link_title: ''
-  buttons_size: ''
-  addtoany_html: ''
 visibility:
   request_path:
     id: request_path

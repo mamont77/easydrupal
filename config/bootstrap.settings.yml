@@ -1,7 +1,7 @@
 favicon:
   mimetype: image/vnd.microsoft.icon
   path: ''
-  url: 'http://easydrupal.dev/themes/bootstrap/favicon.ico'
+  url: /themes/contrib/bootstrap/favicon.ico
   use_default: true
 features:
   comment_user_picture: true
@@ -13,9 +13,17 @@ logo:
   url: ''
   use_default: true
 schema: '8000'
-cdn_jsdelivr_version: 3.3.6
 navbar_position: static-top
 region_wells:
+  navigation: ''
+  navigation_collapsible: ''
+  header: ''
+  highlighted: ''
+  help: ''
+  content: ''
+  sidebar_first: ''
   sidebar_second: ''
+  footer: ''
 schemas:
   bootstrap: 8000
+cdn_version: 3.3.6

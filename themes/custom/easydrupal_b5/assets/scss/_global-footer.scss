@@ -1,10 +1,10 @@
 footer.footer {
-  min-height: 87px;
-  background: #575756;
+  //min-height: 87px;
+  background: $color-body;
   border-top-color: transparent;
-  color: #fff;
-  font-size: 14px;
-  padding: 24px 15px;
+  color: $color-white;
+  font-size: 1rem;
+  padding: 1.75rem 1.5rem;
 
   p {
     margin: 0;

@@ -1,0 +1,22 @@
+@import 'variables_theme';
+
+#block-easydrupal-b5-hireme {
+  h2 {
+    font-size: 4rem;
+    margin: 0;
+  }
+
+  @media (min-width: $bs-breakpoint-md) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
+
+    .field--name-body {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.5rem;
+    }
+  }
+}
