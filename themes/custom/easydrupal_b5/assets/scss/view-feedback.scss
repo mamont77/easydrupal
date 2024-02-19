@@ -2,29 +2,21 @@
 
 @import 'variables_theme';
 
-.view {
-  .views-row {
-    margin-bottom: 15px;
-  }
-}
-
 .view-feedback {
   .row {
     text-align: center;
-
-    .col {
-      border-bottom: 1px dashed $color-neutral-3;
-      padding-bottom: 30px;
-      margin-bottom: 30px;
+    > div {
+      border-bottom: .1rem dashed $color-neutral-3;
+      padding-bottom: 1.5rem;
+      margin-bottom: 1.5rem;
     }
   }
 
   h3.title {
-    margin: 0 0 15px 0;
   }
 
   .about {
-    margin-bottom: 15px;
+    margin-bottom: 1rem;
     color: $color-neutral-2;
 
     span {
@@ -51,8 +43,8 @@
       width: 150px;
       height: 150px;
       border-radius: 50%;
-      border: 8px solid $color-neutral-15;
-      margin: 0 auto 15px auto;
+      border: .5rem solid $color-neutral-15;
+      margin: 0 auto 1rem auto;
       opacity: .8;
 
       &:hover {
@@ -62,14 +54,13 @@
   }
 
   .project-info {
-    margin-bottom: 15px;
+    margin-bottom: 1rem;
   }
 
   .field--name-field-date {
-    font-size: 15px;
-    margin-bottom: 5px;
+    font-size: .9rem;
+    margin-bottom: .5rem;
     color: $color-neutral-2;
-    //font-weight: bold;
   }
 
   .field--name-field-project-title {
@@ -90,9 +81,9 @@
   blockquote {
     color: $color-body;
     background-color: transparent;
-    //border-left: 1px solid $testimonialsBlockquoteBorderColor;
+    border-left: 1px solid $color-neutral-11;
     font-style: italic;
-    padding: 15px;
+    padding: 1rem;
     text-align: justify;
     margin: 0;
     font-size: inherit;

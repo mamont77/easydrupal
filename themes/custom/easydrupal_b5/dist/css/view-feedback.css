@@ -1,21 +1,14 @@
 @charset "UTF-8";
-.view .views-row {
-  margin-bottom: 15px;
-}
-
 .view-feedback .row {
   text-align: center;
 }
-.view-feedback .row .col {
-  border-bottom: 1px dashed #ddd;
-  padding-bottom: 30px;
-  margin-bottom: 30px;
-}
-.view-feedback h3.title {
-  margin: 0 0 15px 0;
+.view-feedback .row > div {
+  border-bottom: 0.1rem dashed #ddd;
+  padding-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 .view-feedback .about {
-  margin-bottom: 15px;
+  margin-bottom: 1rem;
   color: #81a5bf;
 }
 .view-feedback .about span {
@@ -28,19 +21,19 @@
   width: 150px;
   height: 150px;
   border-radius: 50%;
-  border: 8px solid #eee;
-  margin: 0 auto 15px auto;
+  border: 0.5rem solid #eee;
+  margin: 0 auto 1rem auto;
   opacity: 0.8;
 }
 .view-feedback .field--name-field-image-media img:hover {
   opacity: 1;
 }
 .view-feedback .project-info {
-  margin-bottom: 15px;
+  margin-bottom: 1rem;
 }
 .view-feedback .field--name-field-date {
-  font-size: 15px;
-  margin-bottom: 5px;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
   color: #81a5bf;
 }
 .view-feedback .field--name-field-project-title {
@@ -52,8 +45,9 @@
 .view-feedback blockquote {
   color: #575756;
   background-color: transparent;
+  border-left: 1px solid #adadad;
   font-style: italic;
-  padding: 15px;
+  padding: 1rem;
   text-align: justify;
   margin: 0;
   font-size: inherit;

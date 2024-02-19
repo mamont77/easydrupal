@@ -11593,6 +11593,7 @@ a > .ck-content code {
   }
 }
 .ck-content a {
+  color: #293749;
   text-decoration: none;
 }
 .ck-content .dialog-off-canvas-main-canvas > main {

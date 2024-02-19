@@ -42,10 +42,6 @@ view-feedback:
   css:
     theme:
       dist/css/view-feedback.css: { }
-  js:
-    dist/js/view-feedback.js: { }
-  dependencies:
-    - easydrupal_b5/global-styling
 
 view-tags:
   css:

@@ -145,10 +145,10 @@ display:
           row_class: ''
           default_row_class: true
           uses_fields: false
-          col_xs: none
-          col_sm: col-sm-6
+          col_xs: col-12
+          col_sm: none
           col_md: col-md-6
-          col_lg: col-lg-6
+          col_lg: none
           col_xl: none
           col_xxl: none
       row:
@@ -167,7 +167,10 @@ display:
       css_class: feedback
       header: {  }
       footer: {  }
-      display_extenders: {  }
+      display_extenders:
+        metatag_display_extender:
+          metatags: {  }
+          tokenize: false
     cache_metadata:
       max-age: -1
       contexts:

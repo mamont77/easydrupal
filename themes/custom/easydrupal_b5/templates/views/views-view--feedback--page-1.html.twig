@@ -1,12 +1,14 @@
 {{ attach_library('easydrupal_b5/view-feedback') }}
 
-{% set classes = [
+{%
+  set classes = [
   'view',
   'view-' ~ id|clean_class,
   'view-id-' ~ id,
   'view-display-id-' ~ display_id,
   dom_id ? 'js-view-dom-id-' ~ dom_id,
-] %}
+]
+%}
 <div{{ attributes.addClass(classes) }}>
   {{ title_prefix }}
   {% if title %}
@@ -19,7 +21,7 @@
     </div>
   {% endif %}
   {% if exposed %}
-    <div class="view-filters form-group">
+    <div class="view-filters">
       {{ exposed }}
     </div>
   {% endif %}
