@@ -12,11 +12,31 @@
     }
   }
 
+  .node__content {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+  }
+
+  .field--name-field-image-media {
+    img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      border: .5rem solid $color-neutral-15;
+      margin: 0 auto;
+      opacity: .8;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+
   h3.title {
   }
 
   .about {
-    margin-bottom: 1rem;
     color: $color-neutral-2;
 
     span {
@@ -29,53 +49,27 @@
     }
   }
 
-  .name {
-  }
+  .field--name {
+    &-field-date {
+      font-size: .9rem;
+      color: $color-neutral-2;
+    }
 
-  .position {
-  }
-
-  .country {
-  }
-
-  .field--name-field-image-media {
-    img {
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      border: .5rem solid $color-neutral-15;
-      margin: 0 auto 1rem auto;
-      opacity: .8;
-
-      &:hover {
-        opacity: 1;
+    &-field-project-title {
+      color: $color-heading; //need for "comma".
+      //font-weight: bold;
+      a {
       }
-    }
-  }
 
-  .project-info {
-    margin-bottom: 1rem;
-  }
-
-  .field--name-field-date {
-    font-size: .9rem;
-    margin-bottom: .5rem;
-    color: $color-neutral-2;
-  }
-
-  .field--name-field-project-title {
-    color: $color-heading; //need for "comma".
-    //font-weight: bold;
-    a {
-    }
-
-    > span {
-      &:not(:last-child) {
-        &:after {
-          content: ",";
+      > span {
+        &:not(:last-child) {
+          &:after {
+            content: ",";
+          }
         }
       }
     }
+
   }
 
   blockquote {

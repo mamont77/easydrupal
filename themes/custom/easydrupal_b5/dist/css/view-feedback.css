@@ -7,8 +7,28 @@
   padding-bottom: 1.5rem;
   margin-bottom: 1.5rem;
 }
+.view-feedback .node__content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 0.5rem;
+}
+.view-feedback .field--name-field-image-media img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 0.5rem solid #eee;
+  margin: 0 auto;
+  opacity: 0.8;
+}
+.view-feedback .field--name-field-image-media img:hover {
+  opacity: 1;
+}
 .view-feedback .about {
-  margin-bottom: 1rem;
   color: #81a5bf;
 }
 .view-feedback .about span {
@@ -17,23 +37,8 @@
 .view-feedback .about span:not(:last-child):after {
   content: "|";
 }
-.view-feedback .field--name-field-image-media img {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  border: 0.5rem solid #eee;
-  margin: 0 auto 1rem auto;
-  opacity: 0.8;
-}
-.view-feedback .field--name-field-image-media img:hover {
-  opacity: 1;
-}
-.view-feedback .project-info {
-  margin-bottom: 1rem;
-}
 .view-feedback .field--name-field-date {
   font-size: 0.9rem;
-  margin-bottom: 0.5rem;
   color: #81a5bf;
 }
 .view-feedback .field--name-field-project-title {
