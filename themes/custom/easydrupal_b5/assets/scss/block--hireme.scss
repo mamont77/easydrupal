@@ -1,6 +1,8 @@
 @import 'variables_theme';
 
 #block-easydrupal-b5-hireme {
+  text-align: center;
+
   h2 {
     font-size: 4rem;
     margin: 0;
@@ -17,6 +19,35 @@
       justify-content: space-between;
       align-items: center;
       gap: 1.5rem;
+
+      p {
+        margin: 0;
+      }
+    }
+  }
+
+  a {
+    display: inline-block;
+    letter-spacing: .03em;
+    text-transform: uppercase;
+    font-weight: 500;
+    background-color: $color-neutral-2;
+    padding: 1.5rem 2rem;
+    color: $color-white;
+    text-decoration: none;
+
+    &:after {
+      margin-left: 0.5rem;
+      text-rendering: auto;
+      -webkit-font-smoothing: antialiased;
+      content: '\f1d8';
+      font: var(--fa-font-solid);
+    }
+
+    &:hover,
+    &:active,
+    &:focus {
+      background-color: $color-neutral-4;
     }
   }
 }

@@ -1,3 +1,6 @@
+#block-easydrupal-b5-hireme {
+  text-align: center;
+}
 #block-easydrupal-b5-hireme h2 {
   font-size: 4rem;
   margin: 0;
@@ -27,5 +30,28 @@
             align-items: center;
     gap: 1.5rem;
   }
+  #block-easydrupal-b5-hireme .field--name-body p {
+    margin: 0;
+  }
+}
+#block-easydrupal-b5-hireme a {
+  display: inline-block;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  font-weight: 500;
+  background-color: #81a5bf;
+  padding: 1.5rem 2rem;
+  color: #FFFFFF;
+  text-decoration: none;
+}
+#block-easydrupal-b5-hireme a:after {
+  margin-left: 0.5rem;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  content: "\f1d8";
+  font: var(--fa-font-solid);
+}
+#block-easydrupal-b5-hireme a:hover, #block-easydrupal-b5-hireme a:active, #block-easydrupal-b5-hireme a:focus {
+  background-color: #5f8dae;
 }
 /*# sourceMappingURL=../sourcemaps/block--hireme.css.map */
