@@ -123,8 +123,6 @@ module:
   twigsuggest: 100
   standard: 1000
 theme:
-  bootstrap: 0
-  easydrupal: 0
   claro: 0
   stable9: 0
   bootstrap5: 0
