@@ -1,0 +1,7 @@
+.breadcrumb {
+  --bs-secondary-color: rgb(204, 204, 204);
+}
+.breadcrumb a {
+  color: #81a5bf;
+}
+/*# sourceMappingURL=../sourcemaps/block--breadcrumbs.css.map */

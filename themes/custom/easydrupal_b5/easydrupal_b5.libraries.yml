@@ -81,6 +81,11 @@ paragraph-source-code:
     theme:
       dist/css/paragraph-source-code.css: { }
 
+block-breadcrumbs:
+  css:
+    theme:
+      dist/css/block--breadcrumbs.css: { }
+
 block-otherprofilesrightsidebar:
   css:
     theme:

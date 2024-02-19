@@ -11656,15 +11656,6 @@ a > .ck-content code {
       -ms-flex-pack: center;
           justify-content: center;
 }
-.ck-content .breadcrumb {
-  border-radius: 0;
-  background: none transparent;
-  padding: 0;
-  margin-bottom: 2rem;
-}
-.ck-content .breadcrumb a {
-  color: #81a5bf;
-}
 .ck-content label {
   display: inline-block;
   max-width: 100%;

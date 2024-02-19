@@ -12505,16 +12505,6 @@ a {
           justify-content: center;
 }
 
-.breadcrumb {
-  border-radius: 0;
-  background: none transparent;
-  padding: 0;
-  margin-bottom: 2rem;
-}
-.breadcrumb a {
-  color: #81a5bf;
-}
-
 label {
   display: inline-block;
   max-width: 100%;
