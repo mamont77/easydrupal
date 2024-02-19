@@ -5,14 +5,14 @@ dependencies:
   config:
     - image.style.feedback_portrait
   theme:
-    - easydrupal
+    - bootstrap5
 id: feedback_portrait
 label: 'FeedBack Portrait'
 image_style_mappings:
   -
     image_mapping_type: image_style
     image_mapping: feedback_portrait
-    breakpoint_id: easydrupal.min-width-1px
-    multiplier: 1x
-breakpoint_group: easydrupal
+    breakpoint_id: bootstrap5.screen.sm-min
+    multiplier: 2x
+breakpoint_group: bootstrap5.screen
 fallback_image_style: feedback_portrait

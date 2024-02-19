@@ -215,13 +215,13 @@ display:
             caption:
               title: '0'
               alt: '0'
-            current_view_mode: _custom
             background: false
             responsive_image_style: feedback_portrait
             image_style: max_150x150
             media_switch: ''
             ratio: ''
             thumbnail_style: ''
+            current_view_mode: _custom
           group_column: ''
           group_columns: {  }
           group_rows: true

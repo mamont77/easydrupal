@@ -6,7 +6,7 @@ dependencies:
     - image.style.max_200x200
     - image.style.max_720x720
   theme:
-    - easydrupal
+    - bootstrap5
 _core:
   default_config_hash: xAduWBNBoi9WKBMCoVIKSueNYqPK84SiiZwQYKPbkaE
 id: article
@@ -15,7 +15,7 @@ image_style_mappings:
   -
     image_mapping_type: image_style
     image_mapping: max_720x720
-    breakpoint_id: easydrupal.screen-xs-max
+    breakpoint_id: bootstrap5.screen.sm-max
     multiplier: 1x
-breakpoint_group: easydrupal
+breakpoint_group: bootstrap5.screen
 fallback_image_style: max_200x200

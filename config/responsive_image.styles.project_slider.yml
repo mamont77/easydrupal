@@ -7,19 +7,19 @@ dependencies:
     - image.style.project_slider_max_width_767px
     - image.style.project_slider_max_width_991px
   theme:
-    - easydrupal
+    - bootstrap5
 id: project_slider
 label: 'Project Slider'
 image_style_mappings:
   -
     image_mapping_type: image_style
-    image_mapping: project_slider_max_width_767px
-    breakpoint_id: easydrupal.screen-xs-max
+    image_mapping: project_slider_max_width_991px
+    breakpoint_id: bootstrap5.screen.md-max
     multiplier: 1x
   -
     image_mapping_type: image_style
-    image_mapping: project_slider_max_width_991px
-    breakpoint_id: easydrupal.screen-sm-max
+    image_mapping: project_slider_max_width_767px
+    breakpoint_id: bootstrap5.screen.sm-max
     multiplier: 1x
-breakpoint_group: easydrupal
+breakpoint_group: bootstrap5.screen
 fallback_image_style: project_slider_default

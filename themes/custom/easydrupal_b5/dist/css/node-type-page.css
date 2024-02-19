@@ -9,7 +9,7 @@
 }
 .alias--about-me article.node--view-mode-full .field--name-body img {
   border-radius: 50%;
-  border: 0.8rem solid #eee;
+  border: 0.5rem solid #eee;
   width: 216px;
   height: 216px;
 }

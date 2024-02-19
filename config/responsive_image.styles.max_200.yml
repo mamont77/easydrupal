@@ -5,14 +5,14 @@ dependencies:
   config:
     - image.style.max_200x200
   theme:
-    - easydrupal
+    - bootstrap5
 id: max_200
 label: 'Max 200'
 image_style_mappings:
   -
     image_mapping_type: image_style
     image_mapping: max_200x200
-    breakpoint_id: easydrupal.min-width-1px
+    breakpoint_id: bootstrap5.screen.sm-min
     multiplier: 1x
-breakpoint_group: easydrupal
+breakpoint_group: bootstrap5.screen
 fallback_image_style: max_200x200

@@ -18,6 +18,10 @@ settings:
   label: 'AddToAny buttons'
   label_display: '0'
   provider: addtoany
+  buttons_size: null
+  addtoany_html: ''
+  link_url: ''
+  link_title: ''
 visibility:
   request_path:
     id: request_path
