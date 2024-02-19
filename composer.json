@@ -81,6 +81,7 @@
         "drupal/sticky_sharrre_bar": "^1.5",
         "drupal/token": "^1.13",
         "drupal/twig_field_value": "^2.0",
+        "drupal/twig_tweak": "^3.2",
         "drupal/twigsuggest": "^1.0@RC",
         "drupal/upgrade_status": "^4.0",
         "drupal/views_bootstrap": "^5.5@alpha",

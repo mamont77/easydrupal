@@ -1,0 +1,28 @@
+{%
+  set classes = [
+  'node',
+  'node--type-' ~ node.bundle|clean_class,
+  node.isPromoted() ? 'node--promoted',
+  node.isSticky() ? 'node--sticky',
+  not node.isPublished() ? 'node--unpublished',
+  view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+]
+%}
+{{ attach_library('bootstrap5/node') }}
+{{ attach_library('easydrupal_b5/node-type-article') }}
+
+<article{{ attributes.addClass(classes) }}>
+
+  <div class="d-flex justify-content-start">
+    <div class="date">
+      <span class="day">{{ node.created.value|date('j') }}</span>
+      <span class="year">{{ node.created.value|date('M.Y') }}</span>
+    </div>
+    {{ drupal_block('page_title_block') }}
+  </div>
+
+  <div{{ content_attributes.addClass('node__content') }}>
+    {{ content }}
+  </div>
+
+</article>

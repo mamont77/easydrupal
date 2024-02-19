@@ -1,19 +1,18 @@
-uuid: 9949846f-9d7f-4c06-b662-ec771d7713c7
+uuid: 8f3c5445-1842-4b67-b7eb-a94dac391def
 langcode: en
 status: true
 dependencies:
   module:
-    - ctools
     - taxonomy
 id: version
 label: Version
 type: 'canonical_entities:taxonomy_term'
 pattern: 'version/[term:name]'
 selection_criteria:
-  321a1a90-3712-4682-a10d-f1ad7e76e71f:
+  5801438f-8acb-4673-a25d-6f8d95ff005f:
     id: 'entity_bundle:taxonomy_term'
     negate: false
-    uuid: 321a1a90-3712-4682-a10d-f1ad7e76e71f
+    uuid: 5801438f-8acb-4673-a25d-6f8d95ff005f
     context_mapping:
       taxonomy_term: taxonomy_term
     bundles:
