@@ -1,0 +1,125 @@
+@charset "UTF-8";
+
+@import 'variables_theme';
+
+.view {
+  .views-row {
+    margin-bottom: 15px;
+  }
+}
+
+.view-feedback {
+  .row {
+    text-align: center;
+
+    .col {
+      border-bottom: 1px dashed $color-neutral-3;
+      padding-bottom: 30px;
+      margin-bottom: 30px;
+    }
+  }
+
+  h3.title {
+    margin: 0 0 15px 0;
+  }
+
+  .about {
+    margin-bottom: 15px;
+    color: $color-neutral-2;
+
+    span {
+      color: $color-neutral-2;
+      &:not(:last-child) {
+        &:after {
+          content: "|";
+        }
+      }
+    }
+  }
+
+  .name {
+  }
+
+  .position {
+  }
+
+  .country {
+  }
+
+  .field--name-field-image-media {
+    img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      border: 8px solid $color-neutral-15;
+      margin: 0 auto 15px auto;
+      opacity: .8;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+
+  .project-info {
+    margin-bottom: 15px;
+  }
+
+  .field--name-field-date {
+    font-size: 15px;
+    margin-bottom: 5px;
+    color: $color-neutral-2;
+    //font-weight: bold;
+  }
+
+  .field--name-field-project-title {
+    color: $color-heading; //need for "comma".
+    //font-weight: bold;
+    a {
+    }
+
+    > span {
+      &:not(:last-child) {
+        &:after {
+          content: ",";
+        }
+      }
+    }
+  }
+
+  blockquote {
+    color: $color-body;
+    background-color: transparent;
+    //border-left: 1px solid $testimonialsBlockquoteBorderColor;
+    font-style: italic;
+    padding: 15px;
+    text-align: justify;
+    margin: 0;
+    font-size: inherit;
+    font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+    &:before, &:after {
+      font-family: helvetica, arial, sans-serif;
+      color: $color-neutral-2;
+      font-size: 3em;
+      line-height: 0.1em;
+    }
+
+    &:before {
+      content: "\201c";
+      vertical-align: -.4em;
+      margin-left: 0;
+      margin-right: 0.2em;
+    }
+
+    &:after {
+      content: "\201d";
+      vertical-align: -.45em;
+      margin-left: 0.2em;
+    }
+
+    > p:first-child {
+      display: inline;
+    }
+  }
+}

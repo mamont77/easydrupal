@@ -1,0 +1,16 @@
+.alias--about-me article.node--view-mode-full .field--name-body .align-left {
+  float: none;
+  text-align: center;
+}
+@media (min-width: 768px) {
+  .alias--about-me article.node--view-mode-full .field--name-body .align-left {
+    float: left;
+  }
+}
+.alias--about-me article.node--view-mode-full .field--name-body img {
+  border-radius: 50%;
+  border: 0.8rem solid #eee;
+  width: 216px;
+  height: 216px;
+}
+/*# sourceMappingURL=../sourcemaps/node-type-page.css.map */

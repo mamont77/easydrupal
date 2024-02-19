@@ -1,0 +1,65 @@
+@charset "UTF-8";
+
+@import 'variables_theme';
+
+.view {
+  .views-row {
+    margin-bottom: 1.5rem;
+  }
+}
+
+.view-about-author {
+  border: 1px solid $color-neutral-3;
+  padding: 20px 15px;
+  line-height: 22px;
+
+  .views-row {
+    margin-bottom: 0;
+  }
+
+  .views-field {
+    margin-bottom: 5px;
+  }
+
+  .views-field-field-last-name {
+    font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+    color: $color-neutral-16;
+  }
+
+  .views-field-user-picture {
+    img {
+      width: 150px;
+      height: 150px;
+      margin: 0 auto;
+      border-radius: 50%;
+      border: 8px solid $color-neutral-15;
+      opacity: .8;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+
+  .views-field-field-country {
+    .field-content {
+      &::before {
+        font-family: 'FontAwesome';
+        content: "\f3c5";
+        padding-right: 5px;
+      }
+    }
+  }
+
+  //.views-field-field-date-birth {
+  //  color: $dateColor;
+  //}
+
+  .views-field-field-about {
+    font-size: 16px;
+    line-height: 18px;
+  }
+}

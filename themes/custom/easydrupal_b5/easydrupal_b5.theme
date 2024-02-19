@@ -7,7 +7,51 @@
  * Place your custom PHP code in this file.
  */
 
+use Drupal\Component\Utility\Html;
 use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements template_preprocess_html().
+ */
+function easydrupal_b5_preprocess_html(&$variables): void {
+  // Page specific info.
+  $variables['path_info']['args'] = FALSE;
+  $path = \Drupal::service('path.current')->getPath();
+  $path_args = explode('/', ltrim($path, '/'));
+  if (isset($path_args[0])
+    && isset($path_args[1])
+    && ($path_args[0] == 'node')
+    && (is_numeric($path_args[1]))) {
+    $variables['attributes']['class'][] = 'page-node-' . $path_args[1];
+  }
+  if (isset($path_args[0])
+    && isset($path_args[1])
+    && ($path_args[0] == 'user')) {
+    $variables['attributes']['class'][] = 'page-user-' . $path_args[1];
+  }
+  if (isset($path_args[0])
+    && isset($path_args[1])
+    && isset($path_args[2]) &&
+    $path_args[0] == 'taxonomy' && $path_args[1] == 'term') {
+    $variables['attributes']['class'][] = 'page-taxonomy-term-' . $path_args[2];
+    $term = \Drupal::entityTypeManager()
+      ->getStorage('taxonomy_term')
+      ->load($path_args[2]);
+    if (!empty($term)) {
+      $vocabulary_id = $term->bundle();
+      $variables['attributes']['class'][] = 'page-vocabulary-' . Html::cleanCssIdentifier($vocabulary_id);
+    }
+  }
+  $view_id = \Drupal::routeMatch()->getParameter('view_id');
+  if ($view_id) {
+    $variables['attributes']['class'][] = 'page-view-' . Html::cleanCssIdentifier($view_id);
+  }
+
+  // Add node alias as a class.
+  $path_alias = \Drupal::service('path_alias.manager')
+    ->getAliasByPath($path);
+  $variables['attributes']['class'][] = 'alias-' . Html::cleanCssIdentifier($path_alias);
+}
 
 /**
  * Implements template_preprocess_page().
@@ -20,6 +64,9 @@ function easydrupal_b5_preprocess_page(&$variables): void {
   if (isset($variables['node'])) {
     /** @var \Drupal\node\NodeInterface $node */
     $node = $variables['node'];
+
+    // Expose Content type to page template.
+    $variables['content_type'] = $node->getType();
 
     // Check a content type.
     switch ($node->getType()) {

@@ -1,0 +1,82 @@
+@charset "UTF-8";
+.view .views-row {
+  margin-bottom: 15px;
+}
+
+.view-feedback .row {
+  text-align: center;
+}
+.view-feedback .row .col {
+  border-bottom: 1px dashed #ddd;
+  padding-bottom: 30px;
+  margin-bottom: 30px;
+}
+.view-feedback h3.title {
+  margin: 0 0 15px 0;
+}
+.view-feedback .about {
+  margin-bottom: 15px;
+  color: #81a5bf;
+}
+.view-feedback .about span {
+  color: #81a5bf;
+}
+.view-feedback .about span:not(:last-child):after {
+  content: "|";
+}
+.view-feedback .field--name-field-image-media img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 8px solid #eee;
+  margin: 0 auto 15px auto;
+  opacity: 0.8;
+}
+.view-feedback .field--name-field-image-media img:hover {
+  opacity: 1;
+}
+.view-feedback .project-info {
+  margin-bottom: 15px;
+}
+.view-feedback .field--name-field-date {
+  font-size: 15px;
+  margin-bottom: 5px;
+  color: #81a5bf;
+}
+.view-feedback .field--name-field-project-title {
+  color: #293749;
+}
+.view-feedback .field--name-field-project-title > span:not(:last-child):after {
+  content: ",";
+}
+.view-feedback blockquote {
+  color: #575756;
+  background-color: transparent;
+  font-style: italic;
+  padding: 15px;
+  text-align: justify;
+  margin: 0;
+  font-size: inherit;
+  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.view-feedback blockquote:before, .view-feedback blockquote:after {
+  font-family: helvetica, arial, sans-serif;
+  color: #81a5bf;
+  font-size: 3em;
+  line-height: 0.1em;
+}
+.view-feedback blockquote:before {
+  content: "“";
+  vertical-align: -0.4em;
+  margin-left: 0;
+  margin-right: 0.2em;
+}
+.view-feedback blockquote:after {
+  content: "”";
+  vertical-align: -0.45em;
+  margin-left: 0.2em;
+}
+.view-feedback blockquote > p:first-child {
+  display: inline;
+}
+/*# sourceMappingURL=../sourcemaps/view-feedback.css.map */

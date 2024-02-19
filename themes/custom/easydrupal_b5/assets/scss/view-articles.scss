@@ -1,0 +1,54 @@
+@charset "UTF-8";
+
+@import 'variables_theme';
+@import "date";
+
+.view {
+  .views-row {
+    margin-bottom: 15px;
+  }
+}
+
+.view-articles,
+.view-taxonomy-term {
+  .views-row {
+    padding-bottom: 7px;
+    border-bottom: 1px dashed $color-neutral-3;
+  }
+
+  .field--name-node-title {
+    h2 {
+      margin-top: 0;
+    }
+
+    a {
+    }
+  }
+
+  .field--name-field-image-media {
+    img {
+      width: 100%;
+      border: 1px solid $color-neutral-15;
+      margin: 0 auto;
+    }
+  }
+
+  .field-name-body {
+    p:first-child:first-letter {
+      font-family: "Times New Roman", Times, serif;
+      font-size: 200%;
+      color: $color-heading;
+    }
+  }
+}
+
+@media (min-width: $bs-breakpoint-md) {
+  .view-articles,
+  .view-taxonomy-term {
+    .field--name-field-image-media {
+      max-width: 200px;
+      float: left;
+      margin: 0 15px 15px 0;
+    }
+  }
+}

@@ -1,0 +1,135 @@
+@charset "UTF-8";
+
+@import 'variables_theme';
+@import "tags";
+
+/* uncss:ignore start */
+.addtoany_list {
+  background-color: $color-white;
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+  @media (min-width: $bs-breakpoint-lg) {
+    display: block;
+    position: fixed;
+    z-index: 9999995;
+    right: 3px;
+    top: 30%;
+    bottom: auto;
+    .a2a_counter {
+      .a2a_svg {
+        display: block;
+        margin: 0 auto 2px auto;
+      }
+    }
+    .a2a_count {
+      display: block;
+      margin: 0 auto;
+    }
+    > a {
+      text-align: center;
+      display: block;
+    }
+  }
+
+  > a {
+    overflow: hidden;
+    padding: 4px;
+    text-decoration: none;
+  }
+}
+
+/* uncss:ignore end */
+
+/* uncss:ignore start */
+.a2a_svg,
+.a2a_count,
+.a2a_menu,
+.a2a_menu_find_container {
+  border-radius: 0 !important;
+}
+
+/* uncss:ignore end */
+
+.date {
+  display: none;
+}
+
+.page-header {
+  .date {
+    display: block;
+  }
+}
+
+.field--name-field-image-media {
+  @media (min-width: 768px) {
+    float: left;
+    margin: 0 15px 15px 0;
+  }
+
+  img {
+    width: 100%;
+    margin: 0 auto;
+    border: 1px solid $color-neutral-15;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .region-sidebar-second {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    border-top: 4px solid $color-neutral-3;
+    padding-top: 15px;
+
+    section {
+      &.block-views-blockabout-author-block-1 {
+        text-align: center;
+      }
+
+      &.block-views-blocktags-tags,
+      &.block-views-blocktags-versions {
+        width: 49%;
+        display: inline-block;
+        float: left;
+      }
+    }
+  }
+}
+
+.field--name-field-comments {
+  margin-top: 15px;
+  clear: both;
+
+  .field__label {
+    font-size: 23px;
+    text-transform: uppercase;
+    color: $color-heading;
+    text-align: center;
+    border-top: 4px solid $color-neutral-3;
+    border-bottom: 4px solid $color-neutral-3;
+    padding: 15px 0;
+  }
+}
+
+.file > span {
+  background: $color-white;
+  color: $color-neutral-2;
+  border-bottom: 1px solid darken($color-neutral-2, 10%);
+  border-top: 1px solid darken($color-neutral-2, 10%);
+
+  &:first-child {
+    border-left: 4px solid darken($color-neutral-2, 10%);
+  }
+
+  &:last-child {
+    border-right: 1px solid darken($color-neutral-2, 10%);
+  }
+}
+
+.field--name-field-conclusions {
+  border: 1px solid $color-neutral-3;
+  background-color: $color-neutral-15;
+  padding: 15px;
+}

@@ -1,0 +1,27 @@
+@charset "UTF-8";
+
+@import 'variables_theme';
+
+.page-node-type-page {
+
+}
+
+.alias--about-me {
+  article.node--view-mode-full {
+    .field--name-body {
+      .align-left {
+        float: none;
+        text-align: center;
+        @media (min-width: $bs-breakpoint-md) {
+          float: left;
+        }
+      }
+      img {
+        border-radius: 50%;
+        border: .8rem solid $color-neutral-15;
+        width: 216px;
+        height: 216px;
+      }
+    }
+  }
+}
