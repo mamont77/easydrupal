@@ -91,6 +91,11 @@ block-hireme:
     theme:
       dist/css/block--hireme.css: { }
 
+form-contact:
+  css:
+    theme:
+      dist/css/form--contact.css: { }
+
 fontawesome:
   version: VERSION
   js:

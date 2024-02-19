@@ -1,0 +1,103 @@
+@import 'variables_theme';
+
+// Placeholder text.
+$input-color-placeholder: $color-neutral-5;
+$input-font-style-placeholder: italic;
+@mixin placeholder($color: $input-color-placeholder, $font-style: $input-font-style-placeholder) {
+  &:-moz-placeholder {
+    color: $color;
+    font-style: $font-style;
+    opacity: 1; // Override Firefox's unusual default opacity; see https://github.com/twbs/bootstrap/pull/11526
+  }
+  // Firefox
+  &::-moz-placeholder {
+    color: $color;
+    font-style: $font-style;
+    opacity: 1; // Override Firefox's unusual default opacity; see https://github.com/twbs/bootstrap/pull/11526
+  }
+  &:-ms-input-placeholder {
+    color: $color;
+    font-style: $font-style;
+  }
+  // Internet Explorer 10+
+  &::-webkit-input-placeholder {
+    color: $color;
+    font-style: $font-style;
+  }
+  // Safari and Chrome
+}
+
+
+.contact-message-form {
+  .form-control {
+    border: .1rem solid $color-neutral-3;
+    background-color: $color-white;
+    clear: both;
+    height: auto;
+    margin-bottom: 2.5rem;
+    padding: 1rem 1.5rem;
+    border-radius: 0;
+    color: $color-neutral-8;
+
+    &:focus {
+      outline: 0;
+    }
+
+    @include placeholder($color-neutral-5, italic);
+  }
+
+  .form-textarea {
+    height: 176px;
+    resize: none;
+  }
+
+  .form-actions {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 1rem;
+    justify-content: center;
+  }
+}
+
+.g-recaptcha {
+  margin-bottom: 1.5rem;
+  opacity: .8;
+
+  & > div {
+    margin: 0 auto;
+  }
+}
+
+.button {
+  --bs-btn-padding-x: 1rem;
+  --bs-btn-padding-y: .75rem;
+  --bs-btn-font-family: #{$font-main};
+  --bs-btn-font-size: 1.6rem;
+  --bs-btn-font-weight: inherit;
+  --bs-btn-line-height: inherit;
+  --bs-btn-color: #{$color-neutral-9};
+  --bs-btn-bg: #{$color-white};
+  --bs-btn-border-color: #{$color-neutral-5};
+  --bs-btn-hover-color: #{$color-neutral-9};
+  --bs-btn-hover-bg: #{$color-neutral-10};
+  --bs-btn-hover-border-color: #{$color-neutral-11};
+  --bs-btn-active-color:#{$color-neutral-9};
+  --bs-btn-active-bg: #{$color-neutral-10};
+  --bs-btn-active-border-color: #{$color-neutral-11};
+}
+
+.button--primary {
+  --bs-btn-color: #{$color-white};
+  --bs-btn-bg: #{$color-neutral-2};
+  --bs-btn-border-color: #{$color-neutral-12};
+  --bs-btn-hover-color: #{$color-white};
+  --bs-btn-hover-bg: #{$color-neutral-4};
+  --bs-btn-hover-border-color: #{$color-neutral-13};
+  --bs-btn-active-color:#{$color-white};
+  --bs-btn-active-bg: #{$color-neutral-4};
+  --bs-btn-active-border-color: #{$color-neutral-13};
+}
+
+.btn-default {
+
+}

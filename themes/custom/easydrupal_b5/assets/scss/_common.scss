@@ -71,3 +71,35 @@
     justify-content: center;
   }
 }
+
+.breadcrumb {
+  border-radius: 0;
+  background: none transparent;
+  padding: 0;
+  margin-bottom: 2rem;
+
+  a {
+    color: $color-neutral-2;
+  }
+}
+
+label {
+  display: inline-block;
+  max-width: 100%;
+  //margin-bottom: .5rem;
+  font-weight: 700;
+}
+
+// todo: move to another place.
+
+pre {
+  border-color: $color-neutral-5;
+  background-color: $color-neutral-6;
+  color: $color-neutral-7;
+  font-size: 1.3rem;
+}
+
+blockquote {
+  border-left-color: $color-neutral-5;
+  color: $color-neutral-7;
+}

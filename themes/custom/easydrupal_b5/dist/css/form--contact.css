@@ -1,0 +1,85 @@
+.contact-message-form .form-control {
+  border: 0.1rem solid #ddd;
+  background-color: #FFFFFF;
+  clear: both;
+  height: auto;
+  margin-bottom: 2.5rem;
+  padding: 1rem 1.5rem;
+  border-radius: 0;
+  color: #666;
+}
+.contact-message-form .form-control:focus {
+  outline: 0;
+}
+.contact-message-form .form-control:-moz-placeholder {
+  color: #ccc;
+  font-style: italic;
+  opacity: 1;
+}
+.contact-message-form .form-control::-moz-placeholder {
+  color: #ccc;
+  font-style: italic;
+  opacity: 1;
+}
+.contact-message-form .form-control:-ms-input-placeholder {
+  color: #ccc;
+  font-style: italic;
+}
+.contact-message-form .form-control::-webkit-input-placeholder {
+  color: #ccc;
+  font-style: italic;
+}
+.contact-message-form .form-textarea {
+  height: 176px;
+  resize: none;
+}
+.contact-message-form .form-actions {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  gap: 1rem;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.g-recaptcha {
+  margin-bottom: 1.5rem;
+  opacity: 0.8;
+}
+.g-recaptcha > div {
+  margin: 0 auto;
+}
+
+.button {
+  --bs-btn-padding-x: 1rem;
+  --bs-btn-padding-y: .75rem;
+  --bs-btn-font-family: Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;
+  --bs-btn-font-size: 1.6rem;
+  --bs-btn-font-weight: inherit;
+  --bs-btn-line-height: inherit;
+  --bs-btn-color: #333;
+  --bs-btn-bg: #FFFFFF;
+  --bs-btn-border-color: #ccc;
+  --bs-btn-hover-color: #333;
+  --bs-btn-hover-bg: #e6e5e5;
+  --bs-btn-hover-border-color: #adadad;
+  --bs-btn-active-color:#333;
+  --bs-btn-active-bg: #e6e5e5;
+  --bs-btn-active-border-color: #adadad;
+}
+
+.button--primary {
+  --bs-btn-color: #FFFFFF;
+  --bs-btn-bg: #81a5bf;
+  --bs-btn-border-color: #7099b6;
+  --bs-btn-hover-color: #FFFFFF;
+  --bs-btn-hover-bg: #5f8dae;
+  --bs-btn-hover-border-color: #4f7b9b;
+  --bs-btn-active-color:#FFFFFF;
+  --bs-btn-active-bg: #5f8dae;
+  --bs-btn-active-border-color: #4f7b9b;
+}
+/*# sourceMappingURL=../sourcemaps/form--contact.css.map */
