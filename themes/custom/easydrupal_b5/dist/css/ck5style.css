@@ -11689,7 +11689,7 @@ a > .ck-content code {
   --bs-navbar-padding-x: 0;
   --bs-navbar-padding-y: 0;
   --bs-navbar-toggler-font-size: 1rem;
-  --bs-navbar-color: #FFFFFF;
+  --bs-navbar-color: #575756;
   --bs-navbar-toggler-border-color: #81a5bf;
   --bs-navbar-toggler-border-radius: .3rem;
   --bs-navbar-toggler-padding-x: .5rem;
@@ -11714,7 +11714,7 @@ a > .ck-content code {
 .ck-content header .navbar-toggler {
   background-color: #81a5bf;
 }
-.ck-content header .menu--main .navbar-nav {
+.ck-content header .navigation .navbar-nav {
   --bs-nav-link-padding-x: 0;
   --bs-nav-link-padding-y: .75rem;
   --bs-nav-link-font-weight: normal;
@@ -11722,21 +11722,21 @@ a > .ck-content code {
   --bs-nav-link-hover-color: #81a5bf;
 }
 @media (min-width: 768px) {
-  .ck-content header .menu--main .navbar-nav {
+  .ck-content header .navigation .navbar-nav {
     --bs-nav-link-padding-x: 0;
     --bs-nav-link-padding-y: 1.8rem;
   }
 }
-.ck-content header .menu--main .navbar-nav .nav-item:not(:last-of-type) {
+.ck-content header .navigation .navbar-nav .nav-item:not(:last-of-type) {
   border-bottom: 0.1rem solid #ddd;
 }
 @media (min-width: 768px) {
-  .ck-content header .menu--main .navbar-nav .nav-item:not(:last-of-type) {
+  .ck-content header .navigation .navbar-nav .nav-item:not(:last-of-type) {
     border-bottom: none;
     border-right: 0.1rem solid #ddd;
   }
 }
-.ck-content header .menu--main .navbar-nav .nav-item .nav-link {
+.ck-content header .navigation .navbar-nav .nav-item .nav-link {
   --bs-nav-link-font-size: 0.938rem;
   --bs-nav-link-hover-color: #81a5bf;
   --bs-nav-link-font-weight: 700;
@@ -11750,27 +11750,27 @@ a > .ck-content code {
   transition: none;
 }
 @media (min-width: 768px) {
-  .ck-content header .menu--main .navbar-nav .nav-item .nav-link {
+  .ck-content header .navigation .navbar-nav .nav-item .nav-link {
     padding-left: var(--bs-navbar-nav-link-padding-x);
   }
 }
-.ck-content header .menu--main .navbar-nav .nav-item .nav-link.is-active, .ck-content header .menu--main .navbar-nav .nav-item .nav-link:hover, .ck-content header .menu--main .navbar-nav .nav-item .nav-link:focus, .ck-content header .menu--main .navbar-nav .nav-item .nav-link:active {
+.ck-content header .navigation .navbar-nav .nav-item .nav-link.is-active, .ck-content header .navigation .navbar-nav .nav-item .nav-link:hover, .ck-content header .navigation .navbar-nav .nav-item .nav-link:focus, .ck-content header .navigation .navbar-nav .nav-item .nav-link:active {
   color: #81a5bf;
   border-left: var(--hover-border-bottom) solid #81a5bf;
   padding-left: calc(1.5rem - var(--hover-border-bottom));
 }
 @media (min-width: 768px) {
-  .ck-content header .menu--main .navbar-nav .nav-item .nav-link.is-active, .ck-content header .menu--main .navbar-nav .nav-item .nav-link:hover, .ck-content header .menu--main .navbar-nav .nav-item .nav-link:focus, .ck-content header .menu--main .navbar-nav .nav-item .nav-link:active {
+  .ck-content header .navigation .navbar-nav .nav-item .nav-link.is-active, .ck-content header .navigation .navbar-nav .nav-item .nav-link:hover, .ck-content header .navigation .navbar-nav .nav-item .nav-link:focus, .ck-content header .navigation .navbar-nav .nav-item .nav-link:active {
     border-left: none;
     border-bottom: var(--hover-border-bottom) solid #81a5bf;
     padding-bottom: calc(var(--bs-nav-link-padding-y) - var(--hover-border-bottom));
   }
 }
-.ck-content header .menu--main .navbar-nav .nav-item .nav-link:hover, .ck-content header .menu--main .navbar-nav .nav-item .nav-link:focus, .ck-content header .menu--main .navbar-nav .nav-item .nav-link:active {
+.ck-content header .navigation .navbar-nav .nav-item .nav-link:hover, .ck-content header .navigation .navbar-nav .nav-item .nav-link:focus, .ck-content header .navigation .navbar-nav .nav-item .nav-link:active {
   background-color: #ddd;
 }
 @media (min-width: 768px) {
-  .ck-content header .menu--main .navbar-nav .nav-item .nav-link:hover, .ck-content header .menu--main .navbar-nav .nav-item .nav-link:focus, .ck-content header .menu--main .navbar-nav .nav-item .nav-link:active {
+  .ck-content header .navigation .navbar-nav .nav-item .nav-link:hover, .ck-content header .navigation .navbar-nav .nav-item .nav-link:focus, .ck-content header .navigation .navbar-nav .nav-item .nav-link:active {
     background: none;
   }
 }
