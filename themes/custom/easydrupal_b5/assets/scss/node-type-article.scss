@@ -1,6 +1,7 @@
 @charset "UTF-8";
 
 @import 'variables_theme';
+@import "date";
 @import "tags";
 
 /* uncss:ignore start */
@@ -52,49 +53,36 @@
 
 /* uncss:ignore end */
 
-.date {
-  display: none;
-}
-
-.page-header {
-  .date {
-    display: block;
+.block-page-title-block {
+  h1 {
+    margin: 0;
+    padding: 0;
+    border: none;
   }
 }
 
+.header {
+  padding-bottom: 0.5rem;
+  border-bottom: 0.1rem solid $color-neutral-3;
+  margin-bottom: 1.5rem;
+}
+
 .field--name-field-image-media {
-  @media (min-width: 768px) {
+  @media (min-width: $bs-breakpoint-md) {
     float: left;
-    margin: 0 15px 15px 0;
+    margin: 0 1.5rem 1.5rem 0;
   }
 
   img {
     width: 100%;
     margin: 0 auto;
-    border: 1px solid $color-neutral-15;
+    border: .1rem solid $color-neutral-15;
   }
 }
 
-
-@media (max-width: 768px) {
-  .region-sidebar-second {
-    margin-top: 15px;
-    margin-bottom: 15px;
-    border-top: 4px solid $color-neutral-3;
-    padding-top: 15px;
-
-    section {
-      &.block-views-blockabout-author-block-1 {
-        text-align: center;
-      }
-
-      &.block-views-blocktags-tags,
-      &.block-views-blocktags-versions {
-        width: 49%;
-        display: inline-block;
-        float: left;
-      }
-    }
+.field--name-body {
+  p:last-of-type {
+    margin-bottom: 0;
   }
 }
 
@@ -107,8 +95,8 @@
     text-transform: uppercase;
     color: $color-heading;
     text-align: center;
-    border-top: 4px solid $color-neutral-3;
-    border-bottom: 4px solid $color-neutral-3;
+    border-top: .4rem solid $color-neutral-3;
+    border-bottom: .4rem solid $color-neutral-3;
     padding: 15px 0;
   }
 }
@@ -116,20 +104,20 @@
 .file > span {
   background: $color-white;
   color: $color-neutral-2;
-  border-bottom: 1px solid darken($color-neutral-2, 10%);
-  border-top: 1px solid darken($color-neutral-2, 10%);
+  border-bottom: .1rem solid darken($color-neutral-2, 10%);
+  border-top: .1rem solid darken($color-neutral-2, 10%);
 
   &:first-child {
-    border-left: 4px solid darken($color-neutral-2, 10%);
+    border-left: .4rem solid darken($color-neutral-2, 10%);
   }
 
   &:last-child {
-    border-right: 1px solid darken($color-neutral-2, 10%);
+    border-right: .1rem solid darken($color-neutral-2, 10%);
   }
 }
 
 .field--name-field-conclusions {
-  border: 1px solid $color-neutral-3;
+  border: .1rem solid $color-neutral-3;
   background-color: $color-neutral-15;
   padding: 15px;
 }

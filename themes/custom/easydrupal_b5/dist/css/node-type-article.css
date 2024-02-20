@@ -1,3 +1,49 @@
+.date {
+  position: relative;
+  background-color: #81a5bf;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #FFFFFF;
+  padding: 0.5rem;
+  text-transform: uppercase;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+.date span.day {
+  display: block;
+  font-size: 18px;
+  line-height: 18px;
+  font-weight: bold;
+}
+.date span.year {
+  display: block;
+  font-size: 10px;
+  line-height: 10px;
+}
+.date:after {
+  left: 100%;
+  top: 50%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  border-left-color: #81a5bf;
+  border-width: 8px;
+  margin-top: -8px;
+}
+
 /* uncss:ignore start */
 .addtoany_list {
   background-color: #FFFFFF;
@@ -48,42 +94,34 @@
 }
 
 /* uncss:ignore end */
-.date {
-  display: none;
+.block-page-title-block h1 {
+  margin: 0;
+  padding: 0;
+  border: none;
 }
 
-.page-header .date {
-  display: block;
+.header {
+  padding-bottom: 0.5rem;
+  border-bottom: 0.1rem solid #ddd;
+  margin-bottom: 1.5rem;
 }
 
 @media (min-width: 768px) {
   .field--name-field-image-media {
     float: left;
-    margin: 0 15px 15px 0;
+    margin: 0 1.5rem 1.5rem 0;
   }
 }
 .field--name-field-image-media img {
   width: 100%;
   margin: 0 auto;
-  border: 1px solid #eee;
+  border: 0.1rem solid #eee;
 }
 
-@media (max-width: 768px) {
-  .region-sidebar-second {
-    margin-top: 15px;
-    margin-bottom: 15px;
-    border-top: 4px solid #ddd;
-    padding-top: 15px;
-  }
-  .region-sidebar-second section.block-views-blockabout-author-block-1 {
-    text-align: center;
-  }
-  .region-sidebar-second section.block-views-blocktags-tags, .region-sidebar-second section.block-views-blocktags-versions {
-    width: 49%;
-    display: inline-block;
-    float: left;
-  }
+.field--name-body p:last-of-type {
+  margin-bottom: 0;
 }
+
 .field--name-field-comments {
   margin-top: 15px;
   clear: both;
@@ -93,26 +131,26 @@
   text-transform: uppercase;
   color: #293749;
   text-align: center;
-  border-top: 4px solid #ddd;
-  border-bottom: 4px solid #ddd;
+  border-top: 0.4rem solid #ddd;
+  border-bottom: 0.4rem solid #ddd;
   padding: 15px 0;
 }
 
 .file > span {
   background: #FFFFFF;
   color: #81a5bf;
-  border-bottom: 1px solid #5f8dae;
-  border-top: 1px solid #5f8dae;
+  border-bottom: 0.1rem solid #5f8dae;
+  border-top: 0.1rem solid #5f8dae;
 }
 .file > span:first-child {
-  border-left: 4px solid #5f8dae;
+  border-left: 0.4rem solid #5f8dae;
 }
 .file > span:last-child {
-  border-right: 1px solid #5f8dae;
+  border-right: 0.1rem solid #5f8dae;
 }
 
 .field--name-field-conclusions {
-  border: 1px solid #ddd;
+  border: 0.1rem solid #ddd;
   background-color: #eee;
   padding: 15px;
 }

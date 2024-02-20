@@ -82,13 +82,30 @@ label {
 // todo: move to another place.
 
 pre {
-  border-color: $color-neutral-5;
   background-color: $color-neutral-6;
   color: $color-neutral-7;
-  font-size: 1.3rem;
+  font-size: .8rem;
+  display: block;
+  padding: 9.5px;
+  margin: 0 0 10px;
+  line-height: 1.7;
+  word-break: break-all;
+  word-wrap: break-word;
+  border: .1rem solid $color-neutral-5;
+  border-radius: 4px;
 }
 
 blockquote {
   border-left-color: $color-neutral-5;
   color: $color-neutral-7;
+}
+
+.region-content .field {
+  margin-bottom: 1.5rem;
+}
+
+.region-sidebar-second {
+  > div:not(:last-of-type) {
+    margin-bottom: 1.5rem;
+  }
 }
