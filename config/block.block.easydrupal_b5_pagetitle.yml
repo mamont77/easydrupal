@@ -9,7 +9,7 @@ dependencies:
 id: easydrupal_b5_pagetitle
 theme: easydrupal_b5
 region: content
-weight: -9
+weight: -8
 provider: null
 plugin: page_title_block
 settings:

@@ -9,7 +9,7 @@ dependencies:
 id: easydrupal_b5_help
 theme: easydrupal_b5
 region: content
-weight: -7
+weight: -6
 provider: null
 plugin: help_block
 settings:

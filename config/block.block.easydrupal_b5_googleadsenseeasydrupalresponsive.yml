@@ -1,6 +1,6 @@
 uuid: d15f35ad-c222-4e48-851e-6253fc8523ba
 langcode: en
-status: false
+status: true
 dependencies:
   content:
     - 'block_content:basic:9e9ec6c0-7a8a-46d1-bdfe-febaa30677a8'
@@ -12,7 +12,7 @@ dependencies:
 id: easydrupal_b5_googleadsenseeasydrupalresponsive
 theme: easydrupal_b5
 region: content
-weight: -1
+weight: -9
 provider: null
 plugin: 'block_content:9e9ec6c0-7a8a-46d1-bdfe-febaa30677a8'
 settings:

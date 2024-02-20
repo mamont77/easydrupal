@@ -10,7 +10,7 @@ dependencies:
 id: easydrupal_b5_addtoanysharebuttons
 theme: easydrupal_b5
 region: content
-weight: -5
+weight: -4
 provider: null
 plugin: addtoany_block
 settings:

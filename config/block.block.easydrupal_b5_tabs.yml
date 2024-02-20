@@ -9,7 +9,7 @@ dependencies:
 id: easydrupal_b5_tabs
 theme: easydrupal_b5
 region: content
-weight: -8
+weight: -7
 provider: null
 plugin: local_tasks_block
 settings:
