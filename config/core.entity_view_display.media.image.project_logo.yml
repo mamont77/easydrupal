@@ -19,7 +19,7 @@ mode: project_logo
 content:
   field_media_image:
     type: responsive_image
-    label: visually_hidden
+    label: hidden
     settings:
       responsive_image_style: project_logo
       image_link: ''

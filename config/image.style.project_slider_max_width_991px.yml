@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies: {  }
 name: project_slider_max_width_991px
-label: 'Project Slider MAX-WIDTH: 991PX'
+label: 'zzz - Project Slider MAX-WIDTH: 991PX'
 effects:
   35fd68ab-9f0e-47c3-91c6-45f12e6c9372:
     uuid: 35fd68ab-9f0e-47c3-91c6-45f12e6c9372
@@ -21,3 +21,4 @@ effects:
       width: 940
       height: 530
       anchor: center-center
+pipeline: ''

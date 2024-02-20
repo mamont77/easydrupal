@@ -1,0 +1,27 @@
+{%
+  set classes = [
+  'node',
+  'node--type-' ~ node.bundle|clean_class,
+  node.isPromoted() ? 'node--promoted',
+  node.isSticky() ? 'node--sticky',
+  not node.isPublished() ? 'node--unpublished',
+  view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+]
+%}
+<article{{ attributes.addClass(classes) }}>
+  <div{{ content_attributes.addClass('node__content') }}>
+    <div class="row">
+      <div class="col-sm-6">
+        {{ title_prefix }}
+        <h3{{ title_attributes }}>
+          <a href="{{ url }}" rel="bookmark" hreflang="en">{{ label }}</a>
+        </h3>
+        {{ title_suffix }}
+        {{ content|without('field_landing_page_backgro_media') }}
+      </div>
+      <div class="col-sm-6">
+        {{ content.field_landing_page_backgro_media }}
+      </div>
+    </div>
+  </div>
+</article>

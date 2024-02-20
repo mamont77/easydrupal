@@ -1,45 +1,53 @@
-uuid: cb1cc502-c738-4bcb-b9ba-cac7c89c0e97
+uuid: 2fab7ed3-650f-42c7-a51f-99ab7daf7941
 langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_view_mode.media.project_slider
     - field.field.media.image.field_media_categories
     - field.field.media.image.field_media_image
     - media.type.image
-    - responsive_image.styles.narrow
+    - responsive_image.styles.project_slider
   module:
     - fences
     - responsive_image
 _core:
   default_config_hash: B1a2aBHmUulUZN6HrxITEH1tSResuVjXMBEv1lUBtOo
-id: media.image.default
+id: media.image.project_slider
 targetEntityType: media
 bundle: image
-mode: default
+mode: project_slider
 content:
   field_media_image:
     type: responsive_image
     label: hidden
     settings:
-      responsive_image_style: narrow
+      responsive_image_style: project_slider
       image_link: ''
       image_loading:
         attribute: eager
     third_party_settings:
       fences:
-        fences_field_tag: div
+        fences_field_tag: none
         fences_field_classes: ''
         fences_field_items_wrapper_tag: none
         fences_field_items_wrapper_classes: ''
-        fences_field_item_tag: div
+        fences_field_item_tag: none
         fences_field_item_classes: ''
-        fences_label_tag: div
+        fences_label_tag: none
         fences_label_classes: ''
     weight: 0
+    region: content
+  name:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
     region: content
 hidden:
   created: true
   field_media_categories: true
-  name: true
   thumbnail: true
   uid: true

@@ -16,7 +16,7 @@ plugin: addtoany_block
 settings:
   id: addtoany_block
   label: 'AddToAny share buttons'
-  label_display: visible
+  label_display: '0'
   provider: addtoany
   context_mapping: {  }
   buttons_size: null

@@ -361,10 +361,10 @@ display:
           grouping: {  }
           row_class: ''
           default_row_class: true
-          col_xs: none
-          col_sm: col-sm-4
+          col_xs: col-12
+          col_sm: none
           col_md: col-md-4
-          col_lg: col-lg-4
+          col_lg: none
           col_xl: none
           col_xxl: none
       row:

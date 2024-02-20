@@ -1,0 +1,11 @@
+uuid: d2d7957d-0e5a-4eb9-b8fc-3cd4987f8ea3
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+id: media.project_slider
+label: 'Project Slider'
+description: ''
+targetEntityType: media
+cache: true

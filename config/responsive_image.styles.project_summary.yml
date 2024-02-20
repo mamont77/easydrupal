@@ -3,10 +3,9 @@ langcode: en
 status: true
 dependencies:
   config:
-    - image.style.max_720x720
     - image.style.project_summary_default
-    - image.style.project_summary_max_width_1199px
-    - image.style.project_summary_max_width_991px_
+    - image.style.project_summary_min_width_768px
+    - image.style.project_summary_min_width_992px
   theme:
     - bootstrap5
 id: project_summary
@@ -14,18 +13,18 @@ label: 'Project Summary'
 image_style_mappings:
   -
     image_mapping_type: image_style
-    image_mapping: project_summary_max_width_1199px
-    breakpoint_id: bootstrap5.screen.lg-max
+    image_mapping: project_summary_min_width_992px
+    breakpoint_id: bootstrap5.screen.lg-min
     multiplier: 1x
   -
     image_mapping_type: image_style
-    image_mapping: project_summary_max_width_991px_
-    breakpoint_id: bootstrap5.screen.md-max
+    image_mapping: project_summary_min_width_768px
+    breakpoint_id: bootstrap5.screen.md-min
     multiplier: 1x
   -
     image_mapping_type: image_style
-    image_mapping: max_720x720
-    breakpoint_id: bootstrap5.screen.sm-max
-    multiplier: 1x
+    image_mapping: project_summary_default
+    breakpoint_id: bootstrap5.screen.sm-min
+    multiplier: 2x
 breakpoint_group: bootstrap5.screen
 fallback_image_style: project_summary_default

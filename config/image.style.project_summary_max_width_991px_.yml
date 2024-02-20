@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies: {  }
 name: project_summary_max_width_991px_
-label: "Project Summary MAX-WIDTH: 991PX\t"
+label: "zzz - Project Summary MAX-WIDTH: 991PX\t"
 effects:
   2c6e7c23-948d-4a15-ac1c-f1f737d20997:
     uuid: 2c6e7c23-948d-4a15-ac1c-f1f737d20997
@@ -21,3 +21,4 @@ effects:
       width: 220
       height: 124
       anchor: left-top
+pipeline: ''

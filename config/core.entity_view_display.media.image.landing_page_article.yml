@@ -19,7 +19,7 @@ mode: landing_page_article
 content:
   field_media_image:
     type: responsive_image
-    label: visually_hidden
+    label: hidden
     settings:
       responsive_image_style: landing_page_article
       image_link: ''

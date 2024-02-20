@@ -1,0 +1,16 @@
+uuid: d9e6950f-ebc4-47d8-a65f-24cd7fcc9231
+langcode: en
+status: true
+dependencies: {  }
+name: project_summary_min_width_768px
+label: 'Project Summary MIN-WIDTH: 768px'
+effects:
+  4c2a07b6-a47f-46af-a00a-a8cf541e4dff:
+    uuid: 4c2a07b6-a47f-46af-a00a-a8cf541e4dff
+    id: image_scale_and_crop
+    weight: 3
+    data:
+      width: 300
+      height: 170
+      anchor: center-top
+pipeline: ''

@@ -5,19 +5,12 @@ dependencies: {  }
 name: project_summary_default
 label: 'Project Summary Default'
 effects:
-  9b4c4e71-22a3-4671-a8d4-148e4013b15c:
-    uuid: 9b4c4e71-22a3-4671-a8d4-148e4013b15c
-    id: image_scale
-    weight: 1
+  e3a94323-f0d6-4545-b259-89ad55823ce2:
+    uuid: e3a94323-f0d6-4545-b259-89ad55823ce2
+    id: image_scale_and_crop
+    weight: 3
     data:
-      width: 360
-      height: null
-      upscale: true
-  f057a531-2bdd-4708-b23a-7d0c9a38e967:
-    uuid: f057a531-2bdd-4708-b23a-7d0c9a38e967
-    id: image_crop
-    weight: 2
-    data:
-      width: 360
-      height: 204
-      anchor: left-top
+      width: 726
+      height: 412
+      anchor: center-top
+pipeline: ''

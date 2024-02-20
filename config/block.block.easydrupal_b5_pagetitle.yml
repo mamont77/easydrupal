@@ -3,7 +3,6 @@ langcode: en
 status: true
 dependencies:
   module:
-    - node
     - system
   theme:
     - easydrupal_b5
@@ -22,13 +21,4 @@ visibility:
   request_path:
     id: request_path
     negate: true
-    pages: "<front>\r\n/user/login\r\n/user/password\r\n"
-  'entity_bundle:node':
-    id: 'entity_bundle:node'
-    negate: false
-    context_mapping:
-      node: '@node.node_route_context:node'
-    bundles:
-      client: client
-      page: page
-      project: project
+    pages: "<front>\r\n/user/login\r\n/user/password\r\n/articles/*\r\n"
