@@ -138,7 +138,7 @@ class StickySharrreBarBlock extends BlockBase {
       }
 
       // FIXME: need load block info and get id of region.
-      $instance = Block::load('stickysharrrebar');
+      $instance = Block::load('easydrupal_b5_stickysharrrebar');
       $region = $instance->get('region');
       $custom_css_selector = $this->configuration['use_custom_css_selector'];
 
