@@ -12,8 +12,8 @@ header .navbar {
 }
 
 .page-node-type-landingpage {
-  font-size: 1rem;
-  line-height: 1.2rem;
+  font-size: 1.2rem;
+  line-height: 1.4rem;
   font-weight: 300;
   /** About **/
   /** Projects **/
@@ -23,31 +23,33 @@ header .navbar {
 }
 .page-node-type-landingpage .section {
   text-align: center;
-  padding-top: 50px;
-  padding-bottom: 50px;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
   /* Style for our header texts */
 }
 .page-node-type-landingpage .section .title-wrapper {
   max-width: 350px;
-  margin: 0 auto 15px auto;
+  margin: 0 auto 0.75rem auto;
 }
 .page-node-type-landingpage .section h2 {
-  font-size: 34px;
+  font-size: 2.3rem;
+  margin-bottom: 0;
   padding: 0;
   text-transform: uppercase;
   color: #6686A2;
 }
 .page-node-type-landingpage .section h3 {
-  font-size: 26px;
+  font-size: 1.6rem;
 }
 .page-node-type-landingpage .section .line {
   width: 100%;
-  height: 4px;
-  margin: 10px auto;
+  height: 0.4rem;
+  margin: 1rem auto;
 }
 .page-node-type-landingpage .section .read-more {
-  margin: 15px 0;
+  margin: 1.5rem 0;
   text-align: right;
+  font-size: 1rem;
 }
 .page-node-type-landingpage .section .read-more a {
   color: #293749;
@@ -56,12 +58,12 @@ header .navbar {
   background: url(../images/pattern-1.png);
   background-color: #7ea2bb;
 }
-.page-node-type-landingpage .about .container {
+.page-node-type-landingpage .about .container-lg {
   margin: 0 auto 0 auto;
   width: 50%;
 }
 @media screen and (max-width: 1024px) {
-  .page-node-type-landingpage .about .container {
+  .page-node-type-landingpage .about .container-lg {
     width: 60%;
   }
 }
@@ -76,8 +78,8 @@ header .navbar {
   text-align: left;
   margin: 0 auto;
   max-height: 600px;
-  font-size: 18px;
-  line-height: 24px;
+  font-size: 1.2rem;
+  line-height: 1.4rem;
 }
 @media (max-width: 768px) {
   .page-node-type-landingpage .about .field--name-body .align-left {
@@ -284,7 +286,7 @@ header .navbar {
   }
 }
 @media screen and (min-width: 993px) {
-  .page-node-type-landingpage .main-container.container {
+  .page-node-type-landingpage .main-container.container-lg {
     padding: 79px 0 0 0;
     width: 100%;
     margin-left: -15px;
@@ -296,7 +298,7 @@ header .navbar {
   }
 }
 @media screen and (max-width: 992px) {
-  .page-node-type-landingpage .main-container.container {
+  .page-node-type-landingpage .main-container.container-lg {
     padding-top: 79px;
     padding-bottom: 0;
     width: 100%;
@@ -314,7 +316,7 @@ header .navbar {
     width: 100%;
     height: auto;
   }
-  .page-node-type-landingpage .about .container {
+  .page-node-type-landingpage .about .container-lg {
     width: 75%;
   }
   .page-node-type-landingpage .about .field--name-body {
@@ -344,7 +346,7 @@ header .navbar {
   .page-node-type-landingpage .section h3 {
     font-size: 22px !important;
   }
-  .page-node-type-landingpage .about .container {
+  .page-node-type-landingpage .about .container-lg {
     width: 100%;
   }
   .page-node-type-landingpage .projects img {
