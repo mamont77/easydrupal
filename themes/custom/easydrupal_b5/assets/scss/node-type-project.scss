@@ -7,12 +7,6 @@
 
 }
 
-//.field-name-field-image-media {
-//  img {
-//    width: 100%;
-//  }
-//}
-
 .field--name-field-skills {
   .skills {
     display: inline;
@@ -26,39 +20,29 @@
   }
 }
 
-//.field-name-field-project-images {
-//  a {
-//    display: block;
-//    text-decoration: none;
-//    outline: none;
-//  }
-//}
-
 .field-name-field-project-url {
   a {
-    margin-top: 12px;
     display: inline-block;
-    letter-spacing: 0.03em;
+    letter-spacing: .03em;
     text-transform: uppercase;
     font-weight: 500;
     background-color: $color-neutral-2;
-    padding: 15px 20px;
+    padding: 1.5rem 2rem;
     color: $color-white;
     text-decoration: none;
 
     &:after {
-      font-family: 'FontAwesome';
-      content: "\f35d";
-      margin-left: .5rem;
+      margin-left: 0.5rem;
+      text-rendering: auto;
+      -webkit-font-smoothing: antialiased;
+      content: '\f35d';
+      font: var(--fa-font-solid);
     }
 
-    &:hover, &:active {
-      background-color: darken($color-neutral-2, 10%);
-    }
-
-    @media screen and (max-width: 768px) {
-      display: block;
-      text-align: center;
+    &:hover,
+    &:active,
+    &:focus {
+      background-color: $color-neutral-4;
     }
   }
 }

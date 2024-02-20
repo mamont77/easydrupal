@@ -1,0 +1,34 @@
+{% set classes = [
+  'node',
+  'node--type-' ~ node.bundle|clean_class,
+  node.isPromoted() ? 'node--promoted',
+  node.isSticky() ? 'node--sticky',
+  not node.isPublished() ? 'node--unpublished',
+  view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+] %}
+{{ attach_library('bootstrap5/node') }}
+<article{{ attributes.addClass(classes) }}>
+  <div{{ content_attributes.addClass('node__content') }}>
+    <div class="row">
+      {% if content.field_logo_media|field_value is not empty %}
+        <div class="col-sm-6 col-md-4">
+          {{ content.field_logo_media }}
+        </div>
+        <div class="col-sm-6 col-md-8">
+          <div class="d-flex gap-3 flex-column">
+            {{ content|without('field_logo_media', 'field_project_images_media') }}
+          </div>
+        </div>
+      {% else %}
+        <div class="col-sm-12">
+          <div class="d-flex gap-3 flex-column">
+            {{ content|without('field_logo_media', 'field_project_images_media') }}
+          </div>
+        </div>
+      {% endif %}
+      <div class="col-sm-12">
+        {{ content.field_project_images_media }}
+      </div>
+    </div>
+  </div>
+</article>

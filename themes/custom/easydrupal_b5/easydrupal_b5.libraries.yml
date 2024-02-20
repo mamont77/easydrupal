@@ -52,10 +52,6 @@ node-type-article:
   css:
     theme:
       dist/css/node-type-article.css: { }
-  js:
-    dist/js/node-type-article.js: { }
-  dependencies:
-    - easydrupal_b5/global-styling
 
 node-type-page:
   css:
