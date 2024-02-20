@@ -1,6 +1,6 @@
 uuid: 6d978dc6-597e-4a6f-995c-c5be8b4b5942
 langcode: en
-status: false
+status: true
 dependencies:
   content:
     - 'block_content:basic:9e9ec6c0-7a8a-46d1-bdfe-febaa30677a8'
@@ -18,7 +18,7 @@ plugin: 'block_content:9e9ec6c0-7a8a-46d1-bdfe-febaa30677a8'
 settings:
   id: 'block_content:9e9ec6c0-7a8a-46d1-bdfe-febaa30677a8'
   label: 'Google Adsense - EasyDrupal Responsive'
-  label_display: visible
+  label_display: '0'
   provider: block_content
   status: true
   info: ''
