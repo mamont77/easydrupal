@@ -84,7 +84,6 @@ function easydrupal_b5_preprocess_page(&$variables): void {
 
       case 'project':
         $variables['#attached']['library'][] = 'easydrupal_b5/node-type-project';
-        $variables['#attached']['library'][] = 'easydrupal_b5/slick';
 
         break;
     }

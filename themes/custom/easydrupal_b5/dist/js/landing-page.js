@@ -2,7 +2,7 @@
  * @file
  * easyDrupal landing page functionality.
  */
-(function ($, Drupal, drupalSettings) {
+(function ($, Drupal, once) {
 
   'use strict';
 
@@ -58,4 +58,4 @@
     }
   };
 
-})(jQuery, Drupal, drupalSettings);
+})(jQuery, Drupal, once);

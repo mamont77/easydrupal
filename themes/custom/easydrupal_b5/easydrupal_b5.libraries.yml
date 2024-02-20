@@ -9,6 +9,7 @@ global-styling:
     - core/drupal
     - core/jquery
     - core/once
+
 geshifilter:
   css:
     theme:
@@ -62,6 +63,13 @@ node-type-project:
   css:
     theme:
       dist/css/node-type-project.css: { }
+  js:
+    dist/js/project-slick.js: { }
+  dependencies:
+    - core/drupal
+    - core/jquery
+    - core/once
+    - easydrupal_b5/slick
 
 paragraph-common:
   css:
@@ -116,6 +124,13 @@ fontawesome-without-pseudo-elements:
         data-search-pseudo-elements: false
 
 slick:
+  remote: http://kenwheeler.github.io/slick/
+  license:
+    name: GNU-GPL-2.0-or-later
+    url: https://github.com/kenwheeler/slick/blob/master/LICENSE
+    gpl-compatible: true
+  js:
+    //cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js: { type: external, minified: true }
   css:
-    theme:
-      dist/css/slick.css: { }
+    component:
+      //cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css: { type: external, minified: true }

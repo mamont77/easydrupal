@@ -41,6 +41,13 @@
   border-left-color: #666;
 }
 
+.field--name-field-media-image {
+  margin-bottom: 1.5rem;
+}
+.field--name-field-media-image img {
+  width: 100%;
+}
+
 .field--name-field-skills .skills {
   display: inline;
   list-style: none;
@@ -66,5 +73,74 @@
 }
 .field-name-field-project-url a:hover, .field-name-field-project-url a:active, .field-name-field-project-url a:focus {
   background-color: #5f8dae;
+}
+
+.field--name-field-project-images-media {
+  position: initial;
+  background-image: url(../images/devices/cs-imac-frame.png);
+  background-repeat: no-repeat;
+  background-position: center top;
+  height: 611px;
+  width: 846px;
+  margin: 3rem auto;
+  padding: 27px 82px 197px 83px;
+  overflow: hidden;
+}
+.field--name-field-project-images-media .field--name-name {
+  position: relative;
+  padding: 1rem;
+  opacity: 0.8;
+  top: -4rem;
+  text-align: center;
+  margin: 0 auto;
+  width: 40%;
+  background: #fff;
+}
+@media (max-width: 991px) {
+  .field--name-field-project-images-media {
+    background: none transparent;
+    padding: 0;
+    width: 100%;
+    height: auto;
+  }
+  .field--name-field-project-images-media img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+.slick__arrow button {
+  outline: 0;
+}
+
+.slick-arrow {
+  padding: 0;
+  border: 0;
+  color: #414a51;
+  position: absolute;
+  width: 7rem;
+  height: 2.5rem;
+  fill: currentColor;
+  font-size: 1.25rem;
+  font-weight: 100;
+  overflow: hidden;
+  text-align: center;
+  top: 31%;
+  background: #ddd;
+  opacity: 0.8;
+  z-index: 1;
+}
+@media (min-width: 768px) {
+  .slick-arrow {
+    background: transparent;
+    top: 38%;
+    opacity: 1;
+  }
+}
+.slick-arrow.slick-prev {
+  left: 0;
+}
+.slick-arrow.slick-next {
+  right: 0;
 }
 /*# sourceMappingURL=../sourcemaps/node-type-project.css.map */

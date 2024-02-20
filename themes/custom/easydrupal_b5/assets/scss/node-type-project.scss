@@ -3,8 +3,11 @@
 @import 'variables_theme';
 @import "tags";
 
-.page-node-type-project {
-
+.field--name-field-media-image {
+  img {
+    width: 100%;
+  }
+  margin-bottom: 1.5rem;
 }
 
 .field--name-field-skills {
@@ -44,5 +47,79 @@
     &:focus {
       background-color: $color-neutral-4;
     }
+  }
+}
+
+// Slick.
+
+.field--name-field-project-images-media {
+  position: initial;
+  background-image: url(../images/devices/cs-imac-frame.png);
+  background-repeat: no-repeat;
+  background-position: center top;
+  height: 611px;
+  width: 846px;
+  margin: 3rem auto;
+  padding: 27px 82px 197px 83px;
+  overflow: hidden;
+
+  .field--name-name {
+    position: relative;
+    padding: 1rem;
+    opacity: .8;
+    top: -4rem;
+    text-align: center;
+    margin: 0 auto;
+    width: 40%;
+    background: #fff;
+  }
+
+  @media (max-width: $bs-breakpoint-lg - 1) {
+    background: none transparent;
+    padding: 0;
+    width: 100%;
+    height: auto;
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+}
+
+.slick__arrow {
+  button {
+    outline: 0;
+  }
+}
+
+.slick-arrow {
+  padding: 0;
+  border: 0;
+  color: $color-neutral-16;
+  position: absolute;
+  width: 7rem;
+  height: 2.5rem;
+  fill: currentColor;
+  font-size: 1.25rem;
+  font-weight: 100;
+  overflow: hidden;
+  text-align: center;
+  top: 31%;
+  background: $color-neutral-3;
+  opacity: .8;
+  z-index: 1;
+
+  @media (min-width: $bs-breakpoint-md) {
+    background: transparent;
+    top: 38%;
+    opacity: 1;
+  }
+
+  &.slick-prev {
+    left: 0;
+  }
+
+  &.slick-next {
+    right: 0;
   }
 }
