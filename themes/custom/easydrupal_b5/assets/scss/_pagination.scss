@@ -1,0 +1,21 @@
+@import 'variables_theme';
+
+.pagination {
+  --bs-pagination-padding-x: 0.75rem;
+  --bs-pagination-padding-y: 0.375rem;
+  --bs-pagination-font-size: 1rem;
+  --bs-pagination-color: #{$color-neutral-2};
+  --bs-pagination-bg: #{$color-white};
+  --bs-pagination-border-color: #{$color-neutral-2};
+  --bs-pagination-hover-color: #{$color-white};
+  --bs-pagination-hover-bg: #{$color-neutral-2};
+  --bs-pagination-hover-border-color: #{$color-neutral-2};
+  --bs-pagination-focus-color: #{$color-white};
+  --bs-pagination-focus-bg: #{$color-neutral-2};
+  --bs-pagination-active-color: #{$color-white};
+  --bs-pagination-active-bg: #{$color-neutral-2};
+  --bs-pagination-active-border-color: #{$color-neutral-2};
+  --bs-pagination-disabled-color: #{$color-neutral-2};
+  --bs-pagination-disabled-bg: #{$color-white};
+  --bs-pagination-disabled-border-color: #{$color-neutral-2};
+}

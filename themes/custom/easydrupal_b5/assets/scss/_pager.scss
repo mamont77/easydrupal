@@ -1,0 +1,30 @@
+@import 'variables_theme';
+
+.pager {
+  padding-left: 0;
+  margin: 2rem 0;
+  list-style: none;
+  text-align: center;
+
+  li {
+    > a {
+      color: $color-neutral-2;
+      display: inline-block;
+      padding: .5rem 1.4rem;
+      background-color: $color-white;
+      border: .1rem solid $color-neutral-2;
+      border-radius: 0.75rem;
+
+      &:hover,
+      &:focus,
+      &:active {
+        color: $color-white;
+        background-color: $color-neutral-2;
+      }
+    }
+  }
+}
+
+.ajax-progress {
+  display: none !important;
+}
