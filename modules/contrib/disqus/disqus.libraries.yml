@@ -1,8 +1,8 @@
 disqus:
   version: 1.x
   js:
-    js/disqus.js: {}
-    js/disqus.settings.js: {}
+    js/disqus.js: { attributes: { defer: true } }
+    js/disqus.settings.js: { attributes: { defer: true } }
   dependencies:
     - core/jquery
     - core/once
@@ -11,12 +11,12 @@ disqus:
 ga:
   version: 1.x
   js:
-    js/disqus_ga.js: {}
+    js/disqus_ga.js: { attributes: { defer: true } }
   dependencies:
     - disqus/disqus
 notification:
   version: 1.x
   js:
-    js/disqus_notification.js: {}
+    js/disqus_notification.js: { attributes: { defer: true } }
   dependencies:
     - disqus/disqus

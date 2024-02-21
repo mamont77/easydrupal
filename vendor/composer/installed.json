@@ -2312,61 +2312,6 @@
             "install-path": "../../themes/contrib/bootstrap5"
         },
         {
-            "name": "drupal/bootstrap_layouts",
-            "version": "5.3.0",
-            "version_normalized": "5.3.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupalcode.org/project/bootstrap_layouts.git",
-                "reference": "8.x-5.3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/bootstrap_layouts-8.x-5.3.zip",
-                "reference": "8.x-5.3",
-                "shasum": "0ca3a76594a9483235920964c56effcf0fdfe06e"
-            },
-            "require": {
-                "drupal/core": "^9.3 || ^10"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "drupal": {
-                    "version": "8.x-5.3",
-                    "datestamp": "1675341751",
-                    "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
-                    }
-                }
-            },
-            "installation-source": "dist",
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "darol100",
-                    "homepage": "https://www.drupal.org/user/2667123"
-                },
-                {
-                    "name": "hctom",
-                    "homepage": "https://www.drupal.org/user/112790"
-                },
-                {
-                    "name": "Rajab Natshah",
-                    "homepage": "https://www.drupal.org/user/1414312"
-                }
-            ],
-            "description": "This module is going to generate layouts with Bootstrap grid system.",
-            "homepage": "https://www.drupal.org/project/bootstrap_layouts",
-            "support": {
-                "source": "https://git.drupalcode.org/project/bootstrap_layouts"
-            },
-            "install-path": "../../modules/contrib/bootstrap_layouts"
-        },
-        {
             "name": "drupal/captcha",
             "version": "2.0.5",
             "version_normalized": "2.0.5.0",
@@ -2691,6 +2636,7 @@
                 },
                 "patches_applied": {
                     "2981434: Default theme favicon for administration theme": "https://www.drupal.org/files/issues/2019-12-14/default-theme-favicon-for-administration-theme-2981434-7.patch",
+                    "3416141: big_pipe.js' checkMutation() does not check if node exists before using it": "https://www.drupal.org/files/issues/2024-01-21/drupal-big_pipe_does_not_check_before_using_node_object-3416141.patch",
                     "Own: Hide version of Drupal": "patches/drupal-core-hide-version.patch"
                 }
             },
@@ -3343,7 +3289,9 @@
                     }
                 },
                 "patches_applied": {
-                    "3359581: Uncaught TypeError: $(...).once is not a function": "https://git.drupalcode.org/project/disqus/-/merge_requests/8.diff"
+                    "3359581: Uncaught TypeError: $(...).once is not a function": "https://git.drupalcode.org/project/disqus/-/merge_requests/8.diff",
+                    "1508786: Lazy load / async load Disqus libraries for better performance": "https://www.drupal.org/files/issues/2022-10-19/disqus-1508786-lazyload-intersectionobserver-46-2.0.x.patch",
+                    "3344834: TypeError: in_array(): Argument #2 ($haystack) must be of type array, null given in in_array()": "https://git.drupalcode.org/project/disqus/-/merge_requests/7.diff"
                 }
             },
             "installation-source": "dist",
@@ -3399,79 +3347,6 @@
                 "source": "https://git.drupalcode.org/project/disqus"
             },
             "install-path": "../../modules/contrib/disqus"
-        },
-        {
-            "name": "drupal/ds",
-            "version": "3.19.0",
-            "version_normalized": "3.19.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupalcode.org/project/ds.git",
-                "reference": "8.x-3.19"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/ds-8.x-3.19.zip",
-                "reference": "8.x-3.19",
-                "shasum": "7a1a4ded193ad8489c123a2f20ca2c7908c65eaa"
-            },
-            "require": {
-                "drupal/core": "^10"
-            },
-            "require-dev": {
-                "drupal/devel": "5.x-dev",
-                "drupal/field_group": "3.x-dev"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "drupal": {
-                    "version": "8.x-3.19",
-                    "datestamp": "1707499881",
-                    "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
-                    }
-                }
-            },
-            "installation-source": "dist",
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "Bram Goffings",
-                    "homepage": "https://www.drupal.org/user/172527",
-                    "role": "Maintainer"
-                },
-                {
-                    "name": "Kristof De Jaeger",
-                    "homepage": "http://realize.be/",
-                    "role": "Maintainer"
-                },
-                {
-                    "name": "Brecht Ceyssens",
-                    "homepage": "https://www.drupal.org/user/591438",
-                    "role": "Maintainer"
-                },
-                {
-                    "name": "swentel",
-                    "homepage": "https://www.drupal.org/user/107403"
-                }
-            ],
-            "description": "Extend the display options for every entity type.",
-            "homepage": "https://www.drupal.org/project/ds",
-            "keywords": [
-                "drupal",
-                "layout",
-                "php"
-            ],
-            "support": {
-                "source": "http://git.drupal.org/project/ds.git",
-                "issues": "https://www.drupal.org/project/issues/ds",
-                "irc": "irc://irc.freenode.org/drupal-contribute"
-            },
-            "install-path": "../../modules/contrib/ds"
         },
         {
             "name": "drupal/editor_advanced_link",
@@ -5465,69 +5340,6 @@
                 "issues": "https://drupal.org/project/issues/simple_sitemap"
             },
             "install-path": "../../modules/contrib/simple_sitemap"
-        },
-        {
-            "name": "drupal/slick",
-            "version": "2.10.0",
-            "version_normalized": "2.10.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupalcode.org/project/slick.git",
-                "reference": "8.x-2.10"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/slick-8.x-2.10.zip",
-                "reference": "8.x-2.10",
-                "shasum": "818d4aab661d94c06e2047eaa14bd45df589e14b"
-            },
-            "require": {
-                "drupal/blazy": "^2.17",
-                "drupal/core": "^8.8 || ^9 || ^10"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "drupal": {
-                    "version": "8.x-2.10",
-                    "datestamp": "1695019811",
-                    "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
-                    }
-                }
-            },
-            "installation-source": "dist",
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "Contributors",
-                    "homepage": "https://www.drupal.org/node/2232779/committers",
-                    "role": "Contributors"
-                },
-                {
-                    "name": "shadcn",
-                    "homepage": "https://www.drupal.org/user/571032"
-                },
-                {
-                    "name": "thalles",
-                    "homepage": "https://www.drupal.org/user/3589086"
-                }
-            ],
-            "description": "Slick carousel, the last carousel you'll ever need.",
-            "homepage": "https://drupal.org/project/slick",
-            "keywords": [
-                "Drupal",
-                "carousel",
-                "slideshow"
-            ],
-            "support": {
-                "source": "https://git.drupalcode.org/project/slick",
-                "issues": "https://drupal.org/project/issues/slick"
-            },
-            "install-path": "../../modules/contrib/slick"
         },
         {
             "name": "drupal/sophron",

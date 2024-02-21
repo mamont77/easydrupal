@@ -5,3 +5,11 @@ Patches applied to this directory:
 Source: https://git.drupalcode.org/project/disqus/-/merge_requests/8.diff
 
 
+1508786: Lazy load / async load Disqus libraries for better performance
+Source: https://www.drupal.org/files/issues/2022-10-19/disqus-1508786-lazyload-intersectionobserver-46-2.0.x.patch
+
+
+3344834: TypeError: in_array(): Argument #2 ($haystack) must be of type array, null given in in_array()
+Source: https://git.drupalcode.org/project/disqus/-/merge_requests/7.diff
+
+

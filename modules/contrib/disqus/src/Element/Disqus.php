@@ -73,6 +73,8 @@ class Disqus extends RenderElement {
       'url' => $url,
       'title' => $title,
       'identifier' => $identifier,
+      'disable_mobile' => $disqus_settings->get('behavior.disqus_disable_mobile'),
+      'lazy_load' => $disqus_settings->get('behavior.disqus_lazy_load'),
     ];
 
     // If the user is logged in, we can inject the username and email for
@@ -113,6 +115,7 @@ class Disqus extends RenderElement {
     if (!empty($callbacks)) {
       $disqus['callbacks'] = $callbacks;
     }
+
     // Check if we want to track new comments in Google Analytics.
     if ($disqus_settings->get('behavior.disqus_track_newcomment_ga')) {
       // Add a callback when a new comment is posted.
@@ -128,6 +131,12 @@ class Disqus extends RenderElement {
       // Attach the js with the callback implementation.
       $element['#attached']['library'][] = 'disqus/notification';
     }
+
+    // Lazy loading configuration.
+    if (\Drupal::config('disqus.settings')->get('advanced.lazy_loading.status')) {
+      $disqus['lazyLoad'] = \Drupal::config('disqus.settings')->get('advanced.lazy_loading.status');
+    }
+
     // Add the disqus.js and all the settings to process the JavaScript and load
     // Disqus.
     $element['#attached']['library'][] = 'disqus/disqus';
