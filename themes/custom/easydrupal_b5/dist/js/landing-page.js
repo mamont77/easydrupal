@@ -32,27 +32,27 @@
         }
       });
 
-      $(once('projectSectionBehavior', '.section.projects .field-name-field-landing-page-backgro-media img', context)).each(function () {
-        $(this).attr({
-          'width': '493',
-          'height': '299'
-        });
-      });
-
-      $(once('articleSectionBehavior', '.section.articles .field-name-field-image-media img', context)).each(function () {
-        $(this).attr({
-          'width': '200',
-          'height': '133'
-        });
-      });
-
-
-      $(once('clientSectionBehavior', '.section.clients .field-name-field-image-media img', context)).each(function () {
-        $(this).attr({
-          'width': '212',
-          'height': '80'
-        });
-      });
+      // $(once('projectSectionBehavior', '.section.projects .field-name-field-landing-page-backgro-media img', context)).each(function () {
+      //   $(this).attr({
+      //     'width': '493',
+      //     'height': '299'
+      //   });
+      // });
+      //
+      // $(once('articleSectionBehavior', '.section.articles .field-name-field-image-media img', context)).each(function () {
+      //   $(this).attr({
+      //     'width': '200',
+      //     'height': '133'
+      //   });
+      // });
+      //
+      //
+      // $(once('clientSectionBehavior', '.section.clients .field-name-field-image-media img', context)).each(function () {
+      //   $(this).attr({
+      //     'width': '212',
+      //     'height': '80'
+      //   });
+      // });
 
       // @todo: Feedback images 150x150.
     }
