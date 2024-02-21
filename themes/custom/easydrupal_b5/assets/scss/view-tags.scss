@@ -3,20 +3,17 @@
 @import 'variables_theme';
 @import "tags";
 
-.view {
-  .views-row {
-    margin-bottom: 15px;
-  }
-}
-
 .view-tags {
-  .views-row {
-    display: inline;
+  .view-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+    .views-row {
+      margin-bottom: 0;
+    }
   }
 
   .views-field {
-    display: inline;
-
     a {
       @extend %tags;
     }

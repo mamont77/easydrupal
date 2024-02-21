@@ -12539,6 +12539,10 @@ blockquote {
   margin-bottom: 1.5rem;
 }
 
+.is-b-loading::before {
+  background: #81a5bf;
+}
+
 header .navbar {
   --bs-navbar-padding-x: 0;
   --bs-navbar-padding-y: 0;

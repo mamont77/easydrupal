@@ -1,15 +1,14 @@
 .field--name-field-skills .skills .skill {
-  top: -3px;
   display: inline-block;
   background: #ddd;
   color: #222;
-  font-size: 12px;
-  height: 23px;
-  line-height: 22px;
-  padding: 0 14px 0 16px;
+  height: 1.4rem;
   position: relative;
-  margin: 0 10px 0 0;
   text-decoration: none;
+  font-size: 0.75rem;
+  line-height: 1.45rem;
+  padding: 0 0.75rem 0 1rem;
+  margin: 0;
 }
 .field--name-field-skills .skills .skill::before {
   background: #FFFFFF;
@@ -48,11 +47,29 @@
   width: 100%;
 }
 
+.field--name-field-skills {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  gap: 0.5rem;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
 .field--name-field-skills .skills {
-  display: inline;
-  list-style: none;
-  padding: 0;
   margin: 0;
+  padding: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  gap: 0.5rem;
 }
 .field-name-field-project-url a {
   display: inline-block;

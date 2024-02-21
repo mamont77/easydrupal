@@ -1,15 +1,14 @@
 .view-tags .views-field a {
-  top: -3px;
   display: inline-block;
   background: #ddd;
   color: #222;
-  font-size: 12px;
-  height: 23px;
-  line-height: 22px;
-  padding: 0 14px 0 16px;
+  height: 1.4rem;
   position: relative;
-  margin: 0 10px 0 0;
   text-decoration: none;
+  font-size: 0.75rem;
+  line-height: 1.45rem;
+  padding: 0 0.75rem 0 1rem;
+  margin: 0;
 }
 .view-tags .views-field a::before {
   background: #FFFFFF;
@@ -41,14 +40,15 @@
   border-left-color: #666;
 }
 
-.view .views-row {
-  margin-bottom: 15px;
+.view-tags .view-content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  gap: 0.5rem;
 }
-
-.view-tags .views-row {
-  display: inline;
-}
-.view-tags .views-field {
-  display: inline;
+.view-tags .view-content .views-row {
+  margin-bottom: 0;
 }
 /*# sourceMappingURL=../sourcemaps/view-tags.css.map */
