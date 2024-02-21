@@ -14,7 +14,7 @@
     {{ content.field_image_media }}
     {{ title_prefix }}
     {% if label and not page %}
-      <h3 {{ title_attributes.addClass('title') }}>{{ label }}</h3>
+      <h2 {{ title_attributes.addClass('h3') }}>{{ label }}</h2>
     {% endif %}
     {{ title_suffix }}
     {{ content|without('field_image_media') }}

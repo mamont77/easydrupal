@@ -11559,37 +11559,38 @@ a > .ck-content code {
 .ck-content h1, .ck-content h2, .ck-content h3, .ck-content h4, .ck-content h5, .ck-content h6, .ck-content .h1, .ck-content .h2, .ck-content .h3, .ck-content .h4, .ck-content .h5, .ck-content .h6 {
   font-family: "Roboto Condensed", Verdana, Arial, Helvetica, sans-serif;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 400;
 }
 .ck-content h1, .ck-content .h1 {
-  font-size: 1.75rem;
-  line-height: 1.75rem;
-  margin-bottom: 1.5rem;
+  font-size: 2.375rem;
+  line-height: 2.375rem;
+  margin-bottom: 2rem;
 }
 @media (min-width: 992px) {
   .ck-content h1, .ck-content .h1 {
-    font-size: 2rem;
-    line-height: 2.5rem;
+    font-size: 3.5rem;
+    line-height: 3.625rem;
   }
 }
 .ck-content h2, .ck-content .h2 {
-  font-size: 1.5rem;
-  margin-bottom: 1.25rem;
+  font-size: 2rem;
+  line-height: 2rem;
+  margin-bottom: 2rem;
 }
 @media (min-width: 992px) {
   .ck-content h2, .ck-content .h2 {
-    font-size: 1.75rem;
-    line-height: normal;
+    font-size: 3.125rem;
+    line-height: 3.4375rem;
   }
 }
 .ck-content h3, .ck-content .h3 {
-  font-size: 1.25rem;
-  line-height: 1.25rem;
+  font-size: 2rem;
+  line-height: 2rem;
 }
 @media (min-width: 992px) {
   .ck-content h3, .ck-content .h3 {
-    font-size: 1.375rem;
-    line-height: normal;
+    font-size: 2rem;
+    line-height: 2.5rem;
   }
 }
 .ck-content a {
@@ -11615,9 +11616,6 @@ a > .ck-content code {
   .ck-content .region-sidebar-second {
     margin-top: 0;
   }
-}
-.ck-content .region-sidebar-second h2, .ck-content .region-sidebar-second .h2 {
-  font-size: 1.4rem;
 }
 .ck-content .node .field--type-text-with-summary ul,
 .ck-content .node .field-name-body ul {

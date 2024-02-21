@@ -1,0 +1,19 @@
+{{ attach_library('easydrupal_b5/' ~ attributes.id|clean_class|replace({'easydrupal-b5-': ''})) }}
+
+{% set classes = [
+  'block',
+  'block-' ~ configuration.provider|clean_class,
+  'block-' ~ plugin_id|clean_class,
+] %}
+{# {{ dump(attributes.id|clean_class|replace({'easydrupal-b5-': ''})) }} #}
+
+<div{{ attributes.addClass(classes) }}>
+  {{ title_prefix }}
+  {% if label %}
+    <h2{{ title_attributes.addClass('h3') }}>{{ label }}</h2>
+  {% endif %}
+  {{ title_suffix }}
+  {% block content %}
+    {{ content }}
+  {% endblock %}
+</div>

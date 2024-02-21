@@ -127,13 +127,23 @@
   clear: both;
 }
 .field--name-field-comments .field__label {
-  font-size: 23px;
+  font-family: "Roboto Condensed", Verdana, Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 2rem;
+  line-height: 2rem;
   text-transform: uppercase;
   color: #293749;
   text-align: center;
   border-top: 0.4rem solid #ddd;
   border-bottom: 0.4rem solid #ddd;
-  padding: 15px 0;
+  padding: 1.5rem 0;
+}
+@media (min-width: 992px) {
+  .field--name-field-comments .field__label {
+    font-size: 2rem;
+    line-height: 2.5rem;
+  }
 }
 
 .file > span {

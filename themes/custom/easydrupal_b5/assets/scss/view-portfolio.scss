@@ -48,11 +48,10 @@
     transition: 150ms ease opacity;
   }
 
-  .title {
-    //font-size: 1.25rem;
+  h2 {
     margin-bottom: 0;
     color: $color-heading;
-    font-weight: 400;
+    //font-weight: 400;
     text-align: center;
   }
 

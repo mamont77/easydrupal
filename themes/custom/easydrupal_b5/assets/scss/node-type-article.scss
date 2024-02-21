@@ -91,13 +91,22 @@
   clear: both;
 
   .field__label {
-    font-size: 23px;
+    font-family: $font-heading;
+    font-style: normal;
+    font-weight: 400;
+
+    font-size: 2rem;
+    line-height: 2rem;
+    @media (min-width: $bs-breakpoint-lg) {
+      font-size: 2rem;
+      line-height: 2.5rem;
+    }
     text-transform: uppercase;
     color: $color-heading;
     text-align: center;
     border-top: .4rem solid $color-neutral-3;
     border-bottom: .4rem solid $color-neutral-3;
-    padding: 15px 0;
+    padding: 1.5rem 0;
   }
 }
 

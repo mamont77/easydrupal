@@ -9,14 +9,14 @@
 {{ attach_library('bootstrap5/node') }}
 
 <article{{ attributes.addClass(classes) }}>
-  <div class="header d-flex align-center gap-3 mb-3">
+  <div class="header d-flex align-items-center gap-3 mb-3">
     <div class="date">
       <span class="day">{{ node.created.value|date('j') }}</span>
       <span class="year">{{ node.created.value|date('M.Y') }}</span>
     </div>
     {{ title_prefix }}
     {% if label and not page %}
-      <h2{{ title_attributes }}>
+      <h2{{ title_attributes.addClass('h3') }}>
         <a href="{{ url }}" rel="bookmark">{{ label }}</a>
       </h2>
     {% endif %}

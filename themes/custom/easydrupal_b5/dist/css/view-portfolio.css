@@ -65,10 +65,9 @@
   -webkit-transition: 150ms ease opacity;
   transition: 150ms ease opacity;
 }
-.view-portfolio .title {
+.view-portfolio h2 {
   margin-bottom: 0;
   color: #293749;
-  font-weight: 400;
   text-align: center;
 }
 .view-portfolio a:hover {

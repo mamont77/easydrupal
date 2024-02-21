@@ -22,11 +22,10 @@
   }
 
   .views-field-field-last-name {
-    font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 22px;
-    font-weight: bold;
     text-align: center;
-    color: $color-neutral-16;
+    h2 {
+      color: $color-neutral-16;
+    }
   }
 
   .views-field-user-picture {

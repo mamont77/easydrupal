@@ -14,10 +14,9 @@
   margin-bottom: 5px;
 }
 .view-about-author .views-field-field-last-name {
-  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 22px;
-  font-weight: bold;
   text-align: center;
+}
+.view-about-author .views-field-field-last-name h2 {
   color: #414a51;
 }
 .view-about-author .views-field-user-picture img {
