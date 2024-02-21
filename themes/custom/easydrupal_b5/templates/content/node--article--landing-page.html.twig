@@ -1,13 +1,11 @@
-{%
-  set classes = [
+{% set classes = [
   'node',
   'node--type-' ~ node.bundle|clean_class,
   node.isPromoted() ? 'node--promoted',
   node.isSticky() ? 'node--sticky',
   not node.isPublished() ? 'node--unpublished',
   view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
-]
-%}
+] %}
 <article{{ attributes.addClass(classes) }}>
   {{ title_prefix }}
   {% if label and not page %}
@@ -17,6 +15,13 @@
   {% endif %}
   {{ title_suffix }}
   <div{{ content_attributes.addClass('node__content') }}>
-    {{ content }}
+    <div class="row">
+      <div class="col-12 col-md-5">
+        {{ content.field_image_media }}
+      </div>
+      <div class="col-12 col-md-7">
+        {{ content|without('field_image_media') }}
+      </div>
+    </div>
   </div>
 </article>

@@ -12401,6 +12401,10 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
   font-style: normal;
   font-weight: 400;
 }
+h1.style-fancy:after, h2.style-fancy:after, h3.style-fancy:after, h4.style-fancy:after, h5.style-fancy:after, h6.style-fancy:after, .h1.style-fancy:after, .h2.style-fancy:after, .h3.style-fancy:after, .h4.style-fancy:after, .h5.style-fancy:after, .h6.style-fancy:after {
+  margin: 2rem 0;
+}
+
 h1, .h1 {
   font-size: 2.375rem;
   line-height: 2.375rem;
@@ -12427,13 +12431,38 @@ h2, .h2 {
 
 h3, .h3 {
   font-size: 2rem;
-  line-height: 2rem;
+  line-height: 2.25rem;
 }
 @media (min-width: 992px) {
   h3, .h3 {
     font-size: 2rem;
     line-height: 2.5rem;
   }
+}
+
+.style-fancy {
+  color: #81a5bf;
+  margin-bottom: 1rem;
+}
+.style-fancy:after {
+  background-color: #81a5bf;
+  content: "";
+  display: block;
+  width: 22rem;
+  height: 0.3125rem;
+  margin: 0.5rem auto 0 auto;
+}
+.style-fancy.fancy-secondary {
+  color: #FFFFFF;
+}
+.style-fancy.fancy-secondary:after {
+  background-color: #FFFFFF;
+}
+.style-fancy.fancy-centered {
+  text-align: center;
+}
+.style-fancy.fancy-centered:after {
+  margin: 0.5rem auto 1.5rem auto;
 }
 
 a {

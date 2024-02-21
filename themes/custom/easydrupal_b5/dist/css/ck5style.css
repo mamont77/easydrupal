@@ -11561,6 +11561,9 @@ a > .ck-content code {
   font-style: normal;
   font-weight: 400;
 }
+.ck-content h1.style-fancy:after, .ck-content h2.style-fancy:after, .ck-content h3.style-fancy:after, .ck-content h4.style-fancy:after, .ck-content h5.style-fancy:after, .ck-content h6.style-fancy:after, .ck-content .h1.style-fancy:after, .ck-content .h2.style-fancy:after, .ck-content .h3.style-fancy:after, .ck-content .h4.style-fancy:after, .ck-content .h5.style-fancy:after, .ck-content .h6.style-fancy:after {
+  margin: 2rem 0;
+}
 .ck-content h1, .ck-content .h1 {
   font-size: 2.375rem;
   line-height: 2.375rem;
@@ -11585,13 +11588,37 @@ a > .ck-content code {
 }
 .ck-content h3, .ck-content .h3 {
   font-size: 2rem;
-  line-height: 2rem;
+  line-height: 2.25rem;
 }
 @media (min-width: 992px) {
   .ck-content h3, .ck-content .h3 {
     font-size: 2rem;
     line-height: 2.5rem;
   }
+}
+.ck-content .style-fancy {
+  color: #81a5bf;
+  margin-bottom: 1rem;
+}
+.ck-content .style-fancy:after {
+  background-color: #81a5bf;
+  content: "";
+  display: block;
+  width: 22rem;
+  height: 0.3125rem;
+  margin: 0.5rem auto 0 auto;
+}
+.ck-content .style-fancy.fancy-secondary {
+  color: #FFFFFF;
+}
+.ck-content .style-fancy.fancy-secondary:after {
+  background-color: #FFFFFF;
+}
+.ck-content .style-fancy.fancy-centered {
+  text-align: center;
+}
+.ck-content .style-fancy.fancy-centered:after {
+  margin: 0.5rem auto 1.5rem auto;
 }
 .ck-content a {
   color: #293749;

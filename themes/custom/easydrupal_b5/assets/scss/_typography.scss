@@ -23,7 +23,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 
   &.style-fancy {
     &:after {
-      // margin: 2rem 0;
+      margin: 2rem 0;
     }
   }
 }
@@ -50,24 +50,44 @@ h2, .h2 {
 
 h3, .h3 {
   font-size: 2rem;
-  line-height: 2rem;
+  line-height: 2.25rem;
   @media (min-width: $bs-breakpoint-lg) {
     font-size: 2rem;
     line-height: 2.5rem;
   }
 }
 
+.style-fancy {
+  color: $color-neutral-2;
+  margin-bottom: 1rem;
+
+  &:after {
+    background-color: $color-neutral-2;
+    content: "";
+    display: block;
+    width: 22rem;
+    height: 0.3125rem;
+    margin: .5rem auto 0 auto;
+  }
+
+  &.fancy-secondary {
+    color: $color-white;
+
+    &:after {
+      background-color: $color-white;
+    }
+  }
+
+  &.fancy-centered {
+    text-align: center;
+
+    &:after {
+      margin: .5rem auto 1.5rem auto;
+    }
+  }
+}
+
 a {
   color: $color-heading;
   text-decoration: none;
-}
-
-// Label.
-.label {
-
-}
-
-// Tags.
-.tags {
-
 }

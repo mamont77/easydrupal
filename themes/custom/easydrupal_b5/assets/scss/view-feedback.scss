@@ -78,7 +78,7 @@
     text-align: justify;
     margin: 0;
     font-size: inherit;
-    font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: $font-main;
 
     &:before, &:after {
       font-family: helvetica, arial, sans-serif;

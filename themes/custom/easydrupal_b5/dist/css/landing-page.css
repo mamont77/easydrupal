@@ -12,9 +12,6 @@ header .navbar {
 }
 
 .page-node-type-landingpage {
-  font-size: 1.2rem;
-  line-height: 1.4rem;
-  font-weight: 300;
   /** About **/
   /** Projects **/
   /** Projects **/
@@ -25,26 +22,12 @@ header .navbar {
   text-align: center;
   padding-top: 4rem;
   padding-bottom: 4rem;
-  /* Style for our header texts */
 }
 .page-node-type-landingpage .section .title-wrapper {
-  max-width: 350px;
-  margin: 0 auto 0.75rem auto;
+  margin: 0 auto;
 }
 .page-node-type-landingpage .section h2 {
-  font-size: 2.3rem;
-  margin-bottom: 0;
-  padding: 0;
   text-transform: uppercase;
-  color: #6686A2;
-}
-.page-node-type-landingpage .section h3 {
-  font-size: 1.6rem;
-}
-.page-node-type-landingpage .section .line {
-  width: 100%;
-  height: 0.4rem;
-  margin: 1rem auto;
 }
 .page-node-type-landingpage .section .read-more {
   margin: 1.5rem 0;
@@ -67,38 +50,25 @@ header .navbar {
     width: 60%;
   }
 }
-.page-node-type-landingpage .about h2 {
-  color: #eee;
-}
-.page-node-type-landingpage .about .line {
-  background-color: #eee;
-}
 .page-node-type-landingpage .about .field--name-body {
   color: #eee;
   text-align: left;
   margin: 0 auto;
-  max-height: 600px;
-  font-size: 1.2rem;
-  line-height: 1.4rem;
 }
-@media (max-width: 768px) {
+.page-node-type-landingpage .about .field--name-body .align-left {
+  float: none;
+  text-align: center;
+}
+@media (min-width: 768px) {
   .page-node-type-landingpage .about .field--name-body .align-left {
-    float: none;
+    float: left;
   }
 }
 .page-node-type-landingpage .about .field--name-body img {
   border-radius: 50%;
-  border: 8px solid #eee;
-  margin: 0 30px 15px 0;
+  border: 0.5rem solid #eee;
   width: 216px;
   height: 216px;
-}
-@media (max-width: 768px) {
-  .page-node-type-landingpage .about .field--name-body img {
-    float: none;
-    display: block;
-    margin: 0 auto 15px auto;
-  }
 }
 .page-node-type-landingpage .about .read-more a {
   color: #eee;
@@ -108,22 +78,10 @@ header .navbar {
   background-color: #fff;
   color: #575756;
 }
-.page-node-type-landingpage .projects h2 {
-  color: #6686A2;
-}
-.page-node-type-landingpage .projects .line {
-  background-color: #81a5bf;
-}
-.page-node-type-landingpage .projects h3 {
-  margin-bottom: 15px;
-}
-.page-node-type-landingpage .projects h3 a {
-  color: #293749;
-}
 .page-node-type-landingpage .projects .field--name-field-landing-page-backgro-media {
-  border: 1px solid #81a5bf;
+  border: 0.1rem solid #81a5bf;
 }
-@media screen and (min-width: 1140px) {
+@media (min-width: 1200px) {
   .page-node-type-landingpage .projects .field--name-field-landing-page-backgro-media {
     background-image: url(../images/devices/cs-imac-frame-small.png);
     background-repeat: no-repeat;
@@ -140,24 +98,13 @@ header .navbar {
   max-height: 299px;
 }
 .page-node-type-landingpage .projects .field--name-body {
-  font-size: 18px;
-  line-height: 24px;
   text-align: justify;
-}
-.page-node-type-landingpage .projects .read-more a {
-  color: #293749;
 }
 .page-node-type-landingpage .clients {
   padding-top: 0;
   background: url(../images/bg-page-section--light-dbffac9426e51e0fdcaaad8452d7561b.png);
   background-color: #fff;
   color: #575756;
-}
-.page-node-type-landingpage .clients h2 {
-  color: #6686A2;
-}
-.page-node-type-landingpage .clients .line {
-  background-color: #81a5bf;
 }
 .page-node-type-landingpage .clients .field--name-field-image-media {
   text-align: center;
@@ -171,34 +118,12 @@ header .navbar {
   background: #eaeaea;
   color: #575756;
 }
-.page-node-type-landingpage .articles h2 {
-  color: #6686A2;
-}
-.page-node-type-landingpage .articles .line {
-  background-color: #6686A2;
-}
-.page-node-type-landingpage .articles h3 a {
-  color: #293749;
-}
-.page-node-type-landingpage .articles .field--name-node-title {
-  margin-bottom: 15px;
-}
-.page-node-type-landingpage .articles .field--name-field-image-media {
-  float: left;
-  margin: 0 15px 15px 0;
-}
 .page-node-type-landingpage .articles .field--name-field-image-media img {
-  border: 1px solid #81a5bf;
-  width: 200px;
-  height: 133px;
+  border: 0.1rem solid #81a5bf;
+  width: 100%;
 }
 .page-node-type-landingpage .articles .field--name-body {
   text-align: left;
-  max-height: 600px;
-  padding-right: 15px;
-}
-.page-node-type-landingpage .articles .read-more a {
-  color: #293749;
 }
 .page-node-type-landingpage .section.feedback {
   background: url(../images/client-testimonials-background.jpg) bottom center;
@@ -206,19 +131,11 @@ header .navbar {
   background-color: #fff;
   color: #575756;
 }
-.page-node-type-landingpage .section.feedback h2 {
-  color: #6686A2;
-}
-.page-node-type-landingpage .section.feedback .line {
-  background-color: #81a5bf;
-}
-.page-node-type-landingpage .section.feedback h3.title {
-  font-size: 20px;
-  color: #293749;
-  margin: 0 0 15px 0;
+.page-node-type-landingpage .section.feedback .field {
+  margin-bottom: 0.75em;
 }
 .page-node-type-landingpage .section.feedback .about-person {
-  margin-bottom: 15px;
+  margin-bottom: 0.75em;
   color: #6686A2;
 }
 .page-node-type-landingpage .section.feedback .about-person span {
@@ -230,16 +147,16 @@ header .navbar {
 .page-node-type-landingpage .section.feedback .field--name-field-image-media img {
   width: 150px;
   height: 150px;
-  margin: 0 auto 15px auto;
   border-radius: 50%;
-  border: 8px solid #eee;
+  border: 0.5rem solid #eee;
+  margin: 0 auto;
   opacity: 0.8;
 }
 .page-node-type-landingpage .section.feedback .field--name-field-image-media img:hover {
   opacity: 1;
 }
 .page-node-type-landingpage .section.feedback .project-info {
-  margin-bottom: 15px;
+  margin-bottom: 0.75rem;
 }
 .page-node-type-landingpage .section.feedback .field--name-field-project-title {
   color: #293749;
@@ -248,17 +165,19 @@ header .navbar {
   content: ",";
 }
 .page-node-type-landingpage .section.feedback blockquote {
-  border-left: 1px solid #bbb;
+  color: #575756;
+  background-color: transparent;
+  border-left: 1px solid #adadad;
   font-style: italic;
-  padding: 0.5em 10px;
+  padding: 1rem;
   text-align: justify;
   margin: 0;
   font-size: inherit;
-  color: #575756;
+  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 .page-node-type-landingpage .section.feedback blockquote:before, .page-node-type-landingpage .section.feedback blockquote:after {
   font-family: helvetica, arial, sans-serif;
-  color: #6686A2;
+  color: #81a5bf;
   font-size: 3em;
   line-height: 0.1em;
 }
@@ -275,82 +194,5 @@ header .navbar {
 }
 .page-node-type-landingpage .section.feedback blockquote > p:first-child {
   display: inline;
-}
-.page-node-type-landingpage .section.feedback .read-more a {
-  color: #293749;
-}
-
-@media screen and (max-width: 1024px) {
-  .page-node-type-landingpage .section .title-wrapper {
-    max-width: 50%;
-  }
-}
-@media screen and (min-width: 993px) {
-  .page-node-type-landingpage .main-container.container-lg {
-    padding: 79px 0 0 0;
-    width: 100%;
-    margin-left: -15px;
-    margin-right: -15px;
-    margin-bottom: 0;
-  }
-  .page-node-type-landingpage .main-section {
-    padding: 0;
-  }
-}
-@media screen and (max-width: 992px) {
-  .page-node-type-landingpage .main-container.container-lg {
-    padding-top: 79px;
-    padding-bottom: 0;
-    width: 100%;
-  }
-  .page-node-type-landingpage .main-section {
-    padding: 0;
-    width: 100%;
-  }
-  .page-node-type-landingpage .articles .field--name-field-image-media {
-    float: none;
-    margin-right: 0;
-  }
-  .page-node-type-landingpage .articles .field--name-field-image-media img {
-    margin: auto;
-    width: 100%;
-    height: auto;
-  }
-  .page-node-type-landingpage .about .container-lg {
-    width: 75%;
-  }
-  .page-node-type-landingpage .about .field--name-body {
-    max-height: initial;
-    padding-right: 0;
-  }
-  .page-node-type-landingpage .articles .field--name-body {
-    max-height: initial;
-    padding-right: 0;
-  }
-}
-@media screen and (max-width: 768px) {
-  .page-node-type-landingpage {
-    font-size: 14px !important;
-    line-height: 16px !important;
-  }
-  .page-node-type-landingpage .field--name-body, .page-node-type-landingpage .field--name-body {
-    font-size: 14px !important;
-    line-height: 16px !important;
-  }
-  .page-node-type-landingpage .title-wrapper {
-    max-width: 80%;
-  }
-  .page-node-type-landingpage .section h2 {
-    font-size: 28px !important;
-  }
-  .page-node-type-landingpage .section h3 {
-    font-size: 22px !important;
-  }
-  .page-node-type-landingpage .about .container-lg {
-    width: 100%;
-  }
-  .page-node-type-landingpage .projects img {
-    max-height: initial;
-  }
 }
 /*# sourceMappingURL=../sourcemaps/landing-page.css.map */
