@@ -12539,6 +12539,10 @@ blockquote {
   margin-bottom: 1.5rem;
 }
 
+.field--name-body p:last-of-type {
+  margin-bottom: 0;
+}
+
 .is-b-loading::before {
   background: #81a5bf;
 }

@@ -1,0 +1,16 @@
+uuid: eced0a22-fc17-4ab8-b6c3-dbc11095e3c0
+langcode: en
+status: true
+dependencies: {  }
+name: project_slider_min_width_992px
+label: 'Project Slider MIN-WIDTH: 992px'
+effects:
+  e4a09642-8da3-42ed-a31d-642483a985cb:
+    uuid: e4a09642-8da3-42ed-a31d-642483a985cb
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 681
+      height: 408
+      anchor: left-top
+pipeline: ''

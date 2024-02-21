@@ -14,8 +14,13 @@ label: Article
 image_style_mappings:
   -
     image_mapping_type: image_style
+    image_mapping: max_200x200
+    breakpoint_id: bootstrap5.screen.md-min
+    multiplier: 1x
+  -
+    image_mapping_type: image_style
     image_mapping: max_720x720
     breakpoint_id: bootstrap5.screen.sm-max
     multiplier: 1x
 breakpoint_group: bootstrap5.screen
-fallback_image_style: max_200x200
+fallback_image_style: max_720x720

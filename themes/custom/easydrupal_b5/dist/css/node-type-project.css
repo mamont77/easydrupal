@@ -40,6 +40,10 @@
   border-left-color: #666;
 }
 
+.region-content .field {
+  margin-bottom: 0;
+}
+
 .field--name-field-media-image {
   margin-bottom: 1.5rem;
 }

@@ -18,7 +18,7 @@ one_pixel: true
 visible_class: false
 wrapper_class: false
 deprecated_class: false
-placeholder: /themes/custom/easydrupal/images/blank.svg
+placeholder: /themes/custom/easydrupal_b5/dist/images/blank.svg
 unstyled_extensions: ''
 use_encodedbox: false
 use_oembed: false

@@ -12,5 +12,5 @@ effects:
     data:
       width: 416
       height: 236
-      anchor: center-top
+      anchor: left-top
 pipeline: ''

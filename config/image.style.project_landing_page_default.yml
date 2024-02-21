@@ -5,19 +5,12 @@ dependencies: {  }
 name: project_landing_page_default
 label: 'Project Landing Page Default'
 effects:
-  0be535ee-086f-4a7f-ac6d-b4c149c1af89:
-    uuid: 0be535ee-086f-4a7f-ac6d-b4c149c1af89
-    id: image_scale
-    weight: 1
+  d51e8fa4-5cf0-410f-aa61-af5fd61d8897:
+    uuid: d51e8fa4-5cf0-410f-aa61-af5fd61d8897
+    id: image_scale_and_crop
+    weight: 3
     data:
-      width: 493
-      height: null
-      upscale: true
-  17753647-9b0f-48f6-bede-9877a2b4cac1:
-    uuid: 17753647-9b0f-48f6-bede-9877a2b4cac1
-    id: image_crop
-    weight: 2
-    data:
-      width: 493
-      height: 299
+      width: 532
+      height: 323
       anchor: left-top
+pipeline: ''

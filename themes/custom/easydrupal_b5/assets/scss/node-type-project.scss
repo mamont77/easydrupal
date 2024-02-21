@@ -3,6 +3,10 @@
 @import 'variables_theme';
 @import "tags";
 
+.region-content .field {
+  margin-bottom: 0;
+}
+
 .field--name-field-media-image {
   img {
     width: 100%;

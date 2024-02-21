@@ -3,9 +3,9 @@ langcode: en
 status: true
 dependencies:
   config:
-    - image.style.max_720x720
     - image.style.project_landing_page_default
-    - image.style.project_landing_page_max_width_991px
+    - image.style.project_landing_page_min_width_1140px
+    - image.style.project_landing_page_min_width_576px
   theme:
     - bootstrap5
 id: project_landing_page
@@ -13,13 +13,18 @@ label: 'Project Landing Page'
 image_style_mappings:
   -
     image_mapping_type: image_style
-    image_mapping: project_landing_page_max_width_991px
-    breakpoint_id: bootstrap5.screen.md-max
+    image_mapping: project_landing_page_min_width_1140px
+    breakpoint_id: bootstrap5.screen.xxl-min
     multiplier: 1x
   -
     image_mapping_type: image_style
-    image_mapping: max_720x720
-    breakpoint_id: bootstrap5.screen.sm-max
+    image_mapping: project_landing_page_min_width_576px
+    breakpoint_id: bootstrap5.screen.sm-min
+    multiplier: 1x
+  -
+    image_mapping_type: image_style
+    image_mapping: project_landing_page_default
+    breakpoint_id: bootstrap5.screen.xs-max
     multiplier: 1x
 breakpoint_group: bootstrap5.screen
 fallback_image_style: project_landing_page_default

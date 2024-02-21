@@ -11685,6 +11685,9 @@ a > .ck-content code {
 .ck-content .region-sidebar-second > div:not(:last-of-type) {
   margin-bottom: 1.5rem;
 }
+.ck-content .field--name-body p:last-of-type {
+  margin-bottom: 0;
+}
 .ck-content .is-b-loading::before {
   background: #81a5bf;
 }

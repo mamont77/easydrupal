@@ -1,0 +1,16 @@
+uuid: fe5bd818-26a9-4a18-86f3-e27d53e65b99
+langcode: en
+status: true
+dependencies: {  }
+name: project_landing_page_min_width_576px
+label: 'Project Landing Page MIN-WIDTH: 576PX'
+effects:
+  14a9d3e8-f4c6-4683-b2bc-6f1fffdf149f:
+    uuid: 14a9d3e8-f4c6-4683-b2bc-6f1fffdf149f
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 454
+      height: 275
+      anchor: center-center
+pipeline: ''
