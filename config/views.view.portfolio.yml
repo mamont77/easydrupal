@@ -406,7 +406,8 @@ display:
     display_options:
       display_extenders:
         metatag_display_extender:
-          metatags: {  }
+          metatags:
+            description: "Explore my Drupal portfolio showcasing expertise in Drupal 10 and 9. From responsive themes to API creation, I specialize in fixing issues, multilingual sites, and seamless migrations. Trust in 18 years of web development experience. Let's elevate your Drupal expertise together."
           tokenize: false
       path: projects
       menu:
