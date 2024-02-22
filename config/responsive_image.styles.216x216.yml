@@ -1,16 +1,16 @@
-uuid: 7a97fbbf-27c5-49bd-ab72-71d816cea263
+uuid: ee65c1dd-fb04-4081-b1fd-c32262e89adb
 langcode: en
 status: true
 dependencies:
   config:
-    - image.style.feedback_portrait
-id: feedback_portrait
-label: 'FeedBack Portrait'
+    - image.style.216x216
+id: 216x216
+label: 216x216
 image_style_mappings:
   -
     image_mapping_type: image_style
-    image_mapping: feedback_portrait
+    image_mapping: 216x216
     breakpoint_id: responsive_image.viewport_sizing
     multiplier: 1x
 breakpoint_group: responsive_image
-fallback_image_style: feedback_portrait
+fallback_image_style: 216x216

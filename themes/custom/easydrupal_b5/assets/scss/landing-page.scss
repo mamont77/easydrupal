@@ -66,8 +66,6 @@ header {
     img {
       border-radius: 50%;
       border: .5rem solid $color-neutral-15;
-      width: 216px;
-      height: 216px;
       max-width: none;
       margin-bottom: 1.5rem;
       @media (min-width: $bs-breakpoint-md) {
@@ -198,8 +196,6 @@ header {
 
     .field--name-field-image-media {
       img {
-        width: 150px;
-        height: 150px;
         border-radius: 50%;
         border: .5rem solid $color-neutral-15;
         margin: 0 auto;

@@ -1,0 +1,16 @@
+uuid: 6969da72-9130-4436-8863-5c7fb5381345
+langcode: en
+status: true
+dependencies: {  }
+name: 216x216
+label: 216x216
+effects:
+  eb601615-6857-4e8a-a836-5eaa44fdc630:
+    uuid: eb601615-6857-4e8a-a836-5eaa44fdc630
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 216
+      height: 216
+      anchor: center-center
+pipeline: ''

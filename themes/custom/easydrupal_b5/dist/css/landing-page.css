@@ -60,8 +60,6 @@ header .navbar {
 .page-node-type-landingpage .about img {
   border-radius: 50%;
   border: 0.5rem solid #eee;
-  width: 216px;
-  height: 216px;
   max-width: none;
   margin-bottom: 1.5rem;
 }
@@ -156,8 +154,6 @@ header .navbar {
   content: "|";
 }
 .page-node-type-landingpage .section.feedback .field--name-field-image-media img {
-  width: 150px;
-  height: 150px;
   border-radius: 50%;
   border: 0.5rem solid #eee;
   margin: 0 auto;

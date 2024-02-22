@@ -18,8 +18,6 @@
   gap: 0.5rem;
 }
 .view-feedback .field--name-field-image-media img {
-  width: 150px;
-  height: 150px;
   border-radius: 50%;
   border: 0.5rem solid #eee;
   margin: 0 auto;

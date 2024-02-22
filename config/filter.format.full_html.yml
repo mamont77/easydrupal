@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_view_mode.media.216x216
     - core.entity_view_mode.media.ck
     - core.entity_view_mode.media.ckeditor_don_t_resize
     - core.entity_view_mode.media.ckeditor_half_width
@@ -25,15 +26,15 @@ filters:
     status: false
     weight: -38
     settings:
+      media_switch: ''
+      hybrid_style: ''
+      box_style: ''
+      box_media_style: ''
+      box_caption: ''
       filter_tags:
         img: img
         iframe: iframe
-      media_switch: ''
-      box_style: ''
-      box_media_style: ''
-      hybrid_style: ''
       use_data_uri: '0'
-      box_caption: ''
   editor_file_reference:
     id: editor_file_reference
     provider: editor
@@ -72,7 +73,7 @@ filters:
     status: false
     weight: -43
     settings:
-      allowed_html: '<img class="responsive"> <p class="text-left text-center text-right text-justify text-nowrap">'
+      allowed_html: '<p class="text-left text-center text-right text-justify text-nowrap">'
       filter_html_help: true
       filter_html_nofollow: false
   filter_html_escape:
@@ -121,6 +122,7 @@ filters:
     settings:
       default_view_mode: ckeditor_don_t_resize
       allowed_view_modes:
+        216x216: 216x216
         ck: ck
         ckeditor_don_t_resize: ckeditor_don_t_resize
         ckeditor_half_width: ckeditor_half_width

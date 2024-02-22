@@ -38,10 +38,10 @@ settings:
   plugins:
     ckeditor5_alignment:
       enabled_alignments:
-        - left
         - center
-        - right
         - justify
+        - left
+        - right
     ckeditor5_codeBlock:
       languages:
         -
@@ -103,9 +103,6 @@ settings:
     ckeditor5_style:
       styles:
         -
-          label: 'Img Responsive'
-          element: '<img class="responsive">'
-        -
           label: 'Left aligned'
           element: '<p class="text-left">'
         -
@@ -126,8 +123,10 @@ settings:
         - rel
         - target
         - title
+    linkit_extension:
+      linkit_enabled: false
     media_media:
-      allow_view_mode_override: false
+      allow_view_mode_override: true
 image_upload:
   status: true
   scheme: public
