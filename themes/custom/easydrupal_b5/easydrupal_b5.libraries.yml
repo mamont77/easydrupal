@@ -19,10 +19,6 @@ landing-page:
   css:
     theme:
       dist/css/landing-page.css: { }
-  js:
-    dist/js/landing-page.js: { }
-  dependencies:
-    - easydrupal_b5/global-styling
 
 view-about-author:
   css:

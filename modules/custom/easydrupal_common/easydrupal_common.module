@@ -28,10 +28,14 @@ function easydrupal_common_page_attachments_alter(array &$attachments): void {
   if (\Drupal::service('path.matcher')->isFrontPage()
     && \Drupal::currentUser()->isAnonymous()) {
     $remove_libraries = [
-      'addtoany/addtoany',
+      'system/base',
+      'core/normalize',
+      'addtoany/addtoany.front',
       'extlink/drupal.extlink',
       'bootstrap/theme',
       'bootstrap5/base',
+      'bootstrap5/global-styling',
+      'bootstrap5/messages'
     ];
     // Conditionally remove an asset.
     foreach ($remove_libraries as $library) {
@@ -41,6 +45,5 @@ function easydrupal_common_page_attachments_alter(array &$attachments): void {
       }
     }
     unset($attachments['#attached']['drupalSettings']['data']['extlink']);
-    // dump($attachments['#attached']);
   }
 }

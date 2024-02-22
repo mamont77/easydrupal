@@ -12,6 +12,10 @@
   </IfModule>
 </FilesMatch>
 
+<filesMatch ".(woff2|ttf|otf|svg|png|jpg|jpeg)$">
+Header set Cache-Control "max-age=31556926, public"
+</filesMatch>
+
 # Don't show directory listings for URLs which map to a directory.
 Options -Indexes
 

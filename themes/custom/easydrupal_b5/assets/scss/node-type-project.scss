@@ -64,13 +64,14 @@
 
 .field--name-field-project-images-media {
   position: initial;
-  background-image: url(../images/devices/cs-imac-frame.png);
+  //background-image: url(../images/devices/cs-imac-frame.png);
+  background-image: url('../../dist/images/devices/desktop.svg');
   background-repeat: no-repeat;
   background-position: center top;
   height: 611px;
   width: 846px;
   margin: 3rem auto;
-  padding: 27px 82px 197px 83px;
+  padding: 29px 83px 195px 81px;
   overflow: hidden;
 
   .field--name-name {
@@ -119,7 +120,7 @@
   opacity: .8;
   z-index: 1;
 
-  @media (min-width: $bs-breakpoint-md) {
+  @media (min-width: $bs-breakpoint-lg) {
     background: transparent;
     top: 38%;
     opacity: 1;

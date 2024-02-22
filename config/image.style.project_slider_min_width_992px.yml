@@ -10,7 +10,7 @@ effects:
     id: image_scale_and_crop
     weight: 1
     data:
-      width: 681
-      height: 408
+      width: 684
+      height: 388
       anchor: left-top
 pipeline: ''

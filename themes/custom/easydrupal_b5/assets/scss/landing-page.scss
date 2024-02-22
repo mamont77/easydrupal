@@ -31,7 +31,6 @@ header {
     }
 
     .read-more {
-      margin: 1.5rem 0;
       text-align: right;
       font-size: 1rem;
 
@@ -51,9 +50,8 @@ header {
       }
     }
 
-    background: url(../images/pattern-1.png);
+    background-image: url('../../dist/images/pattern-1.png');
     background-color: #7ea2bb;
-
 
     .field--name-body {
       color: #eee;
@@ -83,14 +81,15 @@ header {
 
   /** Projects **/
   .projects {
-    background: url(../images/bg-page-section--light-dbffac9426e51e0fdcaaad8452d7561b.png);
+    background-image: url('../../dist/images/bg-page-section--light-dbffac9426e51e0fdcaaad8452d7561b.png');
     background-color: #fff;
     color: #575756;
 
     .field--name-field-landing-page-backgro-media {
       border: .1rem solid #81a5bf;
       @media (min-width: $bs-breakpoint-xl) {
-        background-image: url(../images/devices/cs-imac-frame-small.png);
+        // background-image: url(../images/devices/cs-imac-frame-small.png);
+        background-image: url('../../dist/images/devices/desktop.svg');
         background-repeat: no-repeat;
         background-position: center top;
         height: 440px;
@@ -115,7 +114,7 @@ header {
   /** Projects **/
   .clients {
     padding-top: 0;
-    background: url(../images/bg-page-section--light-dbffac9426e51e0fdcaaad8452d7561b.png);
+    background-image: url('../../dist/images/bg-page-section--light-dbffac9426e51e0fdcaaad8452d7561b.png');
     background-color: #fff;
     color: #575756;
 
@@ -135,6 +134,13 @@ header {
     background: #eaeaea;
     color: #575756;
 
+    h2 {
+      color: darken($color-neutral-2, 11%);
+
+      &:after {
+        background-color: darken($color-neutral-2, 11%);
+      }
+    }
 
     .field--name-field-image-media {
       img {
@@ -150,7 +156,8 @@ header {
 
   /** Feedback **/
   .section.feedback {
-    background: url(../images/client-testimonials-background.jpg) bottom center;
+    background-image: url('../../dist/images/client-testimonials-background.jpg');
+    background-position: bottom center;
     background-size: cover;
     background-color: #fff;
     color: #575756;
