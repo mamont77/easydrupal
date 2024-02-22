@@ -5,16 +5,16 @@
   text-align: center;
 }
 .pager li > a {
-  color: #81a5bf;
+  color: #4f7b9b;
   display: inline-block;
   padding: 0.5rem 1.4rem;
   background-color: #FFFFFF;
-  border: 0.1rem solid #81a5bf;
+  border: 0.1rem solid #4f7b9b;
   border-radius: 0.75rem;
 }
 .pager li > a:hover, .pager li > a:focus, .pager li > a:active {
   color: #FFFFFF;
-  background-color: #81a5bf;
+  background-color: #4f7b9b;
 }
 
 .ajax-progress {

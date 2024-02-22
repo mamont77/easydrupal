@@ -91,3 +91,15 @@ a {
   color: $color-heading;
   text-decoration: none;
 }
+
+.text-formatted {
+  a {
+    &:hover,
+    &:focus,
+    &:focus-visible {
+      color: darken($color-heading, 10%);
+      text-decoration: underline;
+      text-underline-position: under;
+    }
+  }
+}

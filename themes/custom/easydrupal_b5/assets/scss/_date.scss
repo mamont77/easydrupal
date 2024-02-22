@@ -2,7 +2,7 @@
 
 .date {
   position: relative;
-  background-color: $color-neutral-2;
+  background-color: $color-neutral-13;
   font-family: Arial, Helvetica, sans-serif;
   color: $color-white;
   padding: 0.5rem;
@@ -34,7 +34,7 @@
     width: 0;
     position: absolute;
     pointer-events: none;
-    border-left-color: $color-neutral-2;
+    border-left-color: $color-neutral-13;
     border-width: 8px;
     margin-top: -8px;
   }

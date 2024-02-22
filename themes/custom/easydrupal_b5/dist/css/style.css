@@ -12470,6 +12470,12 @@ a {
   text-decoration: none;
 }
 
+.text-formatted a:hover, .text-formatted a:focus, .text-formatted a:focus-visible {
+  color: #171e28;
+  text-decoration: underline;
+  text-underline-position: under;
+}
+
 .dialog-off-canvas-main-canvas > main {
   margin-bottom: 1.5rem;
 }

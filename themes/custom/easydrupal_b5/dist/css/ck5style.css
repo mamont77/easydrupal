@@ -11624,6 +11624,11 @@ a > .ck-content code {
   color: #293749;
   text-decoration: none;
 }
+.ck-content .text-formatted a:hover, .ck-content .text-formatted a:focus, .ck-content .text-formatted a:focus-visible {
+  color: #171e28;
+  text-decoration: underline;
+  text-underline-position: under;
+}
 .ck-content .dialog-off-canvas-main-canvas > main {
   margin-bottom: 1.5rem;
 }

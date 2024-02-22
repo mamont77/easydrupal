@@ -1,6 +1,6 @@
 .date {
   position: relative;
-  background-color: #81a5bf;
+  background-color: #4f7b9b;
   font-family: Arial, Helvetica, sans-serif;
   color: #FFFFFF;
   padding: 0.5rem;
@@ -39,7 +39,7 @@
   width: 0;
   position: absolute;
   pointer-events: none;
-  border-left-color: #81a5bf;
+  border-left-color: #4f7b9b;
   border-width: 8px;
   margin-top: -8px;
 }

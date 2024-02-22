@@ -1,6 +1,6 @@
 .date {
   position: relative;
-  background-color: #81a5bf;
+  background-color: #4f7b9b;
   font-family: Arial, Helvetica, sans-serif;
   color: #FFFFFF;
   padding: 0.5rem;
@@ -39,7 +39,7 @@
   width: 0;
   position: absolute;
   pointer-events: none;
-  border-left-color: #81a5bf;
+  border-left-color: #4f7b9b;
   border-width: 8px;
   margin-top: -8px;
 }
@@ -48,7 +48,7 @@
   --bs-pagination-padding-x: 0.75rem;
   --bs-pagination-padding-y: 0.375rem;
   --bs-pagination-font-size: 1rem;
-  --bs-pagination-color: #81a5bf;
+  --bs-pagination-color: #4f7b9b;
   --bs-pagination-bg: #FFFFFF;
   --bs-pagination-border-color: #81a5bf;
   --bs-pagination-hover-color: #FFFFFF;

@@ -32,7 +32,7 @@
     letter-spacing: .03em;
     text-transform: uppercase;
     font-weight: 400;
-    background-color: $color-neutral-2;
+    background-color: $color-neutral-13;
     padding: 1.5rem 2rem;
     color: $color-white;
     text-decoration: none;
@@ -48,7 +48,7 @@
     &:hover,
     &:active,
     &:focus {
-      background-color: $color-neutral-4;
+      background-color: darken($color-neutral-13, 10%);
     }
   }
 }

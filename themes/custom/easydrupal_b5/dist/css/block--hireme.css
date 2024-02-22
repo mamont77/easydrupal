@@ -40,7 +40,7 @@
   letter-spacing: 0.03em;
   text-transform: uppercase;
   font-weight: 400;
-  background-color: #81a5bf;
+  background-color: #4f7b9b;
   padding: 1.5rem 2rem;
   color: #FFFFFF;
   text-decoration: none;
@@ -53,6 +53,6 @@
   font: var(--fa-font-solid);
 }
 #block-easydrupal-b5-hireme a:hover, #block-easydrupal-b5-hireme a:active, #block-easydrupal-b5-hireme a:focus {
-  background-color: #5f8dae;
+  background-color: #3e6079;
 }
 /*# sourceMappingURL=../sourcemaps/block--hireme.css.map */
