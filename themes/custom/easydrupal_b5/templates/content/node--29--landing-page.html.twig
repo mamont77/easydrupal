@@ -10,7 +10,17 @@
 %}
 <article{{ attributes.addClass(classes) }}>
   <div{{ content_attributes.addClass('node__content') }}>
-    {{ content }}
+    <div class="d-md-flex gap-3 align-items-center">
+      {% set responsiveimagestyle = {
+        '#theme': 'responsive_image',
+        '#responsive_image_style_id': 'feedback_portrait',
+        '#uri': 'public://filefield_paths/RuslanP-200x200_0.jpg',
+        '#alt': 'Ruslan Pi',
+        '#attributes': { class: '' },
+      } %}
+      {{ responsiveimagestyle }}
+      {{ content }}
+    </div>
     <div class="read-more"><a href="/about-me">{{ "Read more"|t }} ></a></div>
   </div>
 </article>

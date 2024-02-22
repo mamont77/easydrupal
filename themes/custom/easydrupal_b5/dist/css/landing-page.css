@@ -37,6 +37,7 @@ header .navbar {
   color: #293749;
 }
 .page-node-type-landingpage .about {
+  text-align: center;
   background-image: url("../../dist/images/pattern-1.png");
   background-color: #7ea2bb;
 }
@@ -48,30 +49,30 @@ header .navbar {
     width: 50%;
   }
 }
+@media (min-width: 768px) {
+  .page-node-type-landingpage .about {
+    text-align: left;
+  }
+}
 .page-node-type-landingpage .about h2:after {
   width: 15rem;
 }
-.page-node-type-landingpage .about .field--name-body {
-  color: #eee;
-  text-align: left;
-  margin: 0 auto;
-}
-.page-node-type-landingpage .about .field--name-body .align-left {
-  float: none;
-  text-align: center;
-  margin-bottom: 1.5rem;
-}
-@media (min-width: 992px) {
-  .page-node-type-landingpage .about .field--name-body .align-left {
-    float: left;
-    margin-bottom: 0;
-  }
-}
-.page-node-type-landingpage .about .field--name-body img {
+.page-node-type-landingpage .about img {
   border-radius: 50%;
   border: 0.5rem solid #eee;
   width: 216px;
   height: 216px;
+  max-width: none;
+  margin-bottom: 1.5rem;
+}
+@media (min-width: 768px) {
+  .page-node-type-landingpage .about img {
+    margin-bottom: 0;
+  }
+}
+.page-node-type-landingpage .about .field--name-body {
+  color: #eee;
+  margin: 0 auto;
 }
 .page-node-type-landingpage .about .read-more a {
   color: #eee;

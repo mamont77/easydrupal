@@ -12,7 +12,7 @@
   </IfModule>
 </FilesMatch>
 
-<filesMatch ".(woff2|ttf|otf|svg|png|jpg|jpeg)$">
+<filesMatch ".(woff2|ttf|otf|svg|png|jpg|jpeg|css|js|webp)$">
 Header set Cache-Control "max-age=31556926, public"
 </filesMatch>
 
