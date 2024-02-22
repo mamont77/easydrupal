@@ -42,12 +42,14 @@ header .navbar {
 }
 .page-node-type-landingpage .about .container-lg {
   margin: 0 auto 0 auto;
-  width: 50%;
 }
-@media screen and (max-width: 1024px) {
+@media (min-width: 1200px) {
   .page-node-type-landingpage .about .container-lg {
-    width: 60%;
+    width: 50%;
   }
+}
+.page-node-type-landingpage .about h2:after {
+  width: 15rem;
 }
 .page-node-type-landingpage .about .field--name-body {
   color: #eee;
@@ -57,10 +59,12 @@ header .navbar {
 .page-node-type-landingpage .about .field--name-body .align-left {
   float: none;
   text-align: center;
+  margin-bottom: 1.5rem;
 }
-@media (min-width: 768px) {
+@media (min-width: 992px) {
   .page-node-type-landingpage .about .field--name-body .align-left {
     float: left;
+    margin-bottom: 0;
   }
 }
 .page-node-type-landingpage .about .field--name-body img {

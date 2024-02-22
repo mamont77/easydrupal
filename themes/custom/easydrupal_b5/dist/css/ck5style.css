@@ -11704,7 +11704,7 @@ a > .ck-content code {
   border-left-color: #ccc;
   color: #212121;
 }
-.ck-content .region-content .field {
+.ck-content .region-content > .field {
   margin-bottom: 1.5rem;
 }
 .ck-content .region-sidebar-second > div:not(:last-of-type) {

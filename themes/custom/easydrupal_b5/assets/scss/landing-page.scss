@@ -44,14 +44,19 @@ header {
   .about {
     .container-lg {
       margin: 0 auto 0 auto;
-      width: 50%;
-      @media screen and (max-width: 1024px) {
-        width: 60%;
+      @media (min-width: $bs-breakpoint-xl) {
+        width: 50%;
       }
     }
 
     background-image: url('../../dist/images/pattern-1.png');
     background-color: #7ea2bb;
+
+    h2 {
+      &:after {
+        width: 15rem;
+      }
+    }
 
     .field--name-body {
       color: #eee;
@@ -61,8 +66,10 @@ header {
       .align-left {
         float: none;
         text-align: center;
-        @media (min-width: $bs-breakpoint-md) {
+        margin-bottom: 1.5rem;
+        @media (min-width: $bs-breakpoint-lg) {
           float: left;
+          margin-bottom: 0;
         }
       }
 

@@ -12558,7 +12558,7 @@ blockquote {
   color: #212121;
 }
 
-.region-content .field {
+.region-content > .field {
   margin-bottom: 1.5rem;
 }
 
