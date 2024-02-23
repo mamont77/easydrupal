@@ -10,7 +10,7 @@ field_name: field_skills
 entity_type: node
 bundle: project
 label: Skills
-description: ''
+description: Deprecated!
 required: false
 translatable: false
 default_value: {  }

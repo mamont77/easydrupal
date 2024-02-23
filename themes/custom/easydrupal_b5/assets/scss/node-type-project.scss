@@ -14,6 +14,7 @@
   margin-bottom: 1.5rem;
 }
 
+// Deprecated.
 .field--name-field-skills {
   display: flex;
   flex-wrap: nowrap;
@@ -28,6 +29,25 @@
     gap: .5rem;
 
     .skill {
+      @extend %tags;
+    }
+  }
+}
+
+.field--name-field-services {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: .5rem;
+  align-items: flex-start;
+  justify-content: flex-start;
+  .services {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+
+    .service {
       @extend %tags;
     }
   }

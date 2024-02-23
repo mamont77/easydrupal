@@ -12,6 +12,7 @@ dependencies:
     - field.field.node.project.field_meta_tags
     - field.field.node.project.field_project_images_media
     - field.field.node.project.field_project_url
+    - field.field.node.project.field_services
     - field.field.node.project.field_skills
     - node.type.project
   module:
@@ -66,4 +67,5 @@ hidden:
   field_logo_media: true
   field_meta_tags: true
   field_project_images_media: true
+  field_services: true
   links: true
