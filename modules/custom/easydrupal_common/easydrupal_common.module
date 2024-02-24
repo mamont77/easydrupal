@@ -5,7 +5,12 @@
  * Contains easydrupal_common.module.
  */
 
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\file\Entity\File;
+use Drupal\file\FileInterface;
+use Drupal\media\Entity\Media;
+use Drupal\media\MediaInterface;
 
 /**
  * Implements hook_help().
@@ -35,7 +40,7 @@ function easydrupal_common_page_attachments_alter(array &$attachments): void {
       'bootstrap/theme',
       'bootstrap5/base',
       'bootstrap5/global-styling',
-      'bootstrap5/messages'
+      'bootstrap5/messages',
     ];
     // Conditionally remove an asset.
     foreach ($remove_libraries as $library) {
@@ -45,5 +50,78 @@ function easydrupal_common_page_attachments_alter(array &$attachments): void {
       }
     }
     unset($attachments['#attached']['drupalSettings']['data']['extlink']);
+  }
+}
+
+/**
+ * Implements hook_entity_presave().
+ */
+function easydrupal_common_entity_presave(EntityInterface $entity) {
+  if ($entity instanceof MediaInterface) {
+    // For better user experience set media name the same as image alt.
+    if ($entity->hasField('field_media_image')
+      && !$entity->get('field_media_image')->isEmpty()) {
+      $image = $entity->get('field_media_image')->getValue()[0];
+      if (isset($image['alt']) && $image['alt'] !== '') {
+        $entity->set('name', $image['alt']);
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_entity_delete().
+ */
+function easydrupal_common_entity_delete(EntityInterface $entity) {
+  // When a file is removing, check and remove the media also.
+  if ($entity instanceof FileInterface) {
+    $module_handler = \Drupal::service('module_handler');
+    if ($module_handler->moduleExists('media')) {
+      $usage_list = \Drupal::service('file.usage')->listUsage($entity);
+      if (!empty($usage_list)) {
+        if (isset($usage_list['file']['media'])) {
+          foreach ($usage_list['file']['media'] as $media_id => $uses) {
+            $media = Media::load($media_id);
+            if ($media instanceof MediaInterface) {
+              $media->delete();
+              \Drupal::logger('custom_module')
+                ->warning('The media @media has been deleted.', [
+                  '@media' => $media->getName(),
+                ]);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // When a media is removing, check and remove the file also.
+  if ($entity instanceof MediaInterface) {
+    $fields = \Drupal::service('entity_field.manager')
+      ->getFieldDefinitions('media', $entity->bundle());
+    $allowed_field_types = ['image', 'file'];
+
+    foreach ($fields as $field_name => $field) {
+      if (in_array($field->getType(), $allowed_field_types)
+        && $field_name != 'thumbnail') {
+        $files = $entity->get($field_name)->getValue();
+        foreach ($files as $file) {
+          $file = File::load($file['target_id']);
+          if ($file instanceof FileInterface) {
+            // @todo Make another fix.
+            // Drupal has the bugs and can't detect
+            // how much a file uses for translated content and in CKEditor.
+            $usage_list = \Drupal::service('file.usage')->listUsage($file);
+            if (empty($usage_list)) {
+              $file->delete();
+              \Drupal::logger('custom_module')
+                ->warning('The file @file has been deleted.', [
+                  '@file' => $file->getFilename(),
+                ]);
+            }
+          }
+        }
+      }
+    }
   }
 }
