@@ -3,11 +3,9 @@
     <div class="title-wrapper">
       <h2 class="section-title style-fancy fancy-centered">{{ label }}</h2>
     </div>
-    <div class="row">
+    <div class="logos d-flex flex-md-row flex-wrap flex-md-nowrap justify-content-center justify-content-md-between align-items-center gap-5">
       {% for item in items %}
-        <div class="item col-sm-6 col-md-2 col-lg-2">
-          {{ item.content }}
-        </div>
+        {{ item.content }}
       {% endfor %}
     </div>
   </div>

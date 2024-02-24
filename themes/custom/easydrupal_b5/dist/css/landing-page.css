@@ -108,14 +108,6 @@ header .navbar {
   background-color: #fff;
   color: #575756;
 }
-.page-node-type-landingpage .clients .field--name-field-image-media {
-  text-align: center;
-}
-.page-node-type-landingpage .clients .field--name-field-image-media img {
-  margin: 0 auto;
-  width: auto;
-  height: auto;
-}
 .page-node-type-landingpage .articles {
   background: #eaeaea;
   color: #575756;
