@@ -1,0 +1,26 @@
+/* uncss:ignore start */
+.user-login-page h1 {
+  display: none;
+}
+.user-login-page .tabs {
+  max-width: 330px;
+  margin: 0 auto;
+}
+
+/* uncss:ignore end */
+/* uncss:ignore start */
+.user-login-form {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
+.user-login-form .form-item {
+  margin-bottom: 5px;
+}
+.user-login-form .form-submit {
+  width: 100%;
+  margin-right: 0;
+}
+
+/* uncss:ignore end */
+/*# sourceMappingURL=../sourcemaps/page--user-login.css.map */

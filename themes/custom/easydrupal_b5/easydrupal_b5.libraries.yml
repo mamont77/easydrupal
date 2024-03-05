@@ -97,6 +97,11 @@ form-contact:
     theme:
       dist/css/form--contact.css: { }
 
+page--user-login:
+  css:
+    theme:
+      dist/css/page--user-login.css: { }
+
 fontawesome:
   version: VERSION
   js:

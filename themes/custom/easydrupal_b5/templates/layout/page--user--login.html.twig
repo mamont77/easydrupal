@@ -42,6 +42,9 @@
  * @see html.html.twig
  */
 #}
+
+{{ attach_library('easydrupal_b5/page--user-login') }}
+
 {%
   set nav_classes = 'navbar navbar-expand-lg' ~
   (b5_navbar_schema != 'none' ? " navbar-#{b5_navbar_schema}" : ' ') ~
@@ -100,7 +103,7 @@
 </main>
 
 {% if page.footer %}
-  <footer class="mt-auto {{ footer_classes }}">
+  <footer class="footer mt-auto {{ footer_classes }}">
     <div class="{{ b5_top_container }}">
       {{ page.footer }}
     </div>

@@ -1,0 +1,33 @@
+@charset "UTF-8";
+
+@import 'variables_theme';
+
+/* uncss:ignore start */
+.user-login-page {
+  h1 {
+    display: none;
+  }
+
+  .tabs {
+    max-width: 330px;
+    margin: 0 auto;
+  }
+}
+/* uncss:ignore end */
+
+/* uncss:ignore start */
+.user-login-form {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+
+  .form-item {
+    margin-bottom: 5px;
+  }
+
+  .form-submit {
+    width: 100%;
+    margin-right: 0;
+  }
+}
+/* uncss:ignore end */
