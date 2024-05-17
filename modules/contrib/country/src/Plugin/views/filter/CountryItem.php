@@ -2,12 +2,12 @@
 
 namespace Drupal\country\Plugin\views\filter;
 
+use Drupal\Core\Entity\EntityFieldManagerInterface;
+use Drupal\Core\Entity\EntityTypeBundleInfoInterface;
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\views\Plugin\views\display\DisplayPluginBase;
 use Drupal\views\Plugin\views\filter\ManyToOne;
 use Drupal\views\ViewExecutable;
-use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Entity\EntityFieldManagerInterface;
-use Drupal\Core\Entity\EntityTypeBundleInfoInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -71,7 +71,7 @@ class CountryItem extends ManyToOne {
    */
   public function init(ViewExecutable $view, DisplayPluginBase $display, array &$options = NULL) {
     parent::init($view, $display, $options);
-    $this->valueTitle = t('Allowed country items');
+    $this->valueTitle = $this->t('Allowed country items');
   }
 
   /**
@@ -176,8 +176,7 @@ class CountryItem extends ManyToOne {
   }
 
   /**
-   * Skip validation if no options have been chosen so we can use it as a
-   * non-filter.
+   * Skip validation if no options were chosen so we can use it as a non-filter.
    */
   public function validate() {
     if (!empty($this->value)) {
@@ -189,6 +188,7 @@ class CountryItem extends ManyToOne {
    * Gets the field storage of the used field.
    *
    * @return \Drupal\Core\Field\FieldStorageDefinitionInterface
+   *   Field storage.
    */
   protected function getFieldStorageDefinition() {
     $definitions = $this->entityFieldManager->getFieldStorageDefinitions($this->definition['entity_type']);
@@ -206,10 +206,10 @@ class CountryItem extends ManyToOne {
   }
 
   /**
-   * Gets the field of the used
-   * field.$options['type'] = ['default' => 'select'].
+   * Gets the field of used field.$options['type'] = ['default' => 'select'].
    *
    * @return \Drupal\Core\Field\FieldDefinitionInterface
+   *   Field definition.
    */
   protected function getFieldDefinition() {
     $definitions = $this->entityFieldManager->getFieldDefinitions($this->definition['entity_type'], $this->options['country_target_bundle']);
@@ -235,7 +235,7 @@ class CountryItem extends ManyToOne {
     }
 
     $countries = $this->options['country_target_bundle'] == 'global'
-      ? \Drupal::service('country_manager')->getList()
+      ? \Drupal::service('country.field.manager')->getList()
       : \Drupal::service('country.field.manager')
         ->getSelectableCountries($this->getFieldDefinition());
     $this->valueOptions = $countries;
@@ -258,4 +258,5 @@ class CountryItem extends ManyToOne {
 
     return $options;
   }
+
 }

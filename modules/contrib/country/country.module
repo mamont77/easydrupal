@@ -5,8 +5,8 @@
  * Defines simple country field type.
  */
 
-use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Url;
 
 /**
@@ -46,7 +46,7 @@ function country_field_widget_country_default_form_alter(&$element, FormStateInt
   }
   else {
     $ip = \Drupal::request()->getClientIp();
-    $country_code = \Drupal::service('ip2country.manager')->getCountry($ip);
+    $country_code = \Drupal::service('ip2country.lookup')->getCountry($ip);
   }
 
   if (in_array($country_code, array_keys($country['#options']))) {

@@ -5,8 +5,8 @@
  * Provides Token integration for country.
  */
 
-use Drupal\Core\Render\BubbleableMetadata;
 use Drupal\Core\Entity\ContentEntityInterface;
+use Drupal\Core\Render\BubbleableMetadata;
 
 /**
  * Implements hook_token_info().
@@ -79,7 +79,7 @@ function country_tokens($type, $tokens, array $data, array $options, BubbleableM
 
       $field_item = $data[$data['field_name']][$delta];
 
-      $country_name = t('');
+      $country_name = "";
       if ($country_code = $field_item->value) {
         $field_definition = $field_item->getFieldDefinition();
         $countries = \Drupal::service('country.field.manager')->getSelectableCountries($field_definition);

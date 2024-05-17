@@ -1,9 +1,9 @@
 <?php
+
 /**
  * @file
  * Contains install and update functions for Country module.
  */
-
 
 /**
  * Update configuration schema.

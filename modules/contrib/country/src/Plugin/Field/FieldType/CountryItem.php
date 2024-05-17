@@ -2,11 +2,12 @@
 
 namespace Drupal\country\Plugin\Field\FieldType;
 
+use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\Core\Field\FieldItemBase;
 use Drupal\Core\Field\FieldStorageDefinitionInterface;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\Core\Session\AccountInterface;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\Core\TypedData\DataDefinition;
 use Drupal\Core\TypedData\OptionsProviderInterface;
 
@@ -30,7 +31,7 @@ class CountryItem extends FieldItemBase implements OptionsProviderInterface {
    */
   public static function propertyDefinitions(FieldStorageDefinitionInterface $field_definition) {
     $properties['value'] = DataDefinition::create('string')
-      ->setLabel(t('Country'));
+      ->setLabel(new TranslatableMarkup('Country'));
 
     return $properties;
   }
@@ -73,7 +74,7 @@ class CountryItem extends FieldItemBase implements OptionsProviderInterface {
       'value' => [
         'Length' => [
           'max' => static::COUNTRY_ISO_MAXLENGTH,
-          'maxMessage' => t('%name: the country iso-2 code may not be longer than @max characters.', [
+          'maxMessage' => $this->t('%name: the country iso-2 code may not be longer than @max characters.', [
             '%name' => $this->getFieldDefinition()
               ->getLabel(),
             '@max' => static::COUNTRY_ISO_MAXLENGTH,
@@ -90,8 +91,8 @@ class CountryItem extends FieldItemBase implements OptionsProviderInterface {
    */
   public static function defaultStorageSettings() {
     return [
-        'selectable_countries' => [],
-      ] + parent::defaultStorageSettings();
+      'selectable_countries' => [],
+    ] + parent::defaultStorageSettings();
   }
 
   /**
@@ -99,8 +100,8 @@ class CountryItem extends FieldItemBase implements OptionsProviderInterface {
    */
   public static function defaultFieldSettings() {
     return [
-        'selectable_countries' => [],
-      ] + parent::defaultFieldSettings();
+      'selectable_countries' => [],
+    ] + parent::defaultFieldSettings();
   }
 
   /**
@@ -115,7 +116,7 @@ class CountryItem extends FieldItemBase implements OptionsProviderInterface {
       ->getFieldStorageDefinition()
       ->getSettings();
     static::defaultCountriesForm($element, $settings);
-    $element['selectable_countries']['#description'] = t('If no countries are selected, all of them will be available for this field.');
+    $element['selectable_countries']['#description'] = $this->t('If no countries are selected, all of them will be available for this field.');
 
     return $element;
   }
@@ -131,10 +132,10 @@ class CountryItem extends FieldItemBase implements OptionsProviderInterface {
   protected function defaultCountriesForm(array &$element, array $settings) {
     $element['selectable_countries'] = [
       '#type' => 'select',
-      '#title' => t('Selectable countries'),
+      '#title' => $this->t('Selectable countries'),
       '#default_value' => $settings['selectable_countries'],
       '#options' => $this->getPossibleOptions(),
-      '#description' => t('Select all countries you want to make available for this field.'),
+      '#description' => $this->t('Select all countries you want to make available for this field.'),
       '#multiple' => TRUE,
       '#size' => 10,
     ];
@@ -156,8 +157,7 @@ class CountryItem extends FieldItemBase implements OptionsProviderInterface {
    * {@inheritdoc}
    */
   public function getPossibleOptions(AccountInterface $account = NULL) {
-    $select_options = \Drupal::service('country_manager')->getList();
-    asort($select_options);
+    $select_options = \Drupal::service('country.field.manager')->getList();
     return $select_options;
   }
 
@@ -177,7 +177,7 @@ class CountryItem extends FieldItemBase implements OptionsProviderInterface {
       ->getFieldStorageDefinition()
       ->getSettings();
     $selectable = array_keys($settings['selectable_countries']);
-    $countries = \Drupal::service('country_manager')->getList();
+    $countries = \Drupal::service('country.field.manager')->getList();
 
     if (!empty($selectable)) {
       $countries = array_filter($countries,

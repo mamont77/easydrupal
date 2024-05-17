@@ -2,14 +2,14 @@
 
 namespace Drupal\fences;
 
-use Drupal\Core\Plugin\DefaultPluginManager;
+use Drupal\Component\Plugin\Discovery\CachedDiscoveryInterface;
+use Drupal\Component\Plugin\PluginManagerInterface;
+use Drupal\Core\Cache\CacheBackendInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Extension\ThemeHandlerInterface;
-use Drupal\Core\Cache\CacheBackendInterface;
-use Drupal\Core\Plugin\Discovery\YamlDiscovery;
-use Drupal\Component\Plugin\PluginManagerInterface;
-use Drupal\Component\Plugin\Discovery\CachedDiscoveryInterface;
+use Drupal\Core\Plugin\DefaultPluginManager;
 use Drupal\Core\Plugin\Discovery\ContainerDerivativeDiscoveryDecorator;
+use Drupal\Core\Plugin\Discovery\YamlDiscovery;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 
 /**

@@ -31,8 +31,8 @@ class CountryItem extends SortPluginBase {
     parent::buildOptionsForm($form, $form_state);
     $form['default_sort'] = [
       '#type' => 'radios',
-      '#title' => t('Sort by ISO code'),
-      '#options' => [t('No'), t('Yes')],
+      '#title' => $this->t('Sort by ISO code'),
+      '#options' => [$this->t('No'), $this->t('Yes')],
       '#default_value' => $this->options['default_sort'],
     ];
   }
@@ -51,10 +51,11 @@ class CountryItem extends SortPluginBase {
     }
 
     $this->ensureMyTable();
-    $country_codes = array_keys(\Drupal::service('country_manager')->getList());
+    $country_codes = array_keys(\Drupal::service('country.field.manager')->getList());
     $connection = Database::getConnection();
-
-    $formula = 'FIELD(' . $this->getField() . ', ' . implode(', ', array_map([$connection, 'quote'], $country_codes)) . ')';
+    $formula = 'FIELD(' . $this->getField() . ', ' . implode(', ', array_map(
+      [$connection, 'quote'], $country_codes)
+    ) . ')';
     $this->query->addOrderBy(NULL, $formula, $this->options['order'], $this->tableAlias . '_' . $this->field . '_country_name_sort');
   }
 

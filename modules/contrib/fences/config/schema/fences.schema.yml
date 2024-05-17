@@ -26,3 +26,9 @@ field.formatter.third_party.fences:
     fences_label_classes:
       type: string
       label: 'The field label CSS classes'
+fences.settings:
+  type: config_object
+  mapping:
+    fences_field_template_override_all_themes:
+      type: boolean
+      label: 'Override the field template for all themes.'

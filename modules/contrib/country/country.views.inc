@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Provides views filter and sort options.
+ */
+
 use Drupal\field\FieldStorageConfigInterface;
 
 /**

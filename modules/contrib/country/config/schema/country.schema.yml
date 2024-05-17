@@ -18,10 +18,6 @@ field.storage_settings.country:
       sequence:
         type: string
 
-views.filter.country_item:
-  type: views_filter
-  label: 'Country filter'
-
 views.filter_value.country_item:
   type: mapping
   label: 'Country filter value'
@@ -29,3 +25,19 @@ views.filter_value.country_item:
     type:
       type: string
       label: 'Type'
+
+views.filter.country_item:
+  type: views_filter
+  label: 'Country filter value'
+  mapping:
+    type:
+      type: string
+      label: 'Selection type'
+
+views.sort.country_item:
+  type: views_sort
+  label: 'Country sort'
+  mapping:
+    default_sort:
+      type: boolean
+      label: 'Sort by ISO code'
