@@ -31,7 +31,7 @@
         "drupal/backup_migrate": "^5.0",
         "drupal/blazy": "^3.0",
         "drupal/bootstrap": "^3.30",
-        "drupal/bootstrap5": "^3.0",
+        "drupal/bootstrap5": "^4.0",
         "drupal/captcha": "^2.0",
         "drupal/coder": "^8.3",
         "drupal/config_partial_export": "^2.0@alpha",
@@ -85,7 +85,7 @@
         "drupal/views_infinite_scroll": "^2.0",
         "drupal/webp": "^1.0@RC",
         "drupal/yoast_seo": "^1.8",
-        "drush/drush": "^12.4",
+        "drush/drush": "^12.5",
         "geshi/geshi": "v1.0.9.1",
         "grasmash/drupal-security-warning": "1.x-dev",
         "oomphinc/composer-installers-extender": "^2.0",
@@ -188,7 +188,8 @@
             "drupal/disqus": {
                 "3359581: Uncaught TypeError: $(...).once is not a function": "https://git.drupalcode.org/project/disqus/-/merge_requests/8.diff",
                 "1508786: Lazy load / async load Disqus libraries for better performance": "https://www.drupal.org/files/issues/2022-10-19/disqus-1508786-lazyload-intersectionobserver-46-2.0.x.patch",
-                "3344834: TypeError: in_array(): Argument #2 ($haystack) must be of type array, null given in in_array()": "https://git.drupalcode.org/project/disqus/-/merge_requests/7.diff"
+                "3344834: TypeError: in_array(): Argument #2 ($haystack) must be of type array, null given in in_array()": "https://git.drupalcode.org/project/disqus/-/merge_requests/7.diff",
+                "3451023: Deprecated function: Calling get_class() without arguments is deprecated": "https://git.drupalcode.org/project/disqus/-/merge_requests/14.diff"
             }
         }
     },

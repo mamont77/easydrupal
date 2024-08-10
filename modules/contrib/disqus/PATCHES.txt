@@ -13,3 +13,7 @@ Source: https://www.drupal.org/files/issues/2022-10-19/disqus-1508786-lazyload-i
 Source: https://git.drupalcode.org/project/disqus/-/merge_requests/7.diff
 
 
+3451023: Deprecated function: Calling get_class() without arguments is deprecated
+Source: https://git.drupalcode.org/project/disqus/-/merge_requests/14.diff
+
+

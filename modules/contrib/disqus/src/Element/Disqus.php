@@ -22,7 +22,7 @@ class Disqus extends RenderElement {
       '#callbacks' => [],
       '#attributes' => ['id' => 'disqus_thread'],
       '#pre_render' => [
-        get_class() . '::generatePlaceholder',
+        [static::class, 'generatePlaceholder'],
       ],
     ];
   }
@@ -40,7 +40,7 @@ class Disqus extends RenderElement {
     if (\Drupal::currentUser()->hasPermission('view disqus comments')) {
       $element[] = [
         '#lazy_builder' => [
-          get_class() . '::displayDisqusComments',
+          static::class . '::displayDisqusComments',
           [
             $element['#title'],
             $element['#url'],
