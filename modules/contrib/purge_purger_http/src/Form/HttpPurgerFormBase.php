@@ -2,9 +2,7 @@
 
 namespace Drupal\purge_purger_http\Form;
 
-use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\purge\Plugin\Purge\Invalidation\InvalidationsServiceInterface;
 use Drupal\purge_purger_http\Entity\HttpPurgerSettings;
 use Drupal\purge_ui\Form\PurgerConfigFormBase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -84,26 +82,13 @@ abstract class HttpPurgerFormBase extends PurgerConfigFormBase {
   protected $schemes = ['http', 'https'];
 
   /**
-   * Constructs a \Drupal\purge_purger_http\Form\ConfigurationForm object.
-   *
-   * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
-   *   The factory for configuration objects.
-   * @param \Drupal\purge\Plugin\Purge\Invalidation\InvalidationsServiceInterface $purge_invalidation_factory
-   *   The invalidation objects factory service.
-   */
-  final public function __construct(ConfigFactoryInterface $config_factory, InvalidationsServiceInterface $purge_invalidation_factory) {
-    $this->setConfigFactory($config_factory);
-    $this->purgeInvalidationFactory = $purge_invalidation_factory;
-  }
-
-  /**
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
-    return new static(
-      $container->get('config.factory'),
-      $container->get('purge.invalidation.factory')
-    );
+    $instance = parent::create($container);
+    $instance->purgeInvalidationFactory = $container->get('purge.invalidation.factory');
+
+    return $instance;
   }
 
   /**

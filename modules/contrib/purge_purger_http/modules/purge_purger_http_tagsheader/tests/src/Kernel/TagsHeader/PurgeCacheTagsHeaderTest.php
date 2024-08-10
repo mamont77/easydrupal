@@ -2,7 +2,9 @@
 
 namespace Drupal\Tests\purge_purger_http\Kernel\TagsHeader;
 
+use Drupal\Core\PageCache\RequestPolicyInterface;
 use Drupal\Tests\purge\Kernel\KernelTestBase;
+use Drupal\Tests\system\Functional\Cache\AssertPageCacheContextsAndTagsTrait;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -12,10 +14,12 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class PurgeCacheTagsHeaderTest extends KernelTestBase {
 
+  use AssertPageCacheContextsAndTagsTrait;
+
   /**
    * {@inheritdoc}
    */
-  protected static $modules = ['system', 'purge_purger_http_tagsheader'];
+  protected static $modules = ['system', 'page_cache', 'purge_purger_http_tagsheader'];
 
   /**
    * {@inheritdoc}
@@ -23,6 +27,18 @@ class PurgeCacheTagsHeaderTest extends KernelTestBase {
   public function setUp($switch_to_memory_queue = TRUE): void {
     parent::setUp($switch_to_memory_queue);
     \Drupal::service('router.builder')->rebuild();
+
+    // Enable page caching to please
+    // \Drupal\purge\EventSubscriber\CacheableResponseSubscriber.
+    $this->enablePageCaching();
+
+    // Make sure \Drupal\Core\PageCache\RequestPolicy\CommandLineOrUnsafeMethod
+    // passes.
+    $requestPolicy = $this->createMock(RequestPolicyInterface::class);
+    $requestPolicy->expects($this->any())
+      ->method('check')
+      ->willReturn(RequestPolicyInterface::ALLOW);
+    $this->container->set('page_cache_request_policy', $requestPolicy);
   }
 
   /**

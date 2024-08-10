@@ -30,7 +30,7 @@ class AdvupdateTest extends UpdateTestBase {
    */
   public function testAdvupdateSettings() {
     $config = $this->config('advupdate.settings');
-    self::assertSame(TRUE, $config->get('notification.extend_email_report'));
+    self::assertTrue($config->get('notification.extend_email_report'));
 
     $this->drupalGet('admin/reports/updates/settings');
     $this->assertSession()->responseNotContains('Expand the report using "Update Manager Advanced" module');

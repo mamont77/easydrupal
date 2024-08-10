@@ -195,15 +195,13 @@ function template_preprocess_views_bootstrap_grid(array &$vars): void {
   $view = $vars['view'];
   $rows = $vars['rows'];
   $vars['id'] = ViewsBootstrap::getUniqueId($view);
-  $vars['attributes']['class'][] = 'grid';
+  $vars['attributes'] = new Attribute(['class' => 'grid']);
   $options = $view->style_plugin->options;
-
-  $vars['row_attributes'] = new Attribute();
 
   if ($options['grid_class']) {
     $grid_class = explode(' ', $options['grid_class']);
     $grid_classes = array_map([Html::class, 'cleanCssIdentifier'], array_filter($grid_class));
-    $vars['row_attributes']->addClass($grid_classes);
+    $vars['attributes']->addClass($grid_classes);
   }
 
   $col_classes = [];
@@ -240,31 +238,22 @@ function template_preprocess_views_bootstrap_list_group(array &$vars): void {
   $view = $vars['view'];
   $options = $view->style_plugin->options;
   $vars['id'] = ViewsBootstrap::getUniqueId($view);
-  $group_title_field = isset($view->style_plugin->options['grouping'][0]) ? $view->style_plugin->options['grouping'][0]['field'] : "";
-  $vars['attributes']['class'][] = 'views-bootstrap-list-group';
-  $classes = array_filter(explode(' ', $view->style_plugin->options['list_group_class_custom']));
-  foreach ($classes as &$list_class) {
-    $list_class = Html::cleanCssIdentifier($list_class);
-  }
-  if (!empty($classes)) {
-    $vars['attributes']['class'] = array_merge($vars['attributes']['class'], $classes);
+  $group_title_field = isset($options['grouping'][0]) ? $options['grouping'][0]['field'] : "";
+  $vars['attributes'] = new Attribute(['class' => 'views-bootstrap-list-group']);
+  if ($options['list_group_class_custom']) {
+    $classes = explode(' ', $options['list_group_class_custom']);
+    $classes = array_map([Html::class, 'cleanCssIdentifier'], array_filter($classes));
+    $vars['attributes']->addClass($classes);
   }
   foreach ($vars['rows'] as $id => $row) {
     $vars['group_title'] = $group_title_field ? $view->style_plugin->getField($id, $group_title_field) : "";
-    $class = $view->style_plugin->options['row_class'];
-    $classes = explode(' ', $class);
-    foreach ($classes as &$class) {
-      $class = Html::cleanCssIdentifier($class);
-    }
-    $row_class = array_filter($classes);
     $vars['rows'][$id] = [];
     $vars['rows'][$id]['content'] = $row;
     $vars['rows'][$id]['title'] = $vars['view']->style_plugin->getField($id, $options['title_field']);
-    $row_attributes = ['class' => ['list-group-item']];
-    if (!empty($row_class)) {
-      $row_attributes['class'] = array_merge($row_attributes['class'], $row_class);
+    $vars['rows'][$id]['attributes'] = new Attribute(['class' => ['list-group-item']]);
+    if ($row_class = $view->style_plugin->getRowClass($id)) {
+      $vars['rows'][$id]['attributes']->addClass($row_class);
     }
-    $vars['rows'][$id]['attributes'] = new Attribute($row_attributes);
   }
 
 }
@@ -372,16 +361,16 @@ function template_preprocess_views_bootstrap_tab(array &$vars): void {
  *   - rows: The raw row data.
  */
 function template_preprocess_views_bootstrap_table(array &$vars): void {
-  $view = $vars['view'];
-  $option_classes = array_filter(explode(' ', $view->style_plugin->options['table_class_custom']));
-  $classes = array_map([Html::class, 'cleanCssIdentifier'], $option_classes);
+  $options = $vars['view']->style_plugin->options;
+  $vars['attributes'] = new Attribute(['class' => 'table']);
+  $vars['responsive'] = $options['responsive'];
+  foreach (array_filter($options['bootstrap_styles']) as $style) {
+    $vars['attributes']->addClass('table-' . $style);
+  }
+  if ($options['table_class_custom']) {
+    $option_classes = array_filter(explode(' ', $options['table_class_custom']));
+    $classes = array_map([Html::class, 'cleanCssIdentifier'], $option_classes);
+    $vars['attributes']->addClass($classes);
+  }
 
-  $vars['responsive'] = $view->style_plugin->options['responsive'];
-  $vars['attributes']['class'][] = 'table';
-  foreach (array_filter($vars['view']->style_plugin->options['bootstrap_styles']) as $style) {
-    $vars['attributes']['class'][] = 'table-' . $style;
-  }
-  if (!empty($classes)) {
-    $vars['attributes']['class'] = array_merge($vars['attributes']['class'], $classes);
-  }
 }

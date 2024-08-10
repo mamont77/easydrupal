@@ -52,3 +52,4 @@ advanced:
   colorspace: RGB
   profile: ''
   coalesce: false
+imagemagick_version: v6

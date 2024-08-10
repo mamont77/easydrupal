@@ -118,7 +118,7 @@ class GeshiFilterFilter extends FilterBase {
       $result->addCacheTags($cache_tags);
     }
     catch (\Exception $e) {
-      watchdog_exception('geshifilter', $e);
+      \Drupal\Component\Utility\DeprecationHelper::backwardsCompatibleCall(\Drupal::VERSION, '10.1.0', fn() => \Drupal\Core\Utility\Error::logException(\Drupal::logger('geshifilter'), $e), fn() => watchdog_exception('geshifilter', $e));
       $this->messenger()->addError($geshi_library['error message']);
     }
 

@@ -177,7 +177,7 @@ class UpdateDetailsMarkup implements MarkupInterface {
   }
 
   /**
-   * Overriden MarkupTrait::create method to preven it being used this way.
+   * Overridden MarkupTrait::create method to prevent it being used this way.
    *
    * @param string $string
    *   Input string to turn into a safe string.

@@ -1,7 +1,7 @@
 name: 'easyDrupal B5'
 type: theme
 description: 'easyDrupal B5 subtheme based on Bootstrap 5 theme.'
-core_version_requirement: '^9.4 || ^10'
+core_version_requirement: '^9.4 || ^10 || ^11'
 'base theme': bootstrap5
 libraries:
   - easydrupal_b5/global-styling

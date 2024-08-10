@@ -1,14 +1,22 @@
+langcode: en
 extlink_exclude_admin_routes: false
 extlink_target: true
 extlink_subdomains: true
 extlink_alert: false
 extlink_alert_text: ''
+extlink_additional_tel_classes: ''
 extlink_exclude: ''
 extlink_include: ''
+extlink_exclude_noreferrer: ''
 extlink_class: '0'
 extlink_label: '(link is external)'
 extlink_img_class: false
 extlink_css_exclude: ''
+extlink_css_include: ''
 extlink_css_explicit: ''
 extlink_mailto_class: '0'
 extlink_mailto_label: '(link sends email)'
+extlink_tel_class: ''
+extlink_tel_label: '(link is a phone number)'
+extlink_additional_link_settings: ''
+extlink_additional_mailto_settings: ''

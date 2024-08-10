@@ -17,9 +17,84 @@ use Drupal\blazy\Utility\Arrays;
 class BlazyViews {
 
   /**
-   * Implements hook_views_pre_render().
+   * Returns one of the Blazy Views fields, if available.
    */
-  public static function viewsPreRender($view): void {
+  public static function viewsField($view) {
+    foreach (['file', 'media'] as $entity) {
+      if (isset($view->field['blazy_' . $entity])) {
+        return $view->field['blazy_' . $entity];
+      }
+    }
+    return NULL;
+  }
+
+  /**
+   * Checks if Blazy is applicable in a view.
+   */
+  public static function isApplicable(array &$variables): array {
+    $view      = $variables['view'];
+    $blazy     = self::viewsField($view);
+    $css_class = $variables['css_class'] ?? NULL;
+
+    return [
+      'css' => $css_class && strpos($css_class, 'blazy--') !== FALSE,
+      'field' => $view->ajaxEnabled() || !empty($blazy),
+    ];
+  }
+
+  /**
+   * Implements hook_preprocess_views_view().
+   */
+  public static function preprocessViewsView(array &$variables): void {
+    $check = self::isApplicable($variables);
+    if ($check['css']) {
+      self::withViewsView($variables);
+    }
+
+    if ($check['field']) {
+      self::withViewsField($variables);
+    }
+  }
+
+  /**
+   * Implements hook_preprocess_views_view().
+   */
+  public static function withViewsView(array &$variables): void {
+    $lightboxes = \blazy()->getLightboxes();
+
+    preg_match('~blazy--(.*?)-gallery~', $variables['css_class'], $matches);
+    $lightbox = $matches[1] ? str_replace('-', '_', $matches[1]) : FALSE;
+
+    // Given blazy--photoswipe-gallery, adds the [data-photoswipe-gallery], etc.
+    if ($lightbox && in_array($lightbox, $lightboxes)) {
+      $view = $variables['view'];
+      $data = [
+        'namespace' => 'blazy',
+        'media_switch' => $lightbox,
+      ];
+
+      $settings = Blazy::init($data);
+
+      $settings[$lightbox] = $lightbox;
+
+      $blazies = $settings['blazies'];
+      $count = count($view->result);
+      $blazies->set('count', $count)
+        ->set('total', $count)
+        ->set('use.ajax', $view->ajaxEnabled());
+
+      \blazy()->moduleHandler()->alter('blazy_is_view', $settings, $variables);
+
+      Attributes::container($variables['attributes'], $settings);
+      $variables['blazy'] = $settings;
+    }
+  }
+
+  /**
+   * Implements hook_preprocess_views_view().
+   */
+  public static function withViewsField(array &$variables): void {
+    $view  = $variables['view'];
     $loads = [];
     $ajax  = $view->ajaxEnabled();
 
@@ -31,9 +106,9 @@ class BlazyViews {
 
     // Load Blazy library once, not per field, if any Blazy Views field found.
     if ($blazy = self::viewsField($view)) {
-      $manager   = $blazy->blazyManager();
+      $manager   = \blazy();
       $plugin_id = $view->getStyle()->getPluginId();
-      $settings  = $blazy->mergedViewsSettings();
+      $settings  = $blazy->mergedSettings;
       $blazies   = $settings['blazies'];
 
       $blazies->set('unlazy', FALSE);
@@ -48,56 +123,13 @@ class BlazyViews {
 
       // Prevents dup [data-LIGHTBOX-gallery] if the Views style supports Grid.
       if (!$grid) {
-        $view->element['#attributes'] = $view->element['#attributes'] ?? [];
-        Attributes::container($view->element['#attributes'], $settings);
+        $manager->moduleHandler()->alter('blazy_is_view', $settings, $variables);
+        Attributes::container($variables['attributes'], $settings);
       }
     }
 
     if ($loads) {
-      $view->element['#attached'] = Arrays::merge($loads, $view->element, '#attached');
-    }
-  }
-
-  /**
-   * Returns one of the Blazy Views fields, if available.
-   */
-  public static function viewsField($view) {
-    foreach (['file', 'media'] as $entity) {
-      if (isset($view->field['blazy_' . $entity])) {
-        return $view->field['blazy_' . $entity];
-      }
-    }
-    return NULL;
-  }
-
-  /**
-   * Implements hook_preprocess_views_view().
-   */
-  public static function preprocessViewsView(array &$variables, $lightboxes): void {
-    preg_match('~blazy--(.*?)-gallery~', $variables['css_class'], $matches);
-    $lightbox = $matches[1] ? str_replace('-', '_', $matches[1]) : FALSE;
-
-    // Given blazy--photoswipe-gallery, adds the [data-photoswipe-gallery], etc.
-    if ($lightbox && in_array($lightbox, $lightboxes)) {
-      $variables['attributes'] = $variables['attributes'] ?? [];
-
-      $data = [
-        'namespace' => 'blazy',
-        'media_switch' => $lightbox,
-      ];
-
-      $settings = Blazy::init($data);
-
-      $blazies = $settings['blazies'];
-      if ($view = $variables['view']) {
-        $count = count($view->result);
-        $blazies->set('count', $count)
-          ->set('total', $count);
-      }
-
-      \blazy()->moduleHandler()->alter('blazy_is_view', $settings, $variables);
-
-      Attributes::container($variables['attributes'], $settings);
+      $variables['#attached'] = Arrays::merge($loads, $variables, '#attached');
     }
   }
 

@@ -148,13 +148,13 @@ abstract class HttpPurgerConfigFormTestBase extends PurgerConfigFormTestBase {
       'name' => 'foobar',
       'invalidationtype' => 'wildcardurl',
       'hostname' => 'example.com',
-      'port' => 8080,
+      'port' => '8080',
       'path' => 'node/1',
-      'request_method' => 1,
-      'scheme' => 0,
-      'verify' => TRUE,
-      'runtime_measurement' => 1,
-      'http_errors' => 1,
+      'request_method' => '1',
+      'scheme' => '0',
+      'verify' => '1',
+      'runtime_measurement' => '1',
+      'http_errors' => '1',
     ];
     $this->submitForm($edit, 'Save configuration');
     foreach ($edit as $field => $value) {

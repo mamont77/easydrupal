@@ -1,0 +1,4 @@
+# cspell: project specific dictionary
+
+# Author / Noun
+Piskarov

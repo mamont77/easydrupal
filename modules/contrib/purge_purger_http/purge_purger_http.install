@@ -14,7 +14,7 @@ function purge_purger_http_update_8003(): void {
 
   foreach ($configNames as $configName) {
     $config = \Drupal::configFactory()->getEditable($configName);
-    $verify = $config->getOriginal('verify', false);
+    $verify = $config->getOriginal('verify', FALSE);
 
     if ($verify === NULL) {
       continue;
