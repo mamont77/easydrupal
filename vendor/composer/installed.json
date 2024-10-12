@@ -6034,6 +6034,9 @@
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
                     }
+                },
+                "patches_applied": {
+                    "3362165: Fix Deprecated function: Creation of dynamic property Drupal\\yoast_seo\\YoastSeoManager::$yoast_seo_field_manager is deprecated": "https://www.drupal.org/files/issues/2023-11-01/yoast_seo-php8_2-3362165-19.patch"
                 }
             },
             "installation-source": "dist",
