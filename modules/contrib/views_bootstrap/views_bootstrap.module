@@ -39,3 +39,22 @@ function views_bootstrap_help($route_name, RouteMatchInterface $route_match) {
 function views_bootstrap_theme() {
   return ViewsBootstrap::getThemeHooks();
 }
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ *
+ * Add views styles template suggestions.
+ *
+ * {@inheritdoc}
+ */
+function views_bootstrap_theme_suggestions_alter(array &$suggestions, array &$variables, $hook): void {
+  if (isset($variables['view']) && str_starts_with($hook, 'views_bootstrap_')) {
+    $view = $variables['view'];
+    $style_name = $view->style_plugin->getPluginId();
+
+    // Add custom theme suggestions.
+    $suggestions[] = $style_name . '__' . $view->id();
+    $suggestions[] = $style_name . '__' . $view->current_display;
+    $suggestions[] = $style_name . '__' . $view->id() . '__' . $view->current_display;
+  }
+}

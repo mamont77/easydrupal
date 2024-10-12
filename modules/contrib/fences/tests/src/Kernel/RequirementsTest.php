@@ -30,8 +30,6 @@ class RequirementsTest extends KernelTestBase {
 
   /**
    * Tests fences_requirements().
-   *
-   * @covers fences_requirements().
    */
   public function testRequirements() {
     \Drupal::service('module_handler')->loadInclude('fences', 'install');

@@ -104,7 +104,7 @@ class OverrideTest extends BrowserTestBase {
   /**
    * Provides scenerios.
    */
-  public function providerScenarios() {
+  public static function providerScenarios() {
     return [
       'core-wo-field-template' => [
         // Stark is the default theme for this test class.

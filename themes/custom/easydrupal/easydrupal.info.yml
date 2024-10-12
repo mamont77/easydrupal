@@ -3,7 +3,7 @@ description: 'Bootstrap Sub-Theme (CDN). Uses the Bootstrap framework Sass sourc
 type: theme
 package: 'Custom'
 base theme: bootstrap
-core_version_requirement: ^8 || ^9 || ^10
+core_version_requirement: ^8 || ^9 || ^10 || ^11
 
 regions:
   navigation: 'Navigation'

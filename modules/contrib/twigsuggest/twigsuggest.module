@@ -387,6 +387,38 @@ function twigsuggest_theme_suggestions_menu_alter(array &$suggestions, array $va
   }
 }
 
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter for menu local actions.
+ *
+ * Adds template suggestions based on menu local action link's route.
+ *
+ * Note that we do *not* have access to region, block, or anything else in here.
+ * And in case you are wondering twigsuggest_theme_suggestions_menu_local_action
+ * does not get any more.  We could do unholy things with the stack trace or
+ * with global variables if more suggestions are truly needed here.
+ */
+function twigsuggest_theme_suggestions_menu_local_action_alter(array &$suggestions, array $variables) {
+  $url = $variables['element']['#link']['url'] ?? NULL;
+  if ($url) {
+    $route = $url->getRouteName();
+    if ($route) {
+      $key = array_key_last($suggestions) ?? -1;
+      $route_pieces = explode('.', $route);
+      foreach ($route_pieces as $position => $piece) {
+        if ($position) {
+          $last_suggestion = $suggestions[$key];
+        }
+        else {
+          $last_suggestion = 'menu_local_action';
+        }
+        $key++;
+        $suggestions[$key] = $last_suggestion . '__' . $piece;
+      }
+    }
+  }
+}
+
 /**
  * Implements hook_preprocess() for all templates.
  *

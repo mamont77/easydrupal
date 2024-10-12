@@ -12,7 +12,7 @@ use Drupal\fences\TagManagerInterface;
  */
 function fences_requirements($phase) {
   if ($phase != 'runtime') {
-    return;
+    return [];
   }
 
   $requirements['fences'] = [

@@ -40,8 +40,8 @@ function extlink_update_8102(): void {
 function extlink_update_8103(): void {
   \Drupal::configFactory()
     ->getEditable('extlink.settings')
-    ->set('extlink_additional_link_settings', '')
-    ->set('extlink_additional_mailto_settings', '')
+    ->set('extlink_additional_link_classes', '')
+    ->set('extlink_additional_mailto_classes', '')
     ->save();
 }
 

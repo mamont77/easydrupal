@@ -109,6 +109,7 @@ final class FencesPresetForm extends EntityForm implements ContainerInjectionInt
       '#type' => 'textfield',
       '#default_value' => $this->entity->get('field_classes'),
       '#states' => $invisible_on_none('field_tag'),
+      '#description' => t('Enter additional classes, separated by space.'),
     ];
 
     $form['values']['field_items_wrapper_tag'] = [
@@ -123,6 +124,7 @@ final class FencesPresetForm extends EntityForm implements ContainerInjectionInt
       '#type' => 'textfield',
       '#default_value' => $this->entity->get('field_items_wrapper_classes'),
       '#states' => $invisible_on_none('field_items_wrapper_tag'),
+      '#description' => t('Enter additional classes, separated by space.'),
     ];
 
     $form['values']['field_item_tag'] = [
@@ -137,6 +139,7 @@ final class FencesPresetForm extends EntityForm implements ContainerInjectionInt
       '#type' => 'textfield',
       '#default_value' => $this->entity->get('field_item_classes'),
       '#states' => $invisible_on_none('field_item_tag'),
+      '#description' => t('Enter additional classes, separated by space.'),
     ];
 
     $form['values']['label_tag'] = [
@@ -151,6 +154,7 @@ final class FencesPresetForm extends EntityForm implements ContainerInjectionInt
       '#type' => 'textfield',
       '#default_value' => $this->entity->get('label_classes'),
       '#states' => $invisible_on_none('label_tag'),
+      '#description' => t('Enter additional classes, separated by space.'),
     ];
 
     return $form;

@@ -25,6 +25,7 @@
     {% set collapse_class = (collapse_var) ? 'show' %}
     {% set collapse_class_boolean = (collapse_var) ? 'true' : 'false' %}
     {% set button_classes = (not collapse_var) ? 'collapsed' %}
+
     <div class="accordion-item">
       <h2 class="accordion-header" id="heading{{ key }}">
         <button class="accordion-button {{ button_classes }}" type="button" data-bs-toggle="collapse" data-bs-target="#{{ id }}-collapse-{{ key }}" aria-expanded="{{ collapse_class_boolean }}" aria-controls="{{ id }}-collapse-{{ key }}">
@@ -33,7 +34,13 @@
       </h2>
       <div id="{{ id }}-collapse-{{ key }}" class="accordion-collapse collapse {{ collapse_class }}" aria-labelledby="heading{{ key }}" data-bs-parent="#{{ id }}">
         <div class="accordion-body">
-          {{ row.content }}
+          {% if output == 'grouped' %}
+            {% for content in row.content %}
+              {{ content }}
+            {% endfor %}
+          {% else %}
+            {{ row.content }}
+          {% endif %}
         </div>
       </div>
     </div>

@@ -60,9 +60,9 @@ class MenuTrailByPathSettingsForm extends ConfigFormBase {
       '#options' => static::getTrailSourceOptions(),
       '#default_value' => $config->get('trail_source'),
     ];
-    $form['trail_source'][MenuTrailByPathActiveTrail::MENU_TRAIL_PATH]['#description'] = t('Attempt to find a matching parent menu link based on the path structure. Slower, especially with a large amount of paths parts to consider.');
-    $form['trail_source'][MenuTrailByPathActiveTrail::MENU_TRAIL_CORE]['#description'] = t('Active trail only for pages that have a menu link pointing to them, same as when not using this module.');
-    $form['trail_source'][MenuTrailByPathActiveTrail::MENU_TRAIL_DISABLED]['#description'] = t('No active trail at all. No performance overhead, useful for special/footer menus.');
+    $form['trail_source'][MenuTrailByPathActiveTrail::MENU_TRAIL_PATH]['#description'] = $this->t('Attempt to find a matching parent menu link based on the path structure. Slower, especially with a large amount of paths parts to consider.');
+    $form['trail_source'][MenuTrailByPathActiveTrail::MENU_TRAIL_CORE]['#description'] = $this->t('Active trail only for pages that have a menu link pointing to them, same as when not using this module.');
+    $form['trail_source'][MenuTrailByPathActiveTrail::MENU_TRAIL_DISABLED]['#description'] = $this->t('No active trail at all. No performance overhead, useful for special/footer menus.');
 
     return parent::buildForm($form, $form_state);
   }

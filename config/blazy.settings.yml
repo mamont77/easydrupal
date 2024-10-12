@@ -32,3 +32,4 @@ io:
   rootMargin: 0px
   threshold: '0'
   disconnect: false
+max_region_count: 0

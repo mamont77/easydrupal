@@ -69,6 +69,7 @@ function fences_field_formatter_third_party_settings_form(FormatterInterface $pl
     // Remove default maxlength of 128:
     '#maxlength' => NULL,
     '#attributes' => ['class' => ['fences-field-classes']],
+    '#description' => t('Enter additional classes, separated by space.'),
   ];
   $settings['fences']['fences_field_items_wrapper_tag'] = [
     '#title' => t('Field Items Wrapper Tag'),
@@ -85,6 +86,7 @@ function fences_field_formatter_third_party_settings_form(FormatterInterface $pl
     // Remove default maxlength of 128:
     '#maxlength' => NULL,
     '#attributes' => ['class' => ['fences-field-items-wrapper-classes']],
+    '#description' => t('Enter additional classes, separated by space.'),
   ];
   $settings['fences']['fences_field_item_tag'] = [
     '#title' => t('Field Item Tag'),
@@ -101,6 +103,7 @@ function fences_field_formatter_third_party_settings_form(FormatterInterface $pl
     // Remove default maxlength of 128:
     '#maxlength' => NULL,
     '#attributes' => ['class' => ['fences-field-item-classes']],
+    '#description' => t('Enter additional classes, separated by space.'),
   ];
   $settings['fences']['fences_label_tag'] = [
     '#title' => t('Label Tag'),
@@ -117,6 +120,7 @@ function fences_field_formatter_third_party_settings_form(FormatterInterface $pl
     // Remove default maxlength of 128:
     '#maxlength' => NULL,
     '#attributes' => ['class' => ['fences-label-classes']],
+    '#description' => t('Enter additional classes, separated by space.'),
   ];
   \Drupal::moduleHandler()->alter('fences_field_formatter_third_party_settings_form', $settings);
 

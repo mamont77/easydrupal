@@ -48,7 +48,7 @@ formatter.tabs:
 element.horizontal_tabs:
   js:
     # Load before field_group/core.
-    formatters/tabs/horizontal-tabs.js: {weight: -1}
+    formatters/tabs/horizontal-tabs.js: { weight: -1 }
   css:
     component:
       formatters/tabs/horizontal-tabs.css: {}
@@ -56,3 +56,21 @@ element.horizontal_tabs:
     - core/jquery
     - core/once
     - core/drupal.collapse
+
+details_validation:
+  js:
+    js/field_group.details_validation.js: {}
+  dependencies:
+    - core/jquery
+
+tab_validation:
+  js:
+    js/field_group.tab_validation.js: {}
+  dependencies:
+    - core/jquery
+
+tabs_validation:
+  js:
+    js/field_group.tabs_validation.js: {}
+  dependencies:
+    - core/jquery

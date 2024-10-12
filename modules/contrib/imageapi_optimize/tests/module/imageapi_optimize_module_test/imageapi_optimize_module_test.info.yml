@@ -7,7 +7,7 @@ core_version_requirement: ^8 || ^9
 dependencies:
   - imageapi_optimize:imageapi_optimize
 
-# Information added by Drupal.org packaging script on 2022-12-22
-version: '4.0.1'
+# Information added by Drupal.org packaging script on 2024-09-28
+version: '4.1.0-beta1'
 project: 'imageapi_optimize'
-datestamp: 1671725074
+datestamp: 1727502256

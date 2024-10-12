@@ -2,7 +2,7 @@ name: 'GeSHi field'
 description: 'Provides a field for source code with GeSHI syntax highlighting.'
 type: module
 package: Filters
-core_version_requirement: ^9.3 || ^10
+core_version_requirement: '^9.3 || ^10 || ^11'
 dependencies:
-  - field
-  - geshifilter
+  - drupal:field
+  - drupal:geshifilter
