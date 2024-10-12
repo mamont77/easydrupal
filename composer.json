@@ -32,7 +32,6 @@
         "drupal/blazy": "^3.0",
         "drupal/bootstrap5": "^4.0",
         "drupal/captcha": "^2.0",
-        "drupal/coder": "^8.3",
         "drupal/config_partial_export": "^2.0@alpha",
         "drupal/core-composer-scaffold": "^10",
         "drupal/core-project-message": "^10",
@@ -189,6 +188,9 @@
                 "1508786: Lazy load / async load Disqus libraries for better performance": "https://www.drupal.org/files/issues/2022-10-19/disqus-1508786-lazyload-intersectionobserver-46-2.0.x.patch",
                 "3344834: TypeError: in_array(): Argument #2 ($haystack) must be of type array, null given in in_array()": "https://git.drupalcode.org/project/disqus/-/merge_requests/7.diff",
                 "3451023: Deprecated function: Calling get_class() without arguments is deprecated": "https://git.drupalcode.org/project/disqus/-/merge_requests/14.diff"
+            },
+            "drupal/advagg": {
+                "3375725: Deprecated function: Creation of dynamic property": "https://www.drupal.org/files/issues/2024-01-16/deprecated-function-creation-of-dynamic-property-3375725-17.patch"
             }
         }
     },
