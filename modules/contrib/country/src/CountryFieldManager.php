@@ -33,8 +33,10 @@ class CountryFieldManager {
    * @param \Drupal\Core\Language\LanguageManagerInterface $language_manager
    *   The language manager.
    */
-  public function __construct(CountryManagerInterface $country_manager,
-    LanguageManagerInterface $language_manager) {
+  public function __construct(
+    CountryManagerInterface $country_manager,
+    LanguageManagerInterface $language_manager,
+  ) {
     $this->countryManager = $country_manager;
     $this->languageManager = $language_manager;
   }

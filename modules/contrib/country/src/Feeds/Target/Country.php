@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\feeds\Feeds\Target;
+namespace Drupal\country\Feeds\Target;
 
 use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\feeds\FieldTargetDefinition;

@@ -6,7 +6,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Element\Select;
 
 /**
- * Provides a selectized form element.
+ * Provides a selected form element.
  *
  * @FormElement("country")
  */

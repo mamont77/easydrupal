@@ -9,7 +9,7 @@
   "homepage": "https://drupal.org/project/sticky_sharrre_bar",
   "authors": [
     {
-      "name": "Ruslan Piskarev",
+      "name": "Ruslan Piskarov",
       "email": "ruslan.piskarev@gmail.com",
       "homepage": "http://makedrupaleasy.com",
       "role": "Maintainer"
@@ -46,7 +46,7 @@
     }
   ],
   "require": {
-    "drupal/core": "^8.7.7 || ^9 || ^10"
+    "drupal/core": "^8.8 || ^9 || ^10 || ^11"
   },
   "extra": {
     "installer-types": [

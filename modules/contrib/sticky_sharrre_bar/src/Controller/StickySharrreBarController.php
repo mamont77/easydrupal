@@ -2,9 +2,10 @@
 
 namespace Drupal\sticky_sharrre_bar\Controller;
 
-use Drupal\Core\Controller\ControllerBase;
-use Drupal\Component\Utility\Html;
 use Drupal\Component\Serialization\Json;
+use Drupal\Component\Utility\Html;
+use Drupal\Core\Controller\ControllerBase;
+use Psr\Http\Message\StreamInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
@@ -20,7 +21,7 @@ class StickySharrreBarController extends ControllerBase {
    * @return array
    *   A render array representing the administrative page content.
    */
-  public function sharrre() {
+  public function sharrre(): JsonResponse|array {
     $url = $_GET['url'];
     $type = $_GET['type'];
     $output = ['url' => $url, 'count' => 0];
@@ -54,13 +55,15 @@ class StickySharrreBarController extends ControllerBase {
   /**
    * Get necessary content use cURL.
    *
-   * @param string $encoded_url
-   *   Url of page.
+   * @param $encoded_url
    *
    * @return \Psr\Http\Message\StreamInterface
-   *   Ready data
+   * Ready data
+   *
+   * @throws \GuzzleHttp\Exception\GuzzleException
+   *
    */
-  private function stickySharrreBarParse($encoded_url) {
+  private function stickySharrreBarParse($encoded_url): StreamInterface {
     $client = \Drupal::httpClient();
     $request = $client->get($encoded_url);
 

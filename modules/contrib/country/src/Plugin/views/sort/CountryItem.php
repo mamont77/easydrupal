@@ -4,7 +4,9 @@ namespace Drupal\country\Plugin\views\sort;
 
 use Drupal\Core\Database\Database;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\country\CountryFieldManager;
 use Drupal\views\Plugin\views\sort\SortPluginBase;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Sort handler for country fields.
@@ -14,6 +16,42 @@ use Drupal\views\Plugin\views\sort\SortPluginBase;
  * @ViewsSort("country_item")
  */
 class CountryItem extends SortPluginBase {
+
+  /**
+   * The country field manager service.
+   *
+   * @var \Drupal\country\CountryFieldManager
+   */
+  private $countryFieldManager;
+
+  /**
+   * Constructs a CountryItem object.
+   *
+   * @param array $configuration
+   *   A configuration array containing information about the plugin instance.
+   * @param string $plugin_id
+   *   The plugin ID for the plugin instance.
+   * @param mixed $plugin_definition
+   *   The plugin implementation definition.
+   * @param \Drupal\country\CountryFieldManager $countryFieldManager
+   *   The country field manager service.
+   */
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, CountryFieldManager $countryFieldManager) {
+    parent::__construct($configuration, $plugin_id, $plugin_definition);
+    $this->countryFieldManager = $countryFieldManager;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+    return new static(
+      $configuration,
+      $plugin_id,
+      $plugin_definition,
+      $container->get('country.field.manager')
+    );
+  }
 
   /**
    * {@inheritdoc}
@@ -51,7 +89,7 @@ class CountryItem extends SortPluginBase {
     }
 
     $this->ensureMyTable();
-    $country_codes = array_keys(\Drupal::service('country.field.manager')->getList());
+    $country_codes = array_keys($this->countryFieldManager->getList());
     $connection = Database::getConnection();
     $formula = 'FIELD(' . $this->getField() . ', ' . implode(', ', array_map(
       [$connection, 'quote'], $country_codes)

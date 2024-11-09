@@ -2,14 +2,15 @@
 
 namespace Drupal\sticky_sharrre_bar\Plugin\Block;
 
-use Drupal\Core\Block\BlockBase;
 use Drupal\block\Entity\Block;
-use Drupal\Core\Session\AccountInterface;
-use Drupal\Core\Access\AccessResult;
 use Drupal\Component\Utility\Html;
+use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Access\AccessResultInterface;
+use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Url;
 use Drupal\Core\Link;
+use Drupal\Core\Session\AccountInterface;
+use Drupal\Core\Url;
 
 /**
  * Provides a 'StickySharrreBarBlock' block.
@@ -24,14 +25,14 @@ class StickySharrreBarBlock extends BlockBase {
   /**
    * {@inheritdoc}
    */
-  protected function blockAccess(AccountInterface $account) {
+  protected function blockAccess(AccountInterface $account): AccessResult|AccessResultInterface {
     return AccessResult::allowedIfHasPermission($account, 'access sticky_sharrre_bar');
   }
 
   /**
    * {@inheritdoc}
    */
-  public function defaultConfiguration() {
+  public function defaultConfiguration(): array {
     return [
       'label_display' => FALSE,
       'providers' => [
@@ -99,7 +100,7 @@ class StickySharrreBarBlock extends BlockBase {
   /**
    * Overrides \Drupal\block\BlockBase::blockSubmit().
    */
-  public function blockSubmit($form, FormStateInterface $form_state) {
+  public function blockSubmit($form, FormStateInterface $form_state): void {
     $values = $form_state->getValue('block_sticky_sharrre_bar');
 
     $this->configuration['providers'] = $values['providers'];
@@ -117,7 +118,7 @@ class StickySharrreBarBlock extends BlockBase {
    *
    * {@inheritdoc}
    */
-  public function build() {
+  public function build(): array {
     $build = [];
     $enabled_providers = [];
 
@@ -138,7 +139,7 @@ class StickySharrreBarBlock extends BlockBase {
       }
 
       // FIXME: need load block info and get id of region.
-      $instance = Block::load('easydrupal_b5_stickysharrrebar');
+      $instance = Block::load('stickysharrrebar');
       $region = $instance->get('region');
       $custom_css_selector = $this->configuration['use_custom_css_selector'];
 
@@ -172,7 +173,6 @@ class StickySharrreBarBlock extends BlockBase {
       if ($this->configuration['use_module_css'] == 1) {
         $build['content']['#attached']['library'][] = 'sticky_sharrre_bar/sticky_sharrre_bar_css';
       }
-
     }
 
     return $build;

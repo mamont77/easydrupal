@@ -2,11 +2,11 @@ name: Country
 type: module
 description: 'Defines a simple country field type.'
 package: Field types
-core_version_requirement: ^10
+core_version_requirement: ^10 || ^11
 dependencies:
   - drupal:field
 
-# Information added by Drupal.org packaging script on 2024-04-26
-version: '2.0.1'
+# Information added by Drupal.org packaging script on 2024-10-25
+version: '2.1.0'
 project: 'country'
-datestamp: 1714120329
+datestamp: 1729841377

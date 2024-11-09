@@ -2,13 +2,14 @@
 
 namespace Drupal\country\Plugin\Field\FieldWidget;
 
+use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\WidgetBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\country\CountryFieldManager;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\Core\Field\FieldDefinitionInterface;
+
 /**
  * Plugin implementation of the 'country_autocomplete' widget.
  *
@@ -46,13 +47,13 @@ class CountryAutocompleteWidget extends WidgetBase implements ContainerFactoryPl
    *   The country field manager.
    */
   public function __construct(
-      $plugin_id,
-      $plugin_definition,
-      FieldDefinitionInterface $field_definition,
-      array $settings,
-      array $third_party_settings,
-      CountryFieldManager $country_field_manager
-    ) {
+    $plugin_id,
+    $plugin_definition,
+    FieldDefinitionInterface $field_definition,
+    array $settings,
+    array $third_party_settings,
+    CountryFieldManager $country_field_manager,
+  ) {
     parent::__construct($plugin_id, $plugin_definition, $field_definition, $settings, $third_party_settings);
     $this->countryFieldManager = $country_field_manager;
   }
@@ -60,13 +61,13 @@ class CountryAutocompleteWidget extends WidgetBase implements ContainerFactoryPl
   /**
    * {@inheritdoc}
    */
-   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
     return new static(
-      $plugin_id, $plugin_definition,
-      $configuration['field_definition'],
-      $configuration['settings'],
-      $configuration['third_party_settings'],
-      $container->get('country.field.manager')
+     $plugin_id, $plugin_definition,
+     $configuration['field_definition'],
+     $configuration['settings'],
+     $configuration['third_party_settings'],
+     $container->get('country.field.manager')
     );
   }
 

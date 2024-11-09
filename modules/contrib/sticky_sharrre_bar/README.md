@@ -76,4 +76,4 @@ You can install the module by Composer (look more [using Composer to manage Drup
 - To issue any bug reports, feature or support requests, see the module issue
   queue at https://drupal.org/project/issues/2268241.
 
-Author: Ruslan Piskarev <http://drupal.org/user/424444>.
+Author: Ruslan Piskarov <http://drupal.org/user/424444>.

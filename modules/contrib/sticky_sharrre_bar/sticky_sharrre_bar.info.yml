@@ -1,6 +1,6 @@
 name: 'Sticky Sharrre Bar'
 description: 'Provides a sticky <a href="http://sharrre.com/">Sharrre</a> block on your site.'
-core_version_requirement: ^8 || ^9 || ^10
+core_version_requirement: ^8.8 || ^9 || ^10 || ^11
 package: Sharing
 type: module
 dependencies:

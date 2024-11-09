@@ -51,15 +51,15 @@ class CountryDefaultFormatter extends FormatterBase implements ContainerFactoryP
    *   The country field manager.
    */
   public function __construct(
-      $plugin_id,
-      $plugin_definition,
-      FieldDefinitionInterface $field_definition,
-      array $settings,
-      $label,
-      $view_mode,
-      array $third_party_settings,
-      CountryFieldManager $country_field_manager
-    ) {
+    $plugin_id,
+    $plugin_definition,
+    FieldDefinitionInterface $field_definition,
+    array $settings,
+    $label,
+    $view_mode,
+    array $third_party_settings,
+    CountryFieldManager $country_field_manager,
+  ) {
     parent::__construct($plugin_id, $plugin_definition, $field_definition, $settings, $label, $view_mode, $third_party_settings);
     $this->countryFieldManager = $country_field_manager;
   }

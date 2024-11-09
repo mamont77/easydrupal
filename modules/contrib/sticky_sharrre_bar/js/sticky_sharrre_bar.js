@@ -17,7 +17,7 @@
   Drupal.behaviors.stickySharrreBarRender = {
     attach: function (context) {
 
-      var enableTracking = (drupalSettings.googleanalytics && drupalSettings.stickySharrreBar.useGoogleAnalyticsTracking === 1) ? true : false,
+      let enableTracking = (drupalSettings.googleanalytics && drupalSettings.stickySharrreBar.useGoogleAnalyticsTracking === 1) ? true : false,
         blockRegion = drupalSettings.stickySharrreBar.blockRegion,
         isCustomSelector = drupalSettings.stickySharrreBar.isCustomSelector,
         selector = '',
@@ -49,7 +49,7 @@
       });
 
       // The "sharrre" plugin requires this object.
-      var buttons = {
+      const buttons = {
         googlePlus: {},
         facebook: {},
         twitter: {},
@@ -58,12 +58,12 @@
         delicious: {},
         stumbleupon: {},
         pinterest: {},
-        tumblr: {} // TODO: Available from v2.0.0 in "Sharrre" plugin.
+        tumblr: {}, // TODO: Available from v2.0.0 in "Sharrre" plugin.
       };
 
       $.each(drupalSettings.stickySharrreBar.providers, function (provider) {
         if (provider) {
-          var currentProvider = {};
+          const currentProvider = {};
           currentProvider[provider] = true;
 
           $('#' + provider, context).sharrre({
