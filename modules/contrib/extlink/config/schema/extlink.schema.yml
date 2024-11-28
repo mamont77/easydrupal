@@ -16,6 +16,9 @@ extlink.settings:
     extlink_target_no_override:
       type: boolean
       label: 'Do not override target="*" if set'
+    extlink_title_no_override:
+      type: boolean
+      label: 'Do not override title="" if set'
     extlink_nofollow:
       type: boolean
       label: 'Tag external links as "no follow"'
@@ -104,6 +107,9 @@ extlink.settings:
     extlink_icon_placement:
       type: string
       label: 'Add icon in front of any processed link.'
+    extlink_prevent_orphan:
+      type: boolean
+      label: 'Prevent text wrapping separating the last word from the icon.'
     whitelisted_domains:
       type: sequence
       label: 'Whitelisted domains'

@@ -1,9 +1,12 @@
 langcode: en
 extlink_exclude_admin_routes: false
 extlink_target: true
+extlink_title_no_override: false
 extlink_subdomains: true
 extlink_alert: false
 extlink_alert_text: ''
+extlink_additional_link_classes: ''
+extlink_additional_mailto_classes: ''
 extlink_additional_tel_classes: ''
 extlink_exclude: ''
 extlink_include: ''
@@ -18,5 +21,4 @@ extlink_mailto_class: '0'
 extlink_mailto_label: '(link sends email)'
 extlink_tel_class: ''
 extlink_tel_label: '(link is a phone number)'
-extlink_additional_link_settings: ''
-extlink_additional_mailto_settings: ''
+extlink_prevent_orphan: false

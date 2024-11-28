@@ -215,6 +215,25 @@
       });
     }
 
+    if (drupalSettings.data.extlink.extTitleNoOverride === false) {
+      // Set the title attribute of all external links that opens in a new window.
+      externalLinks.forEach((link, i) => {
+        const oldTitle = link.getAttribute('title');
+
+        // Determine new title based on drupalSettings extTarget configuration.
+        let newTitle = drupalSettings.data.extlink.extTarget ? drupalSettings.data.extlink.extTargetAppendNewWindowLabel : '';
+        if (oldTitle !== null) {
+          if (Drupal.extlink.hasNewWindowText(oldTitle)) {
+            return;
+          }
+          newTitle = Drupal.extlink.combineLabels(oldTitle, newTitle);
+        }
+        if (newTitle) {
+          externalLinks[i].setAttribute('title', newTitle);
+        }
+      });
+    }
+
     if (drupalSettings.data.extlink.extNoreferrer) {
       externalLinks.forEach((link, i) => {
         // Don't add 'noreferrer' if exclude noreferrer option is set and the
@@ -234,19 +253,6 @@
       });
     }
 
-    // Set the title attribute of all external links.
-    externalLinks.forEach((link, i) => {
-      const oldTitle = link.getAttribute('title');
-      let newTitle = drupalSettings.data.extlink.extTargetAppendNewWindowLabel;
-      if (oldTitle !== null) {
-        if (Drupal.extlink.hasNewWindowText(oldTitle)) {
-          return;
-        }
-        newTitle = Drupal.extlink.combineLabels(oldTitle, newTitle);
-      }
-      externalLinks[i].setAttribute('title', newTitle);
-    });
-
     /* eslint:disable:no-empty */
     Drupal.extlink = Drupal.extlink || {};
 
@@ -263,7 +269,7 @@
 
     const _that = this;
     Drupal.extlink.handleClick = function (event) {
-      const shouldNavigate = Drupal.extlink.popupClickHandler.call(_that);
+      const shouldNavigate = Drupal.extlink.popupClickHandler.call(_that, event);
       if (typeof shouldNavigate !== 'undefined' && !shouldNavigate) {
         // Prevent navigation if the user clicks "Cancel".
         event.preventDefault();
@@ -373,7 +379,7 @@
         let link = linksToProcess[i];
 
         // Prevent appended icons from wrapping lines.
-        if (iconPlacement === 'append') {
+        if (drupalSettings.data.extlink.extPreventOrphan && iconPlacement === 'append') {
           // Find the last word in the link.
           let lastTextNode = link.lastChild;
           let trailingWhitespace = null;
@@ -403,8 +409,8 @@
               breakPreventer.classList.add('extlink-nobreak');
               breakPreventer.textContent = lastWord[0];
               if (trailingWhitespace) {
-                breakPreventer.append(trailingWhitespace.textContent);
                 trailingWhitespace.textContent = '';
+                breakPreventer.append(trailingWhitespace.textContent);
               }
               lastTextNode.textContent = lastText.substring(0, lastText.length - lastWord[0].length);
               lastTextNode.parentNode.append(breakPreventer);
@@ -423,17 +429,17 @@
             if (drupalSettings.data.extlink.mailtoLabel) {
               link.ariaLabel = drupalSettings.data.extlink.mailtoLabel;
             }
-            iconElement.innerHTML = `<span class="${drupalSettings.data.extlink.extFaMailtoClasses}" data-extlink-placement="${iconPlacement}"></span>`;
+            iconElement.innerHTML = Drupal.theme('extlink_fa_mailto', drupalSettings, iconPlacement);
           } else if (className === drupalSettings.data.extlink.extClass) {
             if (drupalSettings.data.extlink.extLabel) {
               link.ariaLabel = drupalSettings.data.extlink.extLabel;
             }
-            iconElement.innerHTML = `<span class="${drupalSettings.data.extlink.extFaLinkClasses}" data-extlink-placement="${iconPlacement}"></span>`;
+            iconElement.innerHTML = Drupal.theme('extlink_fa_extlink', drupalSettings, iconPlacement);
           } else if (className === drupalSettings.data.extlink.telClass) {
             if (drupalSettings.data.extlink.telLabel) {
               link.ariaLabel = drupalSettings.data.extlink.telLabel;
             }
-            iconElement.innerHTML = `<span class="${drupalSettings.data.extlink.extFaTelClasses}" data-extlink-placement="${iconPlacement}"></span>`;
+            iconElement.innerHTML = Drupal.theme('extlink_fa_tel', drupalSettings, iconPlacement);
           }
         } else {
           iconElement = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
@@ -441,17 +447,11 @@
           iconElement.classList.add(className);
           iconElement.setAttribute('data-extlink-placement', iconPlacement);
           if (className === drupalSettings.data.extlink.mailtoClass) {
-            iconElement.setAttribute('aria-label', drupalSettings.data.extlink.mailtoLabel);
-            iconElement.setAttribute('viewBox', '0 10 70 20');
-            iconElement.innerHTML = `<metadata><sfw xmlns="http://ns.adobe.com/SaveForWeb/1.0/"><sliceSourceBounds y="-8160" x="-8165" width="16389" height="16384" bottomLeftOrigin="true"/><optimizationSettings><targetSettings targetSettingsID="0" fileFormat="PNG24Format"><PNG24Format transparency="true" filtered="false" interlaced="false" noMatteColor="false" matteColor="#FFFFFF"/></targetSettings></optimizationSettings></sfw></metadata><title>${drupalSettings.data.extlink.mailtoLabel}</title><path d="M56 14H8c-1.1 0-2 0.9-2 2v32c0 1.1 0.9 2 2 2h48c1.1 0 2-0.9 2-2V16C58 14.9 57.1 14 56 14zM50.5 18L32 33.4 13.5 18H50.5zM10 46V20.3l20.7 17.3C31.1 37.8 31.5 38 32 38s0.9-0.2 1.3-0.5L54 20.3V46H10z"/>`;
+            iconElement = Drupal.theme('extlink_mailto', iconElement, drupalSettings);
           } else if (className === drupalSettings.data.extlink.extClass) {
-            iconElement.setAttribute('aria-label', drupalSettings.data.extlink.extLabel);
-            iconElement.setAttribute('viewBox', '0 0 80 40');
-            iconElement.innerHTML = `<metadata><sfw xmlns="http://ns.adobe.com/SaveForWeb/1.0/"><sliceSourceBounds y="-8160" x="-8165" width="16389" height="16384" bottomLeftOrigin="true"/><optimizationSettings><targetSettings targetSettingsID="0" fileFormat="PNG24Format"><PNG24Format transparency="true" filtered="false" interlaced="false" noMatteColor="false" matteColor="#FFFFFF"/></targetSettings></optimizationSettings></sfw></metadata><title>${drupalSettings.data.extlink.extLabel}</title><path d="M48 26c-1.1 0-2 0.9-2 2v26H10V18h26c1.1 0 2-0.9 2-2s-0.9-2-2-2H8c-1.1 0-2 0.9-2 2v40c0 1.1 0.9 2 2 2h40c1.1 0 2-0.9 2-2V28C50 26.9 49.1 26 48 26z"/><path d="M56 6H44c-1.1 0-2 0.9-2 2s0.9 2 2 2h7.2L30.6 30.6c-0.8 0.8-0.8 2 0 2.8C31 33.8 31.5 34 32 34s1-0.2 1.4-0.6L54 12.8V20c0 1.1 0.9 2 2 2s2-0.9 2-2V8C58 6.9 57.1 6 56 6z"/>`;
+            iconElement = Drupal.theme('extlink_extlink', iconElement, drupalSettings);
           } else if (className === drupalSettings.data.extlink.telClass) {
-            iconElement.setAttribute('aria-label', drupalSettings.data.extlink.telLabel);
-            iconElement.setAttribute('viewBox', '0 0 181.352 181.352');
-            iconElement.innerHTML = `<metadata><sfw xmlns="http://ns.adobe.com/SaveForWeb/1.0/"><sliceSourceBounds y="-8160" x="-8165" width="16389" height="16384" bottomLeftOrigin="true"/><optimizationSettings><targetSettings targetSettingsID="0" fileFormat="PNG24Format"><PNG24Format transparency="true" filtered="false" interlaced="false" noMatteColor="false" matteColor="#FFFFFF"/></targetSettings></optimizationSettings></sfw></metadata><title>${drupalSettings.data.extlink.telLabel}</title><path xmlns="http://www.w3.org/2000/svg"  d="M169.393,167.37l-14.919,9.848c-9.604,6.614-50.531,14.049-106.211-53.404     C-5.415,58.873,9.934,22.86,17.134,14.555L29.523,1.678c2.921-2.491,7.328-2.198,9.839,0.811l32.583,38.543l0.02,0.02     c2.384,2.824,2.306,7.22-0.83,9.868v0.029l-14.44,10.415c-5.716,5.667-0.733,14.587,5.11,23.204l27.786,32.808     c12.926,12.477,20.009,18.241,26.194,14.118l12.008-13.395c2.941-2.472,7.328-2.169,9.839,0.821l32.603,38.543v0.02     C172.607,160.316,172.519,164.703,169.393,167.37z"/>`;
+            iconElement = Drupal.theme('extlink_tel', iconElement, drupalSettings);
           }
         }
         iconElement.setAttribute('role', 'img');
@@ -459,6 +459,105 @@
         link[iconPlacement](iconElement);
       }
     }
+  };
+
+  /**
+   * Theme function for a Font Awesome mailto icon.
+   *
+   * @param {object} drupalSettings
+   *   Settings object used to construct the markup.
+   * @param {string} iconPlacement
+   *   The class to apply to a link.
+   *
+   * @return {string}
+   *   HTML string of the Font AweSome mailto link icon.
+   */
+  Drupal.theme.extlink_fa_mailto = function (drupalSettings, iconPlacement) {
+    return `<span class="${drupalSettings.data.extlink.extFaMailtoClasses}" data-extlink-placement="${iconPlacement}"></span>`;
+  };
+
+  /**
+   * Theme function for a Font Awesome external link icon.
+   *
+   * @param {object} drupalSettings
+   *   Settings object used to construct the markup.
+   * @param {string} iconPlacement
+   *   The class to apply to a link.
+   *
+   * @return {string}
+   *   HTML string of the Font AweSome external link icon.
+   */
+  Drupal.theme.extlink_fa_extlink = function (drupalSettings, iconPlacement) {
+    return `<span class="${drupalSettings.data.extlink.extFaLinkClasses}" data-extlink-placement="${iconPlacement}"></span>`;
+  };
+
+  /**
+   * Theme function for a Font Awesome telephone icon.
+   *
+   * @param {object} drupalSettings
+   *   Settings object used to construct the markup.
+   * @param {string} iconPlacement
+   *   The class to apply to a link.
+   *
+   * @return {string}
+   *   HTML string of the Font AweSome telephone icon.
+   */
+  Drupal.theme.extlink_fa_tel = function (drupalSettings, iconPlacement) {
+    return `<span class="${drupalSettings.data.extlink.extFaLinkClasses}" data-extlink-placement="${iconPlacement}"></span>`;
+  };
+
+  /**
+   * Theme function for a mailto icon.
+   *
+   * @param {object} iconElement
+   *   The current iconElement being altered.
+   * @param {object} drupalSettings
+   *   Settings object used to construct the markup.
+   *
+   * @return {object}
+   *   The altered iconElement.
+   */
+  Drupal.theme.extlink_mailto = function (iconElement, drupalSettings) {
+    iconElement.setAttribute('aria-label', drupalSettings.data.extlink.mailtoLabel);
+    iconElement.setAttribute('viewBox', '0 10 70 20');
+    iconElement.innerHTML = `<title>${drupalSettings.data.extlink.mailtoLabel}</title><path d="M56 14H8c-1.1 0-2 0.9-2 2v32c0 1.1 0.9 2 2 2h48c1.1 0 2-0.9 2-2V16C58 14.9 57.1 14 56 14zM50.5 18L32 33.4 13.5 18H50.5zM10 46V20.3l20.7 17.3C31.1 37.8 31.5 38 32 38s0.9-0.2 1.3-0.5L54 20.3V46H10z"/>`;
+    return iconElement;
+  };
+
+  /**
+   * Theme function for an external link icon.
+   *
+   * @param {object} iconElement
+   *   The current iconElement being altered.
+   * @param {object} drupalSettings
+   *   Settings object used to construct the markup.
+   *
+   * @return {object}
+   *   The altered iconElement.
+   */
+  Drupal.theme.extlink_extlink = function (iconElement, drupalSettings) {
+    iconElement.setAttribute('aria-label', drupalSettings.data.extlink.extLabel);
+    iconElement.setAttribute('viewBox', '0 0 80 40');
+    iconElement.innerHTML = `<title>${drupalSettings.data.extlink.extLabel}</title><path d="M48 26c-1.1 0-2 0.9-2 2v26H10V18h26c1.1 0 2-0.9 2-2s-0.9-2-2-2H8c-1.1 0-2 0.9-2 2v40c0 1.1 0.9 2 2 2h40c1.1 0 2-0.9 2-2V28C50 26.9 49.1 26 48 26z"/><path d="M56 6H44c-1.1 0-2 0.9-2 2s0.9 2 2 2h7.2L30.6 30.6c-0.8 0.8-0.8 2 0 2.8C31 33.8 31.5 34 32 34s1-0.2 1.4-0.6L54 12.8V20c0 1.1 0.9 2 2 2s2-0.9 2-2V8C58 6.9 57.1 6 56 6z"/>`;
+    return iconElement;
+  };
+
+  /**
+   * Theme function for an external telephone icon.
+   *
+   * @param {object} iconElement
+   *   The current iconElement being altered.
+   * @param {object} drupalSettings
+   *   Settings object used to construct the markup.
+   *
+   * @return {object}
+   *   The altered iconElement.
+   */
+  Drupal.theme.extlink_tel = function (iconElement, drupalSettings) {
+    iconElement.setAttribute('aria-label', drupalSettings.data.extlink.telLabel);
+    iconElement.setAttribute('viewBox', '0 0 181.352 181.352');
+    iconElement.innerHTML = `<title>${drupalSettings.data.extlink.telLabel}</title><path xmlns="http://www.w3.org/2000/svg" d="M169.393,167.37l-14.919,9.848c-9.604,6.614-50.531,14.049-106.211-53.404C-5.415,58.873,9.934,22.86,17.134,14.555L29.523,1.678c2.921-2.491,7.328-2.198,9.839,0.811l32.583,38.543l0.02,0.02c2.384,2.824,2.306,7.22-0.83,9.868v0.029l-14.44,10.415c-5.716,5.667-0.733,14.587,5.11,23.204l27.786,32.808c12.926,12.477,20.009,18.241,26.194,14.118l12.008-13.395c2.941-2.472,7.328-2.169,9.839,0.821l32.603,38.543v0.02C172.607,160.316,172.519,164.703,169.393,167.37z"/>`;
+    return iconElement;
   };
 
   Drupal.behaviors.extlink = Drupal.behaviors.extlink || {};

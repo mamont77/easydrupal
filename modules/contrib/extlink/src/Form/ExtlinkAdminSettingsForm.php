@@ -67,6 +67,11 @@ class ExtlinkAdminSettingsForm extends ConfigFormBase {
       '#description' => $this->t('Whether the extlink JS settings should be added to the page via an external settings file. In the case of a large number of patterns, this will reduce the amount of markup added to each page.'),
     ];
 
+    $form['warning'] = [
+      '#type' => 'markup',
+      '#markup' => 'The \'ext\' class will be auto added to all external links.',
+    ];
+
     $form['extlink_class'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Place an icon next to external links.'),
@@ -196,6 +201,18 @@ class ExtlinkAdminSettingsForm extends ConfigFormBase {
       '#description' => $this->t('Choose the location of the external link icon relative to the link. Before and after will place the graphic outside the link, while append and prepend will place the graphic inside the link.'),
     ];
 
+    $form['extlink_prevent_orphan'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Prevent text wrapping separating the last word from the icon.'),
+      '#default_value' => $config->get('extlink_prevent_orphan'),
+      '#description' => $this->t('This is done by wrapping the last word and the symbol into a non-breaking span. Note: This can have unwanted side effects, depending on your CSS.'),
+      '#states' => [
+        'visible' => [
+          ':input[name="extlink_icon_placement"]' => ['value' => 'append'],
+        ],
+      ],
+    ];
+
     $form['extlink_subdomains'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Exclude links with the same primary domain.'),
@@ -220,6 +237,13 @@ class ExtlinkAdminSettingsForm extends ConfigFormBase {
           ':input[name="extlink_target"]' => ['checked' => TRUE],
         ],
       ],
+    ];
+
+    $form['extlink_title_no_override'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Do not alter the title attribute on links.'),
+      '#default_value' => $config->get('extlink_title_no_override'),
+      '#description' => $this->t("If enabled, the title attribute will not be altered on external links."),
     ];
 
     $form['extlink_noreferrer'] = [
@@ -370,7 +394,7 @@ class ExtlinkAdminSettingsForm extends ConfigFormBase {
       '#collapsible' => TRUE,
       '#collapsed' => TRUE,
       '#description' =>
-      '<p>' . $this->t('Use CSS selectors to exclude entirely or only look inside explicitly specified classes and IDs for external links.  These will be passed straight to jQuery for matching.') . '</p>',
+      '<p>' . $this->t('Use CSS selectors to exclude entirely or only look inside explicitly specified classes and IDs for external links.') . '</p>',
     ];
 
     $form['css_matching']['extlink_css_exclude'] = [
@@ -421,6 +445,7 @@ class ExtlinkAdminSettingsForm extends ConfigFormBase {
       ->set('extlink_hide_icons', $values['extlink_hide_icons'])
       ->set('extlink_target', $values['extlink_target'])
       ->set('extlink_target_no_override', $values['extlink_target_no_override'])
+      ->set('extlink_title_no_override', $values['extlink_title_no_override'])
       ->set('extlink_nofollow', $values['extlink_nofollow'])
       ->set('extlink_noreferrer', $values['extlink_noreferrer'])
       ->set('extlink_additional_link_classes', $values['extlink_additional_link_classes'])
@@ -440,6 +465,7 @@ class ExtlinkAdminSettingsForm extends ConfigFormBase {
       ->set('extlink_css_explicit', $values['extlink_css_explicit'])
       ->set('extlink_use_font_awesome', $values['extlink_use_font_awesome'])
       ->set('extlink_icon_placement', $values['extlink_icon_placement'])
+      ->set('extlink_prevent_orphan', $values['extlink_prevent_orphan'])
       ->set('extlink_use_font_awesome', $values['extlink_use_font_awesome'])
       ->set('extlink_font_awesome_classes.links', $values['extlink_font_awesome_classes']['links'])
       ->set('extlink_font_awesome_classes.mailto', $values['extlink_font_awesome_classes']['mailto'])

@@ -2,10 +2,10 @@
 
 namespace Drupal\Tests\extlink\FunctionalJavascript;
 
-use Drupal\filter\Entity\FilterFormat;
-use Drupal\filter\FilterFormatInterface;
 use Drupal\FunctionalJavascriptTests\WebDriverTestBase;
 use Drupal\Tests\TestFileCreationTrait;
+use Drupal\filter\Entity\FilterFormat;
+use Drupal\filter\FilterFormatInterface;
 use Drupal\user\UserInterface;
 
 /**

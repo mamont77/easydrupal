@@ -43,7 +43,7 @@ function extlink_modules_installed($modules, $is_syncing): void {
  */
 function extlink_help($route_name, RouteMatchInterface $arg) {
   if ($route_name == 'help.page.extlink') {
-    $output = '<p>' . t('External Links is used to differentiate between internal and external links. Using jQuery, it will find all external links on a page and add an external icon indicating it will take you offsite or a mail icon for mailto links.') . '</p>';
+    $output = '<p>' . t('External Links is used to differentiate between internal and external links. It will find all external links on a page and add an external icon indicating it will take you offsite or a mail icon for mailto links.') . '</p>';
     return ['#markup' => $output];
   }
 }
@@ -128,6 +128,7 @@ function _extlink_get_settings_from_config(Config $config): array {
     'extTargetAppendNewWindowLabel' => t('(opens in a new window)'),
     'extTargetNoOverride' => ((isset($settings['extlink_target_no_override'])) ? $settings['extlink_target_no_override'] : FALSE),
     'extNofollow'         => ((isset($settings['extlink_nofollow'])) ? $settings['extlink_nofollow'] : FALSE),
+    'extTitleNoOverride'  => ((isset($settings['extlink_title_no_override'])) ? $settings['extlink_title_no_override'] : FALSE),
     'extNoreferrer'       => ((isset($settings['extlink_noreferrer'])) ? $settings['extlink_noreferrer'] : FALSE),
     'extFollowNoOverride' => ((isset($settings['extlink_follow_no_override'])) ? $settings['extlink_follow_no_override'] : FALSE),
     'extClass'            => ((isset($settings['extlink_class'])) ? $settings['extlink_class'] : 'ext'),
@@ -148,6 +149,7 @@ function _extlink_get_settings_from_config(Config $config): array {
     'telLabel'         => ((isset($settings['extlink_tel_label'])) ? Html::escape($settings['extlink_tel_label']) : t('(link is a phone number)')),
     'extUseFontAwesome'   => ((isset($settings['extlink_use_font_awesome'])) ? $settings['extlink_use_font_awesome'] : FALSE),
     'extIconPlacement'    => ((!empty($settings['extlink_icon_placement'])) ? $settings['extlink_icon_placement'] : 'append'),
+    'extPreventOrphan' => $settings['extlink_prevent_orphan'] ?? FALSE,
     'extFaLinkClasses'    => implode(' ', $fa_link_classes),
     'extFaMailtoClasses'  => implode(' ', $fa_mailto_classes),
     'extAdditionalLinkClasses'      => implode(' ', $additional_link_classes),

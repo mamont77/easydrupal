@@ -437,9 +437,9 @@ class ComposerStaticInit7bb062997fc4f0d3cdcb37d377b9bb20
         ),
         'Illuminate\\Support\\' => 
         array (
-            0 => __DIR__ . '/..' . '/illuminate/macroable',
+            0 => __DIR__ . '/..' . '/illuminate/collections',
             1 => __DIR__ . '/..' . '/illuminate/conditionable',
-            2 => __DIR__ . '/..' . '/illuminate/collections',
+            2 => __DIR__ . '/..' . '/illuminate/macroable',
         ),
         'Illuminate\\Contracts\\' => 
         array (
@@ -2944,6 +2944,7 @@ class ComposerStaticInit7bb062997fc4f0d3cdcb37d377b9bb20
         'Drupal\\Core\\Security\\StaticTrustedCallbackHelper' => __DIR__ . '/../..' . '/core/lib/Drupal/Core/Security/StaticTrustedCallbackHelper.php',
         'Drupal\\Core\\Security\\TrustedCallbackInterface' => __DIR__ . '/../..' . '/core/lib/Drupal/Core/Security/TrustedCallbackInterface.php',
         'Drupal\\Core\\Security\\UntrustedCallbackException' => __DIR__ . '/../..' . '/core/lib/Drupal/Core/Security/UntrustedCallbackException.php',
+        'Drupal\\Core\\Serialization\\Yaml' => __DIR__ . '/../..' . '/core/lib/Drupal/Core/Serialization/Yaml.php',
         'Drupal\\Core\\Session\\AccessPolicyBase' => __DIR__ . '/../..' . '/core/lib/Drupal/Core/Session/AccessPolicyBase.php',
         'Drupal\\Core\\Session\\AccessPolicyInterface' => __DIR__ . '/../..' . '/core/lib/Drupal/Core/Session/AccessPolicyInterface.php',
         'Drupal\\Core\\Session\\AccessPolicyProcessor' => __DIR__ . '/../..' . '/core/lib/Drupal/Core/Session/AccessPolicyProcessor.php',
@@ -3036,6 +3037,7 @@ class ComposerStaticInit7bb062997fc4f0d3cdcb37d377b9bb20
         'Drupal\\Core\\Template\\Loader\\FilesystemLoader' => __DIR__ . '/../..' . '/core/lib/Drupal/Core/Template/Loader/FilesystemLoader.php',
         'Drupal\\Core\\Template\\Loader\\StringLoader' => __DIR__ . '/../..' . '/core/lib/Drupal/Core/Template/Loader/StringLoader.php',
         'Drupal\\Core\\Template\\Loader\\ThemeRegistryLoader' => __DIR__ . '/../..' . '/core/lib/Drupal/Core/Template/Loader/ThemeRegistryLoader.php',
+        'Drupal\\Core\\Template\\RemoveCheckToStringNodeVisitor' => __DIR__ . '/../..' . '/core/lib/Drupal/Core/Template/RemoveCheckToStringNodeVisitor.php',
         'Drupal\\Core\\Template\\TwigEnvironment' => __DIR__ . '/../..' . '/core/lib/Drupal/Core/Template/TwigEnvironment.php',
         'Drupal\\Core\\Template\\TwigExtension' => __DIR__ . '/../..' . '/core/lib/Drupal/Core/Template/TwigExtension.php',
         'Drupal\\Core\\Template\\TwigNodeCheckDeprecations' => __DIR__ . '/../..' . '/core/lib/Drupal/Core/Template/TwigNodeCheckDeprecations.php',
@@ -3044,6 +3046,7 @@ class ComposerStaticInit7bb062997fc4f0d3cdcb37d377b9bb20
         'Drupal\\Core\\Template\\TwigNodeVisitorCheckDeprecations' => __DIR__ . '/../..' . '/core/lib/Drupal/Core/Template/TwigNodeVisitorCheckDeprecations.php',
         'Drupal\\Core\\Template\\TwigPhpStorageCache' => __DIR__ . '/../..' . '/core/lib/Drupal/Core/Template/TwigPhpStorageCache.php',
         'Drupal\\Core\\Template\\TwigSandboxPolicy' => __DIR__ . '/../..' . '/core/lib/Drupal/Core/Template/TwigSandboxPolicy.php',
+        'Drupal\\Core\\Template\\TwigSimpleCheckToStringNode' => __DIR__ . '/../..' . '/core/lib/Drupal/Core/Template/TwigSimpleCheckToStringNode.php',
         'Drupal\\Core\\Template\\TwigTransTokenParser' => __DIR__ . '/../..' . '/core/lib/Drupal/Core/Template/TwigTransTokenParser.php',
         'Drupal\\Core\\Test\\AssertMailTrait' => __DIR__ . '/../..' . '/core/lib/Drupal/Core/Test/AssertMailTrait.php',
         'Drupal\\Core\\Test\\EnvironmentCleaner' => __DIR__ . '/../..' . '/core/lib/Drupal/Core/Test/EnvironmentCleaner.php',
