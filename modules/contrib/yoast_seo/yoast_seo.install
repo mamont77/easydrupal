@@ -104,3 +104,10 @@ function yoast_seo_update_8204() : void {
   assert($kernel instanceof DrupalKernelInterface);
   $kernel->rebuildContainer();
 }
+
+/**
+ * Re-add a title and description property to the yoast_seo field.
+ */
+function yoast_seo_update_8205() : void {
+  yoast_seo_update_8202();
+}
