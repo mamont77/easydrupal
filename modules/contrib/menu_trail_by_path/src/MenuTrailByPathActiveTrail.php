@@ -15,6 +15,7 @@ use Drupal\Core\Path\PathValidatorInterface;
 use Drupal\Core\Routing\RequestContext;
 use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\system\Entity\Menu;
+use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 
 /**
  * Overrides the class for the file entity normalizer from HAL.
@@ -84,7 +85,7 @@ class MenuTrailByPathActiveTrail extends MenuActiveTrail {
    * @see https://www.drupal.org/node/2824594
    */
   protected function getCid() {
-    if (!isset($this->cid)) {
+    if (empty($this->cid)) {
       $this->cid = parent::getCid() . ":langcode:{$this->languageManager->getCurrentLanguage()->getId()}:pathinfo:{$this->context->getPathInfo()}";
     }
 
@@ -183,7 +184,7 @@ class MenuTrailByPathActiveTrail extends MenuActiveTrail {
     try {
       $current_pathinfo_url = $this->pathValidator->getUrlIfValidWithoutAccessCheck($this->context->getPathInfo());
     }
-    catch (\InvalidArgumentException $e) {
+    catch (\InvalidArgumentException|BadRequestException $e) {
       return NULL;
     }
     if ($current_pathinfo_url && $current_pathinfo_url->isRouted()) {
@@ -230,7 +231,7 @@ class MenuTrailByPathActiveTrail extends MenuActiveTrail {
       try {
         $url = $this->pathValidator->getUrlIfValidWithoutAccessCheck('/' . implode('/', $path_elements));
       }
-      catch (\InvalidArgumentException $e) {
+      catch (\InvalidArgumentException|BadRequestException $e) {
         continue;
       }
       if ($url && $url->isRouted()) {

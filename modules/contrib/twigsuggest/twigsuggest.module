@@ -26,19 +26,20 @@ function twigsuggest_theme_suggestions_block(array $variables) {
 
     if ($block = Block::load($variables['elements']['#id'])) {
       if (isset($variables['elements']['content']['#block_content'])) {
-        $suggestions[] = 'block__bundle__' . $variables['elements']['content']['#block_content']->bundle();
+        $bundle = $variables['elements']['content']['#block_content']->bundle();
+        $suggestions[] = 'block__bundle__' . $bundle;
+        $suggestions[] = 'block__bundle__' . $bundle . '__' . $block->getRegion();
       }
       $suggestions[] = 'block__' . $block->getRegion();
       $suggestions[] = 'block__' . $block->getRegion() . '__' . $variables['elements']['#id'];
       if ($block->get('settings') && $provider = $block->get('settings')['provider']) {
         // I'm pretty sure core is already providing provider as a suggestion.
         // $suggestions[] = 'block__' . $provider;.
+        $suggestions[] = 'block__' . $provider . '__' . $block->getRegion();
+
         $base_plugin = $variables['elements']['#base_plugin_id'];
         if ($base_plugin !== $provider) {
           $suggestions[] = 'block__' . $base_plugin;
-        }
-        $suggestions[] = 'block__' . $provider . '__' . $block->getRegion();
-        if ($variables['elements']['#base_plugin_id'] != $provider) {
           $suggestions[] = 'block__' . $base_plugin . '__' . $block->getRegion();
         }
         if (isset($variables['elements']['content']['#menu_name'])) {

@@ -74,7 +74,7 @@ class FencesFunctionalTest extends BrowserTestBase {
     $page->checkField('edit-uninstall-fences');
     $page->pressButton('edit-submit');
     $session->statusCodeEquals(200);
-    // Confirm deinstall:
+    // Confirm uninstall:
     $page->pressButton('edit-submit');
     $session->statusCodeEquals(200);
     $session->pageTextContains('The selected modules have been uninstalled.');

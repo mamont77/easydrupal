@@ -3,7 +3,7 @@
 namespace Drupal\imageapi_optimize_webp\Entity;
 
 use Drupal\imageapi_optimize\Entity\ImageAPIOptimizePipeline;
-use Drupal\Core\File\FileSystemInterface;
+use Drupal\Core\File\FileExists;
 
 /**
  * Wrap ImageAPIOptimizePipeline to copy webp derivative to proper directory.
@@ -34,7 +34,7 @@ class ImageAPIOptimizeWebPPipeline extends ImageAPIOptimizePipeline {
       foreach ($this->temporaryFiles as $temp_image_uri) {
         $temp_webp_uri = $temp_image_uri . '.webp';
         if (file_exists($temp_webp_uri)) {
-          $temp_image_uri = \Drupal::service('file_system')->copy($temp_webp_uri, $webp_uri, FileSystemInterface::EXISTS_RENAME);
+          $temp_image_uri = \Drupal::service('file_system')->copy($temp_webp_uri, $webp_uri, FileExists::Rename);
           if ($temp_image_uri) {
             $this->temporaryFiles[] = $temp_webp_uri;
             break;

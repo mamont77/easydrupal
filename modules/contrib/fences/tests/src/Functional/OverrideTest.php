@@ -78,7 +78,7 @@ class OverrideTest extends BrowserTestBase {
    * @param string $theme
    *   The machine name of the theme to test.
    * @param bool $render_without_override
-   *   Whether or not Fences markup should render without the override envoked.
+   *   Whether or not Fences markup should render without the override evoked.
    *
    * @dataProvider providerScenarios
    */
@@ -102,7 +102,7 @@ class OverrideTest extends BrowserTestBase {
   }
 
   /**
-   * Provides scenerios.
+   * Provides scenarios.
    */
   public static function providerScenarios() {
     return [

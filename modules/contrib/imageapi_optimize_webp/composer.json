@@ -9,5 +9,7 @@
     "issues": "https://www.drupal.org/project/issues/imageapi_optimize_webp",
     "source": "http://cgit.drupalcode.org/imageapi_optimize_webp"
   },
-  "require": {}
+  "require": {
+    "drupal/core": "^10.3 || ^11"
+  }
 }

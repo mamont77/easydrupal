@@ -9,6 +9,7 @@ use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\Core\Field\FormatterInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Template\Attribute;
+use Drupal\fences\FencesConstants;
 use Drupal\fences\TagManagerInterface;
 
 /**
@@ -48,6 +49,8 @@ function fences_field_formatter_third_party_settings_form(FormatterInterface $pl
     ];
   };
 
+  $defaultSettings = FencesConstants::DEFAULT_THIRD_PARTY_SETTINGS;
+
   $tag_options = \Drupal::service('fences.tag_manager')->getTagOptions();
   $settings['fences'] = [
     '#type' => 'details',
@@ -58,13 +61,13 @@ function fences_field_formatter_third_party_settings_form(FormatterInterface $pl
     '#title' => t('Field Tag'),
     '#type' => 'select',
     '#options' => $tag_options,
-    '#default_value' => $plugin->getThirdPartySetting('fences', 'fences_field_tag', 'div'),
+    '#default_value' => $plugin->getThirdPartySetting('fences', 'fences_field_tag', $defaultSettings['fences_field_tag']),
     '#attributes' => ['class' => ['fences-field-tag']],
   ];
   $settings['fences']['fences_field_classes'] = [
     '#title' => t('Field Classes'),
     '#type' => 'textfield',
-    '#default_value' => $plugin->getThirdPartySetting('fences', 'fences_field_classes'),
+    '#default_value' => $plugin->getThirdPartySetting('fences', 'fences_field_classes', $defaultSettings['fences_field_classes']),
     '#states' => $invisible_on_none('fences_field_tag'),
     // Remove default maxlength of 128:
     '#maxlength' => NULL,
@@ -75,13 +78,13 @@ function fences_field_formatter_third_party_settings_form(FormatterInterface $pl
     '#title' => t('Field Items Wrapper Tag'),
     '#type' => 'select',
     '#options' => $tag_options,
-    '#default_value' => $plugin->getThirdPartySetting('fences', 'fences_field_items_wrapper_tag', TagManagerInterface::NO_MARKUP_VALUE),
+    '#default_value' => $plugin->getThirdPartySetting('fences', 'fences_field_items_wrapper_tag', $defaultSettings['fences_field_items_wrapper_tag']),
     '#attributes' => ['class' => ['fences-field-items-wrapper-tag']],
   ];
   $settings['fences']['fences_field_items_wrapper_classes'] = [
     '#title' => t('Field Items Wrapper Classes'),
     '#type' => 'textfield',
-    '#default_value' => $plugin->getThirdPartySetting('fences', 'fences_field_items_wrapper_classes'),
+    '#default_value' => $plugin->getThirdPartySetting('fences', 'fences_field_items_wrapper_classes', $defaultSettings['fences_field_items_wrapper_classes']),
     '#states' => $invisible_on_none('fences_field_items_wrapper_tag'),
     // Remove default maxlength of 128:
     '#maxlength' => NULL,
@@ -92,13 +95,13 @@ function fences_field_formatter_third_party_settings_form(FormatterInterface $pl
     '#title' => t('Field Item Tag'),
     '#type' => 'select',
     '#options' => $tag_options,
-    '#default_value' => $plugin->getThirdPartySetting('fences', 'fences_field_item_tag', 'div'),
+    '#default_value' => $plugin->getThirdPartySetting('fences', 'fences_field_item_tag', $defaultSettings['fences_field_item_tag']),
     '#attributes' => ['class' => ['fences-field-item-tag']],
   ];
   $settings['fences']['fences_field_item_classes'] = [
     '#title' => t('Field Item Classes'),
     '#type' => 'textfield',
-    '#default_value' => $plugin->getThirdPartySetting('fences', 'fences_field_item_classes'),
+    '#default_value' => $plugin->getThirdPartySetting('fences', 'fences_field_item_classes', $defaultSettings['fences_field_item_classes']),
     '#states' => $invisible_on_none('fences_field_item_tag'),
     // Remove default maxlength of 128:
     '#maxlength' => NULL,
@@ -109,13 +112,13 @@ function fences_field_formatter_third_party_settings_form(FormatterInterface $pl
     '#title' => t('Label Tag'),
     '#type' => 'select',
     '#options' => $tag_options,
-    '#default_value' => $plugin->getThirdPartySetting('fences', 'fences_label_tag', 'div'),
+    '#default_value' => $plugin->getThirdPartySetting('fences', 'fences_label_tag', $defaultSettings['fences_label_tag']),
     '#attributes' => ['class' => ['fences-label-tag']],
   ];
   $settings['fences']['fences_label_classes'] = [
     '#title' => t('Label Classes'),
     '#type' => 'textfield',
-    '#default_value' => $plugin->getThirdPartySetting('fences', 'fences_label_classes'),
+    '#default_value' => $plugin->getThirdPartySetting('fences', 'fences_label_classes', $defaultSettings['fences_label_classes']),
     '#states' => $invisible_on_none('fences_label_tag'),
     // Remove default maxlength of 128:
     '#maxlength' => NULL,
@@ -167,12 +170,6 @@ function fences_preprocess_field(&$vars) {
         $vars['title_attributes']['class'][] = $class;
       }
     }
-    if (!empty($fences_config['fences_field_classes'])) {
-      $vars['attributes']['class'][] = $fences_config['fences_field_classes'];
-    }
-    if (!empty($fences_config['fences_label_classes'])) {
-      $vars['title_attributes']['class'][] = $fences_config['fences_label_classes'];
-    }
     if (!empty($fences_config['fences_field_item_classes'])) {
       $fences_field_item_classes = explode(' ', $fences_config['fences_field_item_classes']);
       foreach ($vars['items'] as $field_item) {
@@ -184,7 +181,36 @@ function fences_preprocess_field(&$vars) {
     }
     $vars['field_items_wrapper_attributes'] = new Attribute();
     if (!empty($fences_config['fences_field_items_wrapper_classes'])) {
-      $vars['field_items_wrapper_attributes']->addClass($fences_config['fences_field_items_wrapper_classes']);
+      $fences_field_items_wrapper_classes = explode(' ', $fences_config['fences_field_items_wrapper_classes']);
+      foreach ($fences_field_items_wrapper_classes as $class) {
+        // Add classes from setting:
+        $vars['field_items_wrapper_attributes']->addClass($class);
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_field_formatter_settings_summary_alter().
+ */
+function fences_field_formatter_settings_summary_alter(array &$summary, array $context) {
+  $fencesSettings = $context['formatter']->getThirdPartySettings('fences');
+  if (count($fencesSettings) > 0) {
+    $defaultSettings = FencesConstants::DEFAULT_THIRD_PARTY_SETTINGS;
+    $summaryItems = [
+      'fences_field_tag' => t('Field tag: %field_tag', ['%field_tag' => $fencesSettings['fences_field_tag']]),
+      'fences_field_classes' => t('Field classes: %field_classes', ['%field_classes' => $fencesSettings['fences_field_classes']]),
+      'fences_field_items_wrapper_tag' => t('Field items wrapper tag: %field_items_wrapper_tag', ['%field_items_wrapper_tag' => $fencesSettings['fences_field_items_wrapper_tag']]),
+      'fences_field_items_wrapper_classes' => t('Field items wrapper classes: %field_items_wrapper_classes', ['%field_items_wrapper_classes' => $fencesSettings['fences_field_items_wrapper_classes']]),
+      'fences_field_item_tag' => t('Field item tag: %field_item_tag', ['%field_item_tag' => $fencesSettings['fences_field_item_tag']]),
+      'fences_field_item_classes' => t('Field item classes: %field_item_classes', ['%field_item_classes' => $fencesSettings['fences_field_item_classes']]),
+      'fences_label_tag' => t('Label tag: %label_tag', ['%label_tag' => $fencesSettings['fences_label_tag']]),
+      'fences_label_classes' => t('Label classes: %label_classes', ['%label_classes' => $fencesSettings['fences_label_classes']]),
+    ];
+    foreach ($fencesSettings as $setting => $value) {
+      if ($value != $defaultSettings[$setting]) {
+        $summary[] = $summaryItems[$setting];
+      }
     }
   }
 }

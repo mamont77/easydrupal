@@ -90,7 +90,7 @@ class FencesConfigFormTest extends BrowserTestBase {
 
     $this->assertTrue(\Drupal::config('fences.settings')->get('fences_field_template_override_all_themes'));
 
-    // Test disablin the setting.
+    // Test disabling the setting.
     $this->drupalGet('/admin/config/user-interface/fences/settings');
     $page->uncheckField('fences_field_template_override_all_themes');
     $page->pressButton('edit-submit');

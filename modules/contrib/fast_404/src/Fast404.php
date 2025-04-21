@@ -112,7 +112,7 @@ class Fast404 {
     // Check if the URL is for an assets file because Drupal 10.1 changes how
     // assets are handled. In 10.1, asset files are generated if they result in
     // a 404, so we should not block these requests.
-    // lasdjkf
+    // lasdjkf.
     if (version_compare(\Drupal::VERSION, '10.1', '>=')) {
       $assets_path = AssetsStream::basePath();
       if (strstr($path, $assets_path . '/css') !== FALSE || strstr($path, $assets_path . '/js') !== FALSE) {

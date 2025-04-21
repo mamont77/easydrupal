@@ -54,7 +54,6 @@ to your custom forms.
       '#required' => TRUE,
       '#multiple' => TRUE,
       '#empty_option' => 'Country',
-      '#empty_value' => 'none',
       '#default_value' => ['BE', 'NL', 'LU']
     ];
 

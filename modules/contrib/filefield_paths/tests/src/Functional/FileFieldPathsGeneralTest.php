@@ -4,6 +4,7 @@ namespace Drupal\Tests\filefield_paths\Functional;
 
 use Drupal\Core\Field\FieldStorageDefinitionInterface;
 use Drupal\node\Entity\Node;
+use Drupal\node\NodeInterface;
 
 /**
  * Test general functionality.
@@ -29,7 +30,7 @@ class FileFieldPathsGeneralTest extends FileFieldPathsTestBase {
 
     // Ensure that 'Enable File (Field) Paths?' is a direct sibling of
     // 'File (Field) Path settings'.
-    /* @var \Behat\Mink\Element\NodeElement[] $element */
+    /** @var \Behat\Mink\Element\NodeElement[] $element */
     $element = $this->xpath('//div[contains(@class, :class)]/following-sibling::*[1][@id=\'edit-third-party-settings-filefield-paths--2\']', [':class' => 'form-item-third-party-settings-filefield-paths-enabled']);
     $this->assertNotEmpty($element, 'Enable checkbox is next to settings fieldset.');
 
@@ -48,7 +49,7 @@ class FileFieldPathsGeneralTest extends FileFieldPathsTestBase {
     $field_name = mb_strtolower($this->randomMachineName());
     $third_party_settings['filefield_paths']['file_path']['value'] = 'node/[node:nid]';
     $third_party_settings['filefield_paths']['file_name']['value'] = '[node:nid].[file:ffp-extension-original]';
-    $this->createFileField($field_name, 'node', $this->contentType, [], [], $third_party_settings);
+    $this->createFileField($field_name, 'node', $this->contentType, [], [], [], $third_party_settings);
 
     // Create a node without a file attached.
     $this->drupalGet('node/add/' . $this->contentType);
@@ -70,7 +71,7 @@ class FileFieldPathsGeneralTest extends FileFieldPathsTestBase {
     $field_name = mb_strtolower($this->randomMachineName());
     $third_party_settings['filefield_paths']['file_path']['value'] = 'node/[node:nid]';
     $third_party_settings['filefield_paths']['file_name']['value'] = '[node:nid].[file:ffp-extension-original]';
-    $this->createFileField($field_name, 'node', $this->contentType, [], [], $third_party_settings);
+    $this->createFileField($field_name, 'node', $this->contentType, [], [], [], $third_party_settings);
 
     // Create a node with a test file.
     /** @var \Drupal\file\Entity\File $test_file */
@@ -108,7 +109,7 @@ class FileFieldPathsGeneralTest extends FileFieldPathsTestBase {
     $storage_settings['cardinality'] = FieldStorageDefinitionInterface::CARDINALITY_UNLIMITED;
     $third_party_settings['filefield_paths']['file_path']['value'] = 'node/[node:nid]';
     $third_party_settings['filefield_paths']['file_name']['value'] = '[file:fid].txt';
-    $this->createFileField($field_name, 'node', $this->contentType, $storage_settings, [], $third_party_settings);
+    $this->createFileField($field_name, 'node', $this->contentType, $storage_settings, [], [], $third_party_settings);
 
     // Create a node with three (3) test files.
     $text_files = $this->drupalGetTestFiles('text');
@@ -140,7 +141,7 @@ class FileFieldPathsGeneralTest extends FileFieldPathsTestBase {
     // Create a File field with 'node/[random:hash:sha256]' as the File path.
     $field_name = mb_strtolower($this->randomMachineName());
     $third_party_settings['filefield_paths']['file_path']['value'] = 'node/[random:hash:sha512]/[random:hash:sha512]';
-    $this->createFileField($field_name, 'node', $this->contentType, [], [], $third_party_settings);
+    $this->createFileField($field_name, 'node', $this->contentType, [], [], [], $third_party_settings);
 
     // Create a node with a test file.
     /** @var \Drupal\file\Entity\File $test_file */
@@ -148,8 +149,8 @@ class FileFieldPathsGeneralTest extends FileFieldPathsTestBase {
     $nid = $this->uploadNodeFile($test_file, $field_name, $this->contentType);
 
     // Ensure file path is no more than 255 characters.
-    $node = Node::load($nid);
-    $this->assertLessThanOrEqual(255, mb_strlen($node->{$field_name}->uri), 'File path is no more than 255 characters');
+    $node = $this->reloadNode($nid);
+    $this->assertLessThanOrEqual(255, mb_strlen($node->{$field_name}[0]->entity->getFileUri()), 'File path is no more than 255 characters');
   }
 
   /**
@@ -161,7 +162,7 @@ class FileFieldPathsGeneralTest extends FileFieldPathsTestBase {
     $field_name = mb_strtolower($this->randomMachineName());
     $third_party_settings['filefield_paths']['file_path']['value'] = 'node/[node:nid]';
     $third_party_settings['filefield_paths']['file_name']['value'] = '[node:nid].[file:ffp-extension-original]';
-    $this->createFileField($field_name, 'node', $this->contentType, [], [], $third_party_settings);
+    $this->createFileField($field_name, 'node', $this->contentType, [], [], [], $third_party_settings);
 
     // Create a node without an attached file.
     /** @var \Drupal\node\Entity\Node $node */
@@ -180,7 +181,7 @@ class FileFieldPathsGeneralTest extends FileFieldPathsTestBase {
     $node->save();
 
     // Ensure that the File path has been processed correctly.
-    $node = Node::load($node->id());
+    $node = $this->reloadNode($node->id());
     $this->assertSame("public://node/{$node->id()}/{$node->id()}.txt", $node->{$field_name}[0]->entity->getFileUri(), 'The File path has been processed correctly.');
   }
 
@@ -196,7 +197,7 @@ class FileFieldPathsGeneralTest extends FileFieldPathsTestBase {
     $field_name = mb_strtolower($this->randomMachineName());
     $third_party_settings['filefield_paths']['file_path']['value'] = 'node/[node:title]';
     $third_party_settings['filefield_paths']['file_name']['value'] = '[node:title].[file:ffp-extension-original]';
-    $this->createFileField($field_name, 'node', $this->contentType, [], [], $third_party_settings);
+    $this->createFileField($field_name, 'node', $this->contentType, [], [], [], $third_party_settings);
 
     // Create a node with a test file.
     /** @var \Drupal\file\Entity\File $test_file */
@@ -250,7 +251,7 @@ class FileFieldPathsGeneralTest extends FileFieldPathsTestBase {
     // Create a File field with 'node/[node:nid]' as the File path.
     $field_name = mb_strtolower($this->randomMachineName());
     $third_party_settings['filefield_paths']['file_path']['value'] = 'node/[node:nid]';
-    $this->createFileField($field_name, 'node', $this->contentType, [], [], $third_party_settings);
+    $this->createFileField($field_name, 'node', $this->contentType, [], [], [], $third_party_settings);
 
     // Create a node with a test file.
     /** @var \Drupal\file\Entity\File $test_file */
@@ -290,6 +291,7 @@ class FileFieldPathsGeneralTest extends FileFieldPathsTestBase {
    * Test File (Field) Paths works with read-only stream wrappers.
    */
   public function testReadOnly() {
+    $this->markTestIncomplete('A readonly stream wrapper is no longer a valid choice as upload destination. See \Drupal\file\Plugin\Field\FieldType\FileItem::storageSettingsForm().');
     // Create a File field.
     $field_name = mb_strtolower($this->randomMachineName());
     $field_settings = ['uri_scheme' => 'ffp-dummy-readonly'];
@@ -324,6 +326,23 @@ class FileFieldPathsGeneralTest extends FileFieldPathsTestBase {
     // Read-only file not affected by Retroactive updates.
     $this->assertSession()
       ->responseContains("{$this->publicFilesDirectory}/{$file->getFilename()}");
+  }
+
+  /**
+   * Loads the node from the database.
+   *
+   * On the node storage, caches are cleared to ensure the data is loaded from
+   * the database instead of from memory.
+   *
+   * @param int $nid
+   *   The ID from the node to load.
+   *
+   * @return \Drupal\node\NodeInterface
+   *   The loaded node.
+   */
+  protected function reloadNode(int $nid): NodeInterface {
+    $this->container->get('entity_type.manager')->getStorage('node')->resetCache();
+    return Node::load($nid);
   }
 
 }

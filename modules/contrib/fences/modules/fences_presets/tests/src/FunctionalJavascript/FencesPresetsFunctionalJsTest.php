@@ -58,7 +58,7 @@ class FencesPresetsFunctionalJsTest extends WebDriverTestBase {
     $presetSelect->selectOption('None');
     // There seems to be no way to wait for a finished "change" event, so we
     // simply wait the default 10000 milliseconds.
-    $session->waitForElementVisible('css', '#doesn-t-exist');
+    $session->waitForElementVisible('css', '#does-not-exist');
 
     // See if all values are set properly:
     $fieldTagSelect = $session->elementExists('css', 'select[id*="edit-fields-body-settings-edit-form-third-party-settings-fences-fences-field-tag"]');
@@ -97,7 +97,7 @@ class FencesPresetsFunctionalJsTest extends WebDriverTestBase {
     $presetSelect->selectOption('Test preset');
     // There seems to be no way to wait for a finished "change" event, so we
     // simply wait the default 10000 milliseconds.
-    $session->waitForElementVisible('css', '#doesn-t-exist');
+    $session->waitForElementVisible('css', '#does-not-exist');
 
     // See if the correct values are set:
     $fieldTagSelect = $session->elementExists('css', 'select[id*="edit-fields-body-settings-edit-form-third-party-settings-fences-fences-field-tag"]');

@@ -5,6 +5,7 @@
  * Defines simple country field type.
  */
 
+use Drupal\Core\Field\FieldTypeCategoryManagerInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Url;
@@ -71,4 +72,11 @@ function country_module_implements_alter(&$implementations, $hook) {
     unset($implementations['country']);
     $implementations['country'] = $group;
   }
+}
+
+/**
+ * Implements hook_field_type_category_info_alter().
+ */
+function country_field_type_category_info_alter(&$definitions) {
+  $definitions[FieldTypeCategoryManagerInterface::FALLBACK_CATEGORY]['libraries'][] = 'country/country.country-icon';
 }

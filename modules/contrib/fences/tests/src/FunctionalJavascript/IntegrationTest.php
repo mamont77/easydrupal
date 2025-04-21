@@ -174,13 +174,13 @@ class IntegrationTest extends WebDriverTestBase {
         'third_party_settings' => [
           'fences' => [
             'fences_field_tag' => 'article',
-            'fences_field_classes' => 'GBoSTDAZRWAxMHTSwzymJhCAvtUdiKaZYAdSreQdlDIhHjaItLGfzREtNUxcGsUnXqONSUrHaLpwXbdOshbZWhojazHApQYSFCDhPPKPAjJAxxEgIXdEFSejCdIwrWwMym',
+            'fences_field_classes' => 'abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz',
             'fences_field_items_wrapper_tag' => 'div',
-            'fences_field_items_wrapper_classes' => 'GBoSTDAZRWAxMHTSwzymJhCAvtUdiKaZYAdSreQdlDIhHjaItLGfzREtNUxcGsUnXqONSUrHaLpwXbdOshbZWhojazHApQYSFCDhPPKPAjJAxxEgIXdEFSejCdIwrWwMym',
+            'fences_field_items_wrapper_classes' => 'abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz',
             'fences_field_item_tag' => 'code',
-            'fences_field_item_classes' => 'GBoSTDAZRWAxMHTSwzymJhCAvtUdiKaZYAdSreQdlDIhHjaItLGfzREtNUxcGsUnXqONSUrHaLpwXbdOshbZWhojazHApQYSFCDhPPKPAjJAxxEgIXdEFSejCdIwrWwMym',
+            'fences_field_item_classes' => 'abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz',
             'fences_label_tag' => 'h2',
-            'fences_label_classes' => 'GBoSTDAZRWAxMHTSwzymJhCAvtUdiKaZYAdSreQdlDIhHjaItLGfzREtNUxcGsUnXqONSUrHaLpwXbdOshbZWhojazHApQYSFCDhPPKPAjJAxxEgIXdEFSejCdIwrWwMym',
+            'fences_label_classes' => 'abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz',
           ],
         ],
       ])
@@ -188,10 +188,10 @@ class IntegrationTest extends WebDriverTestBase {
 
     $this->drupalGet('/node/' . $this->node->id());
     $article = $session->elementExists('css', '.field--name-body');
-    $this->assertTrue($article->hasClass('GBoSTDAZRWAxMHTSwzymJhCAvtUdiKaZYAdSreQdlDIhHjaItLGfzREtNUxcGsUnXqONSUrHaLpwXbdOshbZWhojazHApQYSFCDhPPKPAjJAxxEgIXdEFSejCdIwrWwMym'), 'Custom field class is present.');
-    $label = $session->elementExists('css', 'h2.GBoSTDAZRWAxMHTSwzymJhCAvtUdiKaZYAdSreQdlDIhHjaItLGfzREtNUxcGsUnXqONSUrHaLpwXbdOshbZWhojazHApQYSFCDhPPKPAjJAxxEgIXdEFSejCdIwrWwMym', $article);
+    $this->assertTrue($article->hasClass('abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz'), 'Custom field class is present.');
+    $label = $session->elementExists('css', 'h2.abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz', $article);
     $this->assertSame($label->getText(), 'Body', 'Field label is found in expected HTML element.');
-    $body = $session->elementExists('css', 'div.GBoSTDAZRWAxMHTSwzymJhCAvtUdiKaZYAdSreQdlDIhHjaItLGfzREtNUxcGsUnXqONSUrHaLpwXbdOshbZWhojazHApQYSFCDhPPKPAjJAxxEgIXdEFSejCdIwrWwMym > code.GBoSTDAZRWAxMHTSwzymJhCAvtUdiKaZYAdSreQdlDIhHjaItLGfzREtNUxcGsUnXqONSUrHaLpwXbdOshbZWhojazHApQYSFCDhPPKPAjJAxxEgIXdEFSejCdIwrWwMym > p', $article);
+    $body = $session->elementExists('css', 'div.abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz > code.abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz > p', $article);
     $this->assertSame($body->getText(), 'Body field value.', 'Field text is found in expected HTML element.');
   }
 

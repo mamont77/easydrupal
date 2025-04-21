@@ -39,14 +39,14 @@ class FieldOutputTestOliveroTheme extends FieldOutputTestBase {
    * {@inheritdoc}
    */
   public static function noFieldMarkupWithLabelExpectedSingle() {
-    return 'Field Testlorem ipsum';
+    return 'Field Test lorem ipsum';
   }
 
   /**
    * {@inheritdoc}
    */
   public static function onlyFieldTagWithLabelExpectedSingle() {
-    return '<article class="text-content clearfix field field--name-field-test field--type-text field--label-above field__items">Field Testlorem ipsum</article>';
+    return '<article class="text-content clearfix field field--name-field-test field--type-text field--label-above field__items">Field Test lorem ipsum</article>';
   }
 
   /**

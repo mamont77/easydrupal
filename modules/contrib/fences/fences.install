@@ -91,12 +91,12 @@ function fences_update_8301(&$sandbox) {
       $components = $view_display->getComponents();
       foreach ($components as $componentName => $component) {
         if (!empty($component['third_party_settings']['fences'])) {
-          // Explicitely set fences_field_items_wrapper_tag to 'none' if not
+          // Explicitly set fences_field_items_wrapper_tag to 'none' if not
           // existing yet.
           if (!isset($component['third_party_settings']['fences']['fences_field_items_wrapper_tag'])) {
             $component['third_party_settings']['fences']['fences_field_items_wrapper_tag'] = TagManagerInterface::NO_MARKUP_VALUE;
           }
-          // Explicitely set fences_field_items_wrapper_classes to 'none' if not
+          // Explicitly set fences_field_items_wrapper_classes to 'none' if not
           // existing yet.
           if (!isset($component['third_party_settings']['fences']['fences_field_items_wrapper_classes'])) {
             $component['third_party_settings']['fences']['fences_field_items_wrapper_classes'] = TagManagerInterface::NO_MARKUP_VALUE;

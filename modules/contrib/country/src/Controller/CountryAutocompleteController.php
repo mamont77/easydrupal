@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * Returns autocomplete responses for countries.
  */
-final class CountryAutocompleteController implements ContainerInjectionInterface {
+class CountryAutocompleteController implements ContainerInjectionInterface {
 
   /**
    * The country field manager.

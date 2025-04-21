@@ -156,7 +156,7 @@ class CountryItem extends FieldItemBase implements OptionsProviderInterface {
   /**
    * {@inheritdoc}
    */
-  public function getPossibleOptions(AccountInterface $account = NULL) {
+  public function getPossibleOptions(?AccountInterface $account = NULL) {
     $select_options = \Drupal::service('country.field.manager')->getList();
     return $select_options;
   }
@@ -164,7 +164,7 @@ class CountryItem extends FieldItemBase implements OptionsProviderInterface {
   /**
    * {@inheritdoc}
    */
-  public function getPossibleValues(AccountInterface $account = NULL) {
+  public function getPossibleValues(?AccountInterface $account = NULL) {
     $options = $this->getPossibleOptions($account);
     return array_keys($options);
   }
@@ -172,7 +172,7 @@ class CountryItem extends FieldItemBase implements OptionsProviderInterface {
   /**
    * {@inheritdoc}
    */
-  public function getSettableOptions(AccountInterface $account = NULL) {
+  public function getSettableOptions(?AccountInterface $account = NULL) {
     $settings = $this->getFieldDefinition()
       ->getFieldStorageDefinition()
       ->getSettings();
@@ -194,7 +194,7 @@ class CountryItem extends FieldItemBase implements OptionsProviderInterface {
   /**
    * {@inheritdoc}
    */
-  public function getSettableValues(AccountInterface $account = NULL) {
+  public function getSettableValues(?AccountInterface $account = NULL) {
     $options = $this->getSettableOptions($account);
     return array_keys($options);
   }

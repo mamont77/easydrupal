@@ -64,7 +64,7 @@ function updateFencesPresetData(presetSelect, detailsWrapper, drupalSettings) {
 (function (Drupal, drupalSettings, once) {
   Drupal.behaviors.fences_presets = {
     attach(context, settings) {
-      once('fenses-presets', '.fences-details-wrapper', context).forEach(
+      once('fences-presets', '.fences-details-wrapper', context).forEach(
         (detailsWrapper) => {
           // Assign first and only collection entry to the presetSelect:
           const [presetSelect] = detailsWrapper.getElementsByClassName(

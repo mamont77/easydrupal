@@ -3,6 +3,7 @@
 namespace Drupal\filefield_paths\Form;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Config\TypedConfigManagerInterface;
 use Drupal\Core\File\FileSystem;
 use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\Form\ConfigFormBase;
@@ -26,7 +27,7 @@ class SettingsForm extends ConfigFormBase {
   protected $streamWrapperManager;
 
   /**
-   * Fi;esystem service.
+   * Filesystem service.
    *
    * @var \Drupal\Core\File\FileSystemInterface
    */
@@ -35,8 +36,8 @@ class SettingsForm extends ConfigFormBase {
   /**
    * {@inheritdoc}
    */
-  public function __construct(ConfigFactoryInterface $config_factory, StreamWrapperManagerInterface $stream_wrapper_manager, FileSystemInterface $file_system) {
-    parent::__construct($config_factory);
+  public function __construct(ConfigFactoryInterface $config_factory, StreamWrapperManagerInterface $stream_wrapper_manager, FileSystemInterface $file_system, TypedConfigManagerInterface $typed_config_manager) {
+    parent::__construct($config_factory, $typed_config_manager);
     $this->streamWrapperManager = $stream_wrapper_manager;
     $this->fileSystem = $file_system;
   }
@@ -48,7 +49,8 @@ class SettingsForm extends ConfigFormBase {
     return new static(
       $container->get('config.factory'),
       $container->get('stream_wrapper_manager'),
-      $container->get('file_system')
+      $container->get('file_system'),
+      $container->get('config.typed')
     );
   }
 
@@ -71,7 +73,7 @@ class SettingsForm extends ConfigFormBase {
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state, Request $request = NULL) {
+  public function buildForm(array $form, FormStateInterface $form_state, ?Request $request = NULL) {
     $form['temp_location'] = [
       '#title' => $this->t('Temporary file location'),
       '#type' => 'textfield',
