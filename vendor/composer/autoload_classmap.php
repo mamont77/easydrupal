@@ -10,6 +10,8 @@ return array(
     'Asm89\\Stack\\Cors' => $vendorDir . '/asm89/stack-cors/src/Cors.php',
     'Asm89\\Stack\\CorsService' => $vendorDir . '/asm89/stack-cors/src/CorsService.php',
     'CURLStringFile' => $vendorDir . '/symfony/polyfill-php81/Resources/stubs/CURLStringFile.php',
+    'ComposerDrupalLenient\\PackageRequiresAdjuster' => $vendorDir . '/mglaman/composer-drupal-lenient/src/PackageRequiresAdjuster.php',
+    'ComposerDrupalLenient\\Plugin' => $vendorDir . '/mglaman/composer-drupal-lenient/src/Plugin.php',
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
     'Composer\\Installers\\AglInstaller' => $vendorDir . '/composer/installers/src/Composer/Installers/AglInstaller.php',
     'Composer\\Installers\\AkauntingInstaller' => $vendorDir . '/composer/installers/src/Composer/Installers/AkauntingInstaller.php',

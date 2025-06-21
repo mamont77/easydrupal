@@ -88,6 +88,7 @@
         "drush/drush": "^13.3",
         "geshi/geshi": "v1.0.9.1",
         "grasmash/drupal-security-warning": "1.x-dev",
+        "mglaman/composer-drupal-lenient": "^1.0",
         "oomphinc/composer-installers-extender": "^2.0",
         "topfloor/composer-cleanup-vcs-dirs": "^1.1"
     },
@@ -111,7 +112,8 @@
             "grasmash/drupal-security-warning": true,
             "oomphinc/composer-installers-extender": true,
             "topfloor/composer-cleanup-vcs-dirs": true,
-            "dealerdirect/phpcodesniffer-composer-installer": true
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "mglaman/composer-drupal-lenient": true
         }
     },
     "extra": {
@@ -199,6 +201,13 @@
             "drupal/advagg": {
                 "3375725: Deprecated function: Creation of dynamic property": "https://www.drupal.org/files/issues/2024-01-16/deprecated-function-creation-of-dynamic-property-3375725-17.patch"
             }
+        },
+        "drupal-lenient": {
+            "allowed-list": [
+                "drupal/advagg",
+                "drupal/devel_entity_updates",
+                "drupal/config_partial_export"
+            ]
         }
     },
     "scripts": {
