@@ -5,7 +5,7 @@ CONTENTS OF THIS FILE
  * Installation
  * Configuration
  * How to use
- * Full synchronisation
+ * Full synchronization
  * Maintainers
 
 
@@ -32,7 +32,7 @@ INSTALLATION
 ------------
 Before you install the module it's advised to do a full synch of your
 configuration otherwise all your config files will be listed by this module.
-For more details see Full synchronisation part of this document.
+For more details see Full synchronization part of this document.
 
  * Install as you would normally install a contributed Drupal module. See:
    https://www.drupal.org/docs/8/extending-drupal-8/installing-drupal-8-modules
@@ -56,7 +56,7 @@ After export you can copy the files from the tarball to your config/install
 folder to apply those changes on next install.
 
 
-FULL SYNCHRONISATION
+FULL SYNCHRONIZATION
 --------------------
 Steps to do a full synch:
  * Do a full export then an import. Your config files will be copied then to the
@@ -77,6 +77,6 @@ Current maintainer:
 This project has been sponsored by:
  * Cheppers Ltd.
    A team of experienced web developers working with the Drupal content
-   management system. Expertised in Drupal consulting, development, professional
-   website design, search engine optimization (SEO), e-commerce and data
-   migration. Visit https://cheppers.com/ for more information.
+   management system. With expertise in Drupal consulting, development,
+   professional website design, search engine optimization (SEO), e-commerce,
+   and data migration. Visit https://cheppers.com/ for more information.

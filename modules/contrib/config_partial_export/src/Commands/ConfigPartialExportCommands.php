@@ -2,8 +2,8 @@
 
 namespace Drupal\config_partial_export\Commands;
 
-use Drupal\Core\Config\FileStorage;
 use Drupal\Core\Config\ConfigManagerInterface;
+use Drupal\Core\Config\FileStorage;
 use Drupal\Core\Config\StorageComparer;
 use Drupal\Core\Config\StorageException;
 use Drupal\Core\Config\StorageInterface;
@@ -37,17 +37,19 @@ class ConfigPartialExportCommands extends DrushCommands {
   protected StorageInterface $configStorageSync;
 
   /**
-   * @param ConfigManagerInterface $configManager
+   * Constructing a ConfigPartialExportCommands object.
+   *
+   * @param \Drupal\Core\Config\ConfigManagerInterface $configManager
    *   Drupal config manager.
-   * @param StorageInterface $configStorage
+   * @param \Drupal\Core\Config\StorageInterface $configStorage
    *   Config storage.
-   * @param StorageInterface $configStorageSync
+   * @param \Drupal\Core\Config\StorageInterface $configStorageSync
    *   File storage.
    */
   public function __construct(
     ConfigManagerInterface $configManager,
     StorageInterface $configStorage,
-    StorageInterface $configStorageSync
+    StorageInterface $configStorageSync,
   ) {
     parent::__construct();
     $this->configManager = $configManager;
@@ -58,11 +60,11 @@ class ConfigPartialExportCommands extends DrushCommands {
   /**
    * Command description here.
    *
-   * @param $config
+   * @param string $config
    *   Configuration keys, comma separated.
-   *
    * @param array $options
-   *   An associative array of options whose values come from cli, aliases, config, etc.
+   *   Associative array of options with values from cli, aliases, config, etc.
+   *
    * @option changelist
    *   Shows the list of changed active config.
    *
@@ -74,7 +76,10 @@ class ConfigPartialExportCommands extends DrushCommands {
    * @command config-partial-export
    * @aliases cpex
    */
-  public function configPartialExport(string $config = '', array $options = ['changelist' => '', 'show-destinations' => ['description']]) {
+  public function configPartialExport(
+    string $config = '',
+    array $options = ['changelist' => '', 'show-destinations' => ['description']],
+  ): ?bool {
     if (isset($options['changelist']) && $options['changelist']) {
       $changes = $this->getChangedConfigList();
       if (!empty($changes)) {
@@ -85,7 +90,7 @@ class ConfigPartialExportCommands extends DrushCommands {
             $this->output()->writeln('- ' . $value);
           }
         }
-        return;
+        return TRUE;
       }
       else {
         return $this->output()->writeln(dt('No changed config.'));
@@ -111,8 +116,6 @@ class ConfigPartialExportCommands extends DrushCommands {
     return TRUE;
   }
 
-
-
   /**
    * Writes a YAML configuration file to the specified directory.
    *
@@ -121,12 +124,14 @@ class ConfigPartialExportCommands extends DrushCommands {
    * @param \Drupal\Core\Config\StorageInterface $source_storage
    *   The source storage.
    * @param \Drupal\Core\Config\StorageInterface $destination_storage
-   *   The source storage.
+   *   The destination storage.
+   * @param string $destination_dir
+   *   The destination directory.
    *
    * @return bool
    *   Whether or not the configuration was moved from source to destination.
    */
-  function writeConfig(string $key, StorageInterface $source_storage, StorageInterface $destination_storage, $destination_dir): bool {
+  public function writeConfig(string $key, StorageInterface $source_storage, StorageInterface $destination_storage, string $destination_dir): bool {
     $data = $source_storage->read($key);
     // New config.
     if (empty($data)) {
@@ -178,7 +183,7 @@ class ConfigPartialExportCommands extends DrushCommands {
           $pos = strpos($config_key, $split[$i], $counter);
           // If no "match" was found for this partial, it should fail.
           if ($pos !== FALSE) {
-            // Increment the counter by the position found and length of the match.
+            // Increment counter by the position found and length of the match.
             $counter += ($pos + strlen($split[$i]));
           }
           else {

@@ -2,16 +2,16 @@
 
 namespace Drupal\config_partial_export\Form;
 
+use Drupal\Component\Serialization\Yaml;
+use Drupal\Core\Archiver\ArchiveTar;
 use Drupal\Core\Config\ConfigManagerInterface;
+use Drupal\Core\Config\StorageComparer;
+use Drupal\Core\Config\StorageInterface;
 use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\Form\FormBase;
-use Drupal\Core\Config\StorageInterface;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Config\StorageComparer;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\Core\Archiver\ArchiveTar;
-use Drupal\Component\Serialization\Yaml;
 use Drupal\Core\State\StateInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Construct the storage changes in a configuration synchronization form.
@@ -68,17 +68,18 @@ class ConfigPartialExportForm extends FormBase {
    *   The state object of the current site instance.
    */
   public function __construct(
-      StorageInterface $active_storage,
-      StorageInterface $snapshot_storage,
-      ConfigManagerInterface $config_manager,
-      FileSystemInterface $file_system,
-      StateInterface $state) {
-        $this->activeStorage = $active_storage;
-        $this->snapshotStorage = $snapshot_storage;
-        $this->configManager = $config_manager;
-        $this->fileSystem = $file_system;
-        $this->state = $state;
-      }
+    StorageInterface $active_storage,
+    StorageInterface $snapshot_storage,
+    ConfigManagerInterface $config_manager,
+    FileSystemInterface $file_system,
+    StateInterface $state,
+  ) {
+    $this->activeStorage = $active_storage;
+    $this->snapshotStorage = $snapshot_storage;
+    $this->configManager = $config_manager;
+    $this->fileSystem = $file_system;
+    $this->state = $state;
+  }
 
   /**
    * {@inheritdoc}
@@ -96,14 +97,14 @@ class ConfigPartialExportForm extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function getFormId() {
+  public function getFormId(): string {
     return 'config_partial_export_form';
   }
 
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state) {
+  public function buildForm(array $form, FormStateInterface $form_state): array {
     $snapshot_comparer = new StorageComparer($this->activeStorage, $this->snapshotStorage);
     $change_list = [];
 
@@ -164,7 +165,7 @@ class ConfigPartialExportForm extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function validateForm(array &$form, FormStateInterface $form_state) {
+  public function validateForm(array &$form, FormStateInterface $form_state): void {
     $user_input = $form_state->getUserInput();
     $count = 0;
 
@@ -183,7 +184,7 @@ class ConfigPartialExportForm extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function submitForm(array &$form, FormStateInterface $form_state) {
+  public function submitForm(array &$form, FormStateInterface $form_state): void {
     $user_input = $form_state->getUserInput();
     $change_list = $user_input['change_list'] ?: [];
     $add_system_site_info = $user_input['addSystemSiteInfo'];
@@ -205,7 +206,7 @@ class ConfigPartialExportForm extends FormBase {
   }
 
   /**
-   * Creates a tarball based on $change_list.
+   * Creating tarball.
    *
    * Creates a tarball based on $change_list in the temporary directory
    * set on admin/config/media/file-system page.
@@ -215,8 +216,8 @@ class ConfigPartialExportForm extends FormBase {
    * @param bool $add_system_site_info
    *   If TRUE the system.site.yml file will be added to change list.
    */
-  public function createArchive(array $change_list, $add_system_site_info = FALSE) {
-    $this->fileSystem->delete($this->fileSystem->getTempDirectory()  . '/config_partial.tar.gz');
+  public function createArchive(array $change_list, bool $add_system_site_info = FALSE): void {
+    $this->fileSystem->delete($this->fileSystem->getTempDirectory() . '/config_partial.tar.gz');
     $archiver = new ArchiveTar($this->fileSystem->getTempDirectory() . '/config_partial.tar.gz', 'gz');
     // Get raw configuration data without overrides.
     if ($add_system_site_info && !in_array('system.site', $change_list)) {
@@ -228,4 +229,5 @@ class ConfigPartialExportForm extends FormBase {
       $archiver->addString("$name.yml", $yaml);
     }
   }
+
 }

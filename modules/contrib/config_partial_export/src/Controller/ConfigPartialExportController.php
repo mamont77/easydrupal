@@ -3,9 +3,9 @@
 namespace Drupal\config_partial_export\Controller;
 
 use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
+use Drupal\system\FileDownloadController;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
-use Drupal\system\FileDownloadController;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -42,7 +42,7 @@ class ConfigPartialExportController implements ContainerInjectionInterface {
   /**
    * Downloads a tarball of the site configuration.
    */
-  public function downloadExport() :BinaryFileResponse {
+  public function downloadExport(): BinaryFileResponse {
     $request = new Request(['file' => 'config_partial.tar.gz']);
     return $this->fileDownloadController->download($request, 'temporary');
   }

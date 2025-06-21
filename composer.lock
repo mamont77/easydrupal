@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f547b919f80b3e64c3ff2cb0a90f4fb6",
+    "content-hash": "b3aa68d1c15632fd4948efb52f7a49dc",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2114,29 +2114,26 @@
         },
         {
             "name": "drupal/config_partial_export",
-            "version": "2.0.0-alpha1",
+            "version": "dev-2.x",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/config_partial_export.git",
-                "reference": "2.0.0-alpha1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/config_partial_export-2.0.0-alpha1.zip",
-                "reference": "2.0.0-alpha1",
-                "shasum": "90a5d0d19c82d6a83b99fdd8215101181e33f594"
+                "reference": "9896ca2b56b399277bcee8d97e18637f0cbbd047"
             },
             "require": {
                 "drupal/core": "^8 || ^9 || ^10 || ^11 || ^12"
             },
             "type": "drupal-module",
             "extra": {
+                "branch-alias": {
+                    "dev-2.x": "2.x-dev"
+                },
                 "drupal": {
-                    "version": "2.0.0-alpha1",
-                    "datestamp": "1679347685",
+                    "version": "2.0.0-alpha1+7-dev",
+                    "datestamp": "1720437084",
                     "security-coverage": {
                         "status": "not-covered",
-                        "message": "Alpha releases are not covered by Drupal security advisories."
+                        "message": "Dev releases are not covered by Drupal security advisories."
                     }
                 }
             },
@@ -2794,17 +2791,11 @@
         },
         {
             "name": "drupal/devel_entity_updates",
-            "version": "4.2.0",
+            "version": "dev-5.0.x",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/devel_entity_updates.git",
-                "reference": "4.2.0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/devel_entity_updates-4.2.0.zip",
-                "reference": "4.2.0",
-                "shasum": "bbd2a745407cd49ce158430818b17d4db05a9e9f"
+                "reference": "8a6dc0a6b1309e630c19f51c33c59ae36f99d426"
             },
             "require": {
                 "drupal/core": "^8 || ^9 || ^10 || ^11 || ^12",
@@ -2816,12 +2807,15 @@
             },
             "type": "drupal-module",
             "extra": {
+                "branch-alias": {
+                    "dev-5.0.x": "5.0.x-dev"
+                },
                 "drupal": {
-                    "version": "4.2.0",
-                    "datestamp": "1728286649",
+                    "version": "5.0.x-dev",
+                    "datestamp": "1728286928",
                     "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
+                        "status": "not-covered",
+                        "message": "Dev releases are not covered by Drupal security advisories."
                     }
                 },
                 "drush": {
@@ -3779,107 +3773,6 @@
                 "source": "https://www.drupal.org/project/image_widget_crop",
                 "issues": "https://www.drupal.org/project/issues/image_widget_crop",
                 "irc": "irc://irc.freenode.org/drupal-contribute"
-            }
-        },
-        {
-            "name": "drupal/imageapi_optimize",
-            "version": "4.1.0-beta1",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupalcode.org/project/imageapi_optimize.git",
-                "reference": "4.1.0-beta1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/imageapi_optimize-4.1.0-beta1.zip",
-                "reference": "4.1.0-beta1",
-                "shasum": "01ef7fc3903f83b8cd8b50fb988e737ed374a788"
-            },
-            "require": {
-                "drupal/core": "^9 || ^10 || ^11"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "drupal": {
-                    "version": "4.1.0-beta1",
-                    "datestamp": "1727502254",
-                    "security-coverage": {
-                        "status": "not-covered",
-                        "message": "Beta releases are not covered by Drupal security advisories."
-                    }
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "Deciphered",
-                    "homepage": "https://www.drupal.org/user/103796"
-                },
-                {
-                    "name": "jcisio",
-                    "homepage": "https://www.drupal.org/user/210762"
-                },
-                {
-                    "name": "steven jones",
-                    "homepage": "https://www.drupal.org/user/99644"
-                }
-            ],
-            "description": "Define pipelines for image optimization and provide integration with core image styles.",
-            "homepage": "https://www.drupal.org/project/imageapi_optimize",
-            "support": {
-                "source": "https://git.drupalcode.org/project/imageapi_optimize"
-            }
-        },
-        {
-            "name": "drupal/imageapi_optimize_webp",
-            "version": "2.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupalcode.org/project/imageapi_optimize_webp.git",
-                "reference": "2.1.0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/imageapi_optimize_webp-2.1.0.zip",
-                "reference": "2.1.0",
-                "shasum": "d8976202255b52b4a1ebb7c76a634584f658358a"
-            },
-            "require": {
-                "drupal/core": "^10.3 || ^11",
-                "drupal/imageapi_optimize": "*"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "drupal": {
-                    "version": "2.1.0",
-                    "datestamp": "1735854739",
-                    "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
-                    }
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0+"
-            ],
-            "authors": [
-                {
-                    "name": "michaellander",
-                    "homepage": "https://www.drupal.org/user/636494"
-                }
-            ],
-            "description": "Add WebP support to Image API",
-            "homepage": "https://www.drupal.org/project/imageapi_optimize_webp",
-            "keywords": [
-                "Drupal"
-            ],
-            "support": {
-                "source": "http://cgit.drupalcode.org/imageapi_optimize_webp",
-                "issues": "https://www.drupal.org/project/issues/imageapi_optimize_webp"
             }
         },
         {
@@ -11165,11 +11058,11 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "drupal/config_partial_export": 15,
+        "drupal/config_partial_export": 20,
+        "drupal/devel_entity_updates": 20,
         "drupal/disqus": 15,
         "drupal/field_group": 15,
         "drupal/filefield_paths": 10,
-        "drupal/imageapi_optimize": 10,
         "drupal/linkit": 15,
         "drupal/rabbit_hole": 10,
         "drupal/twigsuggest": 5,
