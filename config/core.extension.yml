@@ -26,7 +26,6 @@ module:
   datetime: 0
   dblog: 0
   devel: 0
-  devel_entity_updates: 0
   devel_php: 0
   disqus: 0
   dynamic_page_cache: 0

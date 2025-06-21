@@ -62,6 +62,7 @@
         "drupal/linkit": "^7.0@alpha",
         "drupal/menu_trail_by_path": "^2.1",
         "drupal/metatag": "^2.1",
+        "drupal/mysql57": "^1.0",
         "drupal/paragraphs": "^1.17",
         "drupal/pathauto": "^1.12",
         "drupal/purge": "^3.5",
