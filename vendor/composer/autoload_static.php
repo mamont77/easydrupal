@@ -31,10 +31,6 @@ class ComposerStaticInit7bb062997fc4f0d3cdcb37d377b9bb20
     );
 
     public static $prefixLengthsPsr4 = array (
-        't' => 
-        array (
-            'tubalmartin\\CssMin\\' => 19,
-        ),
         'p' => 
         array (
             'phpowermove\\docblock\\' => 21,
@@ -186,10 +182,6 @@ class ComposerStaticInit7bb062997fc4f0d3cdcb37d377b9bb20
     );
 
     public static $prefixDirsPsr4 = array (
-        'tubalmartin\\CssMin\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/tubalmartin/cssmin/src',
-        ),
         'phpowermove\\docblock\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpowermove/docblock/src',
@@ -6483,10 +6475,6 @@ class ComposerStaticInit7bb062997fc4f0d3cdcb37d377b9bb20
         'phpowermove\\docblock\\tags\\UnknownTag' => __DIR__ . '/..' . '/phpowermove/docblock/src/tags/UnknownTag.php',
         'phpowermove\\docblock\\tags\\VarTag' => __DIR__ . '/..' . '/phpowermove/docblock/src/tags/VarTag.php',
         'phpowermove\\docblock\\tags\\VersionTag' => __DIR__ . '/..' . '/phpowermove/docblock/src/tags/VersionTag.php',
-        'tubalmartin\\CssMin\\Colors' => __DIR__ . '/..' . '/tubalmartin/cssmin/src/Colors.php',
-        'tubalmartin\\CssMin\\Command' => __DIR__ . '/..' . '/tubalmartin/cssmin/src/Command.php',
-        'tubalmartin\\CssMin\\Minifier' => __DIR__ . '/..' . '/tubalmartin/cssmin/src/Minifier.php',
-        'tubalmartin\\CssMin\\Utils' => __DIR__ . '/..' . '/tubalmartin/cssmin/src/Utils.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

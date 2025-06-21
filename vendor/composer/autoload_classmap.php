@@ -5913,8 +5913,4 @@ return array(
     'phpowermove\\docblock\\tags\\UnknownTag' => $vendorDir . '/phpowermove/docblock/src/tags/UnknownTag.php',
     'phpowermove\\docblock\\tags\\VarTag' => $vendorDir . '/phpowermove/docblock/src/tags/VarTag.php',
     'phpowermove\\docblock\\tags\\VersionTag' => $vendorDir . '/phpowermove/docblock/src/tags/VersionTag.php',
-    'tubalmartin\\CssMin\\Colors' => $vendorDir . '/tubalmartin/cssmin/src/Colors.php',
-    'tubalmartin\\CssMin\\Command' => $vendorDir . '/tubalmartin/cssmin/src/Command.php',
-    'tubalmartin\\CssMin\\Minifier' => $vendorDir . '/tubalmartin/cssmin/src/Minifier.php',
-    'tubalmartin\\CssMin\\Utils' => $vendorDir . '/tubalmartin/cssmin/src/Utils.php',
 );
