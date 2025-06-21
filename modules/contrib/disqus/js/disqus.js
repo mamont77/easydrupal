@@ -13,7 +13,7 @@ var disqus_def_name = '';
 var disqus_def_email = '';
 var disqus_config;
 
-(function ($) {
+(function ($, once, Drupal) {
 
 "use strict";
 
@@ -48,7 +48,7 @@ Drupal.behaviors.disqus = {
     if (settings.disqus || false) {
 
       // Ensure that the Disqus comments are only loaded once.
-      $(once('disqus', 'body', context)).each(function () {
+      once('disqus', 'body', context).forEach((el) => {
 
         // Setup the global JavaScript variables for Disqus.
         disqus_shortname = settings.disqus.domain;
@@ -61,16 +61,16 @@ Drupal.behaviors.disqus = {
         // Language and SSO settings are passed in through disqus_config().
         disqus_config = function () {
           if (settings.disqus.language || false) {
-            this.language = settings.disqus.language;
+            el.language = settings.disqus.language;
           }
           if (settings.disqus.remote_auth_s3 || false) {
-            this.page.remote_auth_s3 = settings.disqus.remote_auth_s3;
+            el.page.remote_auth_s3 = settings.disqus.remote_auth_s3;
           }
           if (settings.disqus.api_key || false) {
-            this.page.api_key = settings.disqus.api_key;
+            el.page.api_key = settings.disqus.api_key;
           }
           if (settings.disqus.sso || false) {
-            this.sso = settings.disqus.sso;
+            el.sso = settings.disqus.sso;
           }
           if (settings.disqus.callbacks || false) {
             for (var key in settings.disqus.callbacks) {
@@ -81,7 +81,7 @@ Drupal.behaviors.disqus = {
                   fn = fn[callback[j]];
                 }
                 if (typeof fn === 'function') {
-                  this.callbacks[key].push(fn);
+                  el.callbacks[key].push(fn);
                 }
               }
             }
@@ -120,7 +120,7 @@ Drupal.behaviors.disqus = {
     // Load the comment numbers JavaScript.
     if (settings.disqusComments || false) {
       // Ensure that comment numbers JavaScript is only loaded once.
-      $(once('disqusComments', 'body', context)).each(function () {
+      once('disqusComments', 'body', context).forEach(function () {
         disqus_shortname = settings.disqusComments;
         Drupal.disqus.loadCountScript(settings.disqusComments);
       });
@@ -128,4 +128,4 @@ Drupal.behaviors.disqus = {
   }
 };
 
-})(jQuery);
+})(jQuery, once, Drupal);

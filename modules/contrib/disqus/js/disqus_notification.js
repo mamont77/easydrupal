@@ -3,7 +3,7 @@
  * JavaScript for the Disqus module's new comment notification.
  */
 
-  (function ($) {
+  (function ($, Drupal, drupalSettings) {
 
     "use strict";
 

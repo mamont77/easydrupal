@@ -182,12 +182,18 @@
             },
             "drupal/geshifilter": {
                 "3137937: Theme functions are deprecated in geshifield": "https://www.drupal.org/files/issues/2020-11-06/theme_function_deprecated--3137937-2.patch"
+            }
+        },
+        "old-patches": {
+            "drupal/core": {
+                "2981434: Default theme favicon for administration theme": "https://www.drupal.org/files/issues/2019-12-14/default-theme-favicon-for-administration-theme-2981434-7.patch",
+                "Own: Hide version of Drupal": "patches/drupal-core-hide-version.patch"
+            },
+            "drupal/geshifilter": {
+                "3137937: Theme functions are deprecated in geshifield": "https://www.drupal.org/files/issues/2020-11-06/theme_function_deprecated--3137937-2.patch"
             },
             "drupal/disqus": {
-                "3359581: Uncaught TypeError: $(...).once is not a function": "https://git.drupalcode.org/project/disqus/-/merge_requests/8.diff",
-                "1508786: Lazy load / async load Disqus libraries for better performance": "https://www.drupal.org/files/issues/2022-10-19/disqus-1508786-lazyload-intersectionobserver-46-2.0.x.patch",
-                "3344834: TypeError: in_array(): Argument #2 ($haystack) must be of type array, null given in in_array()": "https://git.drupalcode.org/project/disqus/-/merge_requests/7.diff",
-                "3451023: Deprecated function: Calling get_class() without arguments is deprecated": "https://git.drupalcode.org/project/disqus/-/merge_requests/14.diff"
+                "1508786: Lazy load / async load Disqus libraries for better performance": "https://www.drupal.org/files/issues/2022-10-20/disqus-1508786-lazyload-intersectionobserver-47-1.x.patch"
             },
             "drupal/advagg": {
                 "3375725: Deprecated function: Creation of dynamic property": "https://www.drupal.org/files/issues/2024-01-16/deprecated-function-creation-of-dynamic-property-3375725-17.patch"

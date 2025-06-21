@@ -281,6 +281,9 @@
     );
 
     tab.item.addClass(settings.details.attr('class'));
+    // Remove 'claro-details' class to remove additional bottom border from ul >
+    // li of horizontal tab.
+    tab.item.removeClass('claro-details');
 
     // No need to add summary on frontend.
     if (settings.details.drupalGetSummary) {

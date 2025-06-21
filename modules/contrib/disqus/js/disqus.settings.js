@@ -3,7 +3,7 @@
  * Javascript for disqus configuration form.
  */
 
-(function ($) {
+(function ($, Drupal) {
 
 "use strict";
 
@@ -64,4 +64,4 @@ Drupal.behaviors.disqusSettingsForm = {
   }
 };
 
-})(jQuery);
+})(jQuery, Drupal);

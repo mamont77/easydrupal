@@ -125,7 +125,10 @@ class DisqusComment extends SourcePluginBase implements ContainerFactoryPluginIn
   public function prepareRow(Row $row) {
     $row->setSourceProperty('uid', 0);
     $email = $row->getSourceProperty('email');
-    $user = $this->entityTypeManager->getStorage('user')->getQuery()->condition('mail', $email)->execute();
+    $user = $this->entityTypeManager->getStorage('user')->getQuery()
+      ->condition('mail', $email)
+      ->accessCheck(FALSE)
+      ->execute();
     if ($user) {
       $row->setSourceProperty('uid', key($user));
     }
@@ -164,12 +167,12 @@ class DisqusComment extends SourcePluginBase implements ContainerFactoryPluginIn
         $items[$id]['id'] = $id;
         $items[$id]['pid'] = $post->parent;
         $thread = $disqus->threads->details(['thread' => $post->thread]);
-        $items[$id]['identifier'] = $thread->identifier;
+        $items[$id]['identifier'] = $thread->identifier ?? null;
         $items[$id]['name'] = $post->author->name;
-        $items[$id]['email'] = $post->author->email;
-        $items[$id]['user_id'] = $post->author->id;
+        $items[$id]['email'] = $post->author->email ?? null;
+        $items[$id]['user_id'] = $post->author->id ?? null;
         $items[$id]['url'] = $post->author->url;
-        $items[$id]['ipAddress'] = $post->ipAddress;
+        $items[$id]['ipAddress'] = $post->ipAddress ?? null;
         $items[$id]['isAnonymous'] = $post->author->isAnonymous;
         $items[$id]['createdAt'] = $post->createdAt;
         $items[$id]['comment'] = $post->message;

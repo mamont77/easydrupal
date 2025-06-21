@@ -1794,7 +1794,6 @@ class JSCompilerContext {
   }
 }
 
-#[\AllowDynamicProperties]
 class JSNode {
   private $type;
   private $value;

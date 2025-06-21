@@ -3,7 +3,7 @@
  * JavaScript for the Disqus Google Analytics module.
  */
 
-(function ($) {
+(function ($, Drupal) {
 
 "use strict";
 
@@ -35,4 +35,4 @@ Drupal.disqus.disqusTrackNewComment = function () {
   }
 };
 
-})(jQuery);
+})(jQuery, Drupal);

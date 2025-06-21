@@ -14,9 +14,12 @@ ga:
     js/disqus_ga.js: { attributes: { defer: true } }
   dependencies:
     - disqus/disqus
+    - core/jquery
 notification:
   version: 1.x
   js:
-    js/disqus_notification.js: { attributes: { defer: true } }
+    js/disqus_notification.js: {}
   dependencies:
     - disqus/disqus
+    - core/jquery
+    - core/drupalSettings

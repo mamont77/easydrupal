@@ -1,0 +1,11 @@
+--- src/Form/DisqusSettingsForm.php
++++ src/Form/DisqusSettingsForm.php
+@@ -283,6 +295,8 @@ class DisqusSettingsForm extends ConfigFormBase {
+       ->set('behavior.disqus_localization', $form_state->getValue('disqus_localization'))
+       ->set('behavior.disqus_inherit_login', $form_state->getValue('disqus_inherit_login'))
+       ->set('behavior.disqus_track_newcomment_ga', $form_state->getValue('disqus_track_newcomment_ga'))
++      ->set('behavior.disqus_lazy_load', $form_state->getValue('disqus_lazy_load'))
++      ->set('behavior.disqus_count_js', $form_state->getValue('disqus_count_js'))
+       ->set('advanced.disqus_useraccesstoken', $form_state->getValue('disqus_useraccesstoken'))
+       ->set('advanced.disqus_publickey', $form_state->getValue('disqus_publickey'))
+       ->set('advanced.disqus_secretkey', $form_state->getValue('disqus_secretkey'))

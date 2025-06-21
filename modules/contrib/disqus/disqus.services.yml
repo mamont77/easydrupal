@@ -1,7 +1,7 @@
 services:
   disqus.manager:
     class: Drupal\disqus\DisqusCommentManager
-    arguments: ['@entity_type.manager', '@entity_field.manager', '@current_user', '@module_handler', '@config.factory']
+    arguments: ['@entity_type.manager', '@entity_field.manager', '@current_user', '@module_handler', '@config.factory', '@file_url_generator']
   logger.channel.disqus:
     parent: logger.channel_base
     arguments: ['disqus']

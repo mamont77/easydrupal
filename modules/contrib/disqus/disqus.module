@@ -343,6 +343,10 @@ function disqus_migration_plugins_alter(array &$migrations) {
       return $definition['id'] === 'd7_node' || $definition['id'] === 'd7_node_complete';
     }
   );
+  // Alter migrations only if the list is not empty and migrate_drupal is enabled.
+  if (empty($node_migrations) || !\Drupal::moduleHandler()->moduleExists('migrate_drupal')) {
+    return;
+  }
 
   $disqus_plugin = DisqusDeriver::getSourcePlugin('disqus_enabled_content_types');
   assert($disqus_plugin instanceof DrupalSqlBase);

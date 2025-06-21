@@ -44,7 +44,8 @@ variables:
   # removed when DrupalCI is decommissioned in favor of GitlabCI.
   _CSPELL_IGNORE_PATHS: '"drupalci.yml"'
 
-  # Opt-in to test next major version:
+  # Opt-in to more tests.
+  OPT_IN_TEST_MAX_PHP: '1'
   OPT_IN_TEST_NEXT_MAJOR: '1'
 
 #

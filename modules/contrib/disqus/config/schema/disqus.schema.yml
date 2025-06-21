@@ -23,12 +23,6 @@ disqus.settings:
         disqus_notify_newcomment:
           type: boolean
           label: 'Notify of new comments by email'
-        disqus_lazy_load:
-          type: boolean
-          label: 'Lazy load the Disqus script using IntersectionObserver API'
-        disqus_count_js:
-          type: boolean
-          label: 'This will load up the comment count javascript from Disqus'
     advanced:
       type: mapping
       label: 'Advanced'

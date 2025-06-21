@@ -1,0 +1,11 @@
+--- config/install/disqus.settings.yml
++++ config/install/disqus.settings.yml
+@@ -3,6 +3,8 @@ behavior:
+   disqus_localization: false
+   disqus_inherit_login: false
+   disqus_track_newcomment_ga: false
++  disqus_lazy_load: false
++  disqus_count_js: false
+ advanced:
+   disqus_useraccesstoken: ''
+   disqus_publickey: ''

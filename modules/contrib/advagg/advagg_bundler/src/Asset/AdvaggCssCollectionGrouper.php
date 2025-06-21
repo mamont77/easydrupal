@@ -12,13 +12,6 @@ use Drupal\Core\Config\ConfigFactoryInterface;
 class AdvaggCssCollectionGrouper extends CssCollectionGrouper implements AssetCollectionGrouperInterface {
 
   /**
-   * The config for advagg_bundler.
-   *
-   * @var \Drupal\Core\Config\ImmutableConfig
-   */
-  protected $config;
-
-  /**
    * Construct the grouper instance.
    *
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory

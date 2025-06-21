@@ -75,23 +75,26 @@ class DisqusAdminTest extends BrowserTestBase {
     $this->createContentType(['type' => 'test_type', 'name' => 'Test Type']);
     $this->drupalGet('admin/structure/types/manage/test_type/fields/add-field');
     $this->assertSession()->statusCodeEquals(200);
-    $this->getSession()->getDriver()->selectOption('//select[@id="edit-new-storage-type"]', 'disqus_comment');
-    $this->getSession()->getPage()->fillField('edit-label', 'Disqus');
-    $this->getSession()->getPage()->fillField('edit-field-name', 'disqus');
-    $this->click('#edit-submit');
-    $this->assertSession()->addressMatches('/^\/admin\/structure\/types\/manage\/test_type\/fields\/node.test_type.field_disqus\/storage$/');
-    $this->assertSession()->statusCodeEquals(200);
-    $this->click('#edit-submit');
-    $this->assertSession()->addressMatches('/^\/admin\/structure\/types\/manage\/test_type\/fields\/node.test_type.field_disqus$/');
-    $this->assertSession()->statusCodeEquals(200);
+    // At the moment the rest of this test is only compatible with Drupal 10.1 and below.
+    if (version_compare(\Drupal::VERSION, '10.2', '<')) {
+      $this->getSession()->getDriver()->selectOption('//select[@id="edit-new-storage-type"]', 'disqus_comment');
+      $this->getSession()->getPage()->fillField('edit-label', 'Disqus');
+      $this->getSession()->getPage()->fillField('edit-field-name', 'disqus');
+      $this->click('#edit-submit');
+      $this->assertSession()->addressMatches('/^\/admin\/structure\/types\/manage\/test_type\/fields\/node.test_type.field_disqus\/storage$/');
+      $this->assertSession()->statusCodeEquals(200);
+      $this->click('#edit-submit');
+      $this->assertSession()->addressMatches('/^\/admin\/structure\/types\/manage\/test_type\/fields\/node.test_type.field_disqus$/');
+      $this->assertSession()->statusCodeEquals(200);
 
-    // Enabling disqus comments on all nodes for now.
-    $this->getSession()->getPage()->checkField('edit-default-value-input-field-disqus-0-status');
-    $this->getSession()->getPage()->fillField('edit-default-value-input-field-disqus-0-identifier', 'test_identifier');
-    $this->click('#edit-submit');
-    $this->assertSession()->addressMatches('/^\/admin\/structure\/types\/manage\/test_type\/fields$/');
-    $this->assertSession()->statusCodeEquals(200);
-    $this->assertSession()->elementExists('xpath', '//table[@id="field-overview"]//td[text()="Disqus"]');
+      // Enabling disqus comments on all nodes for now.
+      $this->getSession()->getPage()->checkField('edit-default-value-input-field-disqus-0-status');
+      $this->getSession()->getPage()->fillField('edit-default-value-input-field-disqus-0-identifier', 'test_identifier');
+      $this->click('#edit-submit');
+      $this->assertSession()->addressMatches('/^\/admin\/structure\/types\/manage\/test_type\/fields$/');
+      $this->assertSession()->statusCodeEquals(200);
+      $this->assertSession()->elementExists('xpath', '//table[@id="field-overview"]//td[text()="Disqus"]');
+    }
   }
 
 }

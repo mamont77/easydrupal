@@ -2,15 +2,9 @@
 
 namespace Drupal\menu_trail_by_path;
 
-use Drupal\Component\Utility\UrlHelper;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Menu\MenuActiveTrail;
-use Drupal\Core\Menu\MenuLinkManagerInterface;
-use Drupal\Core\Routing\RouteMatchInterface;
-use Drupal\Core\Cache\CacheBackendInterface;
-use Drupal\Core\Lock\LockBackendInterface;
 use Drupal\Core\Url;
-use Drupal\menu_trail_by_path\Path\PathHelperInterface;
 use Drupal\Core\Path\PathValidatorInterface;
 use Drupal\Core\Routing\RequestContext;
 use Drupal\Core\Language\LanguageManagerInterface;
@@ -60,23 +54,43 @@ class MenuTrailByPathActiveTrail extends MenuActiveTrail {
   protected $config;
 
   /**
-   * MenuTrailByPathActiveTrail constructor.
+   * Sets the path validator.
    *
-   * @param \Drupal\Core\Menu\MenuLinkManagerInterface $menu_link_manager
-   * @param \Drupal\Core\Routing\RouteMatchInterface $route_match
-   * @param \Drupal\Core\Cache\CacheBackendInterface $cache
-   * @param \Drupal\Core\Lock\LockBackendInterface $lock
-   * @param \Drupal\Core\Path\PathValidatorInterface $path_validator
-   * @param \Drupal\Core\Routing\RequestContext $context
-   * @param \Drupal\Core\Language\LanguageManagerInterface $languageManager
-   * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
+   * @param \Drupal\Core\Path\PathValidatorInterface $pathValidator
+   *   The path validator.
    */
-  public function __construct(MenuLinkManagerInterface $menu_link_manager, RouteMatchInterface $route_match, CacheBackendInterface $cache, LockBackendInterface $lock, PathValidatorInterface $path_validator, RequestContext $context, LanguageManagerInterface $languageManager, ConfigFactoryInterface $config_factory) {
-    parent::__construct($menu_link_manager, $route_match, $cache, $lock);
-    $this->pathValidator   = $path_validator;
-    $this->context         = $context;
+  public function setPathValidator(PathValidatorInterface $pathValidator): void {
+    $this->pathValidator = $pathValidator;
+  }
+
+  /**
+   * Sets the request context.
+   *
+   * @param \Drupal\Core\Routing\RequestContext $context
+   *   The request context.
+   */
+  public function setRequestContext(RequestContext $context): void {
+    $this->context = $context;
+  }
+
+  /**
+   * Sets the language manager.
+   *
+   * @param \Drupal\Core\Language\LanguageManagerInterface $languageManager
+   *   The language manager.
+   */
+  public function setLanguageManager(LanguageManagerInterface $languageManager): void {
     $this->languageManager = $languageManager;
-    $this->config = $config_factory->get('menu_trail_by_path.settings');
+  }
+
+  /**
+   * Sets the config factory.
+   *
+   * @param \Drupal\Core\Config\ConfigFactoryInterface $configFactory
+   *   The config factory.
+   */
+  public function setConfigFactory(ConfigFactoryInterface $configFactory): void {
+    $this->config = $configFactory->get('menu_trail_by_path.settings');
   }
 
   /**

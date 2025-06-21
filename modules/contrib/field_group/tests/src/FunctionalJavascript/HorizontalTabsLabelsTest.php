@@ -57,7 +57,7 @@ class HorizontalTabsLabelsTest extends WebDriverTestBase {
   ];
 
   /**
-   * The webassert session.
+   * The WebAssert session.
    *
    * @var \Drupal\Tests\WebAssert
    */

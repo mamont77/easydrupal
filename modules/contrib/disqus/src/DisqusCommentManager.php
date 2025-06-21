@@ -6,8 +6,9 @@ use Drupal\Component\Utility\UrlHelper;
 use Drupal\Core\Config\ConfigFactory;
 use Drupal\Core\Entity\EntityFieldManagerInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
+use Drupal\Core\File\FileUrlGeneratorInterface;
+use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Url;
 
 /**
@@ -51,6 +52,13 @@ class DisqusCommentManager implements DisqusCommentManagerInterface {
   protected $configFactory;
 
   /**
+   * The file URL generator.
+   *
+   * @var \Drupal\Core\File\FileUrlGeneratorInterface
+   */
+  protected $fileUrlGenerator;
+
+  /**
    * Constructs the DisqusCommentManager object.
    *
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
@@ -63,13 +71,16 @@ class DisqusCommentManager implements DisqusCommentManagerInterface {
    *   A module handler.
    * @param \Drupal\Core\Config\ConfigFactory $config_factory
    *   A module handler.
+   * @param \Drupal\Core\File\FileUrlGeneratorInterface $file_url_generator
+   *   The file URL generator.
    */
-  public function __construct(EntityTypeManagerInterface $entity_type_manager, EntityFieldManagerInterface $entity_field_manager, AccountInterface $current_user, ModuleHandlerInterface $module_handler, ConfigFactory $config_factory) {
+  public function __construct(EntityTypeManagerInterface $entity_type_manager, EntityFieldManagerInterface $entity_field_manager, AccountInterface $current_user, ModuleHandlerInterface $module_handler, ConfigFactory $config_factory, FileUrlGeneratorInterface $file_url_generator = NULL) {
     $this->entityTypeManager = $entity_type_manager;
     $this->entityFieldManager = $entity_field_manager;
     $this->currentUser = $current_user;
     $this->moduleHandler = $module_handler;
     $this->configFactory = $config_factory;
+    $this->fileUrlGenerator = $file_url_generator;
   }
 
   /**
@@ -201,7 +212,7 @@ class DisqusCommentManager implements DisqusCommentManagerInterface {
         $data['avatar'] = !empty($file_uri) ? $file_uri : NULL;
       }
       if (isset($data['avatar'])) {
-        $data['avatar'] = \Drupal::service('file_url_generator')->generateAbsoluteString($data['avatar']);
+        $data['avatar'] = $this->fileUrlGenerator->generateAbsoluteString($data['avatar']);
       }
     }
     $this->moduleHandler->alter('disqus_user_data', $data);
