@@ -16,7 +16,7 @@
       once('projectSlider', '.field--name-field-project-images-media', context)
         .forEach(function (projectSlider) {
           $(projectSlider).slick({
-            // slide: '.field--name-field-media-image',
+            // slide: '.media',
             slidesToShow: 1,
             slidesToScroll: 1,
             // mobileFirst: true,

@@ -51,7 +51,6 @@ module:
   image_widget_crop: 0
   imagemagick: 0
   inline_form_errors: 0
-  libraries: 0
   link: 0
   linkit: 0
   media: 0

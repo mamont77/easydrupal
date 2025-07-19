@@ -125,13 +125,13 @@ fontawesome-without-pseudo-elements:
         data-search-pseudo-elements: false
 
 slick:
-  remote: http://kenwheeler.github.io/slick/
+  remote: https://accessible360.github.io/accessible-slick/
   license:
-    name: GNU-GPL-2.0-or-later
-    url: https://github.com/kenwheeler/slick/blob/master/LICENSE
-    gpl-compatible: true
+    name: The MIT License
+    url: https://github.com/Accessible360/accessible-slick/blob/master/LICENSE
   js:
-    //cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js: { type: external, minified: true }
+    /libraries/slick/slick/slick.min.js: { }
   css:
     component:
-      //cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css: { type: external, minified: true }
+      # //cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css: { type: external, minified: true }
+      //cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css: { type: external, minified: false }

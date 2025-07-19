@@ -28,10 +28,13 @@
   max-height: calc((100vh - 80px) / 2);
 }
 
-.linkit-ui-autocomplete.ui-widget {
+:not(.ck) > .linkit-ui-autocomplete.ui-widget {
   position: absolute;
   max-width: inherit;
   font-size: 0.9em;
+  &.ck-reset_all-excluded {
+    white-space: break-spaces;
+  }
 }
 
 .linkit-ui-autocomplete.ui-menu .linkit-result-line-wrapper {
@@ -88,4 +91,23 @@
 
 .linkit-result-line--description img {
   display: block;
+}
+
+/* Required to accommodate CKEditor v45 UI changes. See #3532814 */
+.ck.ck-form.ck-link-form.ck-vertical-form,
+.ck.ck-form.ck-link-form.ck-responsive-form {
+  width: fit-content;
+  min-width: 340px;
+  max-width: 640px;
+}
+
+.ck.ck-button-action.ck-button_with-text {
+  min-width: 60px !important;
+}
+
+.ck-link-form .linkit-ui-autocomplete,
+.ck-link-form .linkit-ui-autocomplete * {
+  white-space: break-spaces;
+  word-break: normal;
+  word-wrap: break-word;
 }

@@ -70,7 +70,7 @@
         "drupal/schema_metatag": "^3.0",
         "drupal/seckit": "^2.0",
         "drupal/simple_sitemap": "^4.2",
-        "drupal/sophron": "^2.0",
+        "drupal/sophron": "^2.2",
         "drupal/sticky_sharrre_bar": "^1.5",
         "drupal/token": "^1.13",
         "drupal/twig_field_value": "^2.0",
@@ -85,6 +85,7 @@
         "geshi/geshi": "v1.0.9.1",
         "grasmash/drupal-security-warning": "1.x-dev",
         "mglaman/composer-drupal-lenient": "^1.0",
+        "npm-asset/accessible360--accessible-slick": "^1.8",
         "oomphinc/composer-installers-extender": "^2.0",
         "topfloor/composer-cleanup-vcs-dirs": "^1.1"
     },

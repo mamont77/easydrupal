@@ -130,8 +130,14 @@ class LinkitWidget extends LinkWidget {
     $item = $items[$delta];
     $uri = $item->uri ?? NULL;
 
-    // Try to fetch entity information from the URI.
-    $default_allowed = !$item->isEmpty() && ($this->currentUser->hasPermission('link to any page') || $item->getUrl()->access());
+    try {
+      // Try to fetch entity information from the URI.
+      $default_allowed = !$item->isEmpty() && ($this->currentUser->hasPermission('link to any page') || $item->getUrl()->access());
+    }
+    catch (\InvalidArgumentException $e) {
+      // Make sure we render the form if InvalidArgumentException is thrown.
+    }
+
     if (!empty($item->options['data-entity-type']) && !empty($item->options['data-entity-uuid'])) {
       $entity = $this->entityRepository->loadEntityByUuid($item->options['data-entity-type'], $item->options['data-entity-uuid']);
     }
@@ -165,8 +171,13 @@ class LinkitWidget extends LinkWidget {
       'linkit_profile_id' => $this->getSetting('linkit_profile'),
     ];
 
-    // Add a class to the title field.
+    // Add class to the URI fields item wrapper.
+    $element['uri']['#wrapper_attributes']['class'][] = 'form-item--linkit-widget-uri';
+
+    // Add a class to the title field and its item wrapper.
     $element['title']['#attributes']['class'][] = 'linkit-widget-title';
+    $element['title']['#wrapper_attributes']['class'][] = 'form-item--linkit-widget-title';
+
     if ($this->getSetting('linkit_auto_link_text')) {
       $element['title']['#attributes']['data-linkit-widget-title-autofill-enabled'] = TRUE;
     }
@@ -189,6 +200,10 @@ class LinkitWidget extends LinkWidget {
       '#default_value' => $entity ? ($entity->getEntityTypeId() === 'file' ? 'file' : 'canonical') : '',
     ];
 
+    // Add custom css for the widget representation:
+    $element['#attached']['library'][] = 'linkit/linkit.widget';
+    // Add a custom class to the parent container:
+    $element['#attributes']['class'][] = 'linkit-widget-container';
     return $element;
   }
 

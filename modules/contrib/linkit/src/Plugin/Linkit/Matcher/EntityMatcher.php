@@ -3,6 +3,7 @@
 namespace Drupal\linkit\Plugin\Linkit\Matcher;
 
 use Drupal\Component\Utility\Html;
+use Drupal\Component\Utility\UrlHelper;
 use Drupal\Core\Config\Entity\ConfigEntityTypeInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\Query\QueryInterface;
@@ -105,6 +106,13 @@ class EntityMatcher extends ConfigurableMatcherBase {
   protected $configFactory;
 
   /**
+   * The request context.
+   *
+   * @var \Drupal\Core\Routing\RequestContext
+   */
+  protected $requestContext;
+
+  /**
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
@@ -123,6 +131,7 @@ class EntityMatcher extends ConfigurableMatcherBase {
     $instance->substitutionManager = $container->get('plugin.manager.linkit.substitution');
     $instance->token = $container->get('token');
     $instance->configFactory = $container->get('config.factory');
+    $instance->requestContext = $container->get('router.request_context');
     return $instance;
   }
 
@@ -523,18 +532,31 @@ class EntityMatcher extends ConfigurableMatcherBase {
    *
    * @param string $user_input
    *   The string to url parse.
+   * @param string $base_url
+   *   The site base url. Typically this is only used for testing.
    *
    * @return array
    *   An array with an entity id if the input can be parsed as an internal url
    *   and a match is found, otherwise an empty array.
    */
-  protected function findEntityIdByUrl($user_input) {
-    $result = [];
+  public function findEntityIdByUrl($user_input, $base_url = '') {
+    if (empty($base_url)) {
+      $base_url = $this->requestContext->getCompleteBaseUrl();
+    }
+    $is_absolute_local_url = UrlHelper::isExternal($user_input)
+      && UrlHelper::isValid($user_input, TRUE)
+      && UrlHelper::externalIsLocal($user_input, $base_url);
 
+    if ($is_absolute_local_url) {
+      // The link points to this domain. Make it relative so it can be
+      // matched in Url::fromUserInput().
+      $user_input = substr($user_input, strlen($base_url));
+    }
+    $result = [];
     try {
       $params = Url::fromUserInput($user_input)->getRouteParameters();
-      if (key($params) === $this->targetType) {
-        $result = [end($params)];
+      if (!empty($params[$this->targetType])) {
+        $result = [$params[$this->targetType]];
       }
     }
     catch (\Exception $e) {
