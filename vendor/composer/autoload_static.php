@@ -6667,6 +6667,8 @@ class ComposerStaticInit7bb062997fc4f0d3cdcb37d377b9bb20
         'mglaman\\PHPStanDrupal\\Type\\EntityStorage\\EntityStorageDynamicReturnTypeExtension' => __DIR__ . '/..' . '/mglaman/phpstan-drupal/src/Type/EntityStorage/EntityStorageDynamicReturnTypeExtension.php',
         'mglaman\\PHPStanDrupal\\Type\\EntityStorage\\EntityStorageType' => __DIR__ . '/..' . '/mglaman/phpstan-drupal/src/Type/EntityStorage/EntityStorageType.php',
         'mglaman\\PHPStanDrupal\\Type\\EntityStorage\\GetQueryReturnTypeExtension' => __DIR__ . '/..' . '/mglaman/phpstan-drupal/src/Type/EntityStorage/GetQueryReturnTypeExtension.php',
+        'mglaman\\PHPStanDrupal\\Type\\EntityTypeKeyByExistence' => __DIR__ . '/..' . '/mglaman/phpstan-drupal/src/Type/EntityTypeKeyByExistence.php',
+        'mglaman\\PHPStanDrupal\\Type\\EntityTypeLinkTemplateByExistence' => __DIR__ . '/..' . '/mglaman/phpstan-drupal/src/Type/EntityTypeLinkTemplateByExistence.php',
         'mglaman\\PHPStanDrupal\\Type\\EntityTypeManagerGetStorageDynamicReturnTypeExtension' => __DIR__ . '/..' . '/mglaman/phpstan-drupal/src/Type/EntityTypeManagerGetStorageDynamicReturnTypeExtension.php',
         'mglaman\\PHPStanDrupal\\Type\\InspectorTypeExtension' => __DIR__ . '/..' . '/mglaman/phpstan-drupal/src/Type/InspectorTypeExtension.php',
         'phootwork\\collection\\AbstractCollection' => __DIR__ . '/..' . '/phootwork/collection/AbstractCollection.php',

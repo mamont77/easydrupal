@@ -6094,6 +6094,8 @@ return array(
     'mglaman\\PHPStanDrupal\\Type\\EntityStorage\\EntityStorageDynamicReturnTypeExtension' => $vendorDir . '/mglaman/phpstan-drupal/src/Type/EntityStorage/EntityStorageDynamicReturnTypeExtension.php',
     'mglaman\\PHPStanDrupal\\Type\\EntityStorage\\EntityStorageType' => $vendorDir . '/mglaman/phpstan-drupal/src/Type/EntityStorage/EntityStorageType.php',
     'mglaman\\PHPStanDrupal\\Type\\EntityStorage\\GetQueryReturnTypeExtension' => $vendorDir . '/mglaman/phpstan-drupal/src/Type/EntityStorage/GetQueryReturnTypeExtension.php',
+    'mglaman\\PHPStanDrupal\\Type\\EntityTypeKeyByExistence' => $vendorDir . '/mglaman/phpstan-drupal/src/Type/EntityTypeKeyByExistence.php',
+    'mglaman\\PHPStanDrupal\\Type\\EntityTypeLinkTemplateByExistence' => $vendorDir . '/mglaman/phpstan-drupal/src/Type/EntityTypeLinkTemplateByExistence.php',
     'mglaman\\PHPStanDrupal\\Type\\EntityTypeManagerGetStorageDynamicReturnTypeExtension' => $vendorDir . '/mglaman/phpstan-drupal/src/Type/EntityTypeManagerGetStorageDynamicReturnTypeExtension.php',
     'mglaman\\PHPStanDrupal\\Type\\InspectorTypeExtension' => $vendorDir . '/mglaman/phpstan-drupal/src/Type/InspectorTypeExtension.php',
     'phootwork\\collection\\AbstractCollection' => $vendorDir . '/phootwork/collection/AbstractCollection.php',
