@@ -1,0 +1,11 @@
+--- devel_entity_updates.info.yml
++++ devel_entity_updates.info.yml
+@@ -1,7 +1,7 @@
+ type: module
+ name: Devel Entity Updates
+ description: 'Provides developers an API and drush command to perform automatic entity updates.'
+-core_version_requirement: ^9 || ^10
++core_version_requirement: ^10.1 || ^11
+ package: Development
+ tags:
+  - developer

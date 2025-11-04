@@ -1,5 +1,6 @@
 import { Plugin } from 'ckeditor5/src/core';
 import { findAttributeRange } from 'ckeditor5/src/typing';
+import { getClosestSelectedLinkElement, extractTextFromLinkRange } from './utils.js';
 
 export default class LinkitEditing extends Plugin {
   init() {
@@ -87,37 +88,46 @@ export default class LinkitEditing extends Plugin {
       const extraAttributeValues = linkitAttributes;
       const model = this.editor.model;
       const selection = model.document.selection;
+      const displayedText = args[3] || args[1]['linkit_attributes']['displayedText'];
 
       // Wrapping the original command execution in a model.change() block to
       // make sure there's a single undo step when the extra attribute is added.
       model.change((writer) => {
-        editor.execute('link', ...args);
 
-        const firstPosition = selection.getFirstPosition();
-
-        this.attrs.forEach((attribute) => {
-          if (selection.isCollapsed) {
-            const node = firstPosition.textNode || firstPosition.nodeBefore;
-
+        const updateAttributes = (range, removeSelection) => {
+          this.attrs.forEach((attribute) => {
             if (extraAttributeValues[attribute]) {
-              writer.setAttribute(attribute, extraAttributeValues[attribute], writer.createRangeOn(node));
+              writer.setAttribute(attribute, extraAttributeValues[attribute], range);
             } else {
-              writer.removeAttribute(attribute, writer.createRangeOn(node));
+              writer.removeAttribute(attribute, range);
             }
-
-            writer.removeSelectionAttribute(attribute);
-          } else {
-            const ranges = model.schema.getValidRanges(selection.getRanges(), attribute);
-
-            for (const range of ranges) {
-              if (extraAttributeValues[attribute]) {
-                writer.setAttribute(attribute, extraAttributeValues[attribute], range);
-              } else {
-                writer.removeAttribute(attribute, range);
-              }
+            if (removeSelection) {
+              writer.removeSelectionAttribute(attribute);
             }
+          });
+        };
+
+        const updateLinkTextIfNeeded = (range, displayedText) => {
+          const linkText = extractTextFromLinkRange(range);
+          if (!linkText) {
+            return range;
           }
-        });
+          let newRange = writer.createRange(range.start, range.start.getShiftedBy(displayedText.length));
+          return newRange;
+        };
+
+        editor.execute('link', ...args);
+        if (selection.isCollapsed) {
+          const link = getClosestSelectedLinkElement(selection);
+          let range = writer.createRangeOn(link);
+          range = updateLinkTextIfNeeded(range, displayedText);
+          updateAttributes(range, true);
+        } else {
+          const ranges = model.schema.getValidRanges(selection.getRanges(), 'linkDataEntityType');
+          for (const range of ranges) {
+            updateAttributes(range);
+          }
+        }
       });
     }, { priority: 'high' } );
   }

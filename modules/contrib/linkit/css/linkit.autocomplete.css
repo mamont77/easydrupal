@@ -56,10 +56,8 @@
   background: #0075ba;
 }
 
-.ui-autocomplete
-  .linkit-result-line-wrapper.ui-menu-item-wrapper.ui-state-active,
-.ui-autocomplete
-  .linkit-result-line-wrapper.ui-menu-item-wrapper.ui-state-focus {
+.ui-autocomplete .linkit-result-line-wrapper.ui-menu-item-wrapper.ui-state-active,
+.ui-autocomplete .linkit-result-line-wrapper.ui-menu-item-wrapper.ui-state-focus {
   background: #bfbfbf;
 }
 
