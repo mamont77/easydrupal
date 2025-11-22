@@ -4685,6 +4685,7 @@ class ComposerStaticInit7bb062997fc4f0d3cdcb37d377b9bb20
         'ReCaptcha\\RequestMethod\\SocketPost' => __DIR__ . '/..' . '/google/recaptcha/src/ReCaptcha/RequestMethod/SocketPost.php',
         'ReCaptcha\\RequestParameters' => __DIR__ . '/..' . '/google/recaptcha/src/ReCaptcha/RequestParameters.php',
         'ReCaptcha\\Response' => __DIR__ . '/..' . '/google/recaptcha/src/ReCaptcha/Response.php',
+        'ReflectionConstant' => __DIR__ . '/..' . '/symfony/polyfill-php84/Resources/stubs/ReflectionConstant.php',
         'ReturnTypeWillChange' => __DIR__ . '/..' . '/symfony/polyfill-php81/Resources/stubs/ReturnTypeWillChange.php',
         'Revolt\\EventLoop' => __DIR__ . '/..' . '/revolt/event-loop/src/EventLoop.php',
         'Revolt\\EventLoop\\CallbackType' => __DIR__ . '/..' . '/revolt/event-loop/src/EventLoop/CallbackType.php',

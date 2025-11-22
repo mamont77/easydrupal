@@ -2,7 +2,8 @@ const path = require('path');
 const fs = require('fs');
 const webpack = require('webpack');
 const TerserPlugin = require('terser-webpack-plugin');
-const styles = require('@ckeditor/ckeditor5-dev-utils/lib/styles');
+const utils = require("@ckeditor/ckeditor5-dev-utils");
+const styles = utils.styles;
 
 function getDirectories(srcpath) {
   return fs
@@ -24,6 +25,9 @@ getDirectories('./js/ckeditor5_plugins').forEach((dir) => {
             format: {
               comments: false,
             },
+            compress: {
+              drop_console: true,
+            }
           },
           test: /\.js(\?.*)?$/i,
           extractComments: false,

@@ -4112,6 +4112,7 @@ return array(
     'ReCaptcha\\RequestMethod\\SocketPost' => $vendorDir . '/google/recaptcha/src/ReCaptcha/RequestMethod/SocketPost.php',
     'ReCaptcha\\RequestParameters' => $vendorDir . '/google/recaptcha/src/ReCaptcha/RequestParameters.php',
     'ReCaptcha\\Response' => $vendorDir . '/google/recaptcha/src/ReCaptcha/Response.php',
+    'ReflectionConstant' => $vendorDir . '/symfony/polyfill-php84/Resources/stubs/ReflectionConstant.php',
     'ReturnTypeWillChange' => $vendorDir . '/symfony/polyfill-php81/Resources/stubs/ReturnTypeWillChange.php',
     'Revolt\\EventLoop' => $vendorDir . '/revolt/event-loop/src/EventLoop.php',
     'Revolt\\EventLoop\\CallbackType' => $vendorDir . '/revolt/event-loop/src/EventLoop/CallbackType.php',

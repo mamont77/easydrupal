@@ -113,6 +113,7 @@ class AdvancedLinkTest extends WebDriverTestBase {
       '<a title>' => [
         'attribute_name' => 'title',
         'expected_input_label' => 'Title',
+        'is_grouped' => TRUE,
       ],
       '<a class>' => [
         'attribute_name' => 'class',
