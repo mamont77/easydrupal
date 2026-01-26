@@ -6,13 +6,16 @@ namespace Drupal\Tests\devel_php\Functional;
 
 use Drupal\Core\Url;
 use Drupal\Tests\BrowserTestBase;
+use Drupal\devel_php\Form\ExecutePHP;
 use Drupal\user\UserInterface;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Tests permissions.
- *
- * @group devel_php
  */
+#[CoversClass(ExecutePHP::class)]
+#[Group('devel_php')]
 class PermissionsTest extends BrowserTestBase {
 
   /**

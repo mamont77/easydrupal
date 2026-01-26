@@ -7,13 +7,16 @@ namespace Drupal\Tests\devel_php\Functional;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\Url;
 use Drupal\Tests\BrowserTestBase;
+use Drupal\devel_php\Form\ExecutePHP;
 use Drupal\user\UserInterface;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Tests execute code.
- *
- * @group devel_php
  */
+#[CoversClass(ExecutePHP::class)]
+#[Group('devel_php')]
 class ExecuteCodeTest extends BrowserTestBase {
 
   use StringTranslationTrait;

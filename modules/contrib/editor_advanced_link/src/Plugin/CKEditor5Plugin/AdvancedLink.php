@@ -8,7 +8,6 @@ use Drupal\ckeditor5\Plugin\CKEditor5PluginConfigurableTrait;
 use Drupal\ckeditor5\Plugin\CKEditor5PluginDefault;
 use Drupal\ckeditor5\Plugin\CKEditor5PluginConfigurableInterface;
 use Drupal\ckeditor5\Plugin\CKEditor5PluginElementsSubsetInterface;
-use Drupal\Component\Utility\Html;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\editor\EditorInterface;
 
@@ -99,7 +98,7 @@ class AdvancedLink extends CKEditor5PluginDefault implements CKEditor5PluginConf
         '#type' => 'checkbox',
         '#title' => $this->t('@label (<code>@attribute</code>)', [
           '@label' => $config_ui_labels[$attribute],
-          '@attribute' => Html::escape(self::getAllowedHtmlForSupportedAttribute($attribute)),
+          '@attribute' => self::getAllowedHtmlForSupportedAttribute($attribute),
         ]),
         '#return_value' => $attribute,
       ];

@@ -18,13 +18,17 @@ export default class EditorAdvancedLinkUI extends Plugin {
     const linkUI = editor.plugins.get('LinkUI');
 
     this.listenTo(contextualBalloonPlugin, 'change:visibleView', (evt, name, visibleView) => {
-      if (visibleView !== linkUI.formView) {
+      const formView = linkUI.formView;
+
+      // If the link form has not been initialized yet or the visible view does not match it,
+      // do nothing.
+      if (!formView || visibleView !== formView) {
         return;
       }
 
       // Detach the listener.
       this.stopListening(contextualBalloonPlugin, 'change:visibleView');
-      this.linkFormView = linkUI.formView;
+      this.linkFormView = formView;
 
       this._registerComponents();
     });
@@ -36,17 +40,23 @@ export default class EditorAdvancedLinkUI extends Plugin {
   _registerComponents() {
     const editor = this.editor;
     const linkFormView = editor.plugins.get('LinkUI').formView;
-    const linkCommand = editor.commands.get('link');
 
+    // If for any reason the link form is not available,
+    // bail out early to avoid runtime errors.
+    if (!linkFormView) {
+      return;
+    }
+
+    const linkCommand = editor.commands.get('link');
     const { enabledModelNames } = editor.plugins.get(
       'EditorAdvancedLinkEditing',
     );
 
-    //Insert below CKEditor5's "Displayed text" field.
+    // Insert below CKEditor5's "Displayed text" field.
     let insertIndex = 2;
     let fieldCount = 0;
 
-    enabledModelNames.forEach((modelName, index) => {
+    enabledModelNames.forEach((modelName) => {
       // Skip if field already exists.
       if (typeof linkFormView[modelName] === 'undefined') {
         const options = additionalFormElements[modelName];
@@ -54,7 +64,7 @@ export default class EditorAdvancedLinkUI extends Plugin {
         let parentForm = parentGroup ?? linkFormView;
 
         // Skip if group already exists.
-        if (!!options.group && !parentGroup) {
+        if (options.group && !parentGroup) {
           const groupOptions = additionalFormGroups[options.group];
           parentGroup = this._createGroup(options.group, groupOptions.label);
 
