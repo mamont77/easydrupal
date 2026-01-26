@@ -68,7 +68,6 @@
         "drupal/redis": "^1.8",
         "drupal/schema_metatag": "^3.0",
         "drupal/seckit": "^2.0",
-        "drupal/simple_sitemap": "^4.2",
         "drupal/sophron": "^2.2",
         "drupal/sticky_sharrre_bar": "^1.5",
         "drupal/token": "^1.13",
