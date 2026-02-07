@@ -11,6 +11,19 @@ use Drupal\imagemagick\PackageSuite;
 
 /**
  * Defines imagemagick CreateNew operation.
+ *
+ * @phpstan-type PreparedCreateNewArguments array{
+ *   width: numeric,
+ *   height: numeric,
+ *   extension: string,
+ *   transparent_color: string,
+ * }
+ * @phpstan-type CreateNewArguments array{
+ *   width: positive-int,
+ *   height: positive-int,
+ *   extension: string,
+ *   transparent_color: string,
+ * }
  */
 #[ImageToolkitOperation(
   id: "imagemagick_create_new",
@@ -22,7 +35,7 @@ use Drupal\imagemagick\PackageSuite;
 class CreateNew extends ImagemagickImageToolkitOperationBase {
 
   /**
-   * {@inheritdoc}
+   * @return array<string, mixed>
    */
   protected function arguments(): array {
     return [
@@ -46,7 +59,8 @@ class CreateNew extends ImagemagickImageToolkitOperationBase {
   }
 
   /**
-   * {@inheritdoc}
+   * @param PreparedCreateNewArguments $arguments
+   * @return CreateNewArguments
    */
   protected function validateArguments(array $arguments): array {
     // Assure extension is supported.
@@ -55,8 +69,8 @@ class CreateNew extends ImagemagickImageToolkitOperationBase {
     }
 
     // Assure integers for width and height.
-    $arguments['width'] = (int) round($arguments['width']);
-    $arguments['height'] = (int) round($arguments['height']);
+    $arguments['width'] = (int) round((float) $arguments['width']);
+    $arguments['height'] = (int) round((float) $arguments['height']);
 
     // Fail when width or height are 0 or negative.
     if ($arguments['width'] <= 0) {
@@ -75,7 +89,7 @@ class CreateNew extends ImagemagickImageToolkitOperationBase {
   }
 
   /**
-   * {@inheritdoc}
+   * @param CreateNewArguments $arguments
    */
   protected function execute(array $arguments): bool {
     // Reset the image properties and any processing argument.

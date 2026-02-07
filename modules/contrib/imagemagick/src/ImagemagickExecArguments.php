@@ -6,6 +6,8 @@ namespace Drupal\imagemagick;
 
 /**
  * Stores arguments for execution of ImageMagick/GraphicsMagick commands.
+ *
+ * @phpstan-type Arguments array<int,array{mode: ArgumentMode, argument: string, info: array<string, mixed>}>
  */
 class ImagemagickExecArguments {
 
@@ -17,7 +19,7 @@ class ImagemagickExecArguments {
   /**
    * The array of command line arguments to be used by 'convert'.
    *
-   * @var array<int,array{mode: ArgumentMode, argument: string, info: array}>
+   * @var Arguments
    */
   protected array $arguments = [];
 
@@ -39,7 +41,7 @@ class ImagemagickExecArguments {
   /**
    * The source image frames to access.
    */
-  protected string $sourceFrames;
+  protected ?string $sourceFrames = NULL;
 
   /**
    * The image destination URI/path on saving.
@@ -56,12 +58,6 @@ class ImagemagickExecArguments {
    */
   protected string $destinationFormat = '';
 
-  /**
-   * Constructs an ImagemagickExecArguments object.
-   *
-   * @param \Drupal\imagemagick\ImagemagickExecManagerInterface $execManager
-   *   The ImageMagick execution manager service.
-   */
   public function __construct(
     protected readonly ImagemagickExecManagerInterface $execManager,
   ) {
@@ -115,7 +111,7 @@ class ImagemagickExecArguments {
    *   (optional) The position of the argument in the arguments array.
    *   Reflects the sequence of arguments in the command line. Defaults to
    *   self::APPEND.
-   * @param array $info
+   * @param array<string, mixed> $info
    *   (optional) An optional array with information about the argument.
    *   Defaults to an empty array.
    *
@@ -156,11 +152,11 @@ class ImagemagickExecArguments {
    * @param ?ArgumentMode $mode
    *   (optional) If set, limits the search to the mode of the argument.
    *   Defaults to NULL.
-   * @param array $info
+   * @param array<string, mixed> $info
    *   (optional) If set, limits the search to the arguments whose $info array
    *   key/values match the key/values specified. Defaults to an empty array.
    *
-   * @return array
+   * @return Arguments
    *   Returns an array with the matching arguments.
    */
   public function find(string $regex, ?ArgumentMode $mode = NULL, array $info = []): array {
@@ -295,14 +291,18 @@ class ImagemagickExecArguments {
   /**
    * Sets the source image frames to access.
    *
-   * @param string $frames
+   * Setting this to an empty string will ensure that the default source
+   * frames configured for the file type (if any) will no longer be applied.
+   *
+   * @param string|null $frames
    *   The frames in '[n]' string format.
    *
    * @return $this
    *
    * @see http://www.imagemagick.org/script/command-line-processing.php
+   * @see http://www.graphicsmagick.org/GraphicsMagick.html#files
    */
-  public function setSourceFrames(string $frames): static {
+  public function setSourceFrames(?string $frames): static {
     $this->sourceFrames = $frames;
     return $this;
   }
@@ -314,6 +314,7 @@ class ImagemagickExecArguments {
    *   The frames in '[n]' string format.
    *
    * @see http://www.imagemagick.org/script/command-line-processing.php
+   * @see http://www.graphicsmagick.org/GraphicsMagick.html#files
    */
   public function getSourceFrames(): ?string {
     return $this->sourceFrames ?? NULL;
@@ -322,12 +323,12 @@ class ImagemagickExecArguments {
   /**
    * Sets the image destination URI/path on saving.
    *
-   * @param string $destination
+   * @param string|null $destination
    *   The image destination URI/path.
    *
    * @return $this
    */
-  public function setDestination(string $destination): static {
+  public function setDestination(?string $destination): static {
     $this->destination = $destination;
     return $this;
   }
@@ -335,10 +336,10 @@ class ImagemagickExecArguments {
   /**
    * Gets the image destination URI/path on saving.
    *
-   * @return string
+   * @return string|null
    *   The image destination URI/path.
    */
-  public function getDestination(): string {
+  public function getDestination(): ?string {
     return $this->destination;
   }
 

@@ -32,13 +32,13 @@ image_formats:
     mime_type: image/webp
   AVIF:
     mime_type: image/avif
-    enabled: false
   TIFF:
     mime_type: image/tiff
     enabled: false
   PDF:
     mime_type: application/pdf
     enabled: false
+    identify_frames: '[0]'
   HEIC:
     mime_type: image/heif
     enabled: false

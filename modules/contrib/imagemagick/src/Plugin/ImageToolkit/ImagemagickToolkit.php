@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace Drupal\imagemagick\Plugin\ImageToolkit;
 
+use Drupal\Component\Plugin\Exception\PluginNotFoundException;
 use Drupal\Component\Render\FormattableMarkup;
 use Drupal\Component\Serialization\Exception\InvalidDataTypeException;
 use Drupal\Component\Serialization\Yaml;
 use Drupal\Component\Utility\Html;
 use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Extension\Requirement\RequirementSeverity;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\ImageToolkit\Attribute\ImageToolkit;
 use Drupal\Core\ImageToolkit\ImageToolkitBase;
@@ -25,7 +27,7 @@ use Drupal\imagemagick\ImagemagickFormatMapperInterface;
 use Drupal\imagemagick\PackageCommand;
 use Drupal\imagemagick\PackageSuite;
 use Psr\Log\LoggerInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 /**
@@ -75,39 +77,20 @@ class ImagemagickToolkit extends ImageToolkitBase {
   /**
    * The source image profiles.
    *
-   * @var string[]
+   * @var list<string>
    */
   protected array $profiles = [];
 
   /**
-   * Constructs an ImagemagickToolkit object.
-   *
-   * @param array $configuration
-   *   A configuration array containing information about the plugin instance.
-   * @param string $pluginId
-   *   The plugin_id for the plugin instance.
-   * @param array $pluginDefinition
-   *   The plugin implementation definition.
-   * @param \Drupal\Core\ImageToolkit\ImageToolkitOperationManagerInterface $operationManager
-   *   The toolkit operation manager.
-   * @param \Psr\Log\LoggerInterface $logger
-   *   A logger instance.
-   * @param \Drupal\Core\Config\ConfigFactoryInterface $configFactory
-   *   The config factory.
-   * @param \Drupal\imagemagick\ImagemagickFormatMapperInterface $formatMapper
-   *   The format mapper service.
-   * @param \Drupal\file_mdm\FileMetadataManagerInterface $fileMetadataManager
-   *   The file metadata manager service.
-   * @param \Drupal\imagemagick\ImagemagickExecManagerInterface $execManager
-   *   The ImageMagick execution manager service.
-   * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
-   *   The event dispatcher.
+   * @param array<string, mixed> $configuration
+   * @param array<string, mixed> $pluginDefinition
    */
   public function __construct(
     array $configuration,
     string $pluginId,
     array $pluginDefinition,
     ImageToolkitOperationManagerInterface $operationManager,
+    #[Autowire(service: 'logger.channel.image')]
     LoggerInterface $logger,
     ConfigFactoryInterface $configFactory,
     protected readonly ImagemagickFormatMapperInterface $formatMapper,
@@ -122,24 +105,7 @@ class ImagemagickToolkit extends ImageToolkitBase {
   /**
    * {@inheritdoc}
    */
-  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): static {
-    return new static(
-      $configuration,
-      $plugin_id,
-      $plugin_definition,
-      $container->get(ImageToolkitOperationManagerInterface::class),
-      $container->get('logger.channel.image'),
-      $container->get(ConfigFactoryInterface::class),
-      $container->get(ImagemagickFormatMapperInterface::class),
-      $container->get(FileMetadataManagerInterface::class),
-      $container->get(ImagemagickExecManagerInterface::class),
-      $container->get(EventDispatcherInterface::class),
-    );
-  }
-
-  /**
-   * {@inheritdoc}
-   */
+  // @phpstan-ignore-next-line
   public function buildConfigurationForm(array $form, FormStateInterface $form_state): array {
     $config = $this->configFactory->getEditable('imagemagick.settings');
 
@@ -388,6 +354,44 @@ class ImagemagickToolkit extends ImageToolkitBase {
   /**
    * {@inheritdoc}
    */
+  // @phpstan-ignore missingType.iterableValue
+  public function apply($operation, array $arguments = []) {
+    if ($operation === 'rotate' && !empty($arguments['background']) && strlen($arguments['background']) === 7) {
+      try {
+        // @phpstan-ignore offsetAccess.nonOffsetAccessible
+        if ($this->getToolkitOperation('rotate')->getPluginDefinition()['operation'] === 'rotate_ie') {
+          // Convert #rrggbb to #rrggbbaa as that is the format the plugin is
+          // expecting.
+          $arguments['background'] .= 'FF';
+        }
+      }
+      catch (PluginNotFoundException) {
+      }
+    }
+    return parent::apply($operation, $arguments);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function getToolkitOperation($operation) {
+    if ($operation === 'rotate') {
+      try {
+        return $this->operationManager->getToolkitOperation($this, 'rotate');
+      }
+      catch (PluginNotFoundException) {
+        // Fallback to using the 'rotate_ie' operation defined within
+        // the image_effects module.
+        $operation = 'rotate_ie';
+      }
+    }
+    return $this->operationManager->getToolkitOperation($this, $operation);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  // @phpstan-ignore missingType.iterableValue
   public function validateConfigurationForm(array &$form, FormStateInterface $form_state): void {
     try {
       // Check that the format map contains valid YAML.
@@ -423,6 +427,7 @@ class ImagemagickToolkit extends ImageToolkitBase {
   /**
    * {@inheritdoc}
    */
+  // @phpstan-ignore missingType.iterableValue
   public function submitConfigurationForm(array &$form, FormStateInterface $form_state): void {
     $config = $this->configFactory->getEditable('imagemagick.settings');
     $config
@@ -583,7 +588,7 @@ class ImagemagickToolkit extends ImageToolkitBase {
   /**
    * Gets the source profiles.
    *
-   * @return string[]
+   * @return list<string>
    *   The source profiles.
    */
   public function getProfiles(): array {
@@ -593,7 +598,7 @@ class ImagemagickToolkit extends ImageToolkitBase {
   /**
    * Sets the source profiles.
    *
-   * @param array $profiles
+   * @param list<string> $profiles
    *   The image profiles.
    *
    * @return $this
@@ -763,13 +768,6 @@ class ImagemagickToolkit extends ImageToolkitBase {
     $this->fileMetadataManager->deleteCachedMetadata($this->arguments()->getDestination());
     $this->fileMetadataManager->release($this->arguments()->getDestination());
 
-    // When destination format differs from source format, and source image
-    // is multi-frame, convert only the first frame.
-    $destination_format = $this->arguments()->getDestinationFormat() ?: $this->arguments()->getSourceFormat();
-    if ($this->arguments()->getSourceFormat() !== $destination_format && ($this->getFrames() === NULL || $this->getFrames() > 1)) {
-      $this->arguments()->setSourceFrames('[0]');
-    }
-
     // Execute the command and return.
     $output = '';
     $error = '';
@@ -779,11 +777,12 @@ class ImagemagickToolkit extends ImageToolkitBase {
   /**
    * {@inheritdoc}
    */
+  // @phpstan-ignore missingType.iterableValue
   public function getRequirements(): array {
     $reported_info = [];
-    if (stripos(ini_get('disable_functions'), 'proc_open') !== FALSE) {
+    if (stripos((string) ini_get('disable_functions'), 'proc_open') !== FALSE) {
       // proc_open() is disabled.
-      $severity = REQUIREMENT_ERROR;
+      $severity = RequirementSeverity::Error;
       $reported_info[] = $this->t("The <a href=':proc_open_url'>proc_open()</a> PHP function is disabled. It must be enabled for the toolkit to work. Edit the <a href=':disable_functions_url'>disable_functions</a> entry in your php.ini file, or consult your hosting provider.", [
         ':proc_open_url' => 'http://php.net/manual/en/function.proc-open.php',
         ':disable_functions_url' => 'http://php.net/manual/en/ini.core.php#ini.disable-functions',
@@ -795,7 +794,7 @@ class ImagemagickToolkit extends ImageToolkitBase {
       );
       if (!empty($status['errors'])) {
         // Can not execute 'convert'.
-        $severity = REQUIREMENT_ERROR;
+        $severity = RequirementSeverity::Error;
         foreach ($status['errors'] as $error) {
           $reported_info[] = $error;
         }
@@ -803,7 +802,7 @@ class ImagemagickToolkit extends ImageToolkitBase {
       }
       else {
         // No errors, report the version information.
-        $severity = REQUIREMENT_INFO;
+        $severity = RequirementSeverity::Info;
         $version_info = explode("\n", preg_replace('/\r/', '', Html::escape($status['output'])));
         $value = array_shift($version_info);
         $more_info_available = FALSE;
@@ -848,6 +847,7 @@ class ImagemagickToolkit extends ImageToolkitBase {
   /**
    * {@inheritdoc}
    */
+  // @phpstan-ignore missingType.iterableValue
   public static function getSupportedExtensions(): array {
     return \Drupal::service(ImagemagickFormatMapperInterface::class)->getEnabledExtensions();
   }

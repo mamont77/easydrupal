@@ -9,6 +9,19 @@ use Drupal\Core\StringTranslation\TranslatableMarkup;
 
 /**
  * Defines imagemagick Scale operation.
+ *
+ * @phpstan-type PreparedScaleArguments array{
+ *   width: ?numeric,
+ *   height: ?numeric,
+ *   upscale: bool,
+ *   filter: string,
+ * }
+ * @phpstan-type ScaleArguments array{
+ *   width: positive-int,
+ *   height: positive-int,
+ *   upscale: bool,
+ *   filter: string,
+ * }
  */
 #[ImageToolkitOperation(
   id: "imagemagick_scale",
@@ -20,7 +33,7 @@ use Drupal\Core\StringTranslation\TranslatableMarkup;
 class Scale extends Resize {
 
   /**
-   * {@inheritdoc}
+   * @return array<string, mixed>
    */
   protected function arguments(): array {
     return [
@@ -48,11 +61,13 @@ class Scale extends Resize {
   }
 
   /**
-   * {@inheritdoc}
+   * @param PreparedScaleArguments $arguments
+   * @return ScaleArguments
    */
   protected function validateArguments(array $arguments): array {
     // Fail if no dimensions available for current image.
     if (is_null($this->getToolkit()->getWidth()) || is_null($this->getToolkit()->getHeight())) {
+      // @phpstan-ignore offsetAccess.nonOffsetAccessible
       throw new \RuntimeException("No image dimensions available for the image '{$this->getPluginDefinition()['operation']}' operation");
     }
 
@@ -98,9 +113,9 @@ class Scale extends Resize {
   }
 
   /**
-   * {@inheritdoc}
+   * @param ScaleArguments $arguments
    */
-  protected function execute(array $arguments = []): bool {
+  protected function execute(array $arguments): bool {
     // Don't scale if we don't change the dimensions at all.
     if ($arguments['width'] !== $this->getToolkit()->getWidth() || $arguments['height'] !== $this->getToolkit()->getHeight()) {
       // Don't upscale if the option isn't enabled.

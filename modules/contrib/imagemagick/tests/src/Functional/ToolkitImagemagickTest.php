@@ -11,28 +11,42 @@ use Drupal\imagemagick\EventSubscriber\ImagemagickEventSubscriber;
 use Drupal\imagemagick\PackageSuite;
 use Drupal\Tests\BrowserTestBase;
 use Drupal\Tests\imagemagick\Kernel\ToolkitSetupTrait;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 
 /**
  * Tests that core image manipulations work properly through Imagemagick.
- *
- * @group imagemagick
  */
+#[Group('imagemagick')]
+#[RunTestsInSeparateProcesses]
 class ToolkitImagemagickTest extends BrowserTestBase {
 
   use ToolkitSetupTrait;
 
   // Colors that are used in testing.
   // @codingStandardsIgnoreStart
+  /** @var list<non-negative-int> $black */
   protected array $black             = [  0,   0,   0,   0];
+  /** @var list<non-negative-int> $red */
   protected array $red               = [255,   0,   0,   0];
+  /** @var list<non-negative-int> $green */
   protected array $green             = [  0, 255,   0,   0];
+  /** @var list<non-negative-int> $blue */
   protected array $blue              = [  0,   0, 255,   0];
+  /** @var list<non-negative-int> $yellow */
   protected array $yellow            = [255, 255,   0,   0];
+  /** @var list<non-negative-int> $fuchsia */
   protected array $fuchsia           = [255,   0, 255,   0];
+  /** @var list<non-negative-int> $cyan */
   protected array $cyan              = [  0, 255, 255,   0];
+  /** @var list<non-negative-int> $white */
   protected array $white             = [255, 255, 255,   0];
+  /** @var list<non-negative-int> $grey */
   protected array $grey              = [128, 128, 128,   0];
+  /** @var list<non-negative-int> $transparent */
   protected array $transparent       = [  0,   0,   0, 127];
+  /** @var list<non-negative-int> $rotateTransparent */
   protected array $rotateTransparent = [255, 255, 255, 127];
 
   protected int $width = 40;
@@ -85,11 +99,10 @@ class ToolkitImagemagickTest extends BrowserTestBase {
    *   The id of the toolkit to set up.
    * @param string $toolkit_config
    *   The config object of the toolkit to set up.
-   * @param array $toolkit_settings
+   * @param array<string, mixed> $toolkit_settings
    *   The settings of the toolkit to set up.
-   *
-   * @dataProvider providerToolkitConfiguration
    */
+  #[DataProvider('providerToolkitConfiguration')]
   public function testTemporaryRemoteCopiesDeletion(string $toolkit_id, string $toolkit_config, array $toolkit_settings): void {
     $this->setUpToolkit($toolkit_id, $toolkit_config, $toolkit_settings);
     $this->prepareImageFileHandling();
@@ -123,11 +136,10 @@ class ToolkitImagemagickTest extends BrowserTestBase {
    *   The id of the toolkit to set up.
    * @param string $toolkit_config
    *   The config object of the toolkit to set up.
-   * @param array $toolkit_settings
+   * @param array<string, mixed> $toolkit_settings
    *   The settings of the toolkit to set up.
-   *
-   * @dataProvider providerToolkitConfiguration
    */
+  #[DataProvider('providerToolkitConfiguration')]
   public function testDoubleCropping(string $toolkit_id, string $toolkit_config, array $toolkit_settings): void {
     $this->setUpToolkit($toolkit_id, $toolkit_config, $toolkit_settings);
     $this->prepareImageFileHandling();
@@ -163,11 +175,10 @@ class ToolkitImagemagickTest extends BrowserTestBase {
    *   The id of the toolkit to set up.
    * @param string $toolkit_config
    *   The config object of the toolkit to set up.
-   * @param array $toolkit_settings
+   * @param array<string, mixed> $toolkit_settings
    *   The settings of the toolkit to set up.
-   *
-   * @dataProvider providerToolkitConfiguration
    */
+  #[DataProvider('providerToolkitConfiguration')]
   public function testManipulations(string $toolkit_id, string $toolkit_config, array $toolkit_settings): void {
     $this->setUpToolkit($toolkit_id, $toolkit_config, $toolkit_settings);
     $this->prepareImageFileHandling();
@@ -451,8 +462,10 @@ class ToolkitImagemagickTest extends BrowserTestBase {
     // Test creation of image from scratch, and saving to storage.
     foreach ([IMAGETYPE_PNG, IMAGETYPE_GIF, IMAGETYPE_JPEG] as $type) {
       $image = $this->imageFactory->get();
-      $image->createNew(50, 20, image_type_to_extension($type, FALSE), '#ffff00');
-      $file = 'from_null' . image_type_to_extension($type);
+      $extension = image_type_to_extension($type, FALSE);
+      assert(is_string($extension));
+      $image->createNew(50, 20, $extension, '#ffff00');
+      $file = 'from_null.' . $extension;
       $file_path = $this->testDirectory . '/' . $file;
       $this->assertEquals(50, $image->getWidth(), "Image file '$file' has the correct width.");
       $this->assertEquals(20, $image->getHeight(), "Image file '$file' has the correct height.");
@@ -579,11 +592,10 @@ class ToolkitImagemagickTest extends BrowserTestBase {
    *   The id of the toolkit to set up.
    * @param string $toolkit_config
    *   The config object of the toolkit to set up.
-   * @param array $toolkit_settings
+   * @param array<string, mixed> $toolkit_settings
    *   The settings of the toolkit to set up.
-   *
-   * @dataProvider providerToolkitConfiguration
    */
+  #[DataProvider('providerToolkitConfiguration')]
   public function testNonAsciiFileNames(string $toolkit_id, string $toolkit_config, array $toolkit_settings): void {
     // @todo on Windows, GraphicsMagick fails.
     if (substr(PHP_OS, 0, 3) === 'WIN' && $toolkit_settings['binaries'] === 'graphicsmagick') {
@@ -630,11 +642,10 @@ class ToolkitImagemagickTest extends BrowserTestBase {
    *   The id of the toolkit to set up.
    * @param string $toolkit_config
    *   The config object of the toolkit to set up.
-   * @param array $toolkit_settings
+   * @param array<string, mixed> $toolkit_settings
    *   The settings of the toolkit to set up.
-   *
-   * @dataProvider providerToolkitConfiguration
    */
+  #[DataProvider('providerToolkitConfiguration')]
   public function testInvalidImage(string $toolkit_id, string $toolkit_config, array $toolkit_settings): void {
     $this->setUpToolkit($toolkit_id, $toolkit_config, $toolkit_settings);
 
@@ -656,11 +667,15 @@ class ToolkitImagemagickTest extends BrowserTestBase {
 
   /**
    * Function for finding a pixel's RGBa values.
+   *
+   * @return list<non-negative-int>
+   *   The color as an RGBA array.
    */
   protected function getPixelColor(ImageInterface $image, int $x, int $y): array {
     /** @var \Drupal\system\Plugin\ImageToolkit\GDToolkit $toolkit */
     $toolkit = $image->getToolkit();
     $color_index = imagecolorat($toolkit->getImage(), $x, $y);
+    assert(is_int($color_index));
 
     $transparent_index = imagecolortransparent($toolkit->getImage());
     if ($color_index == $transparent_index) {

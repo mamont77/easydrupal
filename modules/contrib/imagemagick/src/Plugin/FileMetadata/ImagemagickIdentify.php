@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Drupal\imagemagick\Plugin\FileMetadata;
 
+use Drupal\Core\Cache\CacheBackendInterface;
+use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\StreamWrapper\StreamWrapperManagerInterface;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\file_mdm\FileMetadataException;
 use Drupal\file_mdm\Plugin\Attribute\FileMetadata;
@@ -14,6 +17,7 @@ use Drupal\imagemagick\ImagemagickExecArguments;
 use Drupal\imagemagick\ImagemagickExecManagerInterface;
 use Drupal\imagemagick\PackageCommand;
 use Drupal\imagemagick\PackageSuite;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
@@ -27,21 +31,30 @@ use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 )]
 class ImagemagickIdentify extends FileMetadataPluginBase {
 
-  /**
-   * The event dispatcher.
-   */
-  protected readonly EventDispatcherInterface $eventDispatcher;
+  public function __construct(
+    array $configuration,
+    string $plugin_id,
+    array $plugin_definition,
+    #[Autowire(service: 'cache.file_mdm')]
+    CacheBackendInterface $cache,
+    ConfigFactoryInterface $configFactory,
+    StreamWrapperManagerInterface $streamWrapperManager,
+    protected readonly EventDispatcherInterface $eventDispatcher,
+    protected readonly ImagemagickExecManagerInterface $execManager,
+  ) {
+    parent::__construct($configuration, $plugin_id, $plugin_definition, $cache, $configFactory, $streamWrapperManager);
+  }
 
   /**
-   * The ImageMagick execution manager service.
+   * The ImageMagick execution arguments.
    */
-  protected readonly ImagemagickExecManagerInterface $execManager;
+  protected ?ImagemagickExecArguments $arguments;
 
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
-    $instance = parent::create($container, $configuration, $plugin_id, $plugin_definition);
-    $instance->execManager = $container->get(ImagemagickExecManagerInterface::class);
-    $instance->eventDispatcher = $container->get(EventDispatcherInterface::class);
-    return $instance;
+    // While file_mdm overrides PluginBase::create, we need to fallback to
+    // parent to allow autowiring.
+    // @todo remove the method when file_mdm:4.0.0 is out.
+    return static::createInstanceAutowired($container, $configuration, $plugin_id, $plugin_definition);
   }
 
   /**
@@ -160,9 +173,19 @@ class ImagemagickIdentify extends FileMetadataPluginBase {
   /**
    * Calls the identify executable on the specified file.
    *
-   * @return array
+   * @return array{
+   *     'source_local_path'?: string,
+   *     'data'?: array{
+   *       'format': string,
+   *       'width': int,
+   *       'height': int,
+   *       'colorspace'?: string,
+   *       'profiles'?: list<string>,
+   *       'exif_orientation'?: int,
+   *     }
+   *   }
    *   The array with identify metadata, if the file was parsed correctly.
-   *   NULL otherwise.
+   *   An empty array otherwise.
    */
   protected function identify(): array {
     $arguments = new ImagemagickExecArguments($this->execManager);
@@ -229,7 +252,20 @@ class ImagemagickIdentify extends FileMetadataPluginBase {
       $data['source_local_path'] = $arguments->getSourceLocalPath();
     }
 
+    $this->arguments = $arguments;
     return $data;
+  }
+
+  /**
+   * Returns the ImageMagick/GraphicsMagick execution arguments object.
+   *
+   * This represents the arguments used to identify the image.
+   *
+   * @return \Drupal\imagemagick\ImagemagickExecArguments|null
+   *   The ImageMagick/GraphicsMagick execution arguments object.
+   */
+  public function getArguments(): ?ImagemagickExecArguments {
+    return $this->arguments;
   }
 
 }

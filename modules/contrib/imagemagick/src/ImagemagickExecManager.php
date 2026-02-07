@@ -8,6 +8,7 @@ use Drupal\Component\Utility\Timer;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\Core\Session\AccountProxyInterface;
+use Drupal\Core\Site\Settings;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
@@ -28,24 +29,8 @@ class ImagemagickExecManager implements ImagemagickExecManagerInterface {
   /**
    * The execution timeout.
    */
-  protected int $timeout = 60;
+  protected int $timeout;
 
-  /**
-   * Constructs an ImagemagickExecManager object.
-   *
-   * @param \Psr\Log\LoggerInterface $logger
-   *   A logger instance.
-   * @param \Drupal\Core\Config\ConfigFactoryInterface $configFactory
-   *   The config factory.
-   * @param string $appRoot
-   *   The app root.
-   * @param \Drupal\Core\Session\AccountProxyInterface $currentUser
-   *   The current user.
-   * @param \Drupal\imagemagick\ImagemagickFormatMapperInterface $formatMapper
-   *   The format mapper service.
-   * @param \Drupal\Core\Messenger\MessengerInterface $messenger
-   *   The messenger service.
-   */
   public function __construct(
     #[Autowire(service: 'logger.channel.image')]
     protected readonly LoggerInterface $logger,
@@ -55,8 +40,13 @@ class ImagemagickExecManager implements ImagemagickExecManagerInterface {
     protected readonly AccountProxyInterface $currentUser,
     protected readonly ImagemagickFormatMapperInterface $formatMapper,
     protected readonly MessengerInterface $messenger,
+    Settings $settings,
   ) {
     $this->isWindows = substr(PHP_OS, 0, 3) === 'WIN';
+
+    // Allow overriding of the timeout (in seconds) using
+    // $settings['imagemagick.process.timeout'] in $settings[.environment].php.
+    $this->timeout = $settings->get('imagemagick.process.timeout', 60);
   }
 
   /**
@@ -253,7 +243,7 @@ class ImagemagickExecManager implements ImagemagickExecManagerInterface {
    * Builds a convert command for Imagemagick.
    *
    * ImageMagick v6 syntax: convert input [arguments] output.
-   * ImageMagick v7 syntax: magick convert input [arguments] output.
+   * ImageMagick v7 syntax: magick input [arguments] output.
    *
    * @param \Drupal\imagemagick\ImagemagickExecArguments $arguments
    *   An ImageMagick execution arguments object.
@@ -268,10 +258,7 @@ class ImagemagickExecManager implements ImagemagickExecManagerInterface {
    * @see http://www.imagemagick.org/Usage/basics/#cmdline
    */
   private function buildImagemagickConvertCommand(ImagemagickExecArguments $arguments, string $sourcePath, string $destinationPath): array {
-    $cmdline = match ($this->getPackageSuiteVersion(PackageSuite::Imagemagick)) {
-      'v7' => ['convert'],
-      default => [],
-    };
+    $cmdline = [];
     if (($pre = $arguments->toArray(ArgumentMode::PreSource)) !== []) {
       array_push($cmdline, ...$pre);
     }
@@ -367,7 +354,12 @@ class ImagemagickExecManager implements ImagemagickExecManagerInterface {
    *
    * @param string $message
    *   The debug message.
-   * @param array{'@suite': string|\Drupal\Core\StringTranslation\TranslatableMarkup, '@raw': string, '@return_code'?: int, '@execution_time'?: array} $context
+   * @param array{
+   *   '@suite': string|\Drupal\Core\StringTranslation\TranslatableMarkup,
+   *   '@raw': string,
+   *   '@return_code'?: int,
+   *   '@execution_time'?: array<string, mixed>
+   * } $context
    *   Context information.
    */
   public function debugMessage(string $message, array $context): void {

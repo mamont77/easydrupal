@@ -38,7 +38,7 @@ trait ToolkitSetupTrait {
    *   The id of the toolkit to set up.
    * @param string $toolkit_config
    *   The config object of the toolkit to set up.
-   * @param array $toolkit_settings
+   * @param array<string, mixed> $toolkit_settings
    *   The settings of the toolkit to set up.
    */
   protected function setUpToolkit(string $toolkit_id, string $toolkit_config, array $toolkit_settings): void {
@@ -57,7 +57,9 @@ trait ToolkitSetupTrait {
     // Check that ImageMagick or GraphicsMagick binaries are installed, and
     // mark the test skipped if not.
     if ($toolkit_id === 'imagemagick') {
-      $status = \Drupal::service('image.toolkit.manager')->createInstance('imagemagick')->getExecManager()->checkPath('');
+      /** @var \Drupal\imagemagick\Plugin\ImageToolkit\ImagemagickToolkit $toolkit */
+      $toolkit = \Drupal::service('image.toolkit.manager')->createInstance('imagemagick');
+      $status = $toolkit->getExecManager()->checkPath('');
       if (!empty($status['errors'])) {
         $this->markTestSkipped("Tests for '{$toolkit_settings['binaries']}' cannot run because the binaries are not available on the shell path.");
       }
@@ -71,7 +73,11 @@ trait ToolkitSetupTrait {
   /**
    * Provides toolkit configuration data for tests.
    *
-   * @return array[]
+   * @return array<string, array{
+   *     'toolkit_id': string,
+   *     'toolkit_config': string,
+   *     'toolkit_settings': array<string, mixed>,
+   *   }>
    *   An associative array, with key the toolkit scenario to be tested, and
    *   value an associative array with the following keys:
    *   - 'toolkit_id': the toolkit to be used in the test.

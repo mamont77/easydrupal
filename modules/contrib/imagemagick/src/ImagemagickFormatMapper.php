@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Drupal\imagemagick;
 
+use Drupal\Component\Utility\Html;
+use Drupal\Component\Utility\Xss;
 use Drupal\Core\Cache\Cache;
 use Drupal\Core\Cache\CacheBackendInterface;
 use Drupal\Core\Config\ConfigFactoryInterface;
@@ -22,18 +24,6 @@ class ImagemagickFormatMapper implements ImagemagickFormatMapperInterface {
   use SchemaCheckTrait;
   use StringTranslationTrait;
 
-  /**
-   * Constructs an ImagemagickFormatMapper object.
-   *
-   * @param \Drupal\Core\Cache\CacheBackendInterface $cache
-   *   The cache service.
-   * @param \Drupal\Core\Config\ConfigFactoryInterface $configFactory
-   *   The config factory.
-   * @param \Drupal\Core\Config\TypedConfigManagerInterface $typedConfig
-   *   The typed config service.
-   * @param \Drupal\sophron\MimeMapManagerInterface $mimeMapManager
-   *   The MIME map manager service.
-   */
   public function __construct(
     #[Autowire(service: 'cache.default')]
     protected readonly CacheBackendInterface $cache,
@@ -54,11 +44,25 @@ class ImagemagickFormatMapper implements ImagemagickFormatMapperInterface {
     $data['image_formats'] = $map;
 
     // Validates against schema.
-    $schema_errors = $this->checkConfigSchema($this->typedConfig, 'imagemagick.settings', $data);
-    if ($schema_errors !== TRUE) {
+    $schema_errors = $this->checkConfigSchema($this->typedConfig, 'imagemagick.settings', $data, TRUE);
+    if ($schema_errors === FALSE) {
+      $errors['schema'][] = $this->t("Configuration schema for @schema not found.", ['@schema' => 'imagemagick.settings']);
+    }
+    elseif ($schema_errors !== TRUE) {
       foreach ($schema_errors as $key => $value) {
-        [, $path] = explode(':', $key);
-        $components = explode('.', $path);
+        if (is_numeric($key)) {
+          // This is a constraint validation error.
+          [$path, $value] = explode(']', $value, 2);
+          $path = trim($path, '[');
+          $components = explode('.', $path);
+          // Validation errors may contain HTML, so they need to be stripped
+          // before being encoded back to YAML.
+          $value = trim(Xss::filter(Html::decodeEntities($value), []));
+        }
+        else {
+          [, $path] = explode(':', $key);
+          $components = explode('.', $path);
+        }
         if ($components[0] === 'image_formats') {
           if (isset($components[2])) {
             $errors[$components[1]]['variables'][$components[2]][] = $value;
@@ -150,7 +154,7 @@ class ImagemagickFormatMapper implements ImagemagickFormatMapperInterface {
    * Results are cached for subsequent access. Saving the config will
    * invalidate the cache.
    *
-   * @return array
+   * @return array<string, string>
    *   An associative array with ImageMagick formats as keys and their MIME
    *   type as values.
    */
@@ -186,7 +190,7 @@ class ImagemagickFormatMapper implements ImagemagickFormatMapperInterface {
    * Results are cached for subsequent access. Saving the config will
    * invalidate the cache.
    *
-   * @return array
+   * @return array<string, string>
    *   An associative array with file extensions as keys and their ImageMagick
    *   format as values.
    */

@@ -9,6 +9,19 @@ use Drupal\Core\StringTranslation\TranslatableMarkup;
 
 /**
  * Defines imagemagick Crop operation.
+ *
+ * @phpstan-type PreparedCropArguments array{
+ *   x: numeric,
+ *   y: numeric,
+ *   width: ?numeric,
+ *   height: ?numeric,
+ * }
+ * @phpstan-type CropArguments array{
+ *   x: non-negative-int,
+ *   y: non-negative-int,
+ *   width: positive-int,
+ *   height: positive-int,
+ * }
  */
 #[ImageToolkitOperation(
   id: "imagemagick_crop",
@@ -20,7 +33,7 @@ use Drupal\Core\StringTranslation\TranslatableMarkup;
 class Crop extends ImagemagickImageToolkitOperationBase {
 
   /**
-   * {@inheritdoc}
+   * @return array<string, mixed>
    */
   protected function arguments(): array {
     return [
@@ -44,11 +57,13 @@ class Crop extends ImagemagickImageToolkitOperationBase {
   }
 
   /**
-   * {@inheritdoc}
+   * @param PreparedCropArguments $arguments
+   * @return CropArguments
    */
   protected function validateArguments(array $arguments): array {
     // Fail if no dimensions available for current image.
     if (is_null($this->getToolkit()->getWidth()) || is_null($this->getToolkit()->getHeight())) {
+      // @phpstan-ignore offsetAccess.nonOffsetAccessible
       throw new \RuntimeException("No image dimensions available for the image '{$this->getPluginDefinition()['operation']}' operation");
     }
 
@@ -59,27 +74,36 @@ class Crop extends ImagemagickImageToolkitOperationBase {
 
     // Preserve aspect.
     $aspect = $this->getToolkit()->getHeight() / $this->getToolkit()->getWidth();
-    $arguments['height'] = empty($arguments['height']) ? $arguments['width'] * $aspect : $arguments['height'];
-    $arguments['width'] = empty($arguments['width']) ? $arguments['height'] / $aspect : $arguments['width'];
+    $arguments['height'] = (int) (empty($arguments['height']) ? $arguments['width'] * $aspect : $arguments['height']);
+    $arguments['width'] = (int) (empty($arguments['width']) ? $arguments['height'] / $aspect : $arguments['width']);
 
     // Assure integers for all arguments.
+    $output = [];
     foreach (['x', 'y', 'width', 'height'] as $key) {
-      $arguments[$key] = (int) round($arguments[$key]);
+      $output[$key] = (int) round((float) $arguments[$key]);
     }
 
     // Fail when width or height are 0 or negative.
-    if ($arguments['width'] <= 0) {
-      throw new \InvalidArgumentException("Invalid width ('{$arguments['width']}') specified for the image 'crop' operation");
+    if ($output['width'] <= 0) {
+      throw new \InvalidArgumentException("Invalid width ('{$output['width']}') specified for the image 'crop' operation");
     }
-    if ($arguments['height'] <= 0) {
-      throw new \InvalidArgumentException("Invalid height ('{$arguments['height']}') specified for the image 'crop' operation");
+    if ($output['height'] <= 0) {
+      throw new \InvalidArgumentException("Invalid height ('{$output['height']}') specified for the image 'crop' operation");
     }
 
-    return $arguments;
+    // Fail when x or y are negative.
+    if ($output['x'] < 0) {
+      throw new \InvalidArgumentException("Invalid x ('{$output['x']}') specified for the image 'crop' operation");
+    }
+    if ($output['y'] < 0) {
+      throw new \InvalidArgumentException("Invalid y ('{$output['y']}') specified for the image 'crop' operation");
+    }
+
+    return $output;
   }
 
   /**
-   * {@inheritdoc}
+   * @param CropArguments $arguments
    */
   protected function execute(array $arguments): bool {
     // Even though the crop effect in Drupal core does not allow for negative

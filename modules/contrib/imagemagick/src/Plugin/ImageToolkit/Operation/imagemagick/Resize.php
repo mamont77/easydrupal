@@ -9,6 +9,19 @@ use Drupal\Core\StringTranslation\TranslatableMarkup;
 
 /**
  * Defines imagemagick resize operation.
+ *
+ * @phpstan-type PreparedResizeArguments array{
+ *   width: numeric,
+ *   height: numeric,
+ *   upscale: bool,
+ *   filter: string,
+ * }
+ * @phpstan-type ResizeArguments array{
+ *   width: positive-int,
+ *   height: positive-int,
+ *   upscale: bool,
+ *   filter: string,
+ * }
  */
 #[ImageToolkitOperation(
   id: "imagemagick_resize",
@@ -20,7 +33,7 @@ use Drupal\Core\StringTranslation\TranslatableMarkup;
 class Resize extends ImagemagickImageToolkitOperationBase {
 
   /**
-   * {@inheritdoc}
+   * @return array<string, mixed>
    */
   protected function arguments(): array {
     return [
@@ -29,6 +42,11 @@ class Resize extends ImagemagickImageToolkitOperationBase {
       ],
       'height' => [
         'description' => 'The new height of the resized image, in pixels',
+      ],
+      'upscale' => [
+        'description' => 'Boolean indicating that files smaller than the dimensions will be scaled up. This generally results in a low quality image',
+        'required' => FALSE,
+        'default' => FALSE,
       ],
       'filter' => [
         'description' => 'An optional filter to apply for the resize',
@@ -39,12 +57,13 @@ class Resize extends ImagemagickImageToolkitOperationBase {
   }
 
   /**
-   * {@inheritdoc}
+   * @param PreparedResizeArguments $arguments
+   * @return ResizeArguments
    */
   protected function validateArguments(array $arguments): array {
     // Assure integers for all arguments.
-    $arguments['width'] = (int) round($arguments['width']);
-    $arguments['height'] = (int) round($arguments['height']);
+    $arguments['width'] = (int) round((float) $arguments['width']);
+    $arguments['height'] = (int) round((float) $arguments['height']);
 
     // Fail when width or height are 0 or negative.
     if ($arguments['width'] <= 0) {
@@ -58,9 +77,9 @@ class Resize extends ImagemagickImageToolkitOperationBase {
   }
 
   /**
-   * {@inheritdoc}
+   * @param ResizeArguments $arguments
    */
-  protected function execute(array $arguments = []): bool {
+  protected function execute(array $arguments): bool {
     if (!empty($arguments['filter'])) {
       $this->addArguments(['-filter', $arguments['filter']]);
     }
