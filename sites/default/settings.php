@@ -526,6 +526,7 @@ if ($settings['hash_salt']) {
  * about securing private files.
  */
 # $settings['file_private_path'] = '';
+$settings['file_private_path'] = 'sites/default/files/private';
 
 /**
  * Temporary file path:

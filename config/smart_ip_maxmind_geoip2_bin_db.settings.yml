@@ -1,0 +1,8 @@
+_core:
+  default_config_hash: fnYOwh8XmrJE6mWThh6ESo387LMfIvK4J8jDKJYL6Qg
+version: lite
+edition: city
+user_account: '236076'
+license_key: y7OSix33SLk8tjQc
+db_auto_update: true
+bin_file_custom_path: ''

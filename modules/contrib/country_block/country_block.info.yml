@@ -1,0 +1,12 @@
+name: Country Block
+type: module
+description: 'Blocks users from specific countries.'
+core_version_requirement: ^10 || ^11
+package: Custom
+dependencies:
+  - smart_ip:smart_ip
+
+# Information added by Drupal.org packaging script on 2026-02-07
+version: '1.0.2'
+project: 'country_block'
+datestamp: 1770464899

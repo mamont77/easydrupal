@@ -1,0 +1,5 @@
+_core:
+  default_config_hash: U6JjNJFli72PcOYPYwayYxwKqGpZ40Hh-FpmQBJ15ss
+blocked_countries:
+  - RU
+message: 'Access from your country is not permitted.'

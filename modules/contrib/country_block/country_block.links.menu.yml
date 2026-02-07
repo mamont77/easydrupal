@@ -1,0 +1,5 @@
+country_block.settings:
+  title: 'Country Block'
+  description: 'Configure which countries to block.'
+  parent: system.admin_config_system
+  route_name: country_block.settings

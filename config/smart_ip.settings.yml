@@ -1,0 +1,20 @@
+_core:
+  default_config_hash: shw4iv2Lr5GoD_YlLlPuo621mnZN7b4SZJVcphJ-G54
+data_source: maxmind_geoip2_bin_db
+roles_to_geolocate:
+  anonymous: anonymous
+  authenticated: authenticated
+  administrator: '0'
+save_user_location_creation: false
+roles_in_debug_mode:
+  anonymous: false
+  authenticated: false
+  administrator: false
+roles_in_debug_mode_ip:
+  anonymous: ''
+  authenticated: ''
+  administrator: 23.106.36.142
+allowed_pages: '/user/*'
+excluded_ips: ''
+eu_visitor_dont_save: false
+timezone_format: identifier

@@ -1973,7 +1973,7 @@ progress {
 }
 
 .form-text {
-  margin-top: 0;
+  margin-top: 0.25rem;
   font-size: 0.875em;
   color: #6c757d;
 }
@@ -2549,7 +2549,7 @@ textarea.form-control-lg {
 .valid-feedback {
   display: none;
   width: 100%;
-  margin-top: 0;
+  margin-top: 0.25rem;
   font-size: 0.875em;
   color: #198754;
 }
@@ -2639,7 +2639,7 @@ textarea.form-control-lg {
 .invalid-feedback {
   display: none;
   width: 100%;
-  margin-top: 0;
+  margin-top: 0.25rem;
   font-size: 0.875em;
   color: #dc3545;
 }
@@ -11073,6 +11073,9 @@ a[class=button] {
   min-width: 5rem;
 }
 
+input.form-text {
+  margin-top: 0;
+}
 input[type=search] {
   box-sizing: border-box;
 }
@@ -11248,7 +11251,13 @@ footer.footer-dark a:hover {
 }
 footer .region-footer {
   display: flex;
-  flex-direction: column;
+  gap: 40px;
+}
+@media screen and (max-width: 767px) {
+  footer .region-footer {
+    flex-direction: column;
+    gap: 30px;
+  }
 }
 
 .region-sidebar-first,
@@ -11270,6 +11279,11 @@ footer .region-footer {
   flex-shrink: 0;
 }
 
+@media (min-width: 992px) {
+  .region-nav-additional {
+    display: flex;
+  }
+}
 .tabs-primary {
   margin: 1rem 0;
 }
@@ -11336,6 +11350,14 @@ a.tabledrag-handle .handle {
 
 table {
   caption-side: unset;
+}
+
+.admin-dblog .table .icon {
+  background-color: var(--bs-table-bg-state, var(--bs-table-bg-type, var(--bs-table-accent-bg, var(--bs-table-bg))));
+}
+.admin-dblog .table > :not(caption) > * > * {
+  box-shadow: unset;
+  background-color: var(--bs-table-bg-state, var(--bs-table-bg-type, var(--bs-table-accent-bg, var(--bs-table-bg))));
 }
 
 .progress {

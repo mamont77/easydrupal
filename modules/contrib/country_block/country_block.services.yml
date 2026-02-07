@@ -1,0 +1,6 @@
+services:
+  country_block.event_subscriber:
+    class: Drupal\country_block\EventSubscriber\CountryBlockSubscriber
+    arguments: ['@current_user', '@config.factory']
+    tags:
+      - { name: event_subscriber }

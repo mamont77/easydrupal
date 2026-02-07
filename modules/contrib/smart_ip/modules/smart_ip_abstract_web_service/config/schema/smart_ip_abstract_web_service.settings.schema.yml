@@ -1,0 +1,10 @@
+smart_ip_abstract_web_service.settings:
+  type: config_object
+  label: 'Smart IP Abstract IP Geolocation web service settings'
+  mapping:
+    version:
+      type: integer
+      label: 'Abstract IP Geolocation web service API version.'
+    api_key:
+      type: string
+      label: 'Abstract IP Geolocation web service API key.'

@@ -1,0 +1,10 @@
+name: Smart IP
+type: module
+description: Smart IP identify visitor's geographical location (longitude/latitude), country, region, city and postal code based on the IP address of the visitor.
+core_version_requirement: ^10.1 || ^11
+package: Location
+configure: smart_ip.settings
+# Information added by Drupal.org packaging script on 2024-11-28
+version: '5.0.0-alpha4'
+project: 'smart_ip'
+datestamp: 1732813043
