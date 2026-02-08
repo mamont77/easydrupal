@@ -182,6 +182,9 @@
             "drupal/geshifilter": {
                 "3137937: Theme functions are deprecated in geshifield": "https://www.drupal.org/files/issues/2020-11-06/theme_function_deprecated--3137937-2.patch"
             },
+            "drupal/smart_ip": {
+                "#3350345: TypeError: Cannot assign string to property Drupal\\smart_ip\\SmartIpLocation::$latitude": "https://www.drupal.org/files/issues/2025-10-10/3350345-18.patch"
+            },
             "drupal/config_partial_export": {
                 "3429470: D11": "https://git.drupalcode.org/project/config_partial_export/-/merge_requests/5.diff"
             },

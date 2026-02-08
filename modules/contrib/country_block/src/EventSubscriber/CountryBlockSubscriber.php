@@ -6,6 +6,7 @@ namespace Drupal\country_block\EventSubscriber;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Session\AccountInterface;
+use Drupal\smart_ip\SmartIpLocationInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
@@ -17,7 +18,7 @@ use Symfony\Component\HttpKernel\KernelEvents;
  * This subscriber listens to kernel requests and denies access to users
  * from countries defined in the module's configuration.
  */
-final class CountryBlockSubscriber implements EventSubscriberInterface {
+final readonly class CountryBlockSubscriber implements EventSubscriberInterface {
 
   /**
    * Constructs a new CountryBlockSubscriber.
@@ -26,11 +27,15 @@ final class CountryBlockSubscriber implements EventSubscriberInterface {
    *   The current user.
    * @param \Drupal\Core\Config\ConfigFactoryInterface $configFactory
    *   The config factory.
+   * @param \Drupal\smart_ip\SmartIpLocationInterface $locationService
+   *   The smart ip location service.
    */
   public function __construct(
-    private readonly AccountInterface $currentUser,
-    private readonly ConfigFactoryInterface $configFactory,
-  ) {}
+    private AccountInterface         $currentUser,
+    private ConfigFactoryInterface   $configFactory,
+    private SmartIpLocationInterface $locationService,
+  ) {
+  }
 
   /**
    * {@inheritdoc}
@@ -51,32 +56,29 @@ final class CountryBlockSubscriber implements EventSubscriberInterface {
    *   The dispatched event.
    *
    * @throws \Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException
+   * @throws \Exception
    *   Thrown when the user's country is in the blocked list.
    */
   public function checkCountryBlock(RequestEvent $event): void {
+    if (!$event->isMainRequest()) {
+      return;
+    }
+
     // Do not block users with permission to administer site configuration.
     if ($this->currentUser->hasPermission('administer site configuration')) {
       return;
     }
 
     $config = $this->configFactory->get('country_block.settings');
-    $blocked_countries = $config->get('blocked_countries') ?? [];
+    $blockedCountries = $config->get('blocked_countries') ?? [];
 
-    if (empty($blocked_countries)) {
+    if (empty($blockedCountries)) {
       return;
     }
 
-    // Current visitor location.
-    /** @var \Drupal\smart_ip\SmartIpLocation $locationService */
-    $locationService = \Drupal::service('smart_ip.smart_ip_location');
-    $location = $locationService->getData();
-    if (empty($location)) {
-      return;
-    }
+    $countryCode = $this->locationService->get('countryCode');
 
-    $country_code = $location->get('countryCode');
-
-    if ($country_code !== NULL && in_array($country_code, $blocked_countries, TRUE)) {
+    if ($countryCode !== NULL && in_array($countryCode, $blockedCountries, TRUE)) {
       $message = $config->get('message') ?? 'Access from your country is not permitted.';
       throw new AccessDeniedHttpException($message);
     }

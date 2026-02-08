@@ -1,5 +1,5 @@
 country_block.settings:
-  path: '/admin/config/system/country-block'
+  path: '/admin/config/people/country-block'
   defaults:
     _form: '\Drupal\country_block\Form\SettingsForm'
     _title: 'Country Block Settings'

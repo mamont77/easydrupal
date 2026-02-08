@@ -1,6 +1,6 @@
 services:
   country_block.event_subscriber:
     class: Drupal\country_block\EventSubscriber\CountryBlockSubscriber
-    arguments: ['@current_user', '@config.factory']
+    arguments: ['@current_user', '@config.factory', '@smart_ip.smart_ip_location']
     tags:
-      - { name: event_subscriber }
+      - { name: event_subscriber, priority: 10 }

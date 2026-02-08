@@ -6,7 +6,7 @@ package: Custom
 dependencies:
   - smart_ip:smart_ip
 
-# Information added by Drupal.org packaging script on 2026-02-07
-version: '1.0.2'
+# Information added by Drupal.org packaging script on 2026-02-08
+version: '1.0.3'
 project: 'country_block'
-datestamp: 1770464899
+datestamp: 1770554607

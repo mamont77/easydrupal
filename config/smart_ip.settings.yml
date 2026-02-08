@@ -7,14 +7,14 @@ roles_to_geolocate:
   administrator: '0'
 save_user_location_creation: false
 roles_in_debug_mode:
-  anonymous: false
+  anonymous: true
   authenticated: false
   administrator: false
 roles_in_debug_mode_ip:
-  anonymous: ''
-  authenticated: ''
-  administrator: 23.106.36.142
-allowed_pages: '/user/*'
+  anonymous: 195.47.194.73
+  authenticated: 195.47.194.73
+  administrator: 195.47.194.73
+allowed_pages: ''
 excluded_ips: ''
 eu_visitor_dont_save: false
 timezone_format: identifier
