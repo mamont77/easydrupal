@@ -10,7 +10,7 @@
     "gulp": "^3.9.1",
     "gulp-imagemin": "^4.1.0",
     "gulp-postcss": "^7.0.1",
-    "gulp-sass": "^4.0.1",
+    "gulp-sass": "^6.0.1",
     "gulp-sourcemaps": "^2.6.5",
     "gulp-uncss": "^1.0.6",
     "gulp.spritesmith": "^6.12.1"
