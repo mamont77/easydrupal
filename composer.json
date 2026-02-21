@@ -99,7 +99,7 @@
         "discard-changes": true,
         "optimize-autoloader": true,
         "platform": {
-            "php": "8.3"
+            "php": "8.4"
         },
         "allow-plugins": {
             "composer/installers": true,
@@ -187,6 +187,12 @@
             },
             "drupal/config_partial_export": {
                 "3429470: D11": "https://git.drupalcode.org/project/config_partial_export/-/merge_requests/5.diff"
+            },
+            "drupal/image_widget_crop": {
+                "3491004: Can't save image widget crop settings (ImmutableConfigException)": "https://git.drupalcode.org/project/image_widget_crop/-/merge_requests/37.diff"
+            },
+            "drupal/rabbit_hole": {
+                "Fix Multiple Implicit Nullable Parameters for PHP 8.4 Compatibility": "https://git.drupalcode.org/project/rabbit_hole/-/merge_requests/82.diff"
             },
             "npm-asset/slick-carousel": {
                 "3467129: Incompatibility with Drupal 11/jQuery 4": "https://www.drupal.org/files/issues/2025-02-17/compatibility_jQuery_4.patch"

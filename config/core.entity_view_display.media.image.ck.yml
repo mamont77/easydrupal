@@ -7,9 +7,8 @@ dependencies:
     - field.field.media.image.field_media_categories
     - field.field.media.image.field_media_image
     - media.type.image
-    - responsive_image.styles.feedback_portrait
   module:
-    - blazy
+    - image
 _core:
   default_config_hash: B1a2aBHmUulUZN6HrxITEH1tSResuVjXMBEv1lUBtOo
 id: media.image.ck
@@ -18,36 +17,15 @@ bundle: image
 mode: ck
 content:
   field_media_image:
-    type: blazy
-    label: visually_hidden
+    type: image
+    label: above
     settings:
-      caption:
-        title: '0'
-        alt: '0'
-      layout: ''
-      view_mode: ''
-      cache: 0
-      background: false
-      box_caption: ''
-      box_caption_custom: ''
-      box_media_style: ''
-      loading: lazy
-      preload: false
-      responsive_image_style: feedback_portrait
-      use_theme_field: false
-      box_style: ''
+      image_link: ''
       image_style: ''
-      media_switch: ''
-      ratio: ''
-      thumbnail_style: ''
-      grid: ''
-      grid_medium: ''
-      grid_small: ''
-      style: ''
-      lazy: ''
-      skin: ''
+      image_loading:
+        attribute: lazy
     third_party_settings: {  }
-    weight: 0
+    weight: 1
     region: content
 hidden:
   created: true

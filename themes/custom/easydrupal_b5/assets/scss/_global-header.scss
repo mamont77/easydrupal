@@ -33,7 +33,7 @@ header {
     background-color: $color-neutral-2;
   }
 
-  .navigation {
+  nav[role=navigation] {
     .navbar-nav {
       --bs-nav-link-padding-x: 0;
       --bs-nav-link-padding-y: .75rem;

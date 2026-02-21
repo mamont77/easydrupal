@@ -74,7 +74,7 @@ class BehaviorInvoker implements BehaviorInvokerInterface {
    * @param \Drupal\Core\Extension\ModuleHandlerInterface $module_handler
    *   The module handler.
    */
-  public function __construct(BehaviorSettingsManager $rabbit_hole_behavior_settings_manager, RabbitHoleBehaviorPluginManager $plugin_manager_rabbit_hole_behavior_plugin, RabbitHoleEntityPluginManager $plugin_manager_rabbit_hole_entity_plugin, EntityExtender $entity_extender, AccountProxyInterface $current_user, ModuleHandlerInterface $module_handler = NULL) {
+  public function __construct(BehaviorSettingsManager $rabbit_hole_behavior_settings_manager, RabbitHoleBehaviorPluginManager $plugin_manager_rabbit_hole_behavior_plugin, RabbitHoleEntityPluginManager $plugin_manager_rabbit_hole_entity_plugin, EntityExtender $entity_extender, AccountProxyInterface $current_user, ?ModuleHandlerInterface $module_handler = NULL) {
     $this->rhBehaviorSettingsManager = $rabbit_hole_behavior_settings_manager;
     $this->rhBehaviorPluginManager = $plugin_manager_rabbit_hole_behavior_plugin;
     $this->rhEntityPluginManager = $plugin_manager_rabbit_hole_entity_plugin;
@@ -122,7 +122,7 @@ class BehaviorInvoker implements BehaviorInvokerInterface {
   /**
    * {@inheritdoc}
    */
-  public function processEntity(ContentEntityInterface $entity, Response $current_response = NULL) {
+  public function processEntity(ContentEntityInterface $entity, ?Response $current_response = NULL) {
     $plugin = $this->getBehaviorPlugin($entity);
 
     if ($plugin === NULL) {

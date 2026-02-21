@@ -480,9 +480,9 @@ class FormManglerService {
     array &$form,
     FormStateInterface $form_state,
     $form_id,
-    EntityInterface $entity = NULL,
+    ?EntityInterface $entity = NULL,
     $entity_is_bundle = FALSE,
-    ImmutableConfig $bundle_settings = NULL
+    ?ImmutableConfig $bundle_settings = NULL
   ) {
 
     foreach ($this->rhBehaviorPluginManager->getDefinitions() as $id => $def) {

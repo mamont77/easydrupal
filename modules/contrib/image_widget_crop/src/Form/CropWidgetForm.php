@@ -48,7 +48,7 @@ class CropWidgetForm extends ConfigFormBase {
    */
   public static function create(ContainerInterface $container) {
     $instance = parent::create($container);
-    $instance->settings = $container->get('config.factory')->get('image_widget_crop.settings');
+    $instance->settings = $container->get('config.factory')->getEditable('image_widget_crop.settings');
     $instance->imageWidgetCropManager = $container->get('image_widget_crop.manager');
     $instance->moduleHandler = $container->get('module_handler');
     $instance->httpClient = $container->get('http_client');

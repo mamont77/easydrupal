@@ -1,0 +1,47 @@
+uuid: 04cc465c-6172-4739-9eda-7bcca9405e81
+langcode: en
+status: true
+dependencies:
+  module:
+    - file
+    - node
+label: Default
+id: default
+description: 'A default Linkit profile.'
+matchers:
+  76ed9bad-6e0f-4339-b58a-359f6b13b7ba:
+    id: 'entity:node'
+    uuid: 76ed9bad-6e0f-4339-b58a-359f6b13b7ba
+    settings:
+      metadata: 'by [node:author] | [node:created:short]'
+      bundles:
+        article: article
+        landingpage: landingpage
+        page: page
+        project: project
+      group_by_bundle: true
+      substitution_type: canonical
+      limit: 100
+      include_unpublished: false
+    weight: 0
+  73491c57-af1d-41a8-a8b8-4283280f996e:
+    id: 'entity:file'
+    uuid: 73491c57-af1d-41a8-a8b8-4283280f996e
+    settings:
+      metadata: ''
+      bundles: null
+      group_by_bundle: null
+      substitution_type: file
+      limit: 100
+      file_extensions: 'pdf doc docx xls xlsx ppt pptx rtf'
+      file_status: 1
+      images:
+        show_dimensions: false
+        show_thumbnail: false
+        thumbnail_image_style: null
+    weight: 0
+  f0fc3709-0257-4918-9eab-a911639c72a6:
+    id: email
+    uuid: f0fc3709-0257-4918-9eab-a911639c72a6
+    settings: {  }
+    weight: 0

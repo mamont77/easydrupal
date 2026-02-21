@@ -25,7 +25,7 @@ content:
       responsive_image_style: project_slider
       image_link: ''
       image_loading:
-        attribute: eager
+        attribute: lazy
     third_party_settings:
       fences:
         fences_field_tag: none

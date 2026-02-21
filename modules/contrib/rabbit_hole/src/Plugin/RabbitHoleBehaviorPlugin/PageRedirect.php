@@ -114,7 +114,7 @@ class PageRedirect extends RabbitHoleBehaviorPluginBase implements ContainerFact
   /**
    * {@inheritdoc}
    */
-  public function performAction(EntityInterface $entity, Response $current_response = NULL) {
+  public function performAction(EntityInterface $entity, ?Response $current_response = NULL) {
     $target = $this->getActionTarget($entity);
     $response_code = $this->getActionResponseCode($entity);
 
@@ -254,9 +254,9 @@ class PageRedirect extends RabbitHoleBehaviorPluginBase implements ContainerFact
     array &$form,
     FormStateInterface $form_state,
     $form_id,
-    EntityInterface $entity = NULL,
+    ?EntityInterface $entity = NULL,
     $entity_is_bundle = FALSE,
-    ImmutableConfig $bundle_settings = NULL
+    ?ImmutableConfig $bundle_settings = NULL
   ) {
 
     $redirect = NULL;
