@@ -433,19 +433,20 @@
         if (drupalSettings.data.extlink.extUseFontAwesome) {
           iconElement = document.createElement('span');
           iconElement.setAttribute('class', `fa-${className} extlink`);
+
           if (className === drupalSettings.data.extlink.mailtoClass) {
             if (drupalSettings.data.extlink.mailtoLabel) {
-              link.ariaLabel = drupalSettings.data.extlink.mailtoLabel;
+              iconElement.setAttribute('aria-label', drupalSettings.data.extlink.mailtoLabel);
             }
             iconElement.innerHTML = Drupal.theme('extlink_fa_mailto', drupalSettings, iconPlacement);
           } else if (className === drupalSettings.data.extlink.extClass) {
             if (drupalSettings.data.extlink.extLabel) {
-              link.ariaLabel = drupalSettings.data.extlink.extLabel;
+              iconElement.setAttribute('aria-label', drupalSettings.data.extlink.extLabel);
             }
             iconElement.innerHTML = Drupal.theme('extlink_fa_extlink', drupalSettings, iconPlacement);
           } else if (className === drupalSettings.data.extlink.telClass) {
             if (drupalSettings.data.extlink.telLabel) {
-              link.ariaLabel = drupalSettings.data.extlink.telLabel;
+              iconElement.setAttribute('aria-label', drupalSettings.data.extlink.telLabel);
             }
             iconElement.innerHTML = Drupal.theme('extlink_fa_tel', drupalSettings, iconPlacement);
           }
@@ -465,6 +466,9 @@
           }
         }
         iconElement.setAttribute('role', 'img');
+        if (!iconElement.getAttribute('aria-label')) {
+          iconElement.setAttribute('aria-label', drupalSettings.data.extlink.extLabel);
+        }
         iconElement.setAttribute('aria-hidden', drupalSettings.data.extlink.extHideIcons);
         link[iconPlacement](iconElement);
       }

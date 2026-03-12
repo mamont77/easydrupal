@@ -103,7 +103,8 @@ class ImageStyleDownloadController extends FileDownloadController {
    *   Thrown when the file is still being generated.
    */
   public function deliver(Request $request, $scheme, ImageStyleInterface $image_style) {
-    $target = $request->query->get('file');
+    // Ensure a string is passed to string functions (PHP 8.1+ deprecation).
+    $target = (string) $request->query->get('file', '');
     $image_uri = $scheme . '://' . $target;
 
     if ($webp_wanted = preg_match('/\.webp$/', $image_uri)) {

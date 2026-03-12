@@ -194,6 +194,13 @@
             "drupal/rabbit_hole": {
                 "Fix Multiple Implicit Nullable Parameters for PHP 8.4 Compatibility": "https://git.drupalcode.org/project/rabbit_hole/-/merge_requests/82.diff"
             },
+            "drupal/extlink": {
+                "3497604: Accessibility issue - [role=\"img\"] elements must have an alternative text": "https://git.drupalcode.org/project/extlink/-/merge_requests/54.diff",
+                "3492645: Aria label overrides link text": "https://git.drupalcode.org/project/extlink/-/merge_requests/52.diff"
+            },
+            "drupal/webp": {
+                "3556428: Fix deprecation: ltrim() null argument in ImageStyleDownloadController": "https://git.drupalcode.org/project/webp/-/merge_requests/53.diff"
+            },
             "npm-asset/slick-carousel": {
                 "3467129: Incompatibility with Drupal 11/jQuery 4": "https://www.drupal.org/files/issues/2025-02-17/compatibility_jQuery_4.patch"
             }
