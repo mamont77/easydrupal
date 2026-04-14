@@ -61,6 +61,13 @@ function country_field_widget_country_default_form_alter(&$element, FormStateInt
 function country_field_widget_info_alter(array &$info) {
   // Allow boxes/radio buttons widget to be used for country field.
   $info['options_buttons']['field_types'][] = 'country';
+
+  // Add Tagify widget support if the module is enabled.
+  if (\Drupal::moduleHandler()->moduleExists('tagify')) {
+    if (isset($info['tagify_select_widget'])) {
+      $info['tagify_select_widget']['field_types'][] = 'country';
+    }
+  }
 }
 
 /**

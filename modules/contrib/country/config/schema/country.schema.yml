@@ -41,3 +41,17 @@ views.sort.country_item:
     default_sort:
       type: boolean
       label: 'Sort by ISO code'
+
+field.widget.settings.country_autocomplete:
+  type: mapping
+  label: 'Country autocomplete widget settings'
+  mapping:
+    size:
+      type: string
+      label: 'Size'
+    autocomplete_route_name:
+      type: string
+      label: 'Autocomplete route name'
+    placeholder:
+      type: label
+      label: 'Placeholder'

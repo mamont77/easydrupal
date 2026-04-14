@@ -31,7 +31,10 @@
         "drupal/blazy": "^3.0",
         "drupal/bootstrap5": "^4.0",
         "drupal/captcha": "^2.0",
-        "drupal/config_partial_export": "2.x-dev@dev",
+        "drupal/ckeditor5_paste_filter": "^1.1",
+        "drupal/ckeditor5_plugin_pack": "^1.5",
+        "drupal/ckeditor5_premium_features": "^1.8",
+        "drupal/config_partial_export": "^2.0@beta",
         "drupal/core-composer-scaffold": "^11.3",
         "drupal/core-project-message": "^11.3",
         "drupal/core-recommended": "^11.3",
@@ -184,9 +187,6 @@
             },
             "drupal/smart_ip": {
                 "#3350345: TypeError: Cannot assign string to property Drupal\\smart_ip\\SmartIpLocation::$latitude": "https://www.drupal.org/files/issues/2025-10-10/3350345-18.patch"
-            },
-            "drupal/config_partial_export": {
-                "3429470: D11": "https://git.drupalcode.org/project/config_partial_export/-/merge_requests/5.diff"
             },
             "drupal/image_widget_crop": {
                 "3491004: Can't save image widget crop settings (ImmutableConfigException)": "https://git.drupalcode.org/project/image_widget_crop/-/merge_requests/37.diff"

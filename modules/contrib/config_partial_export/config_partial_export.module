@@ -21,7 +21,7 @@ function config_partial_export_file_download($uri): array|bool {
   $date = DateTime::createFromFormat('U', $request->server->get('REQUEST_TIME'));
   $date_string = $date->format('Y-m-d-H-i');
   $hostname = str_replace('.', '-', $request->getHttpHost());
-  $filename = 'config_partial' . '-' . $hostname . '-' . $date_string . '.tar.gz';
+  $filename = "config_partial-{$hostname}-{$date_string}.tar.gz";
   $disposition = 'attachment; filename="' . $filename . '"';
 
   return [

@@ -26,11 +26,11 @@ include:
 variables:
 #   SKIP_ESLINT: '1'
 #   _CURL_TEMPLATES_REF: 'main'
-    OPT_IN_TEST_NEXT_MAJOR: '1'
 
 ################ CUSTOMIZATION DIFFERING FROM THE TEMPLATE BY DA ################
 
-    RUN_JOB_UPGRADE_STATUS: '1' # Source: https://web.archive.org/web/20240705205824/https://www.hojtsy.hu/blog/2024-jul-05/continuous-forward-compatibility-checking-extensions-drupal-12-13-etc
+#   RUN_JOB_UPGRADE_STATUS: '1' # Source: https://web.archive.org/web/20240705205824/https://www.hojtsy.hu/blog/2024-jul-05/continuous-forward-compatibility-checking-extensions-drupal-12-13-etc
+#   OPT_IN_TEST_NEXT_MAJOR: '1'
     _CSPELL_WORDS:
-      value: 'Balu,Ertl,Kovács,László,Cheppers,cpex,webform'
+      value: 'Balu,Ertl,Kovács,László,Cheppers,cpex,webform,testadmin'
       description: 'Hungarian and other irregular words to not mark as incorrect.'

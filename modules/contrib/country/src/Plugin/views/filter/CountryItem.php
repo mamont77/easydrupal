@@ -5,6 +5,7 @@ namespace Drupal\country\Plugin\views\filter;
 use Drupal\Core\Entity\EntityFieldManagerInterface;
 use Drupal\Core\Entity\EntityTypeBundleInfoInterface;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\country\CountryFieldManager;
 use Drupal\views\Plugin\views\display\DisplayPluginBase;
 use Drupal\views\Plugin\views\filter\ManyToOne;
 use Drupal\views\ViewExecutable;
@@ -34,6 +35,13 @@ class CountryItem extends ManyToOne {
   protected $entityTypeBundleInfo;
 
   /**
+   * The country field manager.
+   *
+   * @var \Drupal\country\CountryFieldManager
+   */
+  protected $countryFieldManager;
+
+  /**
    * Constructs a new instance.
    *
    * @param array $configuration
@@ -46,11 +54,14 @@ class CountryItem extends ManyToOne {
    *   EntityManager that is stored internally and used to load nodes.
    * @param \Drupal\Core\Entity\EntityTypeBundleInfoInterface $entity_type_bundle_info
    *   The entity type bundle info.
+   * @param \Drupal\country\CountryFieldManager $country_field_manager
+   *   The country field manager.
    */
-  public function __construct(array $configuration, $plugin_id, array $plugin_definition, EntityFieldManagerInterface $entity_field_manager, EntityTypeBundleInfoInterface $entity_type_bundle_info) {
+  public function __construct(array $configuration, $plugin_id, array $plugin_definition, EntityFieldManagerInterface $entity_field_manager, EntityTypeBundleInfoInterface $entity_type_bundle_info, CountryFieldManager $country_field_manager) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
     $this->entityFieldManager = $entity_field_manager;
     $this->entityTypeBundleInfo = $entity_type_bundle_info;
+    $this->countryFieldManager = $country_field_manager;
   }
 
   /**
@@ -62,7 +73,8 @@ class CountryItem extends ManyToOne {
       $plugin_id,
       $plugin_definition,
       $container->get('entity_field.manager'),
-      $container->get('entity_type.bundle.info')
+      $container->get('entity_type.bundle.info'),
+      $container->get('country.field.manager')
     );
   }
 
@@ -235,9 +247,8 @@ class CountryItem extends ManyToOne {
     }
 
     $countries = $this->options['country_target_bundle'] == 'global'
-      ? \Drupal::service('country.field.manager')->getList()
-      : \Drupal::service('country.field.manager')
-        ->getSelectableCountries($this->getFieldDefinition());
+      ? $this->countryFieldManager->getList()
+      : $this->countryFieldManager->getSelectableCountries($this->getFieldDefinition());
     $this->valueOptions = $countries;
 
     return $this->valueOptions;

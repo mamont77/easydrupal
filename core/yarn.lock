@@ -3102,7 +3102,7 @@ __metadata:
     terser-webpack-plugin: "npm:^5.3.14"
     transliteration: "npm:^2.3.5"
     tua-body-scroll-lock: "npm:^1.6.0"
-    underscore: "npm:~1.13.7"
+    underscore: "npm:^1.13.8"
     webpack: "npm:^5.102.1"
     webpack-cli: "npm:^6.0.1"
   languageName: unknown
@@ -5702,9 +5702,9 @@ __metadata:
   linkType: hard
 
 "flatted@npm:^3.2.9, flatted@npm:^3.3.3":
-  version: 3.4.2
-  resolution: "flatted@npm:3.4.2"
-  checksum: 10c0/a65b67aae7172d6cdf63691be7de6c5cd5adbdfdfe2e9da1a09b617c9512ed794037741ee53d93114276bff3f93cd3b0d97d54f9b316e1e4885dde6e9ffdf7ed
+  version: 3.3.3
+  resolution: "flatted@npm:3.3.3"
+  checksum: 10c0/e957a1c6b0254aa15b8cce8533e24165abd98fadc98575db082b786b5da1b7d72062b81bfdcd1da2f4d46b6ed93bec2434e62333e9b4261d79ef2e75a10dd538
   languageName: node
   linkType: hard
 
@@ -10727,10 +10727,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"underscore@npm:>=1.8.3, underscore@npm:~1.13.7":
+"underscore@npm:>=1.8.3":
   version: 1.13.7
   resolution: "underscore@npm:1.13.7"
   checksum: 10c0/fad2b4aac48847674aaf3c30558f383399d4fdafad6dd02dd60e4e1b8103b52c5a9e5937e0cc05dacfd26d6a0132ed0410ab4258241240757e4a4424507471cd
+  languageName: node
+  linkType: hard
+
+"underscore@npm:^1.13.8":
+  version: 1.13.8
+  resolution: "underscore@npm:1.13.8"
+  checksum: 10c0/6677688daeda30484823e77c0b89ce4dcf29964a77d5a06f37299c007ab4bb1c66a0ff75e0d274620b62a1fe2a6ba29879f8214533ca611d71a1ae504f2bfc9b
   languageName: node
   linkType: hard
 

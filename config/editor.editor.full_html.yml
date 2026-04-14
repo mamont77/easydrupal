@@ -30,10 +30,11 @@ settings:
       - horizontalLine
       - codeBlock
       - '-'
-      - code
       - heading
       - style
+      - code
       - '|'
+      - wproofreader
       - sourceEditing
   plugins:
     ckeditor5_alignment:
@@ -48,15 +49,6 @@ settings:
           label: 'Plain text'
           language: plaintext
         -
-          label: C
-          language: c
-        -
-          label: 'C#'
-          language: cs
-        -
-          label: C++
-          language: cpp
-        -
           label: CSS
           language: css
         -
@@ -65,9 +57,6 @@ settings:
         -
           label: HTML
           language: html
-        -
-          label: Java
-          language: java
         -
           label: JavaScript
           language: javascript
@@ -78,14 +67,17 @@ settings:
           label: Python
           language: python
         -
-          label: Ruby
-          language: ruby
-        -
-          label: TypeScript
-          language: typescript
-        -
           label: XML
           language: xml
+        -
+          label: JSON
+          language: json
+        -
+          label: PRE
+          language: pre
+        -
+          label: CSV
+          language: csv
     ckeditor5_heading:
       enabled_headings:
         - heading2
@@ -99,6 +91,79 @@ settings:
         startIndex: true
         styles: true
       multiBlock: true
+    ckeditor5_paste_filter_pasteFilter:
+      enabled: true
+      filters:
+        -
+          enabled: true
+          weight: -10
+          search: '<o:p><\/o:p>'
+          replace: ''
+        -
+          enabled: true
+          weight: -9
+          search: '(<[^>]*) (style="[^"]*")'
+          replace: $1
+        -
+          enabled: true
+          weight: -8
+          search: '(<[^>]*) (face="[^"]*")'
+          replace: $1
+        -
+          enabled: true
+          weight: -7
+          search: '(<[^>]*) (class="[^"]*")'
+          replace: $1
+        -
+          enabled: true
+          weight: -6
+          search: '(<[^>]*) (valign="[^"]*")'
+          replace: $1
+        -
+          enabled: true
+          weight: -5
+          search: '<font[^>]*>'
+          replace: ''
+        -
+          enabled: true
+          weight: -4
+          search: '<\/font>'
+          replace: ''
+        -
+          enabled: true
+          weight: -3
+          search: '<span[^>]*>'
+          replace: ''
+        -
+          enabled: true
+          weight: -2
+          search: '<\/span>'
+          replace: ''
+        -
+          enabled: true
+          weight: -1
+          search: '<p>&nbsp;<\/p>'
+          replace: ''
+        -
+          enabled: true
+          weight: 0
+          search: '<p><\/p>'
+          replace: ''
+        -
+          enabled: true
+          weight: 1
+          search: '<b><\/b>'
+          replace: ''
+        -
+          enabled: true
+          weight: 2
+          search: '<i><\/i>'
+          replace: ''
+        -
+          enabled: true
+          weight: 3
+          search: '<a name="OLE_LINK[^"]*">(.*?)<\/a>'
+          replace: $1
     ckeditor5_sourceEditing:
       allowed_tags: {  }
     ckeditor5_style:
@@ -118,8 +183,33 @@ settings:
         -
           label: 'No wrap'
           element: '<p class="text-nowrap">'
+        -
+          label: 'Responsive Table'
+          element: '<div class="table-responsive">'
+        -
+          label: 'Bootstrap Table'
+          element: '<table class="table">'
+        -
+          label: 'Bordered Table'
+          element: '<table class="table-bordered">'
+        -
+          label: 'Hover Table'
+          element: '<table class="table-hover">'
+        -
+          label: 'Small Table'
+          element: '<table class="table-sm">'
+        -
+          label: 'Striped Table'
+          element: '<table class="table-striped">'
+        -
+          label: 'Dark Table'
+          element: '<table class="table-dark">'
+        -
+          label: 'Dark Table Heading'
+          element: '<thead class="thead-dark">'
     editor_advanced_link_link:
       enabled_attributes:
+        - aria-label
         - class
         - rel
         - target

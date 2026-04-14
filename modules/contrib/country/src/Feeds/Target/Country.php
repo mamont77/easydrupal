@@ -11,7 +11,7 @@ use Drupal\feeds\Plugin\Type\Target\FieldTargetBase;
  *
  * @FeedsTarget(
  *   id = "country",
- *   field_types = {"address_country"}
+ *   field_types = {"country"}
  * )
  */
 class Country extends FieldTargetBase {

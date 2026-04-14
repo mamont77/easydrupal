@@ -201,7 +201,7 @@ class ConfigPartialExportForm extends FormBase {
       'status_checkbox_system' => (bool) $add_system_site_info,
     ];
     $this->state->set('config_partial_export_form', $last_selection);
-    $this->createArchive(array_filter($change_list), $add_system_site_info);
+    $this->createArchive(array_filter($change_list), (bool) $add_system_site_info);
     $form_state->setRedirect('config_partial.export_partial_download');
   }
 
