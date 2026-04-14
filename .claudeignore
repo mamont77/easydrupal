@@ -1,0 +1,9 @@
+*.log
+.DS_Store
+docroot/core
+docroot/sites/*/files
+docroot/sites/*/private
+sourcemaps
+node_modules
+vendor
+/backups
