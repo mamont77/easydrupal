@@ -11,6 +11,7 @@ dependencies:
   module:
     - editor
     - geshifilter
+    - highlight_js
     - linkit
     - media
 _core:
@@ -91,6 +92,12 @@ filters:
     weight: -40
     settings:
       filter_url_length: 72
+  highlight_js:
+    id: highlight_js
+    provider: highlight_js
+    status: true
+    weight: 100
+    settings: {  }
   linkit:
     id: linkit
     provider: linkit

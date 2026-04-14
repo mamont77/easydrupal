@@ -54,6 +54,7 @@
         "drupal/file_mdm": "^3.0",
         "drupal/filefield_paths": "^1.0@beta",
         "drupal/google_analytics": "^4.0",
+        "drupal/highlight_js": "^1.2",
         "drupal/honeypot": "^2.2",
         "drupal/image_widget_crop": "^3.0",
         "drupal/imagemagick": "^5.0",

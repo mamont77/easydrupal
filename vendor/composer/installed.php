@@ -3,7 +3,7 @@
         'name' => 'drupal/legacy-project',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => '9d4e63a4a051bb219fc6c95f7d6889fa7ed88fd9',
+        'reference' => 'da8c9da17988b966a455f2ee78800b685c9ae175',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -682,6 +682,15 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'drupal/highlight_js' => array(
+            'pretty_version' => '1.2.0',
+            'version' => '1.2.0.0',
+            'reference' => '1.2.0',
+            'type' => 'drupal-module',
+            'install_path' => __DIR__ . '/../../modules/contrib/highlight_js',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'drupal/honeypot' => array(
             'pretty_version' => '2.2.2',
             'version' => '2.2.2.0',
@@ -712,7 +721,7 @@
         'drupal/legacy-project' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => '9d4e63a4a051bb219fc6c95f7d6889fa7ed88fd9',
+            'reference' => 'da8c9da17988b966a455f2ee78800b685c9ae175',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
