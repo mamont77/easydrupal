@@ -102,7 +102,7 @@
         "discard-changes": true,
         "optimize-autoloader": true,
         "platform": {
-            "php": "8.4"
+            "php": "8.3"
         },
         "allow-plugins": {
             "composer/installers": true,
