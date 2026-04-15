@@ -11938,6 +11938,9 @@ a > .ck-content code {
 .ck-content .field--name-body p:last-of-type {
   margin-bottom: 0;
 }
+.ck-content .language-plaintext {
+  color: var(--bs-code-color);
+}
 .ck-content .is-b-loading::before {
   background: #81a5bf;
 }

@@ -114,6 +114,10 @@ blockquote {
   }
 }
 
+.language-plaintext {
+  color: var(--bs-code-color);
+}
+
 .is-b-loading::before {
   background: $color-neutral-2;
 }
