@@ -4,25 +4,22 @@
   "keywords": [
     "administration",
     "developer",
-    "mail",
-    "utility"
+    "utility",
+    "security"
   ],
   "type": "drupal-module",
   "license": "GPL-2.0-or-later",
   "homepage": "https://drupal.org/project/advupdate",
   "authors": [
     {
-      "name": "Ruslan Piskarev",
+      "name": "Ruslan Piskarov",
       "email": "ruslan.piskarev@gmail.com",
       "homepage": "http://makedrupaleasy.com",
       "role": "Maintainer"
     }
   ],
   "support": {
-    "issues": "https://drupal.org/project/issues/advupdate",
-    "source": "http://cgit.drupalcode.org/advupdate"
-  },
-  "require": {
-    "drupal/core": "^8.7.7 || ^9 || ^10 || ^11"
+    "issues": "https://www.drupal.org/project/issues/advupdate",
+    "source": "https://git.drupalcode.org/project/advupdate"
   }
 }

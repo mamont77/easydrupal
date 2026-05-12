@@ -4,10 +4,9 @@ Module modifies the Drupal "`Available updates`" email report to include
 the information normally shown at `/admin/reports/updates/update`, 
 with links to the module updates and their release notes.
 
-The module very similar to 
-"[Update Status Detailed Email]
-(https://www.drupal.org/project/update_detailed_email)",
-however, implemented in another way.
+The module is very similar to
+[Update Status Detailed Email](https://www.drupal.org/project/update_detailed_email),
+however, implemented in a different way.
 
 For a full description of the module, visit the
 [project page](https://www.drupal.org/project/advupdate).
@@ -44,9 +43,9 @@ then enable the module as usual OR install manually as usual.
    functionality of this module 
    without un-installing the module, you can do the following:
 
-2. Go to "`Home > Administration > Reports > Available updates`"
-   and disable the checkbox at "`Expand the report using 
-   "`Update Manager Advanced`" module`".
+2. Go to "Home > Administration > Reports > Available updates"
+   and disable the checkbox at "Expand the report using
+   `Update Manager Advanced` module".
 
 
 ## Maintainers

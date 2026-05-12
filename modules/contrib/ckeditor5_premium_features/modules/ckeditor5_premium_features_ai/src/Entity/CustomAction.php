@@ -33,7 +33,7 @@ use Drupal\Core\Config\Entity\ConfigEntityBase;
  *     }
  *   },
  *   config_prefix = "ckeditor5_ai_custom_action",
- *   admin_permission = "ckeditor ai manage custom actions",
+ *   admin_permission = "administer ckeditor ai",
  *   links = {
  *     "collection" = "/admin/structure/ckeditor-ai-custom-actions",
  *     "add-form" = "/admin/structure/ckeditor-ai-custom-actions/add",

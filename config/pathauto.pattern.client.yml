@@ -2,17 +2,18 @@ uuid: 17909a02-3f90-47de-85cb-3fa559e1f30d
 langcode: en
 status: true
 dependencies:
+  config:
+    - node.type.client
   module:
     - node
 id: client
 label: Client
 type: 'canonical_entities:node'
-pattern: 'client/[node:title]'
+pattern: '/client/[node:title]'
 selection_criteria:
   9325f4c2-e210-4ba5-a4ca-75d4a8b19a24:
     id: 'entity_bundle:node'
     negate: false
-    uuid: 9325f4c2-e210-4ba5-a4ca-75d4a8b19a24
     context_mapping:
       node: node
     bundles:

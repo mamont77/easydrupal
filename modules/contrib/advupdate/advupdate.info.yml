@@ -1,13 +1,14 @@
 name: Update Manager Advanced
 type: module
 description: "The module modifies the Drupal \"Updates available\" email to include the information normally shown at /admin/reports/updates/update, with links to the module updates and their release notes."
-core_version_requirement: ^8 || ^9 || ^10 || ^11
+core_version_requirement: ^11.3
 package: Development
 dependencies:
   - drupal:update
+  - drupal:block
 configure: update.settings
 
-# Information added by Drupal.org packaging script on 2024-08-09
-version: '8.x-1.4'
+# Information added by Drupal.org packaging script on 2026-04-17
+version: '8.x-2.2'
 project: 'advupdate'
-datestamp: 1723189896
+datestamp: 1776434946

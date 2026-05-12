@@ -162,17 +162,23 @@ class HighlightCssFileCreator {
         continue;
       }
 
-      $typeValue = $marker['type'];
-      $className = $this->getHighlightClass($typeValue, $format, $marker['title'], $marker['class_suffix'] ?? NULL);
+      $typeValues = is_array($marker['type'])
+        ? array_filter($marker['type'], fn($value) => !empty($value))
+        : [$marker['type']];
 
-      if ($typeValue === 'marker') {
-        $className .= ' { ' . 'background-color: ' . $marker['color'] . '; }';
-      }
-      else {
-        $className .= ' { ' . 'background-color: transparent; color: ' . $marker['color'] . '; }';
-      }
+      foreach ($typeValues as $typeKey => $typeValue) {
+        $typeValue = is_string($typeKey) ? $typeKey : $typeValue;
+        $className = $this->getHighlightClass($typeValue, $format, $marker['title'], $marker['class_suffix'] ?? NULL);
 
-      $data .= '.' . $className . "\n";
+        if ($typeValue === 'marker') {
+          $className .= ' { ' . 'background-color: ' . $marker['color'] . '; }';
+        }
+        else {
+          $className .= ' { ' . 'background-color: transparent; color: ' . $marker['color'] . '; }';
+        }
+
+        $data .= '.' . $className . "\n";
+      }
     }
 
     return $data;

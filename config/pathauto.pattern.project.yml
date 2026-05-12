@@ -2,17 +2,18 @@ uuid: fbabbc0a-d964-4c33-a38b-20511940eb08
 langcode: en
 status: true
 dependencies:
+  config:
+    - node.type.project
   module:
     - node
 id: project
 label: Project
 type: 'canonical_entities:node'
-pattern: 'projects/[node:title]'
+pattern: '/projects/[node:title]'
 selection_criteria:
   1ce27ce5-3438-4a74-8fa2-0de43b054cd4:
     id: 'entity_bundle:node'
     negate: false
-    uuid: 1ce27ce5-3438-4a74-8fa2-0de43b054cd4
     context_mapping:
       node: node
     bundles:

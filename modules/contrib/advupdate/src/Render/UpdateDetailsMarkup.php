@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\advupdate\Render;
 
 use Drupal\Component\Render\MarkupInterface;
@@ -10,7 +12,7 @@ use Drupal\update\UpdateFetcherInterface;
 use Drupal\update\UpdateManagerInterface;
 
 /**
- * Render safe html output of update details.
+ * Render safe HTML output of update details.
  *
  * Update details can be considered safe as it is the project names and update
  * links provided by the Drupal.org project infrastructure. In preparation of
@@ -29,11 +31,12 @@ class UpdateDetailsMarkup implements MarkupInterface {
    * @return \Drupal\Component\Render\MarkupInterface
    *   The UpdateDetailsMarkup instance.
    */
-  public static function createFromProjectData(array $project_data) {
+  public static function createFromProjectData(array $project_data): MarkupInterface {
+    $build = [];
 
     // This will be a nested array. The first key is the kind of project, which
     // can be either 'enabled', 'disabled', 'manual' (projects which require
-    // manual updates, such as core). Then, each sub-array is an array of
+    // manual updates, such as core). Then, each subarray is an array of
     // projects of that type, indexed by project short name, and containing an
     // array of data for items.
     $projects = [];
@@ -82,7 +85,7 @@ class UpdateDetailsMarkup implements MarkupInterface {
           break;
 
         default:
-          // Jump out of the switch and onto the next project in foreach.
+          // Jump out of the switch and onto the next project in the foreach.
           continue 2;
       }
 
@@ -120,7 +123,7 @@ class UpdateDetailsMarkup implements MarkupInterface {
       ];
 
       // Based on what kind of project this is, save the entry into the
-      // appropriate sub-array.
+      // appropriate subarray.
       switch ($project['project_type']) {
         case 'core':
           // Core needs manual updates at this time.
@@ -169,7 +172,7 @@ class UpdateDetailsMarkup implements MarkupInterface {
       ];
     }
 
-    // Render output into MarkupInterface to allow html output.
+    // Render output into MarkupInterface to allow HTML output.
     $renderer = \Drupal::service('renderer');
     $safe_string = new static();
     $safe_string->string = $renderer->render($build);
@@ -177,7 +180,7 @@ class UpdateDetailsMarkup implements MarkupInterface {
   }
 
   /**
-   * Overridden MarkupTrait::create method to prevent it being used this way.
+   * Overridden MarkupTrait::create a method to prevent it being used this way.
    *
    * @param string $string
    *   Input string to turn into a safe string.
@@ -185,7 +188,7 @@ class UpdateDetailsMarkup implements MarkupInterface {
    * @return string
    *   The string 'Not permitted'.
    */
-  public static function create($string) {
+  public static function create($string): string {
     return 'Not permitted.';
   }
 

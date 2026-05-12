@@ -2,17 +2,18 @@ uuid: 8f3c5445-1842-4b67-b7eb-a94dac391def
 langcode: en
 status: true
 dependencies:
+  config:
+    - taxonomy.vocabulary.versions
   module:
     - taxonomy
 id: version
 label: Version
 type: 'canonical_entities:taxonomy_term'
-pattern: 'version/[term:name]'
+pattern: '/version/[term:name]'
 selection_criteria:
   5801438f-8acb-4673-a25d-6f8d95ff005f:
     id: 'entity_bundle:taxonomy_term'
     negate: false
-    uuid: 5801438f-8acb-4673-a25d-6f8d95ff005f
     context_mapping:
       taxonomy_term: taxonomy_term
     bundles:

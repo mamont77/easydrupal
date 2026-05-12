@@ -140,6 +140,13 @@ class LinkitWidget extends LinkWidget {
 
     if (!empty($item->options['data-entity-type']) && !empty($item->options['data-entity-uuid'])) {
       $entity = $this->entityRepository->loadEntityByUuid($item->options['data-entity-type'], $item->options['data-entity-uuid']);
+      // Fix any mismatches between field value and options due to errors saved
+      // before https://www.drupal.org/project/linkit/issues/3570672 was fixed.
+      if ($entity && $uri && $uriEntity = LinkitHelper::getEntityFromUri($uri)) {
+        if ($entity->getEntityTypeId() !== $uriEntity->getEntityTypeId() || $entity->uuid() !== $uriEntity->uuid()) {
+          $entity = $uriEntity;
+        }
+      }
     }
     else {
       $entity = $default_allowed && $uri ? LinkitHelper::getEntityFromUri($uri) : NULL;

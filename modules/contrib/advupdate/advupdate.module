@@ -5,6 +5,7 @@
  * Contains advupdate.module.
  */
 
+use Drupal\Component\Render\MarkupInterface;
 use Drupal\advupdate\Render\UpdateDetailsMarkup;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
@@ -13,23 +14,23 @@ use Drupal\Core\Url;
 /**
  * Implements hook_help().
  */
-function advupdate_help($route_name, RouteMatchInterface $route_match) {
+function advupdate_help($route_name, RouteMatchInterface $route_match): string {
+  $output = '';
   switch ($route_name) {
     // Main module help for the advupdate module.
     case 'help.page.advupdate':
-      $output = '';
-      $output .= '<h3>' . t('About') . '</h3>';
+      $output = '<h3>' . t('About') . '</h3>';
       $output .= '<p>' . t('The module modifies the Drupal "Updates available" email to include the information normally shown at /admin/reports/updates/update, with links to the module updates and their release notes.') . '</p>';
-      return $output;
-
     default:
   }
+
+  return $output;
 }
 
 /**
  * Implements hook_form_FORM_ID_alter().
  */
-function advupdate_form_update_settings_alter(&$form, FormStateInterface $form_state, $form_id) {
+function advupdate_form_update_settings_alter(&$form, FormStateInterface $form_state, $form_id): void {
   $advupdate_config = \Drupal::config('advupdate.settings');
 
   $form['update_notification_extend_email_report'] = [
@@ -45,7 +46,7 @@ function advupdate_form_update_settings_alter(&$form, FormStateInterface $form_s
 /**
  * Save "notification.extend_email_report" to the configuration.
  */
-function advupdate_form_update_settings_submit_handler($form, FormStateInterface $form_state) {
+function advupdate_form_update_settings_submit_handler($form, FormStateInterface $form_state): void {
   \Drupal::configFactory()->getEditable('advupdate.settings')
     ->set('notification.extend_email_report', $form_state->getValue('update_notification_extend_email_report'))
     ->save();
@@ -54,7 +55,7 @@ function advupdate_form_update_settings_submit_handler($form, FormStateInterface
 /**
  * Implements hook_mail_alter().
  */
-function advupdate_mail_alter(&$message) {
+function advupdate_mail_alter(&$message): void {
   if ($message['id'] == 'update_status_notify'
     && \Drupal::config('advupdate.settings')
       ->get('notification.extend_email_report') == 1) {
@@ -72,8 +73,10 @@ function advupdate_mail_alter(&$message) {
 
 /**
  * Render a list for available updating of core/modules/themes.
+ *
+ * @return \Drupal\Component\Render\MarkupInterface|false
  */
-function _advupdate_mail_additional_data() {
+function _advupdate_mail_additional_data(): MarkupInterface|false {
   \Drupal::moduleHandler()->loadInclude('update', 'module');
   \Drupal::moduleHandler()->loadInclude('update', 'inc', 'update.compare');
 

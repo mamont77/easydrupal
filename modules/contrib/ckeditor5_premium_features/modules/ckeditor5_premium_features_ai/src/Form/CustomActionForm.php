@@ -113,6 +113,13 @@ final class CustomActionForm extends EntityForm {
    */
   public function submitForm(array &$form, FormStateInterface $form_state): void {
     parent::submitForm($form, $form_state);
+    $form_state->setRedirect('entity.ckeditor5_ai_custom_action.collection');
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function save(array $form, FormStateInterface $form_state): int|null {
     $values = $form_state->getValues();
     // Remove unchecked checkboxes.
     if (isset($values['textFormats']) && is_array($values['textFormats'])) {
@@ -123,8 +130,7 @@ final class CustomActionForm extends EntityForm {
     $this->entity->set('prompt', $values['prompt'] ?? NULL);
     $this->entity->set('type', $values['type'] ?? NULL);
     $this->entity->set('model', $values['model'] ?? NULL);
-
-    $form_state->setRedirect('entity.ckeditor5_ai_custom_action.collection');
+    return $this->entity->save();
   }
 
   private function getModelOptions(): array {

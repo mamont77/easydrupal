@@ -2,3 +2,10 @@
 
 # Author / Noun
 Piskarov
+
+# Project-specific
+advupdate
+
+# HTML/Security attributes
+noopener
+noreferrer

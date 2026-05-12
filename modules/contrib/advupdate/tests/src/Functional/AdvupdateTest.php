@@ -3,12 +3,14 @@
 namespace Drupal\Tests\advupdate\Functional;
 
 use Drupal\Tests\update\Functional\UpdateTestBase;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 
 /**
  * Tests the Update Manager Advanced module through a series of tests.
- *
- * @group update
  */
+#[Group('advupdate')]
+#[RunTestsInSeparateProcesses]
 class AdvupdateTest extends UpdateTestBase {
 
   /**
