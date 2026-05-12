@@ -6,7 +6,7 @@
   "private": true,
   "devDependencies": {
     "autoprefixer": "^10.4.13",
-    "postcss": "^8.4.33",
+    "postcss": "^8.5.10",
     "bootstrap": "^5.3.3",
     "gulp": "^4.0.2",
     "gulp-imagemin": "^8.0.0",
