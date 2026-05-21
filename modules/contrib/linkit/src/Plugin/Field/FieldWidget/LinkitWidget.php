@@ -202,9 +202,21 @@ class LinkitWidget extends LinkWidget {
       '#type' => 'hidden',
       '#default_value' => $entity ? $entity->uuid() : '',
     ];
+
+    // Set the fallback substitution type.
+    $substitution_type = $entity && $entity->getEntityTypeId() === 'file' ? 'file' : 'canonical';
+    if ($entity && $linkit_profile = $this->linkitProfileStorage->load($this->getSetting('linkit_profile'))) {
+      /** @var \Drupal\linkit\ProfileInterface $linkit_profile */
+      $matcher = $linkit_profile->getMatcherByEntityType($entity->getEntityTypeId());
+      $matcher_configuration = $matcher ? $matcher->getConfiguration() : [];
+
+      // Retrieve the configured substitution_type or fallback to the default.
+      $substitution_type = $matcher_configuration['settings']['substitution_type'] ?? $substitution_type;
+    }
+
     $element['attributes']['data-entity-substitution'] = [
       '#type' => 'hidden',
-      '#default_value' => $entity ? ($entity->getEntityTypeId() === 'file' ? 'file' : 'canonical') : '',
+      '#default_value' => $substitution_type,
     ];
 
     // Add custom css for the widget representation:
