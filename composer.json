@@ -87,8 +87,8 @@
         "drupal/yoast_seo": "^2.1",
         "drush/drush": "^13.7",
         "geshi/geshi": "dev-master",
-        "grasmash/drupal-security-warning": "^1.0@dev",
-        "mglaman/composer-drupal-lenient": "^1.0",
+        "grasmash/drupal-security-warning": "^2.0",
+        "mglaman/composer-drupal-lenient": "^2.0",
         "npm-asset/slick-carousel": "1.6.0",
         "oomphinc/composer-installers-extender": "^2.0",
         "topfloor/composer-cleanup-vcs-dirs": "^1.1"
@@ -108,13 +108,13 @@
         "allow-plugins": {
             "composer/installers": true,
             "cweagans/composer-patches": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true,
             "drupal/core-composer-scaffold": true,
             "drupal/core-project-message": true,
             "grasmash/drupal-security-warning": true,
+            "mglaman/composer-drupal-lenient": true,
             "oomphinc/composer-installers-extender": true,
-            "topfloor/composer-cleanup-vcs-dirs": true,
-            "dealerdirect/phpcodesniffer-composer-installer": true,
-            "mglaman/composer-drupal-lenient": true
+            "topfloor/composer-cleanup-vcs-dirs": true
         }
     },
     "extra": {

@@ -29,4 +29,5 @@ return array(
     '9b38cf48e83f5d8f60375221cd213eee' => $vendorDir . '/phpstan/phpstan/bootstrap.php',
     '47e1160838b5e5a10346ac4084b58c23' => $vendorDir . '/laravel/prompts/src/helpers.php',
     '801c31d8ed748cfa537fa45402288c95' => $vendorDir . '/psy/psysh/src/functions.php',
+    'a386e918510c0eb48d5b6624d60b138e' => $vendorDir . '/mglaman/composer-drupal-lenient/src/autoload.php',
 );
