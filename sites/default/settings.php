@@ -801,6 +801,8 @@ $settings['state_cache'] = TRUE;
 // Simple XML Sitemap.
 $settings['simple_sitemap_engines.index_now.key'] = '5c9a7dfc-bbb7-4426-899d-a1611dc93426';
 
+$settings['enable_html5_validation'] = FALSE;
+
 // Automatically generated include for settings managed by ddev.
 $ddev_settings = __DIR__ . '/settings.ddev.php';
 if (getenv('IS_DDEV_PROJECT') == 'true' && is_readable($ddev_settings)) {

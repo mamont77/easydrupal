@@ -35,6 +35,7 @@
         "drupal/ckeditor5_plugin_pack": "^1.5",
         "drupal/ckeditor5_premium_features": "^1.8",
         "drupal/config_partial_export": "^2.0@beta",
+        "drupal/contact": "^1.0",
         "drupal/core-composer-scaffold": "^11.4",
         "drupal/core-project-message": "^11.4",
         "drupal/core-recommended": "^11.4",
