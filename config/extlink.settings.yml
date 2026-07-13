@@ -23,5 +23,8 @@ extlink_mailto_class: '0'
 extlink_mailto_label: '(link sends email)'
 extlink_tel_class: ''
 extlink_tel_label: '(link is a phone number)'
+extlink_use_icon: false
+extlink_icons: {  }
 extlink_prevent_orphan: false
+extlink_prevent_orphan_text_like: true
 allowed_domains: null

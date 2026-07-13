@@ -73,8 +73,8 @@ class ViewsBootstrapAccordion extends StylePluginBase {
           ':input[name="style_options[grouping][0][field]"]' => ['filled' => FALSE],
         ],
       ],
-      '#description' => $this->t('Select how to organize your content into tabs: either group by individual field values or aggregate by a field.'),
-      '#default_value' => $this->options['tab_output'],
+      '#description' => $this->t('Select how to organize your content into accordion items: either group by individual field values or aggregate by a field.'),
+      '#default_value' => $this->options['panel_output'],
     ];
 
     $form['group_help_container'] = [

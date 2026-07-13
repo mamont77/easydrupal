@@ -14,10 +14,10 @@
   {% set counter = 0 %}
   {% for row in rows %}
     {% if counter == 0 %}
-      <div {{ attributes }}>
+      <div{{ attributes }}>
     {% endif %}
     {# begin card #}
-    <div {{ row.attributes }}>
+    <div{{ row.attributes }}>
       {% if row.image %}
         <span class="card-img-top">{{ row.image }}</span>
       {% endif %}
@@ -59,7 +59,7 @@
       </div>
     </div>
     {% if (key + 1) % columns == 0 and not loop.last %}
-      </div><div class="row">
+      </div><div{{ row_attributes }}>
     {% endif %}
   {% endfor %}
   </div>

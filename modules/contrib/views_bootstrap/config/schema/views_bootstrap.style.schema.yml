@@ -241,6 +241,9 @@ views.style.views_bootstrap_table:
     responsive:
       type: boolean
       label: "Responsive"
+    responsive_size:
+      type: string
+      label: "Responsive breakpoint behavior"
     table_class_custom:
       type: string
       label: "Table custom class"

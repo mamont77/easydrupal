@@ -35,9 +35,9 @@
         "drupal/ckeditor5_plugin_pack": "^1.5",
         "drupal/ckeditor5_premium_features": "^1.8",
         "drupal/config_partial_export": "^2.0@beta",
-        "drupal/core-composer-scaffold": "^11.3",
-        "drupal/core-project-message": "^11.3",
-        "drupal/core-recommended": "^11.3",
+        "drupal/core-composer-scaffold": "^11.4",
+        "drupal/core-project-message": "^11.4",
+        "drupal/core-recommended": "^11.4",
         "drupal/country": "^2.1",
         "drupal/country_block": "^1.0",
         "drupal/crop": "^2.3",
@@ -47,7 +47,7 @@
         "drupal/disqus": "^2.0@alpha",
         "drupal/editor_advanced_link": "^2.2",
         "drupal/entity_reference_revisions": "^1.11",
-        "drupal/extlink": "^2.0",
+        "drupal/extlink": "^3.0",
         "drupal/fast_404": "^3.7",
         "drupal/fences": "^3.0",
         "drupal/field_group": "^4.0@alpha",
@@ -63,7 +63,7 @@
         "drupal/menu_trail_by_path": "^2.1",
         "drupal/metatag": "^2.1",
         "drupal/mysql57": "^1.0",
-        "drupal/paragraphs": "^1.17",
+        "drupal/paragraphs": "^1.21",
         "drupal/pathauto": "^1.12",
         "drupal/purge": "^3.5",
         "drupal/purge_purger_http": "^1.2",
@@ -81,7 +81,7 @@
         "drupal/twig_tweak": "^3.2",
         "drupal/twigsuggest": "^2.0@RC",
         "drupal/upgrade_status": "^4.3",
-        "drupal/views_bootstrap": "^5.5@RC",
+        "drupal/views_bootstrap": "^5.5",
         "drupal/views_infinite_scroll": "^2.0",
         "drupal/webp": "^1.0@RC",
         "drupal/yoast_seo": "^2.1",
@@ -114,6 +114,7 @@
             "grasmash/drupal-security-warning": true,
             "mglaman/composer-drupal-lenient": true,
             "oomphinc/composer-installers-extender": true,
+            "symfony/runtime": true,
             "topfloor/composer-cleanup-vcs-dirs": true
         }
     },
@@ -196,8 +197,7 @@
                 "Fix Multiple Implicit Nullable Parameters for PHP 8.4 Compatibility": "https://git.drupalcode.org/project/rabbit_hole/-/merge_requests/82.diff"
             },
             "drupal/extlink": {
-                "3497604: Accessibility issue - [role=\"img\"] elements must have an alternative text": "https://git.drupalcode.org/project/extlink/-/merge_requests/54.diff",
-                "3492645: Aria label overrides link text": "https://git.drupalcode.org/project/extlink/-/merge_requests/52.diff"
+                "3492645: Aria label overrides link text": "https://www.drupal.org/files/issues/2026-07-08/extlink-3492645-26-v3-use-aria-label-correctly.patch"
             },
             "drupal/webp": {
                 "3556428: Fix deprecation: ltrim() null argument in ImageStyleDownloadController": "https://git.drupalcode.org/project/webp/-/merge_requests/53.diff"

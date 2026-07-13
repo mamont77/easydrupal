@@ -11,6 +11,16 @@ use Drupal\Core\Template\Attribute;
 use Drupal\views_bootstrap\ViewsBootstrap;
 
 /**
+ * Normalize any value to a safe string for Xss::filter().
+ *
+ * PHP 8.1+ deprecates passing NULL into string funcs used by Xss::filter().
+ * Coerce to string before filtering to avoid deprecations.
+ */
+function views_bootstrap_safe_markup($value, array $allowed_markup) : string {
+  return Xss::filter($value ?? '', $allowed_markup);
+}
+
+/**
  * Prepares variables for views accordion templates.
  *
  * Default template: views-bootstrap-accordion.html.twig.
@@ -48,18 +58,21 @@ function template_preprocess_views_bootstrap_accordion(array &$vars): void {
       $panel_title = $view->style_plugin->getField($id, $panel_title_field);
 
       // Filter the panel title for XSS protection.
-      $filtered_title = Xss::filter($panel_title, $allowed_markup);
+      $filtered_title = views_bootstrap_safe_markup($panel_title, $allowed_markup);
+
+      // Prepare $filtered_title for use as part of an HTML ID.
+      $group_id = Html::getId('-' . $filtered_title);
 
       // Initialize title if it doesn't exist in the grouped content array.
-      if (!isset($grouped_content[$filtered_title])) {
-        $grouped_content[$filtered_title] = [
+      if (!isset($grouped_content[$group_id])) {
+        $grouped_content[$group_id] = [
           'title' => ['#markup' => $filtered_title],
           'content' => [],
         ];
       }
 
       // Add the current row's content to the grouped content.
-      $grouped_content[$filtered_title]['content'][] = $row;
+      $grouped_content[$group_id]['content'][] = $row;
     }
 
     // Replace the rows with the grouped content.
@@ -71,7 +84,10 @@ function template_preprocess_views_bootstrap_accordion(array &$vars): void {
       $vars['rows'][$id] = [];
       $vars['rows'][$id]['content'] = $row;
       $vars['rows'][$id]['title'] = [
-        '#markup' => Xss::filter($view->style_plugin->getField($id, $panel_title_field), $allowed_markup),
+        '#markup' => views_bootstrap_safe_markup(
+          $view->style_plugin->getField($id, $panel_title_field),
+          $allowed_markup
+        ),
       ];
     }
   }
@@ -430,7 +446,10 @@ function template_preprocess_views_bootstrap_tab(array &$vars): void {
   // Keeps which id is used for group by field value.
   $tab_ids = [];
   foreach (array_keys($vars['rows']) as $key) {
-    $tab_field_value = Xss::filter($view->style_plugin->getField($key, $tab_field), $allowed_markup);
+    $tab_field_value = views_bootstrap_safe_markup(
+      $view->style_plugin->getField($key, $tab_field),
+      $allowed_markup
+    );
 
     // If tabs are grouped, get previous key for the value.
     if ($vars['output'] == 'grouped' && isset($tab_ids[$tab_field_value])) {
@@ -445,7 +464,10 @@ function template_preprocess_views_bootstrap_tab(array &$vars): void {
     $vars['group_title'] = $view->style_plugin->getField($id, $group_title_field) ?? "";
     $vars['rows'][$id] = [];
 
-    $tab_field_value = Xss::filter($view->style_plugin->getField($id, $tab_field), $allowed_markup);
+    $tab_field_value = views_bootstrap_safe_markup(
+      $view->style_plugin->getField($id, $tab_field),
+      $allowed_markup
+    );
 
     // If grouped, the tabs create new array with all the values for the tab
     // content.
@@ -481,7 +503,8 @@ function template_preprocess_views_bootstrap_tab(array &$vars): void {
 function template_preprocess_views_bootstrap_table(array &$vars): void {
   $options = $vars['view']->style_plugin->options;
   $vars['attributes'] = new Attribute(['class' => ['table']]);
-  $vars['responsive'] = $options['responsive'];
+  $vars['bs_responsive'] = $options['responsive'];
+  $vars['responsive_size'] = $options['responsive_size'];
   foreach (array_filter($options['bootstrap_styles']) as $style) {
     $vars['attributes']->addClass('table-' . $style);
   }

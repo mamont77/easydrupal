@@ -2,6 +2,13 @@
 
 /**
  * @file
+ * The install and update functions of the module.
+ */
+
+use Drupal\Component\Utility\DeprecationHelper;
+
+/**
+ * @file
  * Contains update functions for Views Bootstrap.
  */
 
@@ -45,7 +52,7 @@ function views_bootstrap_update_91001(&$sandbox): void {
     }
     if ($save) {
       $view->set('display', $displays);
-      $view->save(TRUE);
+      DeprecationHelper::backwardsCompatibleCall(\Drupal::VERSION, '11.4.0', fn() => $view->save(), fn() => $view->save(TRUE));
     }
   }
 }
@@ -74,7 +81,7 @@ function views_bootstrap_update_91002(&$sandbox): void {
     }
     if ($save) {
       $view->set('display', $displays);
-      $view->save(TRUE);
+      DeprecationHelper::backwardsCompatibleCall(\Drupal::VERSION, '11.4.0', fn() => $view->save(), fn() => $view->save(TRUE));
     }
   }
 }
@@ -125,7 +132,7 @@ function views_bootstrap_update_91003(&$sandbox): void {
     }
     if ($save) {
       $view->set('display', $displays);
-      $view->save(TRUE);
+      DeprecationHelper::backwardsCompatibleCall(\Drupal::VERSION, '11.4.0', fn() => $view->save(), fn() => $view->save(TRUE));
     }
   }
 }
@@ -154,7 +161,7 @@ function views_bootstrap_update_91004(&$sandbox): void {
     }
     if ($save) {
       $view->set('display', $displays);
-      $view->save(TRUE);
+      DeprecationHelper::backwardsCompatibleCall(\Drupal::VERSION, '11.4.0', fn() => $view->save(), fn() => $view->save(TRUE));
     }
   }
 }
@@ -183,7 +190,7 @@ function views_bootstrap_update_91005(&$sandbox): void {
     }
     if ($save) {
       $view->set('display', $displays);
-      $view->save(TRUE);
+      DeprecationHelper::backwardsCompatibleCall(\Drupal::VERSION, '11.4.0', fn() => $view->save(), fn() => $view->save(TRUE));
     }
   }
 }
@@ -213,7 +220,7 @@ function views_bootstrap_update_91006(&$sandbox): void {
     }
     if ($save) {
       $view->set('display', $displays);
-      $view->save(TRUE);
+      DeprecationHelper::backwardsCompatibleCall(\Drupal::VERSION, '11.4.0', fn() => $view->save(), fn() => $view->save(TRUE));
     }
   }
 }
