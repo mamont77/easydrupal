@@ -7,6 +7,7 @@
 
 use Drupal\Component\Utility\Html;
 use Drupal\Component\Utility\Xss;
+use Drupal\Component\Render\MarkupInterface;
 use Drupal\Core\Template\Attribute;
 use Drupal\views_bootstrap\ViewsBootstrap;
 
@@ -146,6 +147,8 @@ function template_preprocess_views_bootstrap_cards(array &$vars): void {
   $image_field = $using_fields ? ($options['card_image_field'] ?? NULL) : NULL;
   $title_field = $using_fields ? ($options['card_title_field'] ?? NULL) : NULL;
   $content_field = $using_fields ? ($options['card_content_field'] ?? NULL) : NULL;
+  $card_clickable = $options['card_clickable'] ?? FALSE;
+  $link_field = $using_fields ? ($options['card_link_field'] ?? NULL) : NULL;
 
   // Process each row in the view.
   foreach ($vars['rows'] as $id => $row) {
@@ -157,11 +160,43 @@ function template_preprocess_views_bootstrap_cards(array &$vars): void {
 
     // Process row based on display type (fields vs content).
     if ($using_fields) {
+      $title_output = $title_field ? $view->style_plugin->getField($id, $title_field) : NULL;
+      $link_output = NULL;
+
+      // Add stretched-link class to make entire card clickable if enabled.
+      if ($card_clickable && $link_field) {
+        $link_output = $view->style_plugin->getField($id, $link_field);
+
+        if ($link_output) {
+          // Convert Markup objects to strings for processing.
+          $link_string = ($link_output instanceof MarkupInterface) ? (string) $link_output : $link_output;
+
+          if (is_string($link_string) && strpos($link_string, '<a ') !== FALSE) {
+            // Add the stretched-link class to the first <a> tag.
+            $link_string = preg_replace(
+              '/(<a\s+)/',
+              '$1class="stretched-link" ',
+              $link_string,
+              1
+            );
+            // If the <a> tag already has a class attribute, merge them.
+            $link_string = preg_replace(
+              '/class="stretched-link"\s+class="([^"]*)"/',
+              'class="stretched-link $1"',
+              $link_string
+            );
+            // Update the link output with the modified string.
+            $link_output = $link_string;
+          }
+        }
+      }
+
       $vars['rows'][$id] = [
         'attributes' => $row_attributes,
         'image' => $image_field ? $view->style_plugin->getField($id, $image_field) : NULL,
-        'title' => $title_field ? $view->style_plugin->getField($id, $title_field) : NULL,
+        'title' => $title_output,
         'content' => $content_field ? $view->style_plugin->getField($id, $content_field) : NULL,
+        'link' => $link_output,
       ];
     }
     else {
@@ -200,7 +235,15 @@ function template_preprocess_views_bootstrap_carousel(array &$vars): void {
   $vars['effect'] = $options['effect'];
   $vars['columns'] = $options['columns'];
   $prefix = ViewsBootstrap::getColumnPrefix($options['breakpoints']);
-  $vars['breakpoints'] = $prefix . '-' . intval(12 / $options['columns']);
+  $column_width = intval(12 / $options['columns']);
+  // Add mobile-first responsive columns: full width on small screens,
+  // multi-column at the selected breakpoint and above.
+  if ($options['breakpoints'] != 'xs' && $options['columns'] > 1) {
+    $vars['breakpoints'] = 'col-12 ' . $prefix . '-' . $column_width;
+  }
+  else {
+    $vars['breakpoints'] = $prefix . '-' . $column_width;
+  }
   $vars['use_caption'] = $options['use_caption'];
   $vars['caption_breakpoints'] = $options['caption_breakpoints'];
   $vars['ride'] = $options['ride'];

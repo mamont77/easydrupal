@@ -11,10 +11,12 @@ use Drupal\devel_php\Form\ExecutePHP;
 use Drupal\user\UserInterface;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 
 /**
  * Tests execute code.
  */
+#[RunTestsInSeparateProcesses]
 #[CoversClass(ExecutePHP::class)]
 #[Group('devel_php')]
 class ExecuteCodeTest extends BrowserTestBase {
@@ -50,15 +52,12 @@ class ExecuteCodeTest extends BrowserTestBase {
     // Ensure dump output is parseable by tests assertion methods.
     $this->config('devel.settings')
       ->set('devel_dumper', 'default')
-      ->save(TRUE);
+      ->save();
 
     $user = $this->drupalCreateUser([
       'access devel information',
       'execute php code',
     ]);
-    if (!($user instanceof UserInterface)) {
-      $this->fail('Impossible to create the tests user.');
-    }
 
     $this->user = $user;
   }

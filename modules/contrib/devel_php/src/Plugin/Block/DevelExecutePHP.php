@@ -11,6 +11,7 @@ use Drupal\Core\Form\FormBuilderInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
+use Drupal\devel_php\Form\ExecutePHP;
 
 /**
  * Provides a block for executing PHP code.
@@ -42,7 +43,7 @@ class DevelExecutePHP extends BlockBase implements ContainerFactoryPluginInterfa
    */
   public function build() {
     // @phpstan-ignore-next-line
-    return $this->formBuilder->getForm('Drupal\devel_php\Form\ExecutePHP', FALSE);
+    return $this->formBuilder->getForm(ExecutePHP::class, FALSE);
   }
 
 }

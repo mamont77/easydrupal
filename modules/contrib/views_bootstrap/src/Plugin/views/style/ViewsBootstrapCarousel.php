@@ -78,7 +78,7 @@ class ViewsBootstrapCarousel extends StylePluginBase {
     $fields = $this->displayHandler->getFieldLabels(TRUE);
 
     $form['row_class']['#title'] = $this->t('Custom carousel item class');
-    $form['row_class']['#description'] = $this->t('Additional classes to provide on the carousel-item row div. Separated by a space.');
+    $form['row_class']['#description'] = $this->t('Additional classes to provide on the carousel-item row div. Separated by a space. You may use field replacement patterns from the rewrite results section below.');
 
     $form['keyboard'] = [
       '#type' => 'checkbox',

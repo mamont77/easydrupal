@@ -66,8 +66,8 @@ class ViewsBootstrap {
     ];
     $hooks['views_bootstrap_table'] = [
       'preprocess functions' => [
-        'template_preprocess_views_bootstrap_table',
         'template_preprocess_views_view_table',
+        'template_preprocess_views_bootstrap_table',
       ],
       'file' => 'views_bootstrap.theme.inc',
     ];

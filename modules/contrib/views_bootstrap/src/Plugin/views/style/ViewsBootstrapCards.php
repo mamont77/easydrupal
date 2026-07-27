@@ -54,6 +54,8 @@ class ViewsBootstrapCards extends StylePluginBase {
     $options['card_group'] = ['default' => FALSE];
     $options['card_group_class_custom'] = ['default' => NULL];
     $options['columns'] = ['default' => 1];
+    $options['card_clickable'] = ['default' => FALSE];
+    $options['card_link_field'] = ['default' => NULL];
     return $options;
   }
 
@@ -184,6 +186,38 @@ class ViewsBootstrapCards extends StylePluginBase {
 
     $form['row_class']['#title'] = $this->t('Custom card class');
     $form['row_class']['#weight'] = 5;
+
+    $form['card_clickable'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Enable clickable cards'),
+      '#description' => $this->t('Enables support for clickable cards using Bootstrap\'s stretched-link utility. You can either select a link field below to have the stretched-link class automatically applied, or manually add the stretched-link class to any link within your card content fields.'),
+      '#default_value' => $this->options['card_clickable'],
+      '#states' => [
+        'visible' => [
+          ':input[name="style_options[display]"]' => ['value' => 'fields'],
+        ],
+      ],
+      '#weight' => 5,
+    ];
+
+    if ($this->usesFields()) {
+      $form['card_link_field'] = [
+        '#type' => 'select',
+        '#title' => $this->t('Card link field (optional)'),
+        '#options' => $this->displayHandler->getFieldLabels(TRUE),
+        '#empty_option' => $this->t('- None -'),
+        '#required' => FALSE,
+        '#states' => [
+          'visible' => [
+            ':input[name="style_options[display]"]' => ['value' => 'fields'],
+            ':input[name="style_options[card_clickable]"]' => ['checked' => TRUE],
+          ],
+        ],
+        '#default_value' => $this->options['card_link_field'],
+        '#description' => $this->t('Optional: Select a field containing a link to automatically have the stretched-link class applied. If left empty, you can manually add the stretched-link class to any link in your card title or content fields. The link must be directly in the card-body (not wrapped in other divs) for stretched-link to work. To add additional classes, edit the field under "Style settings" > "Customize field HTML" > "CSS class".'),
+        '#weight' => 5.5,
+      ];
+    }
 
     $form['columns'] = [
       '#type' => 'select',
