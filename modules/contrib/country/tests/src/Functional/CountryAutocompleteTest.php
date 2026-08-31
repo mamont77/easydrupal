@@ -5,6 +5,8 @@ declare(strict_types=1);
 // AI generated.
 namespace Drupal\Tests\country\Functional;
 
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 use Drupal\field\Entity\FieldConfig;
 use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\Tests\BrowserTestBase;
@@ -15,6 +17,8 @@ use Drupal\Tests\BrowserTestBase;
  * @group country
  * @coversDefaultClass \Drupal\country\Controller\CountryAutocompleteController
  */
+#[Group('country')]
+#[RunTestsInSeparateProcesses]
 class CountryAutocompleteTest extends BrowserTestBase {
 
   /**

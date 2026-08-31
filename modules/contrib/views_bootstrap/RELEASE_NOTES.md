@@ -1,5 +1,28 @@
 # Views Bootstrap 5.5.x Release Notes
 
+## Version 5.5.2
+
+### Documentation Improvements
+
+**Carousel Responsive Behavior Clarification**
+- Enhanced documentation to address user confusion about showing different numbers of items per slide on mobile vs desktop
+- Updated "Columns" field label to "Columns per slide" with clearer description explaining mobile-first behavior
+- Updated "Breakpoints" field label to "Multi-column breakpoint" with detailed explanation of how responsive stacking works
+- Added pixel widths to all breakpoint options for clarity (e.g., "Medium (992px+)" instead of just "Medium")
+- NEW: Added collapsible "Responsive carousel behavior" help section in the Views UI with:
+  - Clear explanation of how mobile vs desktop behavior works
+  - Concrete example: "To show 3 items per slide on desktop and 1 item on mobile..."
+  - Step-by-step configuration guidance
+- Enhanced README with dedicated "Carousel Responsive Behavior" section including:
+  - How the responsive feature works
+  - Example configuration walkthrough
+  - Expected results on different screen sizes
+- Improved template documentation (views-bootstrap-carousel.html.twig) for themers with examples
+
+**Why this matters:** The carousel already supported responsive behavior (1 item on mobile, multiple items on desktop), but the documentation didn't clearly explain how to configure it. Users were confused about how to achieve this common use case. These improvements make the existing functionality discoverable and understandable.
+
+---
+
 ## Version 5.5.1
 
 ### Critical Bug Fixes
@@ -77,10 +100,15 @@ Initial stable release of Bootstrap 5 support for Drupal 10+.
 
 ### Breaking Changes
 
-None in 5.5.1.
+None in 5.5.2 or 5.5.1.
 
 ### Upgrade Notes
 
+**Version 5.5.2:**
+- **Carousel Configuration UI**: Field labels and descriptions have been updated for clarity. The functionality hasn't changed - only the wording is clearer. Existing carousel views will continue to work exactly as before.
+- **No action required**: This is a documentation-only release. All improvements are in help text, field labels, and documentation files.
+
+**Version 5.5.1:**
 - **Tabs and Accordions**: If you were experiencing issues with tabs not switching or accordions not working, this is now fixed. No configuration changes needed.
 - **Clickable Cards**: This is a new opt-in feature. Existing card views will continue to work as before. To enable, edit your Cards view and check "Enable clickable cards."
 - **Carousel Breakpoints**: Multi-column carousels will now properly stack on mobile. If you have custom CSS targeting carousel columns, test on mobile viewports.

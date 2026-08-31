@@ -22,7 +22,7 @@ class CountryItem extends SortPluginBase {
    *
    * @var \Drupal\country\CountryFieldManager
    */
-  private $countryFieldManager;
+  protected $countryFieldManager;
 
   /**
    * Constructs a CountryItem object.

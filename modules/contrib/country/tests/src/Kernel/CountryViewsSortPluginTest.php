@@ -5,6 +5,8 @@ declare(strict_types=1);
 // AI generated.
 namespace Drupal\Tests\country\Kernel;
 
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 use Drupal\Core\Form\FormState;
 use Drupal\country\Plugin\views\sort\CountryItem;
 
@@ -14,6 +16,8 @@ use Drupal\country\Plugin\views\sort\CountryItem;
  * @group country
  * @coversDefaultClass \Drupal\country\Plugin\views\sort\CountryItem
  */
+#[Group('country')]
+#[RunTestsInSeparateProcesses]
 class CountryViewsSortPluginTest extends CountryKernelTestBase {
 
   /**

@@ -17,11 +17,11 @@
   },
   "license": "GPL-2.0+",
   "require": {
-    "drupal/core": "^10 || ^11"
+    "drupal/core": "^11.3 || ^12"
   },
   "require-dev": {
-    "drupal/facets": "^2 || ^3",
-    "drupal/feeds": "^3"
+    "drupal/facets": "^2 || ^3 || ^4",
+    "drupal/feeds": "^3 || ^4"
   },
   "suggest": {
     "ext-intl": "Needed to extend capability with the sorting of non-English languages."

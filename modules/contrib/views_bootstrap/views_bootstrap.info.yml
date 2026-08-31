@@ -8,7 +8,7 @@ dependencies:
 libraries:
   - views_bootstrap/components
 
-# Information added by Drupal.org packaging script on 2026-07-27
-version: '5.5.1'
+# Information added by Drupal.org packaging script on 2026-07-31
+version: '5.5.2'
 project: 'views_bootstrap'
-datestamp: 1785117197
+datestamp: 1785534235

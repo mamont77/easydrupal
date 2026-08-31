@@ -5,6 +5,8 @@ declare(strict_types=1);
 // AI generated.
 namespace Drupal\Tests\country\Kernel;
 
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 use Drupal\entity_test\Entity\EntityTest;
 
 /**
@@ -13,6 +15,8 @@ use Drupal\entity_test\Entity\EntityTest;
  * @group country
  * @coversDefaultClass \Drupal\country\Plugin\Field\FieldType\CountryItem
  */
+#[Group('country')]
+#[RunTestsInSeparateProcesses]
 class CountryItemTest extends CountryKernelTestBase {
 
   /**

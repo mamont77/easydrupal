@@ -53,6 +53,8 @@ class ViewsBootstrapCards extends StylePluginBase {
     $options['card_image_field'] = ['default' => NULL];
     $options['card_group'] = ['default' => FALSE];
     $options['card_group_class_custom'] = ['default' => NULL];
+    $options['row_class_custom'] = ['default' => NULL];
+    $options['col_class_custom'] = ['default' => NULL];
     $options['columns'] = ['default' => 1];
     $options['card_clickable'] = ['default' => FALSE];
     $options['card_link_field'] = ['default' => NULL];
@@ -190,7 +192,7 @@ class ViewsBootstrapCards extends StylePluginBase {
     $form['card_clickable'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Enable clickable cards'),
-      '#description' => $this->t('Enables support for clickable cards using Bootstrap\'s stretched-link utility. You can either select a link field below to have the stretched-link class automatically applied, or manually add the stretched-link class to any link within your card content fields.'),
+      '#description' => $this->t("Enables support for clickable cards using Bootstrap's stretched-link utility. You can either select a link field below to have the stretched-link class automatically applied, or manually add the stretched-link class to any link within your card content fields."),
       '#default_value' => $this->options['card_clickable'],
       '#states' => [
         'visible' => [

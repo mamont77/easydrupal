@@ -2,6 +2,8 @@
 
 namespace Drupal\Tests\country\Functional;
 
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 use Drupal\Tests\BrowserTestBase;
 use Drupal\field\Entity\FieldConfig;
 use Drupal\field\Entity\FieldStorageConfig;
@@ -11,6 +13,8 @@ use Drupal\field\Entity\FieldStorageConfig;
  *
  * @group country
  */
+#[Group('country')]
+#[RunTestsInSeparateProcesses]
 class CountryFieldTest extends BrowserTestBase {
 
   /**

@@ -5,6 +5,8 @@ declare(strict_types=1);
 // AI generated.
 namespace Drupal\Tests\country\Kernel;
 
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 use Drupal\country\Plugin\views\filter\CountryItem;
 
 /**
@@ -13,6 +15,8 @@ use Drupal\country\Plugin\views\filter\CountryItem;
  * @group country
  * @coversDefaultClass \Drupal\country\Plugin\views\filter\CountryItem
  */
+#[Group('country')]
+#[RunTestsInSeparateProcesses]
 class CountryViewsFilterPluginTest extends CountryKernelTestBase {
 
   /**

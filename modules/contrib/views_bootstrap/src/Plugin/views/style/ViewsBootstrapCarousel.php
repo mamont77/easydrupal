@@ -75,6 +75,13 @@ class ViewsBootstrapCarousel extends StylePluginBase {
       '#weight' => -99,
     ];
 
+    $form['responsive_help'] = [
+      '#type' => 'details',
+      '#title' => $this->t('Responsive carousel behavior'),
+      '#description' => $this->t('<p><strong>How to show different numbers of items per slide on mobile vs desktop:</strong></p><ul><li><strong>Mobile (small screens):</strong> Always shows 1 item per slide at full width when using multi-column settings</li><li><strong>Desktop (larger screens):</strong> Shows the number of items you select in "Columns per slide"</li></ul><p><strong>Example:</strong> To show 3 items per slide on desktop and 1 item on mobile, set "Columns per slide" to 3 and "Multi-column breakpoint" to Medium. On screens smaller than 992px (phones), users will see 1 item per slide. On screens 992px and wider (tablets, laptops, desktops), they will see 3 items per slide.</p>'),
+      '#weight' => -98,
+    ];
+
     $fields = $this->displayHandler->getFieldLabels(TRUE);
 
     $form['row_class']['#title'] = $this->t('Custom carousel item class');
@@ -172,8 +179,8 @@ class ViewsBootstrapCarousel extends StylePluginBase {
 
     $form['columns'] = [
       '#type' => 'select',
-      '#title' => $this->t('Columns'),
-      '#description' => $this->t('The number of columns to include in the carousel.'),
+      '#title' => $this->t('Columns per slide'),
+      '#description' => $this->t('The number of items to display side-by-side in each carousel slide on larger screens. On smaller screens (below the breakpoint), only 1 item will be shown per slide.'),
       '#options' => [
         1 => 1,
         2 => 2,
@@ -185,15 +192,15 @@ class ViewsBootstrapCarousel extends StylePluginBase {
 
     $form['breakpoints'] = [
       '#type' => 'select',
-      '#title' => $this->t('Breakpoints'),
-      '#description' => $this->t('The min-width breakpoint of the multicolumn carousel.'),
+      '#title' => $this->t('Multi-column breakpoint'),
+      '#description' => $this->t('The minimum screen width where the multi-column layout begins. Below this breakpoint, the carousel will display 1 item per slide (full width). At this breakpoint and above, it will display the number of columns selected above. For example: selecting "Medium" with 3 columns will show 1 item per slide on mobile phones, and 3 items per slide on tablets and larger screens.'),
       '#options' => [
-        'xs' => $this->t('Extra Small'),
-        'sm' => $this->t('Small'),
-        'md' => $this->t('Medium'),
-        'lg' => $this->t('Large'),
-        'xl' => $this->t('Extra large'),
-        'xxl' => $this->t('Extra extra large'),
+        'xs' => $this->t('Extra Small (576px+)'),
+        'sm' => $this->t('Small (768px+)'),
+        'md' => $this->t('Medium (992px+)'),
+        'lg' => $this->t('Large (1200px+)'),
+        'xl' => $this->t('Extra large (1400px+)'),
+        'xxl' => $this->t('Extra extra large (1600px+)'),
       ],
       '#default_value' => $this->options['breakpoints'],
     ];

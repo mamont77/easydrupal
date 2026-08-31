@@ -1,0 +1,88 @@
+<?php
+
+namespace Drupal\country\Hook;
+
+use Drupal\Core\Field\FieldTypeCategoryManagerInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Url;
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Hook\Attribute\Hook;
+use Drupal\Core\StringTranslation\StringTranslationTrait;
+
+/**
+ * Hook implementations for country.
+ */
+class CountryHooks {
+  use StringTranslationTrait;
+
+  /**
+   * Implements hook_help().
+   */
+  #[Hook('help')]
+  public function help($route_name, RouteMatchInterface $route_match) {
+    switch ($route_name) {
+      case 'help.page.country':
+        $output = '';
+        $output .= '<h3>' . $this->t('Country') . '</h3>';
+        $output .= '<p>' . $this->t('The Country module defines a simple country field type for the Field module. It provides 2 widgets - select options and autocomplete textfield - for this purpose.  See the <a href=":field">Field module help page</a> for more information about fields.', [
+          ':field' => Url::fromRoute('help.page', [
+            'name' => 'field',
+          ])->toString(),
+        ]) . '</p>';
+        return $output;
+    }
+  }
+
+  /**
+   * Implements hook_field_widget_WIDGET_TYPE_form_alter().
+   */
+  #[Hook('field_widget_country_default_form_alter')]
+  public static function fieldWidgetCountryDefaultFormAlter(&$element, FormStateInterface $form_state, $context) {
+    $country =& $element['value'];
+    $country_code = '';
+    if (!empty($country['#default_value'])) {
+      return FALSE;
+    }
+    if (!\Drupal::moduleHandler()->moduleExists('ip2country')) {
+      return FALSE;
+    }
+    if (\Drupal::currentUser()->isAuthenticated()) {
+      $uid = \Drupal::currentUser()->id();
+      $user_data = \Drupal::service('user.data')->get('ip2country', $uid);
+      if (isset($user_data)) {
+        $country_code = $user_data['country_iso_code_2'];
+      }
+    }
+    else {
+      $ip = \Drupal::request()->getClientIp();
+      $country_code = \Drupal::service('ip2country.lookup')->getCountry($ip);
+    }
+    if (in_array($country_code, array_keys($country['#options']))) {
+      $country['#default_value'] = $country_code;
+    }
+  }
+
+  /**
+   * Implements hook_field_widget_info_alter().
+   */
+  #[Hook('field_widget_info_alter')]
+  public static function fieldWidgetInfoAlter(array &$info) {
+    // Allow boxes/radio buttons widget to be used for country field.
+    $info['options_buttons']['field_types'][] = 'country';
+    // Add Tagify widget support if the module is enabled.
+    if (\Drupal::moduleHandler()->moduleExists('tagify')) {
+      if (isset($info['tagify_select_widget'])) {
+        $info['tagify_select_widget']['field_types'][] = 'country';
+      }
+    }
+  }
+
+  /**
+   * Implements hook_field_type_category_info_alter().
+   */
+  #[Hook('field_type_category_info_alter')]
+  public static function fieldTypeCategoryInfoAlter(&$definitions) {
+    $definitions[FieldTypeCategoryManagerInterface::FALLBACK_CATEGORY]['libraries'][] = 'country/country.country-icon';
+  }
+
+}

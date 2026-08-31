@@ -2,3 +2,18 @@ services:
   country.field.manager:
     class: Drupal\country\CountryFieldManager
     arguments: ['@country_manager', '@language_manager']
+
+  Drupal\country\Hook\CountryHooks:
+    class: Drupal\country\Hook\CountryHooks
+    autowire: true
+
+  Drupal\country\Hook\CountryTokensHooks:
+    class: Drupal\country\Hook\CountryTokensHooks
+    arguments:
+      - '@entity_type.manager'
+      - '@entity_field.manager'
+      - '@?token.entity_mapper'
+
+  Drupal\country\Hook\CountryViewsHooks:
+    class: Drupal\country\Hook\CountryViewsHooks
+    autowire: true

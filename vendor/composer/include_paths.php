@@ -7,8 +7,8 @@ $baseDir = dirname($vendorDir);
 
 return array(
     $vendorDir . '/disqus/disqus-php',
-    $vendorDir . '/pear/archive_tar',
     $vendorDir . '/pear/console_getopt',
     $vendorDir . '/pear/pear-core-minimal/src',
     $vendorDir . '/pear/pear_exception',
+    $vendorDir . '/pear/archive_tar',
 );

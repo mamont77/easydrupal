@@ -5,6 +5,9 @@ declare(strict_types=1);
 // AI generated.
 namespace Drupal\Tests\country\Kernel;
 
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Drupal\entity_test\Entity\EntityTest;
 
 /**
@@ -12,6 +15,8 @@ use Drupal\entity_test\Entity\EntityTest;
  *
  * @group country
  */
+#[Group('country')]
+#[RunTestsInSeparateProcesses]
 class CountryFormatterTest extends CountryKernelTestBase {
 
   /**
@@ -62,6 +67,7 @@ class CountryFormatterTest extends CountryKernelTestBase {
    *
    * @dataProvider countryDataProvider
    */
+  #[DataProvider('countryDataProvider')]
   public function testDefaultFormatterVariousCountries(string $code, string $expected_name): void {
     $entity = EntityTest::create([
       'field_country' => $code,

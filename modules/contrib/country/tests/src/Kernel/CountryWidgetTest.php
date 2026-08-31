@@ -5,6 +5,8 @@ declare(strict_types=1);
 // AI generated.
 namespace Drupal\Tests\country\Kernel;
 
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 use Drupal\country\Plugin\Field\FieldWidget\CountryAutocompleteWidget;
 use Drupal\Core\Form\FormState;
 use Drupal\entity_test\Entity\EntityTest;
@@ -14,6 +16,8 @@ use Drupal\entity_test\Entity\EntityTest;
  *
  * @group country
  */
+#[Group('country')]
+#[RunTestsInSeparateProcesses]
 class CountryWidgetTest extends CountryKernelTestBase {
 
   /**

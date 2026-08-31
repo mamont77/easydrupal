@@ -5,6 +5,8 @@ declare(strict_types=1);
 // AI generated.
 namespace Drupal\Tests\country\Kernel;
 
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 use Drupal\field\Entity\FieldConfig;
 use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\KernelTests\KernelTestBase;
@@ -15,6 +17,8 @@ use Drupal\KernelTests\KernelTestBase;
  * @group country
  * @coversDefaultClass \Drupal\country\CountryFieldManager
  */
+#[Group('country')]
+#[RunTestsInSeparateProcesses]
 class CountryFieldManagerTest extends KernelTestBase {
 
   /**
