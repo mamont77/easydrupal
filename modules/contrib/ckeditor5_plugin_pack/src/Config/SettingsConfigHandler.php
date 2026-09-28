@@ -105,6 +105,14 @@ class SettingsConfigHandler implements SettingsConfigHandlerInterface {
   public function getDllVersion(): string {
     $library = $this->libraryDiscovery->getLibraryByName('core', 'ckeditor5');
 
+    // Mapping for versions that do not match.
+    $mapping = [
+      '47.6.3' => '47.7.4',
+    ];
+    if (in_array($library['version'], array_keys($mapping))) {
+      return $mapping[$library['version']];
+    }
+
     return $library['version'];
   }
 
@@ -143,6 +151,21 @@ class SettingsConfigHandler implements SettingsConfigHandlerInterface {
    */
   public function isCdnBlocked(): bool {
     return (bool) $this->config?->get('block_cdn');
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function libraryExists(string $library): bool {
+    $dllLocations = $this->getDllLocations();
+    foreach ($dllLocations as $location) {
+      $path = './' . $location . '/' . $library . '/' . $library . '.js';
+      if (realpath($path)) {
+        return TRUE;
+      }
+    }
+
+    return FALSE;
   }
 
 }

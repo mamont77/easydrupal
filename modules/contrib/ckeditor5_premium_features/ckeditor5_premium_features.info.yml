@@ -8,7 +8,7 @@ dependencies:
   - drupal:editor
   - drupal:ckeditor5
 
-# Information added by Drupal.org packaging script on 2026-07-29
-version: '1.8.3'
+# Information added by Drupal.org packaging script on 2026-09-16
+version: '1.8.4'
 project: 'ckeditor5_premium_features'
-datestamp: 1785318957
+datestamp: 1789580629
