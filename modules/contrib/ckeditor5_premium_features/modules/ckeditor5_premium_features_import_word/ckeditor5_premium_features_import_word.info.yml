@@ -6,7 +6,7 @@ core_version_requirement: ^10.3 || ^11
 dependencies:
   - ckeditor5_premium_features:ckeditor5_premium_features
 
-# Information added by Drupal.org packaging script on 2026-09-16
-version: '1.8.4'
+# Information added by Drupal.org packaging script on 2026-10-14
+version: '1.8.6'
 project: 'ckeditor5_premium_features'
-datestamp: 1789580629
+datestamp: 1791977811

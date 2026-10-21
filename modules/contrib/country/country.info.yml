@@ -6,7 +6,7 @@ core_version_requirement: ^11.3 || ^12
 dependencies:
   - drupal:field
 
-# Information added by Drupal.org packaging script on 2026-08-28
-version: '2.2.0'
+# Information added by Drupal.org packaging script on 2026-10-07
+version: '2.2.1'
 project: 'country'
-datestamp: 1787932736
+datestamp: 1791385248

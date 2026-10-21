@@ -5,42 +5,27 @@
  * Contains advupdate.module.
  */
 
+use Drupal\Core\Hook\Attribute\LegacyHook;
+use Drupal\advupdate\Hook\AdvupdateHooks;
 use Drupal\Component\Render\MarkupInterface;
 use Drupal\advupdate\Render\UpdateDetailsMarkup;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
-use Drupal\Core\Url;
 
 /**
  * Implements hook_help().
  */
+#[LegacyHook]
 function advupdate_help($route_name, RouteMatchInterface $route_match): string {
-  $output = '';
-  switch ($route_name) {
-    // Main module help for the advupdate module.
-    case 'help.page.advupdate':
-      $output = '<h3>' . t('About') . '</h3>';
-      $output .= '<p>' . t('The module modifies the Drupal "Updates available" email to include the information normally shown at /admin/reports/updates/update, with links to the module updates and their release notes.') . '</p>';
-    default:
-  }
-
-  return $output;
+  return \Drupal::service(AdvupdateHooks::class)->help($route_name, $route_match);
 }
 
 /**
  * Implements hook_form_FORM_ID_alter().
  */
+#[LegacyHook]
 function advupdate_form_update_settings_alter(&$form, FormStateInterface $form_state, $form_id): void {
-  $advupdate_config = \Drupal::config('advupdate.settings');
-
-  $form['update_notification_extend_email_report'] = [
-    '#type' => 'checkbox',
-    '#title' => t('Expand the report using "Update Manager Advanced" module'),
-    '#default_value' => $advupdate_config->get('notification.extend_email_report'),
-    '#description' => t('An email will include more detailed information with a list of modules.'),
-  ];
-
-  $form['#submit'][] = 'advupdate_form_update_settings_submit_handler';
+  \Drupal::service(AdvupdateHooks::class)->formUpdateSettingsAlter($form, $form_state, $form_id);
 }
 
 /**
@@ -55,20 +40,9 @@ function advupdate_form_update_settings_submit_handler($form, FormStateInterface
 /**
  * Implements hook_mail_alter().
  */
+#[LegacyHook]
 function advupdate_mail_alter(&$message): void {
-  if ($message['id'] == 'update_status_notify'
-    && \Drupal::config('advupdate.settings')
-      ->get('notification.extend_email_report') == 1) {
-    if ($additional_data = _advupdate_mail_additional_data()) {
-      $message['body'][] = "";
-      $message['body'][] = $additional_data;
-      $message['body'][] =
-        t('This emails also may contain additional information added by the "Update Manager Advanced" module (:url).', [
-          ':url' => Url::fromUri('https://www.drupal.org/project/advupdate', ['absolute' => TRUE])
-            ->toString(),
-        ]);
-    }
-  }
+  \Drupal::service(AdvupdateHooks::class)->mailAlter($message);
 }
 
 /**

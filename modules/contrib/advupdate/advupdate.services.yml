@@ -1,0 +1,5 @@
+
+services:
+  Drupal\advupdate\Hook\AdvupdateHooks:
+    class: Drupal\advupdate\Hook\AdvupdateHooks
+    autowire: true

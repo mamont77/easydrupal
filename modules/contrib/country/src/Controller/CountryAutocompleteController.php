@@ -2,6 +2,7 @@
 
 namespace Drupal\country\Controller;
 
+use Drupal\Component\Utility\Html;
 use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
 use Drupal\country\CountryFieldManager;
 use Drupal\field\Entity\FieldConfig;
@@ -70,7 +71,9 @@ class CountryAutocompleteController implements ContainerInjectionInterface {
       }
       foreach ($countries as $country) {
         if (strpos(mb_strtolower($country), mb_strtolower($string)) !== FALSE) {
-          $matches[] = ['value' => $country, 'label' => $country];
+          // Escape the label to prevent unsafe markup.
+          $label = Html::escape((string) $country);
+          $matches[] = ['value' => $label, 'label' => $label];
         }
       }
     }
