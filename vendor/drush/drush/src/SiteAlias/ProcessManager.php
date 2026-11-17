@@ -7,11 +7,9 @@ namespace Drush\SiteAlias;
 use Consolidation\SiteAlias\SiteAliasInterface;
 use Consolidation\SiteProcess\ProcessBase;
 use Consolidation\SiteProcess\ProcessManager as ConsolidationProcessManager;
-use Consolidation\SiteProcess\SiteProcess;
 use Drush\Drush;
 use Drush\Style\DrushStyle;
 use Symfony\Component\Filesystem\Path;
-use Symfony\Component\Process\Process;
 
 /**
  * The Drush ProcessManager adds a few Drush-specific service methods.
@@ -105,7 +103,7 @@ class ProcessManager extends ConsolidationProcessManager
     /**
      * Return the relative path to 'vendor/bin/drush' from the Drupal root.
      */
-    protected function relativePathToVendorBinDrush()
+    protected function relativePathToVendorBinDrush(): string
     {
         // https://getcomposer.org/doc/articles/vendor-binaries.md#finding-the-composer-bin-dir-from-a-binary
         $vendorBin = $GLOBALS['_composer_bin_dir'] ?? Path::join($this->getDrupalFinder()->getVendorDir(), 'bin');
@@ -123,7 +121,7 @@ class ProcessManager extends ConsolidationProcessManager
     public function siteProcess(SiteAliasInterface $siteAlias, $args = [], $options = [], $optionsPassedAsArgs = []): ProcessBase
     {
         $process = parent::siteProcess($siteAlias, $args, $options, $optionsPassedAsArgs);
-        return $this->configureProcess($process);
+        return static::configureProcess($process);
     }
 
     /**
@@ -143,7 +141,7 @@ class ProcessManager extends ConsolidationProcessManager
     public function process($commandline, $cwd = null, ?array $env = null, $input = null, $timeout = 60): ProcessBase
     {
         $process = parent::process($commandline, $cwd, $env, $input, $timeout);
-        return $this->configureProcess($process);
+        return static::configureProcess($process);
     }
 
     /**
@@ -157,7 +155,7 @@ class ProcessManager extends ConsolidationProcessManager
     public function shell($command, $cwd = null, ?array $env = null, $input = null, $timeout = 60): ProcessBase
     {
         $process = parent::shell($command, $cwd, $env, $input, $timeout);
-        return $this->configureProcess($process);
+        return static::configureProcess($process);
     }
 
     /**

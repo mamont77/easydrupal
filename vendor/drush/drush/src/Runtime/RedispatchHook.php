@@ -13,7 +13,7 @@ use Drush\Attributes\HandleRemoteCommands;
 use Drush\Config\ConfigAwareTrait;
 use Drush\Drush;
 use Drush\SiteAlias\ProcessManager;
-use Robo\Contract\ConfigAwareInterface;
+use Consolidation\Config\ConfigAwareInterface;
 use Symfony\Component\Console\Input\InputInterface;
 
 /**
@@ -106,9 +106,7 @@ class RedispatchHook implements InitializeHookInterface, ConfigAwareInterface, S
      */
     protected function alterArgsForRedispatch(array $redispatchArgs): array
     {
-        return array_filter($redispatchArgs, function ($item) {
-            return !str_starts_with($item, '-D');
-        });
+        return array_filter($redispatchArgs, fn($item) => !str_starts_with($item, '-D'));
     }
 
     /**

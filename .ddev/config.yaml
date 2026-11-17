@@ -1,7 +1,7 @@
 name: my-project-makedrupaleasy
 type: drupal11
 docroot: ""
-php_version: "8.3"
+php_version: "8.5"
 webserver_type: nginx-fpm
 xdebug_enabled: false
 additional_hostnames: []
@@ -13,6 +13,11 @@ use_dns_when_possible: true
 composer_version: "2"
 web_environment: []
 corepack_enable: true
+upload_dirs:
+  - sites/default/files
+  - core/node_modules
+  - modules/contrib/upgrade_status/tests/modules/upgrade_status_test_11_compatible/node_modules
+  - themes/custom/easydrupal_b5/node_modules
 
 # Key features of DDEV's config.yaml:
 

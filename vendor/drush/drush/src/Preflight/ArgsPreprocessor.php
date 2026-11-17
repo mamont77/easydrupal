@@ -18,7 +18,7 @@ use Consolidation\SiteAlias\SiteSpecParser;
 class ArgsPreprocessor
 {
     protected ?SiteSpecParser $specParser;
-    protected ?ArgsRemapper $remapper;
+    protected ?ArgsRemapper $remapper = null;
 
     /**
      * ArgsPreprocessor constructor
@@ -56,7 +56,7 @@ class ArgsPreprocessor
         }
 
         $optionsTable = $storage->optionsWithValues();
-        while (!empty($argv)) {
+        while ($argv !== []) {
             $opt = array_shift($argv);
 
             if ($opt == '--') {
@@ -198,8 +198,7 @@ class ArgsPreprocessor
 
         // If $opt is a double-dash option, and it contains an '=', then
         // the option value is everything after the '='.
-        // @phpstan-ignore-next-line
-        if ((strlen($key) < strlen($opt)) && ($opt[1] == '-') && ($opt[strlen($key)] == '=')) {
+        if ((strlen($key) < strlen($opt)) && ($opt[1] === '-') && ($opt[strlen($key)] === '=')) {
             $value = substr($opt, strlen($key) + 1);
             return [$methodName, $value, false];
         }

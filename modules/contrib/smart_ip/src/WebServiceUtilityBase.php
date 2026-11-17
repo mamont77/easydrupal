@@ -18,7 +18,7 @@ abstract class WebServiceUtilityBase implements WebServiceUtilityInterface {
    * {@inheritdoc}
    * @throws \GuzzleHttp\Exception\GuzzleException
    */
-  public static function sendRequest(string $url = NULL): string {
+  public static function sendRequest(?string $url = NULL): string {
     if (!empty($url)) {
       try {
         $response = \Drupal::httpClient()->get($url, ['headers' => ['Accept' => 'application/json']]);

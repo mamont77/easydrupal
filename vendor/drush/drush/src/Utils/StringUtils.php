@@ -20,12 +20,13 @@ final class StringUtils
         //
         // Step 1: implode(',',$args) converts from, say, array('a,','b,','c,') to 'a,,b,,c,'
         // Step 2: explode(',', ...) converts to array('a','','b','','c','')
-        // Step 3: array_filter(...) removes the empty items
-        // Step 4: array_map(...) trims extra whitespace from each item
+        // Step 3: array_map(...) trims extra whitespace from each item
         // (handles csv strings with extra whitespace, e.g. 'a, b, c')
+        // Step 4: array_filter(...) removes the empty items, including those
+        // that were only whitespace, such as the newline after a trailing comma.
         //
-        $args = is_array($args) ? implode(',', array_map('strval', $args)) : (string) $args;
-        return array_map('trim', array_filter(explode(',', $args)));
+        $args = is_array($args) ? implode(',', array_map(strval(...), $args)) : (string) $args;
+        return array_filter(array_map(trim(...), explode(',', $args)));
     }
 
     /**
@@ -52,7 +53,7 @@ final class StringUtils
         $replace = [];
         foreach ($context as $key => $val) {
             if (!is_array($val) && (!is_object($val) || method_exists($val, '__toString'))) {
-                $replace[static::interpolationKey($key)] = $val;
+                $replace[self::interpolationKey($key)] = $val;
             }
         }
 
@@ -87,7 +88,7 @@ final class StringUtils
      * @return string The path with tilde replaced, if applicable.
      * The path with tilde replaced, if applicable.
      */
-    public static function replaceTilde($path, $home)
+    public static function replaceTilde($path, string $home)
     {
         $replacement = $home . '/';
         $match = '#^~/#';

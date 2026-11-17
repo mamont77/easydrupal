@@ -17,9 +17,7 @@ use Drupal\migrate\MigrateExecutable as MigrateExecutableBase;
 use Drupal\migrate\MigrateMessageInterface;
 use Drupal\migrate\MigrateSkipRowException;
 use Drupal\migrate\Plugin\MigrateIdMapInterface;
-use Drupal\migrate\Plugin\Migration;
 use Drupal\migrate\Plugin\migrate\source\SourcePluginBase;
-use Drupal\migrate\Plugin\migrate\source\SqlBase;
 use Drupal\migrate\Plugin\MigrationInterface;
 use Drush\Drupal\Migrate\MigrateEvents as MigrateRunnerEvents;
 use Symfony\Component\Console\Helper\ProgressBar;
@@ -28,11 +26,6 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class MigrateExecutable extends MigrateExecutableBase
 {
-    /**
-     * The Symfony console output.
-     */
-    protected OutputInterface $output;
-
     /**
      * Counters of map statuses.
      */
@@ -107,7 +100,7 @@ class MigrateExecutable extends MigrateExecutableBase
     /**
      * Static cached ID map.
      */
-    protected ?MigrateIdMapFilter $idMap;
+    protected ?MigrateIdMapFilter $idMap = null;
 
     /**
      * If the execution exposes a progress bar.
@@ -117,12 +110,12 @@ class MigrateExecutable extends MigrateExecutableBase
     /**
      * The Symfony progress bar.
      */
-    protected ?ProgressBar $progressBar;
+    protected ?ProgressBar $progressBar = null;
 
     /**
      * Constructs a new migrate executable instance.
      */
-    public function __construct(MigrationInterface $migration, MigrateMessageInterface $message, OutputInterface $output, array $options = [])
+    public function __construct(MigrationInterface $migration, MigrateMessageInterface $message, protected OutputInterface $output, array $options = [])
     {
         Timer::start('migrate:' . $migration->getPluginId());
 
@@ -140,8 +133,6 @@ class MigrateExecutable extends MigrateExecutableBase
         $this->idlist = MigrateUtils::parseIdList($options['idlist']);
 
         parent::__construct($migration, $message);
-
-        $this->output = $output;
         $this->limit = $options['limit'];
         $this->feedback = $options['feedback'] ? intval($options['feedback']) : null;
         $this->showTimestamp = $options['timestamp'];
@@ -159,17 +150,17 @@ class MigrateExecutable extends MigrateExecutableBase
         // - The migration source plugin is configured to skip count.
         $this->exposeProgressBar = $options['progress'] && !$this->feedback && empty($migration->getSourceConfiguration()['skip_count']);
 
-        $this->listeners[MigrateEvents::MAP_SAVE] = [$this, 'onMapSave'];
-        $this->listeners[MigrateEvents::PRE_IMPORT] = [$this, 'onPreImport'];
-        $this->listeners[MigrateEvents::POST_IMPORT] = [$this, 'onPostImport'];
-        $this->listeners[MigrateEvents::MAP_DELETE] = [$this, 'onMapDelete'];
-        $this->listeners[MigrateEvents::PRE_ROLLBACK] = [$this, 'onPreRollback'];
-        $this->listeners[MigrateEvents::POST_ROLLBACK] = [$this, 'onPostRollback'];
-        $this->listeners[MigrateEvents::PRE_ROW_SAVE] = [$this, 'onPreRowSave'];
-        $this->listeners[MigrateEvents::POST_ROW_SAVE] = [$this, 'onPostRowSave'];
-        $this->listeners[MigrateEvents::POST_ROW_DELETE] = [$this, 'onPostRowDelete'];
-        $this->listeners[MigrateRunnerEvents::DRUSH_MIGRATE_PREPARE_ROW] = [$this, 'onPrepareRow'];
-        $this->listeners[MigrateMissingSourceRowsEvent::class] = [$this, 'onMissingSourceRows'];
+        $this->listeners[MigrateEvents::MAP_SAVE] = $this->onMapSave(...);
+        $this->listeners[MigrateEvents::PRE_IMPORT] = $this->onPreImport(...);
+        $this->listeners[MigrateEvents::POST_IMPORT] = $this->onPostImport(...);
+        $this->listeners[MigrateEvents::MAP_DELETE] = $this->onMapDelete(...);
+        $this->listeners[MigrateEvents::PRE_ROLLBACK] = $this->onPreRollback(...);
+        $this->listeners[MigrateEvents::POST_ROLLBACK] = $this->onPostRollback(...);
+        $this->listeners[MigrateEvents::PRE_ROW_SAVE] = $this->onPreRowSave(...);
+        $this->listeners[MigrateEvents::POST_ROW_SAVE] = $this->onPostRowSave(...);
+        $this->listeners[MigrateEvents::POST_ROW_DELETE] = $this->onPostRowDelete(...);
+        $this->listeners[MigrateRunnerEvents::DRUSH_MIGRATE_PREPARE_ROW] = $this->onPrepareRow(...);
+        $this->listeners[MigrateMissingSourceRowsEvent::class] = $this->onMissingSourceRows(...);
 
         $eventDispatcher = $this->getEventDispatcher();
         assert($eventDispatcher instanceof EventDispatcherInterface);
@@ -177,9 +168,6 @@ class MigrateExecutable extends MigrateExecutableBase
             $eventDispatcher->addListener($event, $listener);
         }
 
-        if ($this->deleteMissingSourceRows) {
-            $this->disableMapJoin($migration);
-        }
         if (!$this->interceptPrepareRow($migration) && $this->deleteMissingSourceRows) {
             throw new \RuntimeException(sprintf(
                 "Cannot use --delete: the source plugin of the '%s' migration does not extend %s, so Drush cannot track which source rows still exist.",
@@ -187,31 +175,6 @@ class MigrateExecutable extends MigrateExecutableBase
                 SourcePluginBase::class,
             ));
         }
-    }
-
-    /**
-     * Stops an SqlBase source from hiding imported rows behind the map join.
-     *
-     * When SqlBase::mapJoinable() is true, SqlBase::initializeIterator() LEFT
-     * JOINs the ID map and yields only rows that are not imported yet or are
-     * flagged NEEDS_UPDATE. Rows that are already imported never reach
-     * prepareRow(), so onPrepareRow() does not record them and
-     * handleMissingSourceRows() would roll back every imported row that still
-     * exists in the source. Setting ignore_map makes the source yield every
-     * row; SourcePluginBase::next() then applies the same "not imported or
-     * needs update" filter per row, so the set of imported rows is unchanged.
-     * The join is only an optimization and only matters when the source and
-     * the map share a database connection.
-     */
-    private function disableMapJoin(MigrationInterface $migration): void
-    {
-        $configuration = $migration->getSourceConfiguration();
-        if (!empty($configuration['ignore_map']) || !$migration instanceof Migration || !$migration->getSourcePlugin() instanceof SqlBase) {
-            return;
-        }
-        // Drops the cached source plugin; the next getSourcePlugin() call
-        // builds one from the new configuration.
-        $migration->set('source', ['ignore_map' => true] + $configuration);
     }
 
     /**
@@ -524,11 +487,7 @@ class MigrateExecutable extends MigrateExecutableBase
     public function onPreRowSave(MigratePreRowSaveEvent $event): void
     {
         $idMap = $event->getRow()->getIdMap();
-        if (!empty($idMap['destid1'])) {
-            $this->preExistingItem = true;
-        } else {
-            $this->preExistingItem = false;
-        }
+        $this->preExistingItem = !empty($idMap['destid1']);
     }
 
     /**
@@ -550,7 +509,7 @@ class MigrateExecutable extends MigrateExecutableBase
      */
     public function onPostRowDelete(MigrateRowDeleteEvent $event): void
     {
-        if ($this->feedback && ($this->deleteCounter) && $this->deleteCounter % $this->feedback == 0) {
+        if ($this->feedback && ($this->deleteCounter) && $this->deleteCounter % $this->feedback === 0) {
             $this->rollbackFeedbackMessage(false);
             $this->resetCounters();
         }

@@ -28,7 +28,7 @@ class SmartIp {
    *   Geolocation details of queried IP address.
    * @throws \Exception
    */
-  public static function query(string $ip = NULL): array {
+  public static function query(?string $ip = NULL): array {
     $ip = trim((string) $ip);
     if (empty($ip)) {
       $ip = \Drupal::request()->getClientIp();
@@ -200,7 +200,7 @@ class SmartIp {
    * @return bool
    *   TRUE if the current user is in debug mode and FALSE if not.
    */
-  public static function isUserDebugMode(int $uid = NULL): bool {
+  public static function isUserDebugMode(?int $uid = NULL): bool {
     $inDebugMode = FALSE;
     $config      = \Drupal::config('smart_ip.settings');
     $user        = $uid ? User::load($uid) : \Drupal::currentUser();
@@ -436,7 +436,7 @@ class SmartIp {
    *
    * @return int
    */
-  public static function ipAddressVersion(string $ipAddress = NULL) {
+  public static function ipAddressVersion(?string $ipAddress = NULL) {
     if (filter_var($ipAddress, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) {
       return 4;
     }

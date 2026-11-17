@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace Drush\Commands;
 
-use Consolidation\AnnotatedCommand\AnnotationData;
 use Consolidation\AnnotatedCommand\CommandData;
 use Consolidation\AnnotatedCommand\Hooks\HookManager;
+use Consolidation\AnnotatedCommand\Output\OutputAwareInterface;
+use Consolidation\Config\ConfigAwareInterface;
 use Consolidation\SiteProcess\ProcessManagerAwareInterface;
 use Consolidation\SiteProcess\ProcessManagerAwareTrait;
 use Drush\Attributes as CLI;
@@ -19,24 +20,25 @@ use Drush\Style\DrushStyle;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\MessageFormatter;
 use GuzzleHttp\Middleware;
+use JetBrains\PhpStorm\Deprecated;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
-use Robo\Common\IO;
-use Robo\Contract\ConfigAwareInterface;
-use Robo\Contract\IOAwareInterface;
+use Symfony\Component\Console\Input\ArgvInput;
+use Symfony\Component\Console\Input\InputAwareInterface;
+use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Output\NullOutput;
+use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Filesystem\Path;
 
-abstract class DrushCommands implements IOAwareInterface, LoggerAwareInterface, ConfigAwareInterface, ProcessManagerAwareInterface
+#[Deprecated('See https://www.drush.org/latest/commands/')]
+abstract class DrushCommands implements OutputAwareInterface, InputAwareInterface, LoggerAwareInterface, ConfigAwareInterface, ProcessManagerAwareInterface
 {
     use ProcessManagerAwareTrait;
     use ExecTrait;
     use ConfigAwareTrait;
     use LoggerAwareTrait;
-    use IO {
-        io as roboIo;
-    }
-    use ConfiguresPrompts;
 
     // This is more readable.
     const REQ = InputOption::VALUE_REQUIRED;
@@ -49,16 +51,54 @@ abstract class DrushCommands implements IOAwareInterface, LoggerAwareInterface, 
     const EXIT_FAILURE_WITH_CLARITY = 3;
 
     protected ?CommandData $commandData = null;
+    protected ?InputInterface $input = null;
+    protected ?OutputInterface $output = null;
+    protected ?SymfonyStyle $io = null;
 
     public function __construct()
     {
     }
 
+    public function setInput(InputInterface $input): void
+    {
+        if ($input != $this->input) {
+            $this->io = null;
+        }
+        $this->input = $input;
+    }
+
+    public function setOutput(OutputInterface $output)
+    {
+        if ($output != $this->output) {
+            $this->io = null;
+        }
+        $this->output = $output;
+
+        return $this;
+    }
+
+    protected function input(): InputInterface
+    {
+        if (!isset($this->input)) {
+            $this->setInput(new ArgvInput());
+        }
+        return $this->input;
+    }
+
+    protected function output(): OutputInterface
+    {
+        if (!isset($this->output)) {
+            $this->setOutput(new NullOutput());
+        }
+        return $this->output;
+    }
+
     /**
-     * Override Robo's IO function with our custom style.
+     * Override to provide a DrushStyle instance.
      */
     protected function io(): DrushStyle
     {
+        trigger_deprecation('drush/drush', '14.0.0', 'Convert to a Console command and build a DrushStyle instance. See https://www.drush.org/latest/commands/.');
         if (!$this->io) {
             // Specify our own Style class when needed.
             $this->io = new DrushStyle($this->input(), $this->output());
@@ -72,6 +112,7 @@ abstract class DrushCommands implements IOAwareInterface, LoggerAwareInterface, 
      */
     public function logger(): ?DrushLoggerManager
     {
+        trigger_deprecation('drush/drush', '14.0.0', 'Convert to a Console command and inject a Logger. See https://www.drush.org/latest/commands/.');
         assert(is_null($this->logger) || $this->logger instanceof DrushLoggerManager, 'Instead of using replacing Drush\'s logger, use $this->add() on DrushLoggerManager to add a custom logger. See https://github.com/drush-ops/drush/pull/5022');
         return $this->logger;
     }
@@ -105,19 +146,9 @@ abstract class DrushCommands implements IOAwareInterface, LoggerAwareInterface, 
      * Persist commandData for use in primary command callback. Used by 'topic' commands.
      */
     #[CLI\Hook(type: HookManager::PRE_COMMAND_HOOK, target: '*')]
-    public function preHook(CommandData $commandData)
+    public function preHook(CommandData $commandData): void
     {
         $this->commandData = $commandData;
-    }
-
-    /**
-     * Configure Laravel prompts package.
-     */
-    #[CLI\Hook(type: HookManager::INITIALIZE, target: '*')]
-    public function initHook($input, AnnotationData $annotationData)
-    {
-
-        $this->configurePrompts($input);
     }
 
     /**
@@ -149,6 +180,7 @@ abstract class DrushCommands implements IOAwareInterface, LoggerAwareInterface, 
      */
     public function processManager(): ProcessManager
     {
+        trigger_deprecation('drush/drush', '14.0.0', 'Convert to a Console command and inject a ProcessManager. See https://www.drush.org/latest/commands/.');
         return $this->processManager;
     }
 }

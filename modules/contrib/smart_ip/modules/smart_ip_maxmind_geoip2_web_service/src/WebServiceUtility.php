@@ -22,7 +22,7 @@ class WebServiceUtility extends WebServiceUtilityBase {
   /**
    * {@inheritdoc}
    */
-  public static function getUrl(string $ipAddress = NULL): string {
+  public static function getUrl(?string $ipAddress = NULL): string {
     if (!empty($ipAddress)) {
       $config = \Drupal::config(SmartIpEventSubscriber::configName());
       $userId = $config->get('user_id');
@@ -37,7 +37,7 @@ class WebServiceUtility extends WebServiceUtilityBase {
    * {@inheritdoc}
    * @throws \GuzzleHttp\Exception\GuzzleException
    */
-  public static function getGeolocation(string $ipAddress = NULL): array {
+  public static function getGeolocation(?string $ipAddress = NULL): array {
     $url  = self::getUrl($ipAddress);
     $json = self::sendRequest($url);
     $data = Json::decode($json);

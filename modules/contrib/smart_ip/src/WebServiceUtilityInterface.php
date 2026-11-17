@@ -17,18 +17,18 @@ interface WebServiceUtilityInterface {
   /**
    * Get Smart IP's data source module's web service URL.
    *
-   * @param string $ipAddress
+   * @param string|null $ipAddress
    *   IP address to query for geolocation.
    *
    * @return string
    *   Smart IP's data source module's web service URL.
    */
-  public static function getUrl(string $ipAddress): string;
+  public static function getUrl(?string $ipAddress = NULL): string;
 
   /**
    * Perform HTTP request to the Smart IP's data source module web service.
    *
-   * @param string $url
+   * @param string|null $url
    *   URL provided by Smart IP's data source module web service for geolocation
    *   query.
    *
@@ -36,18 +36,18 @@ interface WebServiceUtilityInterface {
    *   Raw Geolocation data returned by Smart IP's data source module web
    *   service.
    */
-  public static function sendRequest(string $url): string;
+  public static function sendRequest(?string $url = NULL): string;
 
   /**
    * Perform HTTP request and decoding the raw Geolocation data returned by
    * Smart IP's data source module web service.
    *
-   * @param string $ipAddress
+   * @param string|null $ipAddress
    *   IP address to query for geolocation.
    *
    * @return array
    *   Geolocation data returned by Smart IP's data source module web service.
    */
-  public static function getGeolocation(string $ipAddress): array;
+  public static function getGeolocation(?string $ipAddress = NULL): array;
 
 }

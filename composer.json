@@ -43,7 +43,7 @@
         "drupal/country_block": "^1.0",
         "drupal/crop": "^2.3",
         "drupal/devel": "^5.5",
-        "drupal/devel_entity_updates": "^5.0@RC",
+        "drupal/devel_entity_updates": "^3.0",
         "drupal/devel_php": "^2.0",
         "drupal/disqus": "^2.0@alpha",
         "drupal/editor_advanced_link": "^2.2",
@@ -87,7 +87,7 @@
         "drupal/views_infinite_scroll": "^2.0",
         "drupal/webp": "^1.0@RC",
         "drupal/yoast_seo": "^2.1",
-        "drush/drush": "^13.8",
+        "drush/drush": "^14",
         "geshi/geshi": "dev-master",
         "grasmash/drupal-security-warning": "^2.0",
         "mglaman/composer-drupal-lenient": "^2.0",
@@ -105,7 +105,7 @@
         "discard-changes": true,
         "optimize-autoloader": true,
         "platform": {
-            "php": "8.3"
+            "php": "8.5"
         },
         "allow-plugins": {
             "composer/installers": true,
@@ -237,6 +237,9 @@
             },
             "drupal/webp": {
                 "3556428: Fix deprecation: ltrim() null argument in ImageStyleDownloadController": "https://git.drupalcode.org/project/webp/-/merge_requests/53.diff"
+            },
+            "drupal/smart_ip": {
+                "3532497: Fix PHP 8.4 implicit nullable deprecation": "https://www.drupal.org/files/issues/2025-06-25/smart_ip-fix-implicit-nullables-3532497-3.patch"
             },
             "npm-asset/slick-carousel": {
                 "3467129: Incompatibility with Drupal 11/jQuery 4": "https://www.drupal.org/files/issues/2025-02-17/compatibility_jQuery_4.patch"

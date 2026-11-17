@@ -58,7 +58,7 @@ class LegacyServiceFinder
      * @param string $module Module name
      * @param string $filename Full path to modules .info.yml file
      */
-    protected function addModuleDrushServiceProvider($module, $filename)
+    protected function addModuleDrushServiceProvider(string $module, $filename)
     {
         $serviceYmlPath = $this->findModuleDrushServiceProvider($module, dirname($filename));
         $this->addDrushServiceProvider("_drush.$module", $serviceYmlPath);
@@ -85,7 +85,7 @@ class LegacyServiceFinder
      * @param string $module Module name
      * @param string $dir Full path to module base dir
      */
-    protected function findDefaultServicesFile($module, $dir)
+    protected function findDefaultServicesFile($module, string $dir)
     {
         $result = $dir . "/drush.services.yml";
         if (!file_exists($result)) {
@@ -140,7 +140,7 @@ class LegacyServiceFinder
      * @return string
      *   One discovered drush.service.yml file
      */
-    protected function findAppropriateServicesFile($module, $services, $dir)
+    protected function findAppropriateServicesFile($module, $services, string $dir): string
     {
         $version = Drush::getVersion();
         $version = preg_replace('#-dev.*#', '', $version);
@@ -159,7 +159,7 @@ class LegacyServiceFinder
      * Add a services.yml file if it exists.
      *
      * @param string $serviceProviderName Arbitrary name for temporary use only
-     * @param ?string $serviceYmlPath Path to drush.services.yml file
+     * @param string $serviceYmlPath Path to drush.services.yml file
      */
     protected function addDrushServiceProvider($serviceProviderName, $serviceYmlPath = '')
     {
@@ -178,7 +178,7 @@ class LegacyServiceFinder
      * @return string[]
      *   List of paths to all modules' .info.yml files.
      */
-    protected function getModuleFileNames()
+    protected function getModuleFileNames(): array
     {
         $modules = $this->moduleHandler->getModuleList();
         $moduleFilenames = [];

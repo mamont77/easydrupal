@@ -17,6 +17,7 @@ api
 .doctum-cache
 # IDE config
 .idea/
+.vscode/
 sut/*
 !sut/drush
 sut/drush/sites/*test.site.yml
@@ -31,3 +32,6 @@ sut/drush/sites/synctest.site.yml
 
 # Code tools
 .claude
+
+# mkdocs
+.cache

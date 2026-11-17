@@ -23,10 +23,8 @@ trait ConfiguresPromptsTrait
 {
     /**
      * Configure the prompt fallbacks.
-     *
-     * @return void
      */
-    public function configurePrompts(InputInterface $input)
+    public function configurePrompts(InputInterface $input): void
     {
         Prompt::setOutput($this->output);
 
@@ -153,7 +151,7 @@ trait ConfiguresPromptsTrait
             $result = $prompt();
             $style = new SymfonyStyle($this->input, $this->output);
 
-            if ($required && ($result === '' || $result === [] || $result === false)) {
+            if ($required && (in_array($result, ['', [], false], true))) {
                 $style->error(is_string($required) ? $required : 'Required.');
 
                 continue;

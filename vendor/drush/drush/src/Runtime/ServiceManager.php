@@ -30,9 +30,8 @@ use League\Container\Container as DrushContainer;
 use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
-use Robo\ClassDiscovery\RelativeNamespaceDiscovery;
-use Robo\Contract\ConfigAwareInterface;
-use Robo\Contract\OutputAwareInterface;
+use Consolidation\Config\ConfigAwareInterface;
+use Consolidation\AnnotatedCommand\Output\OutputAwareInterface;
 use Drupal;
 use Drupal\Core\DefaultContent\Command\ContentExportCommand as CommandContentExportCommand;
 use Drupal\Core\Recipe\Command\RecipeCommand as CommandRecipeCommand;
@@ -102,7 +101,7 @@ class ServiceManager
     }
 
     /**
-     * Return cached of deferred scubscriber objects.
+     * Return cached of deferred subscriber objects.
      *
      * @return string[]
      *   List of class names to instantiate at bootstrap time.
@@ -113,7 +112,7 @@ class ServiceManager
     }
 
     /**
-     * Discover all of the different kinds of command handler objects
+     * Discover all the different kinds of command handler objects
      * in the places where Drush can find them. Called during preflight;
      * some command classes are returned right away, and others are saved
      * to be handled later during Drupal bootstrap.
@@ -194,8 +193,8 @@ class ServiceManager
     }
 
     /**
-     * Discover PSR-4 autoloaded classes that implement Annotated Command
-     * library command handlers.
+     * Discover PSR-4 autoloaded classes that implement extend DrushCommands and
+     * are named properly.
      *
      * @return string[]
      *   List of command classes
@@ -232,7 +231,7 @@ class ServiceManager
         return array_filter($classes, function (string $class): bool {
             try {
                 $reflectionClass = new \ReflectionClass($class);
-            } catch (\Throwable $e) {
+            } catch (\Throwable) {
                 return false;
             }
             return $reflectionClass->isSubclassOf(BaseGenerator::class)
@@ -358,14 +357,10 @@ class ServiceManager
         $help = 'See https://drupal.org/project/issues/drupal for bug reports and feature requests for this command.';
 
         // Drupal 11.4+
-        /** @disregard P1009 */
         if ($container->has(CommandRecipeCommand::class)) {
-            /** @disregard P1009 */
             $instances[] = Drupal::service(CommandRecipeCommand::class)->setHelp($help);
         }
-        /** @disregard P1009 */
         if ($container->has(CommandContentExportCommand::class)) {
-            /** @disregard P1009 */
             $instances[] = Drupal::service(CommandContentExportCommand::class)->setHelp($help);
         }
 
@@ -405,10 +400,10 @@ class ServiceManager
         // particularly DrushCommands (our abstract base class).
         // n.b. we cannot simply use 'isInstantiable' here because
         // the constructor is typically protected when using a static create method
-        $serviceClasses = array_filter($serviceClasses, function ($class) {
+        $serviceClasses = array_filter($serviceClasses, function (string $class): bool {
             try {
                 $reflection = new \ReflectionClass($class);
-            } catch (\Throwable $e) {
+            } catch (\Throwable) {
                 return false;
             }
             return !$reflection->isAbstract();
@@ -448,7 +443,7 @@ class ServiceManager
     }
 
     /**
-     * Robo does not support invokable commands, so build a Command as needed.
+     * The annotated command framework does not support invokable commands, so build a Command as needed.
      */
     public function commandFromInvokable(array &$callables): array
     {
@@ -476,7 +471,8 @@ class ServiceManager
             foreach ($attributes as $attribute) {
                 $attributeInstance = $attribute->newInstance();
                 $method = $attributeInstance->method ?? '__invoke';
-                $priority = $attributeInstance->priority;
+                // Symfony 8.2 made the attribute priority nullable.
+                $priority = (int) $attributeInstance->priority;
                 $reflectionMethod = $reflectionObject->getMethod($method);
                 $reflectionParameters = $reflectionMethod->getParameters();
                 $paramType = $reflectionParameters[0]->getType();
@@ -525,7 +521,7 @@ class ServiceManager
                 $bootstrap = $attributes[0]->newInstance();
                 return $bootstrap->level;
             }
-        } catch (\ReflectionException $e) {
+        } catch (\ReflectionException) {
         }
         return null;
     }
@@ -619,7 +615,7 @@ class ServiceManager
             $object->setProcessManager($container->get('process.manager'));
         }
         // InputAwareInterface and OutputAwareInterface are needed by
-        // the Robo IO trait that saves and restores input/output state,
+        // the IO trait that saves and restores input/output state,
         // so they must be maintained until that system is retired.
         if ($object instanceof InputAwareInterface) {
             $object->setInput($container->get('input'));

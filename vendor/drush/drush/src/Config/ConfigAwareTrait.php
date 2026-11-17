@@ -6,8 +6,8 @@ namespace Drush\Config;
 
 trait ConfigAwareTrait
 {
-    use \Robo\Common\ConfigAwareTrait {
-        \Robo\Common\ConfigAwareTrait::getConfig as parentGetConfig;
+    use \Consolidation\Config\ConfigAwareTrait {
+        \Consolidation\Config\ConfigAwareTrait::getConfig as parentGetConfig;
     }
 
     /**
@@ -19,7 +19,7 @@ trait ConfigAwareTrait
     public function getConfig(): DrushConfig
     {
         $return = $this->parentGetConfig();
-        assert($return instanceof DrushConfig, 'Expected DrushConfig, got ' . get_class($return) . '.');
+        assert($return instanceof DrushConfig, 'Expected DrushConfig, got ' . $return::class . '.');
         return $return;
     }
 }

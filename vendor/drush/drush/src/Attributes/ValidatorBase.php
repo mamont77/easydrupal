@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace Drush\Attributes;
 
-use Consolidation\AnnotatedCommand\Attributes\AttributeInterface;
 use Consolidation\AnnotatedCommand\CommandData;
 use Consolidation\AnnotatedCommand\Parser\CommandInfo;
 use Drush\Drush;
 
 abstract class ValidatorBase
 {
-    public static function handle(\ReflectionAttribute $attribute, CommandInfo $commandInfo)
+    public static function handle(\ReflectionAttribute $attribute, CommandInfo $commandInfo): void
     {
         $instance = $attribute->newInstance();
         $hookManager = Drush::getContainer()->get('hookManager');

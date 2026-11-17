@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Drush\Config;
 
+use Consolidation\Config\ConfigInterface;
 use Consolidation\Config\Loader\ConfigLoader;
 use Consolidation\Config\Loader\ConfigProcessor;
 use Consolidation\Config\Util\EnvConfig;
@@ -42,8 +43,6 @@ class ConfigLocator
     protected $composerRoot;
 
     protected $configFilePaths = [];
-
-    protected $configFileVariant;
 
     protected $processedConfigPaths = [];
 
@@ -92,9 +91,8 @@ class ConfigLocator
     /**
      * ConfigLocator constructor
      */
-    public function __construct($envPrefix = '', $configFileVariant = '')
+    public function __construct($envPrefix = '', protected $configFileVariant = '')
     {
-        $this->configFileVariant = $configFileVariant;
         $this->config = new DrushConfig();
 
         // Add placeholders to establish priority. We add
@@ -201,7 +199,7 @@ class ConfigLocator
      */
     public function addPreflightConfigFiles(array $filepaths): self
     {
-        $this->addConfigPaths(self::PREFLIGHT_CONTEXT, (array) $filepaths);
+        $this->addConfigPaths(self::PREFLIGHT_CONTEXT, $filepaths);
         return $this;
     }
 
@@ -209,7 +207,7 @@ class ConfigLocator
      * Take any configuration from the active alias record, and add it
      * to our configuration.
      */
-    public function addAliasConfig($aliasConfig): self
+    public function addAliasConfig(ConfigInterface $aliasConfig): self
     {
         $this->config->addContext(self::ALIAS_CONTEXT, $aliasConfig);
         return $this;
@@ -376,16 +374,12 @@ class ConfigLocator
         // In addition to the paths passed in to us (from --alias-path
         // commandline options), add some site-local locations.
         $siteroot_parents = array_map(
-            function ($dir) {
-                return dirname($dir);
-            },
+            dirname(...),
             $this->siteRoots
         );
         $base_dirs = array_filter(array_merge($this->siteRoots, $siteroot_parents, [$this->composerRoot]));
         $site_local_paths = array_map(
-            function ($item) {
-                return Path::join($item, '/drush/sites');
-            },
+            fn(string $item) => Path::join($item, '/drush/sites'),
             array_unique($base_dirs)
         );
 
@@ -462,7 +456,7 @@ class ConfigLocator
     {
         $directories = ["$root/drush", dirname($root) . '/drush', "$root/sites/all/drush"];
 
-        return array_filter($directories, 'is_dir');
+        return array_filter($directories, is_dir(...));
     }
 
     /**
@@ -483,9 +477,7 @@ class ConfigLocator
     public function expandCandidates($candidates, $prefix): array
     {
         $additional = array_map(
-            function ($item) use ($prefix) {
-                return $prefix . $item;
-            },
+            fn($item) => $prefix . $item,
             $candidates
         );
         return array_merge($candidates, $additional);

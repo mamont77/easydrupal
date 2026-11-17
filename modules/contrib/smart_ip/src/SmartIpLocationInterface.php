@@ -68,13 +68,13 @@ interface SmartIpLocationInterface {
    * Gets an item in Smart IP location data or all the Smart IP location data
    * if supplied no parameter.
    *
-   * @param string $key
+   * @param string|null $key
    *   Name of the item in Smart IP location data.
    *
    * @return mixed
    *   Value of the requested item in Smart IP location data or an array of it.
    */
-  public function get(string $key): mixed;
+  public function get(?string $key = NULL): mixed;
 
   /**
    * Saves the Smart IP location data to user data and session (for anonymous,

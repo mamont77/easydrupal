@@ -153,7 +153,7 @@ class SmartIpLocation implements SmartIpLocationInterface {
    * {@inheritdoc}
    * @throws \Exception
    */
-  public function get(string $key = NULL): mixed {
+  public function get(?string $key = NULL): mixed {
     if (!empty($key)) {
       $value = $this->{$key};
       if (!empty($value)) {
@@ -201,26 +201,7 @@ class SmartIpLocation implements SmartIpLocationInterface {
    */
   public function set(string $key, mixed $value): SmartIpLocationInterface|static {
     if (isset($this->{$key})) {
-      // Type cast values to match property types to avoid PHP 8 type errors.
-      switch ($key) {
-        case 'latitude':
-        case 'longitude':
-          $this->{$key} = is_numeric($value) ? (float) $value : 0.0;
-          break;
-
-        case 'isEuCountry':
-        case 'isGdprCountry':
-          $this->{$key} = (bool) $value;
-          break;
-
-        case 'timestamp':
-          $this->{$key} = is_numeric($value) ? (int) $value : 0;
-          break;
-
-        default:
-          $this->{$key} = $value;
-          break;
-      }
+      $this->{$key} = $value;
       $this->allData[$key] = $value;
     }
     return $this;
