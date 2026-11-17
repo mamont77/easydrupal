@@ -224,7 +224,8 @@
                 "3137937: Theme functions are deprecated in geshifield": "https://www.drupal.org/files/issues/2020-11-06/theme_function_deprecated--3137937-2.patch"
             },
             "drupal/smart_ip": {
-                "#3350345: TypeError: Cannot assign string to property Drupal\\smart_ip\\SmartIpLocation::$latitude": "https://www.drupal.org/files/issues/2025-10-10/3350345-18.patch"
+                "3350345: TypeError: Cannot assign string to property Drupal\\smart_ip\\SmartIpLocation::$latitude": "https://www.drupal.org/files/issues/2025-10-10/3350345-18.patch",
+                "3532497: Fix PHP 8.4 implicit nullable deprecation": "https://www.drupal.org/files/issues/2025-06-25/smart_ip-fix-implicit-nullables-3532497-3.patch"
             },
             "drupal/image_widget_crop": {
                 "3491004: Can't save image widget crop settings (ImmutableConfigException)": "https://git.drupalcode.org/project/image_widget_crop/-/merge_requests/37.diff"
@@ -237,9 +238,6 @@
             },
             "drupal/webp": {
                 "3556428: Fix deprecation: ltrim() null argument in ImageStyleDownloadController": "https://git.drupalcode.org/project/webp/-/merge_requests/53.diff"
-            },
-            "drupal/smart_ip": {
-                "3532497: Fix PHP 8.4 implicit nullable deprecation": "https://www.drupal.org/files/issues/2025-06-25/smart_ip-fix-implicit-nullables-3532497-3.patch"
             },
             "npm-asset/slick-carousel": {
                 "3467129: Incompatibility with Drupal 11/jQuery 4": "https://www.drupal.org/files/issues/2025-02-17/compatibility_jQuery_4.patch"
