@@ -5381,6 +5381,7 @@ class ComposerStaticInit7bb062997fc4f0d3cdcb37d377b9bb20
         'MaxMind\\WebService\\Http\\RequestFactory' => __DIR__ . '/..' . '/maxmind/web-service-common/src/WebService/Http/RequestFactory.php',
         'Micheh\\PhpCodeSniffer\\Report\\Gitlab' => __DIR__ . '/..' . '/micheh/phpcs-gitlab/src/Report/Gitlab.php',
         'Nevay\\SPI\\Composer\\Plugin' => __DIR__ . '/..' . '/tbachert/spi/src/Composer/Plugin.php',
+        'Nevay\\SPI\\GeneratedServiceProviderData' => __DIR__ . '/..' . '/composer/GeneratedServiceProviderData.php',
         'Nevay\\SPI\\ServiceConfigurationError' => __DIR__ . '/..' . '/tbachert/spi/src/ServiceConfigurationError.php',
         'Nevay\\SPI\\ServiceLoader' => __DIR__ . '/..' . '/tbachert/spi/src/ServiceLoader.php',
         'Nevay\\SPI\\ServiceLoaderIterator' => __DIR__ . '/..' . '/tbachert/spi/src/ServiceLoaderIterator.php',

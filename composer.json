@@ -111,15 +111,17 @@
             "composer/installers": true,
             "cweagans/composer-patches": true,
             "dealerdirect/phpcodesniffer-composer-installer": true,
+            "drupal/ai_best_practices": true,
             "drupal/core-composer-scaffold": true,
             "drupal/core-project-message": true,
             "grasmash/drupal-security-warning": true,
             "mglaman/composer-drupal-lenient": true,
             "oomphinc/composer-installers-extender": true,
+            "php-http/discovery": true,
+            "phpstan/extension-installer": true,
             "symfony/runtime": true,
-            "topfloor/composer-cleanup-vcs-dirs": true,
-            "drupal/ai_best_practices": true,
-            "phpstan/extension-installer": true
+            "tbachert/spi": true,
+            "topfloor/composer-cleanup-vcs-dirs": true
         }
     },
     "extra": {

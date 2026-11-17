@@ -4403,6 +4403,7 @@ return array(
     'MaxMind\\WebService\\Http\\RequestFactory' => $vendorDir . '/maxmind/web-service-common/src/WebService/Http/RequestFactory.php',
     'Micheh\\PhpCodeSniffer\\Report\\Gitlab' => $vendorDir . '/micheh/phpcs-gitlab/src/Report/Gitlab.php',
     'Nevay\\SPI\\Composer\\Plugin' => $vendorDir . '/tbachert/spi/src/Composer/Plugin.php',
+    'Nevay\\SPI\\GeneratedServiceProviderData' => $vendorDir . '/composer/GeneratedServiceProviderData.php',
     'Nevay\\SPI\\ServiceConfigurationError' => $vendorDir . '/tbachert/spi/src/ServiceConfigurationError.php',
     'Nevay\\SPI\\ServiceLoader' => $vendorDir . '/tbachert/spi/src/ServiceLoader.php',
     'Nevay\\SPI\\ServiceLoaderIterator' => $vendorDir . '/tbachert/spi/src/ServiceLoaderIterator.php',
