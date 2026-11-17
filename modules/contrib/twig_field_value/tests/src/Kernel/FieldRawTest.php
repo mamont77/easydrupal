@@ -2,19 +2,25 @@
 
 namespace Drupal\Tests\twig_field_value\Kernel;
 
+use Drupal\Core\Field\FieldStorageDefinitionInterface;
+use Drupal\twig_field_value\Twig\Extension\FieldValueExtension;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 use Drupal\Core\Entity\FieldableEntityInterface;
 use Drupal\Core\Render\BubbleableMetadata;
 use Drupal\Core\Render\RenderContext;
 use Drupal\entity_test\Entity\EntityTest;
 use Drupal\field\Entity\FieldConfig;
 use Drupal\field\Entity\FieldStorageConfig;
-use Drupal\field\FieldStorageConfigInterface;
 use Drupal\KernelTests\Core\Entity\EntityKernelTestBase;
 
 /**
- * @coversDefaultClass \Drupal\twig_field_value\Twig\Extension\FieldValueExtension
- * @group twig_field_value
+ * Field raw tests from FieldValueExtension.
  */
+#[Group('twig_field_value')]
+#[RunTestsInSeparateProcesses]
+#[CoversClass(FieldValueExtension::class)]
 class FieldRawTest extends EntityKernelTestBase {
 
   /**
@@ -29,6 +35,9 @@ class FieldRawTest extends EntityKernelTestBase {
 
   /**
    * {@inheritdoc}
+   *
+   * @throws \Drupal\Core\Entity\EntityStorageException
+   * @throws \Exception
    */
   protected function setUp(): void {
     parent::setUp();
@@ -36,7 +45,7 @@ class FieldRawTest extends EntityKernelTestBase {
       'field_name' => 'field_reference',
       'type' => 'entity_reference',
       'entity_type' => 'entity_test',
-      'cardinality' => FieldStorageConfigInterface::CARDINALITY_UNLIMITED,
+      'cardinality' => FieldStorageDefinitionInterface::CARDINALITY_UNLIMITED,
       'settings' => [
         'target_type' => 'entity_test',
       ],
@@ -51,7 +60,7 @@ class FieldRawTest extends EntityKernelTestBase {
       'field_name' => 'field_string',
       'type' => 'string',
       'entity_type' => 'entity_test',
-      'cardinality' => FieldStorageConfigInterface::CARDINALITY_UNLIMITED,
+      'cardinality' => FieldStorageDefinitionInterface::CARDINALITY_UNLIMITED,
     ]);
     $fieldStorage->save();
     $fieldConfig = FieldConfig::create([
@@ -70,8 +79,10 @@ class FieldRawTest extends EntityKernelTestBase {
    * access is denied; 2. A field item to which access is denied. The latter
    * is realized with a specially crafted field formatter that denies access to
    * the third field item.
+   *
+   * @throws \Drupal\Core\Entity\EntityStorageException
    */
-  public function testEntityReferenceFieldValue() {
+  public function testEntityReferenceFieldValue(): void {
     $entity1 = EntityTest::create([
       'name' => 'entity1',
     ]);
@@ -133,8 +144,10 @@ class FieldRawTest extends EntityKernelTestBase {
    * Check if an inaccessible field is _not_ displayed.
    *
    * This test uses a field for which #access is set to false.
+   *
+   * @throws \Drupal\Core\Entity\EntityStorageException
    */
-  public function testEntityReferenceFieldAccess() {
+  public function testEntityReferenceFieldAccess(): void {
     $entity1 = EntityTest::create([
       'name' => 'entity1',
     ]);
@@ -183,8 +196,10 @@ class FieldRawTest extends EntityKernelTestBase {
    * This test uses a field item to which access is denied. This is realized
    * with a specially crafted field formatter that denies access to the third
    * field item.
+   *
+   * @throws \Drupal\Core\Entity\EntityStorageException
    */
-  public function testStringFieldValue() {
+  public function testStringFieldValue(): void {
     $entity = EntityTest::create([
       'field_string' => [
         'Iet wiet',
@@ -227,8 +242,10 @@ class FieldRawTest extends EntityKernelTestBase {
    * Check if an inaccessible field is _not_ displayed.
    *
    * This test uses a field for which #access is set to false.
+   *
+   * @throws \Drupal\Core\Entity\EntityStorageException
    */
-  public function testStringFieldAccess() {
+  public function testStringFieldAccess(): void {
     $entity = EntityTest::create([
       'field_string' => [
         'Iet wiet',
@@ -265,8 +282,10 @@ class FieldRawTest extends EntityKernelTestBase {
 
   /**
    * Checks if cache is propagated for a field with the field_raw filter.
+   *
+   * @throws \Drupal\Core\Entity\EntityStorageException
    */
-  public function testFieldRawCache() {
+  public function testFieldRawCache(): void {
     $entity = EntityTest::create([
       'field_string' => [
         'string one',

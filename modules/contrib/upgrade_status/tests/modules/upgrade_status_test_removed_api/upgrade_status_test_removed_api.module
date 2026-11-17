@@ -1,0 +1,32 @@
+<?php
+
+/**
+ * @file
+ * Runs queries with integer fetch modes.
+ */
+
+use Drupal\Core\Database\Statement\FetchAs;
+
+/**
+ * Runs queries with integer fetch modes, and with the FetchAs enum.
+ */
+function upgrade_status_test_removed_api_queries(): void {
+  $database = \Drupal::database();
+  $database->query('SELECT 1')->fetchAll(\PDO::FETCH_ASSOC);
+  $database->query('SELECT 1')->fetch(PDO::FETCH_OBJ);
+  $database->query('SELECT 1')->fetchAllAssoc('id', \PDO::FETCH_NUM);
+  $statement = $database->query('SELECT 1');
+  $statement->setFetchMode(
+    \PDO::FETCH_COLUMN,
+    0
+  );
+  $database->query('SELECT 1', [], ['fetch' => \PDO::FETCH_CLASS]);
+
+  // These are not reported.
+  $database->query('SELECT 1')->fetchAll(FetchAs::Associative);
+  $database->query('SELECT 1')->fetchAll(class_exists(FetchAs::class) ? FetchAs::Associative : \PDO::FETCH_ASSOC);
+  $statement->fetch(FetchAs::Object, \PDO::FETCH_ORI_NEXT);
+  \Drupal::state()->set('upgrade_status_test', [\PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_ASSOC]);
+  // $database->query('SELECT 1')->fetchAll(\PDO::FETCH_ASSOC);
+  \Drupal::state()->set('upgrade_status_test', 'fetchAll(\PDO::FETCH_ASSOC)');
+}

@@ -1,0 +1,69 @@
+<!-- AI generated -->
+<!-- Project page content for drupal.org/project/country -->
+
+<p>Country adds a dedicated country field type to Drupal, backed by <strong>Drupal core's official country list</strong>. Attach it to any entity and let editors pick a country through a select list, autocomplete, radio buttons, checkboxes, or a Tagify-style tag input.</p>
+
+<p>Values are stored as ISO 3166-1 alpha-2 codes (<code>NL</code>, <code>BE</code>, <code>LU</code>) and displayed as the localized country name or the raw ISO code, depending on the formatter you pick.</p>
+
+<h2>Features</h2>
+<ul>
+  <li><strong>Core country list</strong> &ndash; Uses the official country list provided by Drupal core.</li>
+  <li><strong>Multiple widgets</strong> &ndash; Select list, autocomplete, checkboxes, radio buttons, and Tagify (when the Tagify module is installed).</li>
+  <li><strong>Restrict the selectable list</strong> &ndash; Per field storage or per field instance.</li>
+  <li><strong>Views integration</strong> &ndash; Sort and filter plugins for building country-aware listings.</li>
+  <li><strong>Facets support</strong> &ndash; A processor that shows country names instead of ISO codes in facet blocks.</li>
+  <li><strong>Feeds integration</strong> &ndash; Import country data from external sources.</li>
+  <li><strong>Form API element</strong> &ndash; Use <code>#type =&gt; 'country'</code> in custom forms.</li>
+  <li><strong>Token support</strong> &ndash; Country field values are available as tokens.</li>
+  <li><strong>Standards-based</strong> &ndash; Uses ISO 3166-1 alpha-2 country codes.</li>
+</ul>
+
+<div class="note-version">
+  <h2>Why use Country?</h2>
+  <p>Drupal core ships a country list but no country field. A semantic field type backed by that list integrates with Views, Facets, Tokens, Feeds, and the Form API without pulling in a full address module.</p>
+</div>
+
+<h2>Integration</h2>
+<ul>
+  <li><a href="https://www.drupal.org/project/flags">Flags</a> &ndash; The <code>flags_country</code> submodule adds country flag icons to Country fields and widgets.</li>
+  <li><a href="https://www.drupal.org/project/tagify">Tagify</a> &ndash; Enables a Tagify-based select widget for Country fields.</li>
+  <li><a href="https://www.drupal.org/project/ip2country">IP-based Country</a> &ndash; Prefills new Country fields with the visitor's country.</li>
+</ul>
+
+<h2>Comparison with related modules</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Module</th>
+      <th>Approach</th>
+      <th>Best for</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Country</strong></td>
+      <td>A single-purpose country field type backed by Drupal core's country list.</td>
+      <td>Sites that need to store and display a country value, with standard field and Views integration.</td>
+    </tr>
+    <tr>
+      <td><a href="https://www.drupal.org/project/address">Address</a></td>
+      <td>Full international postal addresses via the commerceguys/addressing library, including a separate country field type.</td>
+      <td>Sites that need validated, formatted postal addresses or subdivisions &ndash; use Address instead of (not alongside) this module when the full address model fits.</td>
+    </tr>
+    <tr>
+      <td><a href="https://www.drupal.org/project/flags">Flags</a> (<code>flags_country</code> submodule)</td>
+      <td>Adds flag icons to Country fields and widgets via CSS sprites.</td>
+      <td>Complementary &ndash; install together when you want visual flags next to country names.</td>
+    </tr>
+    <tr>
+      <td><a href="https://www.drupal.org/project/ip2country">IP-based Country</a></td>
+      <td>Looks up a visitor's country from their IP address.</td>
+      <td>Complementary &ndash; Country prefills new widgets with the lookup result when this module is enabled.</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="warning">
+  <h2>🤖 Assisted development</h2>
+  <p>This module is maintained with the help of AI assistants for code generation, review, testing, and documentation. All code is carefully reviewed by the maintainers to ensure that quality and security standards are met.</p>
+</div>

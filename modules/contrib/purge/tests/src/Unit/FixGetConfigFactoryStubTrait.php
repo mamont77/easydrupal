@@ -22,6 +22,30 @@ trait FixGetConfigFactoryStubTrait {
    *   work in unit tests, e.g.: ->getEditable()->set()->save().
    */
   public function getConfigFactoryStub(array $configs = []) {
+    return $this->buildConfigFactoryDouble($configs, FALSE);
+  }
+
+  /**
+   * Returns a config factory mock that tests can set expectations on.
+   *
+   * @param array $configs
+   *   An associative array of configuration settings whose keys are
+   *   configuration object names and whose values are key => value arrays.
+   *
+   * @return \PHPUnit\Framework\MockObject\MockObject|\Drupal\Core\Config\ConfigFactoryInterface
+   *   A mock configuration factory.
+   */
+  public function getConfigFactoryMock(array $configs = []) {
+    return $this->buildConfigFactoryDouble($configs, TRUE);
+  }
+
+  /**
+   * Builds the config factory stub or mock.
+   *
+   * PHPUnit 12 raises a notice for every mock that has no expectations, so
+   * tests that only need canned return values get a stub.
+   */
+  private function buildConfigFactoryDouble(array $configs, bool $mock) {
     $config_get_map = [];
     $config_editable_map = [];
     // Construct the desired configuration object stubs, each with its own
@@ -50,7 +74,9 @@ trait FixGetConfigFactoryStubTrait {
     }
     // Construct a config factory with the array of configuration object stubs
     // as its return map.
-    $config_factory = $this->createMock(ConfigFactoryInterface::class);
+    $config_factory = $mock
+      ? $this->createMock(ConfigFactoryInterface::class)
+      : $this->createStub(ConfigFactoryInterface::class);
     $config_factory->method('get')
       ->willReturnMap($config_get_map);
     $config_factory->method('getEditable')

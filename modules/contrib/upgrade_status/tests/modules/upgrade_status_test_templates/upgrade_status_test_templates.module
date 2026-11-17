@@ -1,0 +1,33 @@
+<?php
+
+/**
+ * @file
+ * Uses deprecated templates for upgrade status module testing.
+ */
+
+/**
+ * Builds render arrays with deprecated and current theme hooks.
+ */
+function upgrade_status_test_templates_build(): array {
+  return [
+    'deprecated' => ['#theme' => 'upgrade_status_test_deprecated'],
+    'suggestion' => ['#theme' => 'upgrade_status_test_deprecated__custom'],
+    'current' => ['#theme' => 'item_list'],
+    'component' => [
+      '#type' => 'component',
+      '#component' => 'upgrade_status_test_templates_provider:deprecated-card',
+    ],
+  ];
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for upgrade_status_test_deprecated.
+ */
+function upgrade_status_test_templates_preprocess_upgrade_status_test_deprecated(array &$variables): void {
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for item_list.
+ */
+function upgrade_status_test_templates_preprocess_item_list(array &$variables): void {
+}

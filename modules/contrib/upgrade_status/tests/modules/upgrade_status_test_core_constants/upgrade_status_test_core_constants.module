@@ -1,0 +1,16 @@
+<?php
+
+/**
+ * @file
+ * Uses deprecated constants from core's include and module files, for testing.
+ *
+ * REQUEST_TIME is deprecated on Drupal 10, REQUIREMENT_ERROR on Drupal 11.2 and
+ * later, and REGIONS_ALL on Drupal 11.4 and later. Each is removed later.
+ */
+
+/**
+ * Returns deprecated constants.
+ */
+function upgrade_status_test_core_constants_values(): array {
+  return [REQUEST_TIME, REQUIREMENT_ERROR, REGIONS_ALL];
+}

@@ -1,0 +1,43 @@
+# Line numbers in this file are checked by ConfigSchemaDeprecationAnalyzerTest.
+upgrade_status_test_config_schema.settings:
+  type: config_object
+  constraints:
+    FullyValidatable: ~
+  mapping:
+    named_options:
+      type: string
+      constraints:
+        # A comment with Choice: [a, b] is ignored.
+        Choice:
+          choices: [a, b]
+    no_options:
+      type: string
+      constraints:
+        NotBlank: []
+    constraints:
+      type: string
+      label: 'This config key is named constraints'
+    list_options:
+      type: string
+      constraints:
+        Choice: [a, b]
+    scalar_options:
+      type: string
+      constraints:
+        NotBlank: ~
+        Length: 255
+    flow_style:
+      type: string
+      constraints: {Regex: '/^a$/'}
+    sequence:
+      type: sequence
+      sequence:
+        type: string
+        constraints:
+          'AllowedValues': [c, d]
+    nested:
+      type: string
+      constraints:
+        Sequentially:
+          constraints:
+            Length: 10

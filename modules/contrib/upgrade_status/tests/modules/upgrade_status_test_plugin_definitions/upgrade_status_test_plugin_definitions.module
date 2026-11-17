@@ -1,0 +1,23 @@
+<?php
+
+/**
+ * @file
+ * Has deprecated plugin definitions, and similar code that is not reported.
+ */
+
+/**
+ * Builds an array with an access callback that is not for Views.
+ */
+function upgrade_status_test_plugin_definitions_build(): array {
+  return [
+    'access callback' => 'upgrade_status_test_plugin_definitions_access',
+    'theme_file' => 'upgrade_status_test_plugin_definitions.theme.inc',
+  ];
+}
+
+/**
+ * Checks access.
+ */
+function upgrade_status_test_plugin_definitions_access(): bool {
+  return TRUE;
+}

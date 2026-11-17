@@ -1,0 +1,80 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - entity_test
+id: upgrade_status_test_config_updates
+label: 'Config updates'
+module: views
+description: ''
+tag: ''
+base_table: entity_test
+base_field: id
+display:
+  default:
+    id: default
+    display_title: Default
+    display_plugin: default
+    position: 0
+    display_options:
+      arguments:
+        user_id:
+          id: user_id
+          table: entity_test
+          field: user_id
+          plugin_id: numeric
+        id:
+          id: id
+          table: entity_test
+          field: id
+          plugin_id: numeric
+      style:
+        type: table
+        options:
+          grouping: {  }
+          columns: {  }
+  page_1:
+    id: page_1
+    display_title: Page
+    display_plugin: page
+    position: 1
+    display_options:
+      defaults:
+        style: false
+        row: false
+      style:
+        type: table
+        options:
+          class: ''
+      row:
+        type: fields
+  block_1:
+    id: block_1
+    display_title: Block
+    display_plugin: block
+    position: 2
+    display_options:
+      defaults:
+        style: false
+        arguments: false
+      arguments:
+        user_id:
+          id: user_id
+          table: entity_test
+          field: user_id
+          plugin_id: entity_target_id
+          target_entity_type_id: user
+      style:
+        type: table
+        options:
+          default: ''
+  attachment_1:
+    id: attachment_1
+    display_title: Attachment
+    display_plugin: attachment
+    position: 3
+    display_options:
+      defaults:
+        style: false
+      style:
+        type: table

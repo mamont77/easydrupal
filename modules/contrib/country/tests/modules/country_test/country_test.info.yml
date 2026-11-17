@@ -1,0 +1,11 @@
+name: 'Country test'
+type: module
+description: 'Support module for Country tests.'
+package: Testing
+dependencies:
+  - country:country
+
+# Information added by Drupal.org packaging script on 2026-10-31
+version: '2.2.2'
+project: 'country'
+datestamp: 1793474528

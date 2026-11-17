@@ -2,6 +2,8 @@
 
 namespace Drupal\Tests\twig_field_value\Unit\FieldValue;
 
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Drupal\Core\Controller\ControllerResolverInterface;
 use Drupal\Core\Entity\EntityRepositoryInterface;
 use Drupal\Core\Language\LanguageManagerInterface;
@@ -9,11 +11,13 @@ use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 use Drupal\Core\Render\RendererInterface;
 use Drupal\Tests\UnitTestCase;
 use Drupal\twig_field_value\Twig\Extension\FieldValueExtension;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 
 /**
- * @coversDefaultClass \Drupal\twig_field_value\Twig\Extension\FieldValueExtension
- * @group twig_field_value
+ * Field raw tests from FieldValueExtension.
  */
+#[Group('twig_field_value')]
+#[RunTestsInSeparateProcesses]
 class FieldRawValueTest extends UnitTestCase {
 
   /**
@@ -47,11 +51,11 @@ class FieldRawValueTest extends UnitTestCase {
    * @return \Drupal\Core\Field\FieldItemBase
    *   The entity object.
    */
-  protected function mockFieldItem($values) {
+  public function mockFieldItem($values) {
     $field_item = $this->createMock('Drupal\Core\Field\FieldItemBase');
     $field_item->expects($this->any())
       ->method('getValue')
-      ->will($this->returnValue($values));
+      ->willReturn($values);
 
     return $field_item;
   }
@@ -65,11 +69,8 @@ class FieldRawValueTest extends UnitTestCase {
    *   The render array.
    * @param string $key
    *   The key.
-   *
-   * @dataProvider providerTestRawValues
-   * @covers ::getRawValues
-   * function put.
    */
+  #[DataProvider('providerTestRawValues')]
   public function testRawValues($expected_result, $render_array, $key) {
 
     $result = $this->extension->getRawValues($render_array, $key);
@@ -85,7 +86,7 @@ class FieldRawValueTest extends UnitTestCase {
    * @return array
    *   Data and expected results.
    */
-  public function providerTestRawValues() {
+  public static function providerTestRawValues(): array {
     return [
       // Invalid render arrays.
       [NULL, NULL, ''],
@@ -100,12 +101,18 @@ class FieldRawValueTest extends UnitTestCase {
         ['#theme' => 'field', '#items' => []],
         '',
       ],
-      [
-        NULL,
-        ['#theme' => 'field', '#items' => $this->mockFieldItem(NULL)],
-        '',
-      ],
     ];
+  }
+
+  /**
+   * Tests field_raw with an empty FieldItem (cannot be in a static provider).
+   */
+  public function testRawValuesWithEmptyFieldItem(): void {
+    $renderArray = [
+      '#theme' => 'field',
+      '#items' => $this->mockFieldItem(NULL),
+    ];
+    $this->assertNull($this->extension->getRawValues($renderArray, ''));
   }
 
 }

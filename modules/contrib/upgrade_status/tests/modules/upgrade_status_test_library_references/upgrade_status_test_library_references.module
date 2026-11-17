@@ -1,0 +1,32 @@
+<?php
+
+/**
+ * @file
+ * Has strings that look like library names.
+ */
+
+/**
+ * Returns strings that look like library names.
+ */
+function upgrade_status_test_library_references_strings(): array {
+  return [
+    'upgrade_status_test_library/deprecated_library',
+    'upgrade_status_test_library/library_with_invalid_dependency',
+    'upgrade_status_test_library/not_defined',
+    'image/png',
+    'no_such_extension/library',
+    'core/once',
+    'core/drupal',
+  ];
+}
+
+/**
+ * Implements hook_library_info_alter().
+ *
+ * Which core libraries are deprecated differs per Drupal version.
+ */
+function upgrade_status_test_library_references_library_info_alter(array &$libraries, string $extension): void {
+  if ($extension === 'core') {
+    $libraries['once']['deprecated'] = 'The "%library_id%" asset library is deprecated for testing.';
+  }
+}

@@ -3,5 +3,4 @@ country.autocomplete:
   defaults:
     _controller: '\Drupal\country\Controller\CountryAutocompleteController::autocomplete'
   requirements:
-    # This is a autocomplete controller,hence no access check is needed.
-    _access: 'TRUE'
+    _custom_access: '\Drupal\country\Controller\CountryAutocompleteController::access'

@@ -1,0 +1,3 @@
+links:
+  - 'route:upgrade_status_test_routes_provider.old'
+  - 'route:upgrade_status_test_routes_provider.new'

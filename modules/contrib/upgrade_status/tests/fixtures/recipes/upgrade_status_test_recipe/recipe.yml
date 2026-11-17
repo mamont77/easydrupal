@@ -1,0 +1,28 @@
+name: 'Upgrade status test recipe'
+description: 'Support recipe for upgrade status testing.'
+type: Testing
+recipes:
+  - core/recipes/administrator_role
+  - core/recipes/article_tags
+  - upgrade_status_test_recipe_compatible
+install:
+  - user
+  - upgrade_status_test_deprecated
+  - 'upgrade_status_test_obsolete'
+config:
+  import:
+    user: '*'
+    upgrade_status_test_deprecated: '*'
+  actions:
+    system.site:
+      simpleConfigUpdate:
+        name: 'Upgrade status test'
+    user.role.authenticated:
+      simpleConfigUpdate:
+        label: 'Upgrade status test'
+    user.role.upgrade_status_test:
+      'entity_create:ensure_exists':
+        label: 'Upgrade status test'
+    system.theme:
+      simple_config_update:
+        default: stark

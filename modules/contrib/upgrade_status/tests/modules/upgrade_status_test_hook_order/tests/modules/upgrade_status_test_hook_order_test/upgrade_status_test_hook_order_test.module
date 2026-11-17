@@ -1,0 +1,12 @@
+<?php
+
+/**
+ * @file
+ * Implements hook_module_implements_alter() in a test module.
+ */
+
+/**
+ * Implements hook_module_implements_alter().
+ */
+function upgrade_status_test_hook_order_test_module_implements_alter(array &$implementations, string $hook): void {
+}

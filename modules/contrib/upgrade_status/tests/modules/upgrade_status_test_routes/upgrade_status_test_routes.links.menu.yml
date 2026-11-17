@@ -1,0 +1,7 @@
+upgrade_status_test_routes.old:
+  title: 'Old'
+  route_name: upgrade_status_test_routes_provider.old
+upgrade_status_test_routes.new:
+  title: 'New'
+  route_name: upgrade_status_test_routes_provider.new
+# route_name: upgrade_status_test_routes_provider.old

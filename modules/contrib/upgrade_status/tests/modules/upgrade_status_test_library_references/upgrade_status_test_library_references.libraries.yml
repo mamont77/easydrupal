@@ -1,0 +1,9 @@
+uses_deprecated:
+  dependencies:
+    - upgrade_status_test_library/deprecated_library
+uses_not_deprecated:
+  dependencies:
+    - upgrade_status_test_library/library_with_invalid_dependency
+uses_not_found:
+  dependencies:
+    - no_such_extension/library

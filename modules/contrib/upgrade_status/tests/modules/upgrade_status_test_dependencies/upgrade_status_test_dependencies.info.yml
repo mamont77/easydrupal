@@ -1,0 +1,17 @@
+name: 'Upgrade status test dependencies'
+type: module
+description: 'Support module for upgrade status module testing.'
+package: Testing
+core_version_requirement: ^10 || ^11 || ^12 || ^13
+dependencies:
+  - drupal:user
+  - upgrade_status:upgrade_status_test_deprecated
+  - 'upgrade_status_test_obsolete (>=1.0)'
+  - drupal:contact
+  - upgrade_status_test_dependencies:upgrade_status_test_dependencies_deprecated
+  # - upgrade_status:upgrade_status_test_deprecated
+
+# Information added by Drupal.org packaging script on 2026-11-16
+version: '5.0.0'
+project: 'upgrade_status'
+datestamp: 1794828610

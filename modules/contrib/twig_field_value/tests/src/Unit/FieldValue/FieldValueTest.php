@@ -2,6 +2,8 @@
 
 namespace Drupal\Tests\twig_field_value\Unit\FieldValue;
 
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Drupal\Core\Controller\ControllerResolverInterface;
 use Drupal\Core\Entity\EntityRepositoryInterface;
 use Drupal\Core\Language\LanguageManagerInterface;
@@ -9,11 +11,13 @@ use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 use Drupal\Core\Render\RendererInterface;
 use Drupal\Tests\UnitTestCase;
 use Drupal\twig_field_value\Twig\Extension\FieldValueExtension;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 
 /**
- * @coversDefaultClass \Drupal\twig_field_value\Twig\Extension\FieldValueExtension
- * @group twig_field_value
+ * Field value tests from FieldValueExtension.
  */
+#[Group('twig_field_value')]
+#[RunTestsInSeparateProcesses]
 class FieldValueTest extends UnitTestCase {
 
   /**
@@ -45,10 +49,8 @@ class FieldValueTest extends UnitTestCase {
    *   The expected result.
    * @param array $render_array
    *   The render array.
-   *
-   * @dataProvider providerTestFieldLabel
-   * @covers ::getFieldLabel
    */
+  #[DataProvider('providerTestFieldLabel')]
   public function testFieldLabel($expected_result, array $render_array) {
     $result = $this->extension->getFieldLabel($render_array);
     $this->assertSame($expected_result, $result);
@@ -60,7 +62,7 @@ class FieldValueTest extends UnitTestCase {
    * @return array
    *   Data and expected results.
    */
-  public static function providerTestFieldLabel() {
+  public static function providerTestFieldLabel(): array {
     return [
       [NULL, []],
       [NULL, ['#title' => 'foo']],
@@ -77,10 +79,8 @@ class FieldValueTest extends UnitTestCase {
    *   The expected result.
    * @param mixed $render_array
    *   The render array.
-   *
-   * @dataProvider providerTestFieldValue
-   * @covers ::getFieldValue
    */
+  #[DataProvider('providerTestFieldValue')]
   public function testFieldValue($expected_result, $render_array) {
     $result = $this->extension->getFieldValue($render_array);
     $this->assertSame($expected_result, $result);
@@ -92,7 +92,7 @@ class FieldValueTest extends UnitTestCase {
    * @return array
    *   Data and expected results.
    */
-  public static function providerTestFieldValue() {
+  public static function providerTestFieldValue(): array {
     return [
       [NULL, NULL],
       [NULL, []],

@@ -9,7 +9,7 @@ use Drupal\Core\Field\Plugin\Field\FieldWidget\OptionsSelectWidget;
  *
  * @FieldWidget(
  *   id = "country_default",
- *   label = @Translation("Country select options"),
+ *   label = @Translation("Select list"),
  *   field_types = {
  *     "country"
  *   },

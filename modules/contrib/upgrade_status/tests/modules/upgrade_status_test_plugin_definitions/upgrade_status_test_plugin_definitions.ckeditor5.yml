@@ -1,0 +1,35 @@
+upgrade_status_test_plugin_definitions_styles:
+  ckeditor5:
+    plugins: []
+    config:
+      drupalElementStyles:
+        align:
+          - name: 'left'
+            title: 'Left'
+            icon: objectBlockLeft
+            modelElements: ['imageBlock']
+          - name: 'right'
+            title: 'Right'
+            icon: 'IconObjectRight'
+            modelElements: ['imageBlock']
+          - name: 'inline'
+            title: 'Inline'
+            icon: '<svg viewBox="0 0 20 20"></svg>'
+            modelElements: ['imageInline']
+        dots:
+          - name: 'dots'
+            title: 'Dots'
+            icon: "threeVerticalDots"
+            modelElements: ['imageBlock']
+  drupal:
+    label: 'Styles'
+    elements: false
+upgrade_status_test_plugin_definitions_other:
+  ckeditor5:
+    plugins: []
+    config:
+      other:
+        icon: objectLeft
+  drupal:
+    label: 'Other'
+    elements: false

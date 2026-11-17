@@ -1,0 +1,9 @@
+{# Not reported: {"dialogClass":"test-dialog"} #}
+{#
+  Not reported either: dialogClass: 'test-dialog'
+#}
+<a href="#" data-dialog-options='{"dialogClass":"test-dialog"}'>{{ 'Test'|t }}</a>
+<a href="#" data-dialog-options="{{ {dialogClass: 'test-dialog'}|json_encode }}">{{ 'Test'|t }}</a>
+<a href="#" class="dialogClass">{{ 'Test'|t }}</a>
+{# cspell:ignore blacklist #}
+<input type="text" data-autocomplete-first-character-blacklist="$">

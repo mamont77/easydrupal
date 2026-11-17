@@ -18,6 +18,29 @@ field.storage_settings.country:
       sequence:
         type: string
 
+field.widget.settings.country_default:
+  label: 'Country select widget settings'
+  type: mapping
+
+field.widget.settings.country_prioritized:
+  label: 'Country select with prioritized countries widget settings'
+  type: mapping
+  mapping:
+    priority_countries:
+      type: sequence
+      label: 'Priority countries'
+      sequence:
+        type: string
+    priority_group_title:
+      type: label
+      label: 'Priority group title'
+    show_priority_separator:
+      type: boolean
+      label: 'Show priority separator'
+    priority_separator_text:
+      type: label
+      label: 'Priority separator text'
+
 views.filter_value.country_item:
   type: mapping
   label: 'Country filter value'

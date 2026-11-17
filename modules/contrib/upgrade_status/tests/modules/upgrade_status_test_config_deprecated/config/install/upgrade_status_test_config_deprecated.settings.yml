@@ -1,0 +1,8 @@
+current: 'value'
+old: 'value'
+nested:
+  current: true
+  old: true
+items:
+  -
+    old: 'value'

@@ -1,0 +1,5 @@
+# A test module of a project, to check that schema files in tests are checked.
+upgrade_status_test_config_schema_nested.settings:
+  type: config_object
+  constraints:
+    Length: 255

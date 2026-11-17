@@ -1,0 +1,25 @@
+<?php
+
+/**
+ * @file
+ * Functions for older Drupal versions, which are converted to classes.
+ */
+
+declare(strict_types=1);
+
+use Drupal\Core\Hook\Attribute\ExtensionFileIsConverted;
+
+/**
+ * Implements hook_help().
+ */
+function upgrade_status_test_extension_files_converted_help(string $route_name): string {
+  return '';
+}
+
+/**
+ * Implements hook_theme().
+ */
+#[ExtensionFileIsConverted]
+function upgrade_status_test_extension_files_converted_theme(): array {
+  return [];
+}

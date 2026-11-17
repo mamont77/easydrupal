@@ -87,7 +87,7 @@ class LoggerServiceTest extends UnitTestCase {
    */
   #[DataProvider('providerTestDestruct')]
   public function testDestruct($expect_write, $call = NULL, $arguments = []): void {
-    $config_factory = $this->getConfigFactoryStub($this->defaultConfig);
+    $config_factory = $this->getConfigFactoryMock($this->defaultConfig);
 
     $config_factory
       ->expects($expect_write ? $this->once() : $this->never())
@@ -223,7 +223,7 @@ class LoggerServiceTest extends UnitTestCase {
     $service = new LoggerService($config_factory, $this->loggerChannelPartFactory);
     $channels_conf = $this->defaultConfig[LoggerService::CONFIG][LoggerService::CKEY];
     $channels = $service->getChannels();
-    $this->assertTrue(is_array($channels));
+    $this->assertIsArray($channels);
     $this->assertEquals(count($channels), count($channels_conf));
     $this->assertEquals($channels, $channels_conf);
   }

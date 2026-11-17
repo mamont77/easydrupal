@@ -2,19 +2,21 @@
 
 namespace Drupal\purge\Plugin\Purge\Queue;
 
+use Drupal\Core\StringTranslation\TranslatableMarkup;
+use Drupal\purge\Attribute\PurgeQueue;
+
 /**
  * A QueueInterface compliant volatile memory buffer queue.
  *
  * @warning
  * This queue does not extend core's Memory queue on purpose, as it does not
  * suit extending it very well nor does its lease time handling work.
- *
- * @PurgeQueue(
- *   id = "memory",
- *   label = @Translation("Memory"),
- *   description = @Translation("A non-persistent, per-request memory queue (not useful on production systems)."),
- * )
  */
+#[PurgeQueue(
+  id: 'memory',
+  label: new TranslatableMarkup('Memory'),
+  description: new TranslatableMarkup('A non-persistent, per-request memory queue (not useful on production systems).'),
+)]
 class MemoryQueue extends QueueBase implements QueueInterface {
 
   /**

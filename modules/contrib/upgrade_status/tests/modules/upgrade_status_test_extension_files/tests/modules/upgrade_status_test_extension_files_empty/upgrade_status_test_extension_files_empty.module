@@ -1,0 +1,8 @@
+<?php
+
+/**
+ * @file
+ * Support module for upgrade status module testing.
+ */
+
+declare(strict_types=1);

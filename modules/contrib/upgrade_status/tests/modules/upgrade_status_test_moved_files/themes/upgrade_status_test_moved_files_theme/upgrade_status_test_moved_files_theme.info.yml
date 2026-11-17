@@ -1,0 +1,37 @@
+name: 'Upgrade status test moved files theme'
+type: theme
+description: 'Support theme for upgrade status module testing.'
+package: Testing
+base theme: false
+core_version_requirement: ^10 || ^11 || ^12 || ^13
+libraries-override:
+  upgrade_status_test_moved_files/old_location:
+    css:
+      component:
+        css/old.css: css/override.css
+        css/other.css: false
+    js:
+      js/old.js: js/override.js
+  upgrade_status_test_moved_files/new_location:
+    css:
+      base:
+        css/new.css: css/override.css
+    js:
+      js/new.js: false
+  system/base:
+    css:
+      component:
+        css/components/fieldgroup.module.css: false
+        css/components/align.module.css: false
+  core/drupal.fieldgroup:
+    css:
+      component:
+        misc/components/fieldgroup.module.css: false
+libraries-extend:
+  upgrade_status_test_moved_files/old_location:
+    - upgrade_status_test_moved_files_theme/library
+
+# Information added by Drupal.org packaging script on 2026-11-16
+version: '5.0.0'
+project: 'upgrade_status'
+datestamp: 1794828610

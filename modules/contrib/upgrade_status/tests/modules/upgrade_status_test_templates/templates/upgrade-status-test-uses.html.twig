@@ -1,0 +1,11 @@
+{#
+/**
+ * @file
+ * Uses deprecated templates and components.
+ */
+#}
+{% include '@upgrade_status_test_templates_provider/upgrade-status-test-tagged.html.twig' %}
+{% include 'upgrade-status-test-deprecated.html.twig' %}
+{{ include('upgrade_status_test_templates_provider:deprecated-card', {heading: 'Hello'}) }}
+{% include '@upgrade_status_test_deprecated/missing.html.twig' ignore missing %}
+{% include '@upgrade_status_test_templates_provider/upgrade-status-test-variables.html.twig' %}

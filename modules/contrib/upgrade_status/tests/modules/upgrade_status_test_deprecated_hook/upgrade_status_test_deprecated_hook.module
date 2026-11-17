@@ -1,0 +1,53 @@
+<?php
+
+/**
+ * @file
+ * Support module for upgrade status module testing.
+ */
+
+use Drupal\Core\Hook\Attribute\LegacyHook;
+
+/**
+ * Implements hook_deprecated_hook_old().
+ */
+function upgrade_status_test_deprecated_hook_deprecated_hook_old(): void {
+}
+
+/**
+ * Implements hook_deprecated_hook_TYPE_alter().
+ */
+function upgrade_status_test_deprecated_hook_deprecated_hook_some_alter(): void {
+}
+
+/**
+ * Implements hook_deprecated_hook_new().
+ */
+function upgrade_status_test_deprecated_hook_deprecated_hook_new(): void {
+}
+
+/**
+ * Implements hook_deprecated_hook_TYPE_alter().
+ *
+ * The object-oriented twin of this function runs on Drupal 11.1 and later.
+ */
+#[LegacyHook]
+function upgrade_status_test_deprecated_hook_deprecated_hook_legacy_alter(): void {
+}
+
+/**
+ * Implements hook_file_validate().
+ *
+ * Core documents this hook as deprecated on Drupal 10, and removed it after.
+ */
+function upgrade_status_test_deprecated_hook_file_validate(): array {
+  return [];
+}
+
+/**
+ * Implements hook_ranking().
+ *
+ * Core documents this hook as deprecated on Drupal 11.3, and removed it after.
+ */
+function upgrade_status_test_deprecated_hook_ranking(): array {
+  return [];
+}

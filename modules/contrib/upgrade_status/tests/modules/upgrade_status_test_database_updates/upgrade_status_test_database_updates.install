@@ -1,0 +1,18 @@
+<?php
+
+/**
+ * @file
+ * Update functions to test the database updates check of Upgrade Status.
+ */
+
+/**
+ * Does nothing, the first update for testing.
+ */
+function upgrade_status_test_database_updates_update_9001(): void {
+}
+
+/**
+ * Does nothing, the second update for testing.
+ */
+function upgrade_status_test_database_updates_update_9002(): void {
+}

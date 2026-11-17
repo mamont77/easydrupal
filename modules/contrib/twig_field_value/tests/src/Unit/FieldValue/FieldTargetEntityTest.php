@@ -2,6 +2,8 @@
 
 namespace Drupal\Tests\twig_field_value\Unit\FieldValue;
 
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Drupal\Core\Controller\ControllerResolverInterface;
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Entity\EntityInterface;
@@ -12,11 +14,13 @@ use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 use Drupal\Core\Render\RendererInterface;
 use Drupal\Tests\UnitTestCase;
 use Drupal\twig_field_value\Twig\Extension\FieldValueExtension;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 
 /**
- * @coversDefaultClass \Drupal\twig_field_value\Twig\Extension\FieldValueExtension
- * @group twig_field_value
+ * Field target entity tests from FieldValueExtension.
  */
+#[Group('twig_field_value')]
+#[RunTestsInSeparateProcesses]
 class FieldTargetEntityTest extends UnitTestCase {
 
   /**
@@ -68,7 +72,7 @@ class FieldTargetEntityTest extends UnitTestCase {
     $field_item = $this->createMock('Drupal\Core\Entity\ContentEntityBase');
     $field_item->expects($this->any())
       ->method('get')
-      ->will($this->returnValue($entities));
+      ->willReturn($entities);
 
     return $field_item;
   }
@@ -80,10 +84,8 @@ class FieldTargetEntityTest extends UnitTestCase {
    *   The expected result.
    * @param mixed $render_array
    *   The render array.
-   *
-   * @dataProvider providerTestTargetEntity
-   * @covers ::getTargetEntity
    */
+  #[DataProvider('providerTestTargetEntity')]
   public function testTargetEntity($expected_result, $render_array) {
 
     $result = $this->extension->getTargetEntity($render_array);
@@ -99,33 +101,7 @@ class FieldTargetEntityTest extends UnitTestCase {
    * @return array
    *   Data and expected results.
    */
-  public function providerTestTargetEntity() {
-    $fieldItemNoAccess = $this->mockEntityReferenceFieldItem($this->mockReferencedEntity(FALSE));
-    $entityNoAccess = $this->createMock(ContentEntityInterface::class);
-    $entityNoAccess->expects($this->any())
-      ->method('get')
-      ->with('reference_field')
-      ->willReturn([0 => $fieldItemNoAccess]);
-
-    $referencedEntity1 = $this->mockReferencedEntity(TRUE);
-    $fieldItem1 = $this->mockEntityReferenceFieldItem($referencedEntity1);
-    $entity = $this->createMock(ContentEntityInterface::class);
-    $entity->expects($this->any())
-      ->method('get')
-      ->with('reference_field')
-      ->willReturn([0 => $fieldItem1]);
-
-    $referencedEntity2 = $this->mockReferencedEntity(TRUE);
-    $fieldItem2 = $this->mockEntityReferenceFieldItem($referencedEntity2);
-    $entityMultiple = $this->createMock(ContentEntityInterface::class);
-    $entityMultiple->expects($this->any())
-      ->method('get')
-      ->with('reference_field')
-      ->willReturn([
-        0 => $fieldItem1,
-        1 => $fieldItem2,
-      ]);
-
+  public static function providerTestTargetEntity(): array {
     return [
       // Invalid render arrays.
       [NULL, NULL],
@@ -177,44 +153,71 @@ class FieldTargetEntityTest extends UnitTestCase {
           '0' => ['#type' => 'details', '#title' => 'detail-0'],
         ],
       ],
-
-      // No access to referenced entity.
-      [
-        NULL,
-        [
-          '#theme' => 'field',
-          '#field_name' => 'reference_field',
-          '#object' => $entityNoAccess,
-          // No child because the referenced entity is not accessible.
-        ],
-      ],
-
-      // Return single referenced entity.
-      [
-        $referencedEntity1,
-        [
-          '#theme' => 'field',
-          '#field_name' => 'reference_field',
-          '#object' => $entity,
-          '0' => ['#type' => 'details', '#title' => 'detail-0'],
-        ],
-      ],
-
-      // Return multiple referenced entities.
-      [
-        [
-          $referencedEntity1,
-          $referencedEntity2,
-        ],
-        [
-          '#theme' => 'field',
-          '#field_name' => 'reference_field',
-          '#object' => $entityMultiple,
-          '0' => ['#type' => 'details', '#title' => 'detail-0'],
-          '1' => ['#type' => 'details', '#title' => 'detail-1'],
-        ],
-      ],
     ];
+  }
+
+  /**
+   * Tests that an inaccessible referenced entity returns NULL.
+   */
+  public function testTargetEntityNoAccess(): void {
+    $fieldItemNoAccess = $this->mockEntityReferenceFieldItem($this->mockReferencedEntity(FALSE));
+    $entityNoAccess = $this->createMock(ContentEntityInterface::class);
+    $entityNoAccess->expects($this->any())
+      ->method('get')
+      ->with('reference_field')
+      ->willReturn([0 => $fieldItemNoAccess]);
+
+    $result = $this->extension->getTargetEntity([
+      '#theme' => 'field',
+      '#field_name' => 'reference_field',
+      '#object' => $entityNoAccess,
+    ]);
+    $this->assertNull($result);
+  }
+
+  /**
+   * Tests that a single accessible referenced entity is returned.
+   */
+  public function testTargetEntitySingleEntity(): void {
+    $referencedEntity = $this->mockReferencedEntity(TRUE);
+    $fieldItem = $this->mockEntityReferenceFieldItem($referencedEntity);
+    $entity = $this->createMock(ContentEntityInterface::class);
+    $entity->expects($this->any())
+      ->method('get')
+      ->with('reference_field')
+      ->willReturn([0 => $fieldItem]);
+
+    $result = $this->extension->getTargetEntity([
+      '#theme' => 'field',
+      '#field_name' => 'reference_field',
+      '#object' => $entity,
+      '0' => ['#type' => 'details', '#title' => 'detail-0'],
+    ]);
+    $this->assertSame($referencedEntity, $result);
+  }
+
+  /**
+   * Tests that multiple accessible referenced entities are returned as array.
+   */
+  public function testTargetEntityMultipleEntities(): void {
+    $referencedEntity1 = $this->mockReferencedEntity(TRUE);
+    $fieldItem1 = $this->mockEntityReferenceFieldItem($referencedEntity1);
+    $referencedEntity2 = $this->mockReferencedEntity(TRUE);
+    $fieldItem2 = $this->mockEntityReferenceFieldItem($referencedEntity2);
+    $entityMultiple = $this->createMock(ContentEntityInterface::class);
+    $entityMultiple->expects($this->any())
+      ->method('get')
+      ->with('reference_field')
+      ->willReturn([0 => $fieldItem1, 1 => $fieldItem2]);
+
+    $result = $this->extension->getTargetEntity([
+      '#theme' => 'field',
+      '#field_name' => 'reference_field',
+      '#object' => $entityMultiple,
+      '0' => ['#type' => 'details', '#title' => 'detail-0'],
+      '1' => ['#type' => 'details', '#title' => 'detail-1'],
+    ]);
+    $this->assertSame([$referencedEntity1, $referencedEntity2], $result);
   }
 
   /**

@@ -2,9 +2,10 @@ name: 'Upgrade status test root module'
 type: module
 description: 'Support module for update module testing.'
 package: Testing
-core_version_requirement: ^9 || ^10 || ^11
+# Make sure we can test different scenarios on Drupal 11 and before.
+core_version_requirement: ^9 || ^10 || ^11 || ^12
 
-# Information added by Drupal.org packaging script on 2026-06-08
-version: '4.3.10'
+# Information added by Drupal.org packaging script on 2026-11-16
+version: '5.0.0'
 project: 'upgrade_status'
-datestamp: 1780927636
+datestamp: 1794828610

@@ -1,0 +1,72 @@
+# Line numbers in this file are checked by LibraryJavaScriptDependencyTest.
+missing_all:
+  js:
+    js/uses_all.js: {}
+no_globals:
+  js:
+    js/no_globals.js: {}
+declared:
+  js:
+    js/uses_all.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/drupalSettings
+    - core/once
+through_own_library:
+  js:
+    js/uses_all.js: {}
+  dependencies:
+    - upgrade_status_test_library_js/declared
+through_core_library:
+  js:
+    js/uses_drupal.js: {}
+  dependencies:
+    - core/drupal.ajax
+unknown_extension:
+  js:
+    js/uses_all.js: {}
+  dependencies:
+    - upgrade_status_test_nonexistent/library
+missing_core_library:
+  js:
+    js/uses_drupal.js: {}
+  dependencies:
+    - core/nonexistent
+minified:
+  js:
+    js/uses_jquery.min.js: { minified: true }
+external:
+  js:
+    https://example.com/uses_all.js: { type: external }
+missing_file:
+  js:
+    js/nonexistent.js: {}
+css_only:
+  css:
+    theme:
+      css/nonexistent.css: {}
+negative_weight:
+  js:
+    js/uses_all.js: { weight: -1 }
+    js/no_globals.js: { weight: -1 }
+    js/uses_drupal.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/drupalSettings
+    - core/once
+negative_weight_without_globals:
+  js:
+    js/no_globals.js: { weight: -5 }
+zero_weight:
+  js:
+    js/uses_drupal.js: { weight: 0 }
+  dependencies:
+    - core/drupal
+negative_weight_external:
+  js:
+    https://example.com/uses_all.js: { type: external, weight: -1 }
+negative_weight_missing_file:
+  js:
+    js/nonexistent.js: { weight: -1 }

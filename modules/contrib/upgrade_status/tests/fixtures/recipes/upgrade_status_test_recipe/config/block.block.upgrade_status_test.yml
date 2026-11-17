@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - user
+  theme:
+    - stark
+  enforced:
+    module:
+      - upgrade_status_test_deprecated
+id: upgrade_status_test
+theme: stark
+region: content
+weight: 0
+provider: null
+plugin: user_login_block
+settings:
+  id: user_login_block
+  label: 'User login'
+  label_display: visible
+  provider: user
+visibility: {  }

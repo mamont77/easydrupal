@@ -494,6 +494,9 @@ class QueueCommands extends DrushCommands implements SiteAliasManagerAwareInterf
    *
    * @option finish
    *   Keep processing until the queue is empty.
+   * @option oneline
+   *   Render the results of each chunk on a single line instead of a table,
+   *   which suits log aggregators that treat every line as a separate entry.
    *
    * @usage drush p:queue-work
    *   Process one chunk of queue items from the queue.
@@ -503,6 +506,8 @@ class QueueCommands extends DrushCommands implements SiteAliasManagerAwareInterf
    *   Keep processing until the queue is empty.
    * @usage drush p:queue-work --finish --format=json|yaml
    *   Keep processing and return parsable output.
+   * @usage drush p:queue-work --finish --oneline
+   *   Keep processing and report each chunk on a single line.
    * @usage drush p:queue-work --no-interaction
    *   Process one chunk without process fork. This mode suited for cron jobs
    *   and does not set a UNIX return status.
@@ -514,6 +519,7 @@ class QueueCommands extends DrushCommands implements SiteAliasManagerAwareInterf
     array $options = [
       'format' => 'string',
       'finish' => FALSE,
+      'oneline' => FALSE,
     ],
   ) {
     // Process one chunk outside of a fork and without result interpretation.
@@ -555,15 +561,25 @@ class QueueCommands extends DrushCommands implements SiteAliasManagerAwareInterf
       }
       // Render a simple results table during interactive runs.
       if ($options['format'] == 'string') {
-        $this->io()->table(
-          [],
-          [
-            [dt("Succeeded"), $result['succeeded']],
-            [dt("Failed"), $result['failed']],
-            [dt("Currently invalidating"), $result['processing']],
-            [dt("Not supported"), $result['not_supported']],
-          ]
-        );
+        if ($options['oneline']) {
+          $this->io()->text(dt('Succeeded: @succeeded, Failed: @failed, Currently invalidating: @processing, Not supported: @not_supported', [
+            '@succeeded' => $result['succeeded'],
+            '@failed' => $result['failed'],
+            '@processing' => $result['processing'],
+            '@not_supported' => $result['not_supported'],
+          ]));
+        }
+        else {
+          $this->io()->table(
+            [],
+            [
+              [dt("Succeeded"), $result['succeeded']],
+              [dt("Failed"), $result['failed']],
+              [dt("Currently invalidating"), $result['processing']],
+              [dt("Not supported"), $result['not_supported']],
+            ]
+          );
+        }
       }
       // Break the loop for any other type of error.
       if ($result['error']) {

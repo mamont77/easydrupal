@@ -1,0 +1,11 @@
+{
+    "name": "drupal/upgrade_status_test_dependencies",
+    "description": "Support module for upgrade status module testing.",
+    "type": "drupal-module",
+    "license": "GPL-2.0-or-later",
+    "require": {
+        "drupal/upgrade_status_test_dependencies_deprecated": "*",
+        "drupal/upgrade_status_test_deprecated": "*",
+        "drupal/user": "*"
+    }
+}

@@ -1,0 +1,5 @@
+name:
+  - Not
+  - a string
+description: 'A recipe with a name and a drupal/core requirement that are not valid.'
+type: 'Testing'

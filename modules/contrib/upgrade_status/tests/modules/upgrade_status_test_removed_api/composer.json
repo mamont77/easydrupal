@@ -1,0 +1,13 @@
+{
+    "name": "drupal/upgrade_status_test_removed_api",
+    "description": "Support module for upgrade status module testing.",
+    "type": "drupal-module",
+    "license": "GPL-2.0-or-later",
+    "require": {
+        "symfony/console": "^6.4 || ^7 || ^8",
+        "symfony/mailer": "^6.4 || ^7.1",
+        "symfony/polyfill-php84": "^1.0",
+        "symfony/uid": "^6.4",
+        "symfony/yaml": "^6.4"
+    }
+}

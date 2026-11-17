@@ -1,0 +1,13 @@
+<?php
+
+/**
+ * @file
+ * A test module that uses the dialogClass dialog option.
+ */
+
+/**
+ * Returns dialog options.
+ */
+function upgrade_status_test_dialog_sub_options(): array {
+  return ["dialogClass" => 'test-dialog'];
+}

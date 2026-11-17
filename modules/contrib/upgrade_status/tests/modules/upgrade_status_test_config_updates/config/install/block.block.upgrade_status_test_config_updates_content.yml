@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_content
+  theme:
+    - stark
+id: upgrade_status_test_config_updates_content
+theme: stark
+region: content
+weight: '3'
+provider: null
+plugin: 'block_content:d7ef0bea-7d3a-4bba-9fa7-1f2b5f3a0b4c'
+settings:
+  id: 'block_content:d7ef0bea-7d3a-4bba-9fa7-1f2b5f3a0b4c'
+  label: 'Content block'
+  label_display: visible
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }

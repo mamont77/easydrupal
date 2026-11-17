@@ -1,5 +1,14 @@
 parameters:
 	ignoreErrors:
+		# These classes do not exist on Drupal 10 and PHPUnit 9, so PHPStan reports
+		# them in the previous major job. The code using them does not run there.
+		- '#^Attribute class Drupal\\Core\\Hook\\Attribute\\(Hook|LegacyHook) does not exist\.$#'
+		- '#^Attribute class PHPUnit\\Framework\\Attributes\\\w+ does not exist\.$#'
+		- '#^Access to constant Error on an unknown class Drupal\\Core\\Extension\\Requirement\\RequirementSeverity\.$#'
+		# This test module uses constants that newer Drupal versions removed.
+		- '#^Constant (REGIONS_ALL|REQUEST_TIME|REQUIREMENT_ERROR) not found\.$#'
+		- '#^Call to deprecated constant REQUEST_TIME#'
+		- '#^in drupal:8\.3\.0 and is removed from drupal:11\.0\.0#'
 		# These test module controllers intentionally call deprecated functions
 		# to verify upgrade_status detects them correctly.
 		-
@@ -40,10 +49,14 @@ parameters:
 		# This test entity intentionally omits config_export to verify
 		# upgrade_status detects the missing key via phpstan-drupal.
 		-
-			message: '#^Configuration entity must define a `config_export` key\.#'
+			message: "#^Configuration entity must define a `config_export` key\\. See https\\://www\\.drupal\\.org/node/2481909$#"
+			count: 1
+			path: tests/modules/upgrade_status_test_error/src/UpgradeStatusTestErrorEntity.php
+		-
+			message: "#^Configuration entity must define a `config_export` key\\.#"
+			count: 1
 			identifier: configEntityConfigExport.noConfigExportKey
 			path: tests/modules/upgrade_status_test_error/src/UpgradeStatusTestErrorEntity.php
-			count: 1
 		# This test class intentionally extends a deprecated class to verify
 		# upgrade_status detects deprecated class extension.
 		-
@@ -51,3 +64,42 @@ parameters:
 			identifier: class.extendsDeprecatedClass
 			path: tests/modules/upgrade_status_test_error/src/ExtendingClass.php
 			count: 1
+		# RunTestsInSeparateProcesses and LegacyRequirementsHook are PHPUnit/Drupal
+		# 11.3+ attributes not available on older versions PHPStan may be run with.
+		-
+			message: '#^Attribute class PHPUnit\\Framework\\Attributes\\RunTestsInSeparateProcesses does not exist\.$#'
+			identifier: attribute.notFound
+			path: tests/src/Functional/UpgradeStatusAccessTest.php
+			count: 1
+		-
+			message: '#^Attribute class PHPUnit\\Framework\\Attributes\\RunTestsInSeparateProcesses does not exist\.$#'
+			identifier: attribute.notFound
+			path: tests/src/Functional/UpgradeStatusAnalyzeTest.php
+			count: 1
+		-
+			message: '#^Attribute class PHPUnit\\Framework\\Attributes\\RunTestsInSeparateProcesses does not exist\.$#'
+			identifier: attribute.notFound
+			path: tests/src/Functional/UpgradeStatusCommandsTest.php
+			count: 1
+		-
+			message: '#^Attribute class PHPUnit\\Framework\\Attributes\\RunTestsInSeparateProcesses does not exist\.$#'
+			identifier: attribute.notFound
+			path: tests/src/Functional/UpgradeStatusUiTest.php
+			count: 1
+		-
+			message: '#^Attribute class PHPUnit\\Framework\\Attributes\\RunTestsInSeparateProcesses does not exist\.$#'
+			identifier: attribute.notFound
+			path: tests/src/Kernel/TwigDeprecationAnalyzerTest.php
+			count: 1
+		-
+			message: '#^Attribute class Drupal\\Core\\Hook\\Attribute\\LegacyRequirementsHook does not exist\.$#'
+			identifier: attribute.notFound
+			path: upgrade_status.install
+			count: 1
+		# This test module calls an undefined function, which the scan reports
+		# in test classes only when PHPUnit is installed.
+		-
+			message: '#^Function upgrade_status_test_undefined_function not found\.$#'
+			identifier: function.notFound
+			path: tests/modules/upgrade_status_test_test_classes/*
+			count: 2

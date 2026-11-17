@@ -1,0 +1,11 @@
+name: 'Info files no requirement'
+type: module
+description: 'Fixture for upgrade status module testing.'
+package: Testing
+lifecycle: deprecated
+lifecycle_link: 'https://example.com'
+
+# Information added by Drupal.org packaging script on 2026-11-16
+version: '5.0.0'
+project: 'upgrade_status'
+datestamp: 1794828610

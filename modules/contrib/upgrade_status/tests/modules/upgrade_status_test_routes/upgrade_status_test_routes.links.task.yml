@@ -1,0 +1,4 @@
+upgrade_status_test_routes_provider.old:
+  title: 'Old'
+  route_name: 'upgrade_status_test_routes_provider.new'
+  base_route: "upgrade_status_test_routes_provider.alias"

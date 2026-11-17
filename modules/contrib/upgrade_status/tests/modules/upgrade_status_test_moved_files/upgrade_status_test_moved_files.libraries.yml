@@ -1,0 +1,23 @@
+new_location:
+  css:
+    base:
+      css/new.css: {}
+  js:
+    js/new.js: {}
+  moved_files:
+    upgrade_status_test_moved_files/old_location:
+      # Core uses versions with and without the drupal: prefix.
+      deprecation_version: 11.2.0
+      removed_version: drupal:12.0.0
+      deprecation_link: https://www.drupal.org/node/3432346
+      css:
+        component:
+          css/old.css:
+            base: css/new.css
+      js:
+        js/old.js: js/new.js
+
+old_location:
+  css:
+    component:
+      css/other.css: {}

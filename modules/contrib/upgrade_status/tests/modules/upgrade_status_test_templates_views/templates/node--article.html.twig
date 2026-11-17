@@ -1,0 +1,10 @@
+{#
+/**
+ * @file
+ * Uses the view variable of node templates.
+ */
+#}
+<article>{{ content }}</article>
+{% if view %}{{ view.storage.id }}{% endif %}
+{{ view_mode }} {{ node.view }} {{ content.view }}
+{% set data = {view: view_mode} %}

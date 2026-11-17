@@ -81,6 +81,7 @@ class DashboardController extends ControllerBase {
     'purger_config'     => 'purge_ui.purger_config_form',
     'purger_configd'    => 'purge_ui.purger_config_dialog_form',
     'purger_delete'     => 'purge_ui.purger_delete_form',
+    'purger_invalidate' => 'purge_ui.purger_invalidate_form',
     'purger_up'         => 'purge_ui.purger_move_up_form',
     'purger_down'       => 'purge_ui.purger_move_down_form',
     'processor_add'     => 'purge_ui.processor_add_form',
@@ -288,6 +289,9 @@ class DashboardController extends ControllerBase {
             ['purger_down', 'id' => $id]
           );
         }
+      }
+      if ($this->purgeProcessors->get('purge_ui_invalidate')) {
+        $ops['invalidate'] = $button($this->t("Invalidate"), ['purger_invalidate', 'id' => $id]);
       }
       // Render the operation links into the 'layer' cell.
       $row_set($build['t'], $id, 'layer', $cell_ops($ops));

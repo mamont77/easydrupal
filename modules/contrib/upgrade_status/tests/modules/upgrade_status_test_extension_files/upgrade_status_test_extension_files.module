@@ -1,0 +1,24 @@
+<?php
+
+/**
+ * @file
+ * Support module for upgrade status module testing.
+ */
+
+declare(strict_types=1);
+
+use Drupal\Core\Hook\Attribute\LegacyHook;
+
+/**
+ * Implements hook_help().
+ */
+#[LegacyHook]
+function upgrade_status_test_extension_files_help(string $route_name): string {
+  return '';
+}
+
+/**
+ * Helper function that is not a hook.
+ */
+function upgrade_status_test_extension_files_helper(): void {
+}

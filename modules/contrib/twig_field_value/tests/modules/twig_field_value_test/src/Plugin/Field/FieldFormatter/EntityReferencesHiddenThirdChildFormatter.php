@@ -2,21 +2,20 @@
 
 namespace Drupal\twig_field_value_test\Plugin\Field\FieldFormatter;
 
+use Drupal\Core\Field\Attribute\FieldFormatter;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\Plugin\Field\FieldFormatter\EntityReferenceLabelFormatter;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
 
 /**
- * Entity reference formatter.
- *
- * @FieldFormatter(
- *   id = "entity_reference_hidden_third_child",
- *   label = @Translation("Without third child"),
- *   description = @Translation("Denies access to every third referenced entity. Only displays the label of every first and second item."),
- *   field_types = {
- *     "entity_reference"
- *   }
- * )
+ * Denies access to every third referenced entity.
  */
+#[FieldFormatter(
+  id: 'entity_reference_hidden_third_child',
+  label: new TranslatableMarkup('Without third child'),
+  description: new TranslatableMarkup('Denies access to every third referenced entity. Only displays the label of every first and second item.'),
+  field_types: ['entity_reference'],
+)]
 class EntityReferencesHiddenThirdChildFormatter extends EntityReferenceLabelFormatter {
 
   /**
@@ -43,7 +42,7 @@ class EntityReferencesHiddenThirdChildFormatter extends EntityReferenceLabelForm
    * @return bool
    *   True for every third child.
    */
-  private function isThirdChild($key) {
+  private function isThirdChild(int $key): bool {
     return $key % 3 == 2;
   }
 

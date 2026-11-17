@@ -1,0 +1,16 @@
+<?php
+
+/**
+ * @file
+ * Uses an item_attributes variable of another theme hook.
+ */
+
+/**
+ * Builds a render array for a theme hook with an item_attributes variable.
+ */
+function upgrade_status_test_item_attributes_build(): array {
+  return [
+    '#theme' => 'upgrade_status_test_gallery',
+    '#item_attributes' => ['class' => ['gallery']],
+  ];
+}

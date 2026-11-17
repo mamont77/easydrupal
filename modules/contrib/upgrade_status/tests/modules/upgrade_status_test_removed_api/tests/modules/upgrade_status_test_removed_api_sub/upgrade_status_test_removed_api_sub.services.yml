@@ -1,0 +1,19 @@
+services:
+  upgrade_status_test_removed_api_sub.argument:
+    class: Drupal\upgrade_status_test_removed_api\PdoConnection
+    arguments: ['@upgrade_status_test_removed_api.deprecated', '@!upgrade_status_test_removed_api.deprecated_alias']
+  upgrade_status_test_removed_api_sub.parent:
+    parent: upgrade_status_test_removed_api.deprecated
+  upgrade_status_test_removed_api_sub.decorator:
+    class: Drupal\upgrade_status_test_removed_api\PdoConnection
+    decorates: 'upgrade_status_test_removed_api.deprecated'
+  upgrade_status_test_removed_api_sub.alias:
+    alias: upgrade_status_test_removed_api.deprecated_alias
+  upgrade_status_test_removed_api_sub.factory:
+    class: Drupal\upgrade_status_test_removed_api\PdoConnection
+    factory: upgrade_status_test_removed_api.deprecated:fetchColumn
+  # These are not reported.
+  upgrade_status_test_removed_api_sub.optional:
+    class: Drupal\upgrade_status_test_removed_api\PdoConnection
+    arguments: ['@?upgrade_status_test_removed_api.deprecated', '@upgrade_status_test_removed_api.replacement', '@@upgrade_status_test_removed_api.deprecated']
+  # arguments: ['@upgrade_status_test_removed_api.deprecated']

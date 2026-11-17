@@ -1,0 +1,18 @@
+<?php
+
+/**
+ * @file
+ * Support module for upgrade status module testing.
+ */
+
+/**
+ * Implements hook_broken_api_before().
+ */
+function upgrade_status_test_broken_api_broken_api_before(): void {
+}
+
+/**
+ * Implements hook_broken_api_after().
+ */
+function upgrade_status_test_broken_api_broken_api_after(): void {
+}

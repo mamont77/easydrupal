@@ -1,0 +1,20 @@
+plain:
+  value: 'value'
+  items:
+    - 'value'
+shared:
+  current: 'value'
+  old: 'value'
+extended:
+  extra: 'value'
+  old: 'value'
+plugin:
+  id: legacy
+  settings:
+    old: 'value'
+tree:
+  children:
+    -
+      children:
+        -
+          old: 'value'

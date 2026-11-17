@@ -2,21 +2,20 @@
 
 namespace Drupal\twig_field_value_test\Plugin\Field\FieldFormatter;
 
+use Drupal\Core\Field\Attribute\FieldFormatter;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\Plugin\Field\FieldFormatter\StringFormatter;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
 
 /**
- * The string formatter.
- *
- * @FieldFormatter(
- *   id = "string_hidden_third_child",
- *   label = @Translation("Without third child"),
- *   description = @Translation("Denies access to every third field item. Only displays every first and second item as plain text."),
- *   field_types = {
- *     "string",
- *   },
- * )
+ * Denies access to every third field item.
  */
+#[FieldFormatter(
+  id: 'string_hidden_third_child',
+  label: new TranslatableMarkup('Without third child'),
+  description: new TranslatableMarkup('Denies access to every third field item. Only displays every first and second item as plain text.'),
+  field_types: ['string'],
+)]
 class StringHiddenThirdChildFormatter extends StringFormatter {
 
   /**
@@ -43,7 +42,7 @@ class StringHiddenThirdChildFormatter extends StringFormatter {
    * @return bool
    *   True for every third child.
    */
-  private function isThirdChild($key) {
+  private function isThirdChild(int $key): bool {
     return $key % 3 == 2;
   }
 

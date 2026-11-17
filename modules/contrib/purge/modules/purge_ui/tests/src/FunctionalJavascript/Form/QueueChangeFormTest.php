@@ -5,11 +5,15 @@ namespace Drupal\Tests\purge_ui\FunctionalJavascript\Form;
 use Drupal\Core\Url;
 use Drupal\purge_ui\Form\QueueChangeForm;
 use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 
 /**
  * Tests \Drupal\purge_ui\Form\QueueChangeForm.
+ *
+ * @group purge
  */
 #[Group('purge')]
+#[RunTestsInSeparateProcesses]
 class QueueChangeFormTest extends FormTestBase {
 
   /**

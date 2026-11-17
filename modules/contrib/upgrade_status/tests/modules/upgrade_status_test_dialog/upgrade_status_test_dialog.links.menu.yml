@@ -1,0 +1,8 @@
+# The dialogClass option in a comment is not reported.
+# dialogClass: test-dialog
+upgrade_status_test_dialog.link:
+  title: 'Test link'
+  route_name: '<nolink>'
+  options:
+    attributes:
+      data-dialog-options: '{"width":800,"dialogClass":"test-dialog"}'

@@ -3,6 +3,7 @@
 namespace Drupal\Tests\rh_node\Functional;
 
 use Drupal\Core\Url;
+use Drupal\rabbit_hole\Plugin\RabbitHoleBehaviorPlugin\PageRedirect;
 use Drupal\Tests\node\Traits\ContentTypeCreationTrait;
 use Drupal\Tests\node\Traits\NodeCreationTrait;
 use Drupal\Tests\rabbit_hole\Functional\RabbitHoleBehaviorSettingsFormTestBase;
@@ -53,6 +54,30 @@ class NodeBehaviorSettingsFormTest extends RabbitHoleBehaviorSettingsFormTestBas
   public function testBundleEditWithFieldUi() {
     \Drupal::service('module_installer')->install(['field_ui']);
     $this->testBundleFormFirstSave();
+  }
+
+  /**
+   * Test node creation by a user without the Rabbit Hole permission.
+   *
+   * @see https://www.drupal.org/project/rabbit_hole/issues/3517235
+   */
+  public function testEntityFormSaveWithoutAdministerPermission() {
+    $bundle_id = $this->createEntityBundle();
+    $this->drupalLogin($this->drupalCreateUser(['create ' . $bundle_id . ' content']));
+
+    $title = $this->randomMachineName();
+    $this->drupalGet(Url::fromRoute('node.add', ['node_type' => $bundle_id]));
+    $this->assertNoRabbitHoleSettings();
+    $this->submitForm(['title[0][value]' => $title], 'Save');
+
+    $nodes = \Drupal::entityTypeManager()
+      ->getStorage('node')
+      ->loadByProperties(['title' => $title]);
+    $node = reset($nodes);
+
+    $this->assertEquals(static::DEFAULT_ACTION, $node->get('rh_action')->value);
+    $this->assertEquals(PageRedirect::RABBIT_HOLE_PAGE_REDIRECT_RESPONSE_DEFAULT, $node->get('rh_redirect_response')->value);
+    $this->assertEquals(static::DEFAULT_ACTION, $node->get('rh_redirect_fallback_action')->value);
   }
 
   /**

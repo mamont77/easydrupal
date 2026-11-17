@@ -27,70 +27,26 @@ class FieldValueExtension extends AbstractExtension {
   use DoTrustedCallbackTrait;
 
   /**
-   * The language manager.
-   *
-   * @var \Drupal\Core\Language\LanguageManagerInterface
-   */
-  protected $languageManager;
-
-  /**
-   * The entity repository.
-   *
-   * @var \Drupal\Core\Entity\EntityRepositoryInterface
-   */
-  protected $entityRepository;
-
-  /**
-   * The controller resolver.
-   *
-   * @var \Drupal\Core\Controller\ControllerResolverInterface
-   */
-  protected $controllerResolver;
-
-  /**
    * The twig_field_value logger channel.
    *
    * @var \Psr\Log\LoggerInterface
    */
   protected $loggerChannel;
 
-  /**
-   * The renderer.
-   *
-   * @var \Drupal\Core\Render\RendererInterface
-   */
-  protected RendererInterface $renderer;
-
-  /**
-   * Constructs a FieldValueExtension.
-   *
-   * @param \Drupal\Core\Language\LanguageManagerInterface $language_manager
-   *   The language manager.
-   * @param \Drupal\Core\Entity\EntityRepositoryInterface $entityRepository
-   *   The entity repository.
-   * @param \Drupal\Core\Controller\ControllerResolverInterface $controllerResolver
-   *   The controller resolver.
-   * @param \Drupal\Core\Logger\LoggerChannelFactoryInterface $loggerFactory
-   *   The logger channel factory.
-   * @param \Drupal\Core\Render\RendererInterface $renderer
-   *   The renderer.
-   */
-  public function __construct(LanguageManagerInterface $language_manager, EntityRepositoryInterface $entityRepository, ControllerResolverInterface $controllerResolver, LoggerChannelFactoryInterface $loggerFactory, ?RendererInterface $renderer = NULL) {
-    $this->languageManager = $language_manager;
-    $this->entityRepository = $entityRepository;
-    $this->controllerResolver = $controllerResolver;
+  public function __construct(
+    protected LanguageManagerInterface $languageManager,
+    protected EntityRepositoryInterface $entityRepository,
+    protected ControllerResolverInterface $controllerResolver,
+    protected LoggerChannelFactoryInterface $loggerFactory,
+    protected RendererInterface $renderer,
+  ) {
     $this->loggerChannel = $loggerFactory->get('twig_field_value');
-    if (is_null($renderer)) {
-      @trigger_error('Calling ' . __METHOD__ . '() without the $renderer argument is deprecated in twig_value_field:2.0.5 and will be required in twig_value_field:3.0.0. See https://www.drupal.org/node/3478478', E_USER_DEPRECATED);
-      $renderer = \Drupal::service('renderer');
-    }
-    $this->renderer = $renderer;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getFilters() {
+  public function getFilters(): array {
     return [
       new TwigFilter('field_label', [$this, 'getFieldLabel']),
       new TwigFilter('field_value', [$this, 'getFieldValue']),

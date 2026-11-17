@@ -1,0 +1,15 @@
+<?php
+
+/**
+ * @file
+ * Implements hook_module_implements_alter() for older Drupal versions.
+ */
+
+use Drupal\Core\Hook\Attribute\LegacyModuleImplementsAlter;
+
+/**
+ * Implements hook_module_implements_alter().
+ */
+#[LegacyModuleImplementsAlter]
+function upgrade_status_test_hook_order_legacy_module_implements_alter(array &$implementations, string $hook): void {
+}

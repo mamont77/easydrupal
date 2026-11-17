@@ -1,0 +1,18 @@
+upgrade_status_test_labeled:
+  label: 'Labeled'
+  category: 'Test'
+  template: templates/labeled
+  regions:
+    main:
+      label: Main
+upgrade_status_test_unlabeled:
+  category: 'Test'
+  template: templates/unlabeled
+  regions:
+    main:
+      label: Main
+upgrade_status_test_derived:
+  deriver: 'Drupal\upgrade_status_test_plugin_definitions\Plugin\Derivative\LayoutDeriver'
+  regions:
+    main:
+      label: Main

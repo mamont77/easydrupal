@@ -2,6 +2,8 @@
 
 namespace Drupal\Tests\upgrade_status\Functional;
 
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 use Drupal\Core\Url;
 use Drupal\Tests\BrowserTestBase;
 
@@ -10,6 +12,8 @@ use Drupal\Tests\BrowserTestBase;
  *
  * @group upgrade_status
  */
+#[RunTestsInSeparateProcesses]
+#[Group('upgrade_status')]
 class UpgradeStatusAccessTest extends BrowserTestBase {
 
   /**
@@ -25,18 +29,12 @@ class UpgradeStatusAccessTest extends BrowserTestBase {
   protected $defaultTheme = 'stark';
 
   /**
-   * Tests access without permission.
+   * Tests access without and with the permission.
    */
-  #[\ReturnTypeWillChange]
-  public function testDeprecationDashboardAccessUnprivileged() {
+  public function testReportAccess(): void {
     $this->drupalGet(Url::fromRoute('upgrade_status.report'));
     $this->assertSession()->statusCodeEquals(403);
-  }
 
-  /**
-   * Tests access with user that has the correct permission.
-   */
-  public function testDeprecationDashboardAccessPrivileged() {
     $this->drupalLogin($this->drupalCreateUser(['administer software updates']));
     $this->drupalGet(Url::fromRoute('upgrade_status.report'));
     $this->assertSession()->statusCodeEquals(200);

@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - entity_test
+id: entity_test.upgrade_status_test_config_updates_recipe
+label: 'Config updates recipe'
+description: '  '
+targetEntityType: entity_test
+cache: true

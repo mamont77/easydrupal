@@ -1,0 +1,9 @@
+name: 'Upgrade status test database updates'
+type: module
+description: 'Support module for upgrade status module testing.'
+package: Testing
+
+# Information added by Drupal.org packaging script on 2026-11-16
+version: '5.0.0'
+project: 'upgrade_status'
+datestamp: 1794828610

@@ -1,0 +1,12 @@
+name: 'Upgrade status test deprecated theme'
+type: theme
+description: 'Support theme for upgrade status module testing.'
+core_version_requirement: ^10 || ^11 || ^12 || ^13
+base theme: false
+lifecycle: deprecated
+lifecycle_link: https://drupal.org/project/upgrade_status
+
+# Information added by Drupal.org packaging script on 2026-11-16
+version: '5.0.0'
+project: 'upgrade_status'
+datestamp: 1794828610

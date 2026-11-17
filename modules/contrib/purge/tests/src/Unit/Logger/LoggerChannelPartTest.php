@@ -22,9 +22,11 @@ use Psr\Log\LogLevel;
 class LoggerChannelPartTest extends UnitTestCase {
 
   /**
-   * The mocked logger channel.
+   * The logger channel test double.
    *
-   * @var \PHPUnit\Framework\MockObject\MockObject|\Psr\Log\LoggerInterface
+   * A stub by default; tests that set expectations replace it with a mock.
+   *
+   * @var \PHPUnit\Framework\MockObject\MockObject|\PHPUnit\Framework\MockObject\Stub|\Psr\Log\LoggerInterface
    */
   protected $loggerChannelPurge;
 
@@ -33,7 +35,7 @@ class LoggerChannelPartTest extends UnitTestCase {
    */
   protected function setUp(): void {
     parent::setUp();
-    $this->loggerChannelPurge = $this->createMock(LoggerInterface::class);
+    $this->loggerChannelPurge = $this->createStub(LoggerInterface::class);
   }
 
   /**
@@ -51,6 +53,7 @@ class LoggerChannelPartTest extends UnitTestCase {
       LogLevel::INFO => RfcLogLevel::INFO,
       LogLevel::DEBUG => RfcLogLevel::DEBUG,
     ];
+    $this->loggerChannelPurge = $this->createMock(LoggerInterface::class);
     $this->loggerChannelPurge
       ->expects($occurrence)
       ->method('log')
@@ -275,6 +278,7 @@ class LoggerChannelPartTest extends UnitTestCase {
    */
   #[DataProvider('providerTestLog')]
   public function testLog($id, $message, $output): void {
+    $this->loggerChannelPurge = $this->createMock(LoggerInterface::class);
     $this->loggerChannelPurge
       ->expects($this->once())
       ->method('log')

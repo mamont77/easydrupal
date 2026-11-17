@@ -2,19 +2,25 @@
 
 namespace Drupal\Tests\twig_field_value\Kernel;
 
+use Drupal\Core\Field\FieldStorageDefinitionInterface;
+use Drupal\twig_field_value\Twig\Extension\FieldValueExtension;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 use Drupal\Core\Entity\FieldableEntityInterface;
 use Drupal\Core\Render\BubbleableMetadata;
 use Drupal\Core\Render\RenderContext;
 use Drupal\entity_test\Entity\EntityTest;
 use Drupal\field\Entity\FieldConfig;
 use Drupal\field\Entity\FieldStorageConfig;
-use Drupal\field\FieldStorageConfigInterface;
 use Drupal\KernelTests\Core\Entity\EntityKernelTestBase;
 
 /**
- * @coversDefaultClass \Drupal\twig_field_value\Twig\Extension\FieldValueExtension
- * @group twig_field_value
+ * Field label tests from FieldValueExtension.
  */
+#[Group('twig_field_value')]
+#[RunTestsInSeparateProcesses]
+#[CoversClass(FieldValueExtension::class)]
 class FieldLabelTest extends EntityKernelTestBase {
 
   /**
@@ -29,6 +35,9 @@ class FieldLabelTest extends EntityKernelTestBase {
 
   /**
    * {@inheritdoc}
+   *
+   * @throws \Drupal\Core\Entity\EntityStorageException
+   * @throws \Exception
    */
   protected function setUp(): void {
     parent::setUp();
@@ -36,7 +45,7 @@ class FieldLabelTest extends EntityKernelTestBase {
       'field_name' => 'field_string',
       'type' => 'string',
       'entity_type' => 'entity_test',
-      'cardinality' => FieldStorageConfigInterface::CARDINALITY_UNLIMITED,
+      'cardinality' => FieldStorageDefinitionInterface::CARDINALITY_UNLIMITED,
     ]);
     $fieldStorage->save();
     $fieldConfig = FieldConfig::create([
@@ -50,8 +59,10 @@ class FieldLabelTest extends EntityKernelTestBase {
 
   /**
    * Test field label filter.
+   *
+   * @throws \Drupal\Core\Entity\EntityStorageException
    */
-  public function testFieldLabel() {
+  public function testFieldLabel(): void {
     $entity = EntityTest::create([
       'field_string' => [
         'value',
@@ -90,8 +101,10 @@ class FieldLabelTest extends EntityKernelTestBase {
    * Check if an inaccessible field is _not_ displayed.
    *
    * This test uses a field for which #access is set to false.
+   *
+   * @throws \Drupal\Core\Entity\EntityStorageException
    */
-  public function testFieldLabelAccess() {
+  public function testFieldLabelAccess(): void {
     $entity = EntityTest::create([
       'field_string' => [
         'value',
@@ -128,8 +141,10 @@ class FieldLabelTest extends EntityKernelTestBase {
 
   /**
    * Checks if cache is propagated for a field with the field_label filter.
+   *
+   * @throws \Drupal\Core\Entity\EntityStorageException
    */
-  public function testFieldLabelCache() {
+  public function testFieldLabelCache(): void {
     $entity = EntityTest::create([
       'field_string' => [
         'value',

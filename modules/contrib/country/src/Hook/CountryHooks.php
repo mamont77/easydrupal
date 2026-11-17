@@ -24,7 +24,7 @@ class CountryHooks {
       case 'help.page.country':
         $output = '';
         $output .= '<h3>' . $this->t('Country') . '</h3>';
-        $output .= '<p>' . $this->t('The Country module defines a simple country field type for the Field module. It provides 2 widgets - select options and autocomplete textfield - for this purpose.  See the <a href=":field">Field module help page</a> for more information about fields.', [
+        $output .= '<p>' . $this->t('The Country module defines a simple country field type for the Field module. It provides widgets for a select list, a select list with priority countries and an autocomplete textfield. See the <a href=":field">Field module help page</a> for more information about fields.', [
           ':field' => Url::fromRoute('help.page', [
             'name' => 'field',
           ])->toString(),

@@ -61,6 +61,7 @@ class EntityExtender implements EntityExtenderInterface {
       ->setName('rh_action')
       ->setLabel($this->t('Rabbit Hole action'))
       ->setDescription($this->t('Specifies which action that Rabbit Hole should take.'))
+      ->setDefaultValue(FormManglerService::RABBIT_HOLE_USE_DEFAULT)
       ->setTranslatable(TRUE);
     foreach ($this->rhBehaviorPluginManager->getDefinitions() as $id => $def) {
       $this->rhBehaviorPluginManager

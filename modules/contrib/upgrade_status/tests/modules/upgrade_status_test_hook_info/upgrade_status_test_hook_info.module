@@ -1,0 +1,16 @@
+<?php
+
+/**
+ * @file
+ * Support module for upgrade status module testing.
+ */
+
+/**
+ * Implements hook_hook_info().
+ */
+function upgrade_status_test_hook_info_hook_info(): array {
+  $hooks['upgrade_status_test_hook_info_example'] = [
+    'group' => 'custom_group',
+  ];
+  return $hooks;
+}

@@ -1,0 +1,12 @@
+name: 'Upgrade status test config deprecated recipe'
+description: 'Support recipe for upgrade status testing.'
+type: Testing
+config:
+  actions:
+    upgrade_status_test_config_deprecated.settings:
+      simpleConfigUpdate:
+        current: 'value'
+        nested.old: false
+    upgrade_status_test_config_deprecated.*:
+      simpleConfigUpdate:
+        old: 'value'

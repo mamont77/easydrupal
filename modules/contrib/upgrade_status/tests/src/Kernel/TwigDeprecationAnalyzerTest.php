@@ -2,15 +2,18 @@
 
 namespace Drupal\Tests\upgrade_status\Kernel;
 
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 use Drupal\KernelTests\KernelTestBase;
 use Drupal\upgrade_status\DeprecationMessage;
-use DrupalFinder\DrupalFinder;
 
 /**
  * Tests analysing Twig templates.
  *
  * @group upgrade_status
  */
+#[RunTestsInSeparateProcesses]
+#[Group('upgrade_status')]
 final class TwigDeprecationAnalyzerTest extends KernelTestBase {
 
   /**
@@ -33,43 +36,35 @@ final class TwigDeprecationAnalyzerTest extends KernelTestBase {
     $sut = $this->container->get('upgrade_status.twig_deprecation_analyzer');
     $twig_deprecations = $sut->analyze($extension);
 
-    $this->assertCount(3, $twig_deprecations, var_export($twig_deprecations, TRUE));
+    $this->assertCount(4, $twig_deprecations, var_export($twig_deprecations, TRUE));
     $this->assertContainsEquals(new DeprecationMessage(
-      'Since  1: Twig Filter "deprecatedfilter" is deprecated. See https://drupal.org/node/3071078.',
+      'Since upgrade_status_test_twig 1.0: Twig Filter "deprecatedfilter" is deprecated. See https://drupal.org/node/3071078.',
       $templates_directory . '/test.html.twig',
       '10',
-     'TwigDeprecationAnalyzer'
+      'TwigDeprecationAnalyzer'
     ), $twig_deprecations);
-
-    // Later than Drupal 10.0.0.
-    if (version_compare('10.0.0', \Drupal::VERSION) === -1) {
-      // Twig 3.15 issues with deprecated options.
-      $finder = new DrupalFinder();
-      $finder->locateRoot(DRUPAL_ROOT);
-      $vendor_path = $finder->getVendorDir();
-      $this->assertContainsEquals(new DeprecationMessage(
-        'Since twig/twig 3.15: Using the "deprecated", "deprecating_package", and "alternative" options is deprecated, pass a "deprecation_info" one instead.',
-        $vendor_path . '/symfony/deprecation-contracts/function.php',
-        '25',
-        'TwigDeprecationAnalyzer'
-      ), $twig_deprecations);
-      // Use of spaceless leads to syntax error in Drupal 10.
-      $this->assertContainsEquals(new DeprecationMessage(
-        sprintf('Twig template %s/spaceless.html.twig contains a syntax error and cannot be parsed.', $templates_directory),
-        $templates_directory . '/spaceless.html.twig',
-        '2',
-        'TwigDeprecationAnalyzer'
-      ), $twig_deprecations);
-    }
-    else {
-      // Spaceless deprecation exists in Twig 2 which is in Drupal 9.
-      $this->assertContainsEquals(new DeprecationMessage(
-        sprintf('The spaceless tag in "%s/spaceless.html.twig" at line 2 is deprecated since Twig 2.7, use the "spaceless" filter with the "apply" tag instead. See https://drupal.org/node/3071078.', $templates_directory),
-        $templates_directory . '/spaceless.html.twig',
-        0,
-        'TwigDeprecationAnalyzer'
-      ), $twig_deprecations);
-    }
+    // Use of spaceless leads to syntax error in Drupal 10.
+    $this->assertContainsEquals(new DeprecationMessage(
+      sprintf('Twig template %s/spaceless.html.twig contains a syntax error and cannot be parsed: Unknown "spaceless" tag.', $templates_directory),
+      $templates_directory . '/spaceless.html.twig',
+      '2',
+      'TwigDeprecationAnalyzer'
+    ), $twig_deprecations);
+    // A filter from a module that is not installed is named in the message.
+    $this->assertContainsEquals(new DeprecationMessage(
+      sprintf('Twig template %s/unknown_filter.html.twig contains a syntax error and cannot be parsed: Unknown "upgrade_status_test_unknown_filter" filter.', $templates_directory),
+      $templates_directory . '/unknown_filter.html.twig',
+      '2',
+      'TwigDeprecationAnalyzer'
+    ), $twig_deprecations);
+    // Other errors while parsing, like from a broken Twig extension, are
+    // reported for the template, and the other templates are still checked.
+    $this->assertContainsEquals(new DeprecationMessage(
+      sprintf('Twig template %s/broken_tag.html.twig cannot be parsed: LogicException: The upgrade_status_test_broken tag is broken.', $templates_directory),
+      $templates_directory . '/broken_tag.html.twig',
+      0,
+      'TwigDeprecationAnalyzer'
+    ), $twig_deprecations);
   }
 
 }

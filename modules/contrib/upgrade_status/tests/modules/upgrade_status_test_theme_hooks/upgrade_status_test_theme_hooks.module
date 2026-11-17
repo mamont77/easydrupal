@@ -1,0 +1,64 @@
+<?php
+
+/**
+ * @file
+ * Support module for upgrade status module testing.
+ */
+
+use Drupal\upgrade_status_test_theme_hooks\Hook\ThemeHooks;
+
+/**
+ * Implements hook_theme().
+ */
+function upgrade_status_test_theme_hooks_theme(): array {
+  $hooks['assigned_with_file'] = [
+    'variables' => ['file' => NULL],
+    'file' => 'upgrade_status_test_theme_hooks.theme.inc',
+  ];
+  return $hooks + [
+    'not_registered' => ['variables' => []],
+    'registered' => [
+      'variables' => [],
+      'initial preprocess' => 'template_preprocess_registered',
+    ],
+    'registered_method' => [
+      'variables' => ['includes' => []],
+      'initial preprocess' => ThemeHooks::class . ':preprocess',
+    ],
+    'with_includes' => [
+      'render element' => 'element',
+      'includes' => ['upgrade_status_test_theme_hooks.theme.inc'],
+    ],
+    // phpcs:ignore Generic.Arrays.DisallowLongArraySyntax
+    'old_array_syntax' => array(
+      // phpcs:ignore Generic.Arrays.DisallowLongArraySyntax
+      'variables' => array(),
+      'file' => 'upgrade_status_test_theme_hooks.theme.inc',
+    ),
+  ];
+}
+
+/**
+ * Prepares variables, but no theme hook sets this as its initial preprocess.
+ */
+function template_preprocess_not_registered(array &$variables): void {
+}
+
+/**
+ * Prepares variables for a theme hook that sets this as its initial preprocess.
+ */
+function template_preprocess_registered(array &$variables): void {
+}
+
+/**
+ * Prepares variables, and the theme hook uses a method for that instead.
+ */
+function template_preprocess_registered_method(array &$variables): void {
+}
+
+/**
+ * This is not hook_theme(), so the keys here are not reported.
+ */
+function upgrade_status_test_theme_hooks_other(): array {
+  return ['example' => ['file' => 'example.inc', 'includes' => []]];
+}

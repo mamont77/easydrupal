@@ -5,6 +5,7 @@ declare(strict_types=1);
 // AI generated.
 namespace Drupal\Tests\country\Functional;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 use Drupal\field\Entity\FieldConfig;
@@ -29,7 +30,7 @@ class CountryAutocompleteTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  protected static $modules = ['country', 'node', 'field'];
+  protected static $modules = ['country', 'country_test', 'node', 'field'];
 
   /**
    * {@inheritdoc}
@@ -214,6 +215,68 @@ class CountryAutocompleteTest extends BrowserTestBase {
     // Countries containing "land": Finland, Iceland, Ireland, Netherlands,
     // New Zealand, Poland, Switzerland, Thailand, etc.
     $this->assertTrue(count($values) > 1);
+  }
+
+  /**
+   * Tests that the autocomplete route denies access to invalid fields.
+   *
+   * @covers ::access
+   */
+  #[DataProvider('providerInvalidFieldPaths')]
+  public function testAccessDeniedForInvalidField(string $path): void {
+    $this->drupalCreateContentType(['type' => 'page', 'name' => 'Page']);
+
+    $this->drupalGet($path, ['query' => ['q' => 'United']]);
+    $this->assertSession()->statusCodeEquals(403);
+  }
+
+  /**
+   * Data provider for testAccessDeniedForInvalidField().
+   */
+  public static function providerInvalidFieldPaths(): array {
+    return [
+      'non-existing field' => ['country/autocomplete/node/article/field_does_not_exist'],
+      'non-existing field, global' => ['country/autocomplete/node/global/field_does_not_exist'],
+      'field not attached to bundle' => ['country/autocomplete/node/page/field_country'],
+      'non-existing bundle' => ['country/autocomplete/node/does_not_exist/field_country'],
+      'non-existing entity type' => ['country/autocomplete/does_not_exist/article/field_country'],
+      'field of another type' => ['country/autocomplete/node/article/title'],
+    ];
+  }
+
+  /**
+   * Tests that field access is respected.
+   *
+   * @covers ::access
+   */
+  public function testAccessDeniedWithoutFieldAccess(): void {
+    $field_storage = FieldStorageConfig::create([
+      'field_name' => 'field_country_hidden',
+      'entity_type' => 'node',
+      'type' => 'country',
+    ]);
+    $field_storage->save();
+    FieldConfig::create([
+      'field_storage' => $field_storage,
+      'bundle' => 'article',
+      'label' => 'Hidden country',
+    ])->save();
+
+    $this->drupalGet('country/autocomplete/node/article/field_country_hidden', [
+      'query' => ['q' => 'United'],
+    ]);
+    $this->assertSession()->statusCodeEquals(403);
+
+    $this->drupalGet('country/autocomplete/node/global/field_country_hidden', [
+      'query' => ['q' => 'United'],
+    ]);
+    $this->assertSession()->statusCodeEquals(403);
+
+    // Other country fields stay available.
+    $this->drupalGet('country/autocomplete/node/article/field_country', [
+      'query' => ['q' => 'United'],
+    ]);
+    $this->assertSession()->statusCodeEquals(200);
   }
 
 }

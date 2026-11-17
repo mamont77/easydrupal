@@ -207,7 +207,7 @@ class SettingsConfigHandler implements SettingsConfigHandlerInterface {
 
     // Mapping for versions that do not match.
     $mapping = [
-      '47.6.3' => '47.7.4',
+      '47.6.3' => '47.7.6',
     ];
 
     return $mapping[$version] ?? $version;

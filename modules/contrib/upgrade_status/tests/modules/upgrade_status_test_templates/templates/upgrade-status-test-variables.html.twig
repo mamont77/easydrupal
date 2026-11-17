@@ -1,0 +1,12 @@
+{#
+/**
+ * @file
+ * Overrides a theme hook with deprecated variables.
+ */
+#}
+{{ new }}
+{% if old %}{{ old|upper }}{% endif %}
+{{ older }}
+{{ item.old }}
+{% set data = {old: new} %}
+{% for key, old in data %}{{ key }}{% endfor %}

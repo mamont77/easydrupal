@@ -1,0 +1,25 @@
+upgrade_status_test_routes_provider.old:
+  path: '/upgrade-status-test/old'
+  defaults:
+    _controller: '\Drupal\system\Controller\SystemController::systemAdminMenuBlockPage'
+  requirements:
+    # Test route only.
+    _access: 'TRUE'
+  deprecated:
+    package: 'drupal/core'
+    version: '10.0.0'
+    message: 'The route "upgrade_status_test_routes_provider.old" is deprecated in drupal:10.0.0 and is removed from drupal:11.0.0. Use "upgrade_status_test_routes_provider.new" instead. See https://www.drupal.org/node/3317784'
+
+upgrade_status_test_routes_provider.new:
+  path: '/upgrade-status-test/new'
+  defaults:
+    _controller: '\Drupal\system\Controller\SystemController::systemAdminMenuBlockPage'
+  requirements:
+    # Test route only.
+    _access: 'TRUE'
+
+upgrade_status_test_routes_provider.alias:
+  alias: 'upgrade_status_test_routes_provider.new'
+  deprecated:
+    package: 'drupal/core'
+    version: '10.0.0'

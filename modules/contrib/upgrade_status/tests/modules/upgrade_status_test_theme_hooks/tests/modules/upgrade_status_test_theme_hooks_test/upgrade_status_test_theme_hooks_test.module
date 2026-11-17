@@ -1,0 +1,34 @@
+<?php
+
+/**
+ * @file
+ * Support module for upgrade status module testing.
+ */
+
+/**
+ * Implements hook_theme().
+ */
+function upgrade_status_test_theme_hooks_test_theme(): array {
+  return [
+    'in_test_module' => [
+      'variables' => [],
+      'file' => 'upgrade_status_test_theme_hooks_test.theme.inc',
+    ],
+    'registered_in_test_module' => [
+      'variables' => [],
+      'initial preprocess' => 'template_preprocess_registered_in_test_module',
+    ],
+  ];
+}
+
+/**
+ * Prepares variables for a theme hook without an initial preprocess.
+ */
+function template_preprocess_in_test_module(array &$variables): void {
+}
+
+/**
+ * Prepares variables for a theme hook with an initial preprocess.
+ */
+function template_preprocess_registered_in_test_module(array &$variables): void {
+}

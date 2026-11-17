@@ -455,8 +455,8 @@ abstract class PluginTestBase extends KernelTestBase {
     $this->assertEquals($this->pluginId, $mutable->getPluginId());
     $this->assertEquals($this->pluginId, $mutable->getType());
     $d = $mutable->getPluginDefinition();
-    $this->assertTrue(is_array($d));
-    $this->assertTrue(is_array($d['examples']));
+    $this->assertIsArray($d);
+    $this->assertIsArray($d['examples']);
     $this->assertInstanceOf(TranslatableMarkup::class, $d['label']);
     $this->assertFalse(empty((string) $d['label']));
     $this->assertInstanceOf(TranslatableMarkup::class, $d['description']);
@@ -472,8 +472,8 @@ abstract class PluginTestBase extends KernelTestBase {
     $this->assertEquals($this->pluginId, $immutable->getPluginId());
     $this->assertEquals($this->pluginId, $immutable->getType());
     $d = $immutable->getPluginDefinition();
-    $this->assertTrue(is_array($d));
-    $this->assertTrue(is_array($d['examples']));
+    $this->assertIsArray($d);
+    $this->assertIsArray($d['examples']);
     $this->assertInstanceOf(TranslatableMarkup::class, $d['label']);
     $this->assertFalse(empty((string) $d['label']));
     $this->assertInstanceOf(TranslatableMarkup::class, $d['description']);

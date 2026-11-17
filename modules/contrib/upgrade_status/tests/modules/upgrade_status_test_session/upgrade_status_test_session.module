@@ -1,0 +1,40 @@
+<?php
+
+/**
+ * @file
+ * Reads and writes custom keys of $_SESSION.
+ */
+
+/**
+ * Reads and writes custom keys of $_SESSION.
+ */
+function upgrade_status_test_session_keys(string $name): mixed {
+  $_SESSION['upgrade_status_test'] = 'value';
+  $_SESSION["upgrade_status_test_ids"][] = 1;
+  $value = $_SESSION['upgrade_status_test'] ?? NULL;
+  unset($_SESSION['upgrade_status_test']);
+  $_SESSION[$name] = $value;
+  $_SESSION[] = $value;
+  $text = "Value: {$_SESSION['upgrade_status_test_ids']}";
+  return empty($_SESSION['upgrade_status_test_ids']) ? $text : $_SESSION['upgrade_status_test'];
+}
+
+/**
+ * Uses $_SESSION in ways that are not reported.
+ */
+function upgrade_status_test_session_allowed(): array {
+  // $_SESSION['upgrade_status_test'] = 'value';
+  /* $_SESSION['upgrade_status_test'] = 'value'; */
+  $text = '$_SESSION["upgrade_status_test"]';
+  $session = ['upgrade_status_test' => $text];
+  $session['upgrade_status_test'] = 'value';
+  $_SESSION_DATA['upgrade_status_test'] = 'value';
+  $attributes = $_SESSION['_sf2_attributes'] ?? [];
+  $flashes = $_SESSION['_symfony_flashes'] ?? [];
+  $metadata = $_SESSION["_sf2_meta"] ?? [];
+  if (empty($_SESSION)) {
+    $_SESSION = [];
+  }
+  \Drupal::request()->getSession()->set('upgrade_status_test', 'value');
+  return [$session, $_SESSION_DATA, $attributes, $flashes, $metadata];
+}

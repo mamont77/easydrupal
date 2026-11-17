@@ -7,7 +7,7 @@ configure: ckeditor5_premium_features_notifications.form.settings
 dependencies:
   - ckeditor5_premium_features:ckeditor5_premium_features
 
-# Information added by Drupal.org packaging script on 2026-10-14
-version: '1.8.6'
+# Information added by Drupal.org packaging script on 2026-11-03
+version: '1.8.7'
 project: 'ckeditor5_premium_features'
-datestamp: 1791977811
+datestamp: 1793697827

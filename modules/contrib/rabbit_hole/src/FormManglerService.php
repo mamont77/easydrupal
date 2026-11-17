@@ -32,21 +32,21 @@ class FormManglerService {
    *
    * @var \Drupal\Core\Entity\EntityTypeManagerInterface|null
    */
-  private $entityTypeManager;
+  protected $entityTypeManager;
 
   /**
    * Behavior plugin manager.
    *
    * @var \Drupal\rabbit_hole\Plugin\RabbitHoleBehaviorPluginManager|null
    */
-  private $rhBehaviorPluginManager;
+  protected $rhBehaviorPluginManager;
 
   /**
    * Entity plugin manager.
    *
    * @var \Drupal\rabbit_hole\Plugin\RabbitHoleEntityPluginManager|null
    */
-  private $rhEntityPluginManager;
+  protected $rhEntityPluginManager;
 
   /**
    * Rabbit hole behavior invoker.
@@ -67,7 +67,7 @@ class FormManglerService {
    *
    * @var \Drupal\rabbit_hole\BehaviorSettingsManager
    */
-  private $rhBehaviorSettingsManager;
+  protected $rhBehaviorSettingsManager;
 
   /**
    * Constructor.
@@ -153,7 +153,7 @@ class FormManglerService {
     $entity_type_id,
     $entity,
     FormStateInterface $form_state,
-    $form_id
+    $form_id,
   ) {
 
     if ($entity === NULL) {
@@ -429,6 +429,14 @@ class FormManglerService {
    */
   public function redirectToEntityEditForm(array $form, FormStateInterface $form_state) {
     $entity = $form_state->getFormObject()->getEntity();
+
+    // The entity may be gone or unroutable by the time this handler runs, for
+    // example when another module has attached it to a form that deletes the
+    // entity it was built for.
+    if ($entity === NULL || $entity->isNew() || !$entity->hasLinkTemplate('edit-form')) {
+      return;
+    }
+
     $plugin = $this->behaviorInvoker->getBehaviorPlugin($entity);
 
     // Set form redirect to entity edit page to prevent 403/404 errors if

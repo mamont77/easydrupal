@@ -1,0 +1,23 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - entity_test
+id: upgrade_status_test_config_updates_recipe
+label: 'Config updates recipe'
+module: views
+description: ''
+tag: ''
+base_table: entity_test
+base_field: id
+display:
+  default:
+    id: default
+    display_title: Default
+    display_plugin: default
+    position: 0
+    display_options:
+      style:
+        type: table
+        options:
+          grouping: {  }

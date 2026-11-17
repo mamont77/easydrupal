@@ -1,0 +1,17 @@
+<?php
+
+/**
+ * @file
+ * Support theme for upgrade status module testing.
+ */
+
+declare(strict_types=1);
+
+use Drupal\Core\Hook\Attribute\LegacyHook;
+
+/**
+ * Implements hook_preprocess_HOOK() for page templates.
+ */
+#[LegacyHook]
+function upgrade_status_test_extension_files_theme_preprocess_page(array &$variables): void {
+}

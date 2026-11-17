@@ -3,11 +3,15 @@
 namespace Drupal\Tests\purge\Kernel\Invalidation;
 
 use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 
 /**
  * Tests \Drupal\purge\Plugin\Purge\Invalidation\EverythingInvalidation.
+ *
+ * @group purge
  */
 #[Group('purge')]
+#[RunTestsInSeparateProcesses]
 class EverythingInvalidationTest extends PluginTestBase {
 
   /**

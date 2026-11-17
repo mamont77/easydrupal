@@ -1,0 +1,135 @@
+upgrade_status_test_config_deprecated.settings:
+  type: config_object
+  label: 'Settings'
+  mapping:
+    current:
+      type: string
+      label: 'Current'
+    old:
+      type: string
+      label: 'Old'
+      deprecated: "The 'old' config is deprecated in drupal:11.1.0 and is removed from drupal:12.0.0. Use 'current' instead. See https://www.drupal.org/project/upgrade_status."
+    nested:
+      type: mapping
+      label: 'Nested'
+      mapping:
+        current:
+          type: boolean
+          label: 'Current'
+        old:
+          type: boolean
+          label: 'Old'
+          deprecated: "The 'nested.old' config is deprecated in drupal:11.2.0 and is removed from drupal:12.0.0. There is no replacement. See https://www.drupal.org/project/upgrade_status."
+    items:
+      type: sequence
+      label: 'Items'
+      sequence:
+        type: mapping
+        label: 'Item'
+        mapping:
+          old:
+            type: string
+            label: 'Old'
+            deprecated: "The 'items.*.old' config is deprecated in drupal:11.2.0 and is removed from drupal:12.0.0. There is no replacement. See https://www.drupal.org/project/upgrade_status."
+
+upgrade_status_test_config_deprecated.legacy:
+  type: config_object
+  label: 'Legacy'
+  deprecated: "The 'upgrade_status_test_config_deprecated.legacy' config is deprecated in drupal:11.3.0 and is removed from drupal:13.0.0. There is no replacement. See https://www.drupal.org/project/upgrade_status."
+  mapping:
+    value:
+      type: string
+      label: 'Value'
+
+upgrade_status_test_config_deprecated.types:
+  type: config_object
+  label: 'Types'
+  mapping:
+    plain:
+      type: upgrade_status_test_config_deprecated.plain
+      label: 'Type without deprecations'
+    shared:
+      type: upgrade_status_test_config_deprecated.shared
+      label: 'Type with a deprecated key'
+    extended:
+      type: upgrade_status_test_config_deprecated.extended
+      label: 'Type that extends a type with a deprecated key'
+    plugin:
+      type: mapping
+      label: 'Plugin with a type that depends on the config data'
+      mapping:
+        id:
+          type: string
+          label: 'ID'
+        settings:
+          type: upgrade_status_test_config_deprecated.plugin.[%parent.id]
+          label: 'Settings'
+    tree:
+      type: upgrade_status_test_config_deprecated.tree
+      label: 'Type that is part of its own definition'
+
+upgrade_status_test_config_deprecated.plain:
+  type: mapping
+  label: 'Plain'
+  mapping:
+    value:
+      type: string
+      label: 'Value'
+    items:
+      type: sequence
+      label: 'Items'
+      sequence:
+        type: string
+        label: 'Item'
+
+upgrade_status_test_config_deprecated.shared:
+  type: mapping
+  label: 'Shared'
+  mapping:
+    current:
+      type: string
+      label: 'Current'
+    old:
+      type: string
+      label: 'Old'
+      deprecated: "The 'old' config of the shared type is deprecated in drupal:11.3.0 and is removed from drupal:12.0.0. There is no replacement. See https://www.drupal.org/project/upgrade_status."
+
+upgrade_status_test_config_deprecated.extended:
+  type: upgrade_status_test_config_deprecated.shared
+  label: 'Extended'
+  mapping:
+    extra:
+      type: string
+      label: 'Extra'
+
+upgrade_status_test_config_deprecated.plugin.*:
+  type: mapping
+  label: 'Plugin settings'
+  mapping:
+    current:
+      type: string
+      label: 'Current'
+
+upgrade_status_test_config_deprecated.plugin.legacy:
+  type: mapping
+  label: 'Legacy plugin settings'
+  mapping:
+    old:
+      type: string
+      label: 'Old'
+      deprecated: "The 'old' config of the legacy plugin is deprecated in drupal:11.3.0 and is removed from drupal:12.0.0. There is no replacement. See https://www.drupal.org/project/upgrade_status."
+
+upgrade_status_test_config_deprecated.tree:
+  type: mapping
+  label: 'Tree'
+  mapping:
+    old:
+      type: string
+      label: 'Old'
+      deprecated: "The 'old' config of the tree type is deprecated in drupal:11.3.0 and is removed from drupal:12.0.0. There is no replacement. See https://www.drupal.org/project/upgrade_status."
+    children:
+      type: sequence
+      label: 'Children'
+      sequence:
+        type: upgrade_status_test_config_deprecated.tree
+        label: 'Child'

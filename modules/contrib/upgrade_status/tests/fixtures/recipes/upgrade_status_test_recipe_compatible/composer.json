@@ -1,0 +1,9 @@
+{
+    "name": "drupal/upgrade_status_test_recipe_compatible",
+    "description": "Support recipe for upgrade status testing.",
+    "type": "drupal-recipe",
+    "license": "GPL-2.0-or-later",
+    "require": {
+        "drupal/core": ">=10"
+    }
+}

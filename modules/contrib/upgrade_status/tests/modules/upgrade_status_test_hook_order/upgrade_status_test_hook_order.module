@@ -1,0 +1,18 @@
+<?php
+
+/**
+ * @file
+ * Implements hook_module_implements_alter() without a legacy attribute.
+ */
+
+/**
+ * Implements hook_module_implements_alter().
+ */
+function upgrade_status_test_hook_order_module_implements_alter(array &$implementations, string $hook): void {
+}
+
+/**
+ * Not a hook implementation, because no module has this name.
+ */
+function upgrade_status_test_hook_order_other_module_implements_alter(): void {
+}

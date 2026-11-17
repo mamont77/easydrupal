@@ -1,0 +1,12 @@
+<?php
+
+/**
+ * @file
+ * Implements a deprecated hook in a submodule of a test module.
+ */
+
+/**
+ * Implements hook_deprecated_hook_old().
+ */
+function upgrade_status_test_test_modules_nested_deprecated_hook_old(): void {
+}

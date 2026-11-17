@@ -1,0 +1,17 @@
+<?php
+
+/**
+ * @file
+ * Functions for older Drupal versions, which are converted to classes.
+ */
+
+declare(strict_types=1);
+
+use Drupal\Core\Hook\Attribute\ExtensionFileIsConverted;
+
+/**
+ * Implements hook_preprocess_HOOK() for page templates.
+ */
+#[ExtensionFileIsConverted]
+function upgrade_status_test_test_modules_converted_preprocess_page(array &$variables): void {
+}
