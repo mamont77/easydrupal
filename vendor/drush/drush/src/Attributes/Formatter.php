@@ -14,11 +14,9 @@ class Formatter
 {
     /**
      * @param ?string $returnType
-     *     The command's return type, before formatting. Usually this is a class
-     *     name like RowsOfFields::class.
+     *     The command's return type, before formatting.
      * @param ?string $defaultFormatter
-     *    The fallback formatter name. See the list at
-     *    https://github.com/consolidation/output-formatters/blob/a112df9a74854c8438b33b334ed619fa43edf31a/src/FormatterManager.php#L43-L57
+     *    The fallback formatter.
      */
     public function __construct(
         public ?string $returnType = null,

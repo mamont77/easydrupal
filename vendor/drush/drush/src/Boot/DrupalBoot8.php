@@ -17,6 +17,7 @@ use Drush\Event\ConsoleDefinitionsEvent;
 use Drush\Runtime\LegacyServiceFinder;
 use Drush\Runtime\LegacyServiceInstantiator;
 use Drush\Runtime\ServiceManager;
+use Robo\Robo;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\TerminableInterface;
@@ -182,7 +183,7 @@ class DrupalBoot8 extends DrupalBoot
 
         // Default to the standard kernel.
         $kernel = Kernels::DRUPAL;
-        if ($annotationData instanceof AnnotationData) {
+        if (!empty($annotationData)) {
             $kernel = $annotationData->get('kernel', Kernels::DRUPAL);
         }
         $request = $this->getRequest();
@@ -264,13 +265,14 @@ class DrupalBoot8 extends DrupalBoot
         $commandInfoAltererInstances = $this->serviceManager->instantiateServices($commandInfoAlterers, $drushContainer, $container);
         $commandInfoAlterers = array_merge($commandInfoAltererInstances, $legacyServiceInstantiator->taggedServices('drush.command_info_alterer'));
 
-        // Set the command info alterers. We must do this prior to
-        // registering any commands, as that is the point where the
+        // Set the command info alterers. We must do this prior to calling
+        // Robo::register to add any commands, as that is the point where the
         // alteration will happen.
         foreach ($commandInfoAlterers as $altererHandler) {
-            $handler = $this->serviceManager->commandFromInvokable($altererHandler);
-            $commandFactory->addCommandInfoAlterer($handler);
-            $this->logger->debug(dt('Commands are potentially altered in !class.', ['!class' => get_class($handler)]));
+            // @todo This is in Drush14 but is giving an error here.
+            // $altererHandler = $this->serviceManager->commandFromInvokable($altererHandler);
+            $commandFactory->addCommandInfoAlterer($altererHandler);
+            $this->logger->debug(dt('Commands are potentially altered in !class.', ['!class' => get_class($altererHandler)]));
         }
 
         // Register the Drush Symfony Console commands found in Drush services
@@ -278,15 +280,15 @@ class DrupalBoot8 extends DrupalBoot
         foreach ($drushServicesConsoleCommands as $command) {
             $this->serviceManager->inflect($drushContainer, $command);
             $this->logger->debug(dt('Add a command: !name', ['!name' => $command->getName()]));
-            $application->addCommand($command);
+            $application->add($command);
         }
 
         // Add annotation commands from drush.services.yml
         $drushServicesCommandHandlers = $legacyServiceInstantiator->taggedServices('drush.command');
         foreach ($drushServicesCommandHandlers as $commandHandler) {
             $this->serviceManager->inflect($drushContainer, $commandHandler);
-            $this->logger->debug(dt('Add a commandfile class: !name', ['!name' => $commandHandler::class]));
-            $application->registerCommandInstances($commandHandler);
+            $this->logger->debug(dt('Add a commandfile class: !name', ['!name' => get_class($commandHandler)]));
+            Robo::register($application, $commandHandler);
         }
 
         // Instantiate all of the classes we discovered in
@@ -296,7 +298,7 @@ class DrupalBoot8 extends DrupalBoot
 
         // Inflect and register all command handlers
         $commandHandlers = $this->serviceManager->commandFromInvokable($commandHandlers);
-        $application->registerCommandInstances($commandHandlers);
+        Robo::register($application, $commandHandlers);
 
         // Dispatch our custom event. It also fires earlier in \Drush\Application::configureAndRegisterCommands.
         Drush::getContainer()->get('eventDispatcher')->dispatch(new ConsoleDefinitionsEvent(Drush::getApplication()), ConsoleDefinitionsEvent::class);
@@ -316,12 +318,6 @@ class DrupalBoot8 extends DrupalBoot
                 $response = new HtmlResponse();
             }
             assert($this->kernel instanceof TerminableInterface);
-            // Kernel termination may trigger a deferred router rebuild, which
-            // discovers plugins (e.g. entity types) using directory paths that
-            // are relative to the Drupal root. Ensure the working directory is
-            // the Drupal root so that discovery does not silently come up empty
-            // when Drush is invoked from elsewhere (e.g. under PHPUnit).
-            chdir($this->kernel->getAppRoot());
             $this->kernel->terminate($this->getRequest(), $response);
         }
     }
@@ -332,7 +328,7 @@ class DrupalBoot8 extends DrupalBoot
      * We now set various contexts that we determined and confirmed to be valid.
      * Additionally we load an optional drush.yml file in the site directory.
      */
-    public function bootstrapDrupalSite(BootstrapManager $manager): void
+    public function bootstrapDrupalSite(BootstrapManager $manager)
     {
         $this->bootstrapDoDrupalSite($manager);
     }

@@ -12,8 +12,11 @@ use Drush\Config\Environment;
 
 class PreflightSiteLocator
 {
-    public function __construct(protected SiteAliasManager $siteAliasManager)
+    protected SiteAliasManager $siteAliasManager;
+
+    public function __construct(SiteAliasManager $siteAliasManager)
     {
+        $this->siteAliasManager = $siteAliasManager;
     }
 
     /**

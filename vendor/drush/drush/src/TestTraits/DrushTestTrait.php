@@ -8,7 +8,7 @@ namespace Drush\TestTraits;
  * DrushTestTrait provides a `drush()` method that may be
  * used to write functional tests for Drush extensions.
  *
- * More information is available at https://github.com/drush-ops/drush/blob/14.x/docs/contribute/unish.md#drush-test-traits.
+ * More information is available at https://github.com/drush-ops/drush/blob/13.x/docs/contribute/unish.md#drush-test-traits.
  */
 trait DrushTestTrait
 {
@@ -75,7 +75,7 @@ trait DrushTestTrait
         }
 
         $cmd[] = (string) $suffix;
-        $exec = array_filter($cmd, strlen(...)); // Removes empty strings.
+        $exec = array_filter($cmd, 'strlen'); // Removes empty strings.
 
         $cmd = implode(' ', $exec);
         $this->execute($cmd, $expected_return, $cd, $env);
@@ -104,7 +104,7 @@ trait DrushTestTrait
         if (!isset($major)) {
             $this->drush('version', [], ['field' => 'drush-version']);
             $version = trim($this->getOutput());
-            [$major] = explode('.', $version);
+            list($major) = explode('.', $version);
         }
         return (int)$major;
     }

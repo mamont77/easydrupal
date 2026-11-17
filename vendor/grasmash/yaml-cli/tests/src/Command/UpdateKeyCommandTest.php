@@ -4,7 +4,6 @@ namespace Grasmash\YamlCli\Tests\Command;
 
 use Dflydev\DotAccessData\Data;
 use Grasmash\YamlCli\Command\UpdateKeyCommand;
-use PHPUnit\Framework\Attributes\DataProvider;
 use Grasmash\YamlCli\Tests\TestBase;
 use Symfony\Component\Console\Tester\CommandTester;
 
@@ -25,8 +24,9 @@ class UpdateKeyCommandTest extends TestBase
 
     /**
      * Tests the 'update:key' command.
+     *
+     * @dataProvider getValueProvider
      */
-    #[DataProvider('getValueProvider')]
     public function testUpdateKey($file, $key, $new_key, $expected_output, $expected_exit_code)
     {
         $contents = $this->getCommand()->loadYamlFile($file);
@@ -68,7 +68,7 @@ class UpdateKeyCommandTest extends TestBase
      */
     protected function getCommand()
     {
-        $this->application->addCommand(new UpdateKeyCommand());
+        $this->application->add(new UpdateKeyCommand());
         $command = $this->application->find('update:key');
 
         return $command;
@@ -106,7 +106,7 @@ class UpdateKeyCommandTest extends TestBase
      * @return array
      *   An array of values to test.
      */
-    public static function getValueProvider()
+    public function getValueProvider()
     {
         $file = 'tests/resources/temp.yml';
 

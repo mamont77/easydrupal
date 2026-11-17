@@ -16,7 +16,7 @@ class SqlPgsql extends SqlBase
 
     private ?string $password_file = null;
 
-    private function createPasswordFile(): ?string
+    private function createPasswordFile()
     {
         $dbSpec = $this->getDbSpec();
         if (null == ($this->getPasswordFile()) && isset($dbSpec['password'])) {
@@ -30,7 +30,7 @@ class SqlPgsql extends SqlBase
             ];
             // Escape colon and backslash characters in entries.
             // @see http://www.postgresql.org/docs/9.1/static/libpq-pgpass.html
-            array_walk($pgpass_parts, function (&$part): void {
+            array_walk($pgpass_parts, function (&$part) {
                   // The order of the replacements is important so that backslashes are
                   // not replaced twice.
                   $part = str_replace(['\\', ':'], ['\\\\', '\:'], (string)$part);

@@ -126,7 +126,7 @@ class PreflightArgs extends Config implements PreflightArgsInterface
     protected function optionConfigMap(): array
     {
         return [
-            self::SIMULATE => \Drush\Config\DrushConfig::SIMULATE,
+            self::SIMULATE => \Robo\Config\Config::SIMULATE,
             self::LOCAL => self::DRUSH_RUNTIME_CONTEXT_NAMESPACE . '.' . self::LOCAL,
         ];
     }

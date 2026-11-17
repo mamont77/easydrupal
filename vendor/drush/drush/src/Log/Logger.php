@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace Drush\Log;
 
-use Consolidation\Log\Logger as ConsolidationLogger;
 use Drush\Drush;
-use Psr\Log\LogLevel;
+use Robo\Log\RoboLogger;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
@@ -25,18 +24,14 @@ use Symfony\Component\Console\Output\OutputInterface;
  * to set an output I/O object here, in case output redirection
  * was the only thing that needed to be swapped out.
  */
-class Logger extends ConsolidationLogger
+class Logger extends RoboLogger
 {
     public function __construct(OutputInterface $output)
     {
-        $verbosityOverrides = [
-            LogLevel::NOTICE => OutputInterface::VERBOSITY_NORMAL,
-            LogLevel::INFO => OutputInterface::VERBOSITY_VERBOSE,
-        ];
-        parent::__construct($output, $verbosityOverrides);
+        parent::__construct($output);
     }
 
-    public function log($level, string|\Stringable $message, array $context = []): void
+    public function log($level, $message, array $context = []): void
     {
         // Append timer and memory values.
         if (Drush::debug()) {

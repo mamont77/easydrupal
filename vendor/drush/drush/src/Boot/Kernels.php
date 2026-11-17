@@ -15,18 +15,24 @@ final class Kernels
 {
     /**
      * The default kernel that is used on standard requests.
+     *
+     * @var string
      */
-    const string DRUPAL = 'drupal';
+    const DRUPAL = 'drupal';
 
     /**
      * The kernel that is used during database updates.
+     *
+     * @var string
      */
-    const string UPDATE = 'update';
+    const UPDATE = 'update';
 
     /**
      * The kernel that is used during site installation.
+     *
+     * @var string
      */
-    const string INSTALLER = 'installer';
+    const INSTALLER = 'installer';
 
     /**
      * Returns the available kernels.
@@ -34,9 +40,9 @@ final class Kernels
     public static function availableKernels(): array
     {
         return [
-            self::DRUPAL,
-            self::UPDATE,
-            self::INSTALLER,
+            static::DRUPAL,
+            static::UPDATE,
+            static::INSTALLER,
         ];
     }
 

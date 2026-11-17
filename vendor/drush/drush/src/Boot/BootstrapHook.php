@@ -15,8 +15,11 @@ use Consolidation\AnnotatedCommand\AnnotationData;
  */
 class BootstrapHook implements InitializeHookInterface
 {
-    public function __construct(protected BootstrapManager $bootstrapManager)
+    protected $bootstrapManager;
+
+    public function __construct(BootstrapManager $bootstrapManager)
     {
+        $this->bootstrapManager = $bootstrapManager;
     }
 
     public function initialize(InputInterface $input, AnnotationData $annotationData): void

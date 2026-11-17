@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Drush\Log;
 
+use Robo\Robo;
 use Drupal\Core\Logger\LogMessageParserInterface;
 use Drupal\Core\Logger\RfcLoggerTrait;
 use Drupal\Core\Logger\RfcLogLevel;
@@ -27,13 +28,19 @@ class DrushLog implements LoggerInterface, LoggerAwareInterface
     use RfcLoggerTrait;
 
     /**
+     * The message's placeholders parser.
+     */
+    protected LogMessageParserInterface $parser;
+
+    /**
      * Constructs a DrushLog object.
      *
      * @param LogMessageParserInterface $parser
      *   The parser to use when extracting message variables.
      */
-    public function __construct(protected LogMessageParserInterface $parser)
+    public function __construct(LogMessageParserInterface $parser)
     {
+        $this->parser = $parser;
     }
 
     /**
@@ -42,7 +49,7 @@ class DrushLog implements LoggerInterface, LoggerAwareInterface
     public function log($level, $message, array $context = []): void
     {
         // Only log during Drush requests, not web requests.
-        if (!Drush::hasContainer()) {
+        if (!Robo::hasContainer()) {
             return;
         }
 
@@ -64,7 +71,9 @@ class DrushLog implements LoggerInterface, LoggerAwareInterface
         $message_placeholders = $this->parser->parseMessagePlaceholders($message, $context);
 
         // Filter out any placeholders that can not be cast to strings.
-        $message_placeholders = array_filter($message_placeholders, fn($element) => is_scalar($element) || is_callable([$element, '__toString']));
+        $message_placeholders = array_filter($message_placeholders, function ($element) {
+            return is_scalar($element) || is_callable([$element, '__toString']);
+        });
 
         $message = $message_placeholders === [] ? $message : strtr($message, $message_placeholders);
 

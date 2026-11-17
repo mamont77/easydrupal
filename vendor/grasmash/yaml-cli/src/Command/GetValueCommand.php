@@ -19,7 +19,7 @@ class GetValueCommand extends CommandBase
     /**
      * {inheritdoc}
      */
-    protected function configure(): void
+    protected function configure()
     {
         $this
             ->setName('get:value')

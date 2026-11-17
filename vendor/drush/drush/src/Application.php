@@ -18,7 +18,8 @@ use Drush\Runtime\ServiceManager;
 use Drush\Runtime\TildeExpansionHook;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
-use Consolidation\Config\ConfigAwareInterface;
+use Robo\Contract\ConfigAwareInterface;
+use Robo\Robo;
 use Symfony\Component\Console\Application as SymfonyApplication;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Exception\CommandNotFoundException;
@@ -39,16 +40,16 @@ class Application extends SymfonyApplication implements LoggerAwareInterface, Co
     use LoggerAwareTrait;
     use ConfigAwareTrait;
 
-    protected ?BootstrapManager $bootstrapManager = null;
-    protected ?SiteAliasManager $aliasManager = null;
-    protected ?RedispatchHook $redispatchHook = null;
-    protected ?TildeExpansionHook $tildeExpansionHook = null;
-    protected ?ServiceManager $serviceManager = null;
+    protected ?BootstrapManager $bootstrapManager;
+    protected ?SiteAliasManager $aliasManager;
+    protected ?RedispatchHook $redispatchHook;
+    protected ?TildeExpansionHook $tildeExpansionHook;
+    protected ?ServiceManager $serviceManager;
 
     /**
      * Add global options to the Application and their default values to Config.
      */
-    public function configureGlobalOptions(): void
+    public function configureGlobalOptions()
     {
         // Symfony 6.1+ has a --debug option for its completion command.
         if ($this->getDefinition()->hasOption('--debug')) {
@@ -96,37 +97,37 @@ class Application extends SymfonyApplication implements LoggerAwareInterface, Co
             );
     }
 
-    public function bootstrapManager(): ?BootstrapManager
+    public function bootstrapManager()
     {
         return $this->bootstrapManager;
     }
 
-    public function setBootstrapManager(BootstrapManager $bootstrapManager): void
+    public function setBootstrapManager(BootstrapManager $bootstrapManager)
     {
         $this->bootstrapManager = $bootstrapManager;
     }
 
-    public function aliasManager(): ?SiteAliasManager
+    public function aliasManager()
     {
         return $this->aliasManager;
     }
 
-    public function setAliasManager(?SiteAliasManager $aliasManager): void
+    public function setAliasManager($aliasManager)
     {
         $this->aliasManager = $aliasManager;
     }
 
-    public function setRedispatchHook(RedispatchHook $redispatchHook): void
+    public function setRedispatchHook(RedispatchHook $redispatchHook)
     {
         $this->redispatchHook = $redispatchHook;
     }
 
-    public function setTildeExpansionHook(TildeExpansionHook $tildeExpansionHook): void
+    public function setTildeExpansionHook(TildeExpansionHook $tildeExpansionHook)
     {
         $this->tildeExpansionHook = $tildeExpansionHook;
     }
 
-    public function setServiceManager(ServiceManager $serviceManager): void
+    public function setServiceManager(ServiceManager $serviceManager)
     {
         $this->serviceManager = $serviceManager;
     }
@@ -134,7 +135,7 @@ class Application extends SymfonyApplication implements LoggerAwareInterface, Co
     /**
      * Return the framework uri selected by the user.
      */
-    public function getUri(): string|false
+    public function getUri()
     {
         if (!$this->bootstrapManager) {
             return 'default';
@@ -146,7 +147,7 @@ class Application extends SymfonyApplication implements LoggerAwareInterface, Co
      * If the user did not explicitly select a site URI,
      * then pick an appropriate site from the cwd.
      */
-    public function refineUriSelection($cwd): void
+    public function refineUriSelection($cwd)
     {
         if (!$this->bootstrapManager || !$this->aliasManager) {
             return;
@@ -203,7 +204,7 @@ class Application extends SymfonyApplication implements LoggerAwareInterface, Co
     /**
      * Look up a command. Bootstrap further if necessary.
      */
-    protected function bootstrapAndFind(string $name): Command|RemoteCommandProxy
+    protected function bootstrapAndFind($name)
     {
         try {
             return parent::find($name);
@@ -308,7 +309,7 @@ class Application extends SymfonyApplication implements LoggerAwareInterface, Co
      * Configure the application object and register all of the commandfiles
      * available in the search paths provided via Preflight
      */
-    public function configureAndRegisterCommands(InputInterface $input, OutputInterface $output, $commandfileSearchpath, ClassLoader $classLoader): void
+    public function configureAndRegisterCommands(InputInterface $input, OutputInterface $output, $commandfileSearchpath, ClassLoader $classLoader)
     {
         // Symfony will call this method for us in run() (it will be
         // called again), but we want to call it up-front, here, so that
@@ -320,7 +321,6 @@ class Application extends SymfonyApplication implements LoggerAwareInterface, Co
         $this->addListeners($commandfileSearchpath);
 
         // Directly add the yaml-cli commands.
-        // @todo these are breaking on Symfony Console 7.4
         $this->addCommands($this->serviceManager->instantiateYamlCliCommands());
 
         // Find the command handlers that we can instantiate without bootstrapping Drupal
@@ -328,17 +328,18 @@ class Application extends SymfonyApplication implements LoggerAwareInterface, Co
 
         // Uncomment the lines below to use Console's built in help and list commands.
         // unset($commandClasses[__DIR__ . '/Commands/help/HelpCommands.php']);
-        // unset($commandClasses[__DIR__ . '/Commands/help/ListCommand.php']);
+        // unset($commandClasses[__DIR__ . '/Commands/help/ListCommands.php']);
 
         // Instantiate our command handler objects with the service manager
         // (handles 'createEarly' static factories)
         $commandInstances = $this->serviceManager->instantiateServices($commandClasses, Drush::getContainer());
 
-        // Register command handlers with the application.
-        // Accepts Annotated Command handlers or Symfony Console Command objects.
+        // Register our commands with Robo, our application framework.
+        // Note that Robo::register can accept Annotated Command
+        // handlers or Symfony Console Command objects, but not yet invokables.
         $commandInstances = $this->serviceManager->commandFromInvokable($commandInstances);
         array_walk($commandInstances, fn($instance) => $this->logger->debug('Add command {class}', ['class' => $instance::class]));
-        $this->registerCommandInstances($commandInstances);
+        Robo::register($this, $commandInstances);
 
         // Dispatch our custom event. It also fires later in \Drush\Boot\DrupalBoot8::bootstrapDrupalFull.
         Drush::getContainer()->get('eventDispatcher')->dispatch(new ConsoleDefinitionsEvent($this), ConsoleDefinitionsEvent::class);
@@ -354,35 +355,6 @@ class Application extends SymfonyApplication implements LoggerAwareInterface, Co
         $this->doRenderThrowable($e, $output);
     }
 
-    /**
-     * Register command handler instances with the application.
-     *
-     * For Symfony Command objects, adds them directly.
-     * For annotated command handler objects, creates commands via commandFactory.
-     *
-     * @param object|object[] $handlers
-     */
-    public function registerCommandInstances(object|array $handlers): void
-    {
-        if (!is_array($handlers)) {
-            $handlers = [$handlers];
-        }
-
-        $container = Drush::getContainer();
-        $commandFactory = $container->get('commandFactory');
-
-        foreach ($handlers as $handler) {
-            if ($handler instanceof Command) {
-                $this->addCommand($handler);
-            } else {
-                $commandList = $commandFactory->createCommandsFromClass($handler);
-                foreach ($commandList as $command) {
-                    $this->addCommand($command);
-                }
-            }
-        }
-    }
-
     // Discover event listeners and add those that do not require bootstrap.
     protected function addListeners($commandfileSearchpath): void
     {
@@ -394,11 +366,11 @@ class Application extends SymfonyApplication implements LoggerAwareInterface, Co
     protected function redispatchIfRemote(Command $command, InputInterface $input): void
     {
         // Redispatch if the command is remote and is eligible.
-        // @phpstan-ignore function.alreadyNarrowedType
+        // @phpstan-ignore-next-line function.alreadyNarrowedType
         $code = method_exists($command, 'getCode') && $command->getCode() ? $command->getCode() : $command;
         $reflection = new \ReflectionObject($code);
         $attributes = $reflection->getAttributes(HandleRemoteCommands::class);
-        if ($attributes === [] && !$command instanceof AnnotatedCommand && !$command instanceof RemoteCommandProxy) {
+        if (empty($attributes) && !$command instanceof AnnotatedCommand && !$command instanceof RemoteCommandProxy) {
             $this->redispatchHook->redispatchIfRemote($input);
         }
     }

@@ -10,20 +10,20 @@ use Drush\DrupalFinder\DrushDrupalFinder;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
 use Psr\Log\LoggerInterface;
-use Consolidation\Config\ConfigAwareInterface;
+use Robo\Contract\ConfigAwareInterface;
 
 class BootstrapManager implements LoggerAwareInterface, ConfigAwareInterface
 {
     use LoggerAwareTrait;
     use ConfigAwareTrait;
 
-    protected ?DrushDrupalFinder $drupalFinder = null;
+    protected ?DrushDrupalFinder $drupalFinder;
     /**
      * @var Boot[]
      */
     protected array $bootstrapCandidates = [];
-    protected ?Boot $bootstrap = null;
-    protected ?int $phase = null;
+    protected ?Boot $bootstrap;
+    protected ?int $phase;
 
     public function getPhase(): int
     {
@@ -43,7 +43,7 @@ class BootstrapManager implements LoggerAwareInterface, ConfigAwareInterface
     /**
      * Add a bootstrap object to the list of candidates.
      *
-     * @param Boot|array $candidateList
+     * @param \Drush\Boot\Boot|array $candidateList
      *   List of boot candidates
      */
     public function add($candidateList): void
@@ -82,7 +82,7 @@ class BootstrapManager implements LoggerAwareInterface, ConfigAwareInterface
     /**
      * Return the framework uri selected by the user.
      */
-    public function getUri(): false|string
+    public function getUri()
     {
         if (!$this->hasBootstrap()) {
             return false;
@@ -94,7 +94,7 @@ class BootstrapManager implements LoggerAwareInterface, ConfigAwareInterface
      * This method is called by the Application iff the user
      * did not explicitly provide a URI.
      */
-    public function selectUri($cwd): string
+    public function selectUri($cwd)
     {
         $uri = $this->bootstrap()->findUri($this->getRoot(), $cwd);
         $this->setUri($uri);
@@ -304,7 +304,7 @@ class BootstrapManager implements LoggerAwareInterface, ConfigAwareInterface
         return $this->bootstrapToPhaseIndex($phase, $annotationData);
     }
 
-    protected function maxPhaseLimit($bootstrap_str): ?int
+    protected function maxPhaseLimit($bootstrap_str)
     {
         $bootstrap_words = explode(' ', $bootstrap_str);
         array_shift($bootstrap_words);

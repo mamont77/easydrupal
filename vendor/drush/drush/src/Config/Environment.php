@@ -15,13 +15,14 @@ use Symfony\Component\Filesystem\Path;
  */
 class Environment
 {
+    protected string $homeDir;
     protected string $originalCwd;
     protected string $etcPrefix = '';
     protected string $sharePrefix = '';
     protected string $drushBasePath;
     protected string $vendorDir;
 
-    protected ?string $docPrefix = null;
+    protected ?string $docPrefix;
     protected string $configFileVariant;
 
     protected ClassLoader $loader;
@@ -33,8 +34,9 @@ class Environment
      * @param string $cwd The current working directory at the time Drush was called.
      * @param string $autoloadFile Path to the autoload.php file.
      */
-    public function __construct(protected string $homeDir, string $cwd, string $autoloadFile)
+    public function __construct(string $homeDir, string $cwd, string $autoloadFile)
     {
+        $this->homeDir = $homeDir;
         $this->originalCwd = Path::canonicalize(FsUtils::realpath($cwd));
         $this->drushBasePath = Path::canonicalize(dirname(__DIR__, 2));
         $this->vendorDir = FsUtils::realpath(dirname($autoloadFile));
@@ -120,7 +122,7 @@ class Environment
                 'cwd' => $this->cwd(),
                 'home' => $this->homeDir(),
                 'user' => $this->getUsername(),
-                'is-windows' => static::isWindows(),
+                'is-windows' => $this->isWindows(),
                 'tmp' => $this->getTmp(),
             ],
             // These values are available as global options, and
@@ -184,7 +186,7 @@ class Environment
         return $this->homeDir() . '/.drush';
     }
 
-    public function setConfigFileVariant(string $variant): void
+    public function setConfigFileVariant($variant): void
     {
         $this->configFileVariant = $variant;
     }
@@ -194,7 +196,7 @@ class Environment
      * the Drush major version number. This is for
      * loading drush.yml and drush10.yml, etc.
      */
-    public function getConfigFileVariant(): string
+    public function getConfigFileVariant()
     {
         return $this->configFileVariant;
     }
@@ -383,7 +385,7 @@ class Environment
         }
 
         // The env variables below must match the variables in example.prompt.sh
-        $tmp = getenv('TMPDIR') ?: '/tmp';
+        $tmp = getenv('TMPDIR') ? getenv('TMPDIR') : '/tmp';
         $username = $this->getUsername();
 
         return "$tmp/drush-env-{$username}/{$filename_prefix}" . $shell_pid;

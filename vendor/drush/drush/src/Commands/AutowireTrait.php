@@ -22,7 +22,7 @@ trait AutowireTrait
      * @param ContainerInterface $container
      *   The service container this instance should use.
      */
-    public static function create(ContainerInterface $container): self
+    public static function create(ContainerInterface $container)
     {
         $args = [];
 

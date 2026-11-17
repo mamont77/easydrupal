@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Drush\Config;
 
 use Consolidation\Config\Util\ConfigOverlay;
+use Robo\Config\Config;
 
 // TODO: Not sure if we should have a reference to PreflightArgs here.
 // Maybe these constants should be in config, and PreflightArgs can
@@ -15,10 +16,6 @@ use Consolidation\Config\Util\ConfigOverlay;
  */
 class DrushConfig extends ConfigOverlay
 {
-    const SIMULATE = 'options.simulate';
-    const INTERACTIVE = 'options.interactive';
-    const DECORATED = 'options.decorated';
-
     public function cwd()
     {
         return $this->get('env.cwd');
@@ -57,7 +54,7 @@ class DrushConfig extends ConfigOverlay
      */
     public function simulate()
     {
-        return $this->get(self::SIMULATE);
+        return $this->get(Config::SIMULATE);
     }
 
     /**

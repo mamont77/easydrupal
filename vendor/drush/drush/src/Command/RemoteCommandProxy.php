@@ -25,9 +25,12 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class RemoteCommandProxy extends Command
 {
-    public function __construct(?string $name, protected RedispatchHook $redispatchHook)
+    protected RedispatchHook $redispatchHook;
+
+    public function __construct($name, RedispatchHook $redispatchHook)
     {
         parent::__construct($name);
+        $this->redispatchHook = $redispatchHook;
 
         // Put in a special input definition to avoid option validation errors.
         $this->setDefinition(new IndiscriminateInputDefinition());

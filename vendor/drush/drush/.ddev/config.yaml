@@ -1,6 +1,6 @@
 type: php
 docroot: sut
-php_version: "8.5"
+php_version: "8.4"
 webserver_type: nginx-fpm
 router_http_port: "87"
 router_https_port: "444"
@@ -14,7 +14,7 @@ composer_version: ""
 disable_settings_management: true
 webimage_extra_packages:
   - bash-completion
-  - xdg-utils
+  - asciinema
 # https://ddev.readthedocs.io/en/latest/users/extend/database-types/
 # When switching DBs, use ddev delete --omit-snapshot
 #database:
@@ -27,6 +27,3 @@ web_environment:
   - DRUSH_OPTIONS_URI=$DDEV_PRIMARY_URL
   - EDITOR=nano
   - DRUSH_ALLOW_XDEBUG=1
-  # For `dr`. Assumes you install with `composer sut:si`
-  - DRUPAL_URI=https://dev
-  - DRUPAL_DEV_SITE_PATH=sites/dev

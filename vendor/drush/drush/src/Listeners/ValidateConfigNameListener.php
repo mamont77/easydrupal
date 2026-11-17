@@ -34,7 +34,7 @@ class ValidateConfigNameListener
         $code = method_exists($command, 'getCode') && $command->getCode() ? $command->getCode() : $command;
         $reflection = new \ReflectionObject($code);
         $attributes = $reflection->getAttributes(ValidateConfigName::class);
-        if ($attributes === []) {
+        if (empty($attributes)) {
             return;
         }
         /** @var ValidateConfigName $instance */

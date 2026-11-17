@@ -3,7 +3,6 @@
 namespace Grasmash\YamlCli\Tests\Command;
 
 use Grasmash\YamlCli\Command\GetValueCommand;
-use PHPUnit\Framework\Attributes\DataProvider;
 use Grasmash\YamlCli\Tests\TestBase;
 use Symfony\Component\Console\Tester\CommandTester;
 
@@ -12,11 +11,12 @@ class GetValueCommandTest extends TestBase
 
     /**
      * Tests the 'get:value' command.
+     *
+     * @dataProvider getValueProvider
      */
-    #[DataProvider('getValueProvider')]
     public function testGetValue($file, $key, $expected_output, $expected_exit_code)
     {
-        $this->application->addCommand(new GetValueCommand());
+        $this->application->add(new GetValueCommand());
 
         $command = $this->application->find('get:value');
         $commandTester = new CommandTester($command);
@@ -37,7 +37,7 @@ class GetValueCommandTest extends TestBase
      * @return array
      *   An array of values to test.
      */
-    public static function getValueProvider()
+    public function getValueProvider()
     {
 
         $file = 'tests/resources/good.yml';

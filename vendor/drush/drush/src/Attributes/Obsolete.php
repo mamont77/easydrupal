@@ -18,7 +18,7 @@ class Obsolete extends NoArgumentsBase
 {
     const NAME = 'obsolete';
 
-    public static function handle(\ReflectionAttribute $attribute, CommandInfo $commandInfo): void
+    public static function handle(\ReflectionAttribute $attribute, CommandInfo $commandInfo)
     {
         parent::handle($attribute, $commandInfo);
         $commandInfo->setHidden(true);

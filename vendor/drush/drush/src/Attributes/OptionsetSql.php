@@ -7,11 +7,12 @@ namespace Drush\Attributes;
 use Attribute;
 use Consolidation\AnnotatedCommand\Parser\CommandInfo;
 use Drush\Commands\DrushCommands;
+use JetBrains\PhpStorm\Deprecated;
 
 #[Attribute(Attribute::TARGET_CLASS | Attribute::TARGET_METHOD)]
 class OptionsetSql
 {
-    public static function handle(\ReflectionAttribute $attribute, CommandInfo $commandInfo): void
+    public static function handle(\ReflectionAttribute $attribute, CommandInfo $commandInfo)
     {
         $commandInfo->addOption('database', 'The DB connection key if using multiple connections in settings.php.', [], 'default');
         $commandInfo->addOption('db-url', 'A Drupal 6 style database URL. For example <info>mysql://root:pass@localhost:port/dbname</info>', [], DrushCommands::REQ);

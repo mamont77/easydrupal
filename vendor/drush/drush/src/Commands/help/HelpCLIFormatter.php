@@ -8,7 +8,7 @@ use Consolidation\OutputFormatters\FormatterManager;
 use Consolidation\OutputFormatters\Formatters\FormatterInterface;
 use Consolidation\OutputFormatters\Options\FormatterOptions;
 use Consolidation\OutputFormatters\StructuredData\RowsOfFields;
-use Drush\Commands\core\MkDocsCommand;
+use Drush\Commands\core\MkCommands;
 use Drush\Drush;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -65,7 +65,7 @@ class HelpCLIFormatter implements FormatterInterface
             $output->writeln('');
             $output->writeln('<comment>Arguments:</comment>');
             foreach ($data['arguments'] as $argument) {
-                $formatted = static::formatArgumentName($argument);
+                $formatted = $this->formatArgumentName($argument);
                 $description = $argument['description'];
                 if (isset($argument['defaults'])) {
                     $description .= ' [default: <info>' . implode(',', $argument['defaults']) . '</info>]';
@@ -96,13 +96,13 @@ class HelpCLIFormatter implements FormatterInterface
                 $name = '-' . $value->getShortcut() . ', ' . $name;
             }
             $rows[] = [
-                static::formatOptionKeys(MkDocsCommand::optionToArray($value)),
+                $this->formatOptionKeys(MkCommands::optionToArray($value)),
                 $value->getDescription(),
             ];
         }
         $rows[] = [
             '',
-            'To see all global options, run `drush core:global-options`.',
+            'To see all global options, run `drush topic` and pick the first choice.',
         ];
         $formatterManager->write($output, 'table', new RowsOfFields($rows), $options);
 
@@ -144,7 +144,7 @@ class HelpCLIFormatter implements FormatterInterface
         );
     }
 
-    public static function formatOptionDescription(array $option): string
+    public static function formatOptionDescription($option): string
     {
         $defaults = '';
         if (array_key_exists('defaults', $option)) {
@@ -158,7 +158,7 @@ class HelpCLIFormatter implements FormatterInterface
         return $option['description'] . $defaults;
     }
 
-    public static function formatArgumentName(array $argument)
+    public static function formatArgumentName($argument)
     {
         $element = $argument['name'];
         if (!$argument['is_required']) {
@@ -174,7 +174,7 @@ class HelpCLIFormatter implements FormatterInterface
         return $element;
     }
 
-    protected function cleanOptions(array &$data): void
+    protected function cleanOptions(&$data): void
     {
 
         if (array_key_exists('options', $data)) {
@@ -211,7 +211,7 @@ class HelpCLIFormatter implements FormatterInterface
                     '--xh-'
                 ) && !str_starts_with($option['name'], '--druplicon')
             ) {
-                 $rows[] = [static::formatOptionKeys($option), static::formatOptionDescription($option)];
+                 $rows[] = [$this->formatOptionKeys($option), $this->formatOptionDescription($option)];
             }
         }
         return $rows;

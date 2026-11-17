@@ -18,8 +18,10 @@ use Drush\Runtime\DependencyInjection;
 use Drush\SiteAlias\ProcessManager;
 use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
+use Robo\Robo;
+use Robo\Runner;
 use RuntimeException;
-use Drush\Application;
+use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Exception\InvalidArgumentException;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -56,9 +58,9 @@ class Drush
     protected static string|false $minorVersion = false;
 
     /**
-     * The currently active container object, or NULL if not initialized yet.
+     * The Robo Runner -- manages and constructs all commandfile classes
      */
-    protected static ?ContainerInterface $container = null;
+    protected static Runner $runner;
 
     /**
      * Number of seconds before timeout for subprocesses. Can be customized via setTimeout() method.
@@ -117,9 +119,9 @@ class Drush
     /**
      * Sets a new global container.
      */
-    public static function setContainer(ContainerInterface $container): void
+    public static function setContainer($container): void
     {
-        static::$container = $container;
+        Robo::setContainer($container);
     }
 
     /**
@@ -127,7 +129,7 @@ class Drush
      */
     public static function unsetContainer(): void
     {
-        static::$container = null;
+        Robo::unsetContainer();
     }
 
     /**
@@ -137,10 +139,10 @@ class Drush
      */
     public static function getContainer(): ContainerInterface
     {
-        if (static::$container === null) {
+        if (!Robo::hasContainer()) {
             throw new RuntimeException('Drush::$container is not initialized yet. \Drush::setContainer() must be called with a real container.');
         }
-        return static::$container;
+        return Robo::getContainer();
     }
 
     /**
@@ -148,7 +150,7 @@ class Drush
      */
     public static function hasContainer(): bool
     {
-        return static::$container !== null;
+        return Robo::hasContainer();
     }
 
     /**
@@ -157,6 +159,17 @@ class Drush
     public static function getApplication(): Application
     {
         return self::getContainer()->get('application');
+    }
+
+    /**
+     * Return the Robo runner.
+     */
+    public static function runner(): Runner
+    {
+        if (!isset(self::$runner)) {
+            self::$runner = new Runner();
+        }
+        return self::$runner;
     }
 
     /**
@@ -342,7 +355,7 @@ class Drush
     /**
      * Return 'true' if we are in affirmative mode
      */
-    public static function affirmative(): mixed
+    public static function affirmative()
     {
         if (!self::hasService('input')) {
             throw new \Exception('No input service available.');
@@ -353,7 +366,7 @@ class Drush
     /**
      * Return 'true' if we are in negative mode
      */
-    public static function negative(): mixed
+    public static function negative()
     {
         if (!self::hasService('input')) {
             throw new \Exception('No input service available.');
@@ -420,7 +433,7 @@ class Drush
                     continue;
                 }
                 $optionNamesFromCommandline[$key] = Drush::getApplication()->get($command_name)->getDefinition()->shortcutToName($name);
-            } catch (InvalidArgumentException) {
+            } catch (InvalidArgumentException $e) {
                 // Do nothing. It's expected.
             }
         }

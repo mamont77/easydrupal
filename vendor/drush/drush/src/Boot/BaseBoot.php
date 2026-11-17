@@ -58,7 +58,7 @@ abstract class BaseBoot implements Boot, LoggerAwareInterface
     {
     }
 
-    public function reportCommandError($command): void
+    public function reportCommandError($command)
     {
         // No longer used.
     }
@@ -102,7 +102,7 @@ abstract class BaseBoot implements Boot, LoggerAwareInterface
         try {
             $application->get($name);
             return true;
-        } catch (\InvalidArgumentException) {
+        } catch (\InvalidArgumentException $e) {
             return false;
         }
     }

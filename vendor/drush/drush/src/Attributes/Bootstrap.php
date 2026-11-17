@@ -28,7 +28,7 @@ class Bootstrap
         }
     }
 
-    public static function handle(\ReflectionAttribute $attribute, CommandInfo $commandInfo): void
+    public static function handle(\ReflectionAttribute $attribute, CommandInfo $commandInfo)
     {
         $instance = $attribute->newInstance();
         $commandInfo->addAnnotation('bootstrap', $instance->level . ( isset($instance->max_level) ? " $instance->max_level" : ''));

@@ -8,7 +8,6 @@ use Drush\Attributes as CLI;
 use Drush\Attributes\OptionsetTableSelection;
 use Drush\Boot\DrupalBootLevels;
 use Drush\Event\ConsoleDefinitionsEvent;
-use Symfony\Component\Console\Command\LazyCommand;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 
@@ -19,14 +18,11 @@ class OptionsetTableSelectionListener
     public function __invoke(ConsoleDefinitionsEvent $event): void
     {
         foreach ($event->getApplication()->all() as $id => $command) {
-            if ($command instanceof LazyCommand) {
-                $command = $command->getCommand();
-            }
             // Support invokable commands (Symfony Console 7.4+).
             $code = method_exists($command, 'getCode') && $command->getCode() ? $command->getCode() : $command;
             $reflection = new \ReflectionObject($code);
             $attributes = $reflection->getAttributes(OptionsetTableSelection::class);
-            if ($attributes === []) {
+            if (empty($attributes)) {
                 continue;
             }
             $command->addOption('skip-tables-key', '', InputOption::VALUE_REQUIRED, 'A key in the $skip_tables array. @see [Site aliases](../site-aliases.md)');

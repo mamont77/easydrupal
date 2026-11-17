@@ -13,7 +13,7 @@ use Symfony\Component\Filesystem\Path;
 final class FsUtils
 {
     // @var null|string[] List of directories to delete
-    private static ?array $deletionList = null;
+    private static $deletionList;
 
     /**
      * Return path to the backup directory.
@@ -123,7 +123,7 @@ final class FsUtils
         $dir = $fs->tempnam($parent, $subdir ?? 'drush');
         unlink($dir);
         $fs->mkdir($dir);
-        self::registerForDeletion($dir);
+        static::registerForDeletion($dir);
         return $dir;
     }
 
@@ -133,30 +133,30 @@ final class FsUtils
      * @param string $dir
      *   Path to directory to be deleted later.
      */
-    public static function registerForDeletion(string $dir): void
+    public static function registerForDeletion(string $dir)
     {
-        if (!isset(self::$deletionList)) {
-            self::$deletionList = [];
-            register_shutdown_function([self::class, 'cleanup']);
+        if (!isset(static::$deletionList)) {
+            static::$deletionList = [];
+            register_shutdown_function([static::class, 'cleanup']);
         }
 
-        self::$deletionList[] = $dir;
+        static::$deletionList[] = $dir;
     }
 
     /**
      * Delete all of the files registered for deletion.
      */
-    public static function cleanup(): void
+    public static function cleanup()
     {
-        if (!isset(self::$deletionList)) {
+        if (!isset(static::$deletionList)) {
             return;
         }
 
         $fs = new Filesystem();
-        foreach (self::$deletionList as $dir) {
+        foreach (static::$deletionList as $dir) {
             try {
                 $fs->remove($dir);
-            } catch (\Exception) {
+            } catch (\Exception $e) {
               // No action taken if someone already deleted the directory
             }
         }
@@ -171,7 +171,7 @@ final class FsUtils
      *   Path to the specified backup directory.
      * @throws \Exception
      */
-    public static function prepareBackupDir(?string $subdir = null): string
+    public static function prepareBackupDir($subdir = null): string
     {
         $fs = new Filesystem();
         $backup_dir = self::getBackupDir($subdir);

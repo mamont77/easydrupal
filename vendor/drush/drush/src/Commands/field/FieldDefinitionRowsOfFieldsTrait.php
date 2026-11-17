@@ -6,6 +6,7 @@ namespace Drush\Commands\field;
 
 use Consolidation\OutputFormatters\Options\FormatterOptions;
 use Consolidation\OutputFormatters\StructuredData\RowsOfFields;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 trait FieldDefinitionRowsOfFieldsTrait
 {

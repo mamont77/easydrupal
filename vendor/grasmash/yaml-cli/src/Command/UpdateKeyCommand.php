@@ -18,7 +18,7 @@ class UpdateKeyCommand extends CommandBase
     /**
      * {inheritdoc}
      */
-    protected function configure(): void
+    protected function configure()
     {
         $this
             ->setName('update:key')

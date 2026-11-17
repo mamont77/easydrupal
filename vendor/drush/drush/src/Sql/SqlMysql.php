@@ -19,7 +19,7 @@ class SqlMysql extends SqlBase
     /**
      * A factory method which creates a mysql or mariadb instance as needed.
      */
-    public static function make(array $dbSpec, array $options): SqlMysql|SqlMariaDB
+    public static function make(array $dbSpec, array $options)
     {
         // If the mysql version reports that it is MariaDB, use MariaDB as client.
         $process = Drush::shell('mysql --version');

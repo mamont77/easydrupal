@@ -11,7 +11,7 @@ use Drush\Boot\DrupalBootLevels;
 use Drush\Config\ConfigAwareTrait;
 use Drush\Drush;
 use Drush\Utils\FsUtils;
-use Consolidation\Config\ConfigAwareInterface;
+use Robo\Contract\ConfigAwareInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Filesystem\Path;
 use Symfony\Component\Process\Process;
@@ -116,12 +116,12 @@ abstract class SqlBase implements ConfigAwareInterface
         }
     }
 
-    public static function getInstance(array $db_spec, $options): ?self
+    public static function getInstance($db_spec, $options): ?self
     {
         $driver = $db_spec['driver'];
         // Drush ships drivers for core database types, and modules/libraries
         // may define additional Drush DB drivers in this namespace.
-        $class_name = empty($driver) ? null : 'Drush\Sql\Sql' . ucfirst($driver);
+        $class_name = !empty($driver) ? 'Drush\Sql\Sql' . ucfirst($driver) : null;
         try {
             if (!$class_name || !class_exists($class_name)) {
                 // Handle custom database drivers which extend a defined driver.
@@ -305,7 +305,7 @@ abstract class SqlBase implements ConfigAwareInterface
      * @return bool
      *   TRUE on success, FALSE on failure
      */
-    public function query(string $query, $input_file = null, ?string $result_file = ''): ?bool
+    public function query(string $query, $input_file = null, $result_file = ''): ?bool
     {
         if (!Drush::simulate()) {
             return $this->alwaysQuery($query, $input_file, $result_file);
@@ -382,7 +382,7 @@ abstract class SqlBase implements ConfigAwareInterface
     /**
      * Show the query in debug mode and simulate mode
      */
-    protected function logQueryInDebugMode(string $query, $input_file_original): void
+    protected function logQueryInDebugMode($query, $input_file_original): void
     {
         // In --verbose mode, Drush::process() will show the call to mysql/psql/sqlite,
         // but the sql query itself is stored in a temp file and not displayed.
@@ -595,7 +595,7 @@ abstract class SqlBase implements ConfigAwareInterface
     public static function dbSpecFromDbUrl($db_url): array
     {
         $db_url_default = is_array($db_url) ? $db_url['default'] : $db_url;
-        return Database::convertDbUrlToConnectionInfo($db_url_default, null);
+        return Database::convertDbUrlToConnectionInfo($db_url_default, DRUPAL_ROOT);
     }
 
     /**

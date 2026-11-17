@@ -7,13 +7,11 @@ namespace Drush\Listeners;
 use Consolidation\OutputFormatters\FormatterManager;
 use Consolidation\OutputFormatters\Options\FormatterOptions;
 use Drush\Attributes as CLI;
-use Drush\Attributes\Formatter;
 use Drush\Boot\DrupalBootLevels;
 use Drush\Commands\AutowireTrait;
 use Drush\Event\ConsoleDefinitionsEvent;
 use Drush\Formatters\FormatterConfigurationItemProviderInterface;
 use ReflectionObject;
-use Symfony\Component\Console\Command\LazyCommand;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 
@@ -31,9 +29,6 @@ final class FormatterListener
     public function __invoke(ConsoleDefinitionsEvent $event): void
     {
         foreach ($event->getApplication()->all() as $id => $command) {
-            if ($command instanceof LazyCommand) {
-                $command = $command->getCommand();
-            }
             // Support invokable commands (Symfony Console 7.4+).
             $code = method_exists($command, 'getCode') && $command->getCode() ? $command->getCode() : $command;
             $reflectionObject = new \ReflectionObject($code);
@@ -41,7 +36,7 @@ final class FormatterListener
                 continue;
             }
 
-            /** @var Formatter $attribute */
+            /** @var \Drush\Attributes\Formatter $attribute */
             $attribute = $attributes[0]->newInstance();
             $configurationData = $this->getConfigurationData($reflectionObject);
             $formatterOptions = new FormatterOptions($configurationData, []);
@@ -83,7 +78,7 @@ final class FormatterListener
         return $configurationData;
     }
 
-    protected function getPrivatePropValue(mixed $object, string $name): mixed
+    protected function getPrivatePropValue(mixed $object, $name): mixed
     {
         $rc = new \ReflectionClass($object);
         $prop = $rc->getProperty($name);

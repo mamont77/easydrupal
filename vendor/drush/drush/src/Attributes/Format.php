@@ -27,7 +27,7 @@ class Format
     ) {
     }
 
-    public static function handle(\ReflectionAttribute $attribute, CommandInfo $commandInfo): void
+    public static function handle(\ReflectionAttribute $attribute, CommandInfo $commandInfo)
     {
         $instance = $attribute->newInstance();
         $commandInfo->addAnnotation(FormatterOptions::LIST_DELIMITER, $instance->listDelimiter);

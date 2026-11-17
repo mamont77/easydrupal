@@ -8,7 +8,7 @@ use Consolidation\AnnotatedCommand\CommandData;
 use Consolidation\AnnotatedCommand\Hooks\ValidatorInterface;
 use Drush\Utils\StringUtils;
 use Drush\Config\ConfigAwareTrait;
-use Consolidation\Config\ConfigAwareInterface;
+use Robo\Contract\ConfigAwareInterface;
 
 /**
  * The TildeExpansionHook is installed as a preValidate hook that runs before

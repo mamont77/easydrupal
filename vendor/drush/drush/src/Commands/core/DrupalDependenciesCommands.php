@@ -25,9 +25,9 @@ use Symfony\Component\Console\Input\InputOption;
  */
 final class DrupalDependenciesCommands extends DrushCommands
 {
-    public const string WHY_MODULE = 'why:module';
-    public const string WHY_CONFIG = 'why:config';
-    private const string CIRCULAR_REFERENCE = '***circular***';
+    public const WHY_MODULE = 'why:module';
+    public const WHY_CONFIG = 'why:config';
+    private const CIRCULAR_REFERENCE = '***circular***';
 
     /**
      * List of dependents grouped by dependency.
@@ -153,7 +153,11 @@ final class DrupalDependenciesCommands extends DrushCommands
 
         $module = $commandData->input()->getArgument('module');
         if ($type === 'module') {
-            $this->dependencies['module-module'] = array_map(fn(Extension $extension): array => array_map(fn(string $dependencyString) => Dependency::createFromString($dependencyString)->getName(), $extension->info['dependencies']), $this->moduleExtensionList->reset()->getList());
+            $this->dependencies['module-module'] = array_map(function (Extension $extension): array {
+                return array_map(function (string $dependencyString) {
+                    return Dependency::createFromString($dependencyString)->getName();
+                }, $extension->info['dependencies']);
+            }, $this->moduleExtensionList->reset()->getList());
 
             if (!$notOnlyInstalled) {
                 $this->dependencies['module-module'] = array_intersect_key(
@@ -283,7 +287,7 @@ final class DrupalDependenciesCommands extends DrushCommands
         );
 
         foreach ($configTypeIds as $configTypeId) {
-            /** @var ConfigEntityInterface $config */
+            /** @var \Drupal\Core\Config\Entity\ConfigEntityInterface $config */
             foreach ($entityTypeManager->getStorage($configTypeId)->loadMultiple() as $config) {
                 $dependencies = $config->getDependencies();
                 $name = $config->getConfigDependencyName();

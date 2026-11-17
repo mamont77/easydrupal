@@ -6,6 +6,8 @@ namespace Drush\Commands\field;
 
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 
+use function t;
+
 /**
  * @property EntityTypeManagerInterface $entityTypeManager
  */

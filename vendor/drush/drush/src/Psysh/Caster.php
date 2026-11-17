@@ -20,7 +20,7 @@ class Caster
     /**
      * Casts \Drupal\Core\Entity\ContentEntityInterface classes.
      */
-    public static function castContentEntity(ContentEntityInterface $entity, array $array, $stub, $isNested): array
+    public static function castContentEntity(ContentEntityInterface $entity, $array, $stub, $isNested)
     {
         if (!$isNested) {
             $array[BaseCaster::PREFIX_VIRTUAL . 'translationLanguages'] = implode(', ', array_keys($entity->getTranslationLanguages()));
@@ -36,7 +36,7 @@ class Caster
                     $value = self::handleReferences($value, $fieldItemList, $fieldStorageDefinition);
                 }
                 // Truncate long values.
-                array_walk_recursive($value, function (&$x): void {
+                array_walk_recursive($value, function (&$x) {
                     if (is_string($x) && strlen($x) > 200) {
                         $x = Unicode::truncate($x, 80, false, true);
                     }
@@ -44,7 +44,7 @@ class Caster
                 // Collapse single value'd field values.
                 if (count($value[0] ?? []) === 1) {
                     // Filter out non-strings.
-                    $to_implode = array_filter(array_column($value, array_keys($value[0])[0]), is_string(...));
+                    $to_implode = array_filter(array_column($value, array_keys($value[0])[0]), fn ($v) => is_string($v));
                     $value = implode(', ', $to_implode);
                 }
                 $array[$key] = $value;
@@ -57,7 +57,7 @@ class Caster
     /**
      * Casts \Drupal\Core\Field\FieldItemListInterface classes.
      */
-    public static function castFieldItemList($list_item, array $array, $stub, $isNested): array
+    public static function castFieldItemList($list_item, $array, $stub, $isNested)
     {
         if (!$isNested) {
             foreach ($list_item as $delta => $item) {
@@ -71,7 +71,7 @@ class Caster
     /**
      * Casts \Drupal\Core\Field\FieldItemInterface classes.
      */
-    public static function castFieldItem($item, array $array, $stub, $isNested): array
+    public static function castFieldItem($item, $array, $stub, $isNested)
     {
         if (!$isNested) {
             $array[BaseCaster::PREFIX_VIRTUAL . 'value'] = $item->getValue();
@@ -83,7 +83,7 @@ class Caster
     /**
      * Casts \Drupal\Core\Config\Entity\ConfigEntityInterface classes.
      */
-    public static function castConfigEntity($entity, array $array, $stub, $isNested): array
+    public static function castConfigEntity($entity, $array, $stub, $isNested)
     {
         if (!$isNested) {
             foreach ($entity->toArray() as $property => $value) {
@@ -97,7 +97,7 @@ class Caster
     /**
      * Casts \Drupal\Core\Config\ConfigBase classes.
      */
-    public static function castConfig($config, array $array, $stub, $isNested): array
+    public static function castConfig($config, $array, $stub, $isNested)
     {
         if (!$isNested) {
             foreach ($config->get() as $property => $value) {
@@ -111,14 +111,14 @@ class Caster
     /**
      * Casts \Drupal\Component\DependencyInjection\Container classes.
      */
-    public static function castContainer($container, array $array, $stub, $isNested): array
+    public static function castContainer($container, $array, $stub, $isNested)
     {
         if (!$isNested) {
             $service_ids = $container->getServiceIds();
             sort($service_ids);
             foreach ($service_ids as $service_id) {
                 $service = $container->get($service_id);
-                $array[BaseCaster::PREFIX_VIRTUAL . $service_id] = is_object($service) ? $service::class : $service;
+                $array[BaseCaster::PREFIX_VIRTUAL . $service_id] = is_object($service) ? get_class($service) : $service;
             }
         }
 
@@ -128,7 +128,7 @@ class Caster
     /**
      * Casts \Drupal\Component\Render\MarkupInterface classes.
      */
-    public static function castMarkup($markup, array $array, $stub, $isNested): array
+    public static function castMarkup($markup, $array, $stub, $isNested)
     {
         if (!$isNested) {
             $array[BaseCaster::PREFIX_VIRTUAL . 'markup'] = (string) $markup;

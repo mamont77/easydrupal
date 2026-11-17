@@ -36,7 +36,7 @@ class BootstrapListener
         $code = method_exists($command, 'getCode') && $command->getCode() ? $command->getCode() : $command;
         $reflection = new \ReflectionObject($code);
         $attributes = $reflection->getAttributes(Bootstrap::class);
-        if ($attributes === []) {
+        if (empty($attributes)) {
             return;
         }
         /** @var \Drush\Attributes\Bootstrap $instance */

@@ -21,7 +21,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 final class TopicCommands extends DrushCommands
 {
-    const string TOPIC = 'core:topic';
+    const TOPIC = 'core:topic';
 
     /**
      * Read detailed documentation on a given topic.
@@ -37,7 +37,7 @@ final class TopicCommands extends DrushCommands
     public function topic($topic_name): int
     {
         $application = Drush::getApplication();
-        $input = new ArrayInput([$topic_name]);
+        $input = new ArrayInput([$topic_name], null);
         return $application->run($input);
     }
 

@@ -37,7 +37,7 @@ class LegacyServiceInstantiator
      *
      * @param array $serviceFiles List of drush.services.yml files
      */
-    public function loadServiceFiles(array $serviceFiles): void
+    public function loadServiceFiles(array $serviceFiles)
     {
         foreach ($serviceFiles as $serviceFile) {
             $serviceFileContents = '';
@@ -105,7 +105,7 @@ class LegacyServiceInstantiator
      *
      * @param array $services List of drush services
      */
-    public function instantiateServices(array $services): void
+    public function instantiateServices(array $services)
     {
         foreach ($services as $serviceName => $info) {
             // Skip legacy generators.
@@ -187,7 +187,7 @@ class LegacyServiceInstantiator
     {
         try {
             $refl = new \ReflectionClass($class);
-        } catch (\Throwable) {
+        } catch (\Throwable $e) {
             return;
         }
         return $refl->newInstanceArgs($this->resolveArguments($arguments));
@@ -201,7 +201,7 @@ class LegacyServiceInstantiator
      * @param string $method Name of method to call
      * @param array $arguments Arguments to pass to class method
      */
-    public function call($object, $method, array $arguments): void
+    public function call($object, $method, array $arguments)
     {
         $resolved = $this->resolveArguments($arguments);
         if ($this->atLeastOneValue($resolved)) {
@@ -218,7 +218,7 @@ class LegacyServiceInstantiator
      * @return array
      *   Arguments after they have been resolved by DI container
      */
-    protected function resolveArguments(array $arguments): array
+    protected function resolveArguments(array $arguments)
     {
         return array_map([$this, 'resolveArgument'], $arguments);
     }
@@ -245,9 +245,12 @@ class LegacyServiceInstantiator
             // Check to see if a previous drush.services.yml instantiated
             // this service; return any service found.
             $drushServiceName = ltrim(substr($arg, 1), '?');
+            if (isset($this->instantiatedDrushServices[$drushServiceName])) {
+                return $this->instantiatedDrushServices[$drushServiceName];
+            }
 
             // If the service is not found in the dynamic container
-            return $this->instantiatedDrushServices[$drushServiceName] ?? $this->resolveFromContainer($this->container, substr($arg, 1));
+            return $this->resolveFromContainer($this->container, substr($arg, 1));
         }
 
         // Look up references to service parameters
