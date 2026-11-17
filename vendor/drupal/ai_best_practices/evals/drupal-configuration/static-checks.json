@@ -1,0 +1,142 @@
+{
+  "skill_file": "skills/drupal-configuration/SKILL.md",
+  "assertions": [
+    {
+      "id": "S01",
+      "description": "Skill file exists",
+      "check": "file_exists",
+      "path": "skills/drupal-configuration/SKILL.md"
+    },
+    {
+      "id": "S02",
+      "description": "Frontmatter has required fields (name, description)",
+      "check": "agent_skill_frontmatter"
+    },
+    {
+      "id": "S03",
+      "description": "Mentions State API as distinct from Config",
+      "check": "contains",
+      "text": "\\Drupal::state()"
+    },
+    {
+      "id": "S04",
+      "description": "Mentions settings.php for secrets",
+      "check": "contains",
+      "text": "settings.php"
+    },
+    {
+      "id": "S05",
+      "description": "Mentions config schema as mandatory",
+      "check": "contains",
+      "text": "schema.yml"
+    },
+    {
+      "id": "S06",
+      "description": "Mentions getEditable for saving config",
+      "check": "contains",
+      "text": "getEditable"
+    },
+    {
+      "id": "S07",
+      "description": "Mentions drush cex for export workflow",
+      "check": "contains",
+      "text": "drush cex"
+    },
+    {
+      "id": "S08",
+      "description": "Mentions ConfigEntityInterface for config entities",
+      "check": "contains",
+      "text": "ConfigEntityInterface"
+    },
+    {
+      "id": "S09",
+      "description": "Mentions config dependencies",
+      "check": "contains",
+      "text": "dependencies"
+    },
+    {
+      "id": "S10",
+      "description": "Mentions third_party_settings mechanism",
+      "check": "contains",
+      "text": "third_party_settings"
+    },
+    {
+      "id": "S11",
+      "description": "Mentions config actions and recipes for 10.3+",
+      "check": "contains",
+      "text": "config action"
+    },
+    {
+      "id": "S12",
+      "description": "Three storage mechanisms section appears before config schema section",
+      "check": "order",
+      "first": "### The three storage mechanisms",
+      "second": "### Config schema"
+    },
+    {
+      "id": "S13",
+      "description": "Skill file stays under the 500-line guideline",
+      "check": "max_lines",
+      "limit": 500
+    },
+    {
+      "id": "S14",
+      "description": "Config Split reference shows the settings.php switch",
+      "check": "contains",
+      "file": "skills/drupal-configuration/references/config-split.md",
+      "text": "$config['config_split.config_split.dev']['status'] = TRUE;"
+    },
+    {
+      "id": "S15",
+      "description": "Config Split reference file exists",
+      "check": "file_exists",
+      "path": "skills/drupal-configuration/references/config-split.md"
+    },
+    {
+      "id": "S16",
+      "description": "SKILL.md points to the Config Split reference",
+      "check": "contains",
+      "text": "references/config-split.md"
+    },
+    {
+      "id": "S17",
+      "description": "Config Split row comes before the Settings row in the decision tree",
+      "check": "order",
+      "first": "| Config Split |",
+      "second": "| Settings |"
+    },
+    {
+      "id": "S18",
+      "description": "Config Split reference explains partial splits and their patch files",
+      "check": "contains",
+      "file": "skills/drupal-configuration/references/config-split.md",
+      "text": "config_split.patch.<config name>.yml"
+    },
+    {
+      "id": "S19",
+      "description": "Config Split reference warns that partial items must already be in config/sync/",
+      "check": "contains",
+      "file": "skills/drupal-configuration/references/config-split.md",
+      "text": "must already be in config/sync/"
+    },
+    {
+      "id": "S20",
+      "description": "Config Split reference stays focused (under 200 lines)",
+      "check": "max_lines",
+      "file": "skills/drupal-configuration/references/config-split.md",
+      "limit": 200
+    },
+    {
+      "id": "S21",
+      "description": "Settings form guidance uses #config_target",
+      "check": "contains",
+      "text": "#config_target"
+    },
+    {
+      "id": "S22",
+      "description": "Settings form guidance mentions RedundantEditableConfigNamesTrait",
+      "check": "contains",
+      "text": "RedundantEditableConfigNamesTrait"
+    }
+  ]
+}

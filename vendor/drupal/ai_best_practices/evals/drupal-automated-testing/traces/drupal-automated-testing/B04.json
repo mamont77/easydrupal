@@ -1,0 +1,31 @@
+{
+  "id": "B04",
+  "teaching": "A corrected setUp method showing installEntitySchema and installConfig calls that create the required database tables.",
+  "provider": "claude",
+  "model": null,
+  "prompt": "I have a Kernel test for my_module that creates node entities but it throws 'table node_field_data does not exist'. Show me the corrected setUp method.",
+  "response": "The error means the node entity's tables were never created. `KernelTestBase` installs nothing by itself: listing `node` in `$modules` only registers the module's services and hooks, it does not create storage. You have to call `installEntitySchema()` explicitly.\n\n```php\n<?php\n\nnamespace Drupal\\Tests\\my_module\\Kernel;\n\nuse Drupal\\KernelTests\\KernelTestBase;\nuse Drupal\\node\\Entity\\NodeType;\nuse PHPUnit\\Framework\\Attributes\\RunTestsInSeparateProcesses;\n\n#[RunTestsInSeparateProcesses]\nclass MyModuleNodeTest extends KernelTestBase {\n\n  /**\n   * {@inheritdoc}\n   */\n  protected static $modules = [\n    'system',\n    'user',\n    'field',\n    'text',\n    'filter',\n    'node',\n    'my_module',\n  ];\n\n  /**\n   * {@inheritdoc}\n   */\n  protected function setUp(): void {\n    parent::setUp();\n\n    // Creates the {users} and {users_field_data} tables. Nodes have an author\n    // reference, so this is required even if the test never touches users.\n    $this->installEntitySchema('user');\n\n    // Creates {node}, {node_field_data}, {node_revision}, etc. This is the\n    // missing call that produces \"table node_field_data does not exist\".\n    $this->installEntitySchema('node');\n\n    // node.settings, field settings, and the fallback text format. Without\n    // 'filter' installed, saving a body value fails on an unknown format.\n    $this->installConfig(['field', 'node', 'filter']);\n\n    // Only needed if the test exercises node access / grants. Omit otherwise.\n    $this->installSchema('node', ['node_access']);\n\n    // Node types are config entities, so they need no schema, but they do not\n    // exist until created. Node::create() with an unknown bundle will fail.\n    NodeType::create([\n      'type' => 'article',\n      'name' => 'Article',\n    ])->save();\n  }\n\n}\n```\n\nA few things worth checking against your actual test:\n\n- **`user` schema is not optional.** People often add `installEntitySchema('node')` alone and then hit a `users_field_data` error on the first `$node->save()`, because the `uid` base field resolves the author.\n- **Bundle must exist.** `Node::create(['type' => 'article'])` throws if no `article` node type has been created. If `my_module` ships the bundle as config, add it to `installConfig(['my_module'])` instead of building it in the test.\n- **`node_access`.** Drop that line unless you are testing access; it is the second most common \"table does not exist\" in node kernel tests, but installing it needlessly just slows setup.\n- **Don't add `installSchema('system', ['sequences'])`.** That advice is all over older docs and Stack Exchange. The `sequences` table was removed in Drupal 10.2 and the call will fail on 10.2+/11.\n- **If you need a body field**, `node_add_body_field()` is not run for you \u2014 call it on the node type, or use `installConfig()` on a module that provides the field config.\n\nIf you also see errors about `key_value` or `cachetags` after this, that is a separate symptom: `system` is missing from `$modules`.",
+  "checks": [
+    {
+      "kind": "must_contain_any",
+      "values": [
+        "installEntitySchema",
+        "installConfig"
+      ]
+    }
+  ],
+  "check_results": [
+    {
+      "kind": "must_contain_any",
+      "passed": true,
+      "detail": "found: ['installEntitySchema', 'installConfig']"
+    }
+  ],
+  "passed": true,
+  "detail": "must_contain_any: found: ['installEntitySchema', 'installConfig']",
+  "elapsed": 34.6,
+  "input_tokens": 2,
+  "output_tokens": 2305,
+  "cost_usd": 0.17457299999999998,
+  "timestamp": "2026-08-08T05:06:33Z"
+}

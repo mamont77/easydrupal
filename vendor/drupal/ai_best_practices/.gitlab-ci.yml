@@ -1,0 +1,144 @@
+stages:
+  - test
+  - deploy
+
+validate-agent-skills:
+  image: composer:2
+  stage: test
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      changes:
+        - skills/**/*
+  script:
+    - composer install --no-interaction --prefer-dist
+    - vendor/bin/agent-skills-validator skills
+
+phpunit:
+  image: composer:2
+  stage: test
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      changes:
+        - src/**/*
+        - tests/**/*
+        - composer.json
+        - composer.lock
+        - phpunit.xml
+  script:
+    - composer install --no-interaction --prefer-dist
+    - vendor/bin/phpunit -c phpunit.xml
+
+evals-static:
+  image: python:3.12-slim
+  stage: test
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      changes:
+        - skills/**/*
+        - evals/**/*
+        - scripts/build-agent-skills-index.py
+        - scripts/test_build_agent_skills_index.py
+        - .gitlab-ci.yml
+  script:
+    - python3 evals/run-evals.py --static
+    - pip install --no-cache-dir pyyaml
+    - python3 scripts/build-agent-skills-index.py --check
+    - python3 scripts/test_build_agent_skills_index.py
+
+# Scoring regression for the Eval Commons case format: verifies the shared
+# scoring core (used by run-evals.py and compare.py), that every dataset.yaml
+# loads with at least one gradable check, and that every dataset/rubric validates
+# against the vendored L1 schemas (evals/schema/). Needs PyYAML + jsonschema (kept
+# out of the pip-free evals-static job above).
+evals-scoring:
+  image: python:3.12-slim
+  stage: test
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      changes:
+        - evals/**/*
+        - .gitlab-ci.yml
+  script:
+    # php-cli is REQUIRED, not optional: scoring.check_php_lint swallows a
+    # missing binary and returns "php not found — lint skipped", so without it
+    # every php_lint check silently passes and the golden's recorded detail no
+    # longer matches. Install it wherever the parity guard runs.
+    - apt-get update && apt-get install -y --no-install-recommends php-cli && rm -rf /var/lib/apt/lists/*
+    - pip install --no-cache-dir pyyaml jsonschema
+    - python3 evals/test_scoring.py
+    # Scorer-parity DRIFT GUARD for the Inspect AI runner (#3588916): the golden
+    # verdicts stay in sync with scoring.py over recorded responses, and coverage
+    # is printed. No inspect_ai here, so the Inspect-scorer REPLAY SKIPs — it is
+    # gated in evals-inspect below.
+    - python3 evals/inspect/test_scorer_parity.py
+
+# Inspect AI runner gate (#3588916): installs the behavioral extra (inspect-ai)
+# and runs the inspect-dependent tests — the provider wrapper and the scorer
+# REPLAY (commons_scorer == golden). All token-free: they never call a model.
+# Heavier than evals-scoring (~40 transitive packages), so it is its own job and
+# only fires on evals/** changes.
+evals-inspect:
+  image: python:3.12-slim
+  stage: test
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      changes:
+        - evals/**/*
+        - .gitlab-ci.yml
+  script:
+    # See evals-scoring: php-cli is required for the parity guard's php_lint
+    # checks to actually run rather than silently skip.
+    - apt-get update && apt-get install -y --no-install-recommends php-cli && rm -rf /var/lib/apt/lists/*
+    - pip install --no-cache-dir -r evals/requirements-behavioral.txt
+    - python3 evals/inspect/test_provider.py
+    - python3 evals/inspect/test_scorer_parity.py
+    - python3 evals/inspect/test_paired_delta.py
+
+# EEE Layer-2 export gate (#3588916): the Inspect -> Every Eval Ever envelope
+# converter (to_eee.py). Heavier still (EEE pulls duckdb/pyarrow), and the export
+# path is optional, so it is isolated from the runner gate above. test_to_eee.py
+# is self-contained and token-free: it fakes the model, runs a real eval to a
+# temp log, converts, and schema-validates the envelope.
+evals-eee-export:
+  image: python:3.12-slim
+  stage: test
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      changes:
+        - evals/inspect/to_eee.py
+        - evals/inspect/test_to_eee.py
+        - evals/inspect/publish_results.py
+        - evals/inspect/test_publish_results.py
+        # test_to_eee runs a real eval through the provider + task, so a change
+        # to either (or the behavioral pins) can break the export end to end.
+        - evals/inspect/provider.py
+        - evals/inspect/tasks.py
+        - evals/requirements-behavioral.txt
+        - evals/requirements-eee.txt
+        - .gitlab-ci.yml
+  script:
+    - pip install --no-cache-dir -r evals/requirements-behavioral.txt
+    - pip install --no-cache-dir -r evals/requirements-eee.txt
+    - python3 evals/inspect/test_to_eee.py
+    - python3 evals/inspect/test_publish_results.py
+
+# Discovery index for npx skills (#3588968). Must run on default-branch push —
+# MR-only jobs never publish Pages. Unique domain off is a project Pages setting
+# (not in git): https://project.pages.drupalcode.org/ai_best_practices/
+# `pages` as a job NAME is deprecated; the job is identified by the `pages:`
+# property instead. artifacts:paths is redundant on GitLab 17.10+ (publish is
+# appended automatically) but is required on earlier versions.
+create-pages:
+  image: python:3.12-slim
+  stage: deploy
+  script:
+    - pip install --no-cache-dir pyyaml
+    - python3 scripts/build-agent-skills-index.py --out pages
+    - echo "Published at ${CI_PAGES_URL}"
+  pages:
+    publish: pages
+  artifacts:
+    paths:
+      - pages
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH

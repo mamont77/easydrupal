@@ -1,0 +1,39 @@
+{
+  "id": "B06",
+  "teaching": "Uses the \\Drupal\\Tests\\my_commerce\\FunctionalJavascript namespace and extends WebDriverTestBase.",
+  "provider": "claude",
+  "model": null,
+  "prompt": "What is the correct PHP namespace for a FunctionalJavascript test class in a module called 'my_commerce'? Show the full class opening with namespace, use statements, and class declaration. Show the code in your response.",
+  "response": "```php\n<?php\n\ndeclare(strict_types=1);\n\nnamespace Drupal\\Tests\\my_commerce\\FunctionalJavascript;\n\nuse Drupal\\FunctionalJavascriptTests\\WebDriverTestBase;\nuse PHPUnit\\Framework\\Attributes\\Group;\nuse PHPUnit\\Framework\\Attributes\\RunTestsInSeparateProcesses;\n\n/**\n * Tests the my_commerce AJAX cart behaviour.\n */\n#[Group('my_commerce')]\n#[RunTestsInSeparateProcesses]\nfinal class CartAjaxTest extends WebDriverTestBase {\n\n  /**\n   * {@inheritdoc}\n   */\n  protected static $modules = ['my_commerce'];\n\n  /**\n   * {@inheritdoc}\n   */\n  protected $defaultTheme = 'stark';\n\n}\n```\n\nThe namespace is `Drupal\\Tests\\my_commerce\\FunctionalJavascript` \u2014 note the capitalisation: `Javascript`, not `JavaScript`. The file lives at `tests/src/FunctionalJavascript/CartAjaxTest.php` inside the module.\n\nTwo things worth flagging that go beyond the namespace itself:\n\n- The base class namespace does **not** match the test namespace. Tests go in `Drupal\\Tests\\my_commerce\\FunctionalJavascript`, but `WebDriverTestBase` comes from `Drupal\\FunctionalJavascriptTests` (plural `Tests` suffix, no `Drupal\\Tests\\` prefix). This is a common mix-up.\n- `#[RunTestsInSeparateProcesses]` is a hard requirement on Drupal 11.3 and strongly recommended on 10.x. `#[Group]` is the attribute form of the old `@group` annotation; on older Drupal versions you may still see the docblock form.",
+  "checks": [
+    {
+      "kind": "must_contain_any",
+      "values": [
+        "FunctionalJavascript",
+        "WebDriverTestBase"
+      ]
+    },
+    {
+      "kind": "php_lint"
+    }
+  ],
+  "check_results": [
+    {
+      "kind": "must_contain_any",
+      "passed": true,
+      "detail": "found: ['FunctionalJavascript', 'WebDriverTestBase']"
+    },
+    {
+      "kind": "php_lint",
+      "passed": true,
+      "detail": "1 block(s) OK"
+    }
+  ],
+  "passed": true,
+  "detail": "must_contain_any: found: ['FunctionalJavascript', 'WebDriverTestBase']; php_lint: 1 block(s) OK",
+  "elapsed": 12.8,
+  "input_tokens": 2,
+  "output_tokens": 817,
+  "cost_usd": 0.137571,
+  "timestamp": "2026-08-08T05:07:01Z"
+}

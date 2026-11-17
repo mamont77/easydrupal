@@ -1,0 +1,174 @@
+{
+  "skill_file": "skills/drupal-skill-authoring/SKILL.md",
+  "assertions": [
+    {
+      "id": "S01",
+      "description": "Skill file exists",
+      "check": "file_exists",
+      "path": "skills/drupal-skill-authoring/SKILL.md"
+    },
+    {
+      "id": "S02",
+      "description": "Frontmatter has required fields (name, description)",
+      "check": "agent_skill_frontmatter"
+    },
+    {
+      "id": "S03",
+      "description": "SKILL.md entry point stays lean (well under the 500-line spec guideline)",
+      "check": "max_lines",
+      "limit": 200
+    },
+    {
+      "id": "S04",
+      "description": "SKILL.md routes to reference files (progressive disclosure map)",
+      "check": "contains",
+      "text": "references/frontmatter.md"
+    },
+    {
+      "id": "S05",
+      "description": "SKILL.md names the canonical 500-line guideline",
+      "check": "contains",
+      "text": "500"
+    },
+    {
+      "id": "S06",
+      "description": "SKILL.md states the validator checks frontmatter, not body length",
+      "check": "contains",
+      "text": "frontmatter only"
+    },
+    {
+      "id": "S07",
+      "description": "SKILL.md points to docs/skill-authoring.md for the decision framework",
+      "check": "contains",
+      "text": "docs/skill-authoring.md"
+    },
+    {
+      "id": "S08",
+      "description": "references/frontmatter.md exists",
+      "check": "file_exists",
+      "path": "skills/drupal-skill-authoring/references/frontmatter.md"
+    },
+    {
+      "id": "S09",
+      "description": "references/progressive-disclosure.md exists",
+      "check": "file_exists",
+      "path": "skills/drupal-skill-authoring/references/progressive-disclosure.md"
+    },
+    {
+      "id": "S10",
+      "description": "references/contributing-here.md exists",
+      "check": "file_exists",
+      "path": "skills/drupal-skill-authoring/references/contributing-here.md"
+    },
+    {
+      "id": "S11",
+      "description": "frontmatter reference lists the allowed-field constraint (name must match directory)",
+      "check": "contains",
+      "file": "skills/drupal-skill-authoring/references/frontmatter.md",
+      "text": "match the directory name"
+    },
+    {
+      "id": "S12",
+      "description": "frontmatter reference documents the 1024-char description limit",
+      "check": "contains",
+      "file": "skills/drupal-skill-authoring/references/frontmatter.md",
+      "text": "1024"
+    },
+    {
+      "id": "S13",
+      "description": "frontmatter reference warns against top-level custom keys",
+      "check": "contains",
+      "file": "skills/drupal-skill-authoring/references/frontmatter.md",
+      "text": "Do not invent top-level custom keys"
+    },
+    {
+      "id": "S14",
+      "description": "progressive-disclosure reference cites the agentskills.io specification",
+      "check": "contains",
+      "file": "skills/drupal-skill-authoring/references/progressive-disclosure.md",
+      "text": "agentskills.io/specification"
+    },
+    {
+      "id": "S15",
+      "description": "progressive-disclosure reference cites Anthropic's best-practices guide",
+      "check": "contains",
+      "file": "skills/drupal-skill-authoring/references/progressive-disclosure.md",
+      "text": "best-practices"
+    },
+    {
+      "id": "S16",
+      "description": "contributing-here reference documents the eval trio requirement",
+      "check": "contains",
+      "file": "skills/drupal-skill-authoring/references/contributing-here.md",
+      "text": "static-checks.json"
+    },
+    {
+      "id": "S17",
+      "description": "contributing-here reference reflects skill auto-discovery (no template wiring)",
+      "check": "contains",
+      "file": "skills/drupal-skill-authoring/references/contributing-here.md",
+      "text": "auto-discover"
+    },
+    {
+      "id": "S18",
+      "description": "contributing-here reference names the validator command",
+      "check": "contains",
+      "file": "skills/drupal-skill-authoring/references/contributing-here.md",
+      "text": "agent-skills-validator"
+    },
+    {
+      "id": "S19",
+      "description": "references/frontmatter.md stays focused (under 200 lines)",
+      "check": "max_lines",
+      "file": "skills/drupal-skill-authoring/references/frontmatter.md",
+      "limit": 200
+    },
+    {
+      "id": "S20",
+      "description": "references/progressive-disclosure.md stays focused (under 200 lines)",
+      "check": "max_lines",
+      "file": "skills/drupal-skill-authoring/references/progressive-disclosure.md",
+      "limit": 200
+    },
+    {
+      "id": "S21",
+      "description": "references/contributing-here.md stays focused (under 200 lines)",
+      "check": "max_lines",
+      "file": "skills/drupal-skill-authoring/references/contributing-here.md",
+      "limit": 200
+    },
+    {
+      "id": "S22",
+      "description": "frontmatter reference states metadata custom fields are spec-legal and pass CI (not forbidden)",
+      "check": "contains",
+      "file": "skills/drupal-skill-authoring/references/frontmatter.md",
+      "text": "spec-legal and pass CI"
+    },
+    {
+      "id": "S23",
+      "description": "frontmatter reference flags the reserved-words spec rule the validator misses",
+      "check": "contains",
+      "file": "skills/drupal-skill-authoring/references/frontmatter.md",
+      "text": "reserved words"
+    },
+    {
+      "id": "S24",
+      "description": "frontmatter reference requires third-person descriptions",
+      "check": "contains",
+      "file": "skills/drupal-skill-authoring/references/frontmatter.md",
+      "text": "third person"
+    },
+    {
+      "id": "S25",
+      "description": "SKILL.md covers writing a good skill, not just a valid one",
+      "check": "contains",
+      "text": "Write a good skill, not just a valid one"
+    },
+    {
+      "id": "S26",
+      "description": "SKILL.md teaches eval-driven development (evals first)",
+      "check": "contains",
+      "text": "Evals first"
+    }
+  ]
+}

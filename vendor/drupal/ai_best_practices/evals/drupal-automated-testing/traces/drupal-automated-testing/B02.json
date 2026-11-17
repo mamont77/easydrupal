@@ -1,0 +1,58 @@
+{
+  "id": "B02",
+  "teaching": "A complete PHP Functional test file using BrowserTestBase with correct namespace and RunTestsInSeparateProcesses attribute.",
+  "provider": "claude",
+  "model": null,
+  "prompt": "Generate a Functional test class for a Drupal module called my_module that tests a page at /my-module/dashboard which should return a 200 status and contain the text 'Dashboard'. Write the complete test file and show the full PHP code in your response.",
+  "response": "Here's the complete test file. Path: `my_module/tests/src/Functional/DashboardPageTest.php`\n\n```php\n<?php\n\ndeclare(strict_types=1);\n\nnamespace Drupal\\Tests\\my_module\\Functional;\n\nuse Drupal\\Tests\\BrowserTestBase;\nuse PHPUnit\\Framework\\Attributes\\Group;\nuse PHPUnit\\Framework\\Attributes\\RunTestsInSeparateProcesses;\n\n/**\n * Tests the my_module dashboard page.\n */\n#[Group('my_module')]\n#[RunTestsInSeparateProcesses]\nclass DashboardPageTest extends BrowserTestBase {\n\n  /**\n   * {@inheritdoc}\n   */\n  protected static $modules = ['my_module'];\n\n  /**\n   * {@inheritdoc}\n   */\n  protected $defaultTheme = 'stark';\n\n  /**\n   * The user account used to view the dashboard.\n   */\n  protected ?AccountInterface $dashboardUser = NULL;\n\n  /**\n   * {@inheritdoc}\n   */\n  protected function setUp(): void {\n    parent::setUp();\n\n    // Adjust the permission to whatever my_module.routing.yml requires on the\n    // my-module/dashboard route.\n    $this->dashboardUser = $this->drupalCreateUser(['access my_module dashboard']);\n  }\n\n  /**\n   * Tests that the dashboard returns 200 and renders its title text.\n   */\n  public function testDashboardPage(): void {\n    $this->drupalLogin($this->dashboardUser);\n    $this->drupalGet('/my-module/dashboard');\n\n    $this->assertSession()->statusCodeEquals(200);\n    $this->assertSession()->pageTextContains('Dashboard');\n  }\n\n  /**\n   * Tests that a user without the permission is denied access.\n   */\n  public function testDashboardAccessDenied(): void {\n    $this->drupalLogin($this->drupalCreateUser());\n    $this->drupalGet('/my-module/dashboard');\n\n    $this->assertSession()->statusCodeEquals(403);\n  }\n\n}\n```\n\nAdd the `use Drupal\\Core\\Session\\AccountInterface;` import alongside the others if you keep the typed property.\n\nA few notes on the choices:\n\n- **Functional, not Kernel or Unit.** The route is an HTTP endpoint returning rendered markup, so it needs a booted site and a real request. A Kernel test can't make HTTP requests, and a Unit test would require mocking the whole container.\n- **`#[RunTestsInSeparateProcesses]`** is a hard requirement on Drupal 11.3 and strongly recommended on 10.x.\n- **Namespace and directory** must match exactly: `Drupal\\Tests\\my_module\\Functional` at `tests/src/Functional/`, or the runner won't discover the class.\n- **The permission string is a placeholder.** I don't know what `my_module.routing.yml` declares on that route. If the route uses `_access: 'TRUE'` or `_permission: 'access content'`, drop the custom permission and the second test method, or swap in the real one. If you paste your routing YAML I'll correct it.\n- **Second test method** covers the most likely error path. Delete it if the page is genuinely public.\n\nTo run it under DDEV:\n\n```bash\nddev exec -e SIMPLETEST_BASE_URL=http://web \\\n  -e SIMPLETEST_DB=mysql://db:db@db/db \\\n  vendor/bin/phpunit -c core web/modules/custom/my_module/tests/src/Functional/DashboardPageTest.php\n```\n\nI showed the code rather than writing it to disk, since the current directory is a scratchpad worktree of `ai_best_practices` and not a Drupal site. Say the word if you want it written somewhere specific.",
+  "checks": [
+    {
+      "kind": "must_contain_any",
+      "values": [
+        "BrowserTestBase"
+      ]
+    },
+    {
+      "kind": "must_not_contain",
+      "values": [
+        "extends UnitTestCase"
+      ]
+    },
+    {
+      "kind": "php_lint"
+    },
+    {
+      "kind": "markdown_structure",
+      "min_code_blocks": 1
+    }
+  ],
+  "check_results": [
+    {
+      "kind": "must_contain_any",
+      "passed": true,
+      "detail": "found: ['BrowserTestBase']"
+    },
+    {
+      "kind": "must_not_contain",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "kind": "php_lint",
+      "passed": true,
+      "detail": "1 block(s) OK"
+    },
+    {
+      "kind": "markdown_structure",
+      "passed": true,
+      "detail": "2 code blocks"
+    }
+  ],
+  "passed": true,
+  "detail": "must_contain_any: found: ['BrowserTestBase']; php_lint: 1 block(s) OK; markdown_structure: 2 code blocks",
+  "elapsed": 22.9,
+  "input_tokens": 2,
+  "output_tokens": 1758,
+  "cost_usd": 0.18949950000000002,
+  "timestamp": "2026-08-08T05:05:06Z"
+}

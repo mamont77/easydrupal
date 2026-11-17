@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+#ddev-generated
+
+## Description: Check PHP version compatibility using PHPCompatibility
+## Usage: phpcompat [flags] [path]
+## Example: "ddev phpcompat web/modules/custom/mymodule"
+## ExecRaw: true
+## HostWorkingDir: true
+
+# shellcheck source=../../module-developer/lib/init.sh
+source /mnt/ddev_config/module-developer/lib/init.sh
+
+exec /usr/local/phpcompat/vendor/bin/phpcs \
+  --runtime-set testVersion 8.2- \
+  --standard=PHPCompatibility \
+  --extensions=php,module,inc,install,test,profile,theme \
+  "$@"

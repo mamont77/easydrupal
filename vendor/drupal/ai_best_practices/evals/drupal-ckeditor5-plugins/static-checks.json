@@ -1,0 +1,30 @@
+{
+  "skill_file": "skills/drupal-ckeditor5-plugins/SKILL.md",
+  "assertions": [
+    { "id": "S01", "description": "Skill file exists", "check": "file_exists", "path": "skills/drupal-ckeditor5-plugins/SKILL.md" },
+    { "id": "S02", "description": "Agent Skills frontmatter is valid", "check": "agent_skill_frontmatter" },
+    { "id": "S03", "description": "Version check instructs reading core.libraries.yml", "check": "contains", "text": "core/core.libraries.yml" },
+    { "id": "S04", "description": "Version check comes before the routing table", "check": "order", "first": "## Step 0", "second": "## Where to go next" },
+    { "id": "S05", "description": "Warns against ckeditor.com docs /latest/ mismatch", "check": "contains", "text": "latest" },
+    { "id": "S06", "description": "SKILL.md entry point stays lean", "check": "max_lines", "limit": 150 },
+    { "id": "S07", "description": "version matrix reference exists", "check": "file_exists", "path": "skills/drupal-ckeditor5-plugins/references/version-matrix.md" },
+    { "id": "S08", "description": "matrix pins docs URLs to the bundled version", "check": "contains", "file": "skills/drupal-ckeditor5-plugins/references/version-matrix.md", "text": "ckeditor.com/docs/ckeditor5/" },
+    { "id": "S09", "description": "DLL reference exists", "check": "file_exists", "path": "skills/drupal-ckeditor5-plugins/references/custom-plugins-dll.md" },
+    { "id": "S10", "description": "DLL reference teaches DllReferencePlugin", "check": "contains", "file": "skills/drupal-ckeditor5-plugins/references/custom-plugins-dll.md", "text": "DllReferencePlugin" },
+    { "id": "S11", "description": "D12 reference exists", "check": "file_exists", "path": "skills/drupal-ckeditor5-plugins/references/drupal-12-outlook.md" },
+    { "id": "S12", "description": "D12 reference is flagged beta", "check": "contains", "file": "skills/drupal-ckeditor5-plugins/references/drupal-12-outlook.md", "text": "beta" },
+    { "id": "S13", "description": "module reference exists", "check": "file_exists", "path": "skills/drupal-ckeditor5-plugins/references/plugin-pack-premium-features.md" },
+    { "id": "S14", "description": "module reference names both projects", "check": "contains", "file": "skills/drupal-ckeditor5-plugins/references/plugin-pack-premium-features.md", "text": "ckeditor5_premium_features" },
+    { "id": "S15", "description": "agent-docs reference exists", "check": "file_exists", "path": "skills/drupal-ckeditor5-plugins/references/agent-docs.md" },
+    { "id": "S16", "description": "agent-docs covers llms-full.txt", "check": "contains", "file": "skills/drupal-ckeditor5-plugins/references/agent-docs.md", "text": "llms-full.txt" },
+    { "id": "S17", "description": "references stay focused: version-matrix", "check": "max_lines", "file": "skills/drupal-ckeditor5-plugins/references/version-matrix.md", "limit": 200 },
+    { "id": "S18", "description": "references stay focused: custom-plugins-dll", "check": "max_lines", "file": "skills/drupal-ckeditor5-plugins/references/custom-plugins-dll.md", "limit": 200 },
+    { "id": "S19", "description": "check-first rule routes to module issue queues before custom code", "check": "contains", "file": "skills/drupal-ckeditor5-plugins/references/plugin-pack-premium-features.md", "text": "issues/ckeditor5_plugin_pack" },
+    { "id": "S20", "description": "check-first ladder appears before the Plugin Pack details", "check": "order", "file": "skills/drupal-ckeditor5-plugins/references/plugin-pack-premium-features.md", "first": "## Before building custom", "second": "## CKEditor 5 Plugin Pack" },
+    { "id": "S21", "description": "agent-docs states the Markdown variants are latest-only (corrections 2026-10-01)", "check": "contains", "file": "skills/drupal-ckeditor5-plugins/references/agent-docs.md", "text": "does not work on versioned docs" },
+    { "id": "S22", "description": "matrix is derivation-only: names the live core file as authoritative (MR !105 review)", "check": "contains", "file": "skills/drupal-ckeditor5-plugins/references/version-matrix.md", "text": "The live core file is authoritative" },
+    { "id": "S23", "description": "matrix explains the -drupal fork suffix (MR !105 review)", "check": "contains", "file": "skills/drupal-ckeditor5-plugins/references/version-matrix.md", "text": "-drupal" },
+    { "id": "S24", "description": "info.yml template depends on the ckeditor5 module (MR !105 review)", "check": "contains", "file": "skills/drupal-ckeditor5-plugins/references/custom-plugins-dll.md", "text": "drupal:ckeditor5" },
+    { "id": "S25", "description": "D12 reference links the NIM migration guide (MR !105 review)", "check": "contains", "file": "skills/drupal-ckeditor5-plugins/references/drupal-12-outlook.md", "text": "nim-migration/migration-to-new-installation-methods" }
+  ]
+}

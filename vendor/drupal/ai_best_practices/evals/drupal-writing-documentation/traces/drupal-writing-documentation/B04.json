@@ -1,0 +1,40 @@
+{
+  "id": "B04",
+  "teaching": "The agent should advise against documenting every option (content sprawl) and instead recommend linking to existing Views documentation on drupal.org. The outline should be focused, opinionated, and cover common use cases rather than exhaustive feature lists.",
+  "provider": "claude",
+  "model": null,
+  "prompt": "A site builder wants to document how Views works for other site builders on their team. They plan to write a comprehensive guide covering every Views feature, every display type, every field formatter, and every filter option. Following Drupal documentation best practices, what should they do differently? Write a short explanation (under 300 words) and then write a better outline for their documentation page. Output in Markdown.",
+  "response": "## What to do differently\n\nA guide that covers every Views feature, display type, formatter, and filter is a re-implementation of documentation that already exists on drupal.org and api.drupal.org, and it will be wrong within one minor release. Completeness is not usefulness.\n\nThree shifts:\n\n**Document your site, not Views.** The generic behaviour of a filter criterion is Drupal's to document, and it is already documented. What nobody else can write is how *your team* uses Views on *your* content types: which views exist, which ones are safe to edit, your naming conventions, which display you clone when you need a new listing. Write that, and link out for the rest.\n\n**Be opinionated.** Site builders arriving at a new team need one recommended path they can follow with confidence, not a menu. Say \"start from the `content_list` view, duplicate the Page display, then adjust the filters.\" Mention alternatives briefly with links instead of documenting each in full.\n\n**Split and shorten.** Most readers arrive with one specific question and want to scan, find their section, and skip the rest. Several short pages under a clear hierarchy beat one long page, and they retrieve better in search.\n\nTwo smaller things: put a copy-paste quick start at the top before any explanation, and use Views vocabulary precisely (*view*, *display*, *format*, *field*, *filter criteria*, *contextual filter*, *relationship*), so experienced people know exactly what you mean.\n\nWhere the team hits something genuinely surprising, a Views quirk that cost someone an afternoon, that is worth writing down at length. Behaviour a reader could have discovered in the UI in thirty seconds is not.\n\n## Better outline\n\n```markdown\n# Views on [Project Name]\n\n## Quick start\nCreate a new listing in 5 steps. Numbered, no explanation.\nLink: \"New to Views? Read [Views overview] on drupal.org first.\"\n\n## Our conventions\n- Naming: machine names, display names, page paths\n- Which views are locked (used by templates/code) and who to ask\n- Where view config lives in the repo; how it gets deployed\n\n## The views we already have\nShort table: view | what it does | where it appears | owner\nPoint at these before building anything new.\n\n## Common tasks\nOne short page each, linked from here:\n- Add a field to an existing listing\n- Filter by a taxonomy term from the URL (contextual filters)\n- Build a listing of content authored by the logged-in user\n- Change how many items appear per page\n\n## Gotchas on this site\nOnly things that surprised us. Each entry: symptom, cause, fix.\n\n## When not to use Views\nThe cases where we use [a block / code / a different module] instead.\n\n## Reference\nLinks out: drupal.org Views documentation, Views API on\napi.drupal.org, our #team Slack channel.\n```",
+  "checks": [
+    {
+      "kind": "must_contain_any",
+      "values": [
+        "drupal.org",
+        "link"
+      ]
+    },
+    {
+      "kind": "markdown_structure",
+      "min_headings": 2
+    }
+  ],
+  "check_results": [
+    {
+      "kind": "must_contain_any",
+      "passed": true,
+      "detail": "found: ['drupal.org', 'link']"
+    },
+    {
+      "kind": "markdown_structure",
+      "passed": true,
+      "detail": "10 headings, 1 code blocks"
+    }
+  ],
+  "passed": true,
+  "detail": "must_contain_any: found: ['drupal.org', 'link']; markdown_structure: 10 headings, 1 code blocks",
+  "elapsed": 30.2,
+  "input_tokens": 2,
+  "output_tokens": 1317,
+  "cost_usd": 0.152751,
+  "timestamp": "2026-08-08T05:11:34Z"
+}

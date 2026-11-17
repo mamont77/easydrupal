@@ -1,0 +1,61 @@
+{
+  "id": "B03",
+  "teaching": "A restructured page that fixes the anti-patterns: removes Click here links, removes $ from code blocks, adds prerequisites and version info, picks one recommended approach instead of listing all options, removes non-Drupal setup instructions, uses proper heading hierarchy.",
+  "provider": "claude",
+  "model": null,
+  "prompt": "Rewrite the following bad documentation to meet Drupal documentation standards. Use ## headings for sections, not #. Add a '## Prerequisites' section. Replace 'Click here' with descriptive link text. Remove $ prompts from code blocks. Do not add explanations outside the rewritten page.\n\n---\n\n# HOW TO CONFIGURE CACHING\n\nClick here for more info: https://www.drupal.org/docs/administering-a-drupal-site/internal-page-caching\n\nTo clear the cache run this:\n\n```\n$ drush cr\n```\n\nThere are many ways to configure caching in Drupal. You can use Internal Page Cache, Dynamic Page Cache, BigPipe, Varnish, Redis, Memcache, or CDN modules. Each has different configuration steps.\n\nYou need to edit settings.php. Here is an example:\n\n```\n$ vim web/sites/default/settings.php\n```\n\nFor Docker setup instructions see the Docker documentation. For installing PHP see the PHP manual. For setting up Apache see the Apache docs.\n\n---\n\nOutput the rewritten page in Markdown.",
+  "response": "# Configure caching\n\nDrupal ships with page caching enabled by default. Most sites need no\nconfiguration at all \u2014 the work is usually *keeping* cached responses correct,\nnot turning caching on.\n\n## TL;DR\n\nRebuild all caches after a code or configuration change:\n\n```\ndrush cr\n```\n\nCheck that the three core caching modules are installed, and set a browser and\nproxy cache lifetime at **Administration \u203a Configuration \u203a Development \u203a\nPerformance** (`/admin/config/development/performance`).\n\nThat is the whole setup for a typical site. Everything below is for sites that\nneed more.\n\n## Prerequisites\n\n- A working Drupal site you can administer. Setting up a local environment is\n  covered in [Configuring a local development environment](https://www.drupal.org/docs/develop/local-server-setup).\n- The *Administer site configuration* permission, or user 1.\n- [Drush](https://www.drush.org/) installed, for the command line steps.\n- Write access to `sites/default/settings.php` if you plan to override cache\n  backends.\n\n## The three core caching layers\n\nDrupal's standard profile installs all three. Leave them enabled in production.\n\n- **[Internal Page Cache](https://www.drupal.org/docs/administering-a-drupal-site/internal-page-caching)**\n  stores a complete rendered page for anonymous users and serves it without\n  bootstrapping the rest of the request.\n- **[Dynamic Page Cache](https://www.drupal.org/docs/administering-a-drupal-site/dynamic-page-cache)**\n  caches pages for *all* users, including authenticated ones, leaving\n  personalised sections as placeholders to be filled in per request.\n- **[BigPipe](https://www.drupal.org/docs/core-modules-and-themes/core-modules/bigpipe-module)**\n  streams those placeholders to the browser as they render, so the cached part\n  of the page appears immediately.\n\nIf pages are serving stale or over-personalised content, the cause is almost\nalways missing or incorrect cache metadata on a render array or a block, not a\nmisconfigured module. Start with the\n[Cache API documentation](https://www.drupal.org/docs/drupal-apis/cache-api) and\ncheck the cache contexts, tags, and max-age on the code in question.\n\n## Clearing caches\n\n```\ndrush cr\n```\n\nThis rebuilds every cache bin, including the container and the plugin,\ndiscovery, and routing caches. It is the correct command after deploying code,\nchanging a `*.services.yml` file, or adding a new plugin.\n\nTo invalidate only what changed, use cache tags from code rather than a full\nrebuild. Full rebuilds on a busy production site cause a thundering herd of\nuncached requests.\n\n## Overriding cache backends in settings.php\n\nOnly do this when you have a specific reason \u2014 an external cache backend, or\ndisabling caching locally.\n\nEdit `sites/default/settings.php` (or better, a `settings.local.php` included\nfrom it) and set the backend for a bin:\n\n```php\n$settings['cache']['bins']['render'] = 'cache.backend.null';\n```\n\nNever commit a null backend to production. Drupal core ships\n`sites/example.settings.local.php` as a starting point for local overrides; copy\nit to `sites/default/settings.local.php` and uncomment the include at the bottom\nof `settings.php`. The full procedure is in\n[Disable Drupal 8 caching during development](https://www.drupal.org/docs/develop/development-tools/disable-caching-and-enable-twig-debugging).\n\n## Going beyond core\n\nIf core caching is correctly configured and the site is still slow, add an\nexternal layer. In rough order of how often they are worth reaching for:\n\n- **[Redis](https://www.drupal.org/project/redis)** or\n  **[Memcache](https://www.drupal.org/project/memcache)** \u2014 move cache bins out\n  of the database. Reach for this first when the `cache_*` tables are large or\n  the database is the bottleneck.\n- **[Varnish Purge](https://www.drupal.org/project/varnish_purge)** with\n  **[Purge](https://www.drupal.org/project/purge)** \u2014 a reverse proxy in front\n  of Drupal, with cache tag invalidation so pages expire when content changes.\n- **A CDN**, driven by the same Purge module. Most hosting platforms provide\n  one and document their own integration.\n\nPick one and configure it properly before adding another. Each additional layer\nis another place for content to go stale.\n\n## See also\n\n- [Cache API](https://www.drupal.org/docs/drupal-apis/cache-api)\n- [Caching in Drupal](https://www.drupal.org/docs/administering-a-drupal-site/caching)\n- [Purge module documentation](https://www.drupal.org/docs/contributed-modules/purge)",
+  "checks": [
+    {
+      "kind": "must_contain_any",
+      "values": [
+        "drush cr",
+        "drush cache:rebuild"
+      ]
+    },
+    {
+      "kind": "must_not_contain",
+      "values": [
+        "Click here",
+        "click here",
+        "$ drush",
+        "$ vim"
+      ]
+    },
+    {
+      "kind": "markdown_structure",
+      "min_headings": 3,
+      "no_h1": true,
+      "required_sections": [
+        "prerequisite"
+      ],
+      "metadata": {
+        "min_paragraphs": 5
+      }
+    }
+  ],
+  "check_results": [
+    {
+      "kind": "must_contain_any",
+      "passed": true,
+      "detail": "found: ['drush cr']"
+    },
+    {
+      "kind": "must_not_contain",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "kind": "markdown_structure",
+      "passed": false,
+      "detail": "H1 found (use ## or deeper): Configure caching"
+    }
+  ],
+  "passed": false,
+  "detail": "must_contain_any: found: ['drush cr']; markdown_structure: H1 found (use ## or deeper): Configure caching",
+  "elapsed": 34.7,
+  "input_tokens": 2,
+  "output_tokens": 2319,
+  "cost_usd": 0.180421,
+  "timestamp": "2026-08-08T05:11:04Z"
+}

@@ -1,0 +1,88 @@
+{
+  "skill_file": "skills/drupal-accessibility/drupal-a11y-fapi/SKILL.md",
+  "assertions": [
+    {
+      "id": "S01",
+      "description": "Skill file exists",
+      "check": "file_exists",
+      "path": "skills/drupal-accessibility/drupal-a11y-fapi/SKILL.md"
+    },
+    {
+      "id": "S02",
+      "description": "Agent Skills frontmatter is valid",
+      "check": "agent_skill_frontmatter"
+    },
+    {
+      "id": "S03",
+      "description": "Requires #title on every form element",
+      "check": "contains",
+      "text": "#title"
+    },
+    {
+      "id": "S04",
+      "description": "Covers #description and aria-describedby auto-generation",
+      "check": "contains",
+      "text": "#description"
+    },
+    {
+      "id": "S05",
+      "description": "Mandates fieldset or details for grouped controls",
+      "check": "contains",
+      "text": "fieldset"
+    },
+    {
+      "id": "S06",
+      "description": "Prohibits interactive elements inside #markup",
+      "check": "contains",
+      "text": "#markup"
+    },
+    {
+      "id": "S07",
+      "description": "Covers #alt contract for image render elements",
+      "check": "contains",
+      "text": "#alt"
+    },
+    {
+      "id": "S08",
+      "description": "Covers #type => 'table' for accessible table rendering",
+      "check": "contains",
+      "text": "#type' => 'table'"
+    },
+    {
+      "id": "S09",
+      "description": "Prohibits redundant ARIA on native elements",
+      "check": "contains",
+      "text": "role=\"button\""
+    },
+    {
+      "id": "S10",
+      "description": "References #title_display => invisible for visually-hidden labels",
+      "check": "contains",
+      "text": "#title_display"
+    },
+    {
+      "id": "S11",
+      "description": "Covers #access => FALSE for hiding elements server-side",
+      "check": "contains",
+      "text": "#access"
+    },
+    {
+      "id": "S13",
+      "description": "Covers #title_display => 'invisible' for visually-hidden labels",
+      "check": "contains",
+      "text": "'invisible'"
+    },
+    {
+      "id": "S14",
+      "description": "Covers #states vs #access distinction",
+      "check": "contains",
+      "text": "#states"
+    },
+    {
+      "id": "S12",
+      "description": "Skill kept under 320 lines",
+      "check": "max_lines",
+      "limit": 320
+    }
+  ]
+}

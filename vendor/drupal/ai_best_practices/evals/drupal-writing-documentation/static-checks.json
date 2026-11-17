@@ -1,0 +1,77 @@
+{
+  "skill_file": "skills/drupal-writing-documentation/SKILL.md",
+  "assertions": [
+    {
+      "id": "S01",
+      "description": "Skill file exists",
+      "check": "file_exists",
+      "path": "skills/drupal-writing-documentation/SKILL.md"
+    },
+    {
+      "id": "S02",
+      "description": "Agent Skills frontmatter is valid",
+      "check": "agent_skill_frontmatter"
+    },
+    {
+      "id": "S03",
+      "description": "Mentions drupal.org wiki as documentation location",
+      "check": "contains",
+      "text": "drupal.org wiki"
+    },
+    {
+      "id": "S04",
+      "description": "Mentions api.drupal.org as documentation source",
+      "check": "contains",
+      "text": "api.drupal.org"
+    },
+    {
+      "id": "S05",
+      "description": "Teaches 'link to everything else' principle",
+      "check": "contains",
+      "text": "Document Drupal; link to everything else"
+    },
+    {
+      "id": "S06",
+      "description": "Teaches audience awareness",
+      "check": "contains",
+      "text": "Know your audience"
+    },
+    {
+      "id": "S07",
+      "description": "Teaches opinionated documentation",
+      "check": "contains",
+      "text": "Be opinionated"
+    },
+    {
+      "id": "S08",
+      "description": "Teaches Drupal terminology",
+      "check": "contains",
+      "text": "Use Drupal's terminology correctly"
+    },
+    {
+      "id": "S09",
+      "description": "Teaches scannability",
+      "check": "contains",
+      "text": "Keep pages short and scannable"
+    },
+    {
+      "id": "S10",
+      "description": "References Content Style Guide",
+      "check": "contains",
+      "text": "Content Style Guide"
+    },
+    {
+      "id": "S11",
+      "description": "Core principles appear before common mistakes",
+      "check": "order",
+      "first": "## Core principles",
+      "second": "## Common mistakes"
+    },
+    {
+      "id": "S12",
+      "description": "Skill file is under 200 lines",
+      "check": "max_lines",
+      "limit": 200
+    }
+  ]
+}

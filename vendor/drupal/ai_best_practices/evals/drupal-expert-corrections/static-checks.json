@@ -1,0 +1,112 @@
+{
+  "skill_file": "skills/drupal-expert-corrections/SKILL.md",
+  "assertions": [
+    {
+      "id": "S01",
+      "description": "Skill file exists",
+      "check": "file_exists",
+      "path": "skills/drupal-expert-corrections/SKILL.md"
+    },
+    {
+      "id": "S02",
+      "description": "Frontmatter has required Agent Skills fields (name, description)",
+      "check": "agent_skill_frontmatter"
+    },
+    {
+      "id": "S03",
+      "description": "Mentions Capture step",
+      "check": "contains",
+      "text": "Capture"
+    },
+    {
+      "id": "S04",
+      "description": "Mentions Classify step",
+      "check": "contains",
+      "text": "Classify"
+    },
+    {
+      "id": "S05",
+      "description": "Mentions Remediate step",
+      "check": "contains",
+      "text": "Remediate"
+    },
+    {
+      "id": "S06",
+      "description": "Mentions Verify step",
+      "check": "contains",
+      "text": "Verify"
+    },
+    {
+      "id": "S07",
+      "description": "Contains SKILL_GAP classification",
+      "check": "contains",
+      "text": "SKILL_GAP"
+    },
+    {
+      "id": "S08",
+      "description": "Contains SKILL_STALE classification",
+      "check": "contains",
+      "text": "SKILL_STALE"
+    },
+    {
+      "id": "S09",
+      "description": "Contains EVAL_GAP classification",
+      "check": "contains",
+      "text": "EVAL_GAP"
+    },
+    {
+      "id": "S10",
+      "description": "Contains HOOK_CANDIDATE classification",
+      "check": "contains",
+      "text": "HOOK_CANDIDATE"
+    },
+    {
+      "id": "S11",
+      "description": "Contains CONFABULATION classification",
+      "check": "contains",
+      "text": "CONFABULATION"
+    },
+    {
+      "id": "S12",
+      "description": "Contains ASSUMPTION_ERROR classification",
+      "check": "contains",
+      "text": "ASSUMPTION_ERROR"
+    },
+    {
+      "id": "S13",
+      "description": "Contains reasoning_failure field",
+      "check": "contains",
+      "text": "reasoning_failure"
+    },
+    {
+      "id": "S14",
+      "description": "Contains confidence field",
+      "check": "contains",
+      "text": "confidence"
+    },
+    {
+      "id": "S15",
+      "description": "Contains project_id field",
+      "check": "contains",
+      "text": "project_id"
+    },
+    {
+      "id": "S16",
+      "description": "Contains eval_seed field",
+      "check": "contains",
+      "text": "eval_seed"
+    },
+    {
+      "id": "S17",
+      "description": "Contains continuous-learning-v2 prior art reference",
+      "check": "contains",
+      "text": "continuous-learning-v2"
+    },
+    {
+      "id": "S18",
+      "description": "Skill file is under 300 lines",
+      "check": "max_lines",
+      "limit": 300
+    }
+  ]
+}

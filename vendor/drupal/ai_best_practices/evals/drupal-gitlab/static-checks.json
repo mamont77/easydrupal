@@ -1,0 +1,247 @@
+{
+  "skill_file": "skills/drupal-gitlab/SKILL.md",
+  "assertions": [
+    {
+      "id": "S01",
+      "description": "Skill file exists",
+      "check": "file_exists",
+      "path": "skills/drupal-gitlab/SKILL.md"
+    },
+    {
+      "id": "S02",
+      "description": "Frontmatter has required fields (name, description)",
+      "check": "agent_skill_frontmatter"
+    },
+    {
+      "id": "S03",
+      "description": "SKILL.md targets git.drupalcode.org via --hostname (no GITLAB_HOST env var)",
+      "check": "contains",
+      "text": "--hostname git.drupalcode.org"
+    },
+    {
+      "id": "S04",
+      "description": "commit-messages reference documents the Conventional Commits format",
+      "check": "contains",
+      "file": "skills/drupal-gitlab/references/commit-messages.md",
+      "text": "Conventional Commits"
+    },
+    {
+      "id": "S05",
+      "description": "commit-messages reference uses Drupal.org usernames in By: lines",
+      "check": "contains",
+      "file": "skills/drupal-gitlab/references/commit-messages.md",
+      "text": "By: drupal-username"
+    },
+    {
+      "id": "S06",
+      "description": "merge-requests reference covers the Drupal issue-fork workflow",
+      "check": "contains",
+      "file": "skills/drupal-gitlab/references/merge-requests.md",
+      "text": "Issue-fork workflow"
+    },
+    {
+      "id": "S07",
+      "description": "merge-requests reference notes the fork must be provisioned before pushing",
+      "check": "contains",
+      "file": "skills/drupal-gitlab/references/merge-requests.md",
+      "text": "Provision the issue fork"
+    },
+    {
+      "id": "S08",
+      "description": "issues reference uses the work items URL convention (/-/work_items/)",
+      "check": "contains",
+      "file": "skills/drupal-gitlab/references/issues.md",
+      "text": "work_items"
+    },
+    {
+      "id": "S09",
+      "description": "merge-requests reference warns glab cannot create cross-project MRs",
+      "check": "contains",
+      "file": "skills/drupal-gitlab/references/merge-requests.md",
+      "text": "cannot create cross-project MRs"
+    },
+    {
+      "id": "S10",
+      "description": "ci-cd reference recommends glab ci trace for debugging failures",
+      "check": "contains",
+      "file": "skills/drupal-gitlab/references/ci-cd.md",
+      "text": "glab ci trace"
+    },
+    {
+      "id": "S11",
+      "description": "SKILL.md Prerequisites section appears before cross-cutting gotchas",
+      "check": "order",
+      "first": "## Prerequisites",
+      "second": "## Cross-cutting gotchas"
+    },
+    {
+      "id": "S12",
+      "description": "SKILL.md entry point stays lean (under 150 lines)",
+      "check": "max_lines",
+      "limit": 150
+    },
+    {
+      "id": "S13",
+      "description": "SKILL.md routes to reference files (progressive disclosure map)",
+      "check": "contains",
+      "text": "references/merge-requests.md"
+    },
+    {
+      "id": "S14",
+      "description": "references/commit-messages.md exists",
+      "check": "file_exists",
+      "path": "skills/drupal-gitlab/references/commit-messages.md"
+    },
+    {
+      "id": "S15",
+      "description": "references/issues.md exists",
+      "check": "file_exists",
+      "path": "skills/drupal-gitlab/references/issues.md"
+    },
+    {
+      "id": "S16",
+      "description": "references/merge-requests.md exists",
+      "check": "file_exists",
+      "path": "skills/drupal-gitlab/references/merge-requests.md"
+    },
+    {
+      "id": "S17",
+      "description": "references/ci-cd.md exists",
+      "check": "file_exists",
+      "path": "skills/drupal-gitlab/references/ci-cd.md"
+    },
+    {
+      "id": "S18",
+      "description": "references/migration.md exists",
+      "check": "file_exists",
+      "path": "skills/drupal-gitlab/references/migration.md"
+    },
+    {
+      "id": "S19",
+      "description": "issues reference documents the /do:fork comment command",
+      "check": "contains",
+      "file": "skills/drupal-gitlab/references/issues.md",
+      "text": "/do:fork"
+    },
+    {
+      "id": "S20",
+      "description": "issues reference documents the state::rtbc scoped label",
+      "check": "contains",
+      "file": "skills/drupal-gitlab/references/issues.md",
+      "text": "state::rtbc"
+    },
+    {
+      "id": "S21",
+      "description": "migration reference translates RTBC terminology",
+      "check": "contains",
+      "file": "skills/drupal-gitlab/references/migration.md",
+      "text": "RTBC"
+    },
+    {
+      "id": "S22",
+      "description": "migration reference translates reroll/rebase terminology",
+      "check": "contains",
+      "file": "skills/drupal-gitlab/references/migration.md",
+      "text": "reroll"
+    },
+    {
+      "id": "S23",
+      "description": "references/issues.md stays focused (under 200 lines)",
+      "check": "max_lines",
+      "file": "skills/drupal-gitlab/references/issues.md",
+      "limit": 200
+    },
+    {
+      "id": "S24",
+      "description": "references/merge-requests.md stays focused (under 200 lines)",
+      "check": "max_lines",
+      "file": "skills/drupal-gitlab/references/merge-requests.md",
+      "limit": 200
+    },
+    {
+      "id": "S25",
+      "description": "references/migration.md stays focused (under 200 lines)",
+      "check": "max_lines",
+      "file": "skills/drupal-gitlab/references/migration.md",
+      "limit": 200
+    },
+    {
+      "id": "S26",
+      "description": "references/contribution.md exists",
+      "check": "file_exists",
+      "path": "skills/drupal-gitlab/references/contribution.md"
+    },
+    {
+      "id": "S27",
+      "description": "SKILL.md routing map points to the contribution reference",
+      "check": "contains",
+      "text": "references/contribution.md"
+    },
+    {
+      "id": "S28",
+      "description": "contribution reference branches on migrated vs legacy issue queue",
+      "check": "contains",
+      "file": "skills/drupal-gitlab/references/contribution.md",
+      "text": "drupalorg-cli"
+    },
+    {
+      "id": "S29",
+      "description": "contribution reference documents the fork-access path via /do:access",
+      "check": "contains",
+      "file": "skills/drupal-gitlab/references/contribution.md",
+      "text": "/do:access"
+    },
+    {
+      "id": "S30",
+      "description": "contribution reference wires the MR to the issue with Closes",
+      "check": "contains",
+      "file": "skills/drupal-gitlab/references/contribution.md",
+      "text": "Closes #"
+    },
+    {
+      "id": "S31",
+      "description": "references/contribution.md stays focused (under 200 lines)",
+      "check": "max_lines",
+      "file": "skills/drupal-gitlab/references/contribution.md",
+      "limit": 200
+    },
+    {
+      "id": "S32",
+      "description": "SKILL.md tells agents not to @-mention/assign contributors unprompted",
+      "check": "contains",
+      "text": "Don't pull specific people in unprompted"
+    },
+    {
+      "id": "S33",
+      "description": "SKILL.md guides agents to write permission-friendly commands (auto-approvable)",
+      "check": "contains",
+      "text": "auto-approve"
+    },
+    {
+      "id": "S34",
+      "description": "SKILL.md documents that --field reads a multi-line API value from a file (-F field=@file)",
+      "check": "contains",
+      "text": "-F field=@file"
+    },
+    {
+      "id": "S35",
+      "description": "merge-requests reference warns that merging one MR makes sibling MRs stale (rebase back-to-back)",
+      "check": "contains",
+      "file": "skills/drupal-gitlab/references/merge-requests.md",
+      "text": "back-to-back"
+    },
+    {
+      "id": "S36",
+      "description": "merge-requests reference notes squash-merge uses the MR title as the commit message",
+      "check": "contains",
+      "file": "skills/drupal-gitlab/references/merge-requests.md",
+      "text": "squash-merges use the MR"
+    },
+    {
+      "id": "S37",
+      "description": "SKILL.md documents that --raw-field keeps an @file value literal",
+      "check": "contains",
+      "text": "--raw-field` treats `@file` as a literal value"
+    }
+  ]
+}

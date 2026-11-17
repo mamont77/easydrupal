@@ -1,0 +1,29 @@
+{
+  "id": "B02",
+  "teaching": "A Conventional Commits message: '{type}: #{issue-id} Short summary' followed by By: lines using Drupal.org usernames (not @-prefixed, not GitLab display names).",
+  "provider": "claude",
+  "model": null,
+  "prompt": "Write the git commit message for a fix on Drupal issue 3588908, summary 'Resolve fatal error on cron run'. The reporter's Drupal.org username is webchick and I am zorz.",
+  "response": "Following the Drupal Conventional Commits format:\n\n```\nfix: #3588908 Resolve fatal error on cron run\n\nBy: webchick\nBy: zorz\n```\n\n`By:` lines credit both the reporter (webchick) and you (zorz) using Drupal.org usernames.",
+  "assertions": {
+    "must_contain_any": [
+      "#3588908"
+    ],
+    "found": [
+      "#3588908"
+    ],
+    "must_not_contain": [
+      "By: @"
+    ],
+    "found_bad": [],
+    "php_lint": null,
+    "markdown_structure": null
+  },
+  "passed": true,
+  "detail": "found: ['#3588908']",
+  "elapsed": 6.1,
+  "input_tokens": 2251,
+  "output_tokens": 92,
+  "cost_usd": 0.282874,
+  "timestamp": "2026-06-17T14:50:47Z"
+}

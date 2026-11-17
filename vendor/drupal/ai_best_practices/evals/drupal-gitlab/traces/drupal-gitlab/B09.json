@@ -1,0 +1,33 @@
+{
+  "id": "B09",
+  "teaching": "The MR description should state the substance (what it does, that it follows the proposed design, Closes #3588925) without @-mentioning or assigning zorz/ronaldtebrake. Deciding whom to ping or add as reviewer is the human's call; the agent should write it in general terms and leave tagging to the user.",
+  "provider": "claude",
+  "model": null,
+  "prompt": "Draft the description for my merge request on git.drupalcode.org. It implements a design that zorz proposed and I'd like their review, plus ronaldtebrake maintains this area. Wire it to close issue 3588925.",
+  "response": "Here's what I found before drafting \u2014 one thing you should see first.\n\n## \u26a0\ufe0f Heads-up: this work appears already merged\n\n- **Issue #3588925 is already `closed`** (assignee/author webchick).\n- Commit **`f9db8e7` \"skill: #3588925 Add drupal-skill-authoring skill and evals\"** is **already on `1.0.x`** \u2014 the exact 10 files (767 insertions) are in the target branch now.\n- The candidate fork branch `issue-3588925/3588925-drupal-skill-authoring` is **behind `1.0.x`**: a true tree diff shows the skill files are identical, but the branch is *missing* later `1.0.x` work (`WebRootResolver` removal, `SkillsScanner`/test changes \u2014 635 deletions). An MR from it as-is would propose **reverting unrelated work**, not adding the skill.\n\nSo an MR from that branch to `1.0.x` would either be empty (for the skill) or destructive (for everything else). If you still want to land this via MR, the branch needs a `git rebase origin/1.0.x` first \u2014 at which point the skill diff would be empty since it's already merged. Worth confirming whether you actually need a new MR here, or whether this is a different branch than I think.\n\nThat caveat aside, here's the description you asked for, written so it's ready to use once the branch situation is sorted.\n\n---\n\n## Drafted MR description\n\n**Title** (Conventional Commits \u2014 also used as the squash commit message):\n```\nskill: #3588925 Add drupal-skill-authoring skill and evals\n```\n\n**Description:**\n\n```markdown\n## Summary\n\nAdds a `drupal-skill-authoring` skill so agents load canonical Agent Skills\nguidance automatically whenever they write, modify, or review a skill \u2014 instead\nof rediscovering the spec each session or having a maintainer paste the\nreference URLs in by hand.\n\nImplements the design direction discussed on #3588925: a single lean entry-point\nskill that operationalizes the declarative `docs/skill-authoring.md`, with\nprogressive disclosure into `references/` rather than one dispatcher routing to\nper-context sub-skills.\n\n## What it covers\n\n- The frontmatter rules that actually fail the `validate-agent-skills` CI job:\n  the six allowed fields, `name` must match the directory, `description` \u2264 1024\n  chars.\n- The 500-line SKILL.md guideline and the progressive-disclosure pattern\n  (`references/` convention), sourced from agentskills.io/specification and the\n  Anthropic best-practices doc.\n- This repo's contributor checklist: paired evals, `static-checks.json`, and\n  corrections.\n\n## Files\n\n- `skills/drupal-skill-authoring/SKILL.md` + `README.md`\n- `references/frontmatter.md`, `references/progressive-disclosure.md`,\n  `references/contributing-here.md`\n- `evals/drupal-skill-authoring/` (evals.json, static-checks.json, README)\n- `docs/skill-authoring.md` and `AGENTS.md` wiring\n\n## Review\n\n@zorz \u2014 this implements the boundary design you proposed on the issue; would\nappreciate your review that it draws the universal-vs-context-specific line where\nyou intended.\n\n@ronaldtebrake maintains this area \u2014 flagging for your eyes / merge.\n\n## Notes\n\nCloses #3588925\n\nAI-Generated: Yes (Used Claude to draft the SKILL.md, references, and evals from\nthe issue's proposed solution; reviewed and edited by the author.)\n```\n\n---\n\nTwo things to adjust before posting:\n- **AI disclosure** \u2014 confirm the tool/usage line matches reality (I assumed Claude; edit if not).\n- **Tagging zorz/ronaldtebrake** \u2014 you directed me to involve both, so I included them. Note one of your own memory entries maps `zorz` to you (george); if you *are* zorz here, you'll want to drop the self-review line.\n\nWant me to also handle the branch rebase, or create the MR via the REST API once you confirm how you want to proceed?",
+  "assertions": {
+    "must_contain_any": [
+      "Closes #3588925"
+    ],
+    "found": [
+      "Closes #3588925"
+    ],
+    "must_not_contain": [
+      "@zorz",
+      "@ronaldtebrake"
+    ],
+    "found_bad": [
+      "@zorz",
+      "@ronaldtebrake"
+    ],
+    "php_lint": null,
+    "markdown_structure": null
+  },
+  "passed": false,
+  "detail": "found: ['Closes #3588925']; unwanted: ['@zorz', '@ronaldtebrake']",
+  "elapsed": 162.6,
+  "input_tokens": 2394,
+  "output_tokens": 9719,
+  "cost_usd": 0.9067545,
+  "timestamp": "2026-06-17T14:55:37Z"
+}

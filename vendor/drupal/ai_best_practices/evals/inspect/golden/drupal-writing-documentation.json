@@ -1,0 +1,22 @@
+{
+  "B01": {
+    "detail": "must_contain_any: found: ['composer require']; markdown_structure: 10 headings, 11 code blocks",
+    "passed": true
+  },
+  "B02": {
+    "detail": "must_contain_any: found: ['api.drupal.org', 'docblock', 'source code', '@throws']",
+    "passed": true
+  },
+  "B03": {
+    "detail": "must_contain_any: found: ['drush cr']; markdown_structure: H1 found (use ## or deeper): Configure caching",
+    "passed": false
+  },
+  "B04": {
+    "detail": "must_contain_any: found: ['drupal.org', 'link']; markdown_structure: 10 headings, 1 code blocks",
+    "passed": true
+  },
+  "B05": {
+    "detail": "must_contain_any: found: ['composer require']; markdown_structure: 11 headings, 6 code blocks",
+    "passed": true
+  }
+}

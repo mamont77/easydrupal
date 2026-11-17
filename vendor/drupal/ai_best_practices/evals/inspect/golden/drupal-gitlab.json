@@ -1,0 +1,38 @@
+{
+  "B01": {
+    "detail": "must_contain_any: found: ['--repo \"git.drupalcode.org/project/token\"']",
+    "passed": true
+  },
+  "B02": {
+    "detail": "must_contain_any: found: ['#3588908']",
+    "passed": true
+  },
+  "B03": {
+    "detail": "must_contain_any: found: ['REST API']",
+    "passed": true
+  },
+  "B04": {
+    "detail": "must_contain_any: found: ['web UI', 'UI']",
+    "passed": true
+  },
+  "B05": {
+    "detail": "must_contain_any: found: ['Create issue fork', 'management', 'provision']",
+    "passed": true
+  },
+  "B06": {
+    "detail": "must_contain_any: found: ['GraphQL']; must_not_contain: unwanted: ['--label']",
+    "passed": false
+  },
+  "B07": {
+    "detail": "must_contain_any: found: ['legacy']",
+    "passed": true
+  },
+  "B08": {
+    "detail": "must_contain_any: found: ['/do:access']",
+    "passed": true
+  },
+  "B09": {
+    "detail": "must_contain_any: found: ['Closes #3588925']; must_not_contain: unwanted: ['@zorz', '@ronaldtebrake']",
+    "passed": false
+  }
+}

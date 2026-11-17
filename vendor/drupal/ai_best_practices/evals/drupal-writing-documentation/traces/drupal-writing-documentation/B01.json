@@ -1,0 +1,58 @@
+{
+  "id": "B01",
+  "teaching": "A well-structured documentation page with version info, prerequisites, step-by-step instructions using Composer as the happy path, and links to canonical Drupal documentation rather than reproducing it.",
+  "provider": "claude",
+  "model": null,
+  "prompt": "Write a drupal.org handbook page explaining how to install a contributed module using Composer on a Drupal 11 site. Target audience: someone who has Drupal running locally but has never installed a contrib module before. Use '## Prerequisites' as the first section. Use ## headings for sections, not #. Output the page in Markdown. Do not add explanations outside the page itself.",
+  "response": "Installing a contributed module with Composer on Drupal 11.\n\n```markdown\nComposer is the only supported way to add a contributed module to a Drupal 11\nsite. It downloads the module, resolves its dependencies, and records the exact\nversion in your `composer.lock` so the same code can be deployed everywhere.\nThis page covers the Drupal-specific parts. If you are new to Composer itself,\nread the [Composer documentation](https://getcomposer.org/doc/) first.\n\n## Prerequisites\n\n- A working Drupal 11 site you can run locally. If you do not have one yet,\n  follow\n  [Local development guide](https://www.drupal.org/docs/develop/local-server-setup).\n- Composer 2.x available on the command line (`composer --version`).\n- Command-line access to the directory containing your site's `composer.json`.\n  This is the project root, one level above `web/` (or `docroot/`) in a standard\n  install. It is **not** the same as your Drupal docroot.\n- A site built from a Composer template such as `drupal/recommended-project`.\n  If your project root has no `composer.json`, your site was not built with\n  Composer and you need to\n  [convert it first](https://www.drupal.org/docs/develop/using-composer/manage-an-existing-drupal-site-with-composer).\n\n## Quick start\n\nFrom your project root:\n\n```bash\ncomposer require drupal/pathauto\ndrush pm:install pathauto\n```\n\nThat is the whole process for most modules. The rest of this page explains what\nthose commands do and what to do when they are not enough.\n\n## Step 1: Find the module's project name\n\nEvery module on drupal.org has a machine name in its URL. For\n`https://www.drupal.org/project/pathauto`, the machine name is `pathauto`, and\nthe Composer package name is `drupal/pathauto`.\n\nUse the machine name, not the human-readable title, and not the name of a\nsubmodule. Submodules ship inside their parent project and are never required\nseparately.\n\nBefore requiring anything, check the project page for a release marked\ncompatible with Drupal 11. The release table shows core compatibility for each\nrelease.\n\n## Step 2: Require the module\n\n```bash\ncomposer require drupal/pathauto\n```\n\nComposer downloads the module into `web/modules/contrib/pathauto`, pulls in any\ndependencies (including other contrib modules), and updates `composer.json` and\n`composer.lock`.\n\nTo pin a specific major version, add a constraint:\n\n```bash\ncomposer require drupal/pathauto:^1.13\n```\n\nPrefer letting Composer choose unless you have a reason to pin. It already\nresolves to a release compatible with your installed core version.\n\n## Step 3: Install the module in Drupal\n\nDownloading a module does not enable it. Drupal still needs to install it, which\ncreates its database tables and default configuration.\n\nWith Drush:\n\n```bash\ndrush pm:install pathauto\n```\n\nThrough the admin UI, go to **Manage > Extend** (`/admin/modules`), find the\nmodule, tick its checkbox, and press **Install**.\n\nBoth do the same thing. Use whichever fits your workflow.\n\n## Step 4: Commit the result\n\nCommit `composer.json` and `composer.lock`. Do not commit the downloaded module\ncode itself: the standard Drupal `.gitignore` excludes `web/modules/contrib`\nbecause Composer rebuilds it from the lock file on deploy.\n\n## Working with development releases\n\nModules without a stable release need an explicit constraint and a relaxed\nstability setting:\n\n```bash\ncomposer require 'drupal/my_module:^2@alpha'\n```\n\nFor a branch that has no tagged release at all:\n\n```bash\ncomposer require 'drupal/my_module:2.0.x-dev@dev'\n```\n\nSet `\"minimum-stability\": \"dev\"` and `\"prefer-stable\": true` in `composer.json`\nif you use several of these. Treat dev releases as untested on production sites.\n\n## Common problems\n\n**\"Could not find a matching version of package drupal/name\"**\n\nThe most common causes, in order:\n\n1. A typo in the machine name.\n2. The project has no release compatible with your core version. Check the\n   project page.\n3. Your `composer.json` is missing the Drupal package repository. It should\n   contain:\n\n   ```json\n   \"repositories\": [\n       {\n           \"type\": \"composer\",\n           \"url\": \"https://packages.drupal.org/8\"\n       }\n   ]\n   ```\n\n   That URL is correct for Drupal 11 despite the `8` in the path. It is the\n   endpoint for all modern Drupal versions.\n\n**\"Your requirements could not be resolved\"**\n\nComposer is reporting a genuine conflict, usually between the module's\nrequirements and your installed core or PHP version. Read the output from the\nbottom up: the last few lines name the packages that actually clash. Do not\nresolve this with `--ignore-platform-reqs`, which hides the problem rather than\nfixing it.\n\n**The module downloaded but does not appear on the Extend page**\n\nClear the cache with `drush cache:rebuild`, and confirm the module landed in\n`web/modules/contrib/` rather than somewhere unexpected. If it is in the wrong\nplace, check that `drupal/core-composer-scaffold` and\n`composer/installers` are present in your `composer.json`.\n\n## Updating and removing\n\nUpdate a single module and its dependencies:\n\n```bash\ncomposer update drupal/pathauto --with-dependencies\n```\n\nThen run database updates:\n\n```bash\ndrush updatedb\n```\n\nRemove a module by uninstalling it in Drupal first, then dropping the package:\n\n```bash\ndrush pm:uninstall pathauto\ncomposer remove drupal/pathauto\n```\n\nUninstalling first matters. It lets the module clean up its configuration and\ndatabase tables. Removing the code while the module is still installed leaves\nthe site with orphaned configuration referencing code that no longer exists.\n\n## Next steps\n\n- [Applying patches with Composer](https://www.drupal.org/docs/develop/using-composer/manage-dependencies#patches)\n- [Update Drupal core with Composer](https://www.drupal.org/docs/updating-drupal)\n- [Using Composer to install Drupal and manage dependencies](https://www.drupal.org/docs/develop/using-composer)\n```",
+  "checks": [
+    {
+      "kind": "must_contain_any",
+      "values": [
+        "composer require"
+      ]
+    },
+    {
+      "kind": "must_not_contain",
+      "values": [
+        "Click here",
+        "click here"
+      ]
+    },
+    {
+      "kind": "markdown_structure",
+      "min_headings": 3,
+      "required_sections": [
+        "prerequisite"
+      ],
+      "min_code_blocks": 1,
+      "metadata": {
+        "min_paragraphs": 8
+      }
+    }
+  ],
+  "check_results": [
+    {
+      "kind": "must_contain_any",
+      "passed": true,
+      "detail": "found: ['composer require']"
+    },
+    {
+      "kind": "must_not_contain",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "kind": "markdown_structure",
+      "passed": true,
+      "detail": "10 headings, 11 code blocks"
+    }
+  ],
+  "passed": true,
+  "detail": "must_contain_any: found: ['composer require']; markdown_structure: 10 headings, 11 code blocks",
+  "elapsed": 39.9,
+  "input_tokens": 2,
+  "output_tokens": 2681,
+  "cost_usd": 0.18690299999999999,
+  "timestamp": "2026-08-08T05:07:53Z"
+}

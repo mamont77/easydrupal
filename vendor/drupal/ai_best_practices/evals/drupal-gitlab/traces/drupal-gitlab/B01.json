@@ -1,0 +1,32 @@
+{
+  "id": "B01",
+  "teaching": "The command targets git.drupalcode.org via the --repo flag (the hostname is in the repo path). glab resolves the Drupal.org token automatically \u2014 no GITLAB_HOST env var, no manual token extraction, and no change to any global default host.",
+  "provider": "claude",
+  "model": null,
+  "prompt": "I'm working on a Drupal contrib module hosted on git.drupalcode.org. Show me the glab command to list the open issues for the project 'token'.",
+  "response": "Here's the command:\n\n```bash\nglab issue list --repo \"git.drupalcode.org/project/token\"\n```\n\nThis lists open issues (work items) by default. A few useful additions:\n\n- `glab issue view <id> --repo \"git.drupalcode.org/project/token\"` \u2014 view a specific issue\n- `--web` \u2014 open the result in your browser\n- `-o json` \u2014 JSON output for scripting\n\nOne caveat: `token` is an older, well-established module, so if this returns nothing on an obviously active project, it may still be on Drupal's legacy issue queue (which `glab` can't see). In that case the issues live at `www.drupal.org/project/token/issues`.",
+  "assertions": {
+    "must_contain_any": [
+      "--repo \"git.drupalcode.org/project/token\"",
+      "--repo 'git.drupalcode.org/project/token'",
+      "--repo git.drupalcode.org/project/token"
+    ],
+    "found": [
+      "--repo \"git.drupalcode.org/project/token\""
+    ],
+    "must_not_contain": [
+      "glab config set host",
+      "GITLAB_HOST"
+    ],
+    "found_bad": [],
+    "php_lint": null,
+    "markdown_structure": null
+  },
+  "passed": true,
+  "detail": "found: ['--repo \"git.drupalcode.org/project/token\"']",
+  "elapsed": 15.1,
+  "input_tokens": 2251,
+  "output_tokens": 212,
+  "cost_usd": 0.63133,
+  "timestamp": "2026-06-17T14:50:41Z"
+}

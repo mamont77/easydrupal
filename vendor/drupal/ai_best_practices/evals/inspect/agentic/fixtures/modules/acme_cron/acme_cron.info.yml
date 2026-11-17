@@ -1,0 +1,5 @@
+name: 'Acme cron'
+type: module
+description: 'Periodic sync with the Acme API.'
+core_version_requirement: ^11
+package: Acme

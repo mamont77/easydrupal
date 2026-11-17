@@ -117,7 +117,9 @@
             "mglaman/composer-drupal-lenient": true,
             "oomphinc/composer-installers-extender": true,
             "symfony/runtime": true,
-            "topfloor/composer-cleanup-vcs-dirs": true
+            "topfloor/composer-cleanup-vcs-dirs": true,
+            "drupal/ai_best_practices": true,
+            "phpstan/extension-installer": true
         }
     },
     "extra": {
@@ -145,21 +147,52 @@
                 "themes/custom/*/composer.json"
             ]
         },
-        "installer-types": ["component", "bower-asset", "npm-asset"],
+        "installer-types": [
+            "component",
+            "bower-asset",
+            "npm-asset"
+        ],
         "installer-paths": {
-            "core": ["type:drupal-core"],
-            "libraries/chosen": ["npm-asset/chosen-js"],
-            "libraries/slick": ["bower-asset/slick-carousel", "npm-asset/slick-carousel"],
-            "libraries/{$name}": ["type:drupal-library", "type:component", "type:bower-asset", "type:npm-asset"],
-            "modules/contrib/{$name}": ["type:drupal-module"],
-            "profiles/contrib/{$name}": ["type:drupal-profile"],
-            "themes/contrib/{$name}": ["type:drupal-theme"],
-            "drush/Commands/contrib/{$name}": ["type:drupal-drush"],
-            "modules/custom/{$name}": ["type:drupal-custom-module"],
-            "themes/custom/{$name}": ["type:drupal-custom-theme"]
+            "core": [
+                "type:drupal-core"
+            ],
+            "libraries/chosen": [
+                "npm-asset/chosen-js"
+            ],
+            "libraries/slick": [
+                "bower-asset/slick-carousel",
+                "npm-asset/slick-carousel"
+            ],
+            "libraries/{$name}": [
+                "type:drupal-library",
+                "type:component",
+                "type:bower-asset",
+                "type:npm-asset"
+            ],
+            "modules/contrib/{$name}": [
+                "type:drupal-module"
+            ],
+            "profiles/contrib/{$name}": [
+                "type:drupal-profile"
+            ],
+            "themes/contrib/{$name}": [
+                "type:drupal-theme"
+            ],
+            "drush/Commands/contrib/{$name}": [
+                "type:drupal-drush"
+            ],
+            "modules/custom/{$name}": [
+                "type:drupal-custom-module"
+            ],
+            "themes/custom/{$name}": [
+                "type:drupal-custom-theme"
+            ]
         },
         "drupal-core-project-message": {
-            "include-keys": ["homepage", "support"],
+            "include-keys": [
+                "homepage",
+                "support"
+            ],
             "post-create-project-cmd-message": [
                 "<bg=blue;fg=white>                                                         </>",
                 "<bg=blue;fg=white>  Congratulations, you’ve installed the Drupal codebase  </>",
@@ -167,7 +200,6 @@
                 "<bg=blue;fg=white>                                                         </>",
                 "",
                 "<bg=yellow;fg=black>Next steps</>:",
-
                 "  * Install the site: https://www.drupal.org/docs/8/install",
                 "  * Read the user guide: https://www.drupal.org/docs/user_guide/en/index.html",
                 "  * Get support: https://www.drupal.org/support",
@@ -235,13 +267,10 @@
         }
     },
     "scripts": {
-        "code-sniff": [
-            "./vendor/bin/phpcs --standard=Drupal --extensions=php,module,inc,install,test,profile,theme,info,txt,md --ignore=node_modules,bower_components,vendor,styleguide ./modules/custom ./themes/custom",
-            "./vendor/bin/phpcs --standard=DrupalPractice --extensions=php,module,inc,install,test,profile,theme,info,txt,md --ignore=node_modules,bower_components,vendor,styleguide ./modules/custom  ./themes/custom"
-        ],
-        "code-fix": [
-            "./vendor/bin/phpcbf --standard=Drupal --extensions=php,module,inc,install,test,profile,theme,info,txt,md --ignore=node_modules,bower_components,vendor,styleguide ./modules/custom ./themes/custom",
-            "./vendor/bin/phpcbf --standard=DrupalPractice --extensions=php,module,inc,install,test,profile,theme,info,txt,md --ignore=node_modules,bower_components,vendor,styleguide ./modules/custom ./themes/custom"
-        ]
+        "drupal-ai": "Drupal\\AiBestPractices\\Console\\AiBestPracticesApplication::runFromComposer"
+    },
+    "require-dev": {
+        "drupal/ai_best_practices": "1.0.x-dev",
+        "drupal/core-dev": "^11.4"
     }
 }

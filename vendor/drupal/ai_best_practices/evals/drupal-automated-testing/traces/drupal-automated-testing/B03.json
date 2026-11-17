@@ -1,0 +1,48 @@
+{
+  "id": "B03",
+  "teaching": "A complete FunctionalJavascript test using WebDriverTestBase with waitForElement wrapped in assertNotEmpty to avoid flaky assertions.",
+  "provider": "claude",
+  "model": null,
+  "prompt": "Generate a FunctionalJavascript test for a Drupal form where clicking a 'Show advanced' checkbox reveals a hidden fieldset with CSS selector '#edit-advanced-wrapper'. Write the complete test file and show the code in your response.",
+  "response": "Here's the complete test file. Path: `tests/src/FunctionalJavascript/AdvancedSettingsRevealTest.php`\n\n```php\n<?php\n\ndeclare(strict_types=1);\n\nnamespace Drupal\\Tests\\my_module\\FunctionalJavascript;\n\nuse Drupal\\FunctionalJavascriptTests\\WebDriverTestBase;\nuse PHPUnit\\Framework\\Attributes\\Group;\nuse PHPUnit\\Framework\\Attributes\\RunTestsInSeparateProcesses;\n\n/**\n * Tests the 'Show advanced' reveal on the my_module settings form.\n */\n#[Group('my_module')]\n#[RunTestsInSeparateProcesses]\nclass AdvancedSettingsRevealTest extends WebDriverTestBase {\n\n  /**\n   * {@inheritdoc}\n   */\n  protected static $modules = ['my_module'];\n\n  /**\n   * {@inheritdoc}\n   */\n  protected $defaultTheme = 'stark';\n\n  /**\n   * {@inheritdoc}\n   */\n  protected function setUp(): void {\n    parent::setUp();\n\n    $this->drupalLogin($this->drupalCreateUser(['administer my_module']));\n  }\n\n  /**\n   * Tests that the advanced fieldset is hidden until the checkbox is checked.\n   */\n  public function testAdvancedFieldsetToggles(): void {\n    $this->drupalGet('/admin/config/system/my-module');\n    $page = $this->getSession()->getPage();\n\n    // With #states the wrapper is already in the DOM, just hidden. Assert on\n    // visibility, not presence: waitForElement() would match immediately and\n    // pass even if the reveal behaviour were completely broken.\n    $wrapper = $page->find('css', '#edit-advanced-wrapper');\n    $this->assertNotNull($wrapper, 'The advanced fieldset is rendered.');\n    $this->assertFalse($wrapper->isVisible(), 'The advanced fieldset starts hidden.');\n\n    $page->checkField('show_advanced');\n\n    $this->assertNotEmpty(\n      $this->assertSession()->waitForElementVisible('css', '#edit-advanced-wrapper'),\n      'The advanced fieldset becomes visible after checking \"Show advanced\".'\n    );\n\n    // Unchecking hides it again. There is no waitForElementHidden(), and the\n    // element is hidden rather than removed, so poll the DOM directly.\n    $page->uncheckField('show_advanced');\n    $this->assertJsCondition(\n      'document.querySelector(\"#edit-advanced-wrapper\").offsetParent === null'\n    );\n    $this->assertFalse($wrapper->isVisible(), 'The advanced fieldset is hidden again.');\n  }\n\n  /**\n   * Tests that a value entered in the revealed fieldset is submitted.\n   */\n  public function testRevealedFieldIsSubmitted(): void {\n    $this->drupalGet('/admin/config/system/my-module');\n    $page = $this->getSession()->getPage();\n\n    $page->checkField('show_advanced');\n    $this->assertNotEmpty(\n      $this->assertSession()->waitForElementVisible('css', '#edit-advanced-wrapper')\n    );\n\n    $page->fillField('advanced_threshold', '42');\n    $page->pressButton('Save configuration');\n\n    $this->assertSession()->pageTextContains('The configuration options have been saved.');\n    $this->assertSame(\n      42,\n      $this->config('my_module.settings')->get('advanced_threshold')\n    );\n  }\n\n}\n```\n\n**Assumptions to adjust for your module:** module name `my_module`, route `/admin/config/system/my-module`, permission `administer my_module`, checkbox `#name` of `show_advanced`, and the field `advanced_threshold` inside the fieldset. The `#[Group]` attribute needs PHPUnit 10+ (Drupal 11.2+); on 10.x use the `@group my_module` docblock annotation instead.\n\n**If the reveal is AJAX rather than `#states`** the wrapper genuinely does not exist on initial load, so the first block changes to:\n\n```php\n$this->assertSession()->elementNotExists('css', '#edit-advanced-wrapper');\n$page->checkField('show_advanced');\n$this->assertSession()->assertWaitOnAjaxRequest();\n$this->assertNotEmpty(\n  $this->assertSession()->waitForElement('css', '#edit-advanced-wrapper')\n);\n```\n\nRun it with `SIMPLETEST_BASE_URL` and `SIMPLETEST_DB` set, plus `MINK_DRIVER_ARGS_WEBDRIVER` pointing at your Chrome/Selenium container:\n\n```bash\nddev exec -e SIMPLETEST_BASE_URL=http://web \\\n  -e SIMPLETEST_DB=mysql://db:db@db/db \\\n  -e MINK_DRIVER_ARGS_WEBDRIVER='[\"chrome\",{\"browserName\":\"chrome\",\"goog:chromeOptions\":{\"args\":[\"--disable-gpu\",\"--headless\"]}},\"http://chrome:9515\"]' \\\n  vendor/bin/phpunit -c web/core \\\n  web/modules/custom/my_module/tests/src/FunctionalJavascript/AdvancedSettingsRevealTest.php\n```",
+  "checks": [
+    {
+      "kind": "must_contain_any",
+      "values": [
+        "waitForElement",
+        "assertNotEmpty"
+      ]
+    },
+    {
+      "kind": "php_lint"
+    },
+    {
+      "kind": "markdown_structure",
+      "min_code_blocks": 1
+    }
+  ],
+  "check_results": [
+    {
+      "kind": "must_contain_any",
+      "passed": true,
+      "detail": "found: ['waitForElement', 'assertNotEmpty']"
+    },
+    {
+      "kind": "php_lint",
+      "passed": true,
+      "detail": "2 block(s) OK"
+    },
+    {
+      "kind": "markdown_structure",
+      "passed": true,
+      "detail": "3 code blocks"
+    }
+  ],
+  "passed": true,
+  "detail": "must_contain_any: found: ['waitForElement', 'assertNotEmpty']; php_lint: 2 block(s) OK; markdown_structure: 3 code blocks",
+  "elapsed": 52.1,
+  "input_tokens": 2,
+  "output_tokens": 4460,
+  "cost_usd": 0.228859,
+  "timestamp": "2026-08-08T05:05:58Z"
+}

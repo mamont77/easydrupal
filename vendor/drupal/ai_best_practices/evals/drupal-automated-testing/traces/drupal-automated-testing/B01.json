@@ -1,0 +1,51 @@
+{
+  "id": "B01",
+  "teaching": "A complete PHP Kernel test file using KernelTestBase with correct namespace, RunTestsInSeparateProcesses attribute, and explicit setUp with installConfig/installSchema.",
+  "provider": "claude",
+  "model": null,
+  "prompt": "Generate a Kernel test class for a Drupal module called my_module that tests a service named my_module.calculator. The service has a method add(int $a, int $b): int. Write the complete test file.",
+  "response": "Here is the complete test file. It belongs at `my_module/tests/src/Kernel/CalculatorTest.php`.\n\n```php\n<?php\n\ndeclare(strict_types=1);\n\nnamespace Drupal\\Tests\\my_module\\Kernel;\n\nuse Drupal\\KernelTests\\KernelTestBase;\nuse PHPUnit\\Framework\\Attributes\\Group;\nuse PHPUnit\\Framework\\Attributes\\RunTestsInSeparateProcesses;\nuse PHPUnit\\Framework\\Attributes\\TestWith;\n\n/**\n * Tests the my_module.calculator service.\n */\n#[Group('my_module')]\n#[RunTestsInSeparateProcesses]\nclass CalculatorTest extends KernelTestBase {\n\n  /**\n   * {@inheritdoc}\n   */\n  protected static $modules = ['my_module'];\n\n  /**\n   * The calculator service under test.\n   */\n  protected object $calculator;\n\n  /**\n   * {@inheritdoc}\n   */\n  protected function setUp(): void {\n    parent::setUp();\n    $this->calculator = $this->container->get('my_module.calculator');\n  }\n\n  /**\n   * Tests that the service is registered in the container.\n   */\n  public function testServiceIsRegistered(): void {\n    $this->assertTrue($this->container->has('my_module.calculator'));\n  }\n\n  /**\n   * Tests add() with a range of integer inputs.\n   *\n   * @param int $a\n   *   The first operand.\n   * @param int $b\n   *   The second operand.\n   * @param int $expected\n   *   The expected sum.\n   */\n  #[TestWith([1, 2, 3])]\n  #[TestWith([0, 0, 0])]\n  #[TestWith([5, 0, 5])]\n  #[TestWith([-3, 8, 5])]\n  #[TestWith([-4, -6, -10])]\n  #[TestWith([PHP_INT_MAX - 1, 1, PHP_INT_MAX])]\n  public function testAdd(int $a, int $b, int $expected): void {\n    $this->assertSame($expected, $this->calculator->add($a, $b));\n  }\n\n  /**\n   * Tests that add() is commutative.\n   */\n  #[TestWith([7, 11])]\n  #[TestWith([-7, 11])]\n  #[TestWith([0, 42])]\n  public function testAddIsCommutative(int $a, int $b): void {\n    $this->assertSame(\n      $this->calculator->add($a, $b),\n      $this->calculator->add($b, $a)\n    );\n  }\n\n}\n```\n\nA few notes on the choices:\n\n- **Kernel is the right type here.** A service with a pure integer method has no UI and no HTTP surface, so Functional would just be slower for no gain. It is still a Kernel test rather than a Unit test because the point is that the service resolves correctly out of the container.\n- **No `installEntitySchema()` / `installConfig()` calls.** Kernel tests install nothing by default, but this service touches neither entities nor config. If your real calculator reads settings, add `$this->installConfig(['my_module']);` to `setUp()` \u2014 a \"config object does not exist\" error is the tell.\n- **`assertSame`, not `assertEquals`.** The method is typed `: int`, so identity comparison catches a string `\"3\"` sneaking through; `assertEquals` would not.\n- **`protected object $calculator`** is a placeholder type. Replace it with the real class (e.g. `protected Calculator $calculator;` plus the matching `use`) once you have the class name \u2014 that gets you static analysis on the call sites.\n\nIf `add()` should reject or clamp overflow, that needs its own test; the `PHP_INT_MAX - 1` case above only covers the boundary that stays in range, since actual overflow in PHP silently produces a float and would fail the `int` return type.",
+  "checks": [
+    {
+      "kind": "must_contain_any",
+      "values": [
+        "KernelTestBase",
+        "RunTestsInSeparateProcesses"
+      ]
+    },
+    {
+      "kind": "must_not_contain",
+      "values": [
+        "extends UnitTestCase",
+        "extends BrowserTestBase"
+      ]
+    },
+    {
+      "kind": "php_lint"
+    }
+  ],
+  "check_results": [
+    {
+      "kind": "must_contain_any",
+      "passed": true,
+      "detail": "found: ['KernelTestBase', 'RunTestsInSeparateProcesses']"
+    },
+    {
+      "kind": "must_not_contain",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "kind": "php_lint",
+      "passed": true,
+      "detail": "1 block(s) OK"
+    }
+  ],
+  "passed": true,
+  "detail": "must_contain_any: found: ['KernelTestBase', 'RunTestsInSeparateProcesses']; php_lint: 1 block(s) OK",
+  "elapsed": 27.4,
+  "input_tokens": 2,
+  "output_tokens": 2057,
+  "cost_usd": 0.19643949999999996,
+  "timestamp": "2026-08-08T05:04:43Z"
+}

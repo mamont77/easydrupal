@@ -1,0 +1,62 @@
+{
+  "id": "B05",
+  "teaching": "A README following the drupal.org README template with sections for description, requirements, installation, configuration, and maintainers. Should mention specific versions and use Composer for installation.",
+  "provider": "claude",
+  "model": null,
+  "prompt": "Write a README.md for a Drupal 11 contrib module called 'smart_cache' that provides configurable cache tag grouping. The module lets site builders define groups of cache tags that are invalidated together. It requires Drupal 11.0+ and PHP 8.3+. Follow Drupal contrib documentation standards. Output in Markdown.",
+  "response": "The repo README is restored (`git diff` on it is clean). The smart_cache README is at `smart_cache/README.md`:\n\n```markdown\n# Smart Cache\n\nSmart Cache lets site builders define named groups of cache tags that are\ninvalidated together. Invalidate the group, and every tag in it is invalidated\nin one operation.\n\n## Table of contents\n\n- [Requirements](#requirements)\n- [Installation](#installation)\n- [Configuration](#configuration)\n- [Usage](#usage)\n- [Troubleshooting](#troubleshooting)\n- [Maintainers](#maintainers)\n\n## Requirements\n\n- Drupal 11.0 or later\n- PHP 8.3 or later\n\nThis module requires no modules outside of Drupal core.\n\n## Installation\n\nInstall as you would normally install a contributed Drupal module. See\n[Installing modules](https://www.drupal.org/docs/extending-drupal/installing-modules)\nfor further information.\n\n```\ncomposer require drupal/smart_cache\ndrush pm:install smart_cache\n```\n\n## Configuration\n\n1. Go to **Administration \u203a Configuration \u203a Development \u203a Smart Cache**\n   (`/admin/config/development/smart-cache`).\n2. Select **Add cache tag group**.\n3. Give the group a label and a machine name.\n4. List the cache tags that belong to the group, one per line \u2014 for example:\n\n   ```\n   node_list\n   config:system.menu.main\n   taxonomy_term_list:tags\n   ```\n\n5. Save. The group is stored as a config entity, so it can be exported with\n   the rest of your site configuration.\n\nGroups are configuration, not content. Deploy them through your normal\nconfiguration workflow rather than editing them on production.\n\n## Usage\n\n### Invalidating a group in code\n\nInject the `smart_cache.invalidator` service and invalidate by group machine\nname:\n\n```php\n$this->smartCacheInvalidator->invalidateGroup('editorial_landing_pages');\n```\n\nMultiple groups at once:\n\n```php\n$this->smartCacheInvalidator->invalidateGroups([\n  'editorial_landing_pages',\n  'product_feeds',\n]);\n```\n\nInvalidating a group is equivalent to passing every tag in that group to\n`Drupal\\Core\\Cache\\CacheTagsInvalidatorInterface::invalidateTags()`. Grouping\ndoes not change invalidation semantics \u2014 it only gives you one name to refer\nto a set of tags that always change together.\n\n### When to use a group instead of tags directly\n\nReach for a group when the same set of tags is invalidated from several\nplaces \u2014 a cron job, a form submit handler, and a Drush command, say \u2014 and you\nwant that set defined once, in configuration, rather than repeated in code.\n\nDo not use a group as a substitute for correct cache metadata on your render\narrays. If a page is missing a cache tag it should have declared, add the tag;\na group will not fix incorrect cacheability metadata. See\n[Cacheability of render arrays](https://www.drupal.org/docs/drupal-apis/render-api/cacheability-of-render-arrays)\nfor how tags reach the render pipeline in the first place.\n\n### Invalidating from Drush\n\n```\ndrush smart-cache:invalidate editorial_landing_pages\n```\n\n## Troubleshooting\n\n**A group exists but invalidating it has no effect.** Check that the tags in\nthe group are the tags actually attached to the cached output. Enable the\n`page_cache` and `dynamic_page_cache` debug headers, load the page, and\ncompare `X-Drupal-Cache-Tags` against your group.\n\n**A tag name is rejected on save.** Cache tag names may not contain spaces.\nGroup tags are validated against the same rules core applies in\n`Drupal\\Core\\Cache\\Cache::validateTags()`.\n\n**Invalidating a group clears more than expected.** Cache tags cascade: a tag\nsuch as `node_list` is attached to many views and blocks. This is core\nbehaviour, not a Smart Cache behaviour. Narrow the tags in the group if the\nblast radius is too wide.\n\n## Maintainers\n\n- Your Name - [your-drupal-username](https://www.drupal.org/u/your-drupal-username)\n\nIssues and patches are welcome in the\n[issue queue](https://www.drupal.org/project/issues/smart_cache).\n```\n\nNotes on the choices:\n\n- **Structure follows the drupal.org README template** \u2014 Requirements, Installation, Configuration, Troubleshooting, Maintainers, with a table of contents.\n- **Documents Drupal, links to everything else.** Installing a contrib module is not smart_cache-specific, so that section links to the core docs rather than explaining Composer.\n- **Opinionated.** The \"When to use a group instead of tags directly\" section names the case where grouping earns its keep and explicitly says a group is not a fix for wrong cacheability metadata \u2014 the most likely way a site builder misuses this module.\n- **Terminology.** Config entity, cache tag, render array, machine name, bundle-free \u2014 used in core's sense, and linked to the Render API cacheability page for the surrounding subsystem.\n\nTwo things I invented because the brief didn't specify them, and you should correct them against the real module: the service name (`smart_cache.invalidator`), the Drush command name, and the admin path. The maintainer line is a placeholder.",
+  "checks": [
+    {
+      "kind": "must_contain_any",
+      "values": [
+        "composer require"
+      ]
+    },
+    {
+      "kind": "must_not_contain",
+      "values": [
+        "$ composer",
+        "# composer",
+        "Click here",
+        "click here"
+      ]
+    },
+    {
+      "kind": "markdown_structure",
+      "min_headings": 4,
+      "required_sections": [
+        "requirement",
+        "installation",
+        "configuration"
+      ],
+      "min_code_blocks": 1,
+      "metadata": {
+        "min_paragraphs": 6
+      }
+    }
+  ],
+  "check_results": [
+    {
+      "kind": "must_contain_any",
+      "passed": true,
+      "detail": "found: ['composer require']"
+    },
+    {
+      "kind": "must_not_contain",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "kind": "markdown_structure",
+      "passed": true,
+      "detail": "11 headings, 6 code blocks"
+    }
+  ],
+  "passed": true,
+  "detail": "must_contain_any: found: ['composer require']; markdown_structure: 11 headings, 6 code blocks",
+  "elapsed": 61.7,
+  "input_tokens": 8,
+  "output_tokens": 3954,
+  "cost_usd": 0.322488,
+  "timestamp": "2026-08-08T05:12:36Z"
+}

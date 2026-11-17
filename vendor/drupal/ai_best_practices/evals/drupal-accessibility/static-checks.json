@@ -1,0 +1,94 @@
+{
+  "skill_file": "skills/drupal-accessibility/SKILL.md",
+  "assertions": [
+    {
+      "id": "S01",
+      "description": "Dispatcher SKILL.md exists",
+      "check": "file_exists",
+      "path": "skills/drupal-accessibility/SKILL.md"
+    },
+    {
+      "id": "S02",
+      "description": "Agent Skills frontmatter is valid",
+      "check": "agent_skill_frontmatter"
+    },
+    {
+      "id": "S03",
+      "description": "Routes to drupal-a11y-fapi",
+      "check": "contains",
+      "text": "drupal-a11y-fapi"
+    },
+    {
+      "id": "S04",
+      "description": "Routes to drupal-a11y-dom",
+      "check": "contains",
+      "text": "drupal-a11y-dom"
+    },
+    {
+      "id": "S05",
+      "description": "Routes to drupal-a11y-dynamic",
+      "check": "contains",
+      "text": "drupal-a11y-dynamic"
+    },
+    {
+      "id": "S06",
+      "description": "Routes to drupal-a11y-qa",
+      "check": "contains",
+      "text": "drupal-a11y-qa"
+    },
+    {
+      "id": "S07",
+      "description": "References WCAG 2.2 (not 2.1) as the conformance baseline",
+      "check": "contains",
+      "text": "WCAG 2.2"
+    },
+    {
+      "id": "S08",
+      "description": "References SC 2.5.8 Target Size (Minimum) — new in WCAG 2.2",
+      "check": "contains",
+      "text": "SC 2.5.8"
+    },
+    {
+      "id": "S09",
+      "description": "Mandates Playwright over Nightwatch",
+      "check": "contains",
+      "text": "Playwright"
+    },
+    {
+      "id": "S10",
+      "description": "References Drupal.announce as the announcement API",
+      "check": "contains",
+      "text": "Drupal.announce"
+    },
+    {
+      "id": "S11",
+      "description": "Calls out the AI-disclosure requirement",
+      "check": "contains",
+      "text": "AI disclosure"
+    },
+    {
+      "id": "S15",
+      "description": "States detection order: tools before code review before AI",
+      "check": "contains",
+      "text": "Detection order"
+    },
+    {
+      "id": "S13",
+      "description": "Links to CI/CD Accessibility Best Practices upstream guide",
+      "check": "contains",
+      "text": "CI_CD_ACCESSIBILITY_BEST_PRACTICES"
+    },
+    {
+      "id": "S14",
+      "description": "Links to Accessibility Bug Reporting Best Practices upstream guide",
+      "check": "contains",
+      "text": "ACCESSIBILITY_BUG_REPORTING_BEST_PRACTICES"
+    },
+    {
+      "id": "S12",
+      "description": "Dispatcher kept short (under 160 lines)",
+      "check": "max_lines",
+      "limit": 160
+    }
+  ]
+}

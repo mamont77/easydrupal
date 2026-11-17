@@ -1,0 +1,43 @@
+{
+    "name": "drupal/ai_best_practices",
+    "description": "A canonical place to put opinionated Drupal best practice guidance for AI agents",
+    "license": "GPL-2.0-or-later",
+    "type": "composer-plugin",
+    "require": {
+        "php": "^8.1",
+        "composer-plugin-api": "^2.0",
+        "symfony/console": "^6.0 || ^7.0 || ^8.0",
+        "symfony/filesystem": "^6.0 || ^7.0 || ^8.0",
+        "symfony/yaml": "^6.0 || ^7.0 || ^8.0"
+    },
+    "require-dev": {
+        "composer/composer": "^2.2",
+        "friendsofphp/php-cs-fixer": "^3.59",
+        "phpunit/phpunit": "^10.0",
+        "ronaldtebrake/agent-skills-validator": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Drupal\\AiBestPractices\\": "src/AiBestPractices/",
+            "Drupal\\AiBestPractices\\Skills\\": "src/Skills/",
+            "Drupal\\AiBestPractices\\Agents\\": "src/Agents/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Drupal\\AiBestPractices\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "drupal-ai": "Drupal\\AiBestPractices\\Console\\AiBestPracticesApplication::runFromComposer",
+        "cs-fix": "@php vendor/bin/php-cs-fixer fix"
+    },
+    "extra": {
+        "class": "Drupal\\AiBestPractices\\Composer\\AiBestPracticesPlugin"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}

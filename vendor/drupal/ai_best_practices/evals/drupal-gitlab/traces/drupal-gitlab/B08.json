@@ -1,0 +1,33 @@
+{
+  "id": "B08",
+  "teaching": "Because the fork already exists and is not theirs, they must obtain access before pushing \u2014 via the /do:access comment command or the 'Request access' button on the Drupal.org fork management page \u2014 then use the existing fork. From there: branch, commit (Conventional Commits), push to the fork, and open the MR via the REST API (not glab mr create) with Closes #<id> to wire it to the issue.",
+  "provider": "claude",
+  "model": null,
+  "prompt": "I'm a first-time contributor to a Drupal module on git.drupalcode.org. There's an open work item I want to fix, but an issue fork already exists \u2014 someone else created it. Walk me through how to actually start working on it and get my change in.",
+  "response": "Good situation to clarify, because \"a fork already exists\" changes two steps versus the from-scratch path. Here's the walkthrough tailored to it.\n\n## 0. Confirm your tooling (read-only is fine to start)\n\n```bash\nglab auth status --hostname git.drupalcode.org\n```\n\nIf that fails, you need `glab` installed and authenticated before anything else. A read-only (Tier 1) token is enough for steps 1\u20132; you'll need a **write** token (Tier 2: add `api` or `write_repository`) for steps 3 onward.\n\n## 1. Read the work item \u2014 and check for an existing MR\n\nThe repo name is the path segment right after `project/` in the URL.\n\n```bash\nglab issue view <id>  --repo \"git.drupalcode.org/project/<repo>\"\nglab mr list          --repo \"git.drupalcode.org/project/<repo>\"\n```\n\n**This matters in your case.** Whoever created the fork may have already opened an MR from it. If an MR exists, you don't create a new one \u2014 you push your commits to its existing branch, and your work shows up on that same MR. Note the branch name (it'll look like `<issue-id>-some-description`).\n\n## 2. Get access to the existing fork\n\nThe fork exists, so you skip `/do:fork`. As a first-timer you almost certainly **don't** have push access to someone else's fork yet. Check, then request:\n\n```bash\n# Can I see/push to it? (404 = fork doesn't exist; 403 on push = need access)\nglab api --hostname git.drupalcode.org \"/projects/issue%2F<repo>-<id>/members/all\"\n```\n\nIf you lack access, post a comment on the work item containing:\n\n```\n/do:access\n```\n\nThat grants **your** user push access to the existing fork. (It's a Drupal.org custom command, not a normal GitLab one \u2014 all contributors can use it.)\n\n## 3. Set up remotes\n\nTwo remotes: upstream (`origin`) and the issue fork. Mind the host \u2014 **SSH uses `git.drupal.org`** (the `drupalcode` CDN has no SSH listener and will hang on port 22):\n\n```bash\n# upstream, if not already cloned\ngit clone git@git.drupal.org:project/<repo>.git\n# add the issue fork\ngit remote add fork git@git.drupal.org:issue/<repo>-<id>.git\ngit fetch fork\n```\n\n(If SSH is unavailable, use the HTTPS credential-helper pattern from the skill \u2014 never put the token in the URL.)\n\n## 4. Branch from the right place\n\n- **If an MR/branch already exists** (step 1): check out that branch so your commits land on the same MR \u2014 `git checkout -b <issue-id>-desc fork/<issue-id>-desc`.\n- **If the fork exists but has no working branch yet:** create one named `<issue-id>-short-description` off the current target branch (often `1.0.x`, not `main` \u2014 confirm).\n\n## 5. Commit in Conventional Commits format\n\n```\nfix: #<issue-id> Short summary of the change\n\nOptional body explaining the why.\n\nBy: your-drupalorg-username\n```\n\n`By:` uses your **Drupal.org username**, not your GitLab display name or email.\n\n## 6. Push to the fork (never to origin)\n\n```bash\ngit push fork <branch-name>\n```\n\nCI fires on push, so this also kicks off the pipeline.\n\n## 7. Open the MR \u2014 only if one doesn't already exist\n\nIf step 1 found no MR, create the cross-project one (`glab mr create` can't do fork\u2192upstream, so use the REST API). First get the upstream numeric ID:\n\n```bash\nglab api --hostname git.drupalcode.org \"/projects/project%2F<repo>\"\n```\n\nThen create it from the fork to upstream, with `Closes #<id>` in the body and \u2014 **required** \u2014 the AI disclosure line if you used AI:\n\n```\nAI-Generated: Yes (Used [tool] to [how].)\n```\n\nThe full API command with the body inline is in the skill's `merge-requests.md`. Set the title in `{type}: #{id} Summary` form, because GitLab squash-merges use the **MR title** as the commit message.\n\n## 8. Signal it's ready, and claim credit\n\n- Toggle the MR from **Draft \u2192 Ready** when it's ready for review (maps to Needs Review).\n- Fill in the **contribution attribution** link DrupalBot posted on the work item (`new.drupal.org/contribution-record?source_link=\u2026`) \u2014 on GitLab, credit is self-claimed, not granted in the commit.\n- Merges happen via the **web UI** only \u2014 API/CLI merges are blocked here, so don't be surprised when `glab mr merge` won't work.\n\n---\n\nThe two things that differ from the standard path because the fork already exists: **`/do:access` instead of `/do:fork`** (step 2), and **check for an existing MR before creating one** (steps 1 + 7).\n\nIf you paste the work item URL, I can run the read-only steps (view the item, check for an existing MR, check fork membership) and tell you exactly which branch to base off and whether you need `/do:access`.",
+  "assertions": {
+    "must_contain_any": [
+      "/do:access",
+      "Request access",
+      "request access"
+    ],
+    "found": [
+      "/do:access"
+    ],
+    "must_not_contain": [
+      "glab mr create"
+    ],
+    "found_bad": [
+      "glab mr create"
+    ],
+    "php_lint": null,
+    "markdown_structure": null
+  },
+  "passed": false,
+  "detail": "found: ['/do:access']; unwanted: ['glab mr create']",
+  "elapsed": 40.9,
+  "input_tokens": 2251,
+  "output_tokens": 2529,
+  "cost_usd": 0.370053,
+  "timestamp": "2026-06-17T14:52:54Z"
+}

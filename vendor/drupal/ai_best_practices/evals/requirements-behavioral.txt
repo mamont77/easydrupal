@@ -1,0 +1,21 @@
+# Behavioral-eval dependencies for abp (#3588916).
+#
+# NOT needed for the static path: `python3 evals/run-evals.py --static` and the
+# CI `evals-static` job run on the standard library alone. Keep it that way.
+#
+# Needed for:
+#   - behavioral runs that load YAML cases (run-evals.py --behavioral, compare.py)
+#     -> PyYAML
+#   - the native Inspect AI runner (evals/inspect/, run via `inspect eval`)
+#     -> inspect-ai  (pulls ~40 transitive packages; behavioral-only on purpose)
+#   - registering the abp_cli ModelAPI as an inspect_ai entry point, so
+#     `inspect eval ... --model abp_cli/...` resolves the provider at CLI launch
+#     -> the editable -e ./evals/inspect install below (see evals/inspect/pyproject.toml)
+#
+# Install into a venv (run from the repo root so the relative -e path resolves):
+#   python3 -m venv .venv && . .venv/bin/activate
+#   pip install -r evals/requirements-behavioral.txt
+
+pyyaml>=6.0
+inspect-ai>=0.3.241
+-e ./evals/inspect

@@ -1,0 +1,7 @@
+# Pin the global Composer tools (parallel-lint, phpcs, phpstan, rector, ...) to
+# the project's PHP version. Without this they resolve to Symfony 8 packages that
+# require PHP >= 8.4.1 and fail the platform check on PHP 8.3.
+# Kept in a separate file so the add-on's generated web-build/Dockerfile stays untouched.
+ENV COMPOSER_HOME=/usr/local/composer
+RUN composer global config platform.php 8.3.0 \
+    && composer global update --no-interaction --no-progress

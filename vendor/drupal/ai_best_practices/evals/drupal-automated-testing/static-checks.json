@@ -1,0 +1,65 @@
+{
+  "skill_file": "skills/drupal-automated-testing/SKILL.md",
+  "assertions": [
+    {
+      "id": "S01",
+      "description": "Skill file exists",
+      "check": "file_exists",
+      "path": "skills/drupal-automated-testing/SKILL.md"
+    },
+    {
+      "id": "S02",
+      "description": "Agent Skills frontmatter is valid",
+      "check": "agent_skill_frontmatter"
+    },
+    {
+      "id": "S03",
+      "description": "Mentions BrowserTestBase (Functional test class)",
+      "check": "contains",
+      "text": "BrowserTestBase"
+    },
+    {
+      "id": "S04",
+      "description": "Mentions KernelTestBase (Kernel test class)",
+      "check": "contains",
+      "text": "KernelTestBase"
+    },
+    {
+      "id": "S05",
+      "description": "Mentions waitForElement (FunctionalJS flakiness pattern)",
+      "check": "contains",
+      "text": "waitForElement"
+    },
+    {
+      "id": "S06",
+      "description": "Mentions RunTestsInSeparateProcesses (required attribute)",
+      "check": "contains",
+      "text": "RunTestsInSeparateProcesses"
+    },
+    {
+      "id": "S07",
+      "description": "Functional tests listed before Unit tests (guards against unit-first ordering)",
+      "check": "order",
+      "first": "**Functional tests**",
+      "second": "**Unit tests**"
+    },
+    {
+      "id": "S09",
+      "description": "Covers the dual-container architecture trap in Functional tests",
+      "check": "contains",
+      "text": "dual-container"
+    },
+    {
+      "id": "S10",
+      "description": "Covers SIMPLETEST_BASE_URL environment variable for DDEV",
+      "check": "contains",
+      "text": "SIMPLETEST_BASE_URL"
+    },
+    {
+      "id": "S08",
+      "description": "Skill file is under 155 lines",
+      "check": "max_lines",
+      "limit": 155
+    }
+  ]
+}

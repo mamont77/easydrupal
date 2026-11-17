@@ -1,0 +1,32 @@
+{
+  "id": "B07",
+  "teaching": "Not all Drupal projects have migrated to GitLab work items; many still use the legacy Drupal.org issue queue. An empty glab issue list does not mean the API is broken. Continue without a work item or check the legacy queue.",
+  "provider": "claude",
+  "model": null,
+  "prompt": "I ran glab issue list for a Drupal core-related project on git.drupalcode.org and got nothing back, even though I know there are open issues. Is the API broken?",
+  "response": "Almost certainly not broken \u2014 this is the single most common gotcha on git.drupalcode.org. An empty `glab issue list` on an obviously active project almost always means **the project hasn't been migrated to GitLab work items yet**. It's still on the legacy Drupal.org issue queue, which `glab` cannot see.\n\nDrupal.org is mid-migration. Two systems coexist:\n\n- **Migrated** \u2192 issues are GitLab work items at `git.drupalcode.org/project/<repo>/-/work_items/<id>`. `glab issue list` works.\n- **Not migrated** \u2192 issues live at `www.drupal.org/project/<repo>/issues`. `glab` returns nothing because there's literally nothing in the GitLab work-item store to list.\n\nThis is especially likely for **Drupal core**, which is large and conservative about migration \u2014 much of its issue activity still runs through the legacy queue.\n\n## How to confirm\n\n1. **Check that you're hitting the right repo at all** \u2014 a bare `glab issue list` resolves against your default host (often gitlab.com). Always pass `--repo`:\n   ```bash\n   glab issue list --repo \"git.drupalcode.org/project/<repo>\"\n   ```\n2. **Sanity-check the connection** is fine (rules out auth/API):\n   ```bash\n   glab repo view --repo \"git.drupalcode.org/project/<repo>\"\n   ```\n   If that returns the project, the API and your token are working \u2014 the empty issue list is real.\n3. **Open the project's \"Issues\" link** in a browser. If it lands on `www.drupal.org/project/<repo>/issues` rather than a GitLab work-items view, it's still on the legacy queue.\n\n## What to do instead\n\nFor a not-yet-migrated project, manage issues through the **Drupal.org web UI** or the `drupalorg-cli` tool. `glab issue` commands won't find them no matter what you do. Old `/project/<repo>/issues/<id>` URLs auto-redirect to GitLab work items *once* a project migrates \u2014 so if your links still resolve to the classic d.o queue, that's your confirmation.\n\nIf `glab repo view` *also* fails, then come back and we'll look at auth/token scopes \u2014 but a clean repo view plus an empty issue list points squarely at the legacy queue, not a broken API.",
+  "assertions": {
+    "must_contain_any": [
+      "legacy",
+      "not all projects",
+      "have not migrated"
+    ],
+    "found": [
+      "legacy"
+    ],
+    "must_not_contain": [
+      "the API is broken",
+      "reinstall glab"
+    ],
+    "found_bad": [],
+    "php_lint": null,
+    "markdown_structure": null
+  },
+  "passed": true,
+  "detail": "found: ['legacy']",
+  "elapsed": 17.6,
+  "input_tokens": 2251,
+  "output_tokens": 866,
+  "cost_usd": 0.301919,
+  "timestamp": "2026-06-17T14:52:13Z"
+}

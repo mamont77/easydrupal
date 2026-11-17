@@ -1,0 +1,19 @@
+# One sandbox per sample. The operator's CLI logins reach the container only as
+# read-only secrets; the solver copies the one it needs into the agent's home
+# with a shell command, so the file contents never enter the Inspect log.
+services:
+  default:
+    build: .
+    image: abp-agentic-drupal:pilot
+    init: true
+    command: ["tail", "-f", "/dev/null"]
+    network_mode: bridge
+    secrets:
+      - claude_credentials
+      - codex_auth
+
+secrets:
+  claude_credentials:
+    file: ${HOME}/.claude/.credentials.json
+  codex_auth:
+    file: ${CODEX_HOME:-${HOME}/.codex}/auth.json

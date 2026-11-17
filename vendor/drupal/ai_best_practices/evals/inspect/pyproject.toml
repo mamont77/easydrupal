@@ -1,0 +1,35 @@
+# Minimal installable distribution for the abp Inspect runner (#3588916).
+#
+# Its ONLY job is to declare the `abp_cli` ModelAPI as an `inspect_ai` entry
+# point so the native CLI (`inspect eval ... --model abp_cli/...`) auto-discovers
+# the provider. Inspect resolves --model BEFORE it imports the task file, so
+# without this the @modelapi("abp_cli") registration in provider.py would not
+# have run yet and resolution fails ("Model API abp_cli ... not recognized").
+# `ensure_entry_points()` (called from get_model -> registry_find) imports the
+# `provider` module named below, which runs the registration in time.
+#
+# Install EDITABLE (`pip install -e evals/inspect`): provider.py locates its
+# sibling loose scripts (evals/providers.py, evals/scoring.py) via sys.path
+# inserts computed from __file__, so the module must keep its real source path.
+# A non-editable/wheel install would relocate provider.py and break that
+# bootstrap. The behavioral requirements file installs it editable.
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "abp-inspect"
+version = "0.0.0"
+description = "abp Inspect AI runner — registers the abp_cli ModelAPI provider"
+requires-python = ">=3.10"
+
+# The entry point imports `abp_inspect_register` (a UNIQUELY named shim), whose
+# import side effect is the @modelapi("abp_cli") registration. The shim is named
+# distinctly so the installed top-level module cannot collide with / be shadowed
+# by a generic `provider` module in a shared venv; `provider` itself is not
+# installed globally (the shim reaches it via a sys.path insert).
+[project.entry-points.inspect_ai]
+abp_cli = "abp_inspect_register"
+
+[tool.setuptools]
+py-modules = ["abp_inspect_register"]

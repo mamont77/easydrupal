@@ -74,3 +74,5 @@ node_modules
 /_my_data
 /themes/easydrupal/css/*.map
 /themes/custom/easydrupal/css/*.map
+# drupal/ai_best_practices: per-developer settings, see its README
+/ai_best_practices.yaml

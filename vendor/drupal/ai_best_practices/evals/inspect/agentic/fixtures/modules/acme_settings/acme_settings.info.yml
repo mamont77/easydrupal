@@ -1,0 +1,6 @@
+name: 'Acme settings'
+type: module
+description: 'Settings for the Acme API client.'
+core_version_requirement: ^11
+package: Acme
+configure: acme_settings.settings

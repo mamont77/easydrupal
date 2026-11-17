@@ -1,0 +1,6 @@
+<?php
+
+/**
+ * @file
+ * Periodic sync with the Acme API.
+ */

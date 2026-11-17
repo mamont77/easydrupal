@@ -1,0 +1,3 @@
+api_url: 'https://api.example.com'
+retries: 3
+enabled: true

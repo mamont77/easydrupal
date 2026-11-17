@@ -1,0 +1,106 @@
+{
+  "skill_file": "skills/drupal-accessibility/drupal-a11y-dom/SKILL.md",
+  "assertions": [
+    {
+      "id": "S01",
+      "description": "Skill file exists",
+      "check": "file_exists",
+      "path": "skills/drupal-accessibility/drupal-a11y-dom/SKILL.md"
+    },
+    {
+      "id": "S02",
+      "description": "Agent Skills frontmatter is valid",
+      "check": "agent_skill_frontmatter"
+    },
+    {
+      "id": "S03",
+      "description": "Covers .visually-hidden utility",
+      "check": "contains",
+      "text": ".visually-hidden"
+    },
+    {
+      "id": "S04",
+      "description": "Covers aria-hidden misuse on focusable elements",
+      "check": "contains",
+      "text": "aria-hidden"
+    },
+    {
+      "id": "S05",
+      "description": "Covers WCAG 2.2 SC 2.5.8 target size (24×24)",
+      "check": "contains",
+      "text": "24×24"
+    },
+    {
+      "id": "S06",
+      "description": "Covers :focus-visible",
+      "check": "contains",
+      "text": ":focus-visible"
+    },
+    {
+      "id": "S07",
+      "description": "Covers prefers-color-scheme dark mode",
+      "check": "contains",
+      "text": "prefers-color-scheme"
+    },
+    {
+      "id": "S08",
+      "description": "Covers forced-colors mode",
+      "check": "contains",
+      "text": "forced-colors"
+    },
+    {
+      "id": "S09",
+      "description": "Covers prefers-reduced-motion",
+      "check": "contains",
+      "text": "prefers-reduced-motion"
+    },
+    {
+      "id": "S10",
+      "description": "Covers @media (scripting) js-show/js-hide pattern",
+      "check": "contains",
+      "text": "js-show"
+    },
+    {
+      "id": "S11",
+      "description": "Prohibits redundant ARIA roles on native elements",
+      "check": "contains",
+      "text": "role=\"navigation\""
+    },
+    {
+      "id": "S12",
+      "description": "Covers focus-visible rule for dark and forced-colours modes",
+      "check": "contains",
+      "text": "--color-focus"
+    },
+    {
+      "id": "S13",
+      "description": "Covers aria-hidden on decorative SVG icons adjacent to text",
+      "check": "contains",
+      "text": "focusable=\"false\""
+    },
+    {
+      "id": "S14",
+      "description": "Skill kept under 460 lines",
+      "check": "max_lines",
+      "limit": 460
+    },
+    {
+      "id": "S15",
+      "description": "Covers .visually-hidden.focusable skip-link pattern",
+      "check": "contains",
+      "text": ".visually-hidden.focusable"
+    },
+    {
+      "id": "S16",
+      "description": "Covers aria-current for navigation active state",
+      "check": "contains",
+      "text": "aria-current"
+    },
+    {
+      "id": "S17",
+      "description": "Covers aria-expanded for disclosure widgets",
+      "check": "contains",
+      "text": "aria-expanded"
+    }
+  ]
+}

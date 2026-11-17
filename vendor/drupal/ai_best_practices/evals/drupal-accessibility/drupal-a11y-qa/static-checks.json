@@ -1,0 +1,142 @@
+{
+  "skill_file": "skills/drupal-accessibility/drupal-a11y-qa/SKILL.md",
+  "assertions": [
+    {
+      "id": "S01",
+      "description": "Skill file exists",
+      "check": "file_exists",
+      "path": "skills/drupal-accessibility/drupal-a11y-qa/SKILL.md"
+    },
+    {
+      "id": "S02",
+      "description": "Agent Skills frontmatter is valid",
+      "check": "agent_skill_frontmatter"
+    },
+    {
+      "id": "S03",
+      "description": "Covers instance_id / pattern_id two-level Bug ID",
+      "check": "contains",
+      "text": "instance_id"
+    },
+    {
+      "id": "S04",
+      "description": "Specifies SHA-256 hex hash format",
+      "check": "contains",
+      "text": "SHA-256"
+    },
+    {
+      "id": "S05",
+      "description": "Covers WCAG SC mapping requirement",
+      "check": "contains",
+      "text": "WCAG SC"
+    },
+    {
+      "id": "S06",
+      "description": "Enforces one-issue-one-criterion rule",
+      "check": "contains",
+      "text": "one criterion"
+    },
+    {
+      "id": "S07",
+      "description": "Covers severity taxonomy (Critical / High / Medium / Low)",
+      "check": "contains",
+      "text": "Critical"
+    },
+    {
+      "id": "S08",
+      "description": "Requires AT/browser pair in testing environment",
+      "check": "contains",
+      "text": "AT/browser"
+    },
+    {
+      "id": "S09",
+      "description": "Covers AI disclosure requirement",
+      "check": "contains",
+      "text": "AI disclosure"
+    },
+    {
+      "id": "S10",
+      "description": "Requires manual checks before RTBC",
+      "check": "contains",
+      "text": "RTBC"
+    },
+    {
+      "id": "S11",
+      "description": "References REFERENCE_BUG_REPORT.md companion template",
+      "check": "contains",
+      "text": "REFERENCE_BUG_REPORT.md"
+    },
+    {
+      "id": "S13",
+      "description": "Covers suggested-fix sub-skill citation rule",
+      "check": "contains",
+      "text": "sub-skill"
+    },
+    {
+      "id": "S14",
+      "description": "Covers ATAG 2.0 for authoring tool accessibility",
+      "check": "contains",
+      "text": "ATAG"
+    },
+    {
+      "id": "S15",
+      "description": "Covers AT/browser pairing table with specific AT names",
+      "check": "contains",
+      "text": "NVDA"
+    },
+    {
+      "id": "S20",
+      "description": "Establishes tool hierarchy (automated first, manual second, AI last)",
+      "check": "contains",
+      "text": "automated first"
+    },
+    {
+      "id": "S21",
+      "description": "Requires reproducible scan command in every issue",
+      "check": "contains",
+      "text": "verification scan command"
+    },
+    {
+      "id": "S22",
+      "description": "Requires Definition of Done checklist in every issue",
+      "check": "contains",
+      "text": "Definition of Done"
+    },
+    {
+      "id": "S23",
+      "description": "Prohibits filing issues based on AI code inspection alone",
+      "check": "contains",
+      "text": "AI code inspection alone"
+    },
+    {
+      "id": "S16",
+      "description": "Links to CI/CD Accessibility Best Practices upstream guide",
+      "check": "contains",
+      "text": "CI_CD_ACCESSIBILITY_BEST_PRACTICES"
+    },
+    {
+      "id": "S17",
+      "description": "Mandates automated scan before code review",
+      "check": "contains",
+      "text": "Automated scan first"
+    },
+    {
+      "id": "S18",
+      "description": "Covers confidence scores for needs-review axe findings",
+      "check": "contains",
+      "text": "incomplete"
+    },
+    {
+      "id": "S19",
+      "description": "Covers alert-fatigue guard for scheduled scans",
+      "check": "contains",
+      "text": "alert-fatigue"
+    },
+    {
+      "id": "S12",
+      "description": "Skill kept under 460 lines",
+      "check": "max_lines",
+      "limit": 460
+    }
+  ]
+}

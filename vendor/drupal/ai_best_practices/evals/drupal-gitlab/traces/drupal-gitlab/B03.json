@@ -1,0 +1,28 @@
+{
+  "id": "B03",
+  "teaching": "The agent must explain that glab mr create cannot create cross-project (fork-to-upstream) MRs on Drupal's setup, and that the REST API must be used with an explicit source_project_id and target_project_id.",
+  "provider": "claude",
+  "model": null,
+  "prompt": "I pushed a branch to my issue fork on git.drupalcode.org and want to open a merge request from the fork to the upstream project's 1.0.x branch using glab. What's the command?",
+  "response": "`glab mr create` can't do cross-project (fork\u2192upstream) MRs, so you go through the REST API. Two commands:\n\n**1. Get the upstream project's numeric ID** (needed for `target_project_id`):\n\n```bash\nglab api --hostname git.drupalcode.org \"/projects/project%2F<repo>\"\n```\n\nRead the `id` field from the response.\n\n**2. Create the MR** from the fork to upstream `1.0.x`:\n\n```bash\nglab api --hostname git.drupalcode.org \\\n  -F target_project_id=<upstream-id> \\\n  -f source_branch=\"<branch-name>\" \\\n  -f target_branch=\"1.0.x\" \\\n  -f title=\"feat: #<issue-id> Short summary\" \\\n  -f description='## Summary\n\nWhat this MR does.\n\nCloses #<issue-id>\n\nAI-Generated: Yes (Used [tool] to [brief description].)' \\\n  -F remove_source_branch=true \\\n  \"/projects/issue%2F<project>-<issue-id>/merge_requests\"\n```\n\nKey points for your case:\n\n- **`target_branch=\"1.0.x\"`** \u2014 not `main`, as you specified.\n- The **fork's path goes in the URL** (`issue%2F<project>-<issue-id>`), URL-encoded so `/` becomes `%2F`. The only ID you look up is the *upstream* one for `target_project_id`.\n- **Title must follow Conventional Commits** (`{type}: #{issue-id} Summary`) \u2014 GitLab squash-merges use the MR title as the commit message.\n- **`Closes #<issue-id>`** in the description wires the issue to the MR and auto-closes it on merge.\n- Include the **AI disclosure** line if this was AI-assisted (Drupal policy requires it for significant contributions).\n\nThe response is the created MR \u2014 read its `web_url`, or confirm with `glab mr view <iid> --repo \"git.drupalcode.org/project/<repo>\"`.\n\nIf you give me the actual project name, issue ID, and branch name, I'll fill in the exact command.",
+  "assertions": {
+    "must_contain_any": [
+      "REST API",
+      "source_project_id"
+    ],
+    "found": [
+      "REST API"
+    ],
+    "must_not_contain": [],
+    "found_bad": [],
+    "php_lint": null,
+    "markdown_structure": null
+  },
+  "passed": true,
+  "detail": "found: ['REST API']",
+  "elapsed": 16.0,
+  "input_tokens": 2251,
+  "output_tokens": 908,
+  "cost_usd": 0.303149,
+  "timestamp": "2026-06-17T14:51:03Z"
+}

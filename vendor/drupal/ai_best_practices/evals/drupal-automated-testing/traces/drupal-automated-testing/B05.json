@@ -1,0 +1,38 @@
+{
+  "id": "B05",
+  "teaching": "A minimal Kernel test skeleton with KernelTestBase, correct namespace, and RunTestsInSeparateProcesses attribute.",
+  "provider": "claude",
+  "model": null,
+  "prompt": "Generate a Kernel test skeleton for a module called my_module. Only the class structure, no test methods yet.",
+  "response": "```php\n<?php\n\ndeclare(strict_types=1);\n\nnamespace Drupal\\Tests\\my_module\\Kernel;\n\nuse Drupal\\KernelTests\\KernelTestBase;\nuse PHPUnit\\Framework\\Attributes\\Group;\nuse PHPUnit\\Framework\\Attributes\\RunTestsInSeparateProcesses;\n\n/**\n * Tests the my_module services and hook implementations.\n */\n#[Group('my_module')]\n#[RunTestsInSeparateProcesses]\nfinal class MyModuleKernelTest extends KernelTestBase {\n\n  /**\n   * {@inheritdoc}\n   */\n  protected static $modules = [\n    'my_module',\n  ];\n\n  /**\n   * {@inheritdoc}\n   */\n  protected function setUp(): void {\n    parent::setUp();\n\n    // Kernel tests install nothing by default. Uncomment and extend as the\n    // module under test requires:\n    // $this->installConfig(['my_module']);\n    // $this->installEntitySchema('user');\n    // $this->installSchema('my_module', ['my_module_table']);\n  }\n\n}\n```\n\nSave it at `my_module/tests/src/Kernel/MyModuleKernelTest.php`.\n\nTwo things that will bite if they get changed:\n\n- **The namespace must be `Drupal\\Tests\\my_module\\Kernel`** and the file must sit under `tests/src/Kernel/`. Get either wrong and PHPUnit silently discovers nothing rather than erroring.\n- **The empty `setUp()` is deliberate.** Kernel tests give you a minimal environment: no config installed, no entity tables created, no dependency resolution. If you later see \"table does not exist\" or a missing-config error, the fix is the commented block, not the test method.\n\n`#[RunTestsInSeparateProcesses]` is a hard requirement on Drupal 11.3 and strongly recommended on 10.x.\n\nOne check worth making before you build on this: Kernel is the right type only if what you're testing is a service, API, or hook with no UI. If it touches forms, routes, or HTTP, switch the base class to `BrowserTestBase` and the namespace to `...\\Functional` now rather than after you've written the test methods.\n\nTo run it, `SIMPLETEST_BASE_URL` and `SIMPLETEST_DB` both need to be set in your DDEV environment, or PHPUnit will fail or skip.",
+  "checks": [
+    {
+      "kind": "must_contain_any",
+      "values": [
+        "RunTestsInSeparateProcesses"
+      ]
+    },
+    {
+      "kind": "php_lint"
+    }
+  ],
+  "check_results": [
+    {
+      "kind": "must_contain_any",
+      "passed": true,
+      "detail": "found: ['RunTestsInSeparateProcesses']"
+    },
+    {
+      "kind": "php_lint",
+      "passed": true,
+      "detail": "1 block(s) OK"
+    }
+  ],
+  "passed": true,
+  "detail": "must_contain_any: found: ['RunTestsInSeparateProcesses']; php_lint: 1 block(s) OK",
+  "elapsed": 15.9,
+  "input_tokens": 2,
+  "output_tokens": 1096,
+  "cost_usd": 0.1442,
+  "timestamp": "2026-08-08T05:06:48Z"
+}

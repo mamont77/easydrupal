@@ -1,0 +1,7 @@
+acme_settings.settings:
+  path: '/admin/config/system/acme'
+  defaults:
+    _form: '\Drupal\acme_settings\Form\SettingsForm'
+    _title: 'Acme settings'
+  requirements:
+    _permission: 'administer site configuration'

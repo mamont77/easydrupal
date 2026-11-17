@@ -1,0 +1,26 @@
+{
+  "B01": {
+    "detail": "must_contain_any: found: ['KernelTestBase', 'RunTestsInSeparateProcesses']; php_lint: 1 block(s) OK",
+    "passed": true
+  },
+  "B02": {
+    "detail": "must_contain_any: found: ['BrowserTestBase']; php_lint: 1 block(s) OK; markdown_structure: 2 code blocks",
+    "passed": true
+  },
+  "B03": {
+    "detail": "must_contain_any: found: ['waitForElement', 'assertNotEmpty']; php_lint: 2 block(s) OK; markdown_structure: 3 code blocks",
+    "passed": true
+  },
+  "B04": {
+    "detail": "must_contain_any: found: ['installEntitySchema', 'installConfig']",
+    "passed": true
+  },
+  "B05": {
+    "detail": "must_contain_any: found: ['RunTestsInSeparateProcesses']; php_lint: 1 block(s) OK",
+    "passed": true
+  },
+  "B06": {
+    "detail": "must_contain_any: found: ['FunctionalJavascript', 'WebDriverTestBase']; php_lint: 1 block(s) OK",
+    "passed": true
+  }
+}

@@ -1,0 +1,130 @@
+{
+  "skill_file": "skills/drupal-accessibility/drupal-a11y-dynamic/SKILL.md",
+  "assertions": [
+    {
+      "id": "S01",
+      "description": "Skill file exists",
+      "check": "file_exists",
+      "path": "skills/drupal-accessibility/drupal-a11y-dynamic/SKILL.md"
+    },
+    {
+      "id": "S02",
+      "description": "Agent Skills frontmatter is valid",
+      "check": "agent_skill_frontmatter"
+    },
+    {
+      "id": "S03",
+      "description": "Mandates Drupal.announce() over hand-rolled aria-live",
+      "check": "contains",
+      "text": "Drupal.announce"
+    },
+    {
+      "id": "S04",
+      "description": "Prohibits hand-rolled aria-live regions",
+      "check": "contains",
+      "text": "aria-live"
+    },
+    {
+      "id": "S05",
+      "description": "Covers modal focus trapping via Drupal.dialog",
+      "check": "contains",
+      "text": "Drupal.dialog"
+    },
+    {
+      "id": "S06",
+      "description": "Covers AJAX focus return using FocusFirstCommand",
+      "check": "contains",
+      "text": "FocusFirstCommand"
+    },
+    {
+      "id": "S07",
+      "description": "Mandates Playwright over Nightwatch",
+      "check": "contains",
+      "text": "Playwright"
+    },
+    {
+      "id": "S08",
+      "description": "References @axe-core/playwright",
+      "check": "contains",
+      "text": "@axe-core/playwright"
+    },
+    {
+      "id": "S09",
+      "description": "References issue #3553673 (Playwright adoption)",
+      "check": "contains",
+      "text": "3553673"
+    },
+    {
+      "id": "S10",
+      "description": "References issue #3338664 (Axe in PHPUnit)",
+      "check": "contains",
+      "text": "3338664"
+    },
+    {
+      "id": "S11",
+      "description": "Covers colour-mode testing (light and dark Axe scans)",
+      "check": "contains",
+      "text": "colorScheme"
+    },
+    {
+      "id": "S12",
+      "description": "Notes AxeRenderArrayTrait is not yet committed to core",
+      "check": "contains",
+      "text": "yet committed to core"
+    },
+    {
+      "id": "S14",
+      "description": "Covers shift-left pre-commit CI layer guidance",
+      "check": "contains",
+      "text": "pre-commit"
+    },
+    {
+      "id": "S15",
+      "description": "Covers forced-colours Playwright test pattern",
+      "check": "contains",
+      "text": "forcedColors"
+    },
+    {
+      "id": "S16",
+      "description": "Covers drupalAjaxSuccess client-side event for focus return",
+      "check": "contains",
+      "text": "drupalAjaxSuccess"
+    },
+    {
+      "id": "S17",
+      "description": "Covers Drupal.tabbingManager for non-modal focus trapping",
+      "check": "contains",
+      "text": "tabbingManager"
+    },
+    {
+      "id": "S18",
+      "description": "Links to CI/CD Accessibility Best Practices upstream guide",
+      "check": "contains",
+      "text": "CI_CD_ACCESSIBILITY_BEST_PRACTICES"
+    },
+    {
+      "id": "S19",
+      "description": "Covers tool comparison table (axe vs Playwright ARIA snapshots vs Guidepup)",
+      "check": "contains",
+      "text": "toMatchAriaSnapshot"
+    },
+    {
+      "id": "S20",
+      "description": "Covers Guidepup virtual screen reader for CI",
+      "check": "contains",
+      "text": "Guidepup"
+    },
+    {
+      "id": "S21",
+      "description": "Mandates getByRole semantic queries over CSS selectors",
+      "check": "contains",
+      "text": "getByRole"
+    },
+    {
+      "id": "S13",
+      "description": "Skill kept under 470 lines",
+      "check": "max_lines",
+      "limit": 470
+    }
+  ]
+}

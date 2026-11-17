@@ -1,0 +1,33 @@
+{
+  "id": "B06",
+  "teaching": "Work item status is a status widget, not a label. It cannot be set by adding a label; it requires a GraphQL workItemUpdate mutation. If permissions are insufficient, the user sets it in the UI.",
+  "provider": "claude",
+  "model": null,
+  "prompt": "How do I move a Drupal work item on git.drupalcode.org to the 'Needs review' status using glab? Can I just add a label?",
+  "response": "Short answer: yes \u2014 \"Needs review\" is a **scoped label**, not the work-item status widget. There's no separate status button to flip; you add `state::needsReview`. Two ways:\n\n**Via a `/do:` comment (works for all contributors, including non-maintainers):**\n\n```bash\nglab issue comment <id> -m \"/do:relabel ~state::needsReview\" --repo \"git.drupalcode.org/project/<repo>\"\n```\n\nUse `/do:relabel` to replace the current state label (e.g. swap out `state::needsWork`), or `/do:label ~state::needsReview` to just add it.\n\n**Via the label API directly** (if you have write access):\n\n```bash\nglab issue update <id> --label \"state::needsReview\" --unlabel \"state::needsWork\" --repo \"git.drupalcode.org/project/<repo>\"\n```\n\n## Two things to know\n\n1. **Confirm the label name first** \u2014 these are project-configurable. Check before assuming:\n   ```bash\n   glab label list --repo \"git.drupalcode.org/project/<repo>\"\n   ```\n\n2. **Also mark the MR \"Ready\"** (if one exists). Drupal treats Draft\u2194Ready as the native signal that pairs with the label:\n   - MR in **Draft** \u2192 Needs Work\n   - MR marked **Ready** \u2192 Needs Review\n   \n   ```bash\n   glab mr update <mr-iid> --ready --repo \"git.drupalcode.org/project/<repo>\"\n   ```\n\nSo the complete move is: set `state::needsReview` **and** mark the MR Ready. The \"To do / In progress / Done\" GraphQL work-item *status* widget is a separate axis \u2014 you don't need to touch it for the Needs Review transition.",
+  "assertions": {
+    "must_contain_any": [
+      "GraphQL",
+      "workItem"
+    ],
+    "found": [
+      "GraphQL"
+    ],
+    "must_not_contain": [
+      "add a label",
+      "--label"
+    ],
+    "found_bad": [
+      "--label"
+    ],
+    "php_lint": null,
+    "markdown_structure": null
+  },
+  "passed": false,
+  "detail": "found: ['GraphQL']; unwanted: ['--label']",
+  "elapsed": 17.3,
+  "input_tokens": 2251,
+  "output_tokens": 736,
+  "cost_usd": 0.298609,
+  "timestamp": "2026-06-17T14:51:56Z"
+}

@@ -1,0 +1,32 @@
+{
+  "id": "B04",
+  "teaching": "No. API-based merges are blocked at the infrastructure level on git.drupalcode.org even for maintainers; all merges go through the web UI. mergeable from the API also does not account for the fast-forward requirement.",
+  "provider": "claude",
+  "model": null,
+  "prompt": "The GitLab API reports detailed_merge_status: mergeable for my MR on git.drupalcode.org, and I'm a maintainer with a full api-scoped token. Can I just merge it via the API?",
+  "response": "No \u2014 and for two independent reasons, both documented in the skill:\n\n**1. API merges are blocked on git.drupalcode.org, period.** Even a maintainer with a full `api`-scoped token cannot merge via `PUT /projects/:id/merge_requests/:iid/merge` or `glab mr merge`. The endpoint returns a permission error or 301-redirects to `drupal.org/git-error`. This is an intentional infrastructure restriction, not a token/scope problem \u2014 so a bigger token won't fix it. **All merges go through the GitLab web UI merge button.** (See [infra issue 3379836](https://www.drupal.org/project/infrastructure/issues/3379836).)\n\n**2. `detailed_merge_status: mergeable` doesn't even mean the UI button is green.** Drupal.org projects require **fast-forward** merges. The API reports `mergeable` when there are no conflicts, blocking discussions, or CI failures \u2014 but it does *not* account for whether your branch needs a rebase to fast-forward onto the target. If your branch is behind `1.0.x`, you'll need to rebase first:\n\n```bash\ngit fetch origin 1.0.x\ngit rebase origin/1.0.x\ngit push --force-with-lease <issue-fork-remote> <branch>\n```\n\n**What to do:** open the MR in the web UI and use the merge button. If the button is greyed out despite the `mergeable` status, rebase onto the current target as above, then merge.\n\nOne more thing worth checking if you have *other* open MRs against `1.0.x`: the moment you merge this one, the target branch advances and every sibling MR goes stale (fast-forward again). Merge them back-to-back, rebasing each remaining one after every merge.",
+  "assertions": {
+    "must_contain_any": [
+      "web UI",
+      "UI"
+    ],
+    "found": [
+      "web UI",
+      "UI"
+    ],
+    "must_not_contain": [
+      "yes, just merge",
+      "glab mr merge will work"
+    ],
+    "found_bad": [],
+    "php_lint": null,
+    "markdown_structure": null
+  },
+  "passed": true,
+  "detail": "found: ['web UI', 'UI']",
+  "elapsed": 13.7,
+  "input_tokens": 2251,
+  "output_tokens": 697,
+  "cost_usd": 0.297954,
+  "timestamp": "2026-06-17T14:51:17Z"
+}

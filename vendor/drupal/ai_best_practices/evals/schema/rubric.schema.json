@@ -1,0 +1,689 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://git.drupalcode.org/project/ai_eval/-/raw/1.1.0-alpha1/schema/rubric.schema.json",
+  "title": "Drupal Eval Commons Rubric",
+  "type": "object",
+  "required": [
+    "id",
+    "version",
+    "checks",
+    "scoring"
+  ],
+  "additionalProperties": true,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]*$",
+      "description": "Stable rubric identifier, snake_case."
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+(\\.[0-9]+)?$",
+      "description": "Semver. Breaking score changes require major bump."
+    },
+    "description": {
+      "type": "string"
+    },
+    "applicable_bundles": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_]*$"
+      },
+      "description": "Bundles this rubric is meaningful for. Optional; empty = any. Each value follows the same snake_case pattern as questions[].bundle so typos on the matching side surface at validation, not silently at run time."
+    },
+    "checks": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/check"
+      }
+    },
+    "scoring": {
+      "$ref": "#/$defs/scoring"
+    }
+  },
+  "$defs": {
+    "check": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/check_must_contain_any"
+        },
+        {
+          "$ref": "#/$defs/check_must_not_contain"
+        },
+        {
+          "$ref": "#/$defs/check_regex"
+        },
+        {
+          "$ref": "#/$defs/check_json_schema"
+        },
+        {
+          "$ref": "#/$defs/check_php_lint"
+        },
+        {
+          "$ref": "#/$defs/check_markdown_structure"
+        },
+        {
+          "$ref": "#/$defs/check_tool_usage"
+        },
+        {
+          "$ref": "#/$defs/check_format"
+        },
+        {
+          "$ref": "#/$defs/check_fact_match"
+        },
+        {
+          "$ref": "#/$defs/check_llm_judge"
+        },
+        {
+          "$ref": "#/$defs/check_composite"
+        },
+        {
+          "$ref": "#/$defs/check_target_match"
+        },
+        {
+          "$ref": "#/$defs/check_command"
+        },
+        {
+          "$ref": "#/$defs/check_score_delta"
+        }
+      ]
+    },
+    "scoring": {
+      "type": "object",
+      "required": [
+        "combine"
+      ],
+      "properties": {
+        "combine": {
+          "enum": [
+            "all_pass",
+            "any_pass",
+            "weighted_avg",
+            "min",
+            "max",
+            "median"
+          ]
+        },
+        "weights": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "number"
+          }
+        },
+        "threshold": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    },
+    "check_base": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string",
+          "description": "Optional human-readable description of what this check verifies."
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": true,
+          "description": "Optional extension slot for consumer-specific fields. Preserves unevaluatedProperties typo protection on real check fields."
+        }
+      }
+    },
+    "check_must_contain_any": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/check_base"
+        },
+        {
+          "type": "object",
+          "required": [
+            "kind",
+            "values"
+          ],
+          "properties": {
+            "kind": {
+              "const": "must_contain_any"
+            },
+            "case_sensitive": {
+              "type": "boolean",
+              "default": false
+            },
+            "values": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "check_must_not_contain": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/check_base"
+        },
+        {
+          "type": "object",
+          "required": [
+            "kind",
+            "values"
+          ],
+          "properties": {
+            "kind": {
+              "const": "must_not_contain"
+            },
+            "case_sensitive": {
+              "type": "boolean",
+              "default": false
+            },
+            "values": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "check_regex": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/check_base"
+        },
+        {
+          "type": "object",
+          "required": [
+            "kind",
+            "patterns"
+          ],
+          "properties": {
+            "kind": {
+              "const": "regex"
+            },
+            "patterns": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "string"
+              }
+            },
+            "mode": {
+              "type": "string",
+              "enum": [
+                "any",
+                "all"
+              ],
+              "default": "any"
+            },
+            "flags": {
+              "type": "string",
+              "default": ""
+            }
+          }
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "check_json_schema": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/check_base"
+        },
+        {
+          "type": "object",
+          "required": [
+            "kind"
+          ],
+          "properties": {
+            "kind": {
+              "const": "json_schema"
+            },
+            "schema_ref": {
+              "type": "string"
+            },
+            "schema": {
+              "type": [
+                "object",
+                "boolean"
+              ]
+            }
+          },
+          "oneOf": [
+            {
+              "required": [
+                "schema_ref"
+              ]
+            },
+            {
+              "required": [
+                "schema"
+              ]
+            }
+          ]
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "check_php_lint": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/check_base"
+        },
+        {
+          "type": "object",
+          "required": [
+            "kind"
+          ],
+          "properties": {
+            "kind": {
+              "const": "php_lint"
+            },
+            "wrapper": {
+              "enum": [
+                "none",
+                "optional",
+                "required"
+              ],
+              "default": "none"
+            },
+            "wrapper_template": {
+              "type": "string"
+            }
+          }
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "check_markdown_structure": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/check_base"
+        },
+        {
+          "type": "object",
+          "required": [
+            "kind"
+          ],
+          "properties": {
+            "kind": {
+              "const": "markdown_structure"
+            },
+            "min_headings": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "max_heading_level": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "required_sections": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "no_h1": {
+              "type": "boolean"
+            },
+            "min_code_blocks": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "forbidden_patterns": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "check_tool_usage": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/check_base"
+        },
+        {
+          "type": "object",
+          "required": [
+            "kind"
+          ],
+          "properties": {
+            "kind": {
+              "const": "tool_usage"
+            },
+            "source": {
+              "type": "string"
+            },
+            "match_args": {
+              "type": "boolean"
+            }
+          }
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "check_format": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/check_base"
+        },
+        {
+          "type": "object",
+          "required": [
+            "kind",
+            "format"
+          ],
+          "properties": {
+            "kind": {
+              "const": "format"
+            },
+            "format": {
+              "type": "string",
+              "enum": [
+                "text",
+                "json",
+                "yaml",
+                "markdown"
+              ]
+            },
+            "strict": {
+              "type": "boolean"
+            }
+          }
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "check_fact_match": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/check_base"
+        },
+        {
+          "type": "object",
+          "required": [
+            "kind"
+          ],
+          "properties": {
+            "kind": {
+              "const": "fact_match"
+            },
+            "source": {
+              "type": "string"
+            },
+            "threshold": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            }
+          }
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "judge": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "model_id": {
+          "type": "string",
+          "description": "Declares a model override. Omitting it or leaving it empty declares the site judge model. This portable declaration is not executed as a judge panel by ai_eval."
+        },
+        "temperature": {
+          "type": "number",
+          "description": "Portable temperature setting. ai_eval does not apply this field because llm_judge checks are not executable judge panels."
+        },
+        "weight": {
+          "type": "number",
+          "description": "Intra-panel weight when this judge sits inside a panel (judges form: array). Distinct from rubric-level scoring.weights, which is keyed by check id and weights checks within the rubric. Ignored when judges is a single object."
+        }
+      }
+    },
+    "check_llm_judge": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/check_base"
+        },
+        {
+          "type": "object",
+          "required": [
+            "kind",
+            "judge_prompt_ref",
+            "judges",
+            "threshold"
+          ],
+          "properties": {
+            "kind": {
+              "const": "llm_judge"
+            },
+            "judge_prompt_ref": {
+              "type": "string",
+              "pattern": "^judge/[a-z][a-z0-9_]*@[0-9]+\\.[0-9]+(\\.[0-9]+)?$"
+            },
+            "judges": {
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/judge"
+                },
+                {
+                  "type": "array",
+                  "minItems": 2,
+                  "items": {
+                    "$ref": "#/$defs/judge"
+                  }
+                }
+              ],
+              "description": "Single judge (object form) for the common case, or a panel of >= 2 judges (array form) for ensemble grading. The panel form additionally requires `aggregation`."
+            },
+            "aggregation": {
+              "type": "string",
+              "enum": [
+                "majority_vote",
+                "average",
+                "weighted_average",
+                "median"
+              ],
+              "description": "How to combine panel judge scores. Required only when `judges` is an array."
+            },
+            "threshold": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1,
+              "description": "Pass/fail cutoff applied to the (possibly aggregated) judge score. Required in both single-judge and panel forms."
+            },
+            "expert_baseline": {
+              "type": "number"
+            }
+          },
+          "if": {
+            "properties": {
+              "judges": {
+                "type": "array"
+              }
+            },
+            "required": [
+              "judges"
+            ]
+          },
+          "then": {
+            "required": [
+              "aggregation"
+            ]
+          }
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "check_composite": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/check_base"
+        },
+        {
+          "type": "object",
+          "required": [
+            "kind",
+            "rubric_ref"
+          ],
+          "properties": {
+            "kind": {
+              "const": "composite"
+            },
+            "rubric_ref": {
+              "type": "string",
+              "pattern": "^rubric/[a-z][a-z0-9_]*@[0-9]+\\.[0-9]+(\\.[0-9]+)?$"
+            }
+          }
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "check_target_match": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/check_base"
+        },
+        {
+          "type": "object",
+          "required": [
+            "kind",
+            "reference_path"
+          ],
+          "properties": {
+            "kind": {
+              "const": "target_match"
+            },
+            "reference_path": {
+              "type": "string",
+              "description": "Dot-path into the question for the reference text, e.g. expected.reference. May resolve to one string or an array of acceptable variants; with multiple references the check scores against each and keeps the best (sacreBLEU multi-reference behavior). Resolution is the runner's responsibility."
+            },
+            "mode": {
+              "type": "string",
+              "enum": [
+                "exact",
+                "normalized",
+                "chrf"
+              ],
+              "default": "normalized"
+            },
+            "threshold": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1,
+              "default": 1,
+              "description": "Similarity cutoff for chrf mode; ignored for exact/normalized."
+            }
+          }
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "check_command": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/check_base"
+        },
+        {
+          "type": "object",
+          "required": [
+            "kind",
+            "command"
+          ],
+          "properties": {
+            "kind": {
+              "const": "command"
+            },
+            "sandbox": {
+              "type": "string",
+              "default": "ddev",
+              "description": "Sandbox provider id. Executors MUST run commands in the sandbox, never on the host."
+            },
+            "setup": {
+              "type": "string",
+              "enum": [
+                "none",
+                "revert_fix",
+                "apply_patch"
+              ],
+              "default": "none"
+            },
+            "command": {
+              "type": "string",
+              "description": "Command line; {{ metadata.<key> }} placeholders resolve from the question."
+            },
+            "expect": {
+              "type": "string",
+              "enum": [
+                "exit_zero",
+                "fail_to_pass"
+              ],
+              "default": "exit_zero",
+              "description": "fail_to_pass (SWE-bench vocabulary): the named test must fail in the setup state and pass after the model's change (the stronger, less game-able oracle)."
+            }
+          }
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "check_score_delta": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/check_base"
+        },
+        {
+          "type": "object",
+          "required": [
+            "kind",
+            "tool",
+            "min_delta"
+          ],
+          "properties": {
+            "kind": {
+              "const": "score_delta"
+            },
+            "tool": {
+              "type": "string",
+              "description": "Static-analysis tool id, open like sandbox. Well-known values: audit, phpcs, phpstan; executors reject ids they cannot run."
+            },
+            "sandbox": {
+              "type": "string",
+              "default": "ddev"
+            },
+            "baseline": {
+              "type": [
+                "number",
+                "string"
+              ],
+              "description": "Pre-change score, literal or {{ metadata.<key> }} template."
+            },
+            "min_delta": {
+              "type": "number",
+              "description": "Required improvement, measured in the tool's improvement direction: positive ALWAYS means better (an audit score rises, a phpstan issue count falls; executors normalize the sign per tool)."
+            },
+            "guard_command": {
+              "type": "string",
+              "description": "Run after the change; must exit zero. Prevents raising the metric by deleting/breaking code. Pass requires BOTH min_delta met and guard exit zero."
+            }
+          }
+        }
+      ],
+      "unevaluatedProperties": false
+    }
+  }
+}

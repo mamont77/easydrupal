@@ -1,0 +1,20 @@
+# Project PHPStan config. `ddev phpstan` uses this file as-is (the bundled
+# level-0 defaults from ddev-module-developer are NOT applied when it exists).
+# mglaman/phpstan-drupal is registered by phpstan/extension-installer.
+
+parameters:
+  level: 5
+  paths:
+    - modules/custom
+    - themes/custom
+  fileExtensions:
+    - php
+    - module
+    - inc
+    - install
+    - theme
+    - profile
+  reportUnmatchedIgnoredErrors: false
+  ignoreErrors:
+    # new static() is a best practice in Drupal, so we cannot fix that.
+    - "#^Unsafe usage of new static#"

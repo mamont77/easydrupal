@@ -1,0 +1,34 @@
+{
+  "id": "B05",
+  "teaching": "The issue fork must be provisioned through the Drupal.org issue management UI before it exists. Pushing to a non-existent fork returns 404, and the fork cannot be created by pushing or via the API.",
+  "provider": "claude",
+  "model": null,
+  "prompt": "I created a work item for my Drupal module and tried to push my branch to the issue fork, but I get a 404. The fork URL looks right. What's wrong?",
+  "response": "A 404 on push almost always means the fork **doesn't exist yet** \u2014 not that the URL is wrong.\n\nThe key thing the issue-fork workflow trips people on: **creating a work item does not create the fork.** They're two separate steps. The fork URL looks right because it's predictable (`git.drupalcode.org/issue/<project>-<issue-id>`), but the path resolving in your head doesn't mean the repo has been provisioned on the server. Pushing never creates it \u2014 and a push to a non-existent fork returns exactly this 404.\n\n**Fix:** provision the fork first, one of two ways:\n\n- Post a comment containing `/do:fork` on the work item (simplest), or\n- Open the management page (DrupalBot auto-posts the link in a comment on the work item) and click **\"Create issue fork.\"**\n\nEither one creates the fork + a branch from the default branch. Then your push will work.\n\n**How to confirm which case you're in** before/after:\n\n```bash\n# 404 here = fork does not exist yet \u2192 /do:fork\n# 200 here = fork exists (then a push 403 would mean you need /do:access)\nglab api --hostname git.drupalcode.org \"/projects/issue%2F<project>-<issue-id>\"\n```\n\nTwo follow-on gotchas once the fork exists:\n\n1. **If you get a 403 instead of 404** on push, the fork exists but you lack access \u2014 post `/do:access` on the work item.\n2. **SSH remote?** Make sure it points at `git@git.drupal.org:...` (the origin host), not `git.drupalcode.org` (the CDN front, which has no SSH listener and just hangs on port 22). HTTPS remotes use `git.drupalcode.org`.\n\nWant me to draft the `/do:fork` comment for you? If so, tell me the project and issue ID.",
+  "assertions": {
+    "must_contain_any": [
+      "Create issue fork",
+      "management",
+      "provision"
+    ],
+    "found": [
+      "Create issue fork",
+      "management",
+      "provision"
+    ],
+    "must_not_contain": [
+      "just push again",
+      "push will create the fork"
+    ],
+    "found_bad": [],
+    "php_lint": null,
+    "markdown_structure": null
+  },
+  "passed": true,
+  "detail": "found: ['Create issue fork', 'management', 'provision']",
+  "elapsed": 21.7,
+  "input_tokens": 2251,
+  "output_tokens": 688,
+  "cost_usd": 0.29754899999999995,
+  "timestamp": "2026-06-17T14:51:39Z"
+}

@@ -1,0 +1,32 @@
+# Every Eval Ever (EEE) Layer-2 export dependencies for abp (#3588916).
+#
+# ONLY for converting an Inspect .eval log to the cross-harness EEE v0.2.2
+# envelope via evals/inspect/to_eee.py. NOT needed to run evals (static or
+# behavioral) — keep it out of requirements-behavioral.txt so a contributor who
+# only runs the suite does not pull EEE's heavy transitive deps (duckdb, pyarrow).
+#
+# Python >= 3.12 REQUIRED for this extra (only): every-eval-ever 0.2.3rc1
+# declares Requires-Python >=3.12, so on 3.10/3.11 this install fails with an
+# unhelpful "No matching distribution found". The static and behavioral paths
+# keep the repo-wide 3.10 floor; CI runs python:3.12-slim and is unaffected.
+#
+# Layered on top of the behavioral install:
+#   pip install -r evals/requirements-behavioral.txt
+#   pip install -r evals/requirements-eee.txt
+#
+# every-eval-ever[inspect] is published by the evaleval coalition; the [inspect]
+# extra adds the inspect-log converter. jsonschema validates the emitted
+# envelope against EEE's bundled schema (to_eee falls back to skipping
+# validation if it is absent).
+#
+# COUPLING: to_eee.py imports `every_eval_ever.converters.inspect.adapter`
+# (the same entry point EEE's own CLI uses) and asserts envelope schema_version
+# 0.2.2. EEE is pre-1.0 and ships only pre-releases, so this floor allows the rc
+# we built against; re-verify the import path and schema version on any upgrade
+# (test_to_eee.py is the canary — it fails loudly if either drifts).
+
+# Upper bound matches the hard-coded schema_version 0.2.2 assertion in
+# to_eee/test_to_eee and the internal import path: a 0.3+ release may move either,
+# so cap it and bump deliberately (the canary test re-verifies on upgrade).
+every-eval-ever[inspect]>=0.2.3rc1,<0.3
+jsonschema>=4.0

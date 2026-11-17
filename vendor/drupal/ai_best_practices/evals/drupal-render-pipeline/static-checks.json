@@ -1,0 +1,89 @@
+{
+  "skill_file": "skills/drupal-render-pipeline/SKILL.md",
+  "assertions": [
+    {
+      "id": "S01",
+      "description": "Skill file exists",
+      "check": "file_exists",
+      "path": "skills/drupal-render-pipeline/SKILL.md"
+    },
+    {
+      "id": "S02",
+      "description": "Frontmatter has required Agent Skills fields (name, description)",
+      "check": "agent_skill_frontmatter"
+    },
+    {
+      "id": "S03",
+      "description": "Mentions render arrays as the required return type",
+      "check": "contains",
+      "text": "render array"
+    },
+    {
+      "id": "S04",
+      "description": "Mentions cache contexts as a dimension of variation",
+      "check": "contains",
+      "text": "cache contexts"
+    },
+    {
+      "id": "S05",
+      "description": "Mentions cache tags as data dependencies",
+      "check": "contains",
+      "text": "cache tags"
+    },
+    {
+      "id": "S06",
+      "description": "Mentions lazy builders for personalized content",
+      "check": "contains",
+      "text": "#lazy_builder"
+    },
+    {
+      "id": "S07",
+      "description": "Mentions #create_placeholder for lazy builder activation",
+      "check": "contains",
+      "text": "#create_placeholder"
+    },
+    {
+      "id": "S08",
+      "description": "Mentions #plain_text for user-generated content",
+      "check": "contains",
+      "text": "#plain_text"
+    },
+    {
+      "id": "S09",
+      "description": "Mentions two-phase invalidation behavior",
+      "check": "contains",
+      "text": "two-phase"
+    },
+    {
+      "id": "S10",
+      "description": "Mentions CacheableMetadata value object",
+      "check": "contains",
+      "text": "CacheableMetadata"
+    },
+    {
+      "id": "S11",
+      "description": "Mentions BigPipe streaming",
+      "check": "contains",
+      "text": "BigPipe"
+    },
+    {
+      "id": "S12",
+      "description": "Mentions scalar-only lazy builder arguments",
+      "check": "contains",
+      "text": "scalar"
+    },
+    {
+      "id": "S13",
+      "description": "Render arrays section appears before lazy builders section",
+      "check": "order",
+      "first": "### Return render arrays, not HTML strings",
+      "second": "### Lazy builders for personalized content"
+    },
+    {
+      "id": "S14",
+      "description": "Skill file is under 250 lines",
+      "check": "max_lines",
+      "limit": 250
+    }
+  ]
+}
