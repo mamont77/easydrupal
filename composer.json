@@ -45,7 +45,7 @@
         "drupal/devel": "^5.5",
         "drupal/devel_entity_updates": "^3.0",
         "drupal/devel_php": "^2.0",
-        "drupal/disqus": "^2.0@alpha",
+        "drupal/disqus": "^2.0",
         "drupal/editor_advanced_link": "^2.2",
         "drupal/entity_reference_revisions": "^1.11",
         "drupal/extlink": "^3.0",
@@ -238,6 +238,9 @@
             },
             "drupal/webp": {
                 "3556428: Fix deprecation: ltrim() null argument in ImageStyleDownloadController": "https://git.drupalcode.org/project/webp/-/merge_requests/53.diff"
+            },
+            "drupal/disqus": {
+                "3542113: PHP 8.4 Deprecation: explicit nullable type must be used": "https://git.drupalcode.org/project/disqus/-/merge_requests/22.diff"
             },
             "npm-asset/slick-carousel": {
                 "3467129: Incompatibility with Drupal 11/jQuery 4": "https://www.drupal.org/files/issues/2025-02-17/compatibility_jQuery_4.patch"

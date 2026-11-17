@@ -8,7 +8,6 @@ var disqus_shortname = '';
 var disqus_url = '';
 var disqus_title = '';
 var disqus_identifier = '';
-var disqus_lazy_load = 0;
 var disqus_def_name = '';
 var disqus_def_email = '';
 var disqus_config;
@@ -17,27 +16,7 @@ var disqus_config;
 
 "use strict";
 
-/**
- * JS load helper functions.
- */
-Drupal.disqus = {
-  loadCommentScript: function (shortname) {
-    // Make the AJAX call to get the Disqus comments.
-    this.loadScript(shortname, 'embed.js')
-  },
-  loadCountScript: function (shortname) {
-    // Make the AJAX call to get the number of comments.
-    this.loadScript(shortname, 'count.js');
-  },
-  loadScript: function (shortname, scriptName) {
-    $.ajax({
-      type: 'GET',
-      url: '//' + shortname + '.disqus.com/' + scriptName,
-      dataType: 'script',
-      cache: false
-    });
-  }
-};
+Drupal.disqus = {};
 
 /**
  * Drupal Disqus behavior.
@@ -88,32 +67,13 @@ Drupal.behaviors.disqus = {
           }
         };
 
-        // Lazy load the Disqus comments using IntersectionObserver.
-        if (settings.disqus.lazy_load || false) {
-          // Ensure browser supports IntersectionObserver.
-          if ('IntersectionObserver' in window) {
-            const options = {
-              rootMargin: '200px',
-            };
-            const disqusComments = document.querySelector('#disqus_thread');
-            const observer = new IntersectionObserver((entries) => {
-              entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                  Drupal.disqus.loadCommentScript(disqus_shortname);
-                  observer.disconnect();
-                }
-              });
-            }, options);
-            observer.observe(disqusComments);
-          }
-          else {
-            // If IntersectionObserver not available, load it directly.
-            Drupal.disqus.loadCommentScript(disqus_shortname);
-          }
-        }
-        else {
-          Drupal.disqus.loadCommentScript(disqus_shortname);
-        }
+        // Make the AJAX call to get the Disqus comments.
+        jQuery.ajax({
+          type: 'GET',
+          url: '//' + disqus_shortname + '.disqus.com/embed.js',
+          dataType: 'script',
+          cache: false
+        });
       });
     }
 
@@ -122,7 +82,13 @@ Drupal.behaviors.disqus = {
       // Ensure that comment numbers JavaScript is only loaded once.
       once('disqusComments', 'body', context).forEach(function () {
         disqus_shortname = settings.disqusComments;
-        Drupal.disqus.loadCountScript(settings.disqusComments);
+        // Make the AJAX call to get the number of comments.
+        jQuery.ajax({
+          type: 'GET',
+          url: '//' + disqus_shortname + '.disqus.com/count.js',
+          dataType: 'script',
+          cache: false
+        });
       });
     }
   }

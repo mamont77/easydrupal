@@ -78,7 +78,7 @@ class DisqusComment extends SourcePluginBase implements ContainerFactoryPluginIn
   /**
    * {@inheritdoc}
    */
-  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition, MigrationInterface $migration = NULL) {
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition, ?MigrationInterface $migration = NULL) {
     return new static(
       $configuration,
       $plugin_id,
@@ -167,12 +167,12 @@ class DisqusComment extends SourcePluginBase implements ContainerFactoryPluginIn
         $items[$id]['id'] = $id;
         $items[$id]['pid'] = $post->parent;
         $thread = $disqus->threads->details(['thread' => $post->thread]);
-        $items[$id]['identifier'] = $thread->identifier ?? null;
+        $items[$id]['identifier'] = $thread->identifier ?? NULL;
         $items[$id]['name'] = $post->author->name;
-        $items[$id]['email'] = $post->author->email ?? null;
-        $items[$id]['user_id'] = $post->author->id ?? null;
+        $items[$id]['email'] = $post->author->email ?? NULL;
+        $items[$id]['user_id'] = $post->author->id ?? NULL;
         $items[$id]['url'] = $post->author->url;
-        $items[$id]['ipAddress'] = $post->ipAddress ?? null;
+        $items[$id]['ipAddress'] = $post->ipAddress ?? NULL;
         $items[$id]['isAnonymous'] = $post->author->isAnonymous;
         $items[$id]['createdAt'] = $post->createdAt;
         $items[$id]['comment'] = $post->message;

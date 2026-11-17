@@ -266,7 +266,6 @@ function disqus_field_views_data(FieldStorageConfigInterface $field_storage) {
  * Implements hook_theme().
  */
 function disqus_theme() {
-  // Grab domain to append to noscript.
   $domain = \Drupal::config('disqus.settings')->get('disqus_domain');
   return [
     'disqus_noscript' => [
@@ -276,41 +275,6 @@ function disqus_theme() {
       ],
     ],
   ];
-}
-
-/**
- * {@inheritdoc}
- */
-function disqus_preprocess_html(&$variables) {
-  $load_count_js = Drupal::config('disqus.settings')->get('behavior.disqus_count_js');
-  if ($load_count_js) {
-    $variables['page']['#attached']['library'][] = 'disqus/comment_count';
-  }
-}
-
-/**
- * {@inheritdoc}
- */
-function disqus_library_info_build() {
-  $domain = Drupal::config('disqus.settings')->get('disqus_domain');
-  $libraries = [];
-  $libraries['comment_count'] = [
-    'version' => '1.0',
-    'js' => [
-      'https://' . $domain . '.disqus.com/count.js' => [
-        'type' => 'external',
-        'attributes' => [
-          'defer' => TRUE,
-          'id' => 'dsq-count-scr',
-        ]
-      ],
-    ],
-    'dependencies' => [
-      'disqus/disqus',
-    ],
-  ];
-
-  return $libraries;
 }
 
 /**

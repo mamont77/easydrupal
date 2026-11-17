@@ -143,18 +143,6 @@ class DisqusSettingsForm extends ConfigFormBase {
         ],
       ],
     ];
-    $form['behavior']['disqus_lazy_load'] = [
-      '#type' => 'checkbox',
-      '#title' => t('Use Lazy Loading'),
-      '#description' => t('Lazy load the Disqus script using IntersectionObserver API.'),
-      '#default_value' => $disqus_config->get('behavior.disqus_lazy_load'),
-    ];
-    $form['behavior']['disqus_count_js'] = [
-      '#type' => 'checkbox',
-      '#title' => t('Load comment count javascript'),
-      '#description' => t('This will load up the comment count javascript from Disqus.'),
-      '#default_value' => $disqus_config->get('behavior.disqus_count_js'),
-    ];
 
     // Advanced settings.
     $form['advanced'] = [

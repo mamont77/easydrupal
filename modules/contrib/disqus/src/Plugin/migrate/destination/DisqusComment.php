@@ -57,7 +57,7 @@ class DisqusComment extends DestinationBase implements ContainerFactoryPluginInt
   /**
    * {@inheritdoc}
    */
-  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition, MigrationInterface $migration = NULL) {
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition, ?MigrationInterface $migration = NULL) {
     return new static(
       $configuration,
       $plugin_id,
@@ -71,7 +71,7 @@ class DisqusComment extends DestinationBase implements ContainerFactoryPluginInt
   /**
    * {@inheritdoc}
    */
-  public function fields(MigrationInterface $migration = NULL) {
+  public function fields(?MigrationInterface $migration = NULL) {
     return [
       'disqus_id' => $this->t('The disqus ID'),
       'message' => $this->t('The comment body.'),

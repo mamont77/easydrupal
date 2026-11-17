@@ -74,7 +74,7 @@ class DisqusCommentManager implements DisqusCommentManagerInterface {
    * @param \Drupal\Core\File\FileUrlGeneratorInterface $file_url_generator
    *   The file URL generator.
    */
-  public function __construct(EntityTypeManagerInterface $entity_type_manager, EntityFieldManagerInterface $entity_field_manager, AccountInterface $current_user, ModuleHandlerInterface $module_handler, ConfigFactory $config_factory, FileUrlGeneratorInterface $file_url_generator = NULL) {
+  public function __construct(EntityTypeManagerInterface $entity_type_manager, EntityFieldManagerInterface $entity_field_manager, AccountInterface $current_user, ModuleHandlerInterface $module_handler, ConfigFactory $config_factory, ?FileUrlGeneratorInterface $file_url_generator = NULL) {
     $this->entityTypeManager = $entity_type_manager;
     $this->entityFieldManager = $entity_field_manager;
     $this->currentUser = $current_user;

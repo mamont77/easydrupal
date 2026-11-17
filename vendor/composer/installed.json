@@ -1925,6 +1925,7 @@
                 "jasonrgd/disqus-php": "*"
             },
             "time": "2025-11-05T15:28:17+00:00",
+            "published-time": "2025-11-05T15:31:21+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -4348,6 +4349,7 @@
                 "disqus/disqus-php": "^1.0",
                 "drupal/core": "^9 || ^10 || ^11"
             },
+            "published-time": "2025-06-10T20:01:17+00:00",
             "type": "drupal-module",
             "extra": {
                 "drupal": {
@@ -4357,6 +4359,9 @@
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
                     }
+                },
+                "patches_applied": {
+                    "3542113: PHP 8.4 Deprecation: explicit nullable type must be used": "https://git.drupalcode.org/project/disqus/-/merge_requests/22.diff"
                 }
             },
             "installation-source": "dist",
@@ -4382,12 +4387,12 @@
                     "homepage": "https://www.drupal.org/user/99340"
                 },
                 {
-                    "name": "gaurav.kapoor",
-                    "homepage": "https://www.drupal.org/user/3495331"
+                    "name": "dbnubs",
+                    "homepage": "https://www.drupal.org/user/1969424"
                 },
                 {
-                    "name": "jason.blanda",
-                    "homepage": "https://www.drupal.org/user/1969424"
+                    "name": "gaurav.kapoor",
+                    "homepage": "https://www.drupal.org/user/3495331"
                 },
                 {
                     "name": "JayeshSolanki",
